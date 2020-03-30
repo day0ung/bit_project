@@ -1,5 +1,0 @@
-# BitFinalPrj
-
-
-BitCamp Final Project
-
