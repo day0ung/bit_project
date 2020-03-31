@@ -264,6 +264,14 @@ Tomcat v8.5 Server at localhost-config/
 *.sln
 *.sw
 
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
 
 
 
