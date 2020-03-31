@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <div id="wrap">
-      <div id="header">
+      <div id="header" class="sub">
         <div id="header-top">
           <div class="container">
+            
             <!-- header-top -->
             <HeaderTop></HeaderTop>
           </div>
@@ -45,12 +46,12 @@
 
 <script>
 // @ is an alias to /src
-import HeaderTop from '@/components/Header-top.vue'
-import HeaderNav from '@/components/Header-nav.vue'
-import FooterNav from '@/components/Footer-nav.vue'
-import FooterInfo from '@/components/Footer-info.vue'
+import HeaderTop from '@/components/header/Header-top.vue'
+import HeaderNav from '@/components/header/Header-nav.vue'
+import FooterNav from '@/components/footer/Footer-nav.vue'
+import FooterInfo from '@/components/footer/Footer-info.vue'
 import Contents from '@/components/Contents.vue'
-import globalCSS from '@/assets/global.css'
+import global from '@/assets/css/global.css'
 
 export default {
   name: 'Home',
