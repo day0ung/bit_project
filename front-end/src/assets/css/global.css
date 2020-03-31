@@ -73,6 +73,13 @@ caption {position:static;}
 .invisible, .hide{overflow:hidden; visibility:hidden; width:0; height:0; font-size:0; line-height:0; position:absolute;}
 label.invisible{*position:Absolute;}
 
+/* common */
+.clfix:after {content: "."; display: block; height:0px; clear: both; visibility: hidden;}
+.clfix {display:inline-block;}
+.clfix {display:block;}
+* html .clfix {height:1%;} /* Hides from IE-mac */
+.clfix {zoom:1;} /*for IE 5.5-7*/
+
 
 body {line-height: 1;}
 ol, ul {list-style: none;}
@@ -152,7 +159,7 @@ a {text-decoration:none !important;}
 }
 
 .all_menu {display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(0,0,0,0.9); z-index:1100;}
-.all_menu.active {display:block;}
+.all_menu .active {display:block;}
 .all_menu .inner {position:relative; height:100%;}
 .all_menu ul {position:absolute; top:250px; left:50%;  margin-left:-525px; width:1050px; }
 .all_menu ul li {float:left; width:25%; text-align:center;}

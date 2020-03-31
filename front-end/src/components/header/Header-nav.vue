@@ -29,29 +29,35 @@
                         <ul>
                             <li>
                                 <strong>ABOUT US</strong>
-                                <a href="<%=request.getContextPath()%>/aboutusentrance">모두의 전시</a>
+                                <a href="#">팔레트</a>
                             </li>
                             <li>
-                                <strong>EXHIBIT</strong>
-                                <a href="/AgencyBgencyy/exhibitlist?choice=now">현재전시</a>
-                                <a href="/AgencyBgencyy/exhibitlist?choice=fut">예정전시</a>
-                                <a href="/AgencyBgencyy/exhibitlist?choice=past">지난전시</a>
+                                <strong>개인스터디</strong>
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
                             </li>
                             <li>
-                                <strong>SCHEDULE</strong>
-                                <a href="/AgencyBgencyy/exhibitschedule">월별 전시</a>
+                                <strong>그룹스터디</strong>
+                                <a href="#">1</a>
                             </li>
                             <li>
-                                <strong>COMMUNITY</strong>
-                                <a href="/AgencyBgencyy/community/notice.jsp">공지사항</a>
-                                <a href="/AgencyBgencyy/community/faq.jsp">자주묻는질문</a>
-                                <a href="/AgencyBgencyy/showReviewList?pageNum=0">리뷰</a>
+                                <strong>취업</strong>
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
+                            </li>
+                            <li>
+                                <strong>게시판</strong>
+                                <a href="#">1</a>
+                                <a href="#">2</a>
+                                <a href="#">3</a>
                             </li>
                         </ul>
                     </div>
                 </div>
 				<div class="searchWrap">
-					<form name="serach" method="get" action="<%=request.getContextPath() %>/mainSearch">
+					<form name="serach" method="get" action="#">
 						<input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
 						<button type="submit"></button>
 					</form>
