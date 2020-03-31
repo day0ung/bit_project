@@ -17,7 +17,7 @@
                         </div>
                         전체메뉴
                     </a></li>
-                    <li><a href="#">ABOUT US</a></li>
+                    <li><router-link to="/aboutus">ABOUT US</router-link></li>
                     <li><a href="#">개인스터디</a></li>
                     <li><a href="#">그룹스터디</a></li>
                     <li><a href="#">취업</a></li>
