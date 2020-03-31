@@ -8,8 +8,6 @@ import com.palette.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,11 +29,4 @@ public class MemberController {
         return "";
     }
 
-    // @RequestMapping(value = "/register", method=RequestMethod.GET)
-    // public String member(){
-    //     System.out.println("register()");
-    //     List<MemberDto> list = memberService.selectAll();
-    //     System.out.println(list.size());
-    //     return "";
-    // }
 }
