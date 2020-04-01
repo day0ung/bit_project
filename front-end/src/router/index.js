@@ -5,7 +5,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'Home',
     component: () => import('../views/Home/Home.vue')
   },
@@ -23,6 +23,11 @@ const routes = [
     path: '/group',
     name: 'Group',
     component: () => import('../views/Group/Group.vue')
+  },
+  {
+    path: '/group/detail',
+    name: 'Group_detail',
+    component: () => import('../views/Group/Group_detail.vue')
   },
   {
     path: '/employment',
