@@ -8,7 +8,7 @@
 <router-link to="/search">검색</router-link> -->
     <div class="header-btm">
 			<div class="inner">
-				<ul class="gnb clfix">
+				<ul class="gnb clfix depth2" @click="navclick">
                     <li class="navi_btn"><a href="#none">
                         <div class="hamburger">
                         <span class="line"></span>

@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import empDepth02 from '@/components/include/depth02.vue'
 export default {
 
 }
