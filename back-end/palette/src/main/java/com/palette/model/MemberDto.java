@@ -1,11 +1,9 @@
 package com.palette.model;
 
-import org.apache.ibatis.type.Alias;
 
 /**
  * MemberDto
  */
-@Alias("MemberDto")
 public class MemberDto {
 
     private String name;
