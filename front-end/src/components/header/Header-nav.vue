@@ -8,15 +8,20 @@
 <router-link to="/search">검색</router-link> -->
     <div class="header-btm">
 			<div class="inner">
+<<<<<<< HEAD
 				<ul class="gnb clfix depth2">
                     <li class="navi_btn"><a href="#none">
+=======
+				<ul class="gnb clfix">
+                    <li class="navi_btn"><router-link to="/">
+>>>>>>> 217ff95e4732f7420424bd477807df228ac8b37a
                         <div class="hamburger">
                         <span class="line"></span>
                         <span class="line"></span>
                         <span class="line"></span>
                         </div>
                         전체메뉴
-                    </a></li>
+                    </router-link></li>
                     <li><router-link to="/aboutus">ABOUT US</router-link></li>
                     <li><router-link to="/private">개인스터디</router-link></li>
                     <li><router-link to="/group">그룹스터디</router-link></li>
