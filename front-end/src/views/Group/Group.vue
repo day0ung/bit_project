@@ -8,12 +8,9 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-import empDepth02 from '@/components/include/depth02.vue'
-=======
+
 import subnav from '@/views/Group/subnav.vue'
 
->>>>>>> 217ff95e4732f7420424bd477807df228ac8b37a
 export default {
   components: {
     subnav,
