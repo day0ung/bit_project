@@ -22,7 +22,7 @@
                     <li><router-link to="/group">그룹스터디</router-link></li>
                     <li><router-link to="/employment">취업</router-link></li>
                     <li><router-link to="/notice">게시판</router-link></li>
-                    <li><router-link to="/search">검색</router-link></li>
+                    <!-- <li><router-link to="/search">검색</router-link></li> -->
                 </ul>	
 
                 <div class="all_menu">
@@ -57,12 +57,7 @@
                         </ul>
                     </div>
                 </div>
-				<div class="searchWrap">
-					<form name="serach" method="get" action="#">
-						<input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
-						<button type="submit"></button>
-					</form>
-				</div>
+
 			</div><!-- //inner -->
 		</div><!-- //header-btm -->
 </template>
