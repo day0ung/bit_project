@@ -18,7 +18,7 @@ public class MemberService {
         MemberDao memberDao;
 
 		public List<MemberDto> selectAll() {
-            System.out.println("service");
+            //System.out.println("service");
 			return memberDao.selectAll();
 		}
     
