@@ -22,9 +22,9 @@ export default new Vuex.Store({
   },
   getters:{
     pageName(state){
-      state.depth1 = state.currpage.split("/")[3]
-      state.depth2 = state.currpage.split("/")[4]
-      state.depth3 = state.currpage.split("/")[5]
+      state.depth1 = state.currpage.split("/")[1]
+      state.depth2 = state.currpage.split("/")[2]
+      state.depth3 = state.currpage.split("/")[3]
      
       if (state.depth1 != undefined){
         state.totalDepth = state.depth1

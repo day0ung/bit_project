@@ -10,7 +10,7 @@
 
 export default {
   mounted(){
-    this.$store.state.currpage = window.location.href
+    this.$store.state.currpage = this.$route.path
   }
 
 }

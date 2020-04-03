@@ -2,7 +2,6 @@
   <div class="Group">
       <br>
       <h1 id="classs">{{ this.$store.getters.pageName }}</h1>
-
       <br>
       <router-link to="/group/detail1">detail1</router-link> |
       <router-link to="/group/detail2">detail2</router-link> |
@@ -17,7 +16,7 @@
 
 export default {
   mounted(){
-    this.$store.state.currpage = window.location.href
+    this.$store.state.currpage = this.$route.path
   }
 }
 </script>
