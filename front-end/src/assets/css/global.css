@@ -167,7 +167,7 @@ a {text-decoration:none !important;}
 .all_menu ul li a {display:block; line-height:50px; color:#fff; font-size:23px; transition:all 0.2s ease-in-out;}
 .all_menu ul li a:hover {color:#9d2a25;}
 
-.searchWrap {position:absolute; top:20px;}
+.searchWrap {position:absolute; top:20px; z-index: 1;}
 .searchWrap input {border:1px solid #888; width:230px; height:30px; color:#868686; padding-left:20px; outline:none; border-radius:30px;}
 .searchWrap input ::placeholder {font-size:15px; color:#c1c0c0;}
 .searchWrap input::-webkit-input-placeholder { /* Chrome/Opera/Safari */font-size:15px; color:#c1c0c0;}
