@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import sample from '@/store/sampleStore.js'
+import sample from '@/store/subStore.js'
 
 Vue.use(Vuex)
 
