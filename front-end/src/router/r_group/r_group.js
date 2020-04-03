@@ -5,6 +5,10 @@ export default [
         component: () => import('@/views/Group/Group.vue'),
         children:[
             {
+                path: '',
+                component: () => import('@/views/Group/menu/detail1'),
+            },
+            {
                 path: 'detail1',
                 component: () => import('@/views/Group/menu/detail1'),
             },
