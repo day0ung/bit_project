@@ -6,7 +6,7 @@ export default [
         children:[
             {
                 path: 'detail1',
-                component: () => import('@/views/Group/menu/detail1')
+                component: () => import('@/views/Group/menu/detail1'),
             },
             {
                 path: 'detail2',
@@ -19,6 +19,10 @@ export default [
             {
                 path: 'detail4',
                 component: () => import('@/views/Group/menu/detail4')
+            },
+            {
+                path: '/group/detail1/:seq/depth1',
+                component: () => import('@/views/Group/depth/depth1')
             }
         ]
     }
