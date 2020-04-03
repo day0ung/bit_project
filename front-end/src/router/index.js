@@ -1,55 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
+import home from '@/router/Home/home.js'
+import aboutus from '@/router/AboutUs/aboutus.js'
+import privatestudy from '@/router/PrivateStudy/privatestudy.js'
+import groupstudy from '@/router/GroupStudy/groupstudy.js'
+import notice from '@/router/Notice/notice.js'
+import employment from '@/router/Employment/employment.js'
+import search from '@/router/Search/search.js'
 
-const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: () => import('../views/Home/Home.vue')
-  },
-  {
-    path: '/aboutus',
-    name: 'AboutUs',
-    component: () => import('../views/AboutUs/AboutUs.vue')
-  },
-  {
-    path: '/private',
-    name: 'Private',
-    component: () => import('../views/Private/Private.vue')
-  },
-  {
-    path: '/group',
-    name: 'Group',
-    component: () => import('../views/Group/Group.vue')
-  },
-  {
-    path: '/group/detail',
-    name: 'Group_detail',
-    component: () => import('../views/Group/Group_detail.vue')
-  },
-  {
-    path: '/employment',
-    name: 'Employment',
-    component: () => import('../views/Employment/Employment.vue')
-  },
-  {
-    path: '/notice',
-    name: 'Notice',
-    component: () => import('../views/Notice/Notice.vue')
-  },
-  {
-    path: '/search',
-    name: 'Search',
-    component: () => import('../views/Search/Search.vue')
-  }
-]
+
+Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes: [
+    ...home,
+    ...aboutus,
+    ...privatestudy,
+    ...groupstudy,
+    ...notice,
+    ...employment,
+    ...search
+  ]
 })
 
 export default router

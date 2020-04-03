@@ -1,0 +1,20 @@
+<template>
+  <div class="detail2">
+      <br>
+      <h5>detail2</h5>
+      <br>
+      <h6>{{ this.$store.state.subStore.data }}</h6>
+  </div>
+</template>
+
+<script>
+export default {
+  mounted(){
+      this.$store.state.currpage = window.location.href
+  }
+}
+</script>
+
+<style>
+
+</style>
