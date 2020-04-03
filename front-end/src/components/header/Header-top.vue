@@ -2,7 +2,13 @@
 <div>
     <div class="header_top">
         <div class="inner">
-            <span><router-link to="/login">로그인</router-link></span> |
+          <!--   <button id="show-modal" @click="showModal = true">Show Modal</button>
+             <modal v-if="showModal" @close="showModal = false">
+             
+                <h3 slot="header">custom header</h3>
+            </modal> -->
+  
+            <span><router-link to="/login">로그인</router-link></span>  |
             <span><router-link to="/join">회원가입</router-link></span>
             <h1 class="logo">
                 <a href="/home">
@@ -19,9 +25,12 @@
 
 
 export default {
-    name : "headerTop"
+    name : "headerTop",
+  
 }
 </script>
+
+
 
 <style>
 
