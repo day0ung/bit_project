@@ -16,19 +16,8 @@
 <script>
 
 export default {
-  data(){
-    return{
-      str: "",
-      dwd: true
-    }
-  },methods:{
-      setValue: function() {
-      str = document.getElementById("classs").innerText
-    }
-  },
   mounted(){
     this.$store.state.currpage = window.location.href
-    this.setValue()
   }
 }
 </script>

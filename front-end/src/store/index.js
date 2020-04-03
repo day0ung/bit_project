@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import sample from '@/store/sampleStore.js'
+
+import aboutus from '@/store/AboutUs/aboutus.js'
+import employment from '@/store/Employment/employment.js'
+import groupstudy from '@/store/GroupStudy/groupstudy.js'
+import privatestudy from '@/store/PrivateStudy/privatestudy.js'
+import notice from '@/store/Notice/notice.js'
+
+import subStore from '@/store/subStore.js'
 
 Vue.use(Vuex)
 
@@ -36,9 +43,9 @@ export default new Vuex.Store({
   },
   modules: {
     aboutus,
-    employment,
-    groupstudy,
     privatestudy,
+    groupstudy,
+    employment,
     notice,
     subStore
   }
