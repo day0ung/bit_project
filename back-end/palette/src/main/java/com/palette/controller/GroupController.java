@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.GroupDto;
@@ -27,16 +28,11 @@ public class GroupController {
     	return list;
     }
     
-    
-    @GetMapping(value = "/getOneGroup")
-    public GroupDto getOneGroup(){
-    	int seq = 2;	// 실제 프로젝트시 파라미터 추가해야함
-    	System.out.println("getOneGroupo 메소듦ㄴㅇㄹ");
-    	GroupDto dto = groupService.getOneGroup(seq);
-    	System.out.println(dto.toString());
-    	
-    	
-    	
-    	return dto;
+    @PostMapping(value = "/getOneGroup")
+    public GroupDto getOneGroup(GroupDto insertDto){
+        System.out.println("getOneGroupo()");
+        GroupDto outDto = groupService.getOneGroup(insertDto.getGroupInfoSeq());
+        System.out.println(outDto.toString());
+    	return outDto;
     }
 }
