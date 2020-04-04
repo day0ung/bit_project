@@ -2,15 +2,15 @@
   <div class="detail1">
     <br>
     <br>
-    <div style="display: flex;">
-      <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq">
+    <div style="display: flex; flex-wrap: wrap;">
+      <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
         <div class="blue" v-if="groupInfo.interBigSeq === 1">
           <header>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <router-link to="/">
               <img src="@/assets/Awesome.png">
             </router-link>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
           </header>
           <div class="profile-bio">
@@ -21,11 +21,11 @@
 
         <div class="red" v-if="groupInfo.interBigSeq === 2">
           <header>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <router-link to="/">
               <img src="@/assets/Awesome.png">
             </router-link>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
           </header>
           <div class="profile-bio">
@@ -36,11 +36,11 @@
 
         <div class="green" v-if="groupInfo.interBigSeq === 3">
           <header>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <router-link to="/">
               <img src="@/assets/Awesome.png">
             </router-link>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
           </header>
           <div class="profile-bio">
@@ -51,11 +51,11 @@
         
         <div class="yellow" v-if="groupInfo.interBigSeq === 4">
           <header>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <router-link to="/">
               <img src="@/assets/Awesome.png">
             </router-link>
-            <div style="height: 25px;"></div>
+            <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
           </header>
           <div class="profile-bio">
@@ -80,6 +80,7 @@ export default {
       axios.get("http://localhost:9000/getAllGroup")
                 .then(res => {
             //alert(JSON.stringify(res.data))
+            this.list = res.data
             this.$store.state.s_group.groupList = res.data
           })
   }
@@ -103,8 +104,8 @@ aside {
   border-radius: 50%;
   margin: 0 auto;
   display: block;
-  height: 200px;
-  width: 200px;
+  height: 210px;
+  width: 210px;
   background-size: cover;
   overflow: hidden;
   transition: all ease 0.3s;
@@ -279,64 +280,14 @@ aside:hover header h1 {
     transform: matrix3d( 4.025, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -125.912, 0, 0, 1 );
   }
   5.71% {
-    transform: matrix3d(
-      3.039,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      -79.596,
-      0,
-      0,
-      1
-    );
+    transform: matrix3d( 3.039, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -79.596, 0, 0, 1 );
   }
   8.11% {
-    transform: matrix3d(
-      1.82,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      -31.647,
-      0,
-      0,
-      1
-    );
+    transform: matrix3d( 1.82, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -31.647, 0, 0, 1 );
   }
   8.81% {
-    transform: matrix3d(
-      1.581,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      0,
-      0,
-      0,
-      1,
-      0,
-      -21.84,
-      0,
-      0,
-      1
-    );
+    transform: matrix3d( 1.581,
+      0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -21.84, 0, 0, 1 );
   }
   11.96% {
     transform: matrix3d(1.034, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4.825, 0, 0, 1);
