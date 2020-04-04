@@ -25,8 +25,13 @@ export default [
                 component: () => import('@/views/Group/menu/detail4')
             },
             {
-                path: '/group/detail1/:seq/depth1',
+                name: 'depth1',
+                path: '/group/detail1/depth1/:contentId',
                 component: () => import('@/views/Group/depth/depth1')
+            },
+            {
+                path: '/create',
+                component: () => import('@/views/Group/depth/create')
             }
         ]
     }
