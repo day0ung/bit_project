@@ -1,7 +1,7 @@
 <template>
   <div class="depth1">
       <br>
-      <h5>depth1</h5>
+      <h2>{{ groupOne.name }}</h2>
       <br>
       <h5>{{ groupOne.name }}</h5>
       <p>{{ groupOne.maxMember }}</p>
@@ -28,7 +28,6 @@ export default {
     axios.post("http://localhost:9000/getOneGroup", params)
                 .then(res => {
             this.groupOne = res.data
-            this.$store.state.s_group.groupOne = res.data
           })
   }
 }

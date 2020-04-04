@@ -137,19 +137,19 @@ aside {
 }
 
 aside .blue{
-  background: rgb(87, 108, 226);
+  background: #74b9ff;
 }
 
 aside .red{
-  background: rgb(224, 135, 83);
+  background: #ff7675;
 }
 
 aside .green{
-  background: rgb(96, 224, 113);
+  background: #00cec9;
 }
 
 aside .yellow{
-  background: rgb(230, 217, 109);
+  background: #ffeaa7;
 }
 
 aside:hover {
