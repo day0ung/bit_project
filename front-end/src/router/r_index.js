@@ -22,7 +22,8 @@ const router = new VueRouter({
     ...r_group,
     ...r_notice,
     ...r_employment,
-    ...r_search
+    ...r_search,
+    { path: '*', component:() => import('@/components/NotFoundComponent.vue') }
   ],
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }
