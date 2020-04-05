@@ -5,16 +5,16 @@
     <!-- 상단 버튼 -->
     <div style="display: flow-root;">
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-primary">
+        <label class="btn blue">
           <input type="radio" name="options" id="option1" autocomplete="off"> 대학생/취업
         </label>
-        <label class="btn btn-info">
+        <label class="btn red">
           <input type="radio" name="options" id="option2" autocomplete="off"> 공무원/임용
         </label>
-        <label class="btn btn-success">
+        <label class="btn green">
           <input type="radio" name="options" id="option3" autocomplete="off"> 어학/회화
         </label>
-        <label class="btn btn-warning">
+        <label class="btn yellow">
           <input type="radio" name="options" id="option3" autocomplete="off"> 라이프/취미
         </label>
       </div>
@@ -229,6 +229,15 @@ export default {
   border: 7px solid #74b9ff;
 }
 
+.btn-group-toggle .blue{
+  color: #4e4e4e;
+  background: #74b9ff;
+}
+
+.btn-group-toggle .blue:hover{
+  background: #6aa9e9;
+}
+
 .blue button{
   background: #74b9ff;
 }
@@ -241,6 +250,15 @@ export default {
   width: 150px;
   height: 150px;
   border: 8px solid #ff7675;
+}
+
+.btn-group-toggle .red{
+  color: #4e4e4e;
+  background: #ff7675;
+}
+
+.btn-group-toggle .red:hover{
+  background: #e26767;
 }
 
 .red button{
@@ -258,6 +276,15 @@ export default {
   border: 8px solid #00cec9;
 }
 
+.btn-group-toggle .green{
+  color: #4e4e4e;
+  background: #00cec9;
+}
+
+.btn-group-toggle .green:hover{
+  background: #00adab;
+}
+
 .green button{
   background: #00cec9;
 }
@@ -271,6 +298,15 @@ export default {
   width: 150px;
   height: 150px;
   border: 8px solid #ffeaa7;
+}
+
+.btn-group-toggle .yellow{
+  color: #4e4e4e;
+  background: #ffeaa7;
+}
+
+.btn-group-toggle .yellow:hover{
+  background: #e9d69a;
 }
 
 .yellow button{
@@ -296,8 +332,6 @@ aside {
   transition: all ease 0.3s;
 }
 
-
-
 aside:hover {
   background: #f5f5f5;
   border-top: 4px solid rgba(0, 0, 0, 0.22);
@@ -315,7 +349,6 @@ aside:hover header img {
 header {
   text-align: center;
 }
-
 
 .profile-bio {
   text-align: center;
