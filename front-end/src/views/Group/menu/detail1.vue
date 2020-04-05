@@ -28,7 +28,7 @@
             <div class="imageCircle all">
               <div style="height: 30px;"></div>
                 <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-                  <img src="@/assets/Awesome.png">
+                  <img :src="groupInfo.image">
                 </router-link>
               <div style="height: 30px;"></div>
             </div>
@@ -37,7 +37,7 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}}</p>
+              <p>{{groupInfo.info}} {{groupInfo.image}}</p>
             </div>
             <p>스터디 시작일 : {{groupInfo.startDate}}</p>
             <p>스터디 종료일 : {{groupInfo.endDate}}</p>
@@ -52,7 +52,7 @@
           <header>
             <div style="height: 30px;"></div>
             <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-              <img src="@/assets/Awesome.png">
+              <img :src="groupInfo.image">
             </router-link>
             <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
@@ -60,7 +60,7 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}}</p>
+              <p>{{groupInfo.info}} {{groupInfo.image}}</p>
             </div>
             <p>스터디 시작일 : {{groupInfo.startDate}}</p>
             <p>스터디 종료일 : {{groupInfo.endDate}}</p>
@@ -75,7 +75,7 @@
           <header>
             <div style="height: 30px;"></div>
             <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-              <img src="@/assets/Awesome.png">
+              <img :src="groupInfo.image">
             </router-link>
             <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
@@ -98,7 +98,7 @@
           <header>
             <div style="height: 30px;"></div>
             <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-              <img src="@/assets/Awesome.png">
+              <img :src="groupInfo.image">
             </router-link>
             <div style="height: 30px;"></div>
             <h4>{{groupInfo.name}}</h4>
@@ -128,6 +128,7 @@ export default {
   data(){
     return{
       list: this.$store.state.s_group.groupList,
+      image: ""
     }
   },
   methods:{
