@@ -30,7 +30,8 @@ export default [
                 component: () => import('@/views/Group/depth/depth1')
             },
             {
-                path: '/create',
+                name: 'Create',
+                path: 'create',
                 component: () => import('@/views/Group/depth/create')
             }
         ]
