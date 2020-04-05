@@ -37,7 +37,7 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}} {{groupInfo.image}}</p>
+              <p>{{groupInfo.info}}</p>
             </div>
             <p>스터디 시작일 : {{groupInfo.startDate}}</p>
             <p>스터디 종료일 : {{groupInfo.endDate}}</p>
@@ -60,7 +60,7 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}} {{groupInfo.image}}</p>
+              <p>{{groupInfo.info}}</p>
             </div>
             <p>스터디 시작일 : {{groupInfo.startDate}}</p>
             <p>스터디 종료일 : {{groupInfo.endDate}}</p>
