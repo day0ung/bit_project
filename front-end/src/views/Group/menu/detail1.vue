@@ -167,7 +167,7 @@ export default {
   },
   mounted(){
       this.$store.state.currpage = this.$route.path
-      axios.get("http://192.168.2.43:9000/getAllGroup")
+      axios.get("http://localhost:9000/getAllGroup")
                 .then(res => {
             //alert(JSON.stringify(res.data))
             this.list = res.data
