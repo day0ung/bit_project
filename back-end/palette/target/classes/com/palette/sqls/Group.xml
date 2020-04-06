@@ -3,9 +3,23 @@
 
 <mapper namespace="com.palette.dao.GroupDao">
 
-<select id="getAllGroup" resultType="com.palette.model.GroupDto">
-	SELECT * FROM GROUP_INFO
-</select>
+  <select id="getAllGroup" resultType="com.palette.model.GroupDto">
+    SELECT * FROM GROUP_INFO
+  </select>
+  
+  <select id="getOneGroup" parameterType="java.lang.Integer" resultType="com.palette.model.GroupDto">
+    SELECT * FROM GROUP_INFO
+    WHERE GROUP_INFO_SEQ = #{seq}
+  </select>
+
+  <select id="getBigList" resultType="com.palette.model.InterBigDto">
+    SELECT * FROM INTER_BIG
+  </select>
+  
+  <select id="getSmallList" parameterType="java.lang.Integer" resultType="com.palette.model.InterSmallDto">
+    SELECT * FROM INTER_SMALL WHERE INTER_BIG_SEQ = #{seq}
+  </select>
+
  
 <select id="getOneGroup" parameterType="java.lang.Integer" resultType="com.palette.model.GroupDto">
 	SELECT * FROM GROUP_INFO

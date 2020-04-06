@@ -35,7 +35,7 @@
             <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
-          <div class="profile-bio desc">
+          <div class="profile-bio detail_desc">
             <div class="info">
               <p>그룹장 : {{groupInfo.memberSeq}}</p>
               <p>{현재인원} / {{groupInfo.maxMember}}</p>
@@ -47,7 +47,7 @@
             </div>
           </div>
           <div class="buttons detailcontainer">
-            <button class="add">상세보기</button>
+            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
             <button class="like"><span>♥</span></button>
           </div>
         </div>
@@ -62,7 +62,7 @@
             <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
-          <div class="profile-bio desc">
+          <div class="profile-bio detail_desc">
             <div class="info">
               <p>그룹장 : {{groupInfo.memberSeq}}</p>
               <p>{현재인원} / {{groupInfo.maxMember}}</p>
@@ -74,7 +74,7 @@
             </div>
           </div>
           <div class="buttons detailcontainer">
-            <button class="add">상세보기</button>
+            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
             <button class="like"><span>♥</span></button>
           </div>
         </div>
@@ -89,7 +89,7 @@
             <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
-          <div class="profile-bio desc">
+          <div class="profile-bio detail_desc">
             <div class="info">
               <p>그룹장 : {{groupInfo.memberSeq}}</p>
               <p>{현재인원} / {{groupInfo.maxMember}}</p>
@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="buttons detailcontainer">
-            <button class="add">상세보기</button>
+            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
             <button class="like"><span>♥</span></button>
           </div>
         </div>
@@ -116,7 +116,7 @@
             <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
-          <div class="profile-bio desc">
+          <div class="profile-bio detail_desc">
             <div class="info">
               <p>그룹장 : {{groupInfo.memberSeq}}</p>
               <p>{현재인원} / {{groupInfo.maxMember}}</p>
@@ -128,11 +128,13 @@
             </div>
           </div>
           <div class="buttons detailcontainer">
-            <button class="add">상세보기</button>
+            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
             <button class="like"><span>♥</span></button>
           </div>
         </div>
       </aside>
+      <div class="back_footer">
+      </div>
     </div>
 
     <div class="gradient-border all"></div>
@@ -156,11 +158,16 @@ export default {
       this.$router.push({
         name: "Create"
       })
+    },
+    gotoDetail(seq){
+      this.$router.push({
+        path : "/group/detail1/depth1/" + seq
+      })
     }
   },
   mounted(){
       this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/getAllGroup")
+      axios.get("http://192.168.2.43:9000/getAllGroup")
                 .then(res => {
             //alert(JSON.stringify(res.data))
             this.list = res.data
@@ -184,6 +191,10 @@ export default {
   background: #f7f7f7;
 } */
 
+.back_footer{
+  height: 450px;
+}
+
 .info{
   height: 42px;
 }
@@ -205,7 +216,7 @@ export default {
   width: 90%;
 }
 
-.desc {
+.detail_desc {
 	 text-transform: none;
 	 letter-spacing: 0;
 	 color: #4e4e4e;

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.GroupDto;
+import com.palette.model.InterBigDto;
+import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
 
 
@@ -35,4 +37,21 @@ public class GroupController {
         System.out.println(outDto.toString());
     	return outDto;
     }
+
+    @PostMapping(value = "/getBigIndex")
+    public List<InterBigDto> getBigList(){
+        System.out.println("getBigList");
+        List<InterBigDto> list = groupService.getBigList();
+        System.out.println(list.size());
+        return list;
+    }
+
+    @PostMapping(value = "/getSmallIndex")
+    public List<InterSmallDto> getSmallList(int interBigSeq){
+        System.out.println("getSmallList");
+        List<InterSmallDto> list = groupService.getSmallList(interBigSeq);
+        System.out.println(list.size());
+        return list;
+    }
+
 }
