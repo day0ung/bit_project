@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.GroupDao;
 import com.palette.model.GroupDto;
+import com.palette.model.InterBigDto;
+import com.palette.model.InterSmallDto;
 
 @Service
 @Transactional
@@ -22,5 +24,13 @@ public class GroupService {
 
 	public GroupDto getOneGroup(int seq) {
 		return groupDao.getOneGroup(seq);
+	}
+
+	public List<InterBigDto> getBigList() {
+		return groupDao.getBigList();
+	}
+
+	public List<InterSmallDto> getSmallList(int seq) {
+		return groupDao.getSmallList(seq);
 	}
 }
