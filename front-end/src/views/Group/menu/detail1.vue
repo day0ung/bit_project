@@ -32,7 +32,7 @@
                 </router-link>
               <div style="height: 30px;"></div>
             </div>
-            <h4>{{groupInfo.name}}</h4>
+            <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
           <div class="profile-bio desc">
@@ -59,7 +59,7 @@
               <img :src="groupInfo.image">
             </router-link>
             <div style="height: 30px;"></div>
-            <h4>{{groupInfo.name}}</h4>
+            <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
           <div class="profile-bio desc">
@@ -86,7 +86,7 @@
               <img :src="groupInfo.image">
             </router-link>
             <div style="height: 30px;"></div>
-            <h4>{{groupInfo.name}}</h4>
+            <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
           <div class="profile-bio desc">
@@ -113,7 +113,7 @@
               <img :src="groupInfo.image">
             </router-link>
             <div style="height: 30px;"></div>
-            <h4>{{groupInfo.name}}</h4>
+            <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
           <div class="profile-bio desc">

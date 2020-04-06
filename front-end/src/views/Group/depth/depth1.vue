@@ -11,7 +11,7 @@
       </div>
       <div class="product">
         <div class="product_content">
-          <h1>{{ groupOne.name }}</h1>
+          <h1>{{ groupOne.groupName }}</h1>
           <p>{{ groupOne.startDate }} ~ {{ groupOne.endDate }}</p>
           <br>
           <div class="group_info">
