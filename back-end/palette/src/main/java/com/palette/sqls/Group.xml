@@ -20,11 +20,6 @@
     SELECT * FROM INTER_SMALL WHERE INTER_BIG_SEQ = #{seq}
   </select>
 
- 
-<select id="getOneGroup" parameterType="java.lang.Integer" resultType="com.palette.model.GroupDto">
-	SELECT * FROM GROUP_INFO
-	WHERE GROUP_INFO_SEQ = #{seq}
-</select>
 
 <resultMap type="com.palette.model.GroupDto" id="GroupInfo">
 	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
@@ -58,5 +53,5 @@
 	<result column="MEMBER_SEQ" property="MemberSeq"/>
 	<result column="DEL" property="del"/>
 </resultMap>
-
+ 
 </mapper>

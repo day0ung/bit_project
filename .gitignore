@@ -272,6 +272,7 @@ Tomcat v8.5 Server at localhost-config/
 /.nb-gradle/
 build/
 
-
+#Gradle temporary files
+target/
 
 
