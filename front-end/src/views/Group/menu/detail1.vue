@@ -37,10 +37,14 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}}</p>
+              <p>그룹장 : {{groupInfo.memberSeq}}</p>
+              <p>{현재인원} / {{groupInfo.maxMember}}</p>
+              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
             </div>
-            <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-            <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            <div class="date">
+              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
+              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            </div>
           </div>
           <div class="buttons detailcontainer">
             <button class="add">상세보기</button>
@@ -60,10 +64,14 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}}</p>
+              <p>그룹장 : {{groupInfo.memberSeq}}</p>
+              <p>{현재인원} / {{groupInfo.maxMember}}</p>
+              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
             </div>
-            <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-            <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            <div class="date">
+              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
+              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            </div>
           </div>
           <div class="buttons detailcontainer">
             <button class="add">상세보기</button>
@@ -83,10 +91,14 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}}</p>
+              <p>그룹장 : {{groupInfo.memberSeq}}</p>
+              <p>{현재인원} / {{groupInfo.maxMember}}</p>
+              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
             </div>
-            <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-            <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            <div class="date">
+              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
+              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            </div>
           </div>
           <div class="buttons detailcontainer">
             <button class="add">상세보기</button>
@@ -106,10 +118,14 @@
           </header>
           <div class="profile-bio desc">
             <div class="info">
-              <p>{{groupInfo.info}}</p>
+              <p>그룹장 : {{groupInfo.memberSeq}}</p>
+              <p>{현재인원} / {{groupInfo.maxMember}}</p>
+              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
             </div>
-            <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-            <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            <div class="date">
+              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
+              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+            </div>
           </div>
           <div class="buttons detailcontainer">
             <button class="add">상세보기</button>
@@ -128,7 +144,11 @@ export default {
   data(){
     return{
       list: this.$store.state.s_group.groupList,
-      image: ""
+      image: "",
+      categoryOne: true,
+      categoryTwo: true,
+      categoryThree: true,
+      categoryFour: true,
     }
   },
   methods:{
@@ -166,6 +186,14 @@ export default {
 
 .info{
   height: 42px;
+}
+
+.info p{
+  margin: 3px;
+}
+
+.date{
+  margin-top: 5px;
 }
 
 .hr{
