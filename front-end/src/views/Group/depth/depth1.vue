@@ -4,7 +4,7 @@
     <br>
     <!-- blue -->
     <div class="depthcontainer" v-if="groupOne.interBigSeq == 1">
-      <div class="depthimages">
+      <div class="depthimages blueInner">
         <img :src="groupOne.image" />
       </div>
       <div class="groupdetail_product">
@@ -39,7 +39,7 @@
     </div>
     <!-- red -->
     <div class="depthcontainer" v-if="groupOne.interBigSeq == 2">
-      <div class="depthimages">
+      <div class="depthimages redInner">
         <img :src="groupOne.image" />
       </div>
       <div class="groupdetail_product">
@@ -74,7 +74,7 @@
     </div>
   <!-- green -->
     <div class="depthcontainer" v-if="groupOne.interBigSeq == 3">
-      <div class="depthimages">
+      <div class="depthimages greenInner">
         <img :src="groupOne.image" />
       </div>
       <div class="groupdetail_product">
@@ -109,7 +109,7 @@
     </div>
     <!-- yellow -->
     <div class="depthcontainer" v-if="groupOne.interBigSeq == 4">
-      <div class="depthimages">
+      <div class="depthimages yellowInner">
         <img :src="groupOne.image" />
       </div>
       <div class="groupdetail_product">
@@ -212,7 +212,7 @@ export default {
 	 position: absolute;
 	 width: 40%;
 	 top: 0%;
-	 left: 55%;
+	 left: 57%;
 }
 
 .product_content{
@@ -260,6 +260,9 @@ export default {
  .pick {
 	 margin-bottom: 0;
 }
+.yellowInner{
+  background: #ffeaa750;
+}
 .size_yellow {
 	 padding: 8px;
 	 border: 1px solid #4e4e4e;
@@ -270,6 +273,9 @@ export default {
   background: #ffeaa7;
   color: #4e4e4e;
 	transition: all 0.4s ease-in-out;
+}
+.greenInner{
+  background: #00adab50;
 }
 .size_green {
 	 padding: 8px;
@@ -288,10 +294,16 @@ export default {
 	 font-size: 0.7em;
 	 text-align: center;
 }
+.blueInner{
+  background: #74baff60;
+}
 .size_blue:hover{
   background: #74b9ff;
   color: #f5f5f5;
 	transition: all 0.4s ease-in-out;
+}
+.redInner{
+  background: #ff767550;
 }
 .size_red {
 	 padding: 8px;

@@ -393,7 +393,7 @@ header {
 .profile-bio {
   text-align: center;
   padding: 1px 20px 10px 20px !important;
-  transition: all linear 1.5s;
+  transition: all linear 0.7s;
   opacity: 0;
   height: 80px;
 }
