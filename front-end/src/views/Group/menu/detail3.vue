@@ -16,11 +16,11 @@
 export default {
   data(){
     return{
-      memberlist: this.$store.state.subStore.data
+      memberlist: this.$store.state.s_subStore.data
     }
   },
   mounted(){
-      this.$store.state.currpage = window.location.href
+      this.$store.state.currpage = this.$route.path
   }
 }
 </script>

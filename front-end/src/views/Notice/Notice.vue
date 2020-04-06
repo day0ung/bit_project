@@ -1,12 +1,14 @@
 <template>
   <div class="notice">
-      <h1>notice</h1>
+      <h1>{{ this.$store.getters.pageName }}</h1>
   </div>
 </template>
 
 <script>
 export default {
-
+  mounted(){
+    this.$store.state.currpage = this.$route.path
+  }
 }
 </script>
 

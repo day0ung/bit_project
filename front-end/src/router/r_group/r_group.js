@@ -5,8 +5,12 @@ export default [
         component: () => import('@/views/Group/Group.vue'),
         children:[
             {
-                path: '/group/detail1',
-                component: () => import('@/views/Group/menu/detail1')
+                path: '',
+                component: () => import('@/views/Group/menu/detail1'),
+            },
+            {
+                path: 'detail1',
+                component: () => import('@/views/Group/menu/detail1'),
             },
             {
                 path: 'detail2',
@@ -19,6 +23,16 @@ export default [
             {
                 path: 'detail4',
                 component: () => import('@/views/Group/menu/detail4')
+            },
+            {
+                name: 'depth1',
+                path: '/group/detail1/depth1/:contentId',
+                component: () => import('@/views/Group/depth/depth1')
+            },
+            {
+                name: 'Create',
+                path: 'create',
+                component: () => import('@/views/Group/depth/create')
             }
         ]
     }
