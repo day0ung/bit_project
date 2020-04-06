@@ -21,5 +21,42 @@
   </select>
 
  
+<select id="getOneGroup" parameterType="java.lang.Integer" resultType="com.palette.model.GroupDto">
+	SELECT * FROM GROUP_INFO
+	WHERE GROUP_INFO_SEQ = #{seq}
+</select>
+
+<resultMap type="com.palette.model.GroupDto" id="GroupInfo">
+	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+	<result column="MEMBER_SEQ" property="memberSeq"/>
+	<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+	<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+	<result column="GROUP_NAME" property="groupName"/>
+	<result column="INFO" property="info"/>
+	<result column="MAX_MEMBER" property="maxMember"/>
+	<result column="IMAGE" property="image"/>
+	<result column="START_DATE" property="startDate"/>
+	<result column="END_DATE" property="endDate"/>
+	<result column="DEL" property="del"/>
+</resultMap>
+
+<resultMap type="com.palette.model.GroupSchedule" id="GroupSchedule">
+	<id column="GROUP_SCHEDULE_SEQ" property="GroupSchedule"/>
+	<result column="GROUP_INFO_SEQ" property="GroupInfoSeq"/>
+	<result column="SUNDAY" property="sunday"/>
+	<result column="MONDAY" property="monday"/>
+	<result column="TUESDAY" property="tuesday"/>
+	<result column="WEDNESDAY" property="wednesday"/>
+	<result column="THURSDAY" property="thursday"/>
+	<result column="FRIDAY" property="friday"/>
+	<result column="SATURDAY" property="saturday"/>
+</resultMap>
+
+<resultMap type="com.palette.model.GroupMemberDto" id="GroupMember">
+	<id column="GROUP_MEMBER_SEQ" property="GroupMemberSeq"/>
+	<result column="GROUP_INFO_SEQ" property="GroupInfoSeq"/>
+	<result column="MEMBER_SEQ" property="MemberSeq"/>
+	<result column="DEL" property="del"/>
+</resultMap>
 
 </mapper>

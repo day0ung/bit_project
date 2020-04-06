@@ -22,9 +22,9 @@ public class MemberService {
 			return memberDao.selectAll();
 		}
 
-		public MemberDto getOneMember(int seq) {
+		public MemberDto getOneMember(MemberDto dto) {
 			
-			return memberDao.getOneMember(seq);
+			return memberDao.getOneMember(dto);
 		}
     
 }
