@@ -7,4 +7,9 @@
     SELECT * FROM MEMBER
   </select>
 
+  <select id="getOneMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
+  	SELECT * FROM MEMBER
+  	WHERE MEMBER_SEQ = #{seq}
+  </select>
+  
 </mapper>

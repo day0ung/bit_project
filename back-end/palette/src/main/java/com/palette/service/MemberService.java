@@ -21,5 +21,10 @@ public class MemberService {
             //System.out.println("service");
 			return memberDao.selectAll();
 		}
+
+		public MemberDto getOneMember(int seq) {
+			
+			return memberDao.getOneMember(seq);
+		}
     
 }

@@ -29,4 +29,12 @@ public class MemberController {
         return "";
     }
 
+    @GetMapping(value= "/getOneMember")
+    public MemberDto getOneMember(int seq) {
+    	System.out.println("getOneMember() 실행");
+    	MemberDto dto = memberService.getOneMember(seq);
+    	System.out.println(dto.toString());
+    	
+    	return dto;
+    }
 }

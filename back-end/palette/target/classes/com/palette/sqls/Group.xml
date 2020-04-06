@@ -12,4 +12,6 @@
     WHERE GROUP_INFO_SEQ = #{seq}
   </select>
 
+ 
+
 </mapper>
