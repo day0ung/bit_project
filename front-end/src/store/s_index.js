@@ -7,7 +7,7 @@ import s_group from '@/store/s_group/s_group.js'
 import s_employment from '@/store/s_employment/s_employment.js'
 import s_notice from '@/store/s_notice/s_notice.js'
 import s_search from '@/store/s_subStore.js'
-
+import s_member from '@/store/s_member/s_member.js'
 import s_subStore from '@/store/s_subStore.js'
 
 Vue.use(Vuex)
@@ -49,6 +49,7 @@ export default new Vuex.Store({
     s_employment,
     s_notice,
     s_search,
-    s_subStore
+    s_subStore,
+    s_member
   }
 })

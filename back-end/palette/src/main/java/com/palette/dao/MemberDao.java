@@ -13,6 +13,6 @@ public interface MemberDao {
 
 	List<MemberDto> selectAll();
 
-	MemberDto getOneMember(int seq);
+	MemberDto getOneMember(MemberDto dto);
 
 }
