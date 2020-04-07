@@ -106,28 +106,6 @@
     WHERE i.GROUP_INFO_SEQ = #{seq}
 </select>
 
-<select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfoWithName">
-		select *, (select count(*)
-					from GROUP_INFO g
-					join GROUP_MEMBER gm
-					on g.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ) as currMember 
-		from GROUP_INFO g
-		
-		join MEMBER m
-		on g.MEMBER_SEQ = m.MEMBER_SEQ
-		
-		join GROUP_MEMBER gm
-		on g.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
-		
-		join INTER_BIG ib
-		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
-		
-		join INTER_SMALL ism
-		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
-	
-		WHERE g.GROUP_INFO_SEQ = #{seq}
-	</select>
-
 <!-- get Group Member Name -->
 	<resultMap type="com.palette.model.GroupMemberDto" id="GroupMember">
 		<id column="GROUP_MEMBER_SEQ" property="groupMemberSeq"/>
