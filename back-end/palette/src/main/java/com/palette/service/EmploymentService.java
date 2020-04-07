@@ -20,7 +20,7 @@ public class EmploymentService {
 		return employmentDao.getAllRecuritingInfo();
 	}
 
-//	public GroupDto getOneGroup(int seq) {
-//		return employmentDao.getOneGroup(seq);
-//	}
+	public BoardDto getOneRecruit(int seq) {
+		return employmentDao.getOneRecruit(seq);
+	}
 }

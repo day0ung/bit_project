@@ -13,6 +13,6 @@ public interface EmploymentDao {
 
 	List<BoardDto> getAllRecuritingInfo();
 
-//	EmploymentDto getAllRecuritingInfo(int seq);
+	BoardDto getOneRecruit(int seq);
 
 }

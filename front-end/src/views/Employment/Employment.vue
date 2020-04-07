@@ -1,10 +1,12 @@
 <template>
   <div class="employment">
+    
     <div class="employment_detail circleBehind bounce-top">
       <br>
       <br>
       <router-link to="/employment/recruiting">구인 공고</router-link>
       <router-link to="/employment/CVpage">이력서 작성</router-link>
+      
     </div>
     <br>
     <div class="text-focus-in">
@@ -21,6 +23,7 @@ export default {
       list: this.$store.state.s_employment.RecruitingList
     }
   },
+
   mounted(){
     this.$store.state.currpage = this.$route.path
     axios.get("http://localhost:9000/getAllRecuritingInfo")

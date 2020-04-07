@@ -7,7 +7,9 @@
         <ul class="list_product basic" id="_special">
           <li v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
             <div class="box_product">
-              <a href="#" class="link_box track_event"></a> 
+              <a @click="showEmpDetail(recruitingInfo.boardSeq)" class="link_box"></a> 
+              
+              
               <span class="product_logo">
                 <img src="https://www2.saraminbanner.co.kr/banner_logo//company/logo_banner/2018/05/p8pkyk_x5ry-2rxeec_specialplus5767144.png" class="img" alt="이미지없음" rel="nofollow">
               </span>
@@ -16,7 +18,7 @@
               
               <span class="recruit_func">
                 <span class="blind">공고 마감일</span>
-                <span class="num_dday" @click="nowDatef">D - {{recruitingInfo.dDay}} </span> 
+                <span class="num_dday">D - {{recruitingInfo.dDay}} </span> 
                 <button class="sri_btn_xs" title="클릭하면 입사지원할 수 있는 창이 뜹니다." onclick="try{quickApplyForm(&#39;37993617&#39;,&#39;&#39;,&#39;t_category=main&t_content=platinum_fix_expand&#39;, &#39;&#39;); return false;} catch (e) {}; return false;" onmousedown="try{n_trackEvent(&#39;apply&#39;,&#39;main&#39;,&#39;quick_apply&#39;,&#39;&#39;);}catch(e){}"><span class="sri_btn_immediately track_event" data-track_event="main|Ads_quick_apply|platinum_fix_expand|1">즉시지원</span></button> 
               </span> 
               <span class="bg"></span>
@@ -26,16 +28,20 @@
       </div>
     </div>
   </div>
+  
+  
 </div>
 </template>
 
 <script>
+import Modal from "@/views/Employment/depth2/RecruitingDetail.vue"
+
 export default {
   data(){
     return{
       RecruitingList: this.$store.state.s_employment.RecruitingList,
       
-      
+      getOneRecruit : this.$store.state.s_employment.getOneRecruit
     }
   },
   mounted(){
@@ -49,23 +55,24 @@ export default {
                 })
     
   },
+    
   methods:{
-    nowDatef(){
-      // endDate: this.$moment(this.list.cvEndDate).format('YYYYMMDD')
-      endDate: this.$store.state.s_employment.RecruitingList.cvEndDate
-      alert(this.endDate);
-
+    showEmpDetail(seq){
+        this.$router.push({
+          path: "/RecruitingDetail/"+seq
+          })
     }
+    
+      
+    
   }
-  
-  
   
 }
 </script>
 
 
 
-<style scope>
+<style>
 .hidden,
 .blind {overflow:hidden;clip:rect(1px,1px,1px,1px);position:absolute !important;width:1px;height:1px}
 

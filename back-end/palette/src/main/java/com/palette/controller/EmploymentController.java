@@ -71,11 +71,15 @@ public class EmploymentController {
     	return list;
     }
     
-//    @PostMapping(value = "/getOneGroup")
-//    public GroupDto getOneGroup(GroupDto insertDto){
-//        System.out.println("getOneGroupo()");
-//        GroupDto outDto = employmentService.getOneGroup(insertDto.getGroupInfoSeq());
-//        System.out.println(outDto.toString());
-//    	return outDto;
-//    }
+    @PostMapping(value = "/getOneRecruit")
+    public BoardDto getOneRecruit(int empBoardSeq){
+    	System.out.println("sSeq: "+ empBoardSeq);
+        System.out.println("getOneRecruit() 실행");
+//        int seq = Integer.parseInt(sSeq);
+        System.out.println("seq: "+ empBoardSeq);
+        BoardDto dto =  employmentService.getOneRecruit(empBoardSeq);
+        
+
+    	return dto;
+    }
 }
