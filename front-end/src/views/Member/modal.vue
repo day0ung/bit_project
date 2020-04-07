@@ -70,7 +70,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @charset "utf-8";
 /* reset & common class*/
 html {color:#000;background:#fff}

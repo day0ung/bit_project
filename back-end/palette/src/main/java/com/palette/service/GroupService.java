@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.GroupDao;
+import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
@@ -37,5 +38,9 @@ public class GroupService {
 	
 	public List<GroupMemberDto> getGroupMemberName(int seq){
 		return groupDao.getGroupMemberName(seq);
+	}
+
+	public List<GroupBoardDto> getGroupBoardList() {
+		return groupDao.getgroupBoardList();
 	}
 }

@@ -1,12 +1,5 @@
 <template>
   <div class="detail1">
-    <div class="page" v-show="loading"> 
-      <vue-loading type="bars" color="#d9544e" :size="{ width: '50px', height: '50px' }"></vue-loading>
-    </div> 
-    
-    <div class="page" v-show="!loading" style="display: none"> 
- 
-
     <br>
     <br>
     <!-- 상단 버튼 -->
@@ -71,9 +64,9 @@
           </header>
           <div class="profile-bio detail_desc">
             <div class="info">
-              <p>그룹장 : {{groupInfo.memberSeq}}</p>
-              <p>{현재인원} / {{groupInfo.maxMember}}</p>
-              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
+              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
+              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
+              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
             </div>
             <div class="date">
               <p>스터디 시작일 : {{groupInfo.startDate}}</p>
@@ -98,9 +91,9 @@
           </header>
           <div class="profile-bio detail_desc">
             <div class="info">
-              <p>그룹장 : {{groupInfo.memberSeq}}</p>
-              <p>{현재인원} / {{groupInfo.maxMember}}</p>
-              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
+              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
+              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
+              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
             </div>
             <div class="date">
               <p>스터디 시작일 : {{groupInfo.startDate}}</p>
@@ -125,9 +118,9 @@
           </header>
           <div class="profile-bio detail_desc">
             <div class="info">
-              <p>그룹장 : {{groupInfo.memberSeq}}</p>
-              <p>{현재인원} / {{groupInfo.maxMember}}</p>
-              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
+              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
+              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
+              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
             </div>
             <div class="date">
               <p>스터디 시작일 : {{groupInfo.startDate}}</p>
@@ -189,7 +182,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 @-webkit-keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}@keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}
 .shadow-drop-br{-webkit-animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both;animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both}
 /* 
@@ -208,7 +201,7 @@ export default {
 }
 
 .info{
-  height: 42px;
+  height: 50px;
 }
 
 .info p{
@@ -407,7 +400,7 @@ header {
   padding: 1px 20px 10px 20px !important;
   transition: all linear 0.7s;
   opacity: 0;
-  height: 80px;
+  height: 85px;
 }
 
 aside:hover .profile-bio {

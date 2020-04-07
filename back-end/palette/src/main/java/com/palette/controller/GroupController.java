@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @CrossOrigin(origins = "*")
@@ -64,5 +67,13 @@ public class GroupController {
 			}
     	return list;
     }
+
+    @GetMapping(value="/groupBoardList")
+    public List<GroupBoardDto> groupBoardList() {
+        List<GroupBoardDto> list = groupService.getGroupBoardList();
+        System.out.println(list.size());
+        return list;
+    }
+    
 
 }

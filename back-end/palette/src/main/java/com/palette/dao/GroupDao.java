@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
@@ -23,5 +24,7 @@ public interface GroupDao {
 	List<InterSmallDto> getSmallList(int seq);
 	
 	List<GroupMemberDto> getGroupMemberName(int seq);
+
+	List<GroupBoardDto> getgroupBoardList();
 
 }

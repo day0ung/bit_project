@@ -138,5 +138,9 @@
 		 WHERE g.GROUP_INFO_SEQ = #{seq}
 	</select>
 <!-- /get Group Member Name -->
+
+	<select id="getgroupBoardList" resultType="com.palette.model.GroupBoardDto">
+		SELECT * FROM BOARD
+	</select>
  
 </mapper>
