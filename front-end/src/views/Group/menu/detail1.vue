@@ -44,9 +44,9 @@
           </header>
           <div class="profile-bio detail_desc">
             <div class="info">
-              <p>그룹장 : {{groupInfo.memberSeq}}</p>
-              <p>{현재인원} / {{groupInfo.maxMember}}</p>
-              <P>카테고리 : {{ groupInfo.interBigSeq }} > {{groupInfo.interSmallSeq}}</P>
+              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
+              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
+              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
             </div>
             <div class="date">
               <p>스터디 시작일 : {{groupInfo.startDate}}</p>

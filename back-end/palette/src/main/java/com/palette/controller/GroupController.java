@@ -26,8 +26,8 @@ public class GroupController {
     public List<GroupDto> getAllGroup() {
     	System.out.println("getAllGroup 메소드 실행");
     	List<GroupDto> list = groupService.getAllGroup();
-//    	System.out.println(list.size());
-//    	System.out.println("list.size: "+list.get(0).toString());
+    	System.out.println(list.size());
+    	System.out.println("list.size: "+list.get(0).toString());
     	return list;
     }
     

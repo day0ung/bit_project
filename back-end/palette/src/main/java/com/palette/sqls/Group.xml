@@ -3,9 +3,9 @@
 
 <mapper namespace="com.palette.dao.GroupDao">
 
-  <select id="getAllGroup" resultType="com.palette.model.GroupDto">
+<!--   <select id="getAllGroup" resultType="com.palette.model.GroupDto">
     SELECT * FROM GROUP_INFO
-  </select>
+  </select> -->
   
   <select id="getBigList" resultType="com.palette.model.InterBigDto">
     SELECT * FROM INTER_BIG
@@ -44,6 +44,59 @@
 	</resultMap>
 <!-- /group info with schedule -->
 
+
+<!-- group info with Name -->
+	<resultMap type="com.palette.model.GroupDto" id="GroupInfoWithName">
+		<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+		<result column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="GROUP_NAME" property="groupName"/>
+		<result column="INFO" property="info"/>
+		<result column="MAX_MEMBER" property="maxMember"/>
+		<result column="IMAGE" property="image"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="DEL" property="del"/>
+		<result column="currMember" property="currMember"/>
+		<collection property="interBigDto" resultMap="InterBig"/>
+		<collection property="interSmallDto" resultMap="InterSmall"/>
+		<collection property="memberDto" resultMap="MemberInfo"/>
+		<collection property="groupMemberDto" resultMap="GroupMember"/>
+	</resultMap>
+	
+	<resultMap type="com.palette.model.InterBigDto" id="InterBig">
+		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="BIG_NAME" property="bigName"/>
+	</resultMap>
+	<resultMap type="com.palette.model.InterSmallDto" id="InterSmall">
+		<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="SMALL_NAME" property="smallName"/>
+	</resultMap>
+	
+	<select id="getAllGroup" resultMap="GroupInfoWithName">
+		select *, (select count(*)
+					from GROUP_INFO g
+					join GROUP_MEMBER gm
+					on g.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ) as currMember 
+		from GROUP_INFO g
+		
+		join MEMBER m
+		on g.MEMBER_SEQ = m.MEMBER_SEQ
+		
+		join GROUP_MEMBER gm
+		on g.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
+		
+		join INTER_BIG ib
+		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+		
+		join INTER_SMALL ism
+		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+		
+	</select>
+<!-- /group info with Name -->
+
 <select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
     SELECT i.GROUP_INFO_SEQ, i.MEMBER_SEQ, i.INTER_BIG_SEQ, i.INTER_SMALL_SEQ, i.GROUP_NAME, i.INFO, i.MAX_MEMBER, i.IMAGE, i.START_DATE, i.END_DATE, i.DEL,
     	   s.SUNDAY, s.MONDAY, s.TUESDAY, s.WEDNESDAY, s.THURSDAY, s.FRIDAY, s.SATURDAY
@@ -52,7 +105,6 @@
     ON i.GROUP_INFO_SEQ = s.GROUP_INFO_SEQ
     WHERE i.GROUP_INFO_SEQ = #{seq}
 </select>
-
 
 <!-- get Group Member Name -->
 	<resultMap type="com.palette.model.GroupMemberDto" id="GroupMember">

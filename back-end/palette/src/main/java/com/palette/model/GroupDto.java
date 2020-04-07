@@ -24,8 +24,11 @@ public class GroupDto implements Serializable {
 
 	private int groupInfoSeq;	// group_info_seq;
 	private int memberSeq;
+	
 	private int interBigSeq;
+	
 	private int interSmallSeq;
+	
 	private String groupName;
 	private String info;
 	private int maxMember;
@@ -37,14 +40,21 @@ public class GroupDto implements Serializable {
 	private GroupSchedule groupSchedule;
 	
 	
+	private InterBigDto interBigDto;
+	private InterSmallDto interSmallDto;
+	private MemberDto memberDto;
+	private GroupMemberDto groupMemberDto;
+	
+	private int currMember;
+	
 	public GroupDto() {
 	
 	}
 
-	
-
 	public GroupDto(int groupInfoSeq, int memberSeq, int interBigSeq, int interSmallSeq, String groupName, String info,
-			int maxMember, String image, String startDate, String endDate, int del, GroupSchedule groupSchedule) {
+			int maxMember, String image, String startDate, String endDate, int del, GroupSchedule groupSchedule,
+			InterBigDto interBigDto, InterSmallDto interSmallDto, MemberDto memberDto, GroupMemberDto groupMemberDto,
+			int currMember) {
 		super();
 		this.groupInfoSeq = groupInfoSeq;
 		this.memberSeq = memberSeq;
@@ -58,17 +68,22 @@ public class GroupDto implements Serializable {
 		this.endDate = endDate;
 		this.del = del;
 		this.groupSchedule = groupSchedule;
+		this.interBigDto = interBigDto;
+		this.interSmallDto = interSmallDto;
+		this.memberDto = memberDto;
+		this.groupMemberDto = groupMemberDto;
+		this.currMember = currMember;
 	}
-
 
 	@Override
 	public String toString() {
 		return "GroupDto [groupInfoSeq=" + groupInfoSeq + ", memberSeq=" + memberSeq + ", interBigSeq=" + interBigSeq
 				+ ", interSmallSeq=" + interSmallSeq + ", groupName=" + groupName + ", info=" + info + ", maxMember="
 				+ maxMember + ", image=" + image + ", startDate=" + startDate + ", endDate=" + endDate + ", del=" + del
-				+ ", groupSchedule=" + groupSchedule + "]";
+				+ ", groupSchedule=" + groupSchedule + ", interBigDto=" + interBigDto + ", interSmallDto="
+				+ interSmallDto + ", memberDto=" + memberDto + ", groupMemberDto=" + groupMemberDto + ", currMember="
+				+ currMember + "]";
 	}
-
 
 	public int getGroupInfoSeq() {
 		return groupInfoSeq;
@@ -166,5 +181,45 @@ public class GroupDto implements Serializable {
 		this.groupSchedule = groupSchedule;
 	}
 
+	public InterBigDto getInterBigDto() {
+		return interBigDto;
+	}
+
+	public void setInterBigDto(InterBigDto interBigDto) {
+		this.interBigDto = interBigDto;
+	}
+
+	public InterSmallDto getInterSmallDto() {
+		return interSmallDto;
+	}
+
+	public void setInterSmallDto(InterSmallDto interSmallDto) {
+		this.interSmallDto = interSmallDto;
+	}
+
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+	}
+
+	public GroupMemberDto getGroupMemberDto() {
+		return groupMemberDto;
+	}
+
+	public void setGroupMemberDto(GroupMemberDto groupMemberDto) {
+		this.groupMemberDto = groupMemberDto;
+	}
+
+	public int getCurrMember() {
+		return currMember;
+	}
+
+	public void setCurrMember(int currMember) {
+		this.currMember = currMember;
+	}
+	
 	
 }

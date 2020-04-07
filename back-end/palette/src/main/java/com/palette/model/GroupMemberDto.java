@@ -2,6 +2,7 @@ package com.palette.model;
 
 public class GroupMemberDto {
 	
+	private int groupMemberSeq;
 	private int groupInfoSeq;
 	private int memberSeq;
 	private int del;
@@ -12,8 +13,9 @@ public class GroupMemberDto {
 	
 	}
 
-	public GroupMemberDto(int groupInfoSeq, int memberSeq, int del, MemberDto memberDto) {
+	public GroupMemberDto(int groupMemberSeq, int groupInfoSeq, int memberSeq, int del, MemberDto memberDto) {
 		super();
+		this.groupMemberSeq = groupMemberSeq;
 		this.groupInfoSeq = groupInfoSeq;
 		this.memberSeq = memberSeq;
 		this.del = del;
@@ -22,8 +24,16 @@ public class GroupMemberDto {
 
 	@Override
 	public String toString() {
-		return "GroupMemberDto [groupInfoSeq=" + groupInfoSeq + ", memberSeq=" + memberSeq + ", del=" + del
-				+ ", memberDto=" + memberDto + "]";
+		return "GroupMemberDto [groupMemberSeq=" + groupMemberSeq + ", groupInfoSeq=" + groupInfoSeq + ", memberSeq="
+				+ memberSeq + ", del=" + del + ", memberDto=" + memberDto + "]";
+	}
+
+	public int getGroupMemberSeq() {
+		return groupMemberSeq;
+	}
+
+	public void setGroupMemberSeq(int groupMemberSeq) {
+		this.groupMemberSeq = groupMemberSeq;
 	}
 
 	public int getGroupInfoSeq() {
@@ -58,6 +68,5 @@ public class GroupMemberDto {
 		this.memberDto = memberDto;
 	}
 
-	
 	
 }
