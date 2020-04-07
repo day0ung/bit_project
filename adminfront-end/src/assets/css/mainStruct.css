@@ -4,25 +4,34 @@ body {
 
 
 .topNavBar{
-  list-style-type: none;
+  
   margin: 0;
   padding: 0;
-  overflow: hidden;
   background-color: #333;
   position: -webkit-sticky; /* Safari */
+  overflow: hidden;
   position: sticky;
   top: 0;
 }
+
+/* 
+margin: 0;
+padding: 0;
+width: 25%;
+background-color: #f1f1f1;
+height: 100%;
+overflow: auto;
+position: fixed;
+} */
+
+
 
 
 .topNavBar ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow: hidden;
-  background-color: #333;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
+
   top: 0; 
   
 }
