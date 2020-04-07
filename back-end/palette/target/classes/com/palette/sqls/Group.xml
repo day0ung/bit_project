@@ -7,11 +7,6 @@
     SELECT * FROM GROUP_INFO
   </select>
   
-  <select id="getOneGroup" parameterType="java.lang.Integer" resultType="com.palette.model.GroupDto">
-    SELECT * FROM GROUP_INFO
-    WHERE GROUP_INFO_SEQ = #{seq}
-  </select>
-
   <select id="getBigList" resultType="com.palette.model.InterBigDto">
     SELECT * FROM INTER_BIG
   </select>
@@ -20,38 +15,76 @@
     SELECT * FROM INTER_SMALL WHERE INTER_BIG_SEQ = #{seq}
   </select>
 
+<!-- group info with schedule -->
+	<resultMap type="com.palette.model.GroupDto" id="GroupInfo">
+		<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+		<result column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="GROUP_NAME" property="groupName"/>
+		<result column="INFO" property="info"/>
+		<result column="MAX_MEMBER" property="maxMember"/>
+		<result column="IMAGE" property="image"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="DEL" property="del"/>
+		<collection property="groupSchedule" resultMap="GroupSchedule"/>
+	</resultMap>
+	
+	<resultMap type="com.palette.model.GroupSchedule" id="GroupSchedule">
+		<id column="GROUP_SCHEDULE_SEQ" property="groupSchedule"/>
+		<result column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+		<result column="SUNDAY" property="sunday"/>
+		<result column="MONDAY" property="monday"/>
+		<result column="TUESDAY" property="tuesday"/>
+		<result column="WEDNESDAY" property="wednesday"/>
+		<result column="THURSDAY" property="thursday"/>
+		<result column="FRIDAY" property="friday"/>
+		<result column="SATURDAY" property="saturday"/>
+	</resultMap>
+<!-- /group info with schedule -->
 
-<resultMap type="com.palette.model.GroupDto" id="GroupInfo">
-	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
-	<result column="MEMBER_SEQ" property="memberSeq"/>
-	<result column="INTER_BIG_SEQ" property="interBigSeq"/>
-	<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
-	<result column="GROUP_NAME" property="groupName"/>
-	<result column="INFO" property="info"/>
-	<result column="MAX_MEMBER" property="maxMember"/>
-	<result column="IMAGE" property="image"/>
-	<result column="START_DATE" property="startDate"/>
-	<result column="END_DATE" property="endDate"/>
-	<result column="DEL" property="del"/>
-</resultMap>
+<select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
+    SELECT i.GROUP_INFO_SEQ, i.MEMBER_SEQ, i.INTER_BIG_SEQ, i.INTER_SMALL_SEQ, i.GROUP_NAME, i.INFO, i.MAX_MEMBER, i.IMAGE, i.START_DATE, i.END_DATE, i.DEL,
+    	   s.SUNDAY, s.MONDAY, s.TUESDAY, s.WEDNESDAY, s.THURSDAY, s.FRIDAY, s.SATURDAY
+    FROM GROUP_INFO i
+    JOIN GROUP_SCHEDULE s
+    ON i.GROUP_INFO_SEQ = s.GROUP_INFO_SEQ
+    WHERE i.GROUP_INFO_SEQ = #{seq}
+</select>
 
-<resultMap type="com.palette.model.GroupSchedule" id="GroupSchedule">
-	<id column="GROUP_SCHEDULE_SEQ" property="GroupSchedule"/>
-	<result column="GROUP_INFO_SEQ" property="GroupInfoSeq"/>
-	<result column="SUNDAY" property="sunday"/>
-	<result column="MONDAY" property="monday"/>
-	<result column="TUESDAY" property="tuesday"/>
-	<result column="WEDNESDAY" property="wednesday"/>
-	<result column="THURSDAY" property="thursday"/>
-	<result column="FRIDAY" property="friday"/>
-	<result column="SATURDAY" property="saturday"/>
-</resultMap>
 
-<resultMap type="com.palette.model.GroupMemberDto" id="GroupMember">
-	<id column="GROUP_MEMBER_SEQ" property="GroupMemberSeq"/>
-	<result column="GROUP_INFO_SEQ" property="GroupInfoSeq"/>
-	<result column="MEMBER_SEQ" property="MemberSeq"/>
-	<result column="DEL" property="del"/>
-</resultMap>
+<!-- get Group Member Name -->
+	<resultMap type="com.palette.model.GroupMemberDto" id="GroupMember">
+		<id column="GROUP_MEMBER_SEQ" property="groupMemberSeq"/>
+		<result column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+		<result column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="DEL" property="del"/>
+		<collection property="memberDto" resultMap="MemberInfo"/>
+	</resultMap>
+	 
+	<resultMap type="com.palette.model.MemberDto" id="MemberInfo">
+		<id column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="BIRTH" property="birth"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="LOCATION" property="location"/>
+		<result column="EMAIL" property="email"/>
+		<result column="MYMONEY" property="myMoney"/>
+		<result column="CV" property="cv"/>
+		<result column="AUTH" property="auth"/>
+		<result column="DEL" property="del"/>
+		<result column="DISLIKE" property="dislike"/>
+	</resultMap> 
+	 
+	<select id="getGroupMemberName" parameterType="java.lang.Integer" resultMap="GroupMember">
+		SELECT g.GROUP_INFO_SEQ, g.MEMBER_SEQ, m.MEMBER_ID, m.MEMBER_NAME, m.BIRTH, m.ADDRESS, m.LOCATION, m.EMAIL, m.MYMONEY, m.CV, m.AUTH, m.DISLIKE
+	      FROM GROUP_MEMBER g
+		  JOIN MEMBER m
+		    ON g.MEMBER_SEQ = m.MEMBER_SEQ 
+		 WHERE g.GROUP_INFO_SEQ = #{seq}
+	</select>
+<!-- /get Group Member Name -->
  
 </mapper>

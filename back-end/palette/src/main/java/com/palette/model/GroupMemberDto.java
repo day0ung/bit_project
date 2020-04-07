@@ -6,20 +6,24 @@ public class GroupMemberDto {
 	private int memberSeq;
 	private int del;
 	
+	private MemberDto memberDto;
+	
 	public GroupMemberDto() {
 	
 	}
 
-	public GroupMemberDto(int groupInfoSeq, int memberSeq, int del) {
+	public GroupMemberDto(int groupInfoSeq, int memberSeq, int del, MemberDto memberDto) {
 		super();
 		this.groupInfoSeq = groupInfoSeq;
 		this.memberSeq = memberSeq;
 		this.del = del;
+		this.memberDto = memberDto;
 	}
 
 	@Override
 	public String toString() {
-		return "GroupMemberDto [groupInfoSeq=" + groupInfoSeq + ", memberSeq=" + memberSeq + ", del=" + del + "]";
+		return "GroupMemberDto [groupInfoSeq=" + groupInfoSeq + ", memberSeq=" + memberSeq + ", del=" + del
+				+ ", memberDto=" + memberDto + "]";
 	}
 
 	public int getGroupInfoSeq() {
@@ -45,6 +49,15 @@ public class GroupMemberDto {
 	public void setDel(int del) {
 		this.del = del;
 	}
+
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+	}
+
 	
 	
 }
