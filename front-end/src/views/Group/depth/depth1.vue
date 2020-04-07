@@ -201,7 +201,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 /* center container in the middle */

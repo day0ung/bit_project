@@ -1,5 +1,12 @@
 <template>
   <div class="detail1">
+    <div class="page" v-show="loading"> 
+      <vue-loading type="bars" color="#d9544e" :size="{ width: '50px', height: '50px' }"></vue-loading>
+    </div> 
+    
+    <div class="page" v-show="!loading" style="display: none"> 
+ 
+
     <br>
     <br>
     <!-- 상단 버튼 -->
@@ -136,8 +143,8 @@
       <div class="back_footer">
       </div>
     </div>
+    </div>
 
-    <div class="gradient-border all"></div>
   </div>
 </template>
 
@@ -151,6 +158,7 @@ export default {
       categoryTwo: true,
       categoryThree: true,
       categoryFour: true,
+      loading: true
     }
   },
   methods:{
@@ -173,11 +181,15 @@ export default {
             this.list = res.data
             this.$store.state.s_group.groupList = res.data
           })
+  },
+  created(){
+    this.loading = false;
   }
+
 }
 </script>
 
-<style scope>
+<style scoped>
 @-webkit-keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}@keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}
 .shadow-drop-br{-webkit-animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both;animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both}
 /* 
