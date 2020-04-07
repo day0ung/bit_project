@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.GroupDto;
+import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
@@ -52,6 +53,16 @@ public class GroupController {
         List<InterSmallDto> list = groupService.getSmallList(interBigSeq);
         System.out.println(list.size());
         return list;
+    }
+
+    @GetMapping(value="/getGroupMemberName")
+    public List<GroupMemberDto> getGroupMemberName(int interGroupSeq){
+    	System.out.println("getGroupMemberName()");
+    	List<GroupMemberDto> list = groupService.getGroupMemberName(interGroupSeq);
+	    	for (int i = 0; i < list.size(); i++) {
+	    		System.out.println(list.get(i).toString());
+			}
+    	return list;
     }
 
 }
