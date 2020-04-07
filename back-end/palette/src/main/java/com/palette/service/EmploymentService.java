@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.EmploymentDao;
-import com.palette.model.EmploymentDto;
+import com.palette.model.BoardDto;
 
 @Service
 @Transactional
@@ -16,7 +16,7 @@ public class EmploymentService {
 	@Autowired
     EmploymentDao employmentDao;
 
-	public List<EmploymentDto> getAllRecuritingInfo() {
+	public List<BoardDto> getAllRecuritingInfo() {
 		return employmentDao.getAllRecuritingInfo();
 	}
 
