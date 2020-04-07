@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router from '@/router/r_index.js'
+import store from '@/store/s_index.js'
 
 
 import 'expose-loader?$!expose-loader?jQuery!jquery' 
-// 위에서 추가했던 jQuery 밑에 코드를 작성하세요 
 // import  'bootstrap' 
 // import 'bootstrap/dist/css/bootstrap.min.css'
 
