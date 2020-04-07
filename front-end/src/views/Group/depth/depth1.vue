@@ -22,18 +22,25 @@
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
-            <div class="size_blue">월</div>
-            <div class="size_blue">화</div>
-            <div class="size_blue">수</div>
-            <div class="size_blue">목</div>
-            <div class="size_blue">금</div>
-            <div class="size_blue">토</div>
-            <div class="size_blue">일</div>
+            <div v-if="groupOne.groupSchedule.monday == 0" class="size_blue">월</div>
+            <div v-else class="size_blue_check">월</div>
+            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_blue">화</div>
+            <div v-else class="size_blue_check">화</div>
+            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_blue">수</div>
+            <div v-else class="size_blue_check">수</div>
+            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_blue">목</div>
+            <div v-else class="size_blue_check">목</div>
+            <div v-if="groupOne.groupSchedule.friday == 0" class="size_blue">금</div>
+            <div v-else class="size_blue_check">금</div>
+            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_blue">토</div>
+            <div v-else class="size_blue_check">토</div>
+            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_blue">일</div>
+            <div v-else class="size_blue_check">일</div>
           </div>
         </div>
       </div>
       <div class="detailcontainer blue">
-        <button class="add" @click="joinGroup">그룹 스터디 참여하기</button>
+        <button class="add" @click="joinGroup">그룹 스터디 참여신청</button>
         <button class="like"><span>♥</span></button>
       </div>
     </div>
@@ -57,18 +64,25 @@
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
-            <div class="size_red">월</div>
-            <div class="size_red">화</div>
-            <div class="size_red">수</div>
-            <div class="size_red">목</div>
-            <div class="size_red">금</div>
-            <div class="size_red">토</div>
-            <div class="size_red">일</div>
+            <div v-if="groupOne.groupSchedule.monday == 0" class="size_red">월</div>
+            <div v-else class="size_red_check">월</div>
+            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_red">화</div>
+            <div v-else class="size_red_check">화</div>
+            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_red">수</div>
+            <div v-else class="size_red_check">수</div>
+            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_red">목</div>
+            <div v-else class="size_red_check">목</div>
+            <div v-if="groupOne.groupSchedule.friday == 0" class="size_red">금</div>
+            <div v-else class="size_red_check">금</div>
+            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_red">토</div>
+            <div v-else class="size_red_check">토</div>
+            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_red">일</div>
+            <div v-else class="size_red_check">일</div>
           </div>
         </div>
       </div>
       <div class="detailcontainer red">
-        <button class="add" @click="joinGroup">그룹 스터디 참여하기</button>
+        <button class="add" @click="joinGroup">그룹 스터디 참여신청</button>
         <button class="like"><span>♥</span></button>
       </div>
     </div>
@@ -92,18 +106,25 @@
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
-            <div class="size_green">월</div>
-            <div class="size_green">화</div>
-            <div class="size_green">수</div>
-            <div class="size_green">목</div>
-            <div class="size_green">금</div>
-            <div class="size_green">토</div>
-            <div class="size_green">일</div>
+            <div v-if="groupOne.groupSchedule.monday == 0" class="size_green">월</div>
+            <div v-else class="size_green_check">월</div>
+            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_green">화</div>
+            <div v-else class="size_green_check">화</div>
+            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_green">수</div>
+            <div v-else class="size_green_check">수</div>
+            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_green">목</div>
+            <div v-else class="size_green_check">목</div>
+            <div v-if="groupOne.groupSchedule.friday == 0" class="size_green">금</div>
+            <div v-else class="size_green_check">금</div>
+            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_green">토</div>
+            <div v-else class="size_green_check">토</div>
+            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_green">일</div>
+            <div v-else class="size_green_check">일</div>
           </div>
         </div>
       </div>
       <div class="detailcontainer green">
-        <button class="add" @click="joinGroup">그룹 스터디 참여하기</button>
+        <button class="add" @click="joinGroup">그룹 스터디 참여신청</button>
         <button class="like"><span>♥</span></button>
       </div>
     </div>
@@ -127,13 +148,20 @@
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
-            <div class="size_yellow">월</div>
-            <div class="size_yellow">화</div>
-            <div class="size_yellow">수</div>
-            <div class="size_yellow">목</div>
-            <div class="size_yellow">금</div>
-            <div class="size_yellow">토</div>
-            <div class="size_yellow">일</div>
+            <div v-if="groupOne.groupSchedule.monday == 0" class="size_yellow">월</div>
+            <div v-else class="size_yellow_check">월</div>
+            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_yellow">화</div>
+            <div v-else class="size_yellow_check">화</div>
+            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_yellow">수</div>
+            <div v-else class="size_yellow_check">수</div>
+            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_yellow">목</div>
+            <div v-else class="size_yellow_check">목</div>
+            <div v-if="groupOne.groupSchedule.friday == 0" class="size_yellow">금</div>
+            <div v-else class="size_yellow_check">금</div>
+            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_yellow">토</div>
+            <div v-else class="size_yellow_check">토</div>
+            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_yellow">일</div>
+            <div v-else class="size_yellow_check">일</div>
           </div>
         </div>
       </div>
@@ -173,7 +201,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 /* center container in the middle */
@@ -254,9 +282,6 @@ export default {
 	 margin-left: 15px;
 	 margin-top: 5px;
 }
- .sizes:hover {
-	 cursor: pointer;
-}
  .pick {
 	 margin-bottom: 0;
 }
@@ -269,7 +294,11 @@ export default {
 	 font-size: 0.7em;
 	 text-align: center;
 }
-.size_yellow:hover{
+.size_yellow_check{
+  padding: 8px;
+  border: 1px solid #4e4e4e;
+  font-size: 0.7em;
+  text-align: center;
   background: #ffeaa7;
   color: #4e4e4e;
 	transition: all 0.4s ease-in-out;
@@ -283,7 +312,11 @@ export default {
 	 font-size: 0.7em;
 	 text-align: center;
 }
-.size_green:hover{
+.size_green_check{
+  padding: 8px;
+  border: 1px solid #4e4e4e;
+  font-size: 0.7em;
+  text-align: center;
   background: #00adab;
   color: #f5f5f5;
 	transition: all 0.4s ease-in-out;
@@ -294,24 +327,32 @@ export default {
 	 font-size: 0.7em;
 	 text-align: center;
 }
-.blueInner{
-  background: #74baff60;
-}
-.size_blue:hover{
+.size_blue_check{
+  padding: 8px;
+  border: 1px solid #4e4e4e;
+  font-size: 0.7em;
+  text-align: center;
   background: #74b9ff;
   color: #f5f5f5;
-	transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+.blueInner{
+  background: #74baff60;
 }
 .redInner{
   background: #ff767550;
 }
 .size_red {
-	 padding: 8px;
-	 border: 1px solid #4e4e4e;
-	 font-size: 0.7em;
-	 text-align: center;
+  padding: 8px;
+  border: 1px solid #4e4e4e;
+  font-size: 0.7em;
+  text-align: center;
 }
-.size_red:hover{
+.size_red_check{
+  padding: 8px;
+  border: 1px solid #4e4e4e;
+  font-size: 0.7em;
+  text-align: center;
   background: #ff7675;
   color: #f5f5f5;
 	transition: all 0.4s ease-in-out;
