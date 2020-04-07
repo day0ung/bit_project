@@ -1,6 +1,6 @@
 package com.palette.model;
 
-public class EmploymentDto {
+public class BoardDto {
 	private int boardSeq; // BOARD_SEQ
 	private int memberSeq; // MEMBER_SEQ
 	
@@ -11,19 +11,21 @@ public class EmploymentDto {
 	private int readCount; // READ_COUNT
 	private String image; // IMAGE
 	private String cvStartDate; // CV_START_DATE
-	private String cvEndDate; // CV_START_DATE
+	private String cvEndDate; // CV_END_DATE
 	private String fileName; // FILE_NAME
 	private String dbFileName; // DB_FILE_NAME
 	private int del; // DEL
 	private int boardAuth; // BOARD_AUTH
-	private int dDay;
+	private long dDay;
 	
-	public EmploymentDto() {
+	private MemberDto memberDto;
+	
+	public BoardDto() {
 	}
 
-	public EmploymentDto(int boardSeq, int memberSeq, int category, String title, String content, String writeDate,
+	public BoardDto(int boardSeq, int memberSeq, int category, String title, String content, String writeDate,
 			int readCount, String image, String cvStartDate, String cvEndDate, String fileName, String dbFileName,
-			int del, int boardAuth, int dDay) {
+			int del, int boardAuth, long dDay, MemberDto memberDto) {
 		super();
 		this.boardSeq = boardSeq;
 		this.memberSeq = memberSeq;
@@ -40,6 +42,7 @@ public class EmploymentDto {
 		this.del = del;
 		this.boardAuth = boardAuth;
 		this.dDay = dDay;
+		this.memberDto = memberDto;
 	}
 
 	public int getBoardSeq() {
@@ -154,22 +157,34 @@ public class EmploymentDto {
 		this.boardAuth = boardAuth;
 	}
 
-	public int getdDay() {
+	public long getdDay() {
 		return dDay;
 	}
 
-	public void setdDay(int dDay) {
+	public void setdDay(long dDay) {
 		this.dDay = dDay;
+	}
+
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
 	}
 
 	@Override
 	public String toString() {
-		return "EmploymentDto [boardSeq=" + boardSeq + ", memberSeq=" + memberSeq + ", category=" + category
-				+ ", title=" + title + ", content=" + content + ", writeDate=" + writeDate + ", readCount=" + readCount
-				+ ", image=" + image + ", cvStartDate=" + cvStartDate + ", cvEndDate=" + cvEndDate + ", fileName="
-				+ fileName + ", dbFileName=" + dbFileName + ", del=" + del + ", boardAuth=" + boardAuth + ", dDay="
-				+ dDay + "]";
+		return "BoardDto [boardSeq=" + boardSeq + ", memberSeq=" + memberSeq + ", category=" + category + ", title="
+				+ title + ", content=" + content + ", writeDate=" + writeDate + ", readCount=" + readCount + ", image="
+				+ image + ", cvStartDate=" + cvStartDate + ", cvEndDate=" + cvEndDate + ", fileName=" + fileName
+				+ ", dbFileName=" + dbFileName + ", del=" + del + ", boardAuth=" + boardAuth + ", dDay=" + dDay
+				+ ", memberDto=" + memberDto + "]";
 	}
+
+	
+
+	
 
 	
 	

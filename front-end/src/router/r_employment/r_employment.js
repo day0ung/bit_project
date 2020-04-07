@@ -6,18 +6,24 @@ export default [{
         {
             path: '',
             name: '',
-            component: () => import('@/views/Employment/menu/Recruiting_menu')
+            component: () => import('@/views/Employment/depth2/Recruiting_list')
         },
         {
             path: 'recruiting',
             name: 'recruiting',
-            component: () => import('@/views/Employment/menu/Recruiting_menu')
+            component: () => import('@/views/Employment/depth2/Recruiting_list')
         },
         {
             path: 'CVpage',
             name: 'CVpage',
-            component: () => import('@/views/Employment/menu/CV_menu.vue')
-        }
+            component: () => import('@/views/Employment/depth2/CV_menu.vue')
+        },
         
     ]
-}]
+},
+{
+    path: '/RecruitingDetail/:boardId',
+    name: 'RecruitingDetail',
+    component: () => import('@/views/Employment/depth2/RecruitingDetail')
+}
+]
