@@ -1,6 +1,7 @@
 package com.palette.model;
 
 public class GroupSchedule {
+	private int groupScheduleSeq;
 	private int groupInfoSeq;
 	private int sunday;
 	private int monday;
@@ -14,9 +15,10 @@ public class GroupSchedule {
 		
 	}
 
-	public GroupSchedule(int groupInfoSeq, int sunday, int monday, int tuesday, int wednesday, int thursday, int friday,
-			int saturday) {
+	public GroupSchedule(int groupScheduleSeq, int groupInfoSeq, int sunday, int monday, int tuesday, int wednesday,
+			int thursday, int friday, int saturday) {
 		super();
+		this.groupScheduleSeq = groupScheduleSeq;
 		this.groupInfoSeq = groupInfoSeq;
 		this.sunday = sunday;
 		this.monday = monday;
@@ -29,9 +31,17 @@ public class GroupSchedule {
 
 	@Override
 	public String toString() {
-		return "GroupSchedule [groupInfoSeq=" + groupInfoSeq + ", sunday=" + sunday + ", monday=" + monday
-				+ ", tuesday=" + tuesday + ", wednesday=" + wednesday + ", thursday=" + thursday + ", friday=" + friday
-				+ ", saturday=" + saturday + "]";
+		return "GroupSchedule [groupScheduleSeq=" + groupScheduleSeq + ", groupInfoSeq=" + groupInfoSeq + ", sunday="
+				+ sunday + ", monday=" + monday + ", tuesday=" + tuesday + ", wednesday=" + wednesday + ", thursday="
+				+ thursday + ", friday=" + friday + ", saturday=" + saturday + "]";
+	}
+
+	public int getGroupScheduleSeq() {
+		return groupScheduleSeq;
+	}
+
+	public void setGroupScheduleSeq(int groupScheduleSeq) {
+		this.groupScheduleSeq = groupScheduleSeq;
 	}
 
 	public int getGroupInfoSeq() {

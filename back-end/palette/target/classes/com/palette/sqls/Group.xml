@@ -29,10 +29,13 @@
 		<result column="END_DATE" property="endDate"/>
 		<result column="DEL" property="del"/>
 		<collection property="groupSchedule" resultMap="GroupSchedule"/>
+		<collection property="interBigDto" resultMap="InterBig"/>
+		<collection property="interSmallDto" resultMap="InterSmall"/>
+		<collection property="memberDto" resultMap="MemberInfo"/>
 	</resultMap>
 	
 	<resultMap type="com.palette.model.GroupSchedule" id="GroupSchedule">
-		<id column="GROUP_SCHEDULE_SEQ" property="groupSchedule"/>
+		<id column="GROUP_SCHEDULE_SEQ" property="groupScheduleSeq"/>
 		<result column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
 		<result column="SUNDAY" property="sunday"/>
 		<result column="MONDAY" property="monday"/>
@@ -62,7 +65,6 @@
 		<collection property="interBigDto" resultMap="InterBig"/>
 		<collection property="interSmallDto" resultMap="InterSmall"/>
 		<collection property="memberDto" resultMap="MemberInfo"/>
-		<collection property="groupMemberDto" resultMap="GroupMember"/>
 	</resultMap>
 	
 	<resultMap type="com.palette.model.InterBigDto" id="InterBig">
@@ -75,29 +77,24 @@
 		<result column="SMALL_NAME" property="smallName"/>
 	</resultMap>
 	
+	
 	<select id="getAllGroup" resultMap="GroupInfoWithName">
-		select *, (select count(*)
-					from GROUP_INFO g
-					join GROUP_MEMBER gm
-					on g.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ) as currMember 
+		select *
 		from GROUP_INFO g
-		
 		join MEMBER m
-		on g.MEMBER_SEQ = m.MEMBER_SEQ
-		
-		join GROUP_MEMBER gm
-		on g.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
-		
+			on g.MEMBER_SEQ = m.MEMBER_SEQ
 		join INTER_BIG ib
-		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
-		
+			on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
 		join INTER_SMALL ism
-		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
-		
+			on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+		join (select GROUP_INFO_SEQ, count(*) as currMember
+				from GROUP_MEMBER
+				group by GROUP_INFO_SEQ) cur
+			on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
 	</select>
 <!-- /group info with Name -->
 
-<select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
+<!-- <select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
     SELECT i.GROUP_INFO_SEQ, i.MEMBER_SEQ, i.INTER_BIG_SEQ, i.INTER_SMALL_SEQ, i.GROUP_NAME, i.INFO, i.MAX_MEMBER, i.IMAGE, i.START_DATE, i.END_DATE, i.DEL,
     	   s.SUNDAY, s.MONDAY, s.TUESDAY, s.WEDNESDAY, s.THURSDAY, s.FRIDAY, s.SATURDAY
     FROM GROUP_INFO i
@@ -105,7 +102,28 @@
     ON i.GROUP_INFO_SEQ = s.GROUP_INFO_SEQ
     WHERE i.GROUP_INFO_SEQ = #{seq}
 </select>
-
+ -->
+ 
+ <select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
+    select *
+	from GROUP_INFO g
+	join MEMBER m
+		on g.MEMBER_SEQ = m.MEMBER_SEQ
+	join INTER_BIG ib
+		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join GROUP_SCHEDULE s
+		on g.GROUP_INFO_SEQ = s.GROUP_INFO_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as currMember
+			from GROUP_MEMBER
+			group by GROUP_INFO_SEQ) cur
+		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where g.GROUP_INFO_SEQ = #{seq};
+</select>
+ 
+ 
+ 
 <!-- get Group Member Name -->
 	<resultMap type="com.palette.model.GroupMemberDto" id="GroupMember">
 		<id column="GROUP_MEMBER_SEQ" property="groupMemberSeq"/>
