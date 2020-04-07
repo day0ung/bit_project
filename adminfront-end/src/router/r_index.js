@@ -25,18 +25,6 @@ const router = new VueRouter({
     ...r_statisticsNresearch,
     ...r_DashBoard,
     ...r_Home,
-    {
-      path: '/homes',
-      name: 'home',
-      component: () => import(/* webpackChunkName: "about" */ '@/views/home/home.vue'),
-      children:[
-        {
-          path: '/child',
-          name: 'child',
-          component: () => import(/* webpackChunkName: "about" */ '@/views/home/child.vue'),
-        }
-      ]
-    },
     { path: '*', component:() => import('@/components/NotFoundComponent.vue') }
 
 
