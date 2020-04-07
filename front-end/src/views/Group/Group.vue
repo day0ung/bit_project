@@ -1,6 +1,6 @@
 <template>
   <div class="Group">
-    <div class="group_detail circleBehind bounce-top">
+    <div class="group_detail bounce-top">
     <br>
     <br>
     <router-link to="/group/detail1">그룹 스터디 정보</router-link> |
@@ -62,39 +62,4 @@ div.group_detail a
     cursor: pointer;
 }
 
-/* Circle behind */
-div.circleBehind a:before, div.circleBehind a:after
-{
-    position: absolute;
-    top: 22px;
-    left: 50%;
-    width: 40px;
-    height: 40px;
-    border: 2px solid #0277bd;
-    transform: translateX(-50%) translateY(-50%) scale(0.8);
-    border-radius: 50%;
-    background: transparent;
-    content: "";
-    opacity: 0;
-    transition: all 0.3s;
-    z-index: -1;
-}
-
-div.circleBehind a:after
-{
-    border-width: 1px;
-    transition: all 0.4s;
-}
-
-div.circleBehind a:hover:before
-{
-    opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(0.8);
-}
-
-div.circleBehind a:hover:after
-{
-    opacity: 1;
-    transform: translateX(-50%) translateY(-50%) scale(1.1);
-}
 </style>

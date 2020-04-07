@@ -167,7 +167,7 @@ export default {
   },
   mounted(){
       this.$store.state.currpage = this.$route.path
-      axios.get("http://192.168.2.43:9000/getAllGroup")
+      axios.get("http://localhost:9000/getAllGroup")
                 .then(res => {
             //alert(JSON.stringify(res.data))
             this.list = res.data
@@ -393,7 +393,7 @@ header {
 .profile-bio {
   text-align: center;
   padding: 1px 20px 10px 20px !important;
-  transition: all linear 1.5s;
+  transition: all linear 0.7s;
   opacity: 0;
   height: 80px;
 }
