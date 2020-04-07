@@ -34,12 +34,17 @@ public class GroupDto implements Serializable {
 	private String endDate;
 	private int del;
 
+	private GroupSchedule groupSchedule;
+	
+	
 	public GroupDto() {
 	
 	}
 
+	
+
 	public GroupDto(int groupInfoSeq, int memberSeq, int interBigSeq, int interSmallSeq, String groupName, String info,
-			int maxMember, String image, String startDate, String endDate, int del) {
+			int maxMember, String image, String startDate, String endDate, int del, GroupSchedule groupSchedule) {
 		super();
 		this.groupInfoSeq = groupInfoSeq;
 		this.memberSeq = memberSeq;
@@ -52,15 +57,18 @@ public class GroupDto implements Serializable {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.del = del;
+		this.groupSchedule = groupSchedule;
 	}
+
 
 	@Override
 	public String toString() {
 		return "GroupDto [groupInfoSeq=" + groupInfoSeq + ", memberSeq=" + memberSeq + ", interBigSeq=" + interBigSeq
 				+ ", interSmallSeq=" + interSmallSeq + ", groupName=" + groupName + ", info=" + info + ", maxMember="
 				+ maxMember + ", image=" + image + ", startDate=" + startDate + ", endDate=" + endDate + ", del=" + del
-				+ "]";
+				+ ", groupSchedule=" + groupSchedule + "]";
 	}
+
 
 	public int getGroupInfoSeq() {
 		return groupInfoSeq;
@@ -150,4 +158,13 @@ public class GroupDto implements Serializable {
 		this.del = del;
 	}
 
+	public GroupSchedule getGroupSchedule() {
+		return groupSchedule;
+	}
+
+	public void setGroupSchedule(GroupSchedule groupSchedule) {
+		this.groupSchedule = groupSchedule;
+	}
+
+	
 }
