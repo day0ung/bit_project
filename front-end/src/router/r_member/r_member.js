@@ -8,6 +8,6 @@ export default [
         path:'/join',
         name: 'join',
         component: () => import('@/views/Member/Join.vue')
-    }
+    },
 
 ]

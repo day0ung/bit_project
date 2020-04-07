@@ -1,8 +1,21 @@
 <template>
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
 
-<div class="login_page_wrap">
-  <div class="login_message">
-            <h2>로그인이 필요한 서비스입니다.</h2><p>사람인 회원이 아니면, 지금 <span><a href="/zf_user/member/registration/join">회원가입</a></span>을 해주세요.</p>        </div>
+          <div class="modal-header">
+            <slot name="header">
+   
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <slot name="body">
+                    <div class="login_page_wrap">
+            <div class="login_message">
+             <p> 회원이 아니면, 지금 <span><a href="/zf_user/member/registration/join">회원가입</a></span>을 해주세요.</p>        
+            </div>
             <div class="login_input_wrap">         
                 <!-- input box -->
                 <div class="setting">
@@ -32,22 +45,32 @@
                     <a href="/zf_user/helpdesk/idpw-find" class="forgotten" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'find', '');}catch(e){}">아이디/비밀번호 찾기</a>
                 </p>
 
-                <ul class="social_login" id="wrap_social_login">
-               
-                </ul>
 
-            </div>
+                 </div>
+             </div>
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              <button class="modal-default-button" @click="$emit('close')">
+                      CLOSE
+              </button>
+            </slot>
+          </div>
         </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
 export default {
-
-
+    
 }
 </script>
 
-<style scoped>
+<style>
 @charset "utf-8";
 /* reset & common class*/
 html {color:#000;background:#fff}
@@ -84,7 +107,7 @@ button {border:0;background:transparent;cursor:pointer}
 .login_message h2 {margin:0;padding:0;height:28px;color:#444;font-size:30px;font-weight:bold;letter-spacing:-2px;line-height:28px}
 .login_message p {margin:0;padding:0;height:24px;color:#777;font-size:14px;letter-spacing:-1px;line-height:24px}
 .login_message p a {color:#586cdc}
-.login_page_wrap {clear:both;text-align:left; padding-top: 100px;}
+.login_page_wrap {clear:both;text-align:left;}
 .login_page_wrap:after {display:block;clear:both;content:""}
 .margin_control {margin:36px auto 50px !important}
 .login_page_wrap p {margin:0;padding:0}
@@ -103,16 +126,16 @@ button {border:0;background:transparent;cursor:pointer}
 .login_input_wrap .setting:after {display:block;visibility:hidden;clear:both;height:0;content:"."}
 .login_input_wrap .setting {display:inline-block;position:relative;margin-top:28px;margin-bottom:7px;height:20px;line-height:20px}
 .login_input_wrap .setting {display:block}
-.login_input_wrap .setting label {display:block;float:left;margin-right:15px;height:16px;color:#666;font-size:12px;letter-spacing:-1px;line-height:16px;vertical-align:top}
-.login_input_wrap .setting input {display:block;float:left;margin-top:3px;margin-right:5px;vertical-align:top}
+.login_input_wrap .setting label {display:block;float:left;margin-right:15px;height:16px;color:#666;font-size:12px;letter-spacing:-1px;line-height:16px;}
+.login_input_wrap .setting input {display:block;float:left;margin-top:3px;margin-right:5px;}
 .login_input_wrap .setting .dsc_ly {display:block;position:absolute;bottom:30px;left:-12px;z-index:10;width:272px;height:55px}
 .login_input_wrap .setting .dsc_ly .btn_ly_close {overflow:hidden;position:absolute;top:0;right:0;width:17px;height:17px;border:0 none;color:transparent;font-size:0;line-height:0;text-indent:-100%;text-shadow:none;white-space:nowrap;background:url(//www.saraminimage.co.kr/ui/common/btn_login_ly_close.png) 50% 50% no-repeat;cursor:pointer}
 .login_input_wrap .setting .dsc_ly .dsc_arr {display:block;position:absolute;top:53px;left:12px;width:13px;height:8px;line-height:normal;background:url(//www.saraminimage.co.kr/ui/common/btn_login_ly_arr.png) 0 0 no-repeat}
 .login_input_wrap .setting .dsc_ly .dsc_txt {margin:0;padding:6px 10px 7px;border:1px solid #bababa;color:#888;font-size:11px;letter-spacing:-1px;line-height:20px;background-color:#fff}
 .login_input_wrap .setting .dsc_ly .dsc_txt strong {color:#555;font-weight:normal}
-.login_input_wrap .setting .ssl_login_box {display:block;overflow:hidden;float:left;position:relative;padding-right:33px;width:60px;height:20px;box-sizing:border-box;color:#666;font-size:12px;line-height:16px;vertical-align:top}
+.login_input_wrap .setting .ssl_login_box {display:block;overflow:hidden;float:left;position:relative;padding-right:33px;width:60px;height:20px;box-sizing:border-box;color:#666;font-size:12px;line-height:16px;}
 .login_input_wrap .setting .ssl_login_hide {position:absolute;top:-25px;left:0;z-index:-1;width:0;height:0;line-height:0}
-.login_input_wrap .setting .ssl_login_box .label_type {display:block;position:absolute;top:2px;right:0;margin:0;padding:0;width:29px;height:16px;text-indent:-9999px;vertical-align:top;background:url(//www.saraminimage.co.kr/ui/common/btn_autologin2_off.png) 0 0 no-repeat;cursor:pointer}
+.login_input_wrap .setting .ssl_login_box .label_type {display:block;position:absolute;top:2px;right:0;margin:0;padding:0;width:29px;height:16px;text-indent:-9999px;background:url(//www.saraminimage.co.kr/ui/common/btn_autologin2_off.png) 0 0 no-repeat;cursor:pointer}
 .login_input_wrap .setting .ssl_login_box .label_type.on {background:url(//www.saraminimage.co.kr/ui/common/btn_autologin2_on.png) 0 0 no-repeat}
 .login_input_wrap .login-form {position:relative;width:392px;height:85px}
 .login_input_wrap .login-form label {position:absolute;top:0;left:0;z-index:2;margin:0;padding:8px 20px;width:294px;height:40px;box-sizing:border-box;color:#959595;font-size:14px;font-weight:bold;line-height:23px}
@@ -120,7 +143,7 @@ button {border:0;background:transparent;cursor:pointer}
 .login_input_wrap .login-form .id-input-box {position:absolute;top:0;left:0;width:294px;height:43px;border-top:1px solid #cdcdcd;border-bottom:1px solid #e4e4e4;border-left:1px solid #cdcdcd;box-sizing:border-box}
 .login_input_wrap .login-form .pw-input-box {position:absolute;top:43px;left:0;width:294px;height:42px;border-bottom:1px solid #cdcdcd;border-left:1px solid #cdcdcd;box-sizing:border-box}
 .login_input_wrap .login-form .btn-login {position:absolute;top:0;left:294px;width:98px;height:85px;border:none;color:#fff;font-size:16px;font-weight:bold;background:#6b80f1;cursor:pointer}
-.login_input_wrap .signup-forgotten {overflow:hidden;position:relative;margin:18px 0 29px;width:100%;height:16px;font-size:13px;letter-spacing:-1px}
+.login_input_wrap .signup-forgotten {position:relative;margin:18px 0 29px;width:100%;height:16px;font-size:13px;letter-spacing:-1px}
 .login_input_wrap .signup-forgotten .sign-up {float:left;margin-right:10px;color:#666;font-weight:bold;text-decoration:none}
 .login_input_wrap .signup-forgotten .forgotten {float:left;color:#666;text-decoration:none}
 .login_input_wrap .signup-forgotten span {float:left;position:relative;margin-right:8px;width:1px;height:16px;background:url(//www.saraminimage.co.kr/ui/common/bg_vline.png) no-repeat 0 50%}
@@ -129,19 +152,6 @@ button {border:0;background:transparent;cursor:pointer}
 .login_input_wrap .signup-forgotten .service_info_txt:hover {color:#555}
 .login_input_wrap .signup-forgotten .link_rater {float:right;position:relative;margin-right:4px;padding-right:7px;}
 .login_input_wrap .signup-forgotten .link_rater:after {display:inline-block;position:absolute;top:50%;right:0;margin-top:-5px;width:1px;height:11px;background-color:#dedede;content:""}
-.login_input_wrap .social_login {display:inline-block;overflow:hidden;zoom:1;width:100%;height:82px}
-.login_input_wrap .social_login:after {display:block;clear:both;content:""}
-.login_input_wrap .social_login li {display:block;float:left;zoom:1;position:relative;margin-bottom:6px;width:50%;height:38px;box-sizing:border-box;background-color:#fff}
-.login_input_wrap .social_login a {display:block;zoom:1;padding-left:50px;height:38px;border:1px solid #ddd;box-sizing:border-box;color:#666;font-size:12px;letter-spacing:-1px;line-height:34px;text-decoration:none}
-.login_input_wrap .social_login .sl_naver {margin-right:3px;background:url(//www.saraminimage.co.kr/ui/social_login/icon_sns_naver_m.png) 20px 12px no-repeat}
-.login_input_wrap .social_login .sl_facebook {margin-left:3px;background:url(//www.saraminimage.co.kr/ui/social_login/icon_sns_facebook_m.png) 22px 9px no-repeat}
-.login_input_wrap .social_login .sl_kakao {margin-right:3px;background:url(//www.saraminimage.co.kr/ui/social_login/icon_sns_kakao_m.png) 17px 9px no-repeat}
-.login_input_wrap .social_login .sl_google {margin-left:3px;background:url(//www.saraminimage.co.kr/ui/social_login/icon_sns_google_m.png) 18px 9px no-repeat}
-.login_input_wrap .com_noti_list {display:inline-block;overflow:hidden;zoom:1;width:100%;height:82px;padding-top:20px}
-.login_input_wrap .com_noti_list .cn_tit {display:block;margin-bottom:7px;height:17px;color:#444;font-size:15px;font-weight:bold;letter-spacing:-1px;line-height:17px}
-.login_input_wrap .com_noti_list .cn_list {font-size:12px;letter-spacing:-1px;line-height:18px}
-.login_input_wrap .com_noti_list .cn_list li {overflow:hidden;width:90%;text-overflow:ellipsis;white-space:nowrap}
-.login_input_wrap .com_noti_list .cn_list a {color:#666;text-decoration:none}
 .clear_both {display:block;clear:both;zoom:1;font-size:0;content:""}
 
 
@@ -155,5 +165,65 @@ button {border:0;background:transparent;cursor:pointer}
     0%, 100% {transform: translateY(-8px)}
     50%{transform: translateY(8px)}
 }
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
 
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 500px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+  
+}
+
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+  font-weight: inherit;
+  font-size: large;
+  color: #0077cc;
+}
+
+
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 </style>
