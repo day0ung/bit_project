@@ -53,11 +53,9 @@
 
           <div class="modal-footer">
             <slot name="footer">
-                   
-                    <button class="modal-default-button" @click="$emit('close')">
-                            CLOSE
-                    </button>
-
+              <button class="modal-default-button" @click="$emit('close')">
+                      CLOSE
+              </button>
             </slot>
           </div>
         </div>
