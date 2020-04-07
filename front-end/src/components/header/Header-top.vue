@@ -9,7 +9,16 @@
         </div>
         <div class="inner">
             <div style="margin-right: 30px;">
-            <span><router-link to="/login">로그인</router-link></span> |
+            <span>
+                 <button id="show-modal" @click="showModal = true">로그인</button>
+                <Modal v-if="showModal" @close="showModal = false">
+                <!--
+                you can use custom content here to overwrite
+                default content
+                -->
+       
+                </Modal>
+            </span> |
             <span><router-link to="/join">회원가입</router-link></span>
             </div>
             <h1 class="logo">
@@ -24,10 +33,21 @@
 </template>
 
 <script>
-
+import Modal from "@/views/Member/modal.vue";
 
 export default {
-    name : "headerTop"
+    name : "headerTop",
+        data(){
+            return{
+                showModal: false
+            }
+    },
+    components:{
+        Modal
+    },
+    methdos:{
+        
+    }
 }
 </script>
 
