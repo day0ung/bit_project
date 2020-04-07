@@ -10,11 +10,13 @@
         <div class="inner">
             <div style="margin-right: 30px;">
             <span>
-                <button id="show-modal" @click="showModal = true" style="padding-bottom: 3px;
-                 font-weight: 300;
-                 font-size: unset">로그인</button>
+                 <button id="show-modal" @click="showModal = true">로그인</button>
                 <Modal v-if="showModal" @close="showModal = false">
-                
+                <!--
+                you can use custom content here to overwrite
+                default content
+                -->
+       
                 </Modal>
             </span> |
             <span><router-link to="/join">회원가입</router-link></span>
