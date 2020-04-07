@@ -7,4 +7,10 @@
     SELECT * FROM MEMBER
   </select>
 
+  <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
+  	SELECT *
+  	FROM MEMBER
+  	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
+  </select>
+
 </mapper>

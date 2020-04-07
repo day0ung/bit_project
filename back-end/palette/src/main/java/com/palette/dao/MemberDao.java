@@ -13,4 +13,6 @@ public interface MemberDao {
 
 	List<MemberDto> selectAll();
 
+	MemberDto getOneMember(MemberDto dto);
+
 }
