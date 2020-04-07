@@ -29,8 +29,6 @@ public class GroupController {
     public List<GroupDto> getAllGroup() {
     	System.out.println("getAllGroup 메소드 실행");
     	List<GroupDto> list = groupService.getAllGroup();
-    	System.out.println(list.size());
-    	System.out.println("list.size: "+list.get(0).toString());
     	return list;
     }
     
@@ -46,7 +44,6 @@ public class GroupController {
     public List<InterBigDto> getBigList(){
         System.out.println("getBigList");
         List<InterBigDto> list = groupService.getBigList();
-        System.out.println(list.size());
         return list;
     }
 
@@ -54,7 +51,6 @@ public class GroupController {
     public List<InterSmallDto> getSmallList(int interBigSeq){
         System.out.println("getSmallList");
         List<InterSmallDto> list = groupService.getSmallList(interBigSeq);
-        System.out.println(list.size());
         return list;
     }
 
@@ -62,16 +58,15 @@ public class GroupController {
     public List<GroupMemberDto> getGroupMemberName(int interGroupSeq){
     	System.out.println("getGroupMemberName()");
     	List<GroupMemberDto> list = groupService.getGroupMemberName(interGroupSeq);
-	    	for (int i = 0; i < list.size(); i++) {
-	    		System.out.println(list.get(i).toString());
-			}
+	    	// for (int i = 0; i < list.size(); i++) {
+	    	// 	System.out.println(list.get(i).toString());
+			// }
     	return list;
     }
 
     @GetMapping(value="/groupBoardList")
     public List<GroupBoardDto> groupBoardList() {
         List<GroupBoardDto> list = groupService.getGroupBoardList();
-        System.out.println(list.size());
         return list;
     }
     
