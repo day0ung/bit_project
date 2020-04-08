@@ -30,6 +30,11 @@ export default [
                 component: () => import('@/views/Group/depth/depth1')
             },
             {
+                name: 'depth2',
+                path: '/group/detail2/depth2/:contentId',
+                component: () => import('@/views/Group/depth/depth2')
+            },
+            {
                 name: 'Create',
                 path: 'create',
                 component: () => import('@/views/Group/depth/create')
