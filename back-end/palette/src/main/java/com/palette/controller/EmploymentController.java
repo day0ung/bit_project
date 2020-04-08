@@ -1,9 +1,7 @@
 package com.palette.controller;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -14,10 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.palette.model.BoardDto;
-import com.palette.model.GroupDto;
+import com.palette.model.EmploymentBoardDto;
 import com.palette.service.EmploymentService;
-import com.palette.service.GroupService;
 
 
 @CrossOrigin(origins = "*")
@@ -29,10 +25,10 @@ public class EmploymentController {
 
 // 	전체 리스트
     @GetMapping(value = "/getAllRecuritingInfo")
-    public List<BoardDto> getAllRecuritingInfo() {
+    public List<EmploymentBoardDto> getAllRecuritingInfo() {
     	System.out.println("getAllRecuritingInfo 메소드 실행");
     	
-    	List<BoardDto> list = employmentService.getAllRecuritingInfo();
+    	List<EmploymentBoardDto> list = employmentService.getAllRecuritingInfo();
 //    		디데이 함수
 			for (int i = 0; i < list.size(); i++) {
 				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -66,13 +62,13 @@ public class EmploymentController {
     }
     
     @PostMapping(value = "/getOneRecruit")
-    public BoardDto getOneRecruit(int empBoardSeq){
+    public EmploymentBoardDto getOneRecruit(int empBoardSeq){
         System.out.println("getOneRecruit() 실행");
         System.out.println("seq: "+ empBoardSeq);
 //		readcount 증가
         employmentService.readCount(empBoardSeq);
         
-        BoardDto dto =  employmentService.getOneRecruit(empBoardSeq);
+        EmploymentBoardDto dto =  employmentService.getOneRecruit(empBoardSeq);
         
 //		디데이 함수      
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

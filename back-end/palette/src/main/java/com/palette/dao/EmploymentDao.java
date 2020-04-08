@@ -5,15 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.palette.model.BoardDto;
+import com.palette.model.EmploymentBoardDto;
 
 @Mapper
 @Repository
 public interface EmploymentDao {
 
-	List<BoardDto> getAllRecuritingInfo();
+	List<EmploymentBoardDto> getAllRecuritingInfo();
 
-	BoardDto getOneRecruit(int empBoardSeq);
+	EmploymentBoardDto getOneRecruit(int empBoardSeq);
 	
 	void readCount(int empBoardSeq);
 

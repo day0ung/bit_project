@@ -1,6 +1,6 @@
 package com.palette.model;
 
-public class BoardDto {
+public class EmploymentBoardDto {
 	private int boardSeq; // BOARD_SEQ
 	private int memberSeq; // MEMBER_SEQ
 
@@ -30,10 +30,10 @@ public class BoardDto {
 	
 	private MemberDto memberDto;
 	
-	public BoardDto() {
+	public EmploymentBoardDto() {
 	}
 
-	public BoardDto(int boardSeq, int memberSeq, int category, String title, String content, String writeDate,
+	public EmploymentBoardDto(int boardSeq, int memberSeq, int category, String title, String content, String writeDate,
 			int readCount, String image, String cvStartDate, String cvEndDate, String fileName, String dbFileName,
 			int del, int boardAuth, long dDay, String career, String education, String workingType, String salary,
 			String position, String workingLocation, MemberDto memberDto) {
