@@ -1,9 +1,11 @@
 package com.palette.model;
 
 public class GroupBoardDto {
-
+	
+	private int finalnum;
+	
     private int boardSeq;
-    private int groupInfeSeq;
+    private int groupInfoSeq;
     private int memberSeq;
     private int category;
     private String title;
@@ -20,48 +22,73 @@ public class GroupBoardDto {
 
     private int del;
     
+    private MemberDto memberDto;
+    
     // none data//
     private String cvStartDate;
-    private String cvEndSate;
+    private String cvEndDate;
 
 
     public GroupBoardDto() {
     }
 
-    public GroupBoardDto(int boardSeq, int groupInfeSeq, int memberSeq, int category, String title, String content, String writeDate, int readCount, String image, String fileName, String dbFileName, int boardAuth, int del, String cvStartDate, String cvEndSate) {
-        this.boardSeq = boardSeq;
-        this.groupInfeSeq = groupInfeSeq;
-        this.memberSeq = memberSeq;
-        this.category = category;
-        this.title = title;
-        this.content = content;
-        this.writeDate = writeDate;
-        this.readCount = readCount;
-        this.image = image;
-        this.fileName = fileName;
-        this.dbFileName = dbFileName;
-        this.boardAuth = boardAuth;
-        this.del = del;
-        this.cvStartDate = cvStartDate;
-        this.cvEndSate = cvEndSate;
-    }
+    
 
-    public int getBoardSeq() {
+
+	public GroupBoardDto(int finalnum, int boardSeq, int groupInfoSeq, int memberSeq, int category, String title,
+			String content, String writeDate, int readCount, String image, String fileName, String dbFileName,
+			int boardAuth, int del, MemberDto memberDto, String cvStartDate, String cvEndDate) {
+		super();
+		this.finalnum = finalnum;
+		this.boardSeq = boardSeq;
+		this.groupInfoSeq = groupInfoSeq;
+		this.memberSeq = memberSeq;
+		this.category = category;
+		this.title = title;
+		this.content = content;
+		this.writeDate = writeDate;
+		this.readCount = readCount;
+		this.image = image;
+		this.fileName = fileName;
+		this.dbFileName = dbFileName;
+		this.boardAuth = boardAuth;
+		this.del = del;
+		this.memberDto = memberDto;
+		this.cvStartDate = cvStartDate;
+		this.cvEndDate = cvEndDate;
+	}
+
+	public MemberDto getMemberdto() {
+		return memberDto;
+	}
+
+	public void setMemberdto(MemberDto memberdto) {
+		this.memberDto = memberdto;
+	}
+
+	public int getFinalnum() {
+		return finalnum;
+	}
+
+	public void setFinalnum(int finalnum) {
+		this.finalnum = finalnum;
+	}
+
+	public int getGroupInfoSeq() {
+		return groupInfoSeq;
+	}
+
+	public void setGroupInfoSeq(int groupInfoSeq) {
+		this.groupInfoSeq = groupInfoSeq;
+	}
+
+	public int getBoardSeq() {
         return this.boardSeq;
     }
 
     public void setBoardSeq(int boardSeq) {
         this.boardSeq = boardSeq;
     }
-
-    public int getGroupInfeSeq() {
-        return this.groupInfeSeq;
-    }
-
-    public void setGroupInfeSeq(int groupInfeSeq) {
-        this.groupInfeSeq = groupInfeSeq;
-    }
-
     public int getMemberSeq() {
         return this.memberSeq;
     }
@@ -159,11 +186,11 @@ public class GroupBoardDto {
     }
 
     public String getCvEndSate() {
-        return this.cvEndSate;
+        return this.cvEndDate;
     }
 
     public void setCvEndSate(String cvEndSate) {
-        this.cvEndSate = cvEndSate;
+        this.cvEndDate = cvEndSate;
     }
 
     public GroupBoardDto boardSeq(int boardSeq) {
@@ -172,7 +199,7 @@ public class GroupBoardDto {
     }
 
     public GroupBoardDto groupInfeSeq(int groupInfeSeq) {
-        this.groupInfeSeq = groupInfeSeq;
+        this.groupInfoSeq = groupInfeSeq;
         return this;
     }
 
@@ -237,30 +264,19 @@ public class GroupBoardDto {
     }
 
     public GroupBoardDto cvEndSate(String cvEndSate) {
-        this.cvEndSate = cvEndSate;
+        this.cvEndDate = cvEndDate;
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-            " boardSeq='" + getBoardSeq() + "'" +
-            ", groupInfeSeq='" + getGroupInfeSeq() + "'" +
-            ", memberSeq='" + getMemberSeq() + "'" +
-            ", category='" + getCategory() + "'" +
-            ", title='" + getTitle() + "'" +
-            ", content='" + getContent() + "'" +
-            ", writeDate='" + getWriteDate() + "'" +
-            ", readCount='" + getReadCount() + "'" +
-            ", image='" + getImage() + "'" +
-            ", fileName='" + getFileName() + "'" +
-            ", dbFileName='" + getDbFileName() + "'" +
-            ", boardAuth='" + getBoardAuth() + "'" +
-            ", del='" + getDel() + "'" +
-            ", cvStartDate='" + getCvStartDate() + "'" +
-            ", cvEndSate='" + getCvEndSate() + "'" +
-            "}";
-    }
+	@Override
+	public String toString() {
+		return "GroupBoardDto [finalnum=" + finalnum + ", boardSeq=" + boardSeq + ", groupInfoSeq=" + groupInfoSeq
+				+ ", memberSeq=" + memberSeq + ", category=" + category + ", title=" + title + ", content=" + content
+				+ ", writeDate=" + writeDate + ", readCount=" + readCount + ", image=" + image + ", fileName="
+				+ fileName + ", dbFileName=" + dbFileName + ", boardAuth=" + boardAuth + ", del=" + del + ", memberDto="
+				+ memberDto + ", cvStartDate=" + cvStartDate + ", cvEndSate=" + cvEndDate + "]";
+	}
 
+ 
 
 }
