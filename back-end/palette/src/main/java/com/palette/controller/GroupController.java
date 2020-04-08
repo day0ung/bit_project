@@ -1,5 +1,6 @@
 package com.palette.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -65,8 +65,13 @@ public class GroupController {
     }
 
     @GetMapping(value="/groupBoardList")
-    public List<GroupBoardDto> groupBoardList() {
-        List<GroupBoardDto> list = groupService.getGroupBoardList();
+    public ArrayList<GroupBoardDto> groupBoardList() {
+    	
+        ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
+        for (int j = 0; j < list.size(); j++) {
+			
+        	System.out.println(list.get(j).toString());
+		}
         return list;
     }
     

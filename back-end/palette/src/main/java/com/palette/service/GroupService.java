@@ -1,5 +1,6 @@
 package com.palette.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class GroupService {
 		return groupDao.getGroupMemberName(seq);
 	}
 
-	public List<GroupBoardDto> getGroupBoardList() {
+	public ArrayList<GroupBoardDto> getGroupBoardList() {
 		return groupDao.getgroupBoardList();
 	}
 }

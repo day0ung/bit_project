@@ -1,5 +1,6 @@
 package com.palette.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -25,6 +26,6 @@ public interface GroupDao {
 	
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
-	List<GroupBoardDto> getgroupBoardList();
+	ArrayList<GroupBoardDto> getgroupBoardList();
 
 }
