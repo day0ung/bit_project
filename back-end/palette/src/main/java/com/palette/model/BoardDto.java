@@ -3,7 +3,8 @@ package com.palette.model;
 public class BoardDto {
 	private int boardSeq; // BOARD_SEQ
 	private int memberSeq; // MEMBER_SEQ
-	
+
+// 게시판 기본 정보
 	private int category; // CATEGORY
 	private String title; // TITLE
 	private String content; // CONTENT
@@ -18,6 +19,15 @@ public class BoardDto {
 	private int boardAuth; // BOARD_AUTH
 	private long dDay;
 	
+//  구인공고 관련
+	private String career; // CAREER
+	private String education; // EDUCATION
+	private String workingType; // WORKING_TYPE
+	private String salary; // SALARY
+	private String position; // POSITION
+	private String workingLocation; // WORKING_LOCATION
+	
+	
 	private MemberDto memberDto;
 	
 	public BoardDto() {
@@ -25,7 +35,8 @@ public class BoardDto {
 
 	public BoardDto(int boardSeq, int memberSeq, int category, String title, String content, String writeDate,
 			int readCount, String image, String cvStartDate, String cvEndDate, String fileName, String dbFileName,
-			int del, int boardAuth, long dDay, MemberDto memberDto) {
+			int del, int boardAuth, long dDay, String career, String education, String workingType, String salary,
+			String position, String workingLocation, MemberDto memberDto) {
 		super();
 		this.boardSeq = boardSeq;
 		this.memberSeq = memberSeq;
@@ -42,6 +53,12 @@ public class BoardDto {
 		this.del = del;
 		this.boardAuth = boardAuth;
 		this.dDay = dDay;
+		this.career = career;
+		this.education = education;
+		this.workingType = workingType;
+		this.salary = salary;
+		this.position = position;
+		this.workingLocation = workingLocation;
 		this.memberDto = memberDto;
 	}
 
@@ -165,6 +182,54 @@ public class BoardDto {
 		this.dDay = dDay;
 	}
 
+	public String getCareer() {
+		return career;
+	}
+
+	public void setCareer(String career) {
+		this.career = career;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getWorkingType() {
+		return workingType;
+	}
+
+	public void setWorkingType(String workingType) {
+		this.workingType = workingType;
+	}
+
+	public String getSalary() {
+		return salary;
+	}
+
+	public void setSalary(String salary) {
+		this.salary = salary;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getWorkingLocation() {
+		return workingLocation;
+	}
+
+	public void setWorkingLocation(String workingLocation) {
+		this.workingLocation = workingLocation;
+	}
+
 	public MemberDto getMemberDto() {
 		return memberDto;
 	}
@@ -179,8 +244,12 @@ public class BoardDto {
 				+ title + ", content=" + content + ", writeDate=" + writeDate + ", readCount=" + readCount + ", image="
 				+ image + ", cvStartDate=" + cvStartDate + ", cvEndDate=" + cvEndDate + ", fileName=" + fileName
 				+ ", dbFileName=" + dbFileName + ", del=" + del + ", boardAuth=" + boardAuth + ", dDay=" + dDay
-				+ ", memberDto=" + memberDto + "]";
+				+ ", career=" + career + ", education=" + education + ", workingType=" + workingType + ", salary="
+				+ salary + ", position=" + position + ", workingLocation=" + workingLocation + ", memberDto="
+				+ memberDto + "]";
 	}
+
+	
 
 	
 
