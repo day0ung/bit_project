@@ -113,13 +113,13 @@
 	where g.GROUP_INFO_SEQ = #{seq};
 </select>
  
-<select id="getGroupMemberName" parameterType="java.lang.Integer" resultMap="GroupMember">
+<!-- <select id="getGroupMemberName" parameterType="java.lang.Integer" resultMap="GroupMember">
 	SELECT g.GROUP_INFO_SEQ, g.MEMBER_SEQ, m.MEMBER_ID, m.MEMBER_NAME, m.BIRTH, m.ADDRESS, m.LOCATION, m.EMAIL, m.MYMONEY, m.CV, m.AUTH, m.DISLIKE
       FROM GROUP_MEMBER g
 	  JOIN MEMBER m
 	    ON g.MEMBER_SEQ = m.MEMBER_SEQ 
 	 WHERE g.GROUP_INFO_SEQ = #{seq}
-</select>
+</select> -->
 
 <select id="getgroupBoardList" resultType="com.palette.model.GroupBoardDto">
 	SELECT * FROM BOARD
