@@ -5,16 +5,16 @@
                     <div class="box">
                         <p class="tit icon01"><strong>일반</strong>회원가입</p>
                         <div class="con">
-                            <h1>durldpemfdjrkdigo</h1>
+                            <img src="../../assets/css/images/member.png" alt="일반">
                         </div>
-                        <p class="btn"><router-link :to="{name:'home'}" class="con_btn blue">일반회원가입 바로가기</router-link></p>
+                        <p class="btn"><router-link :to="{name:'memberJoin'}" class="con_btn blue">일반회원가입 바로가기</router-link></p>
                     </div>
                     <div class="box">
                         <p class="tit icon02"><strong>기업</strong>회원가입</p>
                         <div class="con">
-                            <h1>durldpemfdjrkdigo</h1>
+                            <img src="../../assets/css/images/company.png" alt="기업">
                         </div>
-                        <p class="btn"><a href="/main/site/member/agree.do" class="con_btn blue">기업회원가입 바로가기</a></p>
+                        <p class="btn"><router-link :to="{name:'companyJoin'}" class="con_btn blue">기업회원가입 바로가기</router-link></p>
                     </div>
             </div>
         </div>
@@ -78,4 +78,10 @@ export default {
 .cont_wrap{
     padding-top: 100px;
 }
+.con img{
+    width: 170px;
+    margin-left: 90px;
+    margin-top: 100px;
+}
+
 </style>

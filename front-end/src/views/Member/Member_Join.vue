@@ -2,28 +2,11 @@
 <div>
   <div id="ndls">
 	<p class="tar mb10"><span class="red">*</span> 표시가 된 곳은 필수 항목입니다.</p>
-
-
-	<div>
-	<input type="hidden" name="name" value="정다영">
-	<input type="hidden" name="ipin_hash" value="K1By+AYOFAxfKDKKLhUfPOBe4Bw64je2LNA3DCJApPbJu/n2XEMEowBKKYdP47pX5ZBpkQRYoeep2S22+mgzew==">
-	<input type="hidden" name="gpin_sex" value="1">
-	<input type="hidden" name="gpin_hash" value="MC0GCCqGSIb3DQIJAyEAsr2qWn8IFHcTbpb44iNZtwErFUL0MYGzOgoJjSEYQ/Q=">
-	<input type="hidden" name="idchk" value="N">
-	<input type="hidden" name="prepage" value="">
-	</div>
 	
 	<div class="ndls_bwrite join_write">
 		<div class="box w100">
 			<ul>
-				<li>
-					<dl>
-						<dt>이름</dt>
-						<dd>
-							정다영
-						</dd>
-					</dl>
-				</li>
+		
 				<li>
 					<dl>
 						<dt><span class="red">*</span> <label for="user_id">아이디</label></dt>
@@ -56,86 +39,6 @@
 						<dd>
 							<span class="select_style">
 							<select id="birthday_year" name="birthday_year">
-							
-								<option value="1920">1920년</option>
-							
-								<option value="1921">1921년</option>
-							
-								<option value="1922">1922년</option>
-							
-								<option value="1923">1923년</option>
-							
-								<option value="1924">1924년</option>
-							
-								<option value="1925">1925년</option>
-							
-								<option value="1926">1926년</option>
-							
-								<option value="1927">1927년</option>
-							
-								<option value="1928">1928년</option>
-							
-								<option value="1929">1929년</option>
-							
-								<option value="1930">1930년</option>
-							
-								<option value="1931">1931년</option>
-							
-								<option value="1932">1932년</option>
-							
-								<option value="1933">1933년</option>
-							
-								<option value="1934">1934년</option>
-							
-								<option value="1935">1935년</option>
-							
-								<option value="1936">1936년</option>
-							
-								<option value="1937">1937년</option>
-							
-								<option value="1938">1938년</option>
-							
-								<option value="1939">1939년</option>
-							
-								<option value="1940">1940년</option>
-							
-								<option value="1941">1941년</option>
-							
-								<option value="1942">1942년</option>
-							
-								<option value="1943">1943년</option>
-							
-								<option value="1944">1944년</option>
-							
-								<option value="1945">1945년</option>
-							
-								<option value="1946">1946년</option>
-							
-								<option value="1947">1947년</option>
-							
-								<option value="1948">1948년</option>
-							
-								<option value="1949">1949년</option>
-							
-								<option value="1950">1950년</option>
-							
-								<option value="1951">1951년</option>
-							
-								<option value="1952">1952년</option>
-							
-								<option value="1953">1953년</option>
-							
-								<option value="1954">1954년</option>
-							
-								<option value="1955">1955년</option>
-							
-								<option value="1956">1956년</option>
-							
-								<option value="1957">1957년</option>
-							
-								<option value="1958">1958년</option>
-							
-								<option value="1959">1959년</option>
 							
 								<option value="1960">1960년</option>
 							
@@ -264,53 +167,17 @@
 							/ 
 							<span class="select_style">
 							<select id="birthday_month" name="birthday_month">
-							
-								
-								
 								<option value="01">01월</option>
-							
-								
-								
 								<option value="02">02월</option>
-							
-								
-								
-								<option value="03" selected="selected">03월</option>
-							
-								
-								
+								<option value="03">03월</option>
 								<option value="04">04월</option>
-							
-								
-								
 								<option value="05">05월</option>
-							
-								
-								
 								<option value="06">06월</option>
-							
-								
-								
 								<option value="07">07월</option>
-							
-								
-								
 								<option value="08">08월</option>
-							
-								
-								
 								<option value="09">09월</option>
-							
-								
-								
 								<option value="10">10월</option>
-							
-								
-								
 								<option value="11">11월</option>
-							
-								
-								
 								<option value="12">12월</option>
 							
 							</select>
@@ -318,134 +185,40 @@
 							/ 
 							<span class="select_style">
 							<select id="birthday_day" name="birthday_day">
-							
-								
-								
 								<option value="01">01월</option>
-							
-								
-								
 								<option value="02">02월</option>
-							
-								
-								
 								<option value="03">03월</option>
-							
-								
-								
 								<option value="04">04월</option>
-							
-								
-								
 								<option value="05">05월</option>
-							
-								
-								
-								<option value="06" selected="selected">06월</option>
-							
-								
-								
+								<option value="06">06월</option>
 								<option value="07">07월</option>
-							
-								
-								
 								<option value="08">08월</option>
-							
-								
-								
 								<option value="09">09월</option>
-							
-								
-								
 								<option value="10">10월</option>
-							
-								
-								
 								<option value="11">11월</option>
-							
-								
-								
 								<option value="12">12월</option>
-							
-								
-								
 								<option value="13">13월</option>
-							
-								
-								
 								<option value="14">14월</option>
-							
-								
-								
 								<option value="15">15월</option>
-							
-								
-								
 								<option value="16">16월</option>
-							
-								
-								
 								<option value="17">17월</option>
-							
-								
-								
 								<option value="18">18월</option>
-							
-								
-								
 								<option value="19">19월</option>
-							
-								
-								
 								<option value="20">20월</option>
-							
-								
-								
 								<option value="21">21월</option>
-							
-								
-								
 								<option value="22">22월</option>
-							
-								
-								
 								<option value="23">23월</option>
-							
-								
-								
 								<option value="24">24월</option>
-							
-								
-								
 								<option value="25">25월</option>
-							
-								
-								
 								<option value="26">26월</option>
-							
-								
-								
 								<option value="27">27월</option>
-							
-								
-								
 								<option value="28">28월</option>
-							
-								
-								
 								<option value="29">29월</option>
-							
-								
-								
 								<option value="30">30월</option>
-							
-								
-								
 								<option value="31">31월</option>
 							
 							</select>
 							</span>
-							<input type="hidden" name="birthday_type" value="+">
 						</dd>
 					</dl>
 				</li>
@@ -553,10 +326,10 @@
 				</li>
 				<li>
 					<dl>
-						<dt><label for="mailing_use_y">E-MAIL수신여부</label></dt>
+						<dt><label for="mailing_use_y">성별</label></dt>
 						<dd>
-							<input type="radio" id="mailing_use_y" name="mailing_use_yn" value="Y" checked="checked"><label for="mailing_use_y">허용</label>
-							<input type="radio" id="mailing_use_n" name="mailing_use_yn" value="N"><label for="mailing_use_n">거부</label>
+							<input type="radio" id="mailing_use_y" name="mailing_use_yn" value="Y" checked="checked"><label for="mailing_use_y">여자</label>
+							<input type="radio" id="mailing_use_n" name="mailing_use_yn" value="N"><label for="mailing_use_n">남자</label>
 						</dd>
 					</dl>
 				</li>
@@ -574,13 +347,13 @@
 				</li>
 				<li>
 					<dl>
-						<dt><span class="red">*</span> <label for="manage_code">도서관</label></dt>
+						<dt><span class="red">*</span> <label for="manage_code">관심지역</label></dt>
 						<dd>
 							
 								
 									<span class="select_style">
 									<select id="manage_code" name="manage_code" class="cus_selt">
-										<option value="">도서관선택</option>
+										<option value="">지역선택</option>
 									
 										<option value="MA">무주형설지공군립도서관</option>
 									
@@ -941,7 +714,7 @@ table.ndls_table1 .tit_group dl dd {float:left;margin:0 10px 0 8px;}
 
 
 /********************게시판형식********************/
-#ndls{width:100%;margin-top:0px;}
+#ndls{width:100%;margin-top: 90px}
 
 #ndls .ndls_total {width:100%;}
 #ndls .ndls_total_left {float:left; font-size:0.95em; padding-top:5px; height:22px;}
