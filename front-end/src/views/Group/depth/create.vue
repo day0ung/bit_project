@@ -15,10 +15,25 @@
                 <button class="btn btn-primary" @click="gruopCreateApply">Group Create Apply</button>
             </div>
         </div>
+
+        <div class="block">
+            <span class="demonstration">With quick options</span>
+            <el-date-picker
+            v-model="value2"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="To"
+            start-placeholder="Start date"
+            end-placeholder="End date"
+            :picker-options="pickerOptions">
+            </el-date-picker>
+        </div>
     </div>
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/index.css';
 export default {
     data(){
         return{

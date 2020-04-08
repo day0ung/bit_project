@@ -22,7 +22,7 @@
         >
       </el-table-column>
       <el-table-column
-        prop="memberSeq"
+        prop="memberName"
         label="작성자"
         >
       </el-table-column>
