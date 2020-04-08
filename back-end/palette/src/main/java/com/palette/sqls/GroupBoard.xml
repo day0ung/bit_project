@@ -20,6 +20,7 @@
 <resultMap type="com.palette.model.GroupBoardDto" id="AllBoardList">
 	<id column="FINALNUM" property="finalnum"/>
 	<result column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+	<result column="BOARD_SEQ" property="boardSeq"/>
 	<result column="MEMBER_SEQ" property="memberSeq"/>
 	<result column="CATEGORY" property="category"/>
 	<result column="TITLE" property="title"/>
