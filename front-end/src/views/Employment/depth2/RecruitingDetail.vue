@@ -132,7 +132,7 @@ export default {
       startDate : "",
       endDate : "",
       nowMilliS : "",
-      endMillis : ""
+      endMillis : "",
       
     }
   },
@@ -150,14 +150,21 @@ export default {
             this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm')
             
       })
+     
+      
+
   },
   computed:{
+    
     dTime(){
       this.nowMilliS = moment(this.nowDate).valueOf()
       this.endMillis = moment(this.endDate).valueOf()
-      return (this.endMillis - this.nowMilliS)
+      alert(moment(this.endMillis - this.nowMilliS).format("hhmmss"))
+      return setInterval(moment(this.endMillis - this.nowMilliS).format("hhmmss"), 1000)
+      
     }
   }
+  
   
     
 
