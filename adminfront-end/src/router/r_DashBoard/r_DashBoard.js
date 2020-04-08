@@ -5,7 +5,8 @@ export default[{
     // component:()=>('@/view/home/dashboard.vue')
     path: '/',
     name: 'dashboard',
-    component:()=> import('@/views/home/dashboard.vue'),
+    component:()=> import('@/views/home/dashboard.vue')
+    ,
     children:[
         {
             path:'',

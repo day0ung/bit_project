@@ -19,6 +19,7 @@
 export default {
     data(){
         return{
+            title:"승인관리"
 
         }
     },

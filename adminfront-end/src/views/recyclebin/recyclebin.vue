@@ -19,7 +19,7 @@
 export default {
     data(){
         return{
-
+            title:"삭제내역"
         }
     },
     methods:{
