@@ -58,215 +58,245 @@ public class GroupBoardDto {
 		this.cvEndDate = cvEndDate;
 	}
 
-	public MemberDto getMemberdto() {
-		return memberDto;
-	}
-
-	public void setMemberdto(MemberDto memberdto) {
-		this.memberDto = memberdto;
-	}
+	
 
 	public int getFinalnum() {
 		return finalnum;
 	}
 
+
+
+
 	public void setFinalnum(int finalnum) {
 		this.finalnum = finalnum;
 	}
+
+
+
+
+	public int getBoardSeq() {
+		return boardSeq;
+	}
+
+
+
+
+	public void setBoardSeq(int boardSeq) {
+		this.boardSeq = boardSeq;
+	}
+
+
+
 
 	public int getGroupInfoSeq() {
 		return groupInfoSeq;
 	}
 
+
+
+
 	public void setGroupInfoSeq(int groupInfoSeq) {
 		this.groupInfoSeq = groupInfoSeq;
 	}
 
-	public int getBoardSeq() {
-        return this.boardSeq;
-    }
 
-    public void setBoardSeq(int boardSeq) {
-        this.boardSeq = boardSeq;
-    }
-    public int getMemberSeq() {
-        return this.memberSeq;
-    }
 
-    public void setMemberSeq(int memberSeq) {
-        this.memberSeq = memberSeq;
-    }
 
-    public int getCategory() {
-        return this.category;
-    }
+	public int getMemberSeq() {
+		return memberSeq;
+	}
 
-    public void setCategory(int category) {
-        this.category = category;
-    }
 
-    public String getTitle() {
-        return this.title;
-    }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public String getContent() {
-        return this.content;
-    }
+	public void setMemberSeq(int memberSeq) {
+		this.memberSeq = memberSeq;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
 
-    public String getWriteDate() {
-        return this.writeDate;
-    }
 
-    public void setWriteDate(String writeDate) {
-        this.writeDate = writeDate;
-    }
 
-    public int getReadCount() {
-        return this.readCount;
-    }
+	public int getCategory() {
+		return category;
+	}
 
-    public void setReadCount(int readCount) {
-        this.readCount = readCount;
-    }
 
-    public String getImage() {
-        return this.image;
-    }
 
-    public void setImage(String image) {
-        this.image = image;
-    }
 
-    public String getFileName() {
-        return this.fileName;
-    }
+	public void setCategory(int category) {
+		this.category = category;
+	}
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
-    public String getDbFileName() {
-        return this.dbFileName;
-    }
 
-    public void setDbFileName(String dbFileName) {
-        this.dbFileName = dbFileName;
-    }
 
-    public int getBoardAuth() {
-        return this.boardAuth;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setBoardAuth(int boardAuth) {
-        this.boardAuth = boardAuth;
-    }
 
-    public int getDel() {
-        return this.del;
-    }
 
-    public void setDel(int del) {
-        this.del = del;
-    }
 
-    public String getCvStartDate() {
-        return this.cvStartDate;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public void setCvStartDate(String cvStartDate) {
-        this.cvStartDate = cvStartDate;
-    }
 
-    public String getCvEndSate() {
-        return this.cvEndDate;
-    }
 
-    public void setCvEndSate(String cvEndSate) {
-        this.cvEndDate = cvEndSate;
-    }
 
-    public GroupBoardDto boardSeq(int boardSeq) {
-        this.boardSeq = boardSeq;
-        return this;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public GroupBoardDto groupInfeSeq(int groupInfeSeq) {
-        this.groupInfoSeq = groupInfeSeq;
-        return this;
-    }
 
-    public GroupBoardDto memberSeq(int memberSeq) {
-        this.memberSeq = memberSeq;
-        return this;
-    }
 
-    public GroupBoardDto category(int category) {
-        this.category = category;
-        return this;
-    }
 
-    public GroupBoardDto title(String title) {
-        this.title = title;
-        return this;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public GroupBoardDto content(String content) {
-        this.content = content;
-        return this;
-    }
 
-    public GroupBoardDto writeDate(String writeDate) {
-        this.writeDate = writeDate;
-        return this;
-    }
 
-    public GroupBoardDto readCount(int readCount) {
-        this.readCount = readCount;
-        return this;
-    }
 
-    public GroupBoardDto image(String image) {
-        this.image = image;
-        return this;
-    }
+	public String getWriteDate() {
+		return writeDate;
+	}
 
-    public GroupBoardDto fileName(String fileName) {
-        this.fileName = fileName;
-        return this;
-    }
 
-    public GroupBoardDto dbFileName(String dbFileName) {
-        this.dbFileName = dbFileName;
-        return this;
-    }
 
-    public GroupBoardDto boardAuth(int boardAuth) {
-        this.boardAuth = boardAuth;
-        return this;
-    }
 
-    public GroupBoardDto del(int del) {
-        this.del = del;
-        return this;
-    }
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
+	}
 
-    public GroupBoardDto cvStartDate(String cvStartDate) {
-        this.cvStartDate = cvStartDate;
-        return this;
-    }
 
-    public GroupBoardDto cvEndSate(String cvEndSate) {
-        this.cvEndDate = cvEndDate;
-        return this;
-    }
+
+
+	public int getReadCount() {
+		return readCount;
+	}
+
+
+
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+
+
+	public String getFileName() {
+		return fileName;
+	}
+
+
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+
+
+
+	public String getDbFileName() {
+		return dbFileName;
+	}
+
+
+
+
+	public void setDbFileName(String dbFileName) {
+		this.dbFileName = dbFileName;
+	}
+
+
+
+
+	public int getBoardAuth() {
+		return boardAuth;
+	}
+
+
+
+
+	public void setBoardAuth(int boardAuth) {
+		this.boardAuth = boardAuth;
+	}
+
+
+
+
+	public int getDel() {
+		return del;
+	}
+
+
+
+
+	public void setDel(int del) {
+		this.del = del;
+	}
+
+
+
+
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+
+
+
+
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+	}
+
+
+
+
+	public String getCvStartDate() {
+		return cvStartDate;
+	}
+
+
+
+
+	public void setCvStartDate(String cvStartDate) {
+		this.cvStartDate = cvStartDate;
+	}
+
+
+
+
+	public String getCvEndDate() {
+		return cvEndDate;
+	}
+
+
+
+
+	public void setCvEndDate(String cvEndDate) {
+		this.cvEndDate = cvEndDate;
+	}
+
+
+
 
 	@Override
 	public String toString() {
@@ -274,9 +304,7 @@ public class GroupBoardDto {
 				+ ", memberSeq=" + memberSeq + ", category=" + category + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", readCount=" + readCount + ", image=" + image + ", fileName="
 				+ fileName + ", dbFileName=" + dbFileName + ", boardAuth=" + boardAuth + ", del=" + del + ", memberDto="
-				+ memberDto + ", cvStartDate=" + cvStartDate + ", cvEndSate=" + cvEndDate + "]";
+				+ memberDto + ", cvStartDate=" + cvStartDate + ", cvEndDate=" + cvEndDate + "]";
 	}
-
- 
 
 }
