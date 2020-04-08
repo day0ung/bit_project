@@ -1,22 +1,21 @@
 <template>
   <div class="detail3">
       <br>
-      <h5>detail3</h5>
       <br>
-      <table border="1">
-        <tr v-for="member in memberlist" :key="member.id">
-          <td>{{ member.id }}</td>
-          <td>{{ member.name }}</td>
-        </tr>
-      </table>
+      <div class="calendar">
+      <el-calendar v-model="date">
+      </el-calendar>
+      </div>
   </div>
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/index.css';
 export default {
   data(){
     return{
-      memberlist: this.$store.state.s_subStore.data
+      memberlist: this.$store.state.s_subStore.data,
+      date: "",
     }
   },
   mounted(){
@@ -25,6 +24,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.calendar{
+  width: 80%;
+  margin: auto;
+}
 
 </style>
