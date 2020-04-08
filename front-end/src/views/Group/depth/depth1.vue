@@ -58,9 +58,9 @@
           <p>{{ groupOne.startDate }} ~ {{ groupOne.endDate }}</p>
           <br>
           <div class="group_info">
-            <p>그룹장 : {{groupOne.memberSeq}}</p>
-            <p> { 현재인원 } / {{ groupOne.maxMember}} </p>
-            <p>분류: {{groupOne.interBigSeq}} > {{groupOne.interSmallSeq}}</p>
+            <p>그룹장 : {{groupOne.memberDto.memberName}}</p>
+            <p> {{ groupOne.currMember}} / {{ groupOne.maxMember}} </p>
+            <p>분류: {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
@@ -100,9 +100,9 @@
           <p>{{ groupOne.startDate }} ~ {{ groupOne.endDate }}</p>
           <br>
           <div class="group_info">
-            <p>그룹장 : {{groupOne.memberSeq}}</p>
-            <p> { 현재인원 } / {{ groupOne.maxMember}} </p>
-            <p>분류: {{groupOne.interBigSeq}} > {{groupOne.interSmallSeq}}</p>
+            <p>그룹장 : {{groupOne.memberDto.memberName}}</p>
+            <p> {{ groupOne.currMember}} / {{ groupOne.maxMember}} </p>
+            <p>분류: {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
@@ -142,9 +142,9 @@
           <p>{{ groupOne.startDate }} ~ {{ groupOne.endDate }}</p>
           <br>
           <div class="group_info">
-            <p>그룹장 : {{groupOne.memberSeq}}</p>
-            <p> { 현재인원 } / {{ groupOne.maxMember}} </p>
-            <p>분류: {{groupOne.interBigSeq}} > {{groupOne.interSmallSeq}}</p>
+            <p>그룹장 : {{groupOne.memberDto.memberName}}</p>
+            <p> {{ groupOne.currMember}} / {{ groupOne.maxMember}} </p>
+            <p>분류: {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
           </div>
           <p class="pick">그룹 주간일정</p>
           <div class="sizes">
