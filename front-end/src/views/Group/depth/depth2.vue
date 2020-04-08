@@ -1,6 +1,6 @@
 <template>
   <div class="depth2">
-      <h1>depth2</h1>
+      <div>{{boardOne}}</div>
       <div>{{boardOne.title}}</div>
       <div>{{boardOne.content}}</div>
   </div>
