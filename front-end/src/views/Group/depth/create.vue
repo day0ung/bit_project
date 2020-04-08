@@ -21,7 +21,7 @@
                         <el-option v-for="smallInter in smallInterList" :key="smallInter.interSmallSeq" :value="smallInter.interSmallSeq" :label="smallInter.smallName"></el-option>
                     </el-select>
                 </el-form-item>
-                <el-form-item label="기간설정" prop="date" required>
+                <el-form-item label="기간설정" prop="date">
                     <el-date-picker
                         v-model="ruleForm.date"
                         type="daterange"
