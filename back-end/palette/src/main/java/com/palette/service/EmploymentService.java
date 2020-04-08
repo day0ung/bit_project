@@ -20,7 +20,11 @@ public class EmploymentService {
 		return employmentDao.getAllRecuritingInfo();
 	}
 
-	public BoardDto getOneRecruit(int seq) {
-		return employmentDao.getOneRecruit(seq);
+	public BoardDto getOneRecruit(int empBoardSeq) {
+		return employmentDao.getOneRecruit(empBoardSeq);
+	}
+	
+	public void readCount(int empBoardSeq) {
+		employmentDao.readCount(empBoardSeq);
 	}
 }
