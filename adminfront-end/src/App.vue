@@ -11,9 +11,13 @@
 
       <div class="topNavBar">
         <ul>
-          <li><router-link class="active" to="/homes">Home</router-link></li>
-          <li><router-link to="/group">GROUP</router-link></li>
-          <li><router-link to="/contact">Contact</router-link></li>
+          <li><router-link class="active" to="/">Home</router-link></li>
+          <li><router-link class="" to="/member">회원관리</router-link></li>
+          <li><router-link class="active" to="/group">소모임관리</router-link></li>
+          <li><router-link class="" to="/board">게시판관리</router-link></li>
+          <li><router-link class="active" to="/statisticsNresearch">통계 및 설문조사</router-link></li>
+          <li><router-link class="" to="/accept">승인</router-link></li>
+          <li><router-link class="active" to="/recyclebin">휴지통</router-link></li>
         </ul>
       </div>
 

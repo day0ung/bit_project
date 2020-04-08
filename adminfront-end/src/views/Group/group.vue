@@ -1,16 +1,22 @@
 <template>
     <div class="group">
+
+        
         <div class="leftBar">
             <ul>
-                <li><router-link class="active" to="/search">서치 </router-link></li>
-                <li><a href="/search">News</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#about">About</a></li>
+                <li> <h2> {{title}} </h2> </li>
+                <li><router-link class="active" to="/search"> 검색0 </router-link></li>
+                <li><router-link  to="/search"> 검색1 </router-link></li>
+                <li><router-link  to="/search"> 검색2 </router-link></li>
+                <li><router-link  to="/search"> 검색3 </router-link></li>
+                
             </ul>
         </div> 
-        <div style="margin-left:25%;">
+        <div class="margin-L_25" >
             <router-view ></router-view>
         </div>
+
+
     </div>
 </template>
 
@@ -18,6 +24,7 @@
 export default {
     data(){
         return{
+            title:'소모임 관리'
 
         }
     },

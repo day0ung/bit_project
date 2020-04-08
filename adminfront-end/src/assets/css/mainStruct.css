@@ -1,7 +1,23 @@
 body {
   font-size: 28px;
+  margin:0;
 }
 
+#ViewStart{
+  width: 100vw;
+  height: 100vh;
+  
+}
+
+.margin-L_25{
+  margin-left: 25%;
+}
+
+
+
+.contentPadding{
+  padding:10px;
+}
 
 .topNavBar{
   
@@ -84,6 +100,7 @@ position: fixed;
 
 .leftBar ul {
   list-style-type: none;
+  padding-top: 20px;
 }
 
 .leftBar li a {
