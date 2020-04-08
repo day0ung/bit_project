@@ -358,7 +358,7 @@ export default {
 
 .btn-group-toggle .yellow:hover{
   color: #4e4e4e;
-  background: #e9d69a;
+  background: #fae6a3;
     transition: all 0.4s ease-in-out;
 }
 
