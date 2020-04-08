@@ -15,6 +15,8 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 
@@ -74,6 +76,15 @@ public class GroupController {
 		}
         return list;
     }
+
+    @PostMapping(value="/groupBoardOne")
+    public GroupBoardDto getGroupBoardOne(int boardSeq) {
+        System.out.println("groupBoardOne");
+        GroupBoardDto dto = groupService.groupBoardOne(boardSeq);
+        System.out.println(dto.toString());
+        return dto;
+    }
+    
     
 
 }

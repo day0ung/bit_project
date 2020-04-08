@@ -28,4 +28,6 @@ public interface GroupDao {
 
 	ArrayList<GroupBoardDto> getgroupBoardList();
 
+	GroupBoardDto groupBoardOne(int seq);
+
 }

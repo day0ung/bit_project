@@ -44,4 +44,8 @@ public class GroupService {
 	public ArrayList<GroupBoardDto> getGroupBoardList() {
 		return groupDao.getgroupBoardList();
 	}
+
+	public GroupBoardDto groupBoardOne(int seq) {
+		return groupDao.groupBoardOne(seq);
+	}
 }

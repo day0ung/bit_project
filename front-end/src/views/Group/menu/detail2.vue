@@ -11,7 +11,7 @@
       @row-click="gotoClick"
       >
       <el-table-column
-        prop="boardSeq"
+        prop="finalnum"
         label="글번호"
         width="200px">
       </el-table-column>
@@ -46,7 +46,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 export default {
   data(){
     return{
-      boardList: [],
       tableData: []
     }
   },
@@ -65,7 +64,6 @@ export default {
       this.$store.state.currpage = this.$route.path
       axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
-            this.boardList = res.data
             this.tableData = res.data
           })
   }
