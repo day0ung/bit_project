@@ -14,12 +14,12 @@
                 <Modal v-if="showModal" @close="showModal = false">
                 <!--
                 you can use custom content here to overwrite
-                default content
+                default contentzz
                 -->
        
                 </Modal>
             </span> |
-            <span><router-link to="/join">회원가입</router-link></span>
+            <span><button @click="$router.push({name:'join'})">회원가입</button></span>
             </div>
             <h1 class="logo">
                 <router-link to="/">
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import Modal from "@/views/Member/modal.vue";
+import Modal from "@/views/Member/Login.vue";
 
 export default {
     name : "headerTop",
@@ -46,7 +46,7 @@ export default {
         Modal
     },
     methdos:{
-        
+  
     }
 }
 </script>
