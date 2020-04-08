@@ -19,6 +19,12 @@
 		<result column="DB_FILE_NAME" property="dbFileName"/>
 		<result column="DEL" property="del"/>
 		<result column="BOARD_AUTH" property="boardAuth"/>
+		<result column="CAREER" property="career"/>
+		<result column="EDUCATION" property="education"/>
+		<result column="WORKING_TYPE" property="workingType"/>
+		<result column="SALARY" property="salary"/>
+		<result column="POSITION" property="position"/>
+		<result column="WORKING_LOCATION" property="workingLocation"/>
 		<collection property="memberDto" resultMap="MemberInfo"/>
 	</resultMap>
 	 
@@ -39,7 +45,8 @@
 <!-- /get Employment Member Name -->
 
   <select id="getAllRecuritingInfo" resultMap="EmploymentBoard">
-    SELECT b.BOARD_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME
+    SELECT b.BOARD_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME,
+    	   b.CAREER, b.EDUCATION, b.WORKING_TYPE, b.SALARY, b.POSITION, b.WORKING_LOCATION
     FROM BOARD b
     JOIN MEMBER m
     ON b.MEMBER_SEQ = m.MEMBER_SEQ
@@ -47,13 +54,19 @@
   </select>
   
   <select id="getOneRecruit" parameterType="java.lang.Integer" resultMap="EmploymentBoard">
-    SELECT b.BOARD_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME
+    SELECT b.BOARD_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME,
+    	   b.CAREER, b.EDUCATION, b.WORKING_TYPE, b.SALARY, b.POSITION, b.WORKING_LOCATION
     FROM BOARD b
     JOIN MEMBER m
     ON b.MEMBER_SEQ = m.MEMBER_SEQ
-    WHERE b.DEL = 0 AND b.BOARD_AUTH = 3 AND b.BOARD_SEQ = #{seq};
-    
+    WHERE b.DEL = 0 AND b.BOARD_AUTH = 3 AND b.BOARD_SEQ = #{empBoardSeq};
   </select>
+  
+  <update id="readCount" parameterType="java.lang.Integer">
+  	UPDATE BOARD
+  	SET READ_COUNT = READ_COUNT + 1
+  	WHERE BOARD_SEQ = #{empBoardSeq};
+  </update>
   
   
 

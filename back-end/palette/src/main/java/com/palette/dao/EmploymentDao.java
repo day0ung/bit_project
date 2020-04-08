@@ -13,6 +13,8 @@ public interface EmploymentDao {
 
 	List<BoardDto> getAllRecuritingInfo();
 
-	BoardDto getOneRecruit(int seq);
+	BoardDto getOneRecruit(int empBoardSeq);
+	
+	void readCount(int empBoardSeq);
 
 }
