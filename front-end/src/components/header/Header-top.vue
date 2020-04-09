@@ -7,12 +7,13 @@
                 <el-button icon="el-icon-search" size="small" circle></el-button>
             </form>
         </div>
-        <div class="inner" v-if="isLogin">
+        <div class="inner">
             <div style="margin-right: 30px;">
             <span>
-                 <button id="show-modal" @click="showModal = true">로그인</button>
-                 <p>{{loginUser}}</p>
+                <button id="show-modal" @click="showModal = true">로그인</button>
+                <p>{{loginUser}}</p>
                 <Modal v-if="showModal" @close="showModal = false">
+                    
                 <!--
                 you can use custom content here to overwrite
                 default contentzz
@@ -53,7 +54,6 @@ export default {
 
     },
     mounted(){
-        loginUser = this.$store.state.s_member.loginUser
     }
     
 }
