@@ -56,9 +56,7 @@
     </div>
   </transition>
 </template>
-
 <script>
-
 import logincss from '@/assets/css/member/login.css'
 export default {
 
@@ -84,7 +82,8 @@ export default {
     				res => {
               if(res.data.memberId == undefined){
                 alert("id나 password가 틀렸습니다.");
-                return false;
+                this.$store.state.s_member.isLogin = true;
+                return;
               }
                 //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
                 //세션에 저장						//json으로 넘어옴 세션에 저장할때는 
@@ -93,10 +92,14 @@ export default {
                 var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
                 //alert('세션가져오기' + loginData)
                 var login = JSON.parse(loginData); //JSON
-                //alert(login.memberId);  
-                alert('로그인 성공')
+                this.$store.state.isLogin = false
+                this.$store.state.loginUser = login
+                alert(this.$store.state.isLogin)
+                alert(this.$store.state.loginUser)
+                
                 this.$emit('close')   
             })
+                          
 
         },
         join(){
@@ -104,8 +107,8 @@ export default {
         }
     }
 }
-</script>
 
+</script>
 <style>
 
 </style>

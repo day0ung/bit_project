@@ -14,6 +14,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    loginUser : null,
+    isLogin : true,
     currpage: "/",
     depth1:"",
     depth2:"",

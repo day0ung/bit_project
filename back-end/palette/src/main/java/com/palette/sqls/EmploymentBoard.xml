@@ -50,7 +50,7 @@
     FROM BOARD b
     JOIN MEMBER m
     ON b.MEMBER_SEQ = m.MEMBER_SEQ
-    WHERE b.DEL = 0 AND b.BOARD_AUTH = 3;
+    WHERE b.DEL = 0 AND b.BOARD_AUTH = 3 AND b.CV_END_DATE > NOW();
   </select>
   
   <select id="getOneRecruit" parameterType="java.lang.Integer" resultMap="EmploymentBoard">

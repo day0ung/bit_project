@@ -65,10 +65,20 @@ public class GroupController {
 			// }
     	return list;
     }
-
-    @PostMapping(value="/groupBoardList")
-    public ArrayList<GroupBoardDto> groupBoardList(BoardParams boardParams) {
+    
+    @PostMapping(value="/groupPagingList")
+    public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
+    	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
     	System.out.println(boardParams.toString());
+    	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
+    	for (int j = 0; j < list.size(); j++) {
+    		
+    		System.out.println(list.get(j).toString());
+    	}
+    	return list;
+    }
+    @GetMapping(value="/groupBoardList")
+    public ArrayList<GroupBoardDto> groupBoardList() {
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
         for (int j = 0; j < list.size(); j++) {
 			
@@ -84,6 +94,14 @@ public class GroupController {
         System.out.println(dto.toString());
         return dto;
     }
+
+    @GetMapping(value="/getInterListAll")
+    public List<InterBigDto> getInterListAll() {
+        System.out.println("getInterListAll()");
+        List<InterBigDto> list = groupService.getInterListAll();
+        return list;
+    }
+    
     
     
 

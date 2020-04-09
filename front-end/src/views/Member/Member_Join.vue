@@ -1,6 +1,8 @@
 <template>
 <div>
-  <div id="ndls">
+	<Interest v-if="show">
+	</Interest>
+  <div id="ndls" v-if="regipage">
 	<p class="tar mb10"><span class="red">*</span> 표시가 된 곳은 필수 항목입니다.</p>
 	
 	<div class="ndls_bwrite join_write">
@@ -95,28 +97,31 @@
 		</div>
 	</div>
 	
-	<p class="btn_w">
-		<input type="button" value="회원가입" class="ndls_btn red" @click="regi">
-		<a href="/" class="ndls_btn gray">취소</a>
-	</p>
-	<Interest v-if="show">
-	</Interest>
-
-	
-</div>
+		<p class="btn_w">
+			<input type="button" value="회원가입" class="ndls_btn red" @click="regi">
+			<a href="/" class="ndls_btn gray">취소</a>
+		</p>
+	</div>
+	<el-steps :active="active" finish-status="success" style="padding-top: 50px">
+		<el-step title="Step 1"></el-step>
+		<el-step title="Step 2"></el-step>
+		<el-step title="Step 3"></el-step>
+	</el-steps>
 </div>
 </template>
 
 <script>
 import Interest from '@/views/Member/memberInterest.vue'
 import dayoung from '@/assets/css/member/memberJoin.css'
-import 'element-ui/lib/theme-chalk/index.css';
+
 export default {
 	components:{
       Interest
     },
 	data(){
 		return{
+		active: 0,
+		regipage: true,
 		show: false,
 		memberId: null,
 		pickerOptions: {
@@ -186,8 +191,11 @@ export default {
 		alert(this.memberId)
 	},
 	regi(){
-		alert()
+		if (this.active++ > 2) this.active = 0;
+		this.regipage = false
 		this.show = true
+		scrollIntoView
+		 // $('html, body').stop().animate({scrollTop: 0}, delay);
 	
 		
 

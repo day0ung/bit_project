@@ -39,6 +39,34 @@
       <el-button type="danger" icon="el-icon-delete" circle></el-button>
     </el-row>
 
+    <el-select v-model="value" placeholder="inter">
+      <el-option-group
+        v-for="big in InterListAll"
+        :key="big.interBigSeq"
+        :label="big.bigName">
+        <el-option
+          v-for="small in group.InterSmallDtos"
+          :key="small.interSmallSeq"
+          :label="small.smallName"
+          :value="small.smallName">
+        </el-option>
+      </el-option-group>
+    </el-select>
+
+    <el-select v-model="value" placeholder="Select">
+      <el-option-group
+        v-for="group in options"
+        :key="group.label"
+        :label="group.label">
+        <el-option
+          v-for="item in group.options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-option-group>
+    </el-select>
+
   </div>
 </template>
 
@@ -75,12 +103,44 @@ export default {
           }
         }]
       },
+      value: '',
       value1: '',
-      value2: ''
+      value2: '',
+      options: [{
+          label: 'Popular cities',
+          options: [{
+            value: 'Shanghai',
+            label: 'Shanghai'
+          }, {
+            value: 'Beijing',
+            label: 'Beijing'
+          }]
+        }, {
+          label: 'City name',
+          options: [{
+            value: 'Chengdu',
+            label: 'Chengdu'
+          }, {
+            value: 'Shenzhen',
+            label: 'Shenzhen'
+          }, {
+            value: 'Guangzhou',
+            label: 'Guangzhou'
+          }, {
+            value: 'Dalian',
+            label: 'Dalian'
+          }]
+        }],
+        interSmallSeq,
+        InterListAll: [],
     };
   },
   mounted(){
     this.$store.state.currpage = this.$route.path
+    axios.get("http://localhost:9000/getInterListAll")
+    .then(res => {
+        this.InterListAll = res.data
+    })
   }
 }
 </script>

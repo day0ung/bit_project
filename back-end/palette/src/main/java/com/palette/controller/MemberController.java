@@ -3,7 +3,6 @@ package com.palette.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.palette.model.MemberDto;
 import com.palette.service.MemberService;
@@ -37,13 +36,6 @@ public class MemberController {
     public MemberDto getOneMember(MemberDto dto, HttpServletRequest request)throws Exception {
     	System.out.println("getOneMember() 실행");
     	MemberDto member = memberService.getOneMember(dto);
-    	System.out.println(member.toString());
-    	
-    	HttpSession session = request.getSession();
-    	session.setAttribute("loginUser", member.getMemberSeq());
-    	
-    	int seq = (Integer)session.getAttribute("loginUser");
-    	System.out.println(seq);
     	return member;
     }
 }

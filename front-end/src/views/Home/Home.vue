@@ -52,7 +52,10 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  mounted(){
   }
+
 }
 </script>
 
