@@ -73,6 +73,8 @@
                     <div class="cont">
                       <div class="iframe_content" width="860" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="" title="상세요강" height="auto">
                         <p>안녕하세요</p>
+                        <P>시간 테스트</P>
+                        
                     
                       </div>
                     </div>
@@ -85,7 +87,8 @@
                           <span class="txt">남은 기간</span>
                           <span class="day">{{getOneRecruit.dDay}}</span>
                           <span class="txt_day">일</span>
-                          <span class="time">{{dTime}}</span>
+                          <span v-show=false class="time">{{dTime}}</span>
+                          <span class="time">{{final}}</span>
                         </div>
                         <dl class="info_period">
                           <dt>시작일</dt>
@@ -119,9 +122,7 @@ import Vue from "vue"
 import moment from "moment"
 import VueMomentJS from "vue-momentjs"
 
-
 Vue.use(VueMomentJS, moment)
-
 
 export default {
   data(){
@@ -133,7 +134,7 @@ export default {
       endDate : "",
       nowMilliS : "",
       endMillis : "",
-      
+      final:""
     }
   },
   mounted(){
@@ -148,29 +149,29 @@ export default {
             this.$store.state.s_employment.getOneRecruit = res.data
             this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm')
             this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm')
-            
       })
-     
-      
 
   },
   computed:{
-    
+    //디데이 함수 setInterVal로 호출
     dTime(){
-      this.nowMilliS = moment(this.nowDate).valueOf()
-      this.endMillis = moment(this.endDate).valueOf()
-      alert(moment(this.endMillis - this.nowMilliS).format("hhmmss"))
-      return setInterval(moment(this.endMillis - this.nowMilliS).format("hhmmss"), 1000)
-      
+        return setInterval(() => this.dTimer(), 1000)
     }
-  }
-  
-  
-    
-
-
-  
+  },
+  methods:{
+    //디데이 시간 함수
+    dTimer(){
+        var now  = this.$moment(new Date()).format('YYYY.MM.DD HH:mm:ss');
+        var then = this.endDate;
+        
+        // console.log(moment.utc(moment(then,"YYYY.MM.DD HH:mm:ss").diff(moment(now,"YYYY.MM.DD HH:mm:ss"))).format("HH:mm:ss"))
+        this.final = moment.utc(moment(then,"YYYY.MM.DD HH:mm:ss").diff(moment(now,"YYYY.MM.DD HH:mm:ss"))).format("HH:mm:ss")
+    }
+  } 
 }
+
+
+
 </script>
 
 <style scoped>

@@ -25,5 +25,11 @@ export default [{
     path: '/RecruitingDetail/:boardId',
     name: 'RecruitingDetail',
     component: () => import('@/views/Employment/depth2/RecruitingDetail')
+},
+{
+    path: '/RecruitingWriting/',
+    name: 'RecruitingWriting',
+    component: () => import('@/views/Employment/depth2/RecruitingWriting')
 }
+
 ]
