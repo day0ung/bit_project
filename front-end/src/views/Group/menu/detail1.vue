@@ -274,12 +274,14 @@ export default {
 }
 
 .btn-group-toggle .blue{
-  color: #4e4e4e;
-  background: #74b9ff;
+  color: #74b9ff;
+  background: #f5f5f5;
 }
 
 .btn-group-toggle .blue:hover{
+  color: #f5f5f5;
   background: #6aa9e9;
+  transition: all 0.4s ease-in-out;
 }
 
 .blue button{
@@ -297,12 +299,14 @@ export default {
 }
 
 .btn-group-toggle .red{
-  color: #4e4e4e;
-  background: #ff7675;
+  color: #ff7675;
+  background: #f5f5f5;
 }
 
 .btn-group-toggle .red:hover{
+  color: #f5f5f5;
   background: #e26767;
+  transition: all 0.4s ease-in-out;
 }
 
 .red button{
@@ -321,12 +325,14 @@ export default {
 }
 
 .btn-group-toggle .green{
-  color: #4e4e4e;
-  background: #00cec9;
+  color: #00cec9;
+  background: #f5f5f5;
 }
 
 .btn-group-toggle .green:hover{
+  color: #f5f5f5;
   background: #00adab;
+  transition: all 0.4s ease-in-out;
 }
 
 .green button{
@@ -344,13 +350,16 @@ export default {
   border: 8px solid #ffeaa7;
 }
 
+
 .btn-group-toggle .yellow{
-  color: #4e4e4e;
-  background: #ffeaa7;
+  color: #ffd54a;
+  background: #f5f5f5;
 }
 
 .btn-group-toggle .yellow:hover{
-  background: #e9d69a;
+  color: #4e4e4e;
+  background: #fae6a3;
+    transition: all 0.4s ease-in-out;
 }
 
 .yellow button{

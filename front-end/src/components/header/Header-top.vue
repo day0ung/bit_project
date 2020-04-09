@@ -4,7 +4,7 @@
         <div class="searchWrap">
             <form name="serach" method="get" action="#">
                 <input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
-                <button type="submit"></button>
+                <el-button icon="el-icon-search" size="small" circle></el-button>
             </form>
         </div>
         <div class="inner">
@@ -34,7 +34,7 @@
 
 <script>
 import Modal from "@/views/Member/Login.vue";
-
+import 'element-ui/lib/theme-chalk/index.css';
 export default {
     name : "headerTop",
         data(){

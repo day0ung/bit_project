@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.palette.model.BoardParams;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -66,9 +66,9 @@ public class GroupController {
     	return list;
     }
 
-    @GetMapping(value="/groupBoardList")
-    public ArrayList<GroupBoardDto> groupBoardList() {
-    	
+    @PostMapping(value="/groupBoardList")
+    public ArrayList<GroupBoardDto> groupBoardList(BoardParams boardParams) {
+    	System.out.println(boardParams.toString());
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
         for (int j = 0; j < list.size(); j++) {
 			

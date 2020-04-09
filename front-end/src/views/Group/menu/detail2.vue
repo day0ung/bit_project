@@ -3,60 +3,64 @@
     <h3>그룹게시판</h3>
     <br>
     <br>
-    <el-table 
-      :row-class-name="clickableRows"
-      :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
-                                              || data.memberDto.memberId.toLowerCase().includes(search.toLowerCase()))"
-      stripe
-      style="width: 100% cursor:pointer"
-      @row-click="gotoClick"
-      >
-      <el-table-column
-        prop="finalnum"
-        label="글번호"
-        width="200px">
-      </el-table-column>
-      <el-table-column
-        prop="title"
-        label="글제목"
-        width="500px"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="memberDto.memberId"
-        label="작성자"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="readCount"
-        label="조회수"
-        >
-      </el-table-column>
-      <el-table-column
-        prop="writeDate"
-        label="작성일"
-        >
-      </el-table-column>
-      <el-table-column
-        align="right">
-      <template slot="header" slot-scope="scope">
+    <div class="boardTableFrom">
+      <div class="boardSearchBar">
         <el-input
           v-model="search"
-          size="mini"
-          placeholder="Type to search"/>
-      </template>
-      </el-table-column>
-    </el-table> <br>
-    <div class="block" align="center">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page.sync="currentPage"
-        :page-sizes="[100, 200, 300, 400]"
-        :page-size="100"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="400">
-      </el-pagination>
+          size="large"
+          placeholder="Search">
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+      </div>
+      <el-table 
+        :row-class-name="clickableRows"
+        :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
+                                                || data.memberDto.memberId.toLowerCase().includes(search.toLowerCase()))"
+        stripe
+        style="width: 100% cursor:pointer"
+        @row-click="gotoClick"
+        >
+        <el-table-column
+          prop="finalnum"
+          label="글번호"
+          width="90px">
+        </el-table-column>
+        <el-table-column
+          prop="title"
+          label="글제목"
+          width="380px"
+          >
+        </el-table-column>
+        <el-table-column
+          prop="memberDto.memberId"
+          label="작성자"
+          width="90px"
+          >
+        </el-table-column>
+        <el-table-column
+          prop="readCount"
+          label="조회수"
+          width="80px"
+          >
+        </el-table-column>
+        <el-table-column
+          prop="writeDate"
+          label="작성일"
+          width="170px"
+          >
+        </el-table-column>
+      </el-table> <br>
+      <div class="block" align="center">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page.sync="currentPage"
+          :page-sizes="[5, 10, 20, 50]"
+          :page-size="5"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="totalItem">
+        </el-pagination>
+      </div>
     </div>
   </div>
 </template>
@@ -70,6 +74,8 @@ export default {
       tableData: [],
       currentPage: 1,
       search: '',
+      totalItem: 0,
+      itemsPerPage: 10,
     }
   },
   methods:{
@@ -83,24 +89,35 @@ export default {
       return "clickableRows";
     },
     handleSizeChange(val) {
+        this.itemsPerPage = val
         console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        console.log(`current page: ${val}`);
-      }
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`current page: ${val}`);
+    }
   },
   mounted(){
       this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/groupBoardList")
+      var params = new URLSearchParams();
+      params.append('itemsPerPage', this.itemsPerPage);
+      params.append('currentPage', this.currentPage);
+      axios.post("http://localhost:9000/groupBoardList", params)
                 .then(res => {
             this.tableData = res.data
+            this.totalItem = res.data.length
           })
   }
 }
 </script>
 
 <style scoped>
-.clickableRows{
-    cursor: pointer !important;
+.boardTableFrom{
+  width: 80%;
+  margin: auto;
+}
+.boardSearchBar{
+  width: 45%;
+  float: right;
 }
 </style>

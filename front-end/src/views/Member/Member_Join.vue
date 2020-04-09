@@ -99,7 +99,8 @@
 		<input type="button" value="회원가입" class="ndls_btn red" @click="regi">
 		<a href="/" class="ndls_btn gray">취소</a>
 	</p>
-	
+	<Interest v-if="show">
+	</Interest>
 
 	
 </div>
@@ -107,11 +108,16 @@
 </template>
 
 <script>
+import Interest from '@/views/Member/memberInterest.vue'
 import dayoung from '@/assets/css/member/memberJoin.css'
 import 'element-ui/lib/theme-chalk/index.css';
 export default {
+	components:{
+      Interest
+    },
 	data(){
 		return{
+		show: false,
 		memberId: null,
 		pickerOptions: {
           disabledDate(time) {
@@ -181,6 +187,11 @@ export default {
 	},
 	regi(){
 		alert()
+		this.show = true
+	
+		
+
+
 	},
 	
   }
