@@ -168,16 +168,18 @@ export default {
     }
   },
   mounted(){
-      this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/getAllGroup")
-                .then(res => {
-            //alert(JSON.stringify(res.data))
-            this.list = res.data
-            this.$store.state.s_group.groupList = res.data
-          })
+    this.loading = true
+    this.$store.state.currpage = this.$route.path
+    axios.get("http://localhost:9000/getAllGroup")
+              .then(res => {
+          //alert(JSON.stringify(res.data))
+          this.list = res.data
+          this.$store.state.s_group.groupList = res.data
+          this.loading = false;
+        })
   },
   created(){
-    this.loading = false;
+    
   }
 
 }
