@@ -2,11 +2,10 @@ package com.palette.model;
 
 public class BoardParams {
 	
-	private int itemsPerPage;
-	private int currPage;
-	private int start;
-	private int end;
-	
+	private int itemsPerPage;	// 5
+	private int currPage;		// 1	2
+	private int start;			// 0	5
+		
 	public BoardParams() {
 	
 	}
@@ -37,6 +36,14 @@ public class BoardParams {
 
 	public void setCurrPage(int currPage) {
 		this.currPage = currPage;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int currPage, int itemsPerPage) {	
+		this.start = (currPage-1)*itemsPerPage;
 	}
 	
 	

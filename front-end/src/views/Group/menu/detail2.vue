@@ -14,11 +14,11 @@
       </div>
       <el-table 
         :row-class-name="clickableRows"
-        :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
-                                                || data.memberDto.memberId.toLowerCase().includes(search.toLowerCase()))"
+        :data="displayData"
         stripe
         style="width: 100% cursor:pointer"
         @row-click="gotoClick"
+       
         >
         <el-table-column
           prop="finalnum"
@@ -58,7 +58,9 @@
           :page-sizes="[5, 10, 20, 50]"
           :page-size="5"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="totalItem">
+          :total="totalItem"
+          :data="displayData"
+          >
         </el-pagination>
       </div>
     </div>
@@ -79,6 +81,10 @@ export default {
     }
   },
   methods:{
+     displayData(){
+      this.tableData=this.tableData.filter(data => !this.search || data.title.toLowerCase().includes(this.search.toLowerCase())
+                                                || data.memberDto.memberId.toLowerCase().includes(this.search.toLowerCase()))
+    },
     gotoClick(row, column, event){
       this.$router.push({
         path : "/group/detail2/depth2/" + row.boardSeq
@@ -95,14 +101,17 @@ export default {
     handleCurrentChange(val) {
       this.currentPage = val
       console.log(`current page: ${val}`);
+    },
+    dataCount(currentRow, oldCurrentRow){
+      alert(currentRow)
     }
   },
-  mounted(){
+  computed:{
+   
+  },
+  created(){
       this.$store.state.currpage = this.$route.path
-      var params = new URLSearchParams();
-      params.append('itemsPerPage', this.itemsPerPage);
-      params.append('currentPage', this.currentPage);
-      axios.post("http://localhost:9000/groupBoardList", params)
+      axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
             this.tableData = res.data
             this.totalItem = res.data.length
