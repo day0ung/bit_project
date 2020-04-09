@@ -15,15 +15,7 @@
 		<result column="SATURDAY" property="saturday"/>
 	</resultMap>
 
-	<resultMap type="com.palette.model.InterBigDto" id="InterBig">
-		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
-		<result column="BIG_NAME" property="bigName"/>
-	</resultMap>
-	<resultMap type="com.palette.model.InterSmallDto" id="InterSmall">
-		<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
-		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
-		<result column="SMALL_NAME" property="smallName"/>
-	</resultMap>
+
 	
 	<resultMap type="com.palette.model.MemberDto" id="MemberInfo">
 		<id column="MEMBER_SEQ" property="memberSeq"/>
@@ -121,6 +113,22 @@
 	 WHERE g.GROUP_INFO_SEQ = #{seq}
 </select> -->
 
+<resultMap type="com.palette.model.InterBigDto" id="InterBig">
+	<id column="INTER_BIG_SEQ" property="interBigSeq"/>
+	<result column="BIG_NAME" property="bigName"/>
+	<collection property="interSmallDtos" ofType="com.palette.model.InterSmallDto">
+		<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="SMALL_NAME" property="smallName"/>
+	</collection>
+</resultMap>
+
+<resultMap type="com.palette.model.InterSmallDto" id="InterSmall">
+	<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+	<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+	<result column="SMALL_NAME" property="smallName"/>
+</resultMap>
+
 <select id="getBigList" resultType="com.palette.model.InterBigDto">
   SELECT * FROM INTER_BIG
 </select>
@@ -128,4 +136,12 @@
 <select id="getSmallList" parameterType="java.lang.Integer" resultType="com.palette.model.InterSmallDto">
   SELECT * FROM INTER_SMALL WHERE INTER_BIG_SEQ = #{seq}
 </select>
+
+<select id="getInterListAll" resultMap="InterBig">
+SELECT *
+FROM INTER_BIG b
+JOIN INTER_SMALL s
+on b.INTER_BIG_SEQ = s.INTER_BIG_SEQ;
+</select>
+
 </mapper>

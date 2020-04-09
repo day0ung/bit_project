@@ -15,7 +15,6 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -84,6 +83,14 @@ public class GroupController {
         System.out.println(dto.toString());
         return dto;
     }
+
+    @GetMapping(value="/getInterListAll")
+    public List<InterBigDto> getInterListAll() {
+        System.out.println("getInterListAll()");
+        List<InterBigDto> list = groupService.getInterListAll();
+        return list;
+    }
+    
     
     
 

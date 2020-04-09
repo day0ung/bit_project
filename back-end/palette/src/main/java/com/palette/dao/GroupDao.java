@@ -30,4 +30,6 @@ public interface GroupDao {
 
 	GroupBoardDto groupBoardOne(int seq);
 
+	List<InterBigDto> getInterListAll();
+
 }
