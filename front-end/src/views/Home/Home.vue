@@ -54,7 +54,7 @@ export default {
     HelloWorld
   },
   mounted(){
-    alert(this.$store.state.s_member.isLogin)
+   
   }
 
 }

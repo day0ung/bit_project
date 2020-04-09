@@ -14,11 +14,6 @@
                 <p>{{loginUser}}</p>
                 <Modal v-if="showModal" @close="showModal = false">
                     
-                <!--
-                you can use custom content here to overwrite
-                default contentzz
-                -->
-       
                 </Modal>
             </span> |
             <span><button @click="$router.push({name:'join'})">회원가입</button></span>
@@ -43,8 +38,8 @@ export default {
         data(){
             return{
                 showModal: false,
-                loginUser: this.$store.state.s_member.loginUser,
-                isLogin: this.$store.state.s_member.isLogin
+                loginUser: this.$store.state.loginUser,
+                isLogin: this.$store.state.isLogin
             }
     },
     components:{
@@ -53,8 +48,7 @@ export default {
     methdos:{
 
     },
-    mounted(){
-    }
+
     
 }
 </script>
