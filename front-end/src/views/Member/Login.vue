@@ -56,7 +56,6 @@
     </div>
   </transition>
 </template>
-
 <script>
 
 import logincss from '@/assets/css/member/login.css'
@@ -69,6 +68,7 @@ export default {
       }
     },
     methods:{
+       
         regi(){
           this.$router.push({name:'join'});
           this.$emit('close')
@@ -94,9 +94,13 @@ export default {
                 //alert('세션가져오기' + loginData)
                 var login = JSON.parse(loginData); //JSON
                 //alert(login.memberId);  
-                alert('로그인 성공')
+                this.$store.state.s_member.isLogin = false
+                alert(this.$store.state.s_member.isLogin)
+                //this.$store.s_member.commit('LoginSave',login)
+                
                 this.$emit('close')   
             })
+                          
 
         },
         join(){
@@ -104,8 +108,8 @@ export default {
         }
     }
 }
-</script>
 
+</script>
 <style>
 
 </style>
