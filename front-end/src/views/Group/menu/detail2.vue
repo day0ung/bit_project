@@ -13,6 +13,7 @@
         </el-input>
       </div>
       <el-table 
+        v-loading="loading"
         :row-class-name="clickableRows"
         :data="displayData"
         stripe
@@ -69,6 +70,7 @@
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
+import { loading } from 'element-ui';
 
 export default {
   data(){
@@ -78,6 +80,7 @@ export default {
       search: '',
       totalItem: 0,
       itemsPerPage: 10,
+      loading: true,
     }
   },
   methods:{
