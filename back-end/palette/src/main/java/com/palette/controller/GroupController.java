@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.palette.model.BoardParams;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -64,10 +65,19 @@ public class GroupController {
 			// }
     	return list;
     }
-
+    
+    @PostMapping(value="/groupPagingList")
+    public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
+    	System.out.println(boardParams.toString());
+    	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
+    	for (int j = 0; j < list.size(); j++) {
+    		
+    		System.out.println(list.get(j).toString());
+    	}
+    	return list;
+    }
     @GetMapping(value="/groupBoardList")
     public ArrayList<GroupBoardDto> groupBoardList() {
-    	
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
         for (int j = 0; j < list.size(); j++) {
 			

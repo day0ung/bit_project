@@ -15,35 +15,30 @@
                     <div class="login_page_wrap">
             <div class="login_message">
               <p> 회원이 아니면, 지금 <span><strong>
-                <button style="    vertical-align: baseline; font-size: 20px; padding-left: 5px; color: blue;" @click="$router.push({name:'join'})">회원가입
+                <button style="    vertical-align: baseline; font-size: 20px; padding-left: 5px; color: blue;" @click="regi">회원가입
                </button></strong></span>을 해주세요.
                </p>        
             </div>
             <div class="login_input_wrap">         
                 <!-- input box -->
                 <div class="setting">
-                 
                     <input id="id_save" name="id_save" type="checkbox" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">
                     <label for="id_save" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">아이디 저장</label>
                 </div>
                 <div class="login-form">
                     <div class="id-input-box focus">
-                        <label id="id-label" for="id" style="display: block;">아이디</label>
-                        <input type="text" id="id" name="id" class="txt_tool" value="">
+                        <input type="text" v-model="id" class="txt_tool" placeholder="아이디">
                     </div>
                     <div class="pw-input-box">
-                        <label id="password-label" for="password" style="display: block;">비밀번호</label>
-                        <input type="password" id="password" name="password" class="txt_tool" value="" maxlength="32">
+                        <input type="password" v-model="pwd" class="txt_tool" placeholder="비밀번호" maxlength="32">
                     </div>
-                    <button type="submit" class="btn-login">로그인</button>
+                    <button @click="login" class="btn-login">로그인</button>
                 </div>
                 <p class="signup-forgotten">
-                    <a id="a_join" href="/zf_user/member/registration/join" onclick="return false;" class="sign-up" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'join', '');}catch(e){}">회원가입</a>
-                    <span></span>
-                    <a href="/zf_user/helpdesk/idpw-find" class="forgotten" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'find', '');}catch(e){}">아이디/비밀번호 찾기</a>
+                 
+                   <span></span>
+                   <button class="forgotten" @click="join" style="font-weight: 5px">아이디/비밀번호 찾기</button>
                 </p>
-
-
                  </div>
              </div>
             </slot>
@@ -63,9 +58,51 @@
 </template>
 
 <script>
+
 import logincss from '@/assets/css/member/login.css'
 export default {
-    
+
+    data(){
+      return{
+          id: null,
+          pwd: null
+      }
+    },
+    methods:{
+        regi(){
+          this.$router.push({name:'join'});
+          this.$emit('close')
+        },
+        login(){
+           var params = new URLSearchParams();
+           params.append('memberId', this.id)
+           params.append('pwd', this.pwd)
+
+          this.id == null ? alert('아이디를 입력해주세요'):
+          this.pwd == null ? alert('비밀번호를 입력해 주세요'):
+          axios.post('http://localhost:9000/getOneMember', params).then(
+    				res => {
+              if(res.data.memberId == undefined){
+                alert("id나 password가 틀렸습니다.");
+                return false;
+              }
+                //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
+                //세션에 저장						//json으로 넘어옴 세션에 저장할때는 
+                sessionStorage.setItem("loginUser", JSON.stringify(res.data)); //String
+                //alert(res.data.memberId)
+                var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
+                //alert('세션가져오기' + loginData)
+                var login = JSON.parse(loginData); //JSON
+                //alert(login.memberId);  
+                alert('로그인 성공')
+                this.$emit('close')   
+            })
+
+        },
+        join(){
+          alert('마이페이지로 이동')
+        }
+    }
 }
 </script>
 

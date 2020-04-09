@@ -38,6 +38,19 @@
 </resultMap>
 
 
+<select id="getgroupPagingList" parameterType="com.palette.model.BoardParams" resultMap="AllBoardList">
+select *
+from(select @finalnum:=@finalnum+1 as finalnum, sub.*
+	from (select @rownum:=@rownum+1 as rownum, b.*, m.MEMBER_ID
+		 from BOARD b 
+         join MEMBER m
+         on b.MEMBER_SEQ = m.MEMBER_SEQ
+         where (@rownum:=0)=0 and b.del = 0
+		 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
+	order by sub.rownum desc) fsub
+order by fsub.finalnum desc
+limit #{start}, #{itemsPerPage}
+</select>
 <select id="getgroupBoardList" resultMap="AllBoardList">
 select *
 from(select @finalnum:=@finalnum+1 as finalnum, sub.*

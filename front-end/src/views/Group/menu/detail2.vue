@@ -14,11 +14,11 @@
       </div>
       <el-table 
         :row-class-name="clickableRows"
-        :data="tableData.filter(data => !search || data.title.toLowerCase().includes(search.toLowerCase())
-                                                || data.memberDto.memberId.toLowerCase().includes(search.toLowerCase()))"
+        :data="displayData"
         stripe
         style="width: 100% cursor:pointer"
         @row-click="gotoClick"
+       
         >
         <el-table-column
           prop="finalnum"
@@ -55,10 +55,12 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page.sync="currentPage"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
+          :page-sizes="[5, 10, 20, 50]"
+          :page-size="5"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="totalItem"
+          :data="displayData"
+          >
         </el-pagination>
       </div>
     </div>
@@ -74,9 +76,15 @@ export default {
       tableData: [],
       currentPage: 1,
       search: '',
+      totalItem: 0,
+      itemsPerPage: 10,
     }
   },
   methods:{
+     displayData(){
+      this.tableData=this.tableData.filter(data => !this.search || data.title.toLowerCase().includes(this.search.toLowerCase())
+                                                || data.memberDto.memberId.toLowerCase().includes(this.search.toLowerCase()))
+    },
     gotoClick(row, column, event){
       this.$router.push({
         path : "/group/detail2/depth2/" + row.boardSeq
@@ -87,17 +95,26 @@ export default {
       return "clickableRows";
     },
     handleSizeChange(val) {
+        this.itemsPerPage = val
         console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        console.log(`current page: ${val}`);
-      }
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`current page: ${val}`);
+    },
+    dataCount(currentRow, oldCurrentRow){
+      alert(currentRow)
+    }
   },
-  mounted(){
+  computed:{
+   
+  },
+  created(){
       this.$store.state.currpage = this.$route.path
       axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
             this.tableData = res.data
+            this.totalItem = res.data.length
           })
   }
 }
