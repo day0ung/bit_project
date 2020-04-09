@@ -73,7 +73,7 @@ export default {
         limit: 10,
         title: ""
       },
-      search:""
+      search:"",
       loading: true,
     }
   },
@@ -83,6 +83,7 @@ export default {
                                                 || data.memberDto.memberId.toLowerCase().includes(this.search.toLowerCase())})
     },
     getList(){
+      this.loading = true
       this.$store.state.currpage = this.$route.path
       // axios.get("http://localhost:9000/groupBoardList")
       //           .then(res => {
@@ -97,7 +98,7 @@ export default {
       axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
           this.tableData = res.data
-         
+          this.loading = false
         })
     },
      handleFilter() {
