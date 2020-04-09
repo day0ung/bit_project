@@ -49,7 +49,7 @@ from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 		 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
 	order by sub.rownum desc) fsub
 order by fsub.finalnum desc
-limit #{start}, #{itemsPerPage}
+limit #{start}, #{limit}
 </select>
 <select id="getgroupBoardList" resultMap="AllBoardList">
 select *

@@ -9,17 +9,16 @@
           v-model="search"
           size="large"
           placeholder="Search">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-button slot="append" icon="el-icon-search"  @click="displayData"></el-button>
         </el-input>
       </div>
       <el-table 
         :row-class-name="clickableRows"
-        :data="displayData"
+        :data="tableData"
         stripe
         style="width: 100% cursor:pointer"
         @row-click="gotoClick"
-       
-        >
+       >
         <el-table-column
           prop="finalnum"
           label="글번호"
@@ -50,40 +49,57 @@
           >
         </el-table-column>
       </el-table> <br>
-      <div class="block" align="center">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page.sync="currentPage"
-          :page-sizes="[5, 10, 20, 50]"
-          :page-size="5"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="totalItem"
-          :data="displayData"
-          >
-        </el-pagination>
-      </div>
+
+      <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+
     </div>
   </div>
 </template>
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
+import Pagination from '@/components/Pagination'
 
 export default {
+  components: { Pagination },
   data(){
     return{
       tableData: [],
-      currentPage: 1,
-      search: '',
-      totalItem: 0,
-      itemsPerPage: 10,
+      total: 0,
+      listQuery:{
+        page: 1,
+        limit: 10,
+        title: ""
+      },
+      search:""
     }
   },
   methods:{
-     displayData(){
-      this.tableData=this.tableData.filter(data => !this.search || data.title.toLowerCase().includes(this.search.toLowerCase())
-                                                || data.memberDto.memberId.toLowerCase().includes(this.search.toLowerCase()))
+    displayData(){
+      this.tableData=this.tableData.filter((data, index) =>{ console.log(index); !this.search || data.title.toLowerCase().includes(this.search.toLowerCase())
+                                                || data.memberDto.memberId.toLowerCase().includes(this.search.toLowerCase())})
+    },
+    getList(){
+      this.$store.state.currpage = this.$route.path
+      // axios.get("http://localhost:9000/groupBoardList")
+      //           .then(res => {
+        //       this.tableData = res.data
+      //       this.total = res.data.length
+      //     })
+     
+      // listQuery
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('page', this.listQuery.page);
+      params.append('limit', this.listQuery.limit);
+      axios.post("http://localhost:9000/groupPagingList", params)
+              .then(res => {
+          this.tableData = res.data
+         
+        })
+    },
+     handleFilter() {
+      this.listQuery.page = 1
+      this.getList()
     },
     gotoClick(row, column, event){
       this.$router.push({
@@ -93,29 +109,17 @@ export default {
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
       return "clickableRows";
-    },
-    handleSizeChange(val) {
-        this.itemsPerPage = val
-        console.log(`${val} items per page`);
-    },
-    handleCurrentChange(val) {
-      this.currentPage = val
-      console.log(`current page: ${val}`);
-    },
-    dataCount(currentRow, oldCurrentRow){
-      alert(currentRow)
     }
   },
   computed:{
    
   },
   created(){
-      this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/groupBoardList")
+     axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
-            this.tableData = res.data
-            this.totalItem = res.data.length
+            this.total = res.data.length
           })
+      this.getList()
   }
 }
 </script>
