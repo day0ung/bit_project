@@ -2,14 +2,14 @@
     <div class="create">
         <div class="createContainer">
             <div class="title">그룹 스터디 생성</div>
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" v-loading="loading">
                 <!-- 그룹명 설정 -->
                 <el-form-item label="그룹 스터디명" prop="groupName">
                     <el-input placeholder="그룹 스터디명을 적어주세요" v-model="ruleForm.groupName" style="width: 85%"></el-input>
                 </el-form-item>
                 <!-- 주제선택 -->
                 <el-form-item label="스터디 주제" prop="region1">
-                    <el-select v-model="ruleForm.region1" placeholder="주제를 선택해주세요" @change="interBig">
+                    <el-select v-model="ruleForm.region1" placeholder="주제를 선택해주세요">
                         <el-option-group v-for="bigInter in InterListAll" :key="bigInter.interBigSeq" :value="bigInter.interBigSeq" :label="bigInter.bigName">
                             <el-option v-for="item in bigInter.interSmallDtos" :key="item.interSmallSeq" :value="item.interSmallSeq" :label="item.smallName"></el-option>
                         </el-option-group>
@@ -81,9 +81,11 @@
 
 <script>
 import 'element-ui/lib/theme-chalk/index.css';
+import { loading } from 'element-ui';
 export default {
     data(){
         return{
+            loading: true,
             ruleForm: {
                 groupName: '',
                 region1: '',
@@ -174,15 +176,6 @@ export default {
                 path: "/group"
             })
         },
-        interBig(value){
-            this.bigValue = value
-            var params = new URLSearchParams();
-            params.append('interBigSeq', this.bigValue);
-            axios.post("http:localhost:9000/getSmallIndex", params)
-                .then(res => {
-                    this.smallInterList = res.data
-                })
-        },
         handleRemove(file, fileList) {
             console.log(file, fileList);
         },
@@ -213,9 +206,11 @@ export default {
         }
     },
     mounted(){
+        this.loading = true
         axios.get("http://localhost:9000/getInterListAll")
         .then(res => {
             this.InterListAll = res.data
+            this.loading = false
         })
     }
 }

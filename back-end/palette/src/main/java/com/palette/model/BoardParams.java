@@ -2,49 +2,51 @@ package com.palette.model;
 
 public class BoardParams {
 	
-	private int itemsPerPage;	// 5
-	private int currPage;		// 1	2
+	private int page;		// 1	2
+	private int limit;	// 5
 	private int start;			// 0	5
 		
 	public BoardParams() {
 	
 	}
 
-	public BoardParams(int itemsPerPage, int currPage) {
+	public BoardParams(int page, int limit, int start) {
 		super();
-		this.itemsPerPage = itemsPerPage;
-		this.currPage = currPage;
+		this.page = page;
+		this.limit = limit;
+		this.start = start;
 	}
 
-	
 	@Override
 	public String toString() {
-		return "BoardParams [itemsPerPage=" + itemsPerPage + ", currPage=" + currPage + "]";
+		return "BoardParams [page=" + page + ", limit=" + limit + ", start=" + start + "]";
 	}
 
-	public int getItemsPerPage() {
-		return itemsPerPage;
+	public int getLimit() {
+		return limit;
 	}
 
-	public void setItemsPerPage(int itemsPerPage) {
-		this.itemsPerPage = itemsPerPage;
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
-	public int getCurrPage() {
-		return currPage;
+	public int getPage() {
+		return page;
 	}
 
-	public void setCurrPage(int currPage) {
-		this.currPage = currPage;
+	public void setPage(int page) {
+		this.page = page;
 	}
 
 	public int getStart() {
 		return start;
 	}
 
-	public void setStart(int currPage, int itemsPerPage) {	
-		this.start = (currPage-1)*itemsPerPage;
+	public void setStart(int start) {
+		this.start = start;
 	}
+
+	
 	
 	
 	

@@ -4,11 +4,11 @@
     <div class="inner_cont">
       <div class="top_product">
         <strong class="tit_cont">구인공고</strong>
-        <ul class="list_product basic" id="_special">
-          <li v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
+        <el-button type="primary" @click="recruitingWrite" style="float: right; background-color:#007bff; margin-top:3px; margin-right:30px">글쓰기</el-button>
+        <ul class="list_product basic" id="_special" style="margin-top:20px">
+          <li style="margin-right: 30px; margin-bottom: 15px;" v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
             <div class="box_product">
               <a @click="showEmpDetail(recruitingInfo.boardSeq)" class="link_box"></a> 
-              
               
               <span class="product_logo">
                 <img src="https://www2.saraminbanner.co.kr/banner_logo//company/logo_banner/2018/05/p8pkyk_x5ry-2rxeec_specialplus5767144.png" class="img" alt="이미지없음" rel="nofollow">
@@ -18,7 +18,8 @@
               
               <span class="recruit_func">
                 <span class="blind">공고 마감일</span>
-                <span class="num_dday">D - {{recruitingInfo.dDay}} </span> 
+                <span class="num_dday" v-if="recruitingInfo.dDay > 0">D - {{recruitingInfo.dDay}} </span>
+                <span class="num_dday" v-else>오늘마감</span>  
                 <button class="sri_btn_xs" title="클릭하면 입사지원할 수 있는 창이 뜹니다." onclick="try{quickApplyForm(&#39;37993617&#39;,&#39;&#39;,&#39;t_category=main&t_content=platinum_fix_expand&#39;, &#39;&#39;); return false;} catch (e) {}; return false;" onmousedown="try{n_trackEvent(&#39;apply&#39;,&#39;main&#39;,&#39;quick_apply&#39;,&#39;&#39;);}catch(e){}"><span class="sri_btn_immediately track_event" data-track_event="main|Ads_quick_apply|platinum_fix_expand|1">즉시지원</span></button> 
               </span> 
               <span class="bg"></span>
@@ -34,8 +35,6 @@
 </template>
 
 <script>
-import Modal from "@/views/Employment/depth2/RecruitingDetail.vue"
-
 export default {
   data(){
     return{
@@ -53,18 +52,19 @@ export default {
                   this.RecruitingList = res.data
                   this.$store.state.s_employment.RecruitingList = res.data
                 })
-    
   },
     
   methods:{
     showEmpDetail(seq){
-        this.$router.push({
-          path: "/RecruitingDetail/"+seq
-          })
+      this.$router.push({
+        path: "/RecruitingDetail/"+seq
+        })
+    },
+    recruitingWrite(seq){
+      this.$router.push({
+        path: "/RecruitingWriting/"
+        })
     }
-    
-      
-    
   }
   
 }
@@ -86,7 +86,7 @@ export default {
 .sri_btn_xs>span.sri_btn_expired_apply {width:52px}
 
 /* 오픈형 (플래티넘/프라임/스페셜)*/
-.list_product {width:1200px; height: auto}
+.list_product {width:1000px; height: auto}
 .list_product:after {display:table;clear:both;content:"";table-layout:fixed;}
 .list_product li {float:left;position:relative;margin-right:16px;width:303px}
 .list_product .box_product {overflow:hidden;position:absolute;top:0;left:0;padding:0 20px;width:100%;height:100%;box-sizing:border-box;background:#fff}
@@ -115,7 +115,7 @@ export default {
 /* 상품 */
 .sri_product {position:relative;z-index:1;}
 .cont_product {width:100%;font-size:15px;letter-spacing:-1px;line-height:18px;}
-.cont_product .inner_cont {position:relative;margin:0 auto;width:1260px;}
+.cont_product .inner_cont {position:relative;margin:0 auto;width:1000px;}
 .top_product {overflow:hidden}
 .top_product:after {display:table;clear:both;content:"";table-layout:fixed}
 .tit_cont {display:inline-block;color:#222;font-size:18px;font-weight:normal;letter-spacing:-2px;line-height:24px;vertical-align:top}

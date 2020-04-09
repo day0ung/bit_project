@@ -53,9 +53,6 @@ export default {
   components: {
     HelloWorld
   },
-  mounted(){
-   
-  }
 
 }
 </script>

@@ -21,7 +21,7 @@
     <button class="btn btn-primary" @click="createGroup" style="float: right;">Group Create</button>
     </div>
     <!-- 그룹 리스트 css적용 html -->
-    <div style="display: flex; flex-wrap: wrap;">
+    <div style="display: flex; flex-wrap: wrap;" v-loading="loading">
       <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
         <div class="blue" v-if="groupInfo.interBigSeq === 1">
           <header>
@@ -141,9 +141,11 @@
 </template>
 
 <script>
+import { loading } from 'element-ui';
 export default {
   data(){
     return{
+      loading: true,
       list: this.$store.state.s_group.groupList,
       image: "",
       categoryOne: true,
@@ -166,16 +168,17 @@ export default {
     }
   },
   mounted(){
-      this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/getAllGroup")
-                .then(res => {
-            //alert(JSON.stringify(res.data))
-            this.list = res.data
-            this.$store.state.s_group.groupList = res.data
-          })
+    this.loading = true
+    this.$store.state.currpage = this.$route.path
+              .then(res => {
+          //alert(JSON.stringify(res.data))
+          this.list = res.data
+          this.$store.state.s_group.groupList = res.data
+          this.loading = false;
+        })
   },
   created(){
-    this.loading = false;
+    
   }
 
 }
