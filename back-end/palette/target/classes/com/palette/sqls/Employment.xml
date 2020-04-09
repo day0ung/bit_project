@@ -4,7 +4,7 @@
 <mapper namespace="com.palette.dao.EmploymentDao">
 
 <!-- get Employment Member Name -->
-	<resultMap type="com.palette.model.BoardDto" id="EmploymentBoard">
+	<resultMap type="com.palette.model.EmploymentBoardDto" id="EmploymentBoard">
 		<id column="BOARD_SEQ" property="boardSeq"/>
 		<result column="MEMBER_SEQ" property="memberSeq"/>
 		<result column="CATEGORY" property="category"/>

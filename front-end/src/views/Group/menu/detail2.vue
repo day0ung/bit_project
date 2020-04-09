@@ -55,10 +55,10 @@
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
           :current-page.sync="currentPage"
-          :page-sizes="[100, 200, 300, 400]"
-          :page-size="100"
+          :page-sizes="[5, 10, 20, 50]"
+          :page-size="5"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="400">
+          :total="totalItem">
         </el-pagination>
       </div>
     </div>
@@ -74,6 +74,8 @@ export default {
       tableData: [],
       currentPage: 1,
       search: '',
+      totalItem: 0,
+      itemsPerPage: 10,
     }
   },
   methods:{
@@ -87,17 +89,23 @@ export default {
       return "clickableRows";
     },
     handleSizeChange(val) {
+        this.itemsPerPage = val
         console.log(`${val} items per page`);
-      },
-      handleCurrentChange(val) {
-        console.log(`current page: ${val}`);
-      }
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      console.log(`current page: ${val}`);
+    }
   },
   mounted(){
       this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/groupBoardList")
+      var params = new URLSearchParams();
+      params.append('itemsPerPage', this.itemsPerPage);
+      params.append('currentPage', this.currentPage);
+      axios.post("http://localhost:9000/groupBoardList", params)
                 .then(res => {
             this.tableData = res.data
+            this.totalItem = res.data.length
           })
   }
 }
