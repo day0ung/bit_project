@@ -44,10 +44,11 @@ public class EmploymentController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    	String end_day = list.get(i).getCvEndDate(); // 엔드데이트string 
+		    	String end_day = list.get(i).getCvEndDate(); // 엔드데이트string
+		    	System.out.println("마감일:" + end_day);
 		    	try {
 					d_end_day = df.parse(end_day);
-					System.out.println(d_end_day);
+					System.out.println("마감일(date): " + d_end_day);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
