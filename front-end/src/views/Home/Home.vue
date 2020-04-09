@@ -52,7 +52,11 @@ export default {
   name: 'Home',
   components: {
     HelloWorld
+  },
+  mounted(){
+    alert(this.$store.state.s_member.isLogin)
   }
+
 }
 </script>
 

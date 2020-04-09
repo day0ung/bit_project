@@ -7,10 +7,11 @@
                 <el-button icon="el-icon-search" size="small" circle></el-button>
             </form>
         </div>
-        <div class="inner">
+        <div class="inner" v-if="isLogin">
             <div style="margin-right: 30px;">
             <span>
                  <button id="show-modal" @click="showModal = true">로그인</button>
+                 <p>{{loginUser}}</p>
                 <Modal v-if="showModal" @close="showModal = false">
                 <!--
                 you can use custom content here to overwrite
@@ -33,21 +34,28 @@
 </template>
 
 <script>
+
 import Modal from "@/views/Member/Login.vue";
 import 'element-ui/lib/theme-chalk/index.css';
 export default {
     name : "headerTop",
         data(){
             return{
-                showModal: false
+                showModal: false,
+                loginUser: this.$store.state.s_member.loginUser,
+                isLogin: this.$store.state.s_member.isLogin
             }
     },
     components:{
         Modal
     },
     methdos:{
-  
+
+    },
+    mounted(){
+        loginUser = this.$store.state.s_member.loginUser
     }
+    
 }
 </script>
 

@@ -12,5 +12,9 @@
   	FROM MEMBER
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
+  
+  <insert id="createMember">
+  	
+  </insert>
 
 </mapper>
