@@ -42,11 +42,8 @@
 .login_input_wrap .login-form .btn-login {position:absolute;top:0;left:294px;width:98px;height:85px;border:none;color:#fff;font-size:16px;font-weight:bold;background:#6b80f1;cursor:pointer}
 .login_input_wrap .signup-forgotten {position:relative;margin:18px 0 29px;width:100%;height:16px;font-size:13px;letter-spacing:-1px}
 .login_input_wrap .signup-forgotten .sign-up {float:left;margin-right:10px;color:#666;font-weight:bold;text-decoration:none}
-.login_input_wrap .signup-forgotten .forgotten {float:left;color:#666;text-decoration:none}
-.login_input_wrap .signup-forgotten span {float:left;position:relative;margin-right:8px;width:1px;height:16px;background:url(//www.saraminimage.co.kr/ui/common/bg_vline.png) no-repeat 0 50%}
-.login_input_wrap .signup-forgotten .service_info_txt {float:right}
-.login_input_wrap .signup-forgotten .service_info_txt img {margin-top:2px;margin-left:6px;vertical-align:top}
-.login_input_wrap .signup-forgotten .service_info_txt:hover {color:#555}
+.login_input_wrap .signup-forgotten .forgotten {float:left;color:#666;text-decoration:none; padding-left: 5px;}
+.login_input_wrap .signup-forgotten span {position: absolute; left: 54px; top: 13px; margin-right: 8px; width: 1px;  height:16px;margin-right:8px;width:1px;height:16px;background:url(//www.saraminimage.co.kr/ui/common/bg_vline.png) no-repeat 0 50%}
 .login_input_wrap .signup-forgotten .link_rater {float:right;position:relative;margin-right:4px;padding-right:7px;}
 .login_input_wrap .signup-forgotten .link_rater:after {display:inline-block;position:absolute;top:50%;right:0;margin-top:-5px;width:1px;height:11px;background-color:#dedede;content:""}
 .clear_both {display:block;clear:both;zoom:1;font-size:0;content:""}
