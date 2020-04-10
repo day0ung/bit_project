@@ -152,7 +152,6 @@ export default {
       categoryTwo: true,
       categoryThree: true,
       categoryFour: true,
-      loading: true
     }
   },
   methods:{
