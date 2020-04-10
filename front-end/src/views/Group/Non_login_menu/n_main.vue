@@ -1,7 +1,15 @@
 <template>
-  <div class="detail1">
-    <br>
-    <br>
+  <div class="n_main">
+    <div class="group_detail bounce-top">
+    <div class="demo">
+      <div class="content">
+          <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+            <h1 class="main-title"><span class="thin">그룹스터디</span></h1>
+          </div>
+      </div>
+    </div>
+    </div>
     <!-- 상단 버튼 -->
     <div style="display: flow-root;">
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -23,96 +31,15 @@
     <!-- 그룹 리스트 css적용 html -->
     <div style="display: flex; flex-wrap: wrap;" v-loading="loading">
       <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
-        <div class="blue" v-if="groupInfo.interBigSeq === 1">
+        <div class="blue">
           <header>
             <div class="imageCircle all">
               <div style="height: 30px;"></div>
-                <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
+                <router-link :to="{ name: 'groupdetail', params: { contentId: groupInfo.groupInfoSeq }}">
                   <img :src="groupInfo.image">
                 </router-link>
               <div style="height: 30px;"></div>
             </div>
-            <h4>{{groupInfo.groupName}}</h4>
-            <div class="hr"></div>
-          </header>
-          <div class="profile-bio detail_desc">
-            <div class="info">
-              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
-              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
-              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
-            </div>
-            <div class="date">
-              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
-            </div>
-          </div>
-          <div class="buttons detailcontainer">
-            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
-            <button class="like"><span>♥</span></button>
-          </div>
-        </div>
-
-        <div class="red" v-if="groupInfo.interBigSeq === 2">
-          <header>
-            <div style="height: 30px;"></div>
-            <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-              <img :src="groupInfo.image">
-            </router-link>
-            <div style="height: 30px;"></div>
-            <h4>{{groupInfo.groupName}}</h4>
-            <div class="hr"></div>
-          </header>
-          <div class="profile-bio detail_desc">
-            <div class="info">
-              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
-              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
-              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
-            </div>
-            <div class="date">
-              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
-            </div>
-          </div>
-          <div class="buttons detailcontainer">
-            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
-            <button class="like"><span>♥</span></button>
-          </div>
-        </div>
-
-        <div class="green" v-if="groupInfo.interBigSeq === 3">
-          <header>
-            <div style="height: 30px;"></div>
-            <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-              <img :src="groupInfo.image">
-            </router-link>
-            <div style="height: 30px;"></div>
-            <h4>{{groupInfo.groupName}}</h4>
-            <div class="hr"></div>
-          </header>
-          <div class="profile-bio detail_desc">
-            <div class="info">
-              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
-              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
-              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
-            </div>
-            <div class="date">
-              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
-            </div>
-          </div>
-          <div class="buttons detailcontainer">
-            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
-            <button class="like"><span>♥</span></button>
-          </div>
-        </div>
-        
-        <div class="yellow" v-if="groupInfo.interBigSeq === 4">
-          <header>
-            <div style="height: 30px;"></div>
-            <router-link :to="{ name: 'depth1', params: { contentId: groupInfo.groupInfoSeq }}">
-              <img :src="groupInfo.image">
-            </router-link>
-            <div style="height: 30px;"></div>
             <h4>{{groupInfo.groupName}}</h4>
             <div class="hr"></div>
           </header>
@@ -161,9 +88,8 @@ export default {
       })
     },
     gotoDetail(seq){
-      this.$router.push({
-        path : "/group/detail1/depth1/" + seq
-      })
+      alert("seq=" + seq)
+      this.$router.push('/group/main/detail/'+seq)
     }
   },
   mounted(){
@@ -184,7 +110,52 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
+/* 우주배경 배너 */
+.large-header {
+   position: relative;
+   width: 100%;
+   background: #111;
+   overflow: hidden;
+   background-size: cover;
+   background-position: center center;
+   z-index: 1;
+}
+
+.demo .large-header {
+   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
+}
+
+.main-title {
+   position: absolute;
+   margin: 0;
+   padding: 0;
+   color: #f9f1e9;
+   text-align: center;
+   top: 50%;
+   left: 50%;
+   -webkit-transform: translate3d(-50%, -50%, 0);
+   transform: translate3d(-50%, -50%, 0);
+}
+
+.demo .main-title {
+   text-transform: uppercase;
+   font-size: 4.2em;
+   letter-spacing: 0.1em;
+}
+
+.main-title .thin {
+   font-weight: 200;
+}
+
+@media only screen and (max-width: 768px) {
+   .demo .main-title {
+      font-size: 3em;
+   }
+}
+/* 우주배경 배너 끝*/
+
 @-webkit-keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}@keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}
 .shadow-drop-br{-webkit-animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both;animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both}
 /* 
@@ -197,6 +168,12 @@ export default {
   border: solid #EEEEEE;
   background: #f7f7f7;
 } */
+
+div.group_detail
+{
+  margin: 0 auto;
+	text-align: center;
+}
 
 .detail1{
   margin: auto;

@@ -48,7 +48,7 @@ export default new Vuex.Store({
     logout(state){
       state.isLogin = true
       state.loginUser = null
-      
+
     }
   },
   actions: {
