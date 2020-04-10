@@ -197,6 +197,11 @@ export default {
   background: #f7f7f7;
 } */
 
+.detail1{
+  margin: auto;
+  width: 90%;
+}
+
 .back_footer{
   height: 450px;
 }

@@ -1,8 +1,7 @@
 <template>
   <div class="Group">
+    <br>
     <div class="group_detail bounce-top">
-    <br>
-    <br>
     <router-link to="/group/detail1">그룹 스터디 정보</router-link> |
     <router-link to="/group/detail2">그룹 게시판</router-link> |
     <router-link to="/group/detail3">그룹 스터디 일정</router-link> |
@@ -10,7 +9,9 @@
     </div>
     <br>
     <div class="text-focus-in">
-    <router-view></router-view>
+    <div class="groupcontent">
+      <router-view></router-view>
+    </div>
     </div>
   </div>
 </template>
