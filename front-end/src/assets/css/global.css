@@ -96,7 +96,7 @@ a {text-decoration:none !important;}
 #header-top .member{margin-top: 15px; position: relative;}
 #header.sub{box-shadow:0 5px 10px rgba(0,0,0,0.1);}
 .header_top {width:100%; height:41px; text-align:right;}
-.logo {position:absolute; width: 70%; text-align: center;}
+.logo {position:absolute; width: 70%; text-align: center; z-index: 1;}
 #banner {width: 100%;height: 450px; line-height: 450px;}
 #contents {width: 100%;height: auto; min-height: 950px; background: #fff;}
 #footer {width: 100%;height: 220px; background: #555;}
