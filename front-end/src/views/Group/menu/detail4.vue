@@ -39,34 +39,6 @@
       <el-button type="danger" icon="el-icon-delete" circle></el-button>
     </el-row>
 
-    <el-select v-model="value" placeholder="inter">
-      <el-option-group
-        v-for="big in InterListAll"
-        :key="big.interBigSeq"
-        :label="big.bigName">
-        <el-option
-          v-for="small in group.InterSmallDtos"
-          :key="small.interSmallSeq"
-          :label="small.smallName"
-          :value="small.smallName">
-        </el-option>
-      </el-option-group>
-    </el-select>
-
-    <el-select v-model="value" placeholder="Select">
-      <el-option-group
-        v-for="group in options"
-        :key="group.label"
-        :label="group.label">
-        <el-option
-          v-for="item in group.options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-option-group>
-    </el-select>
-
   </div>
 </template>
 
@@ -131,7 +103,7 @@ export default {
             label: 'Dalian'
           }]
         }],
-        interSmallSeq,
+        interSmallSeq: [],
         InterListAll: [],
     };
   },
