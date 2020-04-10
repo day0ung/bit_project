@@ -46,7 +46,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="$emit('close')">
+              <button class="modal-default-button" @click="exit">
                       CLOSE
               </button>
             </slot>
@@ -67,6 +67,10 @@ export default {
       }
     },
     methods:{
+        exit(){
+          this.$router.push({path:'/'});
+          this.$emit('close')
+        },
         regi(){
           this.$router.push({name:'join'});
           this.$emit('close')
@@ -82,7 +86,7 @@ export default {
     				res => {
               if(res.data.memberId == undefined){
                 alert("id나 password가 틀렸습니다.");
-                this.$store.state.s_member.isLogin = true;
+                this.$store.state.isLogin = true;
                 return;
               }
                 //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
@@ -92,11 +96,9 @@ export default {
                 var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
                 //alert('세션가져오기' + loginData)
                 var login = JSON.parse(loginData); //JSON
-                this.$store.state.isLogin = false
-                this.$store.state.loginUser = login
-                alert(this.$store.state.isLogin)
-                alert(this.$store.state.loginUser)
-                
+                this.$store.commit('loginSuccess', login )
+                alert('로그인성공')
+                this.$router.push ({path:'/'})
                 this.$emit('close')   
             })
                           
