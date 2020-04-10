@@ -1,16 +1,8 @@
 <template>
     <div>
         <div class="header_top">
-    <!-- <<<<<<< HEAD
-            <div class="header_component">
-                <div class="searchWrap">
-                    <form name="serach" method="get" action="#">
-                        <input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
-                        <el-button icon="el-icon-search" size="small" circle></el-button>
-                    </form>
-    ======= -->
             <div class="searchWrap">
-                <form name="serach" method="get" action="#">
+                <form name="search" method="get" action="#">
                     <input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
                     <el-button icon="el-icon-search" size="small" circle></el-button>
                 </form>
@@ -30,33 +22,11 @@
                         <button @click="$router.push ({name:'mypage'})">마이페이지</button>
                     </span> |
                     <span><button @click="logout">로그아웃</button></span>
-    <!-- >>>>>>> origin/NewDayoung -->
                 </div>
                 <div class="logo">
                     <router-link to="/">
-    <!-- <<<<<<< HEAD
-                        <img style="height: 55px; margin-top: -10px;" src='../../assets/css/images/logo.png' alt="팔레트" />
-                    </router-link>
-                </div>
-                <div class="member">
-                    <span>
-                        <button id="show-modal" @click="showModal = true">로그인</button>
-                        <Modal v-if="showModal" @close="showModal = false">
-                    
-                        you can use custom content here to overwrite
-                        default contentzz
-                    
-                        </Modal>
-                    </span> |
-                    <span><button @click="$router.push({name:'join'})">회원가입</button></span> |
-                    <span><button @click="logOut">로그아웃</button></span>
-                </div>
-    ======= -->
                         <img style="height: 55px; margin-top: -25px;" src='../../assets/css/images/logo.png' alt="팔레트" />
                     </router-link>
-                    
-                    
-    <!-- >>>>>>> origin/NewDayoung -->
                 </div>
             </div>
         </div>
@@ -79,19 +49,8 @@ export default {
     components:{
         Modal
     },
-// <<<<<<< HEAD
-//     methods:{
-//         logOut() {
-//             sessionStorage.removeItem("loginUser")
-//             this.$router.push({
-//                 name: "Home"
-//             })
-//             alert("로그아웃 되었습니다.")
-//         },
-// =======
     computed:{
     ...mapState(['isLogin', 'loginUser'])
-// >>>>>>> origin/NewDayoung
     },
     methods:{
         ...mapMutations(['logout'])

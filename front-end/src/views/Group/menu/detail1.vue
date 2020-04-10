@@ -169,12 +169,13 @@ export default {
   mounted(){
     this.loading = true
     this.$store.state.currpage = this.$route.path
-              .then(res => {
-          //alert(JSON.stringify(res.data))
-          this.list = res.data
-          this.$store.state.s_group.groupList = res.data
-          this.loading = false;
-        })
+    axios.get("http://localhost:9000/getAllGroup")
+            .then(res => {
+        //alert(JSON.stringify(res.data))
+        this.list = res.data
+        this.$store.state.s_group.groupList = res.data
+        this.loading = false;
+      })
   },
   created(){
     
