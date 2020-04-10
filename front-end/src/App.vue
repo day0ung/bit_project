@@ -10,10 +10,11 @@
           </div>
         </div>
         <div id="header-nav">
-          <div class="container">
+          <div class="container" style="height: 40px;">
             <!-- header-nav -->
             <HeaderNav></HeaderNav>
           </div>
+          <div class="headerBar"></div>
         </div>
       </div>
       <div id="contents">
@@ -40,7 +41,15 @@
   </div>
 </template>
 
-<style>
+<style scoped>
+
+.headerBar{
+    line-height: 65px;
+    height: 65px;
+    background: linear-gradient(90deg, rgba(224,13,0,0.7290266448376226) 0%, rgba(239,106,41,1) 50%, rgba(254,220,86,1) 100%);
+    margin: auto;
+    text-align: center;
+}
 
 </style>
 

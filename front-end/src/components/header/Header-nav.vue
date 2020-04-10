@@ -9,14 +9,6 @@
     <div class="header-btm">
 			<div class="inner">
 				<ul class="gnb clfix">
-                    <li class="navi_btn"><router-link to="/">
-                        <div class="hamburger">
-                        <span class="line"></span>
-                        <span class="line"></span>
-                        <span class="line"></span>
-                        </div>
-                        전체메뉴
-                    </router-link></li>
                     <li><router-link to="/aboutus">ABOUT US</router-link></li>
                     <li><router-link to="/private">개인스터디</router-link></li>
                     <li><router-link to="/group">그룹스터디</router-link></li>
@@ -68,6 +60,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -39,43 +39,43 @@
       <el-button type="danger" icon="el-icon-delete" circle></el-button>
     </el-row>
 
-    <el-select v-model="value" placeholder="inter">
-      <el-option-group
-        v-for="big in InterListAll"
-        :key="big.interBigSeq"
-        :label="big.bigName">
-        <el-option
-          v-for="small in group.InterSmallDtos"
-          :key="small.interSmallSeq"
-          :label="small.smallName"
-          :value="small.smallName">
-        </el-option>
-      </el-option-group>
-    </el-select>
-
-    <el-select v-model="value" placeholder="Select">
-      <el-option-group
-        v-for="group in options"
-        :key="group.label"
-        :label="group.label">
-        <el-option
-          v-for="item in group.options"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
-        </el-option>
-      </el-option-group>
-    </el-select>
+    <full-calendar :events="events" :config="config"></full-calendar>
 
   </div>
 </template>
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
+import 'fullcalendar/dist/fullcalendar.css'
+import 'fullcalendar/dist/locale/ko'
+import { FullCalendar } from 'vue-full-calendar'
 
 export default {
-    data() {
+    components: {
+        FullCalendar,
+
+      },
+  data() {
     return {
+    events: [
+        {
+            title  : 'event1',
+            start  : '2020-01-01',
+        },
+        {
+            title  : 'event2',
+            start  : '2020-01-05',
+            end    : '2020-01-07',
+        },
+        {
+            title  : 'event3',
+            start  : '2020-01-09T12:30:00',
+            allDay : false,
+        },
+      ],
+      config: {
+        locale: 'ko',
+      },
       pickerOptions: {
         shortcuts: [{
           text: 'Last week',
@@ -131,7 +131,7 @@ export default {
             label: 'Dalian'
           }]
         }],
-        interSmallSeq,
+        interSmallSeq: [],
         InterListAll: [],
     };
   },

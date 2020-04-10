@@ -107,7 +107,7 @@ export default {
     },
     gotoClick(row, column, event){
       this.$router.push({
-        path : "/group/detail2/depth2/" + row.boardSeq
+        path : "/group/board/detail/" + row.boardSeq
       })
     },
     clickableRows :function (row, rowIndex) {
