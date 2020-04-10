@@ -39,15 +39,43 @@
       <el-button type="danger" icon="el-icon-delete" circle></el-button>
     </el-row>
 
+    <full-calendar :events="events" :config="config"></full-calendar>
+
   </div>
 </template>
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
+import 'fullcalendar/dist/fullcalendar.css'
+import 'fullcalendar/dist/locale/ko'
+import { FullCalendar } from 'vue-full-calendar'
 
 export default {
-    data() {
+    components: {
+        FullCalendar,
+
+      },
+  data() {
     return {
+    events: [
+        {
+            title  : 'event1',
+            start  : '2020-01-01',
+        },
+        {
+            title  : 'event2',
+            start  : '2020-01-05',
+            end    : '2020-01-07',
+        },
+        {
+            title  : 'event3',
+            start  : '2020-01-09T12:30:00',
+            allDay : false,
+        },
+      ],
+      config: {
+        locale: 'ko',
+      },
       pickerOptions: {
         shortcuts: [{
           text: 'Last week',
