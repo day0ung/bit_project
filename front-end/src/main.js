@@ -12,5 +12,13 @@ Vue.config.productionTip = true
 new Vue({
   router,
   store,
+  beforeCreate(){
+    let loginUser = sessionStorage.getItem("loginUser")
+    if(loginUser == null){
+      return
+    }else if(loginUser != null){
+      this.$store.dispatch('getMember', loginUser)
+    }
+  },
   render: h => h(App)
 }).$mount('#app')
