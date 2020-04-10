@@ -18,6 +18,11 @@ export default [
         path:'/companyJoin',
         name:'companyJoin',
         component: () => import('@/views/Member/Company_Join.vue')
+    },
+    {
+        path: '/mypage', 
+        name: 'mypage',
+        component: () => import('@/views/Member/MyPage.vue')
     }
 
 ]
