@@ -26,7 +26,6 @@
           <input type="radio" name="options" id="option3" autocomplete="off"> 라이프/취미
         </label>
       </div>
-    <button class="btn btn-primary" @click="createGroup" style="float: right;">Group Create</button>
     </div>
     <!-- 그룹 리스트 css적용 html -->
     <div style="display: flex; flex-wrap: wrap;" v-loading="loading">
@@ -82,11 +81,6 @@ export default {
     }
   },
   methods:{
-    createGroup() {
-      this.$router.push({
-        name: "Create"
-      })
-    },
     gotoDetail(seq){
       alert("seq=" + seq)
       this.$router.push('/group/main/detail/'+seq)

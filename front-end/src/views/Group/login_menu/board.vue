@@ -1,9 +1,9 @@
 <template>
-  <div class="detail2">
-    <h3>그룹게시판</h3>
+  <div class="groupboard">
     <br>
     <br>
     <div class="boardTableFrom">
+    <h3>그룹게시판</h3>
       <div class="boardSearchBar">
         <el-input
           v-model="search"
@@ -129,8 +129,12 @@ export default {
 </script>
 
 <style scoped>
+.groupboard{
+    margin: auto calc(0% - 50vw); /* container 무시하고 전체 적용 */
+    background: #f5f5f5;
+}
 .boardTableFrom{
-  width: 80%;
+  width: 810px;
   margin: auto;
 }
 .boardSearchBar{

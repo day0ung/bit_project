@@ -7,11 +7,8 @@
       <router-link to="/group/schedule">그룹 스터디 일정</router-link> |
       <router-link to="/group/detail4">그룹 투표</router-link>
     </div>
-    <br>
     <div class="text-focus-in">
-    <div class="groupcontent">
       <router-view></router-view>
-    </div>
     </div>
   </div>
 </template>
