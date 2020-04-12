@@ -22,7 +22,7 @@ export default [
             component: () => import('@/views/Group/login_menu/l_main'),
         },
         {
-            path: 'board',
+            path: 'board',  /* 게시판 이동 시 그룹 seq가지고 가야 함 */
             component: () => import('@/views/Group/login_menu/board')
         },
         {
