@@ -10,7 +10,8 @@ import com.palette.model.MemberDto;
 @Mapper
 @Repository
 public interface adminMemberDao {
-	List<MemberDto> getMemberListAll();
+	List<MemberDto> adminGetMemberListAll();
 	
+	MemberDto adminGetOneMember(MemberDto dto);
 
 }//end of adminMemberDao interface
