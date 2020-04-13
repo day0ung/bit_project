@@ -20,6 +20,11 @@
                         <el-option v-for="smallInter in smallInterList" :key="smallInter.interSmallSeq" :value="smallInter.interSmallSeq" :label="smallInter.smallName"></el-option>
                     </el-select>
                 </el-form-item> -->
+                <!-- 인원설정 -->
+                <el-form-item label="인원설정" prop="maxMember">
+                    <el-input-number size="mini" v-model="ruleForm.maxMember" :min="4" :max="10"></el-input-number>
+                </el-form-item>
+                <!-- 기간설정 -->
                 <el-form-item label="기간설정" prop="date">
                     <el-date-picker
                         v-model="ruleForm.date"
@@ -90,6 +95,7 @@ export default {
                 groupName: '',
                 region1: '',
                 region2: '',
+                maxMember:'',
                 schedeul: [],
                 date: '',
                 desc: '',
@@ -217,17 +223,18 @@ export default {
 </script>
 
 <style scope>
+.create{
+    margin: auto calc(0% - 50vw); /* container 무시하고 전체 적용 */
+    background: #f5f5f5;
+}
 
 .createContainer {
     position: relative;
     margin: auto;
-    margin-top: 30px;
     overflow: hidden;
     width: 650px;
     height: auto;
     max-height: 800px;
-    background: #f5f5f5;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
 }
 .title{

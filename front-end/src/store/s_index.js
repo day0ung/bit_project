@@ -41,8 +41,20 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    loginSuccess(state, payload){
+      state.isLogin = false  //로그인 성공시
+      state.loginUser = payload
+    },
+    logout(state){
+      state.isLogin = true
+      state.loginUser = null
+
+    }
   },
   actions: {
+    getMember({commit} ,loginObj){
+      commit('loginSuccess', loginObj)
+    }
   },
   modules: {
     s_about,

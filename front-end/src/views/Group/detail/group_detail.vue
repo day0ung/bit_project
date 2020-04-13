@@ -177,11 +177,13 @@
 </template>
 
 <script>
+import { loading } from 'element-ui';
 export default {
   data(){
     return{
       groupInfoSeq: "",
-      groupOne: []
+      groupOne: [],
+      loading: true,
     }
   },
   methods:{
@@ -190,13 +192,18 @@ export default {
     }
   },
   mounted(){
+    this.loading = true;
     this.groupInfoSeq = this.$route.params.contentId
     var params = new URLSearchParams();	// post 방식으로 받아야함.
     params.append('groupInfoSeq', this.groupInfoSeq);
     axios.post("http://localhost:9000/getOneGroup", params)
                 .then(res => {
             this.groupOne = res.data
+            this.loading = false;
           })
+  },
+  create(){
+
   }
 }
 </script>
@@ -205,7 +212,6 @@ export default {
 
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 /* center container in the middle */
-
 .group_info{
   height: 80px;
 }
