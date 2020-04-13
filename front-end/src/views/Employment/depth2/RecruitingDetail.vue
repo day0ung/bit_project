@@ -179,7 +179,7 @@ export default {
 
 
 
-/* layout 관련 공통 css */
+
 
 /* reset & common class*/
 html {

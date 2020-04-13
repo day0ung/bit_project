@@ -23,7 +23,7 @@
 					<dl>
 						<dt><span class="red">*</span> <span>공고 제목</span></dt>
 						<dd>
-							<input type="text" v-model="title" class="recruitWrite_input" :focusout="checkblank1()">
+							<input type="text" v-model="title" class="recruitWrite_input" :onkeyup="checkblank1()">
               <span class="text1">123</span>
               <span class="text1">456</span>
 						</dd>
