@@ -1,6 +1,8 @@
 
  import {requireAuth} from '../r_index.js'
-const requireAuth1 = require('../r_index.js')
+
+ const changeloc = {requireAuth}
+
 
 export default[{
     // path:'/',
@@ -9,14 +11,14 @@ export default[{
     path: '/',
     name: 'dashboard',
     component:()=> import('@/views/home/dashboard.vue'),
-    beforeEnter: requireAuth,
+    beforeEnter: changeloc,
     
     children:[
         {
-            path:'',
+            path:'/',
             name:'dashboardContents',
             component:() => import('@/views/home/dashboardContents.vue'),
-            beforeEnter: requireAuth1.requireAuth
+            beforeEnter: changeloc
             
         }
     ]
