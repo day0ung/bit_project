@@ -54,14 +54,15 @@ export default {
 .memberbox .box .tit{border-bottom:1px dashed #ccc;font-size:30px; padding-bottom:30px; color:#222;text-align:center;font-family:'NanumSquareR';background-repeat:no-repeat;background-position:center 56px;}
 .memberbox .box .con > ul{padding-top:22px;}
 .memberbox .box .btn{position:absolute;bottom:40px;left:0;width:100%;text-align:center;}
-.memberbox .box:hover{border:1px solid #673ec0;box-shadow:8px 10px 20px rgba(0,0,0,0.2);-webkit-box-shadow:8px 10px 20px rgba(0,0,0,0.2);}
+.memberbox .box:hover{border:1px solid #ef6c00;box-shadow:8px 10px 20px rgba(0,0,0,0.2);-webkit-box-shadow:8px 10px 20px rgba(0,0,0,0.2);}
 
 /*회원가입*/
 .memberbox .box .tit.icon01{background:url(/nanum/site/builder/dir/main/img/menu730/join_icon01.gif)no-repeat center 0;}
 .memberbox .box .tit.icon02{background:url(/nanum/site/builder/dir/main/img/menu730/join_icon02.gif)no-repeat center 0;}
 
 .con_btn.blue, .con_sbtn.blue {
-    background: #4f40b4;display: inline-block;
+    background: #ef6c00;
+    display: inline-block;
     margin: 0 3px;
     color: #fff;
     padding: 16px 40px;

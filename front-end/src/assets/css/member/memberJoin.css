@@ -392,3 +392,113 @@ input.ndls_btn_save:hover {background:#d44c4c;}
 
 a.ndls_btn_mini {display:inline-block; color:#e77272; font-size:11px; font-family:'돋움', Dotum, sans-serif;letter-spacing:0; line-height:15px; height:15px; border-bottom:1px solid #f45246; background:url('/img/common/bl_arrow2.gif') no-repeat right 3px;padding-right:10px;padding-left:2px;}
 a.ndls_btn_mini:hover{color:#f45246;border-color:#f45246;font-weight:bold;letter-spacing:-1px;}
+
+.select_style{display:inline-block;position:relative;min-width:80px;height:45px;line-height:40px;border:1px solid #dadada;background:#fff;}
+.select_style select{display: inline-block;width:100%;cursor: pointer;outline:0;padding:0 25px 0 10px;border:0;font-size:13px;border-radius: 0;background: white;color: black;appearance: none;
+-webkit-appearance: none; -moz-appearance: none;height: 100%;background:#fff url(/nanum/ndls/imgs/common/select_style_bu.gif) no-repeat right 50%;}
+.select_style select::-ms-expand {display: none;}
+.select_style select:disabled {opacity: 0.5;pointer-events: none;}
+.select_style.middle select{width:100px;}
+
+
+/* 라디오버튼 */
+.radios input[type="radio"] { 
+	position: absolute;
+	 width: 1px; 
+	 height: 1px; 
+	 padding: 0; 
+	 margin: -1px; 
+	 overflow: hidden; 
+	 clip:rect(0,0,0,0); border: 0; 
+}
+.radios input[type="radio"] + label { 
+	display: inline-block; 
+	position: relative; 
+	padding-left: 30px; 
+	cursor: pointer; 
+	-webkit-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+}
+.radios input[type="radio"] + label:before { 
+ content: ' ';
+     display: inline-block; 
+	 width: 26px;
+	 height: 26px;  
+	 line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */ 
+	 margin: -2px 8px 0 0; 
+	 text-align: center; 
+	 vertical-align: middle; 
+	 background: #fafafa; 
+	 border: 1px solid #cacece; 
+	 border-radius : 3px; 
+	 box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); 
+	}
+.radios input[type="radio"] + label:active:before, .radios input[type="radio"]:checked + label:active:before { 
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); }
+.radios input[type="radio"]:checked + label:before { 
+ 	content: '\2714 '; /* 체크표시 유니코드 사용 */ 
+	 color: #fff;
+	 width: 26px;
+	 height: 26px; 
+	 text-shadow: 1px 1px #fff; 
+	 background: #ef6c00; 
+	 border-color: #ef6c00; 
+	 box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+}
+.radios input[type="radio"]:checked + label:after {
+	content: ''; 
+	position: absolute; 
+	background: #99a1a7; 
+	box-shadow: inset 0px 0px 10px rgba(0,0,0,0.3); 
+}
+
+.checks {position: relative;} 
+.checks input[type="checkbox"] {
+	 /* 실제 체크박스는 화면에서 숨김 */ 
+	 position: absolute; 
+	 width: 1px; 
+	 height: 1px;
+	 padding: 0; 
+	 margin: -1px; 
+	 overflow: hidden; 
+	 clip:rect(0,0,0,0); 
+	 border: 0 
+} 
+.checks input[type="checkbox"] + label { 
+	display: inline-block; 
+	position: relative; 
+	cursor: pointer; 
+	-webkit-user-select: none; 
+	-moz-user-select: none; 
+	-ms-user-select: none; 
+} 
+.checks input[type="checkbox"] + label:before {
+	 /* 가짜 체크박스 */ 
+	 content: ' ';
+     display: inline-block; 
+	 width: 26px;
+	 height: 26px;  
+	 line-height: 21px; /* 세로정렬을 위해 높이값과 일치 */ 
+	 margin: -2px 8px 0 0; 
+	 text-align: center; 
+	 vertical-align: middle; 
+	 background: #fafafa; 
+	 border: 1px solid #cacece; 
+	 border-radius : 3px; 
+	 box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05); 
+} 
+.checks input[type="checkbox"] + label:active:before, .checks input[type="checkbox"]:checked + label:active:before { 
+	 box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1); 
+
+} 
+.checks input[type="checkbox"]:checked + label:before { /* 체크박스를 체크했을때 */ 
+	 content: '\2714 '; /* 체크표시 유니코드 사용 */ 
+	 color: #fff;
+	 width: 26px;
+	 height: 26px; 
+	 text-shadow: 1px 1px #fff; 
+	 background: #ef6c00; 
+	 border-color: #ef6c00; 
+	 box-shadow: 0px 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1); 
+}
