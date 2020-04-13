@@ -39,7 +39,7 @@
       <el-button type="danger" icon="el-icon-delete" circle></el-button>
     </el-row>
 
-    <full-calendar :events="events" :config="config"></full-calendar>
+    <full-calendar :events="events" :config="config" @event-selected="eventSelected" @event-created="eventCreated" @day-click="dayClick"></full-calendar>
 
   </div>
 </template>
@@ -141,6 +141,20 @@ export default {
     .then(res => {
         this.InterListAll = res.data
     })
+  },
+  methods:{
+    eventSelected(event, jsEvent, view){
+      alert("확인")
+    },
+    eventCreated(event){
+      alert("eventCreated 확인" + event.url)
+    },
+    dayClick(date, jsEvent, view){
+      alert("dayClick" + date)
+      let timestemp = date
+      let dateConv = new Date(timestemp)
+      alert(dateConv)
+    }
   }
 }
 </script>
