@@ -23,24 +23,24 @@
         <el-table-column
           prop="finalnum"
           label="글번호"
-          width="90px">
+          width="150px">
         </el-table-column>
         <el-table-column
           prop="title"
           label="글제목"
-          width="380px"
+          width="470px"
           >
         </el-table-column>
         <el-table-column
           prop="memberDto.memberId"
           label="작성자"
-          width="90px"
+          width="100px"
           >
         </el-table-column>
         <el-table-column
           prop="readCount"
           label="조회수"
-          width="80px"
+          width="100px"
           >
         </el-table-column>
         <el-table-column
@@ -50,9 +50,9 @@
           >
         </el-table-column>
       </el-table> <br>
-
-      <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-
+      <div class="pageination">
+        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+      </div>
     </div>
   </div>
 </template>
@@ -128,16 +128,15 @@ export default {
 </script>
 
 <style scoped>
-.groupboard{
-    margin: auto calc(0% - 50vw); /* container 무시하고 전체 적용 */
-    background: #f5f5f5;
-}
 .boardTableFrom{
-  width: 810px;
   margin: auto;
 }
 .boardSearchBar{
   width: 45%;
   float: right;
+}
+.pageination{
+  margin: auto;
+  display: table;
 }
 </style>

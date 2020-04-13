@@ -224,17 +224,13 @@ export default {
 
 <style scope>
 .create{
-    margin: auto calc(0% - 50vw); /* container 무시하고 전체 적용 */
-    background: #f5f5f5;
 }
 
 .createContainer {
     position: relative;
     margin: auto;
     overflow: hidden;
-    width: 650px;
     height: auto;
-    max-height: 800px;
     border-radius: 10px;
 }
 .title{

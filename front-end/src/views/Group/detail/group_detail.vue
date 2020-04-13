@@ -2,11 +2,7 @@
   <div class="group_detail">
     <br>
     <br>
-    <!-- blue -->
     <div class="groupDetailcCntainer">
-      <!-- <div class="depthimages blueInner">
-        <img :src="groupOne.image" />
-      </div> -->
       <div class="groupImage">
         <img :src="groupOne.image" />
       </div>
@@ -52,39 +48,6 @@
         <el-button type="primary" round>그룹 스터디 참여신청</el-button>
         <el-button type="primary" round>♥</el-button>
       </div>
-      <!-- <div class="product">
-        <div class="product_content">
-          <h1>{{ groupOne.groupName }}</h1>
-          <p>{{ groupOne.startDate }} ~ {{ groupOne.endDate }}</p>
-          <br>
-          <div class="group_info">
-            <p>그룹장 : {{groupOne.memberDto.memberName}}</p>
-            <p> {{ groupOne.currMember}} / {{ groupOne.maxMember}} </p>
-            <p>분류: {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
-          </div>
-          <p class="pick">그룹 주간일정</p>
-          <div class="sizes">
-            <div v-if="groupOne.groupSchedule.monday == 0" class="size_blue">월</div>
-            <div v-else class="size_blue_check">월</div>
-            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_blue">화</div>
-            <div v-else class="size_blue_check">화</div>
-            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_blue">수</div>
-            <div v-else class="size_blue_check">수</div>
-            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_blue">목</div>
-            <div v-else class="size_blue_check">목</div>
-            <div v-if="groupOne.groupSchedule.friday == 0" class="size_blue">금</div>
-            <div v-else class="size_blue_check">금</div>
-            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_blue">토</div>
-            <div v-else class="size_blue_check">토</div>
-            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_blue">일</div>
-            <div v-else class="size_blue_check">일</div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="detailcontainer blue">
-        <button class="add" @click="joinGroup">그룹 스터디 참여신청</button>
-        <button class="like"><span>♥</span></button>
-      </div> -->
     </div>
     <br>
     <br>
@@ -130,17 +93,14 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 /* center container in the middle */
 .group_detail{
-  margin: auto calc(0% - 50vw); /* container 무시하고 전체 적용 */
-  background: #ebebeb;
 }
 
 .groupDetailcCntainer {
 	 position: relative;
 	 margin: auto;
 	 overflow: hidden;
-	 width: 900px;
    height: auto;
-	 background: #fff;
+	 background: #ebebeb;
 }
 
 .groupImage img{
