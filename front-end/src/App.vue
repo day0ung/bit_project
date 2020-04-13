@@ -10,7 +10,7 @@
           </div>
         </div>
         <div id="header-nav">
-          <div class="container">
+          <div class="container" style="height: 40px;">
             <!-- header-nav -->
             <HeaderNav></HeaderNav>
           </div>
@@ -40,7 +40,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 
 </style>
 

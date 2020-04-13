@@ -1,13 +1,13 @@
 <template>
-<div>
-    <div class="header_top">
-        <div class="searchWrap">
-            <form name="serach" method="get" action="#">
-                <input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
-                <el-button icon="el-icon-search" size="small" circle></el-button>
-            </form>
-        </div>
-        <div class="inner">
+    <div>
+        <div class="header_top">
+            <div class="inner">
+            <div class="searchWrap">
+                <form name="search" method="get" action="#">
+                    <input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
+                    <el-button icon="el-icon-search" size="small" circle></el-button>
+                </form>
+            </div>
             <div v-if="isLogin" style="margin-right: 30px;">
                     <span>
                         <button  @click="showModal = true">로그인</button>
@@ -23,16 +23,14 @@
                 </span> |
                 <span><button @click="logout">로그아웃</button></span>
             </div>
-            <h1 class="logo">
+            <div class="logo">
                 <router-link to="/">
-				    <img style="margin-left:-50px" src='../../assets/css/images/logo.png' alt="팔레트" />
-			    </router-link>
-                 
-            </h1>	
+                    <img style="height: 55px; margin-top: -25px;" src='../../assets/css/images/logo.png' alt="팔레트" />
+                </router-link>
+            </div>
+            </div>
         </div>
     </div>
-</div>
-
 </template>
 
 <script>
