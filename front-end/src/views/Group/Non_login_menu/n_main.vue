@@ -92,7 +92,7 @@ export default {
   },
   methods:{
     gotoDetail(seq){
-      alert("seq=" + seq)
+      //alert("seq=" + seq)
       this.$router.push('/group/main/detail/'+seq)
     }
   },
@@ -235,7 +235,7 @@ div.group_detail
 	 position: relative;
 	 margin: auto;
 	 overflow: hidden;
-	 background: #f5f5f5;
+	 background: #fff;
 }
 
 .detailcontainer button {
@@ -262,10 +262,10 @@ div.group_detail
 }
 
 .add {
-  width: 70%;
+  width: 80%;
 }
 .like {
-  width: 30%;
+  width: 20%;
 }
 
 .blue header img {
