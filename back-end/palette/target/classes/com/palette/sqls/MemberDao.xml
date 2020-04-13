@@ -13,14 +13,4 @@
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
   
-  <insert id="createMember">
-  	
-  </insert>
-
-  <insert id="createInter" parameterType="com.palette.model.InterDto">
-  	<!-- INSERT INTO MEMBER_INTERREST(MEMBER_INTERREST_SEQ, MEMBER_SEQ, BIG_SEQ, SMALL_SEQ, DEL)
-	VALUES ( ,0) 
-	  insert into MEMBER_INTERREST(MEMBER_INTERREST_SEQ, MEMBER_SEQ, BIG_SEQ, SMALL_SEQ, DEL)
-	values (5, 1, 1, 1, 0) -->
-  </insert>
 </mapper>
