@@ -9,6 +9,7 @@ import s_notice from '@/store/s_notice/s_notice.js'
 import s_search from '@/store/s_subStore.js'
 import s_member from '@/store/s_member/s_member.js'
 import s_subStore from '@/store/s_subStore.js'
+import router from '@/router/r_index.js'
 
 Vue.use(Vuex)
 
@@ -48,7 +49,8 @@ export default new Vuex.Store({
     logout(state){
       state.isLogin = true
       state.loginUser = null
-
+      sessionStorage.removeItem("loginUser")
+      router.push({path:'/'})
     }
   },
   actions: {
