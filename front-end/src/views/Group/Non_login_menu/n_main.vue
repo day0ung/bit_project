@@ -10,59 +10,69 @@
       </div>
     </div>
     </div>
-    <!-- 상단 버튼 -->
-    <div style="display: flow-root;">
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn blue">
-          <input type="radio" name="options" id="option1" autocomplete="off"> 대학생/취업
-        </label>
-        <label class="btn red">
-          <input type="radio" name="options" id="option2" autocomplete="off"> 공무원/임용
-        </label>
-        <label class="btn green">
-          <input type="radio" name="options" id="option3" autocomplete="off"> 어학/회화
-        </label>
-        <label class="btn yellow">
-          <input type="radio" name="options" id="option3" autocomplete="off"> 라이프/취미
-        </label>
-      </div>
-    </div>
-    <!-- 그룹 리스트 css적용 html -->
-    <div style="display: flex; flex-wrap: wrap;" v-loading="loading">
-      <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
-        <div class="blue">
-          <header>
-            <div class="imageCircle all">
-              <div style="height: 30px;"></div>
-                <router-link :to="{ name: 'groupdetail', params: { contentId: groupInfo.groupInfoSeq }}">
-                  <img :src="groupInfo.image">
-                </router-link>
-              <div style="height: 30px;"></div>
-            </div>
-            <h4>{{groupInfo.groupName}}</h4>
-            <div class="hr"></div>
-          </header>
-          <div class="profile-bio detail_desc">
-            <div class="info">
-              <p>그룹장 : {{groupInfo.memberDto.memberName}}</p>
-              <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
-              <P>{{ groupInfo.interBigDto.bigName }} > {{groupInfo.interSmallDto.smallName}}</P>
-            </div>
-            <div class="date">
-              <p>스터디 시작일 : {{groupInfo.startDate}}</p>
-              <p>스터디 종료일 : {{groupInfo.endDate}}</p>
-            </div>
-          </div>
-          <div class="buttons detailcontainer">
-            <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">상세보기</button>
-            <button class="like"><span>♥</span></button>
-          </div>
+    <div class="n_main_background"><!-- 배경 -->
+      <div class="n_main_component">
+      <!-- 상단 버튼 -->
+      <div style="display: flow-root;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label class="btn blue">
+            <input type="radio" name="options" id="option1" autocomplete="off"> 대학생/취업
+          </label>
+          <label class="btn red">
+            <input type="radio" name="options" id="option2" autocomplete="off"> 공무원/임용
+          </label>
+          <label class="btn green">
+            <input type="radio" name="options" id="option3" autocomplete="off"> 어학/회화
+          </label>
+          <label class="btn yellow">
+            <input type="radio" name="options" id="option3" autocomplete="off"> 라이프/취미
+          </label>
         </div>
-      </aside>
-      <div class="back_footer">
       </div>
-    </div>
-    </div>
+      <!-- 그룹 리스트 css적용 html -->
+      <div style="display: flex; flex-wrap: wrap;" v-loading="loading">
+        <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
+          <div class="blue">
+            <br>
+            <div class="Classification">
+              <p>{{groupInfo.interSmallDto.smallName}} 스터디</p>
+            </div>
+            <div class="hr"></div>
+            <div class="profile-bio detail_desc">
+              <div class="info">
+                <h4>{{groupInfo.groupName}}</h4>
+                <p>{{groupInfo.groupLocation}} | {{groupInfo.memberDto.memberName}}</p>
+                <p>{{groupInfo.smallInfo}}</p>
+                <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
+              </div>
+              <!-- <div class="date">
+                <p>스터디 시작일 : {{groupInfo.startDate}}</p>
+                <p>스터디 종료일 : {{groupInfo.endDate}}</p>
+              </div> -->
+            </div>
+            <header>
+              <div class="imageCircle all">
+                <div style="height: 50px;"></div>
+                  <router-link :to="{ name: 'groupdetail', params: { contentId: groupInfo.groupInfoSeq }}">
+                    <img :src="groupInfo.image">
+                  </router-link>
+              </div>
+            </header>
+            <div class="backimage">
+              <img :src="groupInfo.image" style="width: 290px; height: auto;">
+            </div>
+            <div class="buttons detailcontainer">
+              <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">{{groupInfo.startDate}} 시작</button>
+              <button class="like"><span>♥</span></button>
+            </div>
+          </div>
+        </aside>
+        <div class="back_footer">
+        </div>
+      </div>
+      </div>
+    </div><!-- 배경 -->
+  </div>
 
 </template>
 
@@ -82,7 +92,7 @@ export default {
   },
   methods:{
     gotoDetail(seq){
-      alert("seq=" + seq)
+      //alert("seq=" + seq)
       this.$router.push('/group/main/detail/'+seq)
     }
   },
@@ -150,18 +160,22 @@ export default {
 }
 /* 우주배경 배너 끝*/
 
+.Classification{
+  text-align: center;
+}
+
 @-webkit-keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}@keyframes shadow-drop-br{0%{-webkit-box-shadow:0 0 0 0 transparent;box-shadow:0 0 0 0 transparent}100%{-webkit-box-shadow:12px 12px 20px -12px rgba(0,0,0,.35);box-shadow:12px 12px 20px -12px rgba(0,0,0,.35)}}
 .shadow-drop-br{-webkit-animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both;animation:shadow-drop-br .4s cubic-bezier(.25,.46,.45,.94) both}
-/* 
+
 .imageCircle{
-  box-sizing: border-box;
-  margin: auto;
-  border-radius: 50%;
-  width: 210px;
-  height: 210px;
-  border: solid #EEEEEE;
-  background: #f7f7f7;
-} */
+  position: absolute;
+  left: 25%;
+  z-index: 1;
+}
+.backimage{
+  position: absolute;
+  top: 200px;
+}
 
 div.group_detail
 {
@@ -183,7 +197,7 @@ div.group_detail
 }
 
 .info p{
-  margin: 3px;
+  margin: 15px;
 }
 
 .date{
@@ -196,14 +210,14 @@ div.group_detail
   margin-bottom: 5px;
   background: #9e9e9e;
   height: 1px;
-  width: 90%;
+  width: 70%;
 }
 
 .detail_desc {
 	 text-transform: none;
 	 letter-spacing: 0;
 	 color: #4e4e4e;
-	 font-size: 0.85em;
+	 font-size: 1em;
 }
 
 .detailcontainer {
@@ -212,7 +226,7 @@ div.group_detail
 	 position: relative;
 	 margin: auto;
 	 overflow: hidden;
-	 background: #f5f5f5;
+	 background: #fff;
 }
 
 .detailcontainer button {
@@ -222,7 +236,7 @@ div.group_detail
 	 border: 0;
 	 text-transform: uppercase;
 	 letter-spacing: 1px;
-	 color: #f5f5f5;
+	 color: #fff;
 	 cursor: pointer;
 }
 .detailcontainer button:hover {
@@ -230,152 +244,51 @@ div.group_detail
 }
 
 .buttons{
+  position: absolute;
+  z-index: 1;
+  bottom: 0px;
   margin: auto;
-  width: 80%;
+  width: 100%;
+  opacity: 0.9;
 }
 
 .add {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  width: 70%;
+  width: 80%;
 }
 .like {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  width: 30%;
+  width: 20%;
 }
 
 .blue header img {
   border-radius: 50%;
   width: 150px;
   height: 150px;
-  border: 7px solid #74b9ff;
-}
-
-.btn-group-toggle .blue{
-  color: #74b9ff;
-  background: #f5f5f5;
-}
-
-.btn-group-toggle .blue:hover{
-  color: #f5f5f5;
-  background: #6aa9e9;
-  transition: all 0.4s ease-in-out;
+  border: 4px solid #f5f5f5;
 }
 
 .blue button{
-  background: #74b9ff;
+  background: rgba(106, 169, 233, 0.8);
 }
 .blue button:hover{
   background: #6aa9e9;
 }
 
-.red header img {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  border: 8px solid #ff7675;
-}
-
-.btn-group-toggle .red{
-  color: #ff7675;
-  background: #f5f5f5;
-}
-
-.btn-group-toggle .red:hover{
-  color: #f5f5f5;
-  background: #e26767;
-  transition: all 0.4s ease-in-out;
-}
-
-.red button{
-  background: #ff7675;
-}
-
-.red button:hover{
-  background: #e26767;
-}
-
-.green header img {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  border: 8px solid #00cec9;
-}
-
-.btn-group-toggle .green{
-  color: #00cec9;
-  background: #f5f5f5;
-}
-
-.btn-group-toggle .green:hover{
-  color: #f5f5f5;
-  background: #00adab;
-  transition: all 0.4s ease-in-out;
-}
-
-.green button{
-  background: #00cec9;
-}
-
-.green button:hover{
-  background: #00adab;
-}
-
-.yellow header img {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  border: 8px solid #ffeaa7;
-}
-
-
-.btn-group-toggle .yellow{
-  color: #ffd54a;
-  background: #f5f5f5;
-}
-
-.btn-group-toggle .yellow:hover{
-  color: #4e4e4e;
-  background: #fae6a3;
-    transition: all 0.4s ease-in-out;
-}
-
-.yellow button{
-  color: #4e4e4e;
-  background: #ffeaa7;
-}
-
-.yellow button:hover{
-  background: #e9d69a;
-}
-
 aside {
+  position: relative;
   background: #f5f5f5;
   border-top: 0px solid rgba(0, 0, 0, 0.22);
   border-bottom: 0px solid rgba(0, 0, 0, 0.33);
-  border-radius: 50%;
   margin: 0 auto;
   display: block;
-  height: 210px;
-  width: 210px;
+  height: 420px;
+  width: 290px;
   background-size: cover;
   overflow: hidden;
   transition: all ease 0.3s;
 }
 
-aside:hover {
-  background: #f5f5f5;
-  border-top: 4px solid rgba(0, 0, 0, 0.22);
-  border-bottom: 4px solid rgba(0, 0, 0, 0.44);
-  border-radius: 5px;
-  height: 400px;
-  width: 250px;
-}
-
 aside:hover header img {
   animation: profile_image 2000ms linear both;
-  animation-delay: 0.5s;
 }
 
 header {
@@ -386,12 +299,7 @@ header {
   text-align: center;
   padding: 1px 20px 10px 20px !important;
   transition: all linear 0.7s;
-  opacity: 0;
   height: 85px;
-}
-
-aside:hover .profile-bio {
-  opacity: 1;
 }
 
 /*PROFILE IMAGE ANIMATE */

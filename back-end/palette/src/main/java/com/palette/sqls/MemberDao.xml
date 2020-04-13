@@ -13,5 +13,4 @@
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
   
-
 </mapper>
