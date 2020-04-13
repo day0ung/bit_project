@@ -27,4 +27,9 @@ public class EmploymentService {
 	public void readCount(int empBoardSeq) {
 		employmentDao.readCount(empBoardSeq);
 	}
+	
+	public boolean insertRecruit(EmploymentBoardDto dto) {
+		int len = employmentDao.insertRecruit(dto);
+		return len > 0?true:false;
+	}
 }

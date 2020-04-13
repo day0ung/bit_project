@@ -59,7 +59,7 @@
     FROM BOARD b
     JOIN MEMBER m
     ON b.MEMBER_SEQ = m.MEMBER_SEQ
-    WHERE b.DEL = 0 AND b.BOARD_AUTH = 3 AND b.BOARD_SEQ = #{empBoardSeq};
+    WHERE b.DEL = 0 AND b.BOARD_AUTH = 3 AND b.BOARD_SEQ = #{empBoardSeq} AND b.CATEGORY = 1;
   </select>
   
   <update id="readCount" parameterType="java.lang.Integer">
@@ -67,6 +67,13 @@
   	SET READ_COUNT = READ_COUNT + 1
   	WHERE BOARD_SEQ = #{empBoardSeq};
   </update>
+  
+  <insert id="insertRecruit" parameterType="com.palette.model.EmploymentBoardDto">
+  	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, IMAGE, CV_START_DATE, CV_END_DATE, FILE_NAME, DB_FILE_NAME, DEL, BOARD_AUTH, CAREER, EDUCATION, WORKING_TYPE, SALARY, POSITION, WORKING_LOCATION)
+  	VALUES(#{memberSeq}, 1, #{title}, #{content}, NOW(), 0, "", #{cvStartDate}, #{cvEndDate}, "", "", 0, 3, #{career}, #{education}, #{workingType}, #{salary}, #{position}, #{workingLocation})
+  </insert>
+  
+  
   
   
 
