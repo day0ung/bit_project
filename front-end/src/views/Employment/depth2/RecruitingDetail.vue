@@ -10,20 +10,20 @@
             <section class="jview">
               <div class="wrap_jv_cont">
                 <div class="wrap_jv_header">
-                  <div class="jv_header">
-                    <a href="#" class="company" target="_blank" onclick="window.open(this.href, ''); return false;" >
+                   <div class="jv_header">
+                    <a href="#" class="company" target="_blank">
                       <!-- 회사명 -->
-                      {{getOneRecruit.memberDto.memberName}}
+                      {{getOneRecruit1.memberDto.memberName}}
                     </a>
                     <button type="button" title="관심기업 등록" class="btn_jview spr_jview btn_interest" onclick="#" onmousedown="#" first_nudge="off">
                       <span>관심기업 등록</span>
                     </button>
                     <h1 class="tit_job">
                         <!-- 글제목 -->
-                      {{getOneRecruit.title}}
+                      {{getOneRecruit1.title}}
                     </h1>
                     <div class="btn_apply">
-                      <span class="dday">D-{{getOneRecruit.dDay}}</span>
+                      <span class="dday">D-{{getOneRecruit1.dDay}}</span>
                       <a class="sri_btn_lg for_btn_event" title="홈페이지 지원" href="http://ps.korchamhrd.net/" target="_blank" rel="nofollow" onclick="try{Saramin.updateHomepageLink(37953815, &quot;homepage&quot;);} catch(e) {}" onmousedown="try{n_trackEvent('homepage_apply', 'view', '37953815')}catch(e){}">
                         <span class="sri_btn_homepage_apply">홈페이지 지원</span>
                       </a>
@@ -36,33 +36,34 @@
                     <div class="col">
                       <dl>
                         <dt>경력</dt>
-                        <dd><strong>{{getOneRecruit.career}}</strong></dd>
+                        <dd><strong>{{getOneRecruit1.career}}</strong></dd>
+                        
                       </dl>            
                       <dl>
                         <dt>학력</dt>
-                        <dd><strong>{{getOneRecruit.education}}</strong></dd>
+                        <dd><strong>{{getOneRecruit1.education}}</strong></dd>
                       </dl>                
                       <dl>
                         <dt>근무형태</dt>
-                        <dd><strong>{{getOneRecruit.workingType}}</strong></dd>
+                        <dd><strong>{{getOneRecruit1.workingType}}</strong></dd>
                       </dl>
                     </div>
                     <div class="col">
                       <dl>
                         <dt>급여</dt>
-                        <dd>{{getOneRecruit.salary}}</dd>
+                        <dd>{{getOneRecruit1.salary}}</dd>
                       </dl>
                       <dl>
                         <dt>직급/직책</dt>
-                        <dd>{{getOneRecruit.position}}</dd>
+                        <dd>{{getOneRecruit1.position}}</dd>
                       </dl>
                       <dl>
                         <dt>근무지역</dt>
-                        <dd>{{getOneRecruit.workingLocation}}</dd>
+                        <dd>{{getOneRecruit1.workingLocation}}</dd>
                       </dl>
                     </div>
                     <ul class="meta">
-                      <li>조회수 <strong>{{getOneRecruit.readCount}}</strong></li>
+                      <li>조회수 <strong>{{getOneRecruit1.readCount}}</strong></li>
                       <!-- <li>홈페이지접속 <strong>105</strong></li> -->
                       <!-- <li class="txt_noti">특이사항</li> -->
                     </ul>
@@ -74,8 +75,6 @@
                       <div class="iframe_content" width="860" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="" title="상세요강" height="auto">
                         <p>안녕하세요</p>
                         <P>시간 테스트</P>
-                        
-                    
                       </div>
                     </div>
                   </div>
@@ -85,7 +84,7 @@
                       <div class="status">
                         <div class="info_timer" data-remain-time="1429051">
                           <span class="txt">남은 기간</span>
-                          <span class="day">{{getOneRecruit.dDay}}</span>
+                          <span class="day">{{getOneRecruit1.dDay}}</span>
                           <span class="txt_day">일</span>
                           <span v-show=false class="time">{{dTime}}</span>
                           <span class="time">{{final}}</span>
@@ -128,16 +127,18 @@ export default {
   data(){
     return{
       empBoardSeq : "",
-      getOneRecruit : "",
+      getOneRecruit1 : "",
       nowDate : this.$moment(new Date()).format('YYYY.MM.DD HH:mm:ss'),
       startDate : "",
       endDate : "",
       nowMilliS : "",
       endMillis : "",
-      final:""
+      final:"",
+      login:""
     }
   },
   mounted(){
+     
     // 구인공고 리스트에서 공고를 클릭시 게시판seq를 파라미터로 가지고 와서 DTO를 불러와서 getOneRecruit에 담는다.
     this.empBoardSeq = this.$route.params.boardId
       var params = new URLSearchParams()
@@ -145,10 +146,11 @@ export default {
       axios.post("http://localhost:9000/getOneRecruit", params)
           .then(res =>{
             
-            this.getOneRecruit = res.data
             this.$store.state.s_employment.getOneRecruit = res.data
+            this.getOneRecruit1 = this.$store.state.s_employment.getOneRecruit
             this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm')
             this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm')
+
       })
 
   },
