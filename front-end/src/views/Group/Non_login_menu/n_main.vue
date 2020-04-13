@@ -41,8 +41,8 @@
             <div class="profile-bio detail_desc">
               <div class="info">
                 <h4>{{groupInfo.groupName}}</h4>
-                <p>{장소} | {{groupInfo.memberDto.memberName}}</p>
-                <p> {small info} </p>
+                <p>{{groupInfo.groupLocation}} | {{groupInfo.memberDto.memberName}}</p>
+                <p>{{groupInfo.smallInfo}}</p>
                 <p>{{groupInfo.currMember}} / {{groupInfo.maxMember}}</p>
               </div>
               <!-- <div class="date">

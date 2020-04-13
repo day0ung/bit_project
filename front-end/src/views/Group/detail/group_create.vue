@@ -2,7 +2,7 @@
     <div class="create">
         <div class="createContainer">
             <div class="title">그룹 스터디 생성</div>
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" v-loading="loading">
+            <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" v-loading="loading">
                 <!-- 그룹명 설정 -->
                 <el-form-item label="그룹 스터디명" prop="groupName">
                     <el-input placeholder="그룹 스터디명을 적어주세요" v-model="ruleForm.groupName" style="width: 85%"></el-input>
@@ -85,7 +85,6 @@
 </template>
 
 <script>
-import 'element-ui/lib/theme-chalk/index.css';
 import { loading } from 'element-ui';
 export default {
     data(){
@@ -223,13 +222,12 @@ export default {
 </script>
 
 <style scope>
-.create{
-}
 
 .createContainer {
     position: relative;
     margin: auto;
     overflow: hidden;
+    width: 600px;
     height: auto;
     border-radius: 10px;
 }

@@ -31,7 +31,7 @@
 
 @font-face {
     font-family: element-icons;
-    src: url(fonts/element-icons.woff) format("woff"), url(fonts/element-icons.ttf) format("truetype");
+    /* src: url(fonts/element-icons.woff) format("woff"), url(fonts/element-icons.ttf) format("truetype"); */
     font-weight: 400;
     font-display: "auto";
     font-style: normal
@@ -4868,7 +4868,6 @@
     float: none;
     display: inline-block;
     text-align: left;
-    padding: 0 0 10px
 }
 
 .el-form--inline .el-form-item {
@@ -4891,8 +4890,9 @@
     display: block
 }
 
+
 .el-form-item {
-    margin-bottom: 22px
+    margin-bottom: 40px
 }
 
 .el-form-item::after,
@@ -4954,7 +4954,8 @@
     text-align: right;
     vertical-align: middle;
     float: left;
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: 500;
     color: #606266;
     line-height: 40px;
     padding: 0 12px 0 0;
@@ -11731,9 +11732,9 @@
     border-radius: 3px
 }
 
-.el-color-predefine__color-selector.is-alpha {
+/* .el-color-predefine__color-selector.is-alpha {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==)
-}
+} */
 
 .el-color-hue-slider {
     position: relative;
@@ -11833,7 +11834,7 @@
     box-sizing: border-box;
     width: 280px;
     height: 12px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==)
+    /* background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==) */
 }
 
 .el-color-alpha-slider__bar {
@@ -12042,7 +12043,7 @@
 }
 
 .el-color-picker__color.is-alpha {
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==)
+    /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==) */
 }
 
 .el-color-picker__color-inner {
