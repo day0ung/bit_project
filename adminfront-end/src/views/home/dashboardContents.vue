@@ -5,6 +5,8 @@
 </template>
 
 <script>
+// import {board} from '@/api/api_index.js'
+
 export default {
 
 }
