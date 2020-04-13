@@ -77,6 +77,7 @@ public class GroupController {
     	}
     	return list;
     }
+    
     @GetMapping(value="/groupBoardList")
     public ArrayList<GroupBoardDto> groupBoardList() {
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
