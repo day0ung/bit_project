@@ -15,6 +15,11 @@ export default [
         component: () => import('@/views/Member/Member_Join.vue')
     },
     {
+        path:'/memberInter',
+        name: 'memberInter',
+        component: () => import('@/views/Member/memberInterest.vue')
+    },
+    {
         path:'/companyJoin',
         name:'companyJoin',
         component: () => import('@/views/Member/Company_Join.vue')
@@ -26,3 +31,4 @@ export default [
     }
 
 ]
+

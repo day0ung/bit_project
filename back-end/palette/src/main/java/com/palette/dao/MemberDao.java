@@ -14,5 +14,7 @@ public interface MemberDao {
 	List<MemberDto> selectAll();
 
 	MemberDto getOneMember(MemberDto dto);
+	
+	int createMember(MemberDto dto);
 
 }

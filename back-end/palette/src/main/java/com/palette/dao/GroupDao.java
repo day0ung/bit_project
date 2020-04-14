@@ -19,12 +19,10 @@ import com.palette.model.InterSmallDto;
 public interface GroupDao {
 
 	List<GroupDto> getAllGroup();
+	ArrayList<GroupDto> getMyGroup(GroupParams groupParams);
+	ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams);
 
 	GroupDto getOneGroup(int seq);
-
-	List<InterBigDto> getBigList();
-
-	List<InterSmallDto> getSmallList(int seq);
 	
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
@@ -36,5 +34,6 @@ public interface GroupDao {
 	List<InterBigDto> getInterListAll();
 
 	ArrayList<GroupDto> groupSearchList(GroupParams groupParams);
+
 
 }
