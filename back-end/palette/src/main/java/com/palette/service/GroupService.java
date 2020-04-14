@@ -12,6 +12,7 @@ import com.palette.model.BoardParams;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
+import com.palette.model.GroupParams;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 
@@ -56,5 +57,9 @@ public class GroupService {
 	}
 	public ArrayList<GroupBoardDto> getGroupBoardList() {
 		return groupDao.getgroupBoardList();
+	}
+
+	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {
+		return groupDao.groupSearchList(groupParams);
 	}
 }

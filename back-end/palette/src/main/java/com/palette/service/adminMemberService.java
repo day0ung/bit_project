@@ -16,9 +16,13 @@ public class adminMemberService {
 	adminMemberDao adminmemberdao;
 	
 	public List<MemberDto> getMemberListAll(){
-		return adminmemberdao.getMemberListAll();
+		return adminmemberdao.adminGetMemberListAll();
 	}
 	
+	public MemberDto adminGetOneMember(MemberDto dto) {
+		
+		return adminmemberdao.adminGetOneMember(dto);
+	}
 	
 
 }//end of adminMemberService class

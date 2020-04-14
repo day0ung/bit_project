@@ -78,6 +78,21 @@
 	</resultMap>
 
 
+<select id="groupSearchList" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select *
+	from GROUP_INFO g
+	join MEMBER m
+		on g.MEMBER_SEQ = m.MEMBER_SEQ
+	join INTER_BIG ib
+		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+			from GROUP_MEMBER
+			group by GROUP_INFO_SEQ) cur
+		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where g.INTER_BIG_SEQ= #{interBigSeq};
+</select>
 <select id="getAllGroup" resultMap="GroupList">
 	select *
 	from GROUP_INFO g
