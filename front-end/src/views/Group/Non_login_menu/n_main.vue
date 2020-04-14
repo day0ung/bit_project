@@ -1,14 +1,15 @@
 <template>
   <div class="n_main">
     <div class="group_detail bounce-top">
-    <div class="demo">
+    <!-- <div class="demo">
       <div class="content">
           <div id="large-header" class="large-header">
             <canvas id="demo-canvas"></canvas>
             <h1 class="main-title"><span class="thin">그룹스터디</span></h1>
           </div>
       </div>
-    </div>
+    </div> -->
+      <div>그룹스터디</div>
     </div>
     <div class="n_main_background"><!-- 배경 -->
       <div class="n_main_component">
@@ -117,7 +118,7 @@ export default {
 <style scoped>
 
 /* 우주배경 배너 */
-.large-header {
+/* .large-header {
    position: relative;
    width: 100%;
    background: #111;
@@ -157,7 +158,7 @@ export default {
    .demo .main-title {
       font-size: 3em;
    }
-}
+} */
 /* 우주배경 배너 끝*/
 
 .Classification{
