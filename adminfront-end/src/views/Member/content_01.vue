@@ -68,9 +68,9 @@
 
 
 
-
+<!-- 
         <button v-on:click="showTestResult">test ajax start area</button>
-        <p v-for="outdata in output_data" :key="outdata.boardSeq"> {{outdata}} </p>
+        <p v-for="outdata in output_data" :key="outdata.boardSeq"> {{outdata}} </p> -->
 
                 <button v-on:click="showMemberList">member List recive </button>
         <p v-for="memdata in member_data" :key="memdata.memberSeq"> {{memdata}} </p>
@@ -100,22 +100,28 @@ export default {
         }
     },
     methods:{
-        showTestResult(){
-            axios.get("http://localhost:9000/getTestString")
-                .then(res => {
-                console.log(JSON.stringify(res.data))
-                this.output_data=res.data;
-            })
-    
-        },
+
+        // axios data processing
+
+        // showTestResult(){
+        //     axios.get("http://localhost:9000/getTestString")
+        //         .then(res => {
+        //         console.log(JSON.stringify(res.data))
+        //         this.output_data=res.data;
+        //     })
+        // },
         showMemberList(){
-             axios.get("http://localhost:9000/getMemberListAll")
+             axios.get("http://localhost:9000/getOneMember")
                 .then(res => {
                 console.log(JSON.stringify(res.data))
                 this.member_data=res.data;
             })
 
         },
+
+         
+        //Event processing
+
         gotoClick(row, column, event){
         this.$router.push({
             path : "/group/detail2/depth2/" + row.boardSeq
@@ -134,17 +140,17 @@ export default {
         console.log(`current page: ${val}`);
         }
     },
-  mounted(){
-      this.$store.state.currpage = this.$route.path
-      var params = new URLSearchParams();
-      params.append('itemsPerPage', this.itemsPerPage);
-      params.append('currentPage', this.currentPage);
-      axios.post("http://localhost:9000/groupBoardList", params)
-                .then(res => {
-            this.tableData = res.data
-            this.totalItem = res.data.length
-          })
-  }
+//   mounted(){
+//       this.$store.state.currpage = this.$route.path
+//       var params = new URLSearchParams();
+//       params.append('itemsPerPage', this.itemsPerPage);
+//       params.append('currentPage', this.currentPage);
+//       axios.post("http://localhost:9000/groupBoardList", params)
+//                 .then(res => {
+//             this.tableData = res.data
+//             this.totalItem = res.data.length
+//           })
+//   }
 }
 </script>
 
