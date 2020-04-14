@@ -10152,7 +10152,7 @@
 }
 
 .el-badge__content--primary {
-    background-color: #409EFF
+    background-color: #FF6C00
 }
 
 .el-badge__content--success {
@@ -12891,7 +12891,7 @@
 }
 
 .el-timeline-item__node--primary {
-    background-color: #409EFF
+    background-color: #FF6C00
 }
 
 .el-timeline-item__node--success {
@@ -12974,7 +12974,7 @@
 .el-link.el-link--default:after,
 .el-link.el-link--primary.is-underline:hover:after,
 .el-link.el-link--primary:after {
-    border-color: #409EFF
+    border-color: #FF6C00
 }
 
 .el-link.is-disabled {
@@ -12998,15 +12998,15 @@
 }
 
 .el-link.el-link--primary {
-    color: #409EFF
+    color: #FF6C00
 }
 
 .el-link.el-link--primary:hover {
-    color: #66b1ff
+    color: #FF6C00
 }
 
 .el-link.el-link--primary.is-disabled {
-    color: #a0cfff
+    color: #FF6C00
 }
 
 .el-link.el-link--danger.is-underline:hover:after,
@@ -13470,22 +13470,25 @@
 
 .el-button--primary {
     color: #FFF;
-    background-color: #409EFF;
-    border-color: #409EFF
+    background-color: #FF6C00;
+    border-color: #FF6C00;
+    outline: 0
 }
 
 .el-button--primary:focus,
 .el-button--primary:hover {
-    background: #66b1ff;
-    border-color: #66b1ff;
-    color: #FFF
+    background: #FF6C00;
+    border-color: #FF6C00;
+    color: #FFF;
+    outline: 0
 }
 
 .el-button--primary.is-active,
 .el-button--primary:active {
-    background: #3a8ee6;
-    border-color: #3a8ee6;
-    color: #FFF
+    background: #FF6C00;
+    border-color: #FF6C00;
+    color: #FFF;
+    outline: 0
 }
 
 .el-button--primary:active {
@@ -13498,25 +13501,25 @@
 .el-button--primary.is-disabled:hover {
     color: #FFF;
     background-color: #a0cfff;
-    border-color: #a0cfff
+    border-color: #a0cfff;
 }
 
 .el-button--primary.is-plain {
     color: #409EFF;
-    background: #ecf5ff;
-    border-color: #b3d8ff
+    background: #FF6C00;
+    border-color: #FF6C00
 }
 
 .el-button--primary.is-plain:focus,
 .el-button--primary.is-plain:hover {
-    background: #409EFF;
-    border-color: #409EFF;
+    background: #FF6C00;
+    border-color: #FF6C00;
     color: #FFF
 }
 
 .el-button--primary.is-plain:active {
-    background: #3a8ee6;
-    border-color: #3a8ee6;
+    background: #FF6C00;
+    border-color: #FF6C00;
     color: #FFF;
     outline: 0
 }
