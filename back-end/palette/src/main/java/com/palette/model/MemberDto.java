@@ -1,5 +1,7 @@
 package com.palette.model;
 
+import java.util.Arrays;
+
 /**
  * MemberDto
  */
@@ -9,10 +11,11 @@ public class MemberDto {
 	private String memberId;
 	private String pwd;
 	private String memberName;
-	private String birth;
 	private String address;
-	private String location;
+	private String interAraea[];
 	private String email;
+	private String age;
+	private int gender;
 	private int myMoney;
 	private int cv;
 	private String companyInfo;
@@ -24,18 +27,19 @@ public class MemberDto {
 	public MemberDto() {
 	}
 
-	public MemberDto(int memberSeq, String memberId, String pwd, String memberName, String birth, String address,
-			String location, String email, int myMoney, int cv, String companyInfo, String companyLogo, int auth,
+	public MemberDto(int memberSeq, String memberId, String pwd, String memberName, String address, String[] interAraea,
+			String email, String age, int gender, int myMoney, int cv, String companyInfo, String companyLogo, int auth,
 			int del, int dislike) {
 		super();
 		this.memberSeq = memberSeq;
 		this.memberId = memberId;
 		this.pwd = pwd;
 		this.memberName = memberName;
-		this.birth = birth;
 		this.address = address;
-		this.location = location;
+		this.interAraea = interAraea;
 		this.email = email;
+		this.age = age;
+		this.gender = gender;
 		this.myMoney = myMoney;
 		this.cv = cv;
 		this.companyInfo = companyInfo;
@@ -77,14 +81,6 @@ public class MemberDto {
 		this.memberName = memberName;
 	}
 
-	public String getBirth() {
-		return birth;
-	}
-
-	public void setBirth(String birth) {
-		this.birth = birth;
-	}
-
 	public String getAddress() {
 		return address;
 	}
@@ -93,12 +89,12 @@ public class MemberDto {
 		this.address = address;
 	}
 
-	public String getLocation() {
-		return location;
+	public String[] getInterAraea() {
+		return interAraea;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setInterAraea(String[] interAraea) {
+		this.interAraea = interAraea;
 	}
 
 	public String getEmail() {
@@ -107,6 +103,22 @@ public class MemberDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public int getGender() {
+		return gender;
+	}
+
+	public void setGender(int gender) {
+		this.gender = gender;
 	}
 
 	public int getMyMoney() {
@@ -168,9 +180,15 @@ public class MemberDto {
 	@Override
 	public String toString() {
 		return "MemberDto [memberSeq=" + memberSeq + ", memberId=" + memberId + ", pwd=" + pwd + ", memberName="
-				+ memberName + ", birth=" + birth + ", address=" + address + ", location=" + location + ", email="
-				+ email + ", myMoney=" + myMoney + ", cv=" + cv + ", companyInfo=" + companyInfo + ", companyLogo="
-				+ companyLogo + ", auth=" + auth + ", del=" + del + ", dislike=" + dislike + "]";
+				+ memberName + ", address=" + address + ", interAraea=" + Arrays.toString(interAraea) + ", email="
+				+ email + ", age=" + age + ", gender=" + gender + ", myMoney=" + myMoney + ", cv=" + cv
+				+ ", companyInfo=" + companyInfo + ", companyLogo=" + companyLogo + ", auth=" + auth + ", del=" + del
+				+ ", dislike=" + dislike + "]";
 	}
+	
+	
 
+	
+
+	
 }

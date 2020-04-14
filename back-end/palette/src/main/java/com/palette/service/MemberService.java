@@ -26,5 +26,10 @@ public class MemberService {
 			
 			return memberDao.getOneMember(dto);
 		}
+		
+		public boolean createMember(MemberDto dto) {
+			int check = memberDao.createMember(dto);
+			return check > 0? true: false;
+		}
     
 }

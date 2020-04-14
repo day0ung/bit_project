@@ -9,36 +9,46 @@
                 </el-form-item>
 				<!-- 비밀번호 -->
 				 <el-form-item label="비밀번호" prop="pass">
-					<el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+					<el-input type="password" v-model="ruleForm.pass" placeholder="비밀번호를 입력해 주세요" autocomplete="off"></el-input>
 				</el-form-item>
 				<el-form-item label="비밀번호 확인" prop="checkPass">
-					<el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-				</el-form-item>
+					<el-input type="password" v-model="ruleForm.checkPass" placeholder="비밀번호를 확인해 주세요"  autocomplete="off"></el-input>
+				</el-form-item> 
+                <!-- 이름 -->
+                <el-form-item label="이름" prop="memberName">
+                    <el-input placeholder="성함을 입력해 주세요" v-model="ruleForm.memberName"></el-input>
+                </el-form-item>
 				<!--  이메일 -->
 				 <el-form-item prop="email" label="Email">
-					<el-input v-model="ruleForm.email"></el-input>
+					<el-input v-model="ruleForm.email" placeholder="올바른 이메일 형식을 입력해 주세요"></el-input>
 				 </el-form-item>	 
                 <!--  나이대선택 -->
 				<el-form-item label="성별/ 연령" prop="age">
-					<el-select v-model="ruleForm.age" placeholder="나이대를 선택해주세요">
+					<el-select v-model="ruleForm.age" placeholder="나이대를 선택해주세요" style="margin-right: 20px" >
 						<el-option label="10대" value="10대"></el-option>
 						<el-option label="20-24" value="20-24"></el-option>
 						<el-option label="25-29" value="25-29"></el-option>
 						<el-option label="30-34" value="30-34"></el-option>
 						<el-option label="40대" value="40대"></el-option>
 					</el-select>
-					||
-					<el-radio v-model="ruleForm.gender" label="1" >남자</el-radio>
-  					<el-radio v-model="ruleForm.gender" label="2" >여자</el-radio>
+				
+					<el-radio v-model="ruleForm.gender" label="1" prop="gender" >남자</el-radio>
+  					<el-radio v-model="ruleForm.gender" label="2" prop="gender" >여자</el-radio>
 				</el-form-item>
-			
+
+                 <!--  주소 -->
+                <el-form-item label="주소" prop="extraAddress">
+                    <el-input v-model="ruleForm.address" placeholder="주소" readonly="readonly" style="width: 50%; margin-right: 10px"></el-input>
+                    <el-button type="info"  @click="execDaumPostcode" plain>우편번호 찾기</el-button>
+                    <el-input v-model="ruleForm.extraAddress" placeholder="상세주소"></el-input>
+                </el-form-item>
             
-               
+
                 <!-- 서브밋버튼 -->
                 <div class="submitBtnDiv">
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
-                        <el-button @click="resetForm('ruleForm')">Reset</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">회원가입</el-button>
+                        <el-button @click="resetForm('ruleForm')">취소</el-button>
                     </el-form-item>
                 </div>
             </el-form>
@@ -62,7 +72,7 @@ export default {
       };
       var validatePass2 = (rule, value, callback) => {
         if (value === '') {
-          callback(new Error('Please input the password again'));
+          callback(new Error('비밀번호 확인을 입력해주세요'));
         } else if (value !== this.ruleForm.pass) {
           callback(new Error('비밀번호가 일치하지 않습니다'));
         } else {
@@ -73,72 +83,73 @@ export default {
             ruleForm: {
 				memberId: '',
 				pass: '',
-				checkPass: '',
+                checkPass: '',
+                memberName: '',
 				email: '', 
-				gender: '',
+				gender: '1',
 				age: '',
 				postcode: '',
       			address: '',
-     			extraAddress: '',
-                maxMember:'',
-                schedeul: [],
-                date: '',
-                desc: '',
-                dialogImageUrl: '',
-                dialogVisible: false
+                extraAddress: '',
+                auth: '0'
             },
             rules: {
-            memberId: [
-                { required: true, message: '아이디를 입력해주세요', trigger: 'blur' },
-                { min: 3, max: 20, message: '스터디 그룹명은 3글자에서 20자로 사이로 지어주세요', trigger: 'blur' }
-			],
-			pass: [
-            	{ required: true, validator: validatePass, trigger: 'blur' }
-			],
-			checkPass: [
-				{ required: true, validator: validatePass2, trigger: 'blur' }
-			],
-			email: [
-				{ required: true, message: 'Please input email address', trigger: 'blur' },
-				{ type: 'email', message: 'Please input correct email address', trigger: ['blur', 'change'] }
-			],
-			age: [
-				{ required: true, message: '나이대를 선택해 주세요', trigger: 'blur' },
-			],
-			gender:[
-
-			],
-			postcode:[
-
-			],
-			address:[
-
-			],
-			extraAddress:[
-
-			],
-            schedeul: [
-                { type: 'array', required: true, message: '주간일정을 선택해주세요', trigger: 'change' }
-            ],
-            date: [
-                { type: 'date', required: true, message: '시작일과 종료일을 선택해주세요', trigger: 'change' }
-            ],
-            desc: [
-                { required: true, message: '스터디 그룹을 소개해주세요', trigger: 'blur' },
-                { min: 1, max: 500, message: '그룹소개는 500자 이내로 작성해주세요.', trigger: 'blur' }
-            ]
+                memberId: [
+                    { required: true, message: '아이디를 입력해주세요', trigger: 'blur' },
+                    { min: 3, max: 20, message: '아이디는 3글자에서 20자로 사이로 지어주세요', trigger: 'blur' }
+                ],
+                pass: [
+                    { required: true, validator: validatePass, trigger: 'blur' }
+                ],
+                checkPass: [
+                    { required: true, validator: validatePass2, trigger: 'blur' }
+                ],
+                memberName:[
+                     { required: true, message: '이름을 입력해주세요', trigger: 'blur' },
+                ],
+                email: [
+                    { required: true, message: '이메일을 입력해주세요', trigger: 'blur' },
+                    { type: 'email', message: '이메일 형식으로 입력해주세요', trigger: ['blur', 'change'] }
+                ],
+                age: [
+                    { required: true, message: '나이대를 선택해 주세요', trigger: 'blur' },
+                ],
+                gender:[
+                    {  message: '성별을 주세요', trigger: 'blur'}
+                ],
+                address:[
+                    { required: true, message: '상세 주소를 입력해주세요', trigger: 'blur' },
+                ],
+                extraAddress:[
+                    {message: '상세주소를 입력해주세요', trigger: 'blur' }
+                ]
             },
-            bigInterList: "",
-            smallInterList: "",
-            bigValue: 0,
-            InterListAll: ''
-            }
+           
+        }
     },
     methods:{
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
-                alert('submit!');
+                var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
+                alert(memberAddress)
+                var params = new URLSearchParams();
+                params.append('memberId', this.ruleForm.memberId)
+                params.append('pwd', this.ruleForm.pass)
+                params.append('memberName', this.ruleForm.memberName)
+                params.append('email', this.ruleForm.email)
+                params.append('gender',  this.ruleForm.gender)
+                params.append('age', this.ruleForm.age)
+                params.append('address', memberAddress)
+                params.append('auth', this.ruleForm.auth)
+                console.log(params)
+                axios.post('http://localhost:9000/createMember', params).then(
+                    res => {
+                        if(res.data == true){
+                            alert('회원가입이 완료 되었습니다')
+                            this.$router.push ({name:'memberInter'})
+                        }
+                    }) 
             } else {
                 console.log('error submit!!');
                 return false;
@@ -152,25 +163,25 @@ export default {
 			new daum.Postcode({
 			onComplete: (data) => {
 			if (data.userSelectedType === 'R') {
-				this.address = data.roadAddress;
+				this.ruleForm.address = data.roadAddress;
 			} else {
-				this.address = data.jibunAddress;
+				this.ruleForm.address = data.jibunAddress;
 			}
 			if (data.userSelectedType === 'R') {
 				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-				this.extraAddress += data.bname;
+				this.ruleForm.extraAddress += data.bname;
 				}
 				if (data.buildingName !== '' && data.apartment === 'Y') {
-				this.extraAddress +=
-					this.extraAddress !== ''
+				this.ruleForm.extraAddress +=
+					this.ruleForm.extraAddress !== ''
 					? `, ${data.buildingName}`
 					: data.buildingName;
 				}
-				if (this.extraAddress !== '') {
-				this.extraAddress = ` (${this.extraAddress})`;
+				if (this.ruleForm.extraAddress !== '') {
+				this.ruleForm.extraAddress = ` (${this.ruleForm.extraAddress})`;
 				}
 			} else {
-				this.extraAddress = '';
+				this.ruleForm.extraAddress = '';
 			}
 			},
 		}).open();

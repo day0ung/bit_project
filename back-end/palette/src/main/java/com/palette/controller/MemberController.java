@@ -33,9 +33,19 @@ public class MemberController {
     }
     
     @PostMapping(value= "/getOneMember")
-    public MemberDto getOneMember(MemberDto dto, HttpServletRequest request)throws Exception {
+    public MemberDto getOneMember(MemberDto dto) {
     	System.out.println("getOneMember() 실행");
     	MemberDto member = memberService.getOneMember(dto);
     	return member;
+    }
+    
+    @PostMapping(value="/createMember")
+    public boolean createMember(MemberDto dto, HttpServletRequest request)throws Exception {
+    	System.out.println("createMember" + dto.toString());
+    	boolean check = memberService.createMember(dto);
+   
+    	System.out.println(" 추가 성공: " + check);
+    	
+    	return check;
     }
 }
