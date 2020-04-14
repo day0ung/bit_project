@@ -8,8 +8,8 @@
                     <el-input placeholder="그룹 스터디명을 적어주세요" v-model="ruleForm.groupName" style="width: 85%"></el-input>
                 </el-form-item>
                 <!-- 주제선택 -->
-                <el-form-item label="스터디 주제" prop="region1">
-                    <el-select v-model="ruleForm.region1" placeholder="주제를 선택해주세요">
+                <el-form-item label="스터디 주제" prop="inter">
+                    <el-select v-model="ruleForm.inter" placeholder="주제를 선택해주세요" style="width: 85%">
                         <el-option-group v-for="bigInter in InterListAll" :key="bigInter.interBigSeq" :value="bigInter.interBigSeq" :label="bigInter.bigName">
                             <el-option v-for="item in bigInter.interSmallDtos" :key="item.interSmallSeq" :value="item.interSmallSeq" :label="item.smallName"></el-option>
                         </el-option-group>
@@ -21,37 +21,41 @@
                     </el-select>
                 </el-form-item> -->
                 <!-- 인원설정 -->
-                <el-form-item label="인원설정" prop="maxMember">
-                    <el-input-number size="mini" v-model="ruleForm.maxMember" :min="4" :max="10"></el-input-number>
+                <el-form-item label="최대인원" prop="maxMember">
+                    <el-input-number size="" v-model="ruleForm.maxMember" :min="4" :max="10"></el-input-number>
                 </el-form-item>
                 <!-- 기간설정 -->
                 <el-form-item label="기간설정" prop="date">
                     <el-date-picker
+                        style="width: 85%"
                         v-model="ruleForm.date"
                         type="daterange"
                         align="right"
                         unlink-panels
-                        range-separator="|"
+                        range-separator=" ~ "
                         start-placeholder="시작일"
                         end-placeholder="종료일"
                         :picker-options="pickerOptions">
                     </el-date-picker>
                 </el-form-item>
+                <!-- 장소선택 -->
+                <el-form-item label="지역선택" prop="address">
+                    <el-button type="primary" round @click="execDaumPostcode">우편번호찾기</el-button>
+                    <el-input placeholder="주소" v-model="ruleForm.address" style="width: 85%" readonly="readonly"></el-input>
+                    <el-input placeholder="상세주소" v-model="ruleForm.extraAddress" style="width: 85%" readonly="readonly"></el-input>
+                </el-form-item>
                 <!-- 주간일정 -->
-                <el-form-item label="주간 일정" prop="schedeul">
-                    <el-checkbox-group v-model="ruleForm.schedeul">
-                        <el-checkbox label="월" name="schedeul"></el-checkbox>
-                        <el-checkbox label="화" name="schedeul"></el-checkbox>
-                        <el-checkbox label="수" name="schedeul"></el-checkbox>
-                        <el-checkbox label="목" name="schedeul"></el-checkbox>
-                        <el-checkbox label="금" name="schedeul"></el-checkbox>
-                        <el-checkbox label="토" name="schedeul"></el-checkbox>
-                        <el-checkbox label="일" name="schedeul"></el-checkbox>
-                    </el-checkbox-group>
+                <el-form-item label="주간 일정" prop="selectSchedeul">
+                    <!-- <el-checkbox-group v-model="ruleForm.selectSchedeul"> -->
+                    <el-checkbox v-model="selectSchedeul" label="schedeul[1].name" value="schedeul[1].val"></el-checkbox>
+                    <!-- </el-checkbox-group> -->
                 </el-form-item>
                 <!-- 그룹소개 -->
-                <el-form-item label="스터디 소개" prop="desc">
-                    <el-input type="textarea" v-model="ruleForm.desc" style="width: 85%"></el-input>
+                <el-form-item label="스터디 간단소개" prop="smallInfo">
+                    <el-input type="textarea" v-model="ruleForm.smallInfo" style="width: 85%;" :autosize="{ minRows: 1, maxRows: 3}" placeholder="스터디를 한마디로 표현한다면?"></el-input>
+                </el-form-item>
+                <el-form-item label="스터디 상세소개" prop="info">
+                    <el-input type="textarea" v-model="ruleForm.info" style="width: 85%;" :autosize="{ minRows: 10, maxRows: 20}" placeholder="스터디의 조건과 방법등 사람들이 보고 참여할 수 있게 소개 해주세요"></el-input>
                 </el-form-item>
                 <!-- 그룹 이미지 -->
                 <el-form-item label="그룹대표 이미지" prop="image">
@@ -66,8 +70,7 @@
                         :on-remove="handleRemove">
                         <i class="el-icon-plus"></i>
                     </el-upload>
-                    <el-dialog :visible.sync="ruleForm.dialogVisible"
-                                append-to-body="true">
+                    <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="ruleForm.dialogImageUrl" alt="">
                     </el-dialog>
                 </el-form-item>
@@ -86,46 +89,61 @@
 
 <script>
 import { loading } from 'element-ui';
+const schedeulTable = [
+    { name: "일", dataValue: "sunday", val: "1" },
+    { name: "월", dataValue: "monday", val: "1" },
+    { name: "화", dataValue: "tuesday", val: "1" },
+    { name: "수", dataValue: "wednesday", val: "1" },
+    { name: "목", dataValue: "thursday", val: "1" },
+    { name: "금", dataValue: "friday", val: "1" },
+    { name: "토", dataValue: "saturday", val: "1" }
+]
+
 export default {
     data(){
         return{
             loading: true,
+            dialogVisible: false,
+            schedeul: schedeulTable,
             ruleForm: {
                 groupName: '',
-                region1: '',
-                region2: '',
+                inter: '',
+                address: '',
+                extraAddress: '',
                 maxMember:'',
-                schedeul: [],
                 date: '',
-                desc: '',
+                info: '',
+                smallInfo: '',
                 dialogImageUrl: '',
-                dialogVisible: false
+                selectSchedeul: [],
+                sunday: '',
             },
             rules: {
             groupName: [
                 { required: true, message: '스터디 그룹 이름을 지어주세요', trigger: 'blur' },
                 { min: 3, max: 20, message: '스터디 그룹명은 3글자에서 20자로 사이로 지어주세요', trigger: 'blur' }
             ],
-            region1: [
-                { required: true, message: '스터디 그룹 큰주제를 선택해주세요', trigger: 'change' }
+            inter: [
+                { required: true, message: '스터디 그룹 주제를 선택해주세요', trigger: 'change' }
             ],
-            region2: [
-                { required: true, message: '스터디 그룹 작은주제를 선택해주세요', trigger: 'change' }
-            ],
-            schedeul: [
-                { type: 'array', required: true, message: '주간일정을 선택해주세요', trigger: 'change' }
-            ],
+            // selectSchedeul: [
+            //     { type: 'array', required: true, message: '주간일정을 선택해주세요', trigger: 'change' }
+            // ],
             date: [
-                { type: 'date', required: true, message: '시작일과 종료일을 선택해주세요', trigger: 'change' }
+                { required: true, message: '시작일과 종료일을 선택해주세요', trigger: 'change' }
             ],
-            desc: [
+            info: [
                 { required: true, message: '스터디 그룹을 소개해주세요', trigger: 'blur' },
                 { min: 1, max: 500, message: '그룹소개는 500자 이내로 작성해주세요.', trigger: 'blur' }
+            ],
+            smallInfo:[
+                { required: true, message: '스터디 그룹을 소개해주세요', trigger: 'blur' },
+                { min: 1, max: 30, message: '간단소개는 30자 이내로 작성해주세요.', trigger: 'blur' }
+            ],
+            address:[
+                { required: true, message: '지역을 선택해주세요', trigger: 'blur' },
             ]
             },
-            bigInterList: "",
-            smallInterList: "",
-            bigValue: 0,
             pickerOptions: {
                 shortcuts: [{
                     text: '일주일',
@@ -169,8 +187,6 @@ export default {
                     }
                 }]
             },
-            value1: '',
-            value2: '',
             InterListAll: ''
             }
     },
@@ -186,7 +202,7 @@ export default {
         },
         handlePictureCardPreview(file) {
             this.ruleForm.dialogImageUrl = file.url;
-            this.ruleForm.dialogVisible = true;
+            this.dialogVisible = true;
         },
         handleExceed(files, fileList){
             this.$message({
@@ -199,7 +215,26 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
-                alert('submit!');
+                // let selectAarrySchedeul = [];
+                // this.ruleForm.selectSchedeul.forEach(function(element){
+                //     schedeulTable.forEach(function(params) {
+                //         if(element === params.name){
+                //             var data = new Object() ;
+                //             data.name = params.dataValue ;
+                //             data.val = params.val ;
+                //             selectAarrySchedeul.push(data) ;
+                //         }
+                //     })
+                // })
+                // this.ruleForm.selectSchedeul = selectAarrySchedeul
+                //alert(JSON.stringify(selectAarrySchedeul))
+                var params = new URLSearchParams();	// post 방식으로 받아야함.
+                params.append('groupDto', this.ruleForm);
+                alert(JSON.stringify(this.ruleForm))
+                axios.post("http://localhost:9000/creatGroupApply", params)
+                            .then(res => {
+                                alert(res.data + "통신성공")
+                            })
             } else {
                 console.log('error submit!!');
                 return false;
@@ -208,6 +243,33 @@ export default {
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
+        },
+        execDaumPostcode() {
+            new daum.Postcode({
+                onComplete: (data) => {
+                if (data.userSelectedType === 'R') {
+                    this.ruleForm.address = data.roadAddress;
+                } else {
+                    this.ruleForm.address = data.jibunAddress;
+                }
+                if (data.userSelectedType === 'R') {
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                    this.ruleForm.extraAddress += data.bname;
+                    }
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                    this.ruleForm.extraAddress +=
+                        this.ruleForm.extraAddress !== ''
+                        ? `, ${data.buildingName}`
+                        : data.buildingName;
+                    }
+                    if (this.ruleForm.extraAddress !== '') {
+                    this.ruleForm.extraAddress = ` (${this.ruleForm.extraAddress})`;
+                    }
+                } else {
+                    this.ruleForm.extraAddress = '';
+                }
+                },
+            }).open();
         }
     },
     mounted(){
@@ -225,22 +287,21 @@ export default {
 
 .createContainer {
     position: relative;
+    padding: 40px;
     margin: auto;
     overflow: hidden;
     width: 600px;
     height: auto;
-    border-radius: 10px;
+    background: #f7f7f7;
 }
 .title{
     font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-    font-size: 18px;
+    font-size: 24px;
     margin: auto;
-    margin-top: 30px;
     margin-bottom: 20px;
     text-align: center;
 }
 .submitBtnDiv{
-    margin-left: -120px;
     text-align: center;
 }
 </style>

@@ -115,8 +115,11 @@ public class GroupController {
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
     }
-    
-    
-    
 
+    @PostMapping(value = "/creatGroupApply")
+    public String creatGroupApply(GroupDto groupDto){
+        System.out.println("creatGroupApply");
+        System.out.println(groupDto.toString());
+        return "";
+    }
 }

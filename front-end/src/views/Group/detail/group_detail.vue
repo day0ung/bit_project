@@ -25,21 +25,21 @@
         <div><span>지역</span> {{ groupOne.groupLocation }}</div>
         <div><span>인원</span> {{ groupOne.currMember}} / {{ groupOne.maxMember}}</div>
         <div><span>일정</span></div>
-        <div class="sizes" style="line-height: 12px;">
-            <div v-if="groupOne.groupSchedule.monday == 0" class="size_blue">월</div>
-            <div v-else class="size_blue_check">월</div>
-            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_blue">화</div>
-            <div v-else class="size_blue_check">화</div>
-            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_blue">수</div>
-            <div v-else class="size_blue_check">수</div>
-            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_blue">목</div>
-            <div v-else class="size_blue_check">목</div>
-            <div v-if="groupOne.groupSchedule.friday == 0" class="size_blue">금</div>
-            <div v-else class="size_blue_check">금</div>
-            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_blue">토</div>
-            <div v-else class="size_blue_check">토</div>
-            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_blue">일</div>
-            <div v-else class="size_blue_check">일</div>
+        <div class="schedules" style="line-height: 12px;">
+            <div v-if="groupOne.groupSchedule.monday == 0" class="schedule">월</div>
+            <div v-else class="schedule_check">월</div>
+            <div v-if="groupOne.groupSchedule.tuesday == 0" class="schedule">화</div>
+            <div v-else class="schedule_check">화</div>
+            <div v-if="groupOne.groupSchedule.wednesday == 0" class="schedule">수</div>
+            <div v-else class="schedule_check">수</div>
+            <div v-if="groupOne.groupSchedule.thursday == 0" class="schedule">목</div>
+            <div v-else class="schedule_check">목</div>
+            <div v-if="groupOne.groupSchedule.friday == 0" class="schedule">금</div>
+            <div v-else class="schedule_check">금</div>
+            <div v-if="groupOne.groupSchedule.saturday == 0" class="schedule">토</div>
+            <div v-else class="schedule_check">토</div>
+            <div v-if="groupOne.groupSchedule.sunday == 0" class="schedule">일</div>
+            <div v-else class="schedule_check">일</div>
         </div>
         
         <div><span>시작일</span> {{ groupOne.startDate }}</div>
@@ -150,19 +150,19 @@ export default {
   width: 80%;
 }
 
-.sizes {
+.schedules {
 	 display: grid;
 	 color: #4e4e4e;
 	 grid-template-columns: repeat(auto-fill, 30px);
 	 grid-gap: 4px;
 }
-.size_blue {
+.schedule {
 	 padding: 8px;
 	 border: 1px solid #4e4e4e;
 	 font-size: 0.7em;
 	 text-align: center;
 }
-.size_blue_check{
+.schedule_check{
   padding: 8px;
   border: 1px solid #4e4e4e;
   font-size: 0.7em;
