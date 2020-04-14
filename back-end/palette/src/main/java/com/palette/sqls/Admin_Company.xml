@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<mapper namespace="com.palette.dao.adminCompanyDao">
 
-<mapper namespace="com.palette.dao.AdminMemberDao">
 
 	<!-- show all company -->
-	<select id="adminGetMemberListAll" resultType="com.palette.model.MemberDto">
+	<select id="adminGetCompanyMemberListAll" resultType="com.palette.model.MemberDto">
 		SELECT * FROM MEMBER
-		WHERE AUTH=2 or AUTH=3
+		WHERE AUTH=2 OR AUTH=3
 	</select>
 	
 	<!-- show company info (SELECT ONE) -->
-	<select id="adminGetOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
+	<select id="adminGetCompanyInfoOne" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
 		SELECT * FROM MEMBER
-		WHERE (AUTH=2 or AUTH=3)
+		WHERE (AUTH=2 OR AUTH=3)
 		<if test="MEMBER_ID != null">
 			AND MEMBER_ID LIKE'1%'
 		</if>
@@ -43,24 +43,22 @@
 	
 	
 	
-	<!--  show ONLY ONE COLUMN LIST  -->
+			<!--  show ONLY ONE COLUMN LIST  -->
 	
-	<!-- show Company Location List All-->
-	<select id="adminGetMemberListAll" resultType="com.palette.model.MemberDto">
-		SELECT LOCATION FROM MEMBER
-		WHERE AUTH=2 or AUTH=3
-	</select>
+			<!-- show Company Location List All-->
+			<select id="adminGetCompanyLocationALl" resultType="com.palette.model.MemberDto">
+				SELECT LOCATION FROM MEMBER
+				WHERE AUTH=2 or AUTH=3
+			</select>
+			
+			<!-- show Company Name List All-->
+			<select id="adminGetCompanyNmaeAll" resultType="com.palette.model.MemberDto">
+				SELECT Member_name FROM MEMBER
+				WHERE AUTH=2 or AUTH=3
+			</select>
+			
 	
-	<!-- show Company Name List All-->
-	<select id="adminGetMemberListAll" resultType="com.palette.model.MemberDto">
-		SELECT LOCATION FROM MEMBER
-		WHERE AUTH=2 or AUTH=3
-	</select>
 	
-	
-	
-	
-
 
 
 </mapper>
