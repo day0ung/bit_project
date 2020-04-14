@@ -11,7 +11,7 @@ export default new Vuex.Store({
         getOneRecruit : ""
     },
     mutations: {
-    },
+    }, 
     actions: {
     }  
 })

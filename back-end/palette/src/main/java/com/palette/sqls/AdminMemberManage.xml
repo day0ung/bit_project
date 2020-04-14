@@ -3,9 +3,17 @@
 
 
 <mapper namespace="com.palette.dao.adminMemberDao">
-	<select id="getMemberListAll" resultType="com.palette.model.MemberDto">
-		SELECT * FROM MEMBER;
+	<select id="adminGetMemberListAll" resultType="com.palette.model.MemberDto">
+		SELECT * FROM MEMBER
 	</select>
+	
+	<select id="adminGetOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
+		SELECT *
+		FROM MEMBER
+		WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
+	</select>
+	
+	
 	
 	
 	

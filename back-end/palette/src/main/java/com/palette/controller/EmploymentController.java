@@ -100,4 +100,17 @@ public class EmploymentController {
 
     	return dto;
     }
+    
+    @GetMapping(value = "/insertRecruit")
+    public boolean insertRecruit(EmploymentBoardDto dto){
+    	System.out.println("insertRecruit() 실행");
+    	System.out.println(dto.toString());
+    	
+    	boolean isS = employmentService.insertRecruit(dto);
+    	System.out.println("취업공 추가 성공: " + isS);
+    	
+    	
+    	return isS;
+    }
+    
 }

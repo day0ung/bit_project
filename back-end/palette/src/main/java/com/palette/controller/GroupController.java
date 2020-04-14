@@ -13,6 +13,7 @@ import com.palette.model.BoardParams;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
+import com.palette.model.GroupParams;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
@@ -31,6 +32,13 @@ public class GroupController {
     public List<GroupDto> getAllGroup() {
     	System.out.println("getAllGroup 메소드 실행");
     	List<GroupDto> list = groupService.getAllGroup();
+    	return list;
+    }
+    @PostMapping(value="/groupSearchList")
+    public ArrayList<GroupDto> groupSearchList(GroupParams groupParams){
+    	ArrayList<GroupDto> list = groupService.groupSearchList(groupParams);
+    	System.out.println("groupSearchList()실행 "+groupParams.toString()+ " / "+ list.size());
+    	
     	return list;
     }
     
@@ -77,6 +85,7 @@ public class GroupController {
     	}
     	return list;
     }
+    
     @GetMapping(value="/groupBoardList")
     public ArrayList<GroupBoardDto> groupBoardList() {
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
