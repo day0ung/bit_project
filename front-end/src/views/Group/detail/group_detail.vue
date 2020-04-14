@@ -22,7 +22,7 @@
       </div>
       <div class="groupInfoContent">
         <p>분류 : {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
-        <p>지역 : {location}</p>
+        <p>지역 : {{ groupOne.groupLocation }}</p>
         <p>인원 : {{ groupOne.currMember}} / {{ groupOne.maxMember}}</p>
         <p>일정 : <div class="sizes">
             <div v-if="groupOne.groupSchedule.monday == 0" class="size_blue">월</div>

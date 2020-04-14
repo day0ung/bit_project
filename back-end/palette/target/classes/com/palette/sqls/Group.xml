@@ -39,11 +39,14 @@
 		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
 		<result column="GROUP_NAME" property="groupName"/>
+		<result column="GROUP_LOCATION" property="groupLocation"/>
+		<result column="SMALL_INFO" property="smallInfo"/>
 		<result column="INFO" property="info"/>
 		<result column="MAX_MEMBER" property="maxMember"/>
 		<result column="IMAGE" property="image"/>
 		<result column="START_DATE" property="startDate"/>
 		<result column="END_DATE" property="endDate"/>
+		<result column="PERMISSION" property="permission"/>
 		<result column="DEL" property="del"/>
 		<result column="CURR_MEMBER" property="currMember"/>
 		<collection property="interBigDto" resultMap="InterBig"/>
@@ -58,11 +61,14 @@
 		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
 		<result column="GROUP_NAME" property="groupName"/>
+		<result column="GROUP_LOCATION" property="groupLocation"/>
+		<result column="SMALL_INFO" property="smallInfo"/>
 		<result column="INFO" property="info"/>
 		<result column="MAX_MEMBER" property="maxMember"/>
 		<result column="IMAGE" property="image"/>
 		<result column="START_DATE" property="startDate"/>
 		<result column="END_DATE" property="endDate"/>
+		<result column="PERMISSION" property="permission"/>
 		<result column="DEL" property="del"/>
 		<result column="CURR_MEMBER" property="currMember"/>
 		<collection property="groupSchedule" resultMap="GroupSchedule"/>
