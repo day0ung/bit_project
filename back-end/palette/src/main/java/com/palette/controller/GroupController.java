@@ -36,7 +36,12 @@ public class GroupController {
     }
     @PostMapping(value="/groupSearchList")
     public ArrayList<GroupDto> groupSearchList(GroupParams groupParams){
-    	ArrayList<GroupDto> list = groupService.groupSearchList(groupParams);
+        ArrayList<GroupDto> list = null;
+        if(groupParams.getInterBigSeq() == 0){
+            list = (ArrayList)groupService.getAllGroup();
+        }else{
+            list = groupService.groupSearchList(groupParams);
+        }
     	System.out.println("groupSearchList()실행 "+groupParams.toString()+ " / "+ list.size());
     	
     	return list;

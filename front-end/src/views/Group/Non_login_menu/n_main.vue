@@ -16,18 +16,22 @@
       <!-- 상단 버튼 -->
       <div style="display: flow-root;">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn blue">
+          <label class="btn">
+            <input type="radio" name="options" id="option3" autocomplete="off" @click="searchBigSeq(0)"> 전체보기
+          </label>
+          <label class="btn">
             <input type="radio" name="options" id="option1" autocomplete="off" @click="searchBigSeq(1)"> 대학생/취업
           </label>
-          <label class="btn red">
+          <label class="btn">
             <input type="radio" name="options" id="option2" autocomplete="off" @click="searchBigSeq(2)"> 공무원/임용
           </label>
-          <label class="btn green">
+          <label class="btn">
             <input type="radio" name="options" id="option3" autocomplete="off" @click="searchBigSeq(3)"> 어학/회화
           </label>
-          <label class="btn yellow">
+          <label class="btn">
             <input type="radio" name="options" id="option3" autocomplete="off" @click="searchBigSeq(4)"> 라이프/취미
           </label>
+
         </div>
       </div>
       <!-- 그룹 리스트 css적용 html -->

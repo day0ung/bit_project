@@ -93,6 +93,8 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 /* center container in the middle */
 .group_detail{
+  width: 950px;
+  margin: auto;
 }
 
 .groupDetailcCntainer {
