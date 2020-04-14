@@ -30,11 +30,14 @@ public class GroupDto implements Serializable {
 	private int interSmallSeq;
 	
 	private String groupName;
+	private String groupLocation;
 	private String info;
+	private String smallInfo;
 	private int maxMember;
 	private String image = "";
 	private String startDate;
 	private String endDate;
+	private int permission;
 	private int del;
 
 	private GroupSchedule groupSchedule;
@@ -47,25 +50,25 @@ public class GroupDto implements Serializable {
 	
 	private int currMember;
 	
+
+
 	public GroupDto() {
-	
 	}
 
-	public GroupDto(int groupInfoSeq, int memberSeq, int interBigSeq, int interSmallSeq, String groupName, String info,
-			int maxMember, String image, String startDate, String endDate, int del, GroupSchedule groupSchedule,
-			InterBigDto interBigDto, InterSmallDto interSmallDto, MemberDto memberDto, GroupMemberDto groupMemberDto,
-			int currMember) {
-		super();
+	public GroupDto(int groupInfoSeq, int memberSeq, int interBigSeq, int interSmallSeq, String groupName, String groupLocation, String info, String smallInfo, int maxMember, String image, String startDate, String endDate, int permission, int del, GroupSchedule groupSchedule, InterBigDto interBigDto, InterSmallDto interSmallDto, MemberDto memberDto, GroupMemberDto groupMemberDto, int currMember) {
 		this.groupInfoSeq = groupInfoSeq;
 		this.memberSeq = memberSeq;
 		this.interBigSeq = interBigSeq;
 		this.interSmallSeq = interSmallSeq;
 		this.groupName = groupName;
+		this.groupLocation = groupLocation;
 		this.info = info;
+		this.smallInfo = smallInfo;
 		this.maxMember = maxMember;
 		this.image = image;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.permission = permission;
 		this.del = del;
 		this.groupSchedule = groupSchedule;
 		this.interBigDto = interBigDto;
@@ -75,18 +78,8 @@ public class GroupDto implements Serializable {
 		this.currMember = currMember;
 	}
 
-	@Override
-	public String toString() {
-		return "GroupDto [groupInfoSeq=" + groupInfoSeq + ", memberSeq=" + memberSeq + ", interBigSeq=" + interBigSeq
-				+ ", interSmallSeq=" + interSmallSeq + ", groupName=" + groupName + ", info=" + info + ", maxMember="
-				+ maxMember + ", image=" + image + ", startDate=" + startDate + ", endDate=" + endDate + ", del=" + del
-				+ ", groupSchedule=" + groupSchedule + ", interBigDto=" + interBigDto + ", interSmallDto="
-				+ interSmallDto + ", memberDto=" + memberDto + ", groupMemberDto=" + groupMemberDto + ", currMember="
-				+ currMember + "]";
-	}
-
 	public int getGroupInfoSeq() {
-		return groupInfoSeq;
+		return this.groupInfoSeq;
 	}
 
 	public void setGroupInfoSeq(int groupInfoSeq) {
@@ -94,7 +87,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public int getMemberSeq() {
-		return memberSeq;
+		return this.memberSeq;
 	}
 
 	public void setMemberSeq(int memberSeq) {
@@ -102,7 +95,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public int getInterBigSeq() {
-		return interBigSeq;
+		return this.interBigSeq;
 	}
 
 	public void setInterBigSeq(int interBigSeq) {
@@ -110,7 +103,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public int getInterSmallSeq() {
-		return interSmallSeq;
+		return this.interSmallSeq;
 	}
 
 	public void setInterSmallSeq(int interSmallSeq) {
@@ -118,23 +111,39 @@ public class GroupDto implements Serializable {
 	}
 
 	public String getGroupName() {
-		return groupName;
+		return this.groupName;
 	}
 
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
 	}
 
+	public String getGroupLocation() {
+		return this.groupLocation;
+	}
+
+	public void setGroupLocation(String groupLocation) {
+		this.groupLocation = groupLocation;
+	}
+
 	public String getInfo() {
-		return info;
+		return this.info;
 	}
 
 	public void setInfo(String info) {
 		this.info = info;
 	}
 
+	public String getSmallInfo() {
+		return this.smallInfo;
+	}
+
+	public void setSmallInfo(String smallInfo) {
+		this.smallInfo = smallInfo;
+	}
+
 	public int getMaxMember() {
-		return maxMember;
+		return this.maxMember;
 	}
 
 	public void setMaxMember(int maxMember) {
@@ -142,7 +151,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public String getImage() {
-		return image;
+		return this.image;
 	}
 
 	public void setImage(String image) {
@@ -150,7 +159,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public String getStartDate() {
-		return startDate;
+		return this.startDate;
 	}
 
 	public void setStartDate(String startDate) {
@@ -158,15 +167,23 @@ public class GroupDto implements Serializable {
 	}
 
 	public String getEndDate() {
-		return endDate;
+		return this.endDate;
 	}
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
+	public int getPermission() {
+		return this.permission;
+	}
+
+	public void setPermission(int permission) {
+		this.permission = permission;
+	}
+
 	public int getDel() {
-		return del;
+		return this.del;
 	}
 
 	public void setDel(int del) {
@@ -174,7 +191,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public GroupSchedule getGroupSchedule() {
-		return groupSchedule;
+		return this.groupSchedule;
 	}
 
 	public void setGroupSchedule(GroupSchedule groupSchedule) {
@@ -182,7 +199,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public InterBigDto getInterBigDto() {
-		return interBigDto;
+		return this.interBigDto;
 	}
 
 	public void setInterBigDto(InterBigDto interBigDto) {
@@ -190,7 +207,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public InterSmallDto getInterSmallDto() {
-		return interSmallDto;
+		return this.interSmallDto;
 	}
 
 	public void setInterSmallDto(InterSmallDto interSmallDto) {
@@ -198,7 +215,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public MemberDto getMemberDto() {
-		return memberDto;
+		return this.memberDto;
 	}
 
 	public void setMemberDto(MemberDto memberDto) {
@@ -206,7 +223,7 @@ public class GroupDto implements Serializable {
 	}
 
 	public GroupMemberDto getGroupMemberDto() {
-		return groupMemberDto;
+		return this.groupMemberDto;
 	}
 
 	public void setGroupMemberDto(GroupMemberDto groupMemberDto) {
@@ -214,11 +231,137 @@ public class GroupDto implements Serializable {
 	}
 
 	public int getCurrMember() {
-		return currMember;
+		return this.currMember;
 	}
 
 	public void setCurrMember(int currMember) {
 		this.currMember = currMember;
+	}
+
+	public GroupDto groupInfoSeq(int groupInfoSeq) {
+		this.groupInfoSeq = groupInfoSeq;
+		return this;
+	}
+
+	public GroupDto memberSeq(int memberSeq) {
+		this.memberSeq = memberSeq;
+		return this;
+	}
+
+	public GroupDto interBigSeq(int interBigSeq) {
+		this.interBigSeq = interBigSeq;
+		return this;
+	}
+
+	public GroupDto interSmallSeq(int interSmallSeq) {
+		this.interSmallSeq = interSmallSeq;
+		return this;
+	}
+
+	public GroupDto groupName(String groupName) {
+		this.groupName = groupName;
+		return this;
+	}
+
+	public GroupDto groupLocation(String groupLocation) {
+		this.groupLocation = groupLocation;
+		return this;
+	}
+
+	public GroupDto info(String info) {
+		this.info = info;
+		return this;
+	}
+
+	public GroupDto smallInfo(String smallInfo) {
+		this.smallInfo = smallInfo;
+		return this;
+	}
+
+	public GroupDto maxMember(int maxMember) {
+		this.maxMember = maxMember;
+		return this;
+	}
+
+	public GroupDto image(String image) {
+		this.image = image;
+		return this;
+	}
+
+	public GroupDto startDate(String startDate) {
+		this.startDate = startDate;
+		return this;
+	}
+
+	public GroupDto endDate(String endDate) {
+		this.endDate = endDate;
+		return this;
+	}
+
+	public GroupDto permission(int permission) {
+		this.permission = permission;
+		return this;
+	}
+
+	public GroupDto del(int del) {
+		this.del = del;
+		return this;
+	}
+
+	public GroupDto groupSchedule(GroupSchedule groupSchedule) {
+		this.groupSchedule = groupSchedule;
+		return this;
+	}
+
+	public GroupDto interBigDto(InterBigDto interBigDto) {
+		this.interBigDto = interBigDto;
+		return this;
+	}
+
+	public GroupDto interSmallDto(InterSmallDto interSmallDto) {
+		this.interSmallDto = interSmallDto;
+		return this;
+	}
+
+	public GroupDto memberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+		return this;
+	}
+
+	public GroupDto groupMemberDto(GroupMemberDto groupMemberDto) {
+		this.groupMemberDto = groupMemberDto;
+		return this;
+	}
+
+	public GroupDto currMember(int currMember) {
+		this.currMember = currMember;
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "{" +
+			" groupInfoSeq='" + getGroupInfoSeq() + "'" +
+			", memberSeq='" + getMemberSeq() + "'" +
+			", interBigSeq='" + getInterBigSeq() + "'" +
+			", interSmallSeq='" + getInterSmallSeq() + "'" +
+			", groupName='" + getGroupName() + "'" +
+			", groupLocation='" + getGroupLocation() + "'" +
+			", info='" + getInfo() + "'" +
+			", smallInfo='" + getSmallInfo() + "'" +
+			", maxMember='" + getMaxMember() + "'" +
+			", image='" + getImage() + "'" +
+			", startDate='" + getStartDate() + "'" +
+			", endDate='" + getEndDate() + "'" +
+			", permission='" + getPermission() + "'" +
+			", del='" + getDel() + "'" +
+			", groupSchedule='" + getGroupSchedule() + "'" +
+			", interBigDto='" + getInterBigDto() + "'" +
+			", interSmallDto='" + getInterSmallDto() + "'" +
+			", memberDto='" + getMemberDto() + "'" +
+			", groupMemberDto='" + getGroupMemberDto() + "'" +
+			", currMember='" + getCurrMember() + "'" +
+			"}";
 	}
 	
 	
