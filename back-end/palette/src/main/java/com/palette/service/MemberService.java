@@ -38,8 +38,8 @@ public class MemberService {
 		}
 		
 		//마이페이지용
-		public MemberDto getSelectMember(int memberSeq) {
-			return memberDao.getSelectMember(memberSeq);
+		public MemberDto getDetailMember(int memberSeq) {
+			return memberDao.getDetailMember(memberSeq);
 		}
     
 }

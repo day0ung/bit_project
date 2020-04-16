@@ -1,6 +1,6 @@
 package com.palette.model;
 
-import java.util.Arrays;
+import java.util.List;
 
 /**
  * MemberDto
@@ -12,7 +12,7 @@ public class MemberDto {
 	private String pwd;
 	private String memberName;
 	private String address;
-	private String interAraea[];
+	private String interArea;
 	private String email;
 	private String age;
 	private int gender;
@@ -24,19 +24,22 @@ public class MemberDto {
 	private int del;
 	private int dislike;
 
+	private MemberInterDto memberInterDto;
+	private List<InterBigDto> interBigDtos;
+	
 	public MemberDto() {
 	}
 
-	public MemberDto(int memberSeq, String memberId, String pwd, String memberName, String address, String[] interAraea,
+	public MemberDto(int memberSeq, String memberId, String pwd, String memberName, String address, String interArea,
 			String email, String age, int gender, int myMoney, int cv, String companyInfo, String companyLogo, int auth,
-			int del, int dislike) {
+			int del, int dislike, MemberInterDto memberInterDto, List<InterBigDto> interBigDtos) {
 		super();
 		this.memberSeq = memberSeq;
 		this.memberId = memberId;
 		this.pwd = pwd;
 		this.memberName = memberName;
 		this.address = address;
-		this.interAraea = interAraea;
+		this.interArea = interArea;
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
@@ -47,6 +50,8 @@ public class MemberDto {
 		this.auth = auth;
 		this.del = del;
 		this.dislike = dislike;
+		this.memberInterDto = memberInterDto;
+		this.interBigDtos = interBigDtos;
 	}
 
 	public int getMemberSeq() {
@@ -89,12 +94,12 @@ public class MemberDto {
 		this.address = address;
 	}
 
-	public String[] getInterAraea() {
-		return interAraea;
+	public String getInterArea() {
+		return interArea;
 	}
 
-	public void setInterAraea(String[] interAraea) {
-		this.interAraea = interAraea;
+	public void setInterArea(String interArea) {
+		this.interArea = interArea;
 	}
 
 	public String getEmail() {
@@ -177,14 +182,32 @@ public class MemberDto {
 		this.dislike = dislike;
 	}
 
+	public MemberInterDto getMemberInterDto() {
+		return memberInterDto;
+	}
+
+	public void setMemberInterDto(MemberInterDto memberInterDto) {
+		this.memberInterDto = memberInterDto;
+	}
+
+	public List<InterBigDto> getInterBigDtos() {
+		return interBigDtos;
+	}
+
+	public void setInterBigDtos(List<InterBigDto> interBigDtos) {
+		this.interBigDtos = interBigDtos;
+	}
+
 	@Override
 	public String toString() {
 		return "MemberDto [memberSeq=" + memberSeq + ", memberId=" + memberId + ", pwd=" + pwd + ", memberName="
-				+ memberName + ", address=" + address + ", interAraea=" + Arrays.toString(interAraea) + ", email="
-				+ email + ", age=" + age + ", gender=" + gender + ", myMoney=" + myMoney + ", cv=" + cv
-				+ ", companyInfo=" + companyInfo + ", companyLogo=" + companyLogo + ", auth=" + auth + ", del=" + del
-				+ ", dislike=" + dislike + "]";
+				+ memberName + ", address=" + address + ", interArea=" + interArea + ", email=" + email + ", age=" + age
+				+ ", gender=" + gender + ", myMoney=" + myMoney + ", cv=" + cv + ", companyInfo=" + companyInfo
+				+ ", companyLogo=" + companyLogo + ", auth=" + auth + ", del=" + del + ", dislike=" + dislike
+				+ ", memberInterDto=" + memberInterDto + ", interBigDtos=" + interBigDtos + "]";
 	}
+
+	
 	
 	
 

@@ -20,5 +20,7 @@ public interface MemberDao {
 	int createMember(MemberDto dto);
 	
 	MemberDto getSelectMember(int memberSeq);
+	
+	MemberDto getDetailMember(int memberSeq);
 
 }

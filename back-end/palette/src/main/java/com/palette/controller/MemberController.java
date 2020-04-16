@@ -59,7 +59,7 @@ public class MemberController {
     public MemberDto getOneMember(int memberSeq) {
     	System.out.println("getOneMember() 실행");
     	System.out.println("======"+ memberSeq);
-    	MemberDto member = memberService.getSelectMember(memberSeq);
+    	MemberDto member = memberService.getDetailMember(memberSeq);
     	return member;
     }
     
