@@ -39,7 +39,7 @@
             <div v-else class="size_blue_check">토</div>
             <div v-if="groupOne.groupSchedule.sunday == 0" class="size_blue">일</div>
             <div v-else class="size_blue_check">일</div>
-          </div></p>
+          </div>
         <p>시작일 : {{ groupOne.startDate }}</p>
         <p>완료일 : {{ groupOne.endDate }}</p>
       </div>

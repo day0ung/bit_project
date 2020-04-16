@@ -35,19 +35,30 @@ export default {
                 </el-checkbox-group>
                </el-form-item>
 
+                <el-form-item label="관심분야" prop="interBig">
+                     <el-checkbox-group v-model="ruleForm.interBig" style="float: left">
+                        <el-checkbox id="interBig" v-model="interBigSeq">
+                            <label for="interBig">대학생/취업</label>
+                        </el-checkbox>
+                        <el-checkbox label="공무원/임용" name="type" ></el-checkbox>
+                        <el-checkbox label="어학/회화" name="type" ></el-checkbox>
+                        <el-checkbox label="라이프/취미" name="type" ></el-checkbox>
+                 </el-checkbox-group>
+
+                </el-form-item>
                <!-- 관심분야 -->
-               <el-form-item label="관심분야" prop="interBig">
+               <!-- <el-form-item label="관심분야" prop="interBig">
                     <el-checkbox-group v-model="ruleForm.interBig" style="float: left">
                         <el-checkbox label="대학생/취업" :value="1" name="type" ></el-checkbox>
                         <el-checkbox label="공무원/임용" name="type" ></el-checkbox>
                         <el-checkbox label="어학/회화" name="type" ></el-checkbox>
                         <el-checkbox label="라이프/취미" name="type" ></el-checkbox>
                 </el-checkbox-group>
-               </el-form-item>
+               </el-form-item> -->
 
 
                 <!-- 상세분야 -->
-               <el-form-item label="상세분야" prop="interSmall" >
+              <!--  <el-form-item label="상세분야" prop="interSmall" >
                   <p style="color: #82CF1E; margin-bottom:-10px" >대학생/취업</p>
                    <div style="border-bottom: solid 1px; color: #cecece; padding-bottom: 10px">
                     <el-checkbox-group v-model="ruleForm.interSmall" size="medium">
@@ -99,7 +110,7 @@ export default {
                         <el-checkbox label="자유" name="type"></el-checkbox>
                     </el-checkbox-group>
                      </div> 
-               </el-form-item>
+               </el-form-item> -->
 
                 <!-- 서브밋버튼 -->
                 <div class="submitBtnDiv">
@@ -115,44 +126,27 @@ export default {
 </template>
 
 <script>
+/* const interBigger = [] */
 export default {
     data(){
-		var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('비밀번호를 입력해주세요'));
-        } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('비밀번호 확인을 입력해주세요'));
-        } else if (value !== this.ruleForm.pass) {
-          callback(new Error('비밀번호가 일치하지 않습니다'));
-        } else {
-          callback();
-        }
-      };
         return{
+            interBigSeq: ['1','2', '3', '4'],
             ruleForm: {
                 interArea:[],
-                interBig: [],
+                interBigSeq: [],
                 interSmall:[]
             },
             rules: {
      
-                interArea:[
+          /*       interArea:[
                     { required: true, message: '관심지역을 선택해주세요', trigger: 'change' },
-                ],
+                ], */
                 interBig:[
                     { required: true, message: '관심분야를 선택해주세요', trigger: 'change' },
                 ],
-                interSmall:[
+              /*   interSmall:[
                     { required: true, message: '상세분야를 선택해주세요', trigger: 'change' },
-                ]
+                ] */
             },
            
         }
@@ -161,7 +155,13 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
-                alert(this.ruleForm.interBig);
+               /*  const seq = '1'
+                if( this.ruleForm.interBig.one == true){
+                    alert(typeof this.ruleForm.interBig.one)
+                    seq = this.ruleForm.interBig.one
+                    alert(this.seq)
+                } */
+                alert(this.interBig)
             } else {
                 console.log('error submit!!');
                 return false;

@@ -5,26 +5,27 @@
             <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <!-- 아이디 설정 -->
                 <el-form-item label="아이디" prop="memberId">
-                    <el-input placeholder="아이디를 입력해 주세요" v-model="ruleForm.memberId"></el-input>
+                    <el-input placeholder="아이디를 입력해 주세요" v-model="ruleForm.memberId" style="width: 57%; margin-right: 10px"></el-input>
+                     <el-button type="success" @click="idcheck" plain>중복확인</el-button>
                 </el-form-item>
 				<!-- 비밀번호 -->
 				 <el-form-item label="비밀번호" prop="pass">
-					<el-input type="password" v-model="ruleForm.pass" placeholder="비밀번호를 입력해 주세요" autocomplete="off"></el-input>
+					<el-input type="password" v-model="ruleForm.pass" placeholder="비밀번호를 입력해 주세요" autocomplete="off" style="width: 75%;"></el-input>
 				</el-form-item>
 				<el-form-item label="비밀번호 확인" prop="checkPass">
-					<el-input type="password" v-model="ruleForm.checkPass" placeholder="비밀번호를 확인해 주세요"  autocomplete="off"></el-input>
+					<el-input type="password" v-model="ruleForm.checkPass" placeholder="비밀번호를 확인해 주세요"  autocomplete="off" style="width: 75%;"></el-input>
 				</el-form-item> 
                 <!-- 이름 -->
                 <el-form-item label="이름" prop="memberName">
-                    <el-input placeholder="성함을 입력해 주세요" v-model="ruleForm.memberName"></el-input>
+                    <el-input placeholder="성함을 입력해 주세요" v-model="ruleForm.memberName" style="width: 75%;"></el-input>
                 </el-form-item>
 				<!--  이메일 -->
 				 <el-form-item prop="email" label="Email">
-					<el-input v-model="ruleForm.email" placeholder="올바른 이메일 형식을 입력해 주세요"></el-input>
+					<el-input v-model="ruleForm.email" placeholder="올바른 이메일 형식을 입력해 주세요"  style="width: 75%;"></el-input>
 				 </el-form-item>	 
                 <!--  나이대선택 -->
 				<el-form-item label="성별/ 연령" prop="age">
-					<el-select v-model="ruleForm.age" placeholder="나이대를 선택해주세요" style="margin-right: 20px" >
+					<el-select v-model="ruleForm.age" placeholder="나이대를 선택해주세요" style="margin-right: 20px; width: 75%;" >
 						<el-option label="10대" value="10대"></el-option>
 						<el-option label="20-24" value="20-24"></el-option>
 						<el-option label="25-29" value="25-29"></el-option>
@@ -40,7 +41,7 @@
                 <el-form-item label="주소" prop="extraAddress">
                     <el-input v-model="ruleForm.address" placeholder="주소" readonly="readonly" style="width: 50%; margin-right: 10px"></el-input>
                     <el-button type="info"  @click="execDaumPostcode" plain>우편번호 찾기</el-button>
-                    <el-input v-model="ruleForm.extraAddress" placeholder="상세주소"></el-input>
+                    <el-input v-model="ruleForm.extraAddress" placeholder="상세주소"  style="width: 75%;"></el-input>
                 </el-form-item>
             
 
@@ -60,7 +61,13 @@
 <script>
 export default {
     data(){
-		var validatePass = (rule, value, callback) => {
+     /*  var validateId = (rule, value, callback) => {
+          if(this.ruleForm.memberId === '' || this.ruleForm.memberId === null){
+            callback(new Error('제발'))
+          }
+      }; */
+
+	  var validatePass = (rule, value, callback) => {
         if (value === '') {
           callback(new Error('비밀번호를 입력해주세요'));
         } else {
@@ -81,7 +88,8 @@ export default {
       };
         return{
             ruleForm: {
-				memberId: '',
+                memberId: '',
+                idcheck: false, 
 				pass: '',
                 checkPass: '',
                 memberName: '',
@@ -96,8 +104,11 @@ export default {
             rules: {
                 memberId: [
                     { required: true, message: '아이디를 입력해주세요', trigger: 'blur' },
-                    { min: 3, max: 20, message: '아이디는 3글자에서 20자로 사이로 지어주세요', trigger: 'blur' }
+                    { min: 3, max: 20, message: '아이디는 3글자에서 20자로 사이로 지어주세요', trigger: 'blur' },
                 ],
+                /* idcheck: [
+                    { validator: validateId, trigger: 'blur'}
+                ], */
                 pass: [
                     { required: true, validator: validatePass, trigger: 'blur' }
                 ],
@@ -128,6 +139,23 @@ export default {
         }
     },
     methods:{
+         idcheck(){
+            if( this.ruleForm.memberId == ''){
+                alert('아이디를 입력해주세요')
+            }else{
+                var params = new URLSearchParams();
+                params.append('memberId', this.ruleForm.memberId)
+                axios.get('http://localhost:9000/checkid', params)
+                .then(res => {
+                    alert('통신성공')
+                    if(res.data == true){
+                        alert(' 이미아이디가 존재합니다.')
+                    }else{
+                        alert('아이디 사용이 가능합니다')
+                    }
+                }) 
+            }
+        }, 
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
