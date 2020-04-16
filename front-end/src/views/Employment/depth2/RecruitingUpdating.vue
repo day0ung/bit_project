@@ -5,7 +5,7 @@
 				<el-input readonly="readonly" :value="login1.memberName"></el-input>
 			</el-form-item>
 			<el-form-item label="제목"  prop="title">
-				<el-input v-model="ruleForm.title"></el-input>
+				<el-input v-model="ruleForm.title" :value="ruleForm.title"></el-input>
 			</el-form-item>
 			<el-form-item label="접수기간">
 				<el-date-picker
@@ -60,7 +60,7 @@
 				<el-input type="textarea" v-model="ruleForm.content"></el-input>
 			</el-form-item>
 			<el-form-item>
-				<el-button type="primary" @click="submitForm('ruleForm')">적용</el-button>
+				<el-button type="primary" @click="submitForm('ruleForm')">수정</el-button>
 				<el-button @click="resetForm('ruleForm')">취소</el-button>
 			</el-form-item>
 		</el-form>
@@ -91,8 +91,8 @@ export default {
 		  login1: [],
 		  dialogImageUrl: ""
 		},
-		
-		login : "",
+		getOneRecruit1 : "",
+		login1 : "",
         rules: {
 		  title: [
 			{ required: true, message: '제목을 입력하세요', trigger: 'blur' },
@@ -129,8 +129,9 @@ export default {
         this.$refs[formName].validate((valid) => {
           if (valid) {
 			
-			axios.get("http://localhost:9000/insertRecruit",{
+			axios.get("http://localhost:9000/recruitUpdating",{
 				params:{
+					boardSeq: this.getOneRecruit1.boardSeq,
 					memberSeq: this.login1.memberSeq,
 					title: this.ruleForm.title,
 					career: this.ruleForm.career,
@@ -143,18 +144,23 @@ export default {
 					workingLocation: this.ruleForm.workingLocation,
 					image: this.ruleForm.dialogImageUrl,
 					content:this.ruleForm.content
-
 				}
 			}).then(res =>{
-				alert("성공적으로 적용되었습니다.")
-				this.$router.push({
-        			name: 'Recruiting_list'
-        		})
+				if(res.date === true){
+					alert("성공적으로 수정되었습니다.")
+					this.$router.push({
+						name: 'recruiting'
+					})
+				}
+				else {
+					alert("수정을 실패했습니다. 다시 확인해주시기 바랍니다.")
+				}
 			})
-			
           } else {
-            console.log('error submit!!');
-            return false;
+			alert('공고가 등록되지 않았습니다.');
+			this.$router.push({
+        			name: 'recruiting'
+            })
           }
         });
       },
@@ -176,12 +182,36 @@ export default {
                 type: 'error'
 			})
 		},
-	
+
 	},
 	created(){
 		let sMemberSeq = sessionStorage.getItem("loginUser")
 		this.login1 = JSON.parse(sMemberSeq)
 		// this.memberSeq = this.$store.state.loginUser.memberSeq
-	}
+	},
+	mounted(){
+		this.empBoardSeq = this.$route.params.boardSeq
+		var params = new URLSearchParams()
+		params.append("empBoardSeq", this.empBoardSeq)
+		axios.post("http://localhost:9000/getOneRecruit", params)
+			.then(res =>{
+				
+				this.$store.state.s_employment.getOneRecruit = res.data
+				this.getOneRecruit1 = this.$store.state.s_employment.getOneRecruit
+				this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm:ss')
+            	this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm:ss')
+				this.ruleForm.title = this.getOneRecruit1.title
+				this.ruleForm.cvStartDate = this.startDate
+				this.ruleForm.cvEndDate = this.endDate
+				this.ruleForm.career = this.getOneRecruit1.career
+				this.ruleForm.education = this.getOneRecruit1.education
+				this.ruleForm.workingType = this.getOneRecruit1.workingType
+				this.ruleForm.salary = this.getOneRecruit1.salary
+				this.ruleForm.position = this.getOneRecruit1.position
+				this.ruleForm.workingLocation = this.getOneRecruit1.workingLocation
+				this.ruleForm.content = this.getOneRecruit1.content
+			})
+  	}
   }
+  
 </script>

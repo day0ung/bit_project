@@ -32,4 +32,15 @@ public class EmploymentService {
 		int len = employmentDao.insertRecruit(dto);
 		return len > 0?true:false;
 	}
+	
+	public boolean recruitUpdating(EmploymentBoardDto dto) {
+		int len = employmentDao.recruitUpdating(dto);
+		return len > 0?true:false;
+	}
+	
+	public boolean recruitDelete(int empBoardSeq) {
+		int len = employmentDao.recruitDelete(empBoardSeq);
+		return len > 0?true:false;
+	}
+	
 }

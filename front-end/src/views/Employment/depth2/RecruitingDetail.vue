@@ -106,8 +106,11 @@
                       <p class="noti">마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
                   </div>
                 </div>
-
-                </div>
+                <el-row v-if="login1.memberSeq === getOneRecruit1.memberSeq">
+                    <el-button @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
+                    <el-button @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
+                </el-row>
+            </div>
             </section>
           </div> 
         </div>
@@ -120,6 +123,7 @@
 import Vue from "vue"
 import moment from "moment"
 import VueMomentJS from "vue-momentjs"
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(VueMomentJS, moment)
 
@@ -131,10 +135,8 @@ export default {
       nowDate : this.$moment(new Date()).format('YYYY.MM.DD HH:mm:ss'),
       startDate : "",
       endDate : "",
-      nowMilliS : "",
-      endMillis : "",
       final:"",
-      login:""
+      login1:[]
     }
   },
   mounted(){
@@ -168,8 +170,44 @@ export default {
         
         // console.log(moment.utc(moment(then,"YYYY.MM.DD HH:mm:ss").diff(moment(now,"YYYY.MM.DD HH:mm:ss"))).format("HH:mm:ss"))
         this.final = moment.utc(moment(then,"YYYY.MM.DD HH:mm:ss").diff(moment(now,"YYYY.MM.DD HH:mm:ss"))).format("HH:mm:ss")
+    },
+    recruitUpdate(seq){
+        this.$router.push({
+        path: "/recruitUpdate/" + seq
+        })
+    },
+    recruitDelete(seq){
+        const deleteCheck = confirm("정말로 이 글을 삭제하시겠습니까?")
+        if(deleteCheck){
+            var params = new URLSearchParams()
+            params.append("empBoardSeq", seq)
+            axios.post("http://localhost:9000/recruitDelete", params)
+                .then(res =>{
+                    if(res.data === true){
+                        alert("성공적으로 삭제되었습니다.")
+                        this.$router.push({
+						name: 'recruiting'
+					    })
+                    } else {
+                        alert("삭제를 실패하였습니다.")
+                        this.$router.push({
+						name: 'recruiting'
+					    })
+                    }
+              })    
+        } else {
+            return
+        }
+
     }
-  } 
+
+  },
+    
+  created(){
+		let sMemberSeq = sessionStorage.getItem("loginUser")
+		this.login1 = JSON.parse(sMemberSeq)
+		// this.memberSeq = this.$store.state.loginUser.memberSeq
+	}
 }
 
 
@@ -284,61 +322,6 @@ button {
     border: 0;
     background: transparent;
     cursor: pointer
-}
-
-.hidden, .blind {
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    position: absolute !important;
-    width: 1px;
-    height: 1px
-}
-
-.ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap
-}
-
-.noSelect {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-    -o-user-select: none;
-    -khtml-user-select: none
-}
-
-#skipnavigation a {
-    position: absolute;
-    left: -3000%
-}
-
-#skipnavigation a:focus {
-    display: block;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    height: 30px;
-    color: #fff;
-    line-height: 30px;
-    text-align: center;
-    background: #6174d1
-}
-
-/* layout */
-.sri_lnb_icon {
-    display: inline-block;
-    vertical-align: top;
-    background: url(//www.saraminimage.co.kr/sri/common/layout/sri_lnb_icon_181004.png) no-repeat;
-    background-size: 300px 150px
-}
-
-.sri_gnb_option {
-    display: inline-block;
-    vertical-align: middle;
-    background: url(//www.saraminimage.co.kr/sri/common/layout/sri_gnb_option_menu.png) no-repeat;
-    background-size: 210px 44px
 }
 
 body {
@@ -492,10 +475,110 @@ body.has_lnb #sri_section {
     background-position: -50px 0
 }
 
-#sri_wrap {
+
+
+#sri_footer {
     display: table-row;
     width: 100%;
-    height: 100%
+    height: 1px
+}
+
+body#sri_layout_popup #sri_footer {
+    display: none
+}
+
+/* 팝업뷰 */
+#sri_layout_popup {
+    min-width: 960px
+}
+
+#sri_layout_popup .wrap_jview {
+    padding: 0
+}
+
+#sri_layout_popup .jv_remote {
+    top: 39px;
+    margin-left: -549px
+}
+
+#sri_layout_popup .jv_remote.shrink {
+    margin-left: -472px
+}
+
+#sri_layout_popup .jv_remote.fix_pop {
+    top: 99px
+}
+
+#sri_layout_popup .jview_floating .jv_header_float {
+    margin-left: -435px
+}
+
+/* 인쇄 */
+@page {
+    margin: 60px 40px;
+    size: A4
+}
+
+body#sri_layout_popup.printing #content {
+    background: #fff
+}
+
+body#sri_layout_popup.printing .main_nudge, body#sri_layout_popup.printing .jview .btn_tooltip, body#sri_layout_popup.printing .jview .btn_link, body#sri_layout_popup.printing .jview .btn_move_map, body#sri_layout_popup.printing .jview .btn_interest, body#sri_layout_popup.printing .jview .btn_share, body#sri_layout_popup.printing .jview .wrap_share, body#sri_layout_popup.printing .jv_summary .btn_modify, body#sri_layout_popup.printing .jv_footer .btn_tags, body#sri_layout_popup.printing .jv_cont .btn_more_cont {
+    display: none !important
+}
+
+body#sri_layout_popup.printing .toolTipWrap {
+    display: block;
+    margin: 0;
+    padding: 2px 0
+}
+
+body#sri_layout_popup.printing .toolTip {
+    display: block;
+    position: static;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    border: 0;
+    color: inherit;
+    background: none;
+    box-shadow: none
+}
+
+body#sri_layout_popup.printing .toolTip .tail, body#sri_layout_popup.printing .toolTip .btnClose {
+    display: none
+}
+
+body#sri_layout_popup.printing .jview .toolTip ul, body#sri_layout_popup.printing .jview .toolTip .toolTipCont {
+    font-size: 12px
+}
+
+body#sri_layout_popup.printing .jview .toolTip ul > li, body#sri_layout_popup.printing .jview .toolTip ul > li span {
+    line-height: 18px
+}
+
+body#sri_layout_popup.printing .jv_cont .layer_group {
+    overflow: visible;
+    position: static
+}
+
+body#sri_layout_popup.printing .jv_cont .layer_group .layer {
+    max-height: none
+}
+
+body#sri_layout_popup.printing .jv_cont .layer_group .layer .cont_more {
+    display: block
+}
+
+body#sri_layout_popup.printing .jv_footer .cont {
+    padding-top: 0
+}
+
+body#sri_layout_popup.printing .jv_footer .cont .tags {
+    overflow: visible;
+    position: static;
+    padding: 9px 0;
+    height: auto
 }
 
 #content {
@@ -509,6 +592,571 @@ body.has_lnb #sri_section {
     padding-right: 160px;
     min-height: 960px
 }
+
+#sri_wrap {
+    display: table-row;
+    width: 100%;
+    height: 100%
+}
+
+.wrap_nav ul.nav .wrap_depth2 .content {
+    width: 750px
+}
+
+/* default layout override */
+body {
+    min-width: 1260px
+}
+
+#sri_header {
+    position: absolute
+}
+
+#content {
+    margin-top: 20px;
+    padding: 39px 0 40px;
+    width: 100%;
+    min-height: 2000px;
+    background: #f1f3f9
+}
+
+button {
+    border: 0;
+    background: none
+}
+
+.clipboard_dummy {
+    overflow: hidden;
+    position: fixed;
+    top: -1px;
+    left: -1px;
+    width: 1px;
+    height: 1px
+}
+
+.jview .enc_mail {
+    display: none
+}
+
+#header > .inner.fixed_script {
+    position: absolute !important
+}
+
+/* 프로그레스 바 */
+.jview_progress {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    height: 4px;
+    background: #e5e6eb
+}
+
+.jview_progress .row {
+    display: block;
+    width: 100%;
+    height: 4px;
+    border: 0;
+    background: #5b76f5;
+    -webkit-transform: scaleX(0);
+    -ms-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 0 0;
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    transform-origin: 0 0;
+    will-change: transform
+}
+
+/* 공고뷰 컨텐츠 */
+.wrap_jview {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    padding-right: 300px;
+    width: 960px
+}
+
+/* 공통 요소들 */
+.spr_jview:before, .spr_jview:after {
+    display: inline-block;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/sri/person/jobs_view/spr_jview_190208.png) no-repeat
+}
+
+.jview .btn_jview {
+    display: inline-block;
+    padding: 0 9px 3px;
+    height: 28px;
+    border: 1px solid #e4e4e4;
+    box-sizing: border-box;
+    font-size: 0;
+    vertical-align: top;
+    background-color: #fff
+}
+
+.jview a.btn_jview {
+    line-height: 23px
+}
+
+.jview .btn_jview span {
+    color: #666;
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: -1px
+}
+
+.jview .jv_header .btn_jview span {
+    color: #888
+}
+
+.jview .btn_jview strong {
+    color: #666;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: -1px
+}
+
+.jview .btn_interest:before {
+    margin: 3px 5px 0 0;
+    width: 15px;
+    height: 13px;
+    background-position: 0 0;
+    content: ""
+}
+
+.jview .btn_interest.on:before {
+    background-position: -30px 0
+}
+
+.jview .btn_print:before {
+    margin: 3px 5px 0 0;
+    width: 15px;
+    height: 15px;
+    background-position: -100px -70px;
+    content: ""
+}
+
+.jview .btn_share:before {
+    margin: 3px 5px 0 0;
+    width: 12px;
+    height: 13px;
+    background-position: -80px -70px;
+    content: ""
+}
+
+.jview .btn_scrap {
+    display: block;
+    padding: 11px 0 7px;
+    width: 60px;
+    height: 60px;
+    border: 1px solid #e9e9e9
+}
+
+.jview .btn_scrap .txt_scrap {
+    display: block;
+    padding-top: 24px;
+    width: 100%;
+    height: 100%;
+    color: #949494;
+    box-sizing: border-box;
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 14px
+}
+
+.jview .btn_scrap .txt_scrap:before {
+    position: absolute;
+    left: 50%;
+    top: 11px;
+    margin-left: -10px;
+    width: 19px;
+    height: 19px;
+    background-position: -60px 0
+}
+
+.jview .btn_scrap.on .txt_scrap:before {
+    background-position: -60px -30px
+}
+
+.jview .btn_link:after {
+    margin: 8px 0 0 8px;
+    width: 6px;
+    height: 9px;
+    background-position: 0 -150px;
+    content: ""
+}
+
+.jview .sri_btn_lg {
+    display: block;
+    width: 185px
+}
+
+.jview .sri_btn_lg span {
+    width: 183px
+}
+
+.jview .share {
+    display: inline-block;
+    position: relative;
+    margin-left: 4px;
+    vertical-align: middle
+}
+
+.jview .share .list_share {
+    display: none;
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    margin-left: -62px;
+    padding: 2px;
+    width: 123px;
+    height: 30px;
+    border: 1px solid #eee;
+    background-color: #fff
+}
+
+.jview .share .list_share:before {
+    position: absolute;
+    top: -7px;
+    left: 58px;
+    width: 11px;
+    height: 7px;
+    background-position: -60px -20px;
+    content: ""
+}
+
+.jview .share .list_share:after {
+    position: absolute;
+    top: -20px;
+    left: -1px;
+    width: 129px;
+    height: 20px;
+    background: none;
+    content: ""
+}
+
+.jview .share .list_share li {
+    float: left;
+    border-left: 1px solid #eee
+}
+
+.jview .share .list_share .spr_jview {
+    display: block;
+    padding: 4px;
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box
+}
+
+.jview .share .list_share li:first-child {
+    border-left: 0
+}
+
+.jview .share .list_share .spr_jview:after {
+    display: block;
+    width: 22px;
+    height: 22px;
+    content: ""
+}
+
+.jview .share .list_share .facebook:after {
+    background-position: 0 -40px
+}
+
+.jview .share .list_share .twitter:after {
+    background-position: -30px -40px
+}
+
+.jview .share .list_share .copy_url:after {
+    background-position: -60px -40px
+}
+
+.jview .share .list_share .send_sms:after {
+    background-position: -90px -40px
+}
+
+.jview .share:hover .list_share {
+    display: block
+}
+
+.jview {
+    position: relative
+}
+
+.jview + .jview {
+    margin-top: 29px
+}
+
+.jview > .wrap_jv_cont {
+    position: relative;
+    padding: 40px 44px 100px;
+    border: 1px solid #e5e6eb;
+    background: #fff
+}
+
+.jview > .jv_ads {
+    overflow: hidden;
+    margin: 29px auto 0;
+    width: 728px;
+    height: 90px
+}
+
+.jview a + .toolTipWrap, .jview span + .toolTipWrap, .jview strong + .toolTipWrap {
+    margin-left: 6px
+}
+
+.jview .toolTipWrap + .toolTipWrap {
+    margin-left: 4px
+}
+
+.jview .toolTipWrap.opened .toolTip {
+    display: block
+}
+
+.jview .toolTip .toolTipCont {
+    font-size: 12px
+}
+
+.jview .toolTip .toolTipTit, .jview .toolTip p {
+    color: #666;
+    word-break: break-all
+}
+
+.jview .toolTip ul {
+    display: block;
+    font-size: 12px
+}
+
+.jview .toolTip ul > li {
+    position: relative;
+    margin-top: 6px;
+    padding-left: 66px;
+    min-height: 16px;
+    color: #666;
+    line-height: 16px
+}
+
+.jview .toolTip ul > li:first-child {
+    margin-top: 0
+}
+
+.jview .toolTip ul > li > span {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 66px;
+    color: #888;
+    line-height: 16px
+}
+
+.jview .toolTip .txt_noti {
+    margin-top: 10px;
+    padding: 8px 15px 10px;
+    color: #949494;
+    font-size: 11px;
+    letter-spacing: -1px;
+    line-height: 17px;
+    background-color: #f9f9f9
+}
+
+.jview .scroll {
+    scrollbar-3dLight-Color: #fff;
+    scrollbar-arrow-color: #e5e6eb;
+    scrollbar-base-color: #fff;
+    scrollbar-Face-Color: #e5e6eb;
+    scrollbar-Track-Color: #fff;
+    scrollbar-DarkShadow-Color: #fff;
+    scrollbar-Highlight-Color: #fff;
+    scrollbar-Shadow-Color: #fff
+}
+
+.jview .scroll::-webkit-scrollbar {
+    width: 6px;
+    height: 6px
+}
+
+.jview .scroll::-webkit-scrollbar-track {
+    background: #fcfcfc
+}
+
+.jview .scroll::-webkit-scrollbar-thumb {
+    background: #f2f2f3
+}
+
+.wrap_jv_header {
+    padding-bottom: 30px;
+    min-height: 75px
+}
+
+.wrap_jv_header + .jv_cont {
+    margin-top: 0
+}
+
+.jv_header .company {
+    display: inline-block;
+    overflow: hidden;
+    margin-right: 8px;
+    padding-right: 2px;
+    max-width: 380px;
+    height: 28px;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 23px;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    white-space: nowrap
+}
+
+.jv_header .tag + .company {
+    max-width: 420px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hidden, .blind {
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    width: 1px;
+    height: 1px
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.noSelect {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none
+}
+
+#skipnavigation a {
+    position: absolute;
+    left: -3000%
+}
+
+#skipnavigation a:focus {
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 30px;
+    color: #fff;
+    line-height: 30px;
+    text-align: center;
+    background: #6174d1
+}
+
+/* layout */
+.sri_lnb_icon {
+    display: inline-block;
+    vertical-align: top;
+    background: url(//www.saraminimage.co.kr/sri/common/layout/sri_lnb_icon_181004.png) no-repeat;
+    background-size: 300px 150px
+}
+
+.sri_gnb_option {
+    display: inline-block;
+    vertical-align: middle;
+    background: url(//www.saraminimage.co.kr/sri/common/layout/sri_gnb_option_menu.png) no-repeat;
+    background-size: 210px 44px
+}
+
+
+
+
+
+
 
 #sri_banner {
     position: absolute;
@@ -530,15 +1178,7 @@ body.has_lnb #sri_banner {
     box-sizing: border-box
 }
 
-#sri_footer {
-    display: table-row;
-    width: 100%;
-    height: 1px
-}
 
-body#sri_layout_popup #sri_footer {
-    display: none
-}
 
 .sri_ready {
     display: block;
@@ -966,9 +1606,7 @@ body#sri_layout_popup #sri_footer {
     width: 450px
 }
 
-.wrap_nav ul.nav .wrap_depth2 .content {
-    width: 750px
-}
+
 
 .wrap_nav ul.nav .wrap_depth2 .gnb_sub_home {
     position: relative;
@@ -4547,247 +5185,9 @@ body#sri_layout_popup #sri_footer {
 }
 
 
-/* default layout override */
-body {
-    min-width: 1260px
-}
 
-#sri_header {
-    position: absolute
-}
 
-#content {
-    margin-top: 20px;
-    padding: 39px 0 40px;
-    width: 100%;
-    min-height: 2000px;
-    background: #f1f3f9
-}
 
-button {
-    border: 0;
-    background: none
-}
-
-.clipboard_dummy {
-    overflow: hidden;
-    position: fixed;
-    top: -1px;
-    left: -1px;
-    width: 1px;
-    height: 1px
-}
-
-.jview .enc_mail {
-    display: none
-}
-
-#header > .inner.fixed_script {
-    position: absolute !important
-}
-
-/* 공통 요소들 */
-.spr_jview:before, .spr_jview:after {
-    display: inline-block;
-    vertical-align: top;
-    background: url(//www.saraminimage.co.kr/sri/person/jobs_view/spr_jview_190208.png) no-repeat
-}
-
-.jview .btn_jview {
-    display: inline-block;
-    padding: 0 9px 3px;
-    height: 28px;
-    border: 1px solid #e4e4e4;
-    box-sizing: border-box;
-    font-size: 0;
-    vertical-align: top;
-    background-color: #fff
-}
-
-.jview a.btn_jview {
-    line-height: 23px
-}
-
-.jview .btn_jview span {
-    color: #666;
-    font-size: 13px;
-    font-weight: normal;
-    letter-spacing: -1px
-}
-
-.jview .jv_header .btn_jview span {
-    color: #888
-}
-
-.jview .btn_jview strong {
-    color: #666;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: -1px
-}
-
-.jview .btn_interest:before {
-    margin: 3px 5px 0 0;
-    width: 15px;
-    height: 13px;
-    background-position: 0 0;
-    content: ""
-}
-
-.jview .btn_interest.on:before {
-    background-position: -30px 0
-}
-
-.jview .btn_print:before {
-    margin: 3px 5px 0 0;
-    width: 15px;
-    height: 15px;
-    background-position: -100px -70px;
-    content: ""
-}
-
-.jview .btn_share:before {
-    margin: 3px 5px 0 0;
-    width: 12px;
-    height: 13px;
-    background-position: -80px -70px;
-    content: ""
-}
-
-.jview .btn_scrap {
-    display: block;
-    padding: 11px 0 7px;
-    width: 60px;
-    height: 60px;
-    border: 1px solid #e9e9e9
-}
-
-.jview .btn_scrap .txt_scrap {
-    display: block;
-    padding-top: 24px;
-    width: 100%;
-    height: 100%;
-    color: #949494;
-    box-sizing: border-box;
-    font-size: 12px;
-    letter-spacing: 0;
-    line-height: 14px
-}
-
-.jview .btn_scrap .txt_scrap:before {
-    position: absolute;
-    left: 50%;
-    top: 11px;
-    margin-left: -10px;
-    width: 19px;
-    height: 19px;
-    background-position: -60px 0
-}
-
-.jview .btn_scrap.on .txt_scrap:before {
-    background-position: -60px -30px
-}
-
-.jview .btn_link:after {
-    margin: 8px 0 0 8px;
-    width: 6px;
-    height: 9px;
-    background-position: 0 -150px;
-    content: ""
-}
-
-.jview .sri_btn_lg {
-    display: block;
-    width: 185px
-}
-
-.jview .sri_btn_lg span {
-    width: 183px
-}
-
-.jview .share {
-    display: inline-block;
-    position: relative;
-    margin-left: 4px;
-    vertical-align: middle
-}
-
-.jview .share .list_share {
-    display: none;
-    position: absolute;
-    top: 38px;
-    left: 50%;
-    margin-left: -62px;
-    padding: 2px;
-    width: 123px;
-    height: 30px;
-    border: 1px solid #eee;
-    background-color: #fff
-}
-
-.jview .share .list_share:before {
-    position: absolute;
-    top: -7px;
-    left: 58px;
-    width: 11px;
-    height: 7px;
-    background-position: -60px -20px;
-    content: ""
-}
-
-.jview .share .list_share:after {
-    position: absolute;
-    top: -20px;
-    left: -1px;
-    width: 129px;
-    height: 20px;
-    background: none;
-    content: ""
-}
-
-.jview .share .list_share li {
-    float: left;
-    border-left: 1px solid #eee
-}
-
-.jview .share .list_share .spr_jview {
-    display: block;
-    padding: 4px;
-    width: 30px;
-    height: 30px;
-    box-sizing: border-box
-}
-
-.jview .share .list_share li:first-child {
-    border-left: 0
-}
-
-.jview .share .list_share .spr_jview:after {
-    display: block;
-    width: 22px;
-    height: 22px;
-    content: ""
-}
-
-.jview .share .list_share .facebook:after {
-    background-position: 0 -40px
-}
-
-.jview .share .list_share .twitter:after {
-    background-position: -30px -40px
-}
-
-.jview .share .list_share .copy_url:after {
-    background-position: -60px -40px
-}
-
-.jview .share .list_share .send_sms:after {
-    background-position: -90px -40px
-}
-
-.jview .share:hover .list_share {
-    display: block
-}
 
 .jv_title {
     margin-bottom: 14px;
@@ -4823,122 +5223,14 @@ button {
     content: ""
 }
 
-.jview a + .toolTipWrap, .jview span + .toolTipWrap, .jview strong + .toolTipWrap {
-    margin-left: 6px
-}
 
-.jview .toolTipWrap + .toolTipWrap {
-    margin-left: 4px
-}
-
-.jview .toolTipWrap.opened .toolTip {
-    display: block
-}
-
-.jview .toolTip .toolTipCont {
-    font-size: 12px
-}
-
-.jview .toolTip .toolTipTit, .jview .toolTip p {
-    color: #666;
-    word-break: break-all
-}
-
-.jview .toolTip ul {
-    display: block;
-    font-size: 12px
-}
-
-.jview .toolTip ul > li {
-    position: relative;
-    margin-top: 6px;
-    padding-left: 66px;
-    min-height: 16px;
-    color: #666;
-    line-height: 16px
-}
-
-.jview .toolTip ul > li:first-child {
-    margin-top: 0
-}
-
-.jview .toolTip ul > li > span {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 66px;
-    color: #888;
-    line-height: 16px
-}
-
-.jview .toolTip .txt_noti {
-    margin-top: 10px;
-    padding: 8px 15px 10px;
-    color: #949494;
-    font-size: 11px;
-    letter-spacing: -1px;
-    line-height: 17px;
-    background-color: #f9f9f9
-}
-
-.jview .scroll {
-    scrollbar-3dLight-Color: #fff;
-    scrollbar-arrow-color: #e5e6eb;
-    scrollbar-base-color: #fff;
-    scrollbar-Face-Color: #e5e6eb;
-    scrollbar-Track-Color: #fff;
-    scrollbar-DarkShadow-Color: #fff;
-    scrollbar-Highlight-Color: #fff;
-    scrollbar-Shadow-Color: #fff
-}
-
-.jview .scroll::-webkit-scrollbar {
-    width: 6px;
-    height: 6px
-}
-
-.jview .scroll::-webkit-scrollbar-track {
-    background: #fcfcfc
-}
-
-.jview .scroll::-webkit-scrollbar-thumb {
-    background: #f2f2f3
-}
 
 /* 즉시지원 버튼 컬러
 .jview .sri_btn_lg>span.sri_btn_immediately {border:1px solid #ff6d6a;color:#fff;background:#ff6d6a}
 .offer.list .sri_btn_xs {display:inline-block;overflow:hidden;margin:0;padding:0;width:auto;height:auto;box-sizing:border-box;text-align:center;vertical-align:top;background:#fff;cursor:pointer}
 .offer.list .sri_btn_xs>span.sri_btn_immediately {width:52px;border:1px solid #ff6d6a;color:#ff6d6a;background:0}
  */
-/* 프로그레스 바 */
-.jview_progress {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 11;
-    width: 100%;
-    height: 4px;
-    background: #e5e6eb
-}
 
-.jview_progress .row {
-    display: block;
-    width: 100%;
-    height: 4px;
-    border: 0;
-    background: #5b76f5;
-    -webkit-transform: scaleX(0);
-    -ms-transform: scaleX(0);
-    transform: scaleX(0);
-    -webkit-transform-origin: 0 0;
-    -moz-transform-origin: 0 0;
-    -ms-transform-origin: 0 0;
-    -o-transform-origin: 0 0;
-    transform-origin: 0 0;
-    will-change: transform
-}
 
 /* 추천영역 */
 .jview_wing {
@@ -5235,6 +5527,10 @@ button {
     line-height: 24px
 }
 
+.offer.tbl .company .link {
+    max-width: 128px
+}
+
 .offer.tbl .link {
     display: inline-block;
     overflow: hidden;
@@ -5248,9 +5544,7 @@ button {
     text-decoration: underline
 }
 
-.offer.tbl .company .link {
-    max-width: 128px
-}
+
 
 .offer.tbl .recruit .link {
     max-width: 440px;
@@ -5804,24 +6098,7 @@ button {
     content: ""
 }
 
-.jv_header .company {
-    display: inline-block;
-    overflow: hidden;
-    margin-right: 8px;
-    padding-right: 2px;
-    max-width: 380px;
-    height: 28px;
-    font-size: 18px;
-    font-weight: normal;
-    line-height: 23px;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-    white-space: nowrap
-}
 
-.jv_header .tag + .company {
-    max-width: 420px
-}
 
 .jv_header .tit_job {
     margin-top: 4px;
@@ -6247,31 +6524,7 @@ button {
     display: block
 }
 
-/* 팝업뷰 */
-#sri_layout_popup {
-    min-width: 960px
-}
 
-#sri_layout_popup .wrap_jview {
-    padding: 0
-}
-
-#sri_layout_popup .jv_remote {
-    top: 39px;
-    margin-left: -549px
-}
-
-#sri_layout_popup .jv_remote.shrink {
-    margin-left: -472px
-}
-
-#sri_layout_popup .jv_remote.fix_pop {
-    top: 99px
-}
-
-#sri_layout_popup .jview_floating .jv_header_float {
-    margin-left: -435px
-}
 
 /* 개인 마이페이지 */
 #pm_contents {
@@ -6295,36 +6548,9 @@ button {
     display: none !important
 }
 
-/* 공고뷰 컨텐츠 */
-.wrap_jview {
-    position: relative;
-    z-index: 1;
-    margin: 0 auto;
-    padding-right: 300px;
-    width: 960px
-}
 
-.jview {
-    position: relative
-}
 
-.jview + .jview {
-    margin-top: 29px
-}
 
-.jview > .wrap_jv_cont {
-    position: relative;
-    padding: 40px 44px 100px;
-    border: 1px solid #e5e6eb;
-    background: #fff
-}
-
-.jview > .jv_ads {
-    overflow: hidden;
-    margin: 29px auto 0;
-    width: 728px;
-    height: 90px
-}
 
 .jv_cont {
     position: relative;
@@ -6349,14 +6575,7 @@ button {
     width: 870px
 }
 
-.wrap_jv_header {
-    padding-bottom: 30px;
-    min-height: 75px
-}
 
-.wrap_jv_header + .jv_cont {
-    margin-top: 0
-}
 
 /* 핵심정보 */
 .jv_summary .col {
@@ -8572,73 +8791,7 @@ button {
     color: #86c2ff
 }
 
-/* 인쇄 */
-@page {
-    margin: 60px 40px;
-    size: A4
-}
 
-body#sri_layout_popup.printing #content {
-    background: #fff
-}
-
-body#sri_layout_popup.printing .main_nudge, body#sri_layout_popup.printing .jview .btn_tooltip, body#sri_layout_popup.printing .jview .btn_link, body#sri_layout_popup.printing .jview .btn_move_map, body#sri_layout_popup.printing .jview .btn_interest, body#sri_layout_popup.printing .jview .btn_share, body#sri_layout_popup.printing .jview .wrap_share, body#sri_layout_popup.printing .jv_summary .btn_modify, body#sri_layout_popup.printing .jv_footer .btn_tags, body#sri_layout_popup.printing .jv_cont .btn_more_cont {
-    display: none !important
-}
-
-body#sri_layout_popup.printing .toolTipWrap {
-    display: block;
-    margin: 0;
-    padding: 2px 0
-}
-
-body#sri_layout_popup.printing .toolTip {
-    display: block;
-    position: static;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    border: 0;
-    color: inherit;
-    background: none;
-    box-shadow: none
-}
-
-body#sri_layout_popup.printing .toolTip .tail, body#sri_layout_popup.printing .toolTip .btnClose {
-    display: none
-}
-
-body#sri_layout_popup.printing .jview .toolTip ul, body#sri_layout_popup.printing .jview .toolTip .toolTipCont {
-    font-size: 12px
-}
-
-body#sri_layout_popup.printing .jview .toolTip ul > li, body#sri_layout_popup.printing .jview .toolTip ul > li span {
-    line-height: 18px
-}
-
-body#sri_layout_popup.printing .jv_cont .layer_group {
-    overflow: visible;
-    position: static
-}
-
-body#sri_layout_popup.printing .jv_cont .layer_group .layer {
-    max-height: none
-}
-
-body#sri_layout_popup.printing .jv_cont .layer_group .layer .cont_more {
-    display: block
-}
-
-body#sri_layout_popup.printing .jv_footer .cont {
-    padding-top: 0
-}
-
-body#sri_layout_popup.printing .jv_footer .cont .tags {
-    overflow: visible;
-    position: static;
-    padding: 9px 0;
-    height: auto
-}
 
 @media print {
     * {

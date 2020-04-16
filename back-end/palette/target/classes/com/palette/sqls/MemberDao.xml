@@ -8,13 +8,81 @@
   </select>
 
   <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
-  	SELECT MEMBER_SEQ, MEMBER_ID, PWD, MEMBER_NAME, AGE, INTERAREA, GENDER
+  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME
   	FROM MEMBER
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
   
+  <select id="checkId" parameterType="com.palette.model.MemberDto" resultType="java.lang.Integer">
+	SELECT COALESCE(COUNT(*), 0)
+	FROM MEMBER
+	WHERE MEMBER_ID=#{memberId}
+  </select>
+
   <insert id="createMember" parameterType="com.palette.model.MemberDto">
   	INSERT INTO MEMBER ( MEMBER_NAME, MEMBER_ID, PWD, AGE, ADDRESS, EMAIL, AUTH, GENDER )
   	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}) 
   </insert>
+  
+  
+  <select id="getSelectMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
+  	SELECT MEMBER_SEQ, MEMBER_ID, PWD, MEMBER_NAME, AGE, INTERAREA, MYMONEY
+  	FROM MEMBER
+  	WHERE MEMBER_SEQ=#{memberSeq}
+  </select>
+ 
+ 	<resultMap type="com.palette.model.MemberDto" id="MemberDetail">
+ 		<id column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="INTERAREA" property="interArea"/>
+		<result column="EMAIL" property="email"/>
+		<result column="AGE" property="age"/>
+		<result column="GENDER" property="gender"/>
+		<result column="MYMONEY" property="myMoney"/>
+		<result column="CV" property="cv"/>
+		<result column="AUTH" property="auth"/>
+		<result column="DEL" property="del"/>
+		<result column="DISLIKE" property="dislike"/>
+		<collection property="memberInterDto" resultMap="MemberInter"></collection>
+		<collection property="interBigDtos" resultMap="InterBig"></collection>
+ 	</resultMap>
+ <select id="getDetailMember" parameterType="java.lang.Integer" resultMap="MemberDetail">
+		SELECT * 
+	FROM MEMBER_INTERREST inter
+	JOIN MEMBER mem
+		ON inter.MEMBER_SEQ  = mem.MEMBER_SEQ
+	JOIN INTER_BIG bg
+		ON bg.INTER_BIG_SEQ = inter.BIG_SEQ   
+	JOIN INTER_SMALL sm
+		ON inter.SMALL_SEQ = sm.INTER_SMALL_SEQ
+	WHERE mem.MEMBER_SEQ =#{memberSeq};
+ </select>
+ 	
+ 	
+	 <resultMap type="com.palette.model.InterBigDto" id="InterBig">
+		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="BIG_NAME" property="bigName"/>
+		<collection property="interSmallDtos" ofType="com.palette.model.InterSmallDto">
+			<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+			<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+			<result column="SMALL_NAME" property="smallName"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.palette.model.InterSmallDto" id="InterSmall">
+		<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="SMALL_NAME" property="smallName"/>
+	</resultMap>
+	
+	<resultMap type="com.palette.model.MemberInterDto" id="MemberInter">
+		<id column="MEMBER_INTERREST_SEQ" property="memberInterrestSeq"/>
+		<result column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="BIG_SEQ" property="bigSeq"/>
+		<result column="SMALL_SEQ" property="smallSeq"/>
+		<result column="DEL" property="del"/>
+	</resultMap> 
+
 </mapper>

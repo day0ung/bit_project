@@ -5,10 +5,10 @@
         <div class="leftBar">
             <ul>
                 <li> <h2> {{title}} </h2> </li>
-                <li><router-link class="active" to="/search"> 검색0 </router-link></li>
-                <li><router-link  to="/search"> 검색1 </router-link></li>
-                <li><router-link  to="/search"> 검색2 </router-link></li>
-                <li><router-link  to="/search"> 검색3 </router-link></li>
+                <li><router-link class="active" to="/group01"> 기업회원 승인 </router-link></li>
+                <li><router-link  to="/group02"> 그룹개설 승인 </router-link></li>
+                <li><router-link  to="/group03"> 검색2 </router-link></li>
+                <li><router-link  to="/group04"> 검색3 </router-link></li>
                 
             </ul>
         </div> 

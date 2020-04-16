@@ -15,6 +15,12 @@ public interface MemberDao {
 
 	MemberDto getOneMember(MemberDto dto);
 	
+	int checkId(MemberDto dto);
+	
 	int createMember(MemberDto dto);
+	
+	MemberDto getSelectMember(int memberSeq);
+	
+	MemberDto getDetailMember(int memberSeq);
 
 }
