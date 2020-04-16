@@ -26,19 +26,17 @@ public class GroupService {
 	public List<GroupDto> getAllGroup() {
 		return groupDao.getAllGroup();
 	}
+	public ArrayList<GroupDto> getMyGroup(GroupParams groupParams) {
+		return groupDao.getMyGroup(groupParams);
+	}
+	public ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams) {
+		return groupDao.getMyOtherGroup(groupParams);
+	}
 
 	public GroupDto getOneGroup(int seq) {
 		return groupDao.getOneGroup(seq);
 	}
 
-	public List<InterBigDto> getBigList() {
-		return groupDao.getBigList();
-	}
-
-	public List<InterSmallDto> getSmallList(int seq) {
-		return groupDao.getSmallList(seq);
-	}
-	
 	public List<GroupMemberDto> getGroupMemberName(int seq){
 		return groupDao.getGroupMemberName(seq);
 	}
@@ -62,4 +60,7 @@ public class GroupService {
 	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {
 		return groupDao.groupSearchList(groupParams);
 	}
+	
+
+	
 }

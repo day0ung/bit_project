@@ -275,4 +275,8 @@ build/
 #Gradle temporary files
 target/
 
+## DataBase File
+application.properties
+
+
 
