@@ -14,5 +14,11 @@ public interface MemberDao {
 	List<MemberDto> selectAll();
 
 	MemberDto getOneMember(MemberDto dto);
+	
+	int checkId(MemberDto dto);
+	
+	int createMember(MemberDto dto);
+	
+	MemberDto getSelectMember(int memberSeq);
 
 }

@@ -39,11 +39,14 @@
 		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
 		<result column="GROUP_NAME" property="groupName"/>
+		<result column="GROUP_LOCATION" property="groupLocation"/>
+		<result column="SMALL_INFO" property="smallInfo"/>
 		<result column="INFO" property="info"/>
 		<result column="MAX_MEMBER" property="maxMember"/>
 		<result column="IMAGE" property="image"/>
 		<result column="START_DATE" property="startDate"/>
 		<result column="END_DATE" property="endDate"/>
+		<result column="PERMISSION" property="permission"/>
 		<result column="DEL" property="del"/>
 		<result column="CURR_MEMBER" property="currMember"/>
 		<collection property="interBigDto" resultMap="InterBig"/>
@@ -58,11 +61,14 @@
 		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
 		<result column="GROUP_NAME" property="groupName"/>
+		<result column="GROUP_LOCATION" property="groupLocation"/>
+		<result column="SMALL_INFO" property="smallInfo"/>
 		<result column="INFO" property="info"/>
 		<result column="MAX_MEMBER" property="maxMember"/>
 		<result column="IMAGE" property="image"/>
 		<result column="START_DATE" property="startDate"/>
 		<result column="END_DATE" property="endDate"/>
+		<result column="PERMISSION" property="permission"/>
 		<result column="DEL" property="del"/>
 		<result column="CURR_MEMBER" property="currMember"/>
 		<collection property="groupSchedule" resultMap="GroupSchedule"/>
@@ -72,6 +78,21 @@
 	</resultMap>
 
 
+<select id="groupSearchList" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select *
+	from GROUP_INFO g
+	join MEMBER m
+		on g.MEMBER_SEQ = m.MEMBER_SEQ
+	join INTER_BIG ib
+		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+			from GROUP_MEMBER
+			group by GROUP_INFO_SEQ) cur
+		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where g.INTER_BIG_SEQ= #{interBigSeq};
+</select>
 <select id="getAllGroup" resultMap="GroupList">
 	select *
 	from GROUP_INFO g
@@ -85,6 +106,46 @@
 			from GROUP_MEMBER
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+</select>
+<select id="getMyGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select * 
+	from GROUP_INFO i
+	join MEMBER m
+		on i.MEMBER_SEQ = m.MEMBER_SEQ
+	join GROUP_MEMBER gm
+		on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
+	join INTER_BIG ib
+		on i.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+			from GROUP_MEMBER
+			group by GROUP_INFO_SEQ) cur
+		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where gm.MEMBER_SEQ =#{memberSeq};
+</select>
+<select id="getMyOtherGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select * 
+	from GROUP_INFO i
+	join MEMBER m
+		on i.MEMBER_SEQ = m.MEMBER_SEQ
+	join INTER_BIG ib
+			on i.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+			from GROUP_MEMBER
+			group by GROUP_INFO_SEQ) cur
+		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where i.GROUP_INFO_SEQ not in 
+								(select i.GROUP_INFO_SEQ 
+								 from GROUP_INFO i
+								 join GROUP_MEMBER gm
+								     on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
+								 where gm.MEMBER_SEQ = #{memberSeq} )
+	<if test="interBigSeq != 0">
+	and i.INTER_BIG_SEQ = #{interBigSeq};
+	</if>
 </select>
 
  <select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
@@ -129,13 +190,6 @@
 	<result column="SMALL_NAME" property="smallName"/>
 </resultMap>
 
-<select id="getBigList" resultType="com.palette.model.InterBigDto">
-  SELECT * FROM INTER_BIG
-</select>
-
-<select id="getSmallList" parameterType="java.lang.Integer" resultType="com.palette.model.InterSmallDto">
-  SELECT * FROM INTER_SMALL WHERE INTER_BIG_SEQ = #{seq}
-</select>
 
 <select id="getInterListAll" resultMap="InterBig">
 SELECT *

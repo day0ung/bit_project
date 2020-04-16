@@ -24,7 +24,7 @@
                 <span><button @click="logout">로그아웃</button></span>
             </div>
             <div class="logo">
-                <router-link to="/">
+                <router-link :to="{path: '/'}" exact>
                     <img style="height: 55px; margin-top: -25px;" src='../../assets/css/images/logo.png' alt="팔레트" />
                 </router-link>
             </div>

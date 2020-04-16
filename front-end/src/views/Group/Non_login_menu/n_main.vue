@@ -1,32 +1,37 @@
 <template>
   <div class="n_main">
     <div class="group_detail bounce-top">
-    <div class="demo">
+    <!-- <div class="demo">
       <div class="content">
           <div id="large-header" class="large-header">
             <canvas id="demo-canvas"></canvas>
             <h1 class="main-title"><span class="thin">그룹스터디</span></h1>
           </div>
       </div>
-    </div>
+    </div> -->
+      <div>그룹스터디</div>
     </div>
     <div class="n_main_background"><!-- 배경 -->
       <div class="n_main_component">
       <!-- 상단 버튼 -->
       <div style="display: flow-root;">
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-          <label class="btn blue">
-            <input type="radio" name="options" id="option1" autocomplete="off"> 대학생/취업
+          <label class="btn">
+            <input type="radio" name="options" id="option3" autocomplete="off" @click="searchBigSeq(0)"> 전체보기
           </label>
-          <label class="btn red">
-            <input type="radio" name="options" id="option2" autocomplete="off"> 공무원/임용
+          <label class="btn">
+            <input type="radio" name="options" id="option1" autocomplete="off" @click="searchBigSeq(1)"> 대학생/취업
           </label>
-          <label class="btn green">
-            <input type="radio" name="options" id="option3" autocomplete="off"> 어학/회화
+          <label class="btn">
+            <input type="radio" name="options" id="option2" autocomplete="off" @click="searchBigSeq(2)"> 공무원/임용
           </label>
-          <label class="btn yellow">
-            <input type="radio" name="options" id="option3" autocomplete="off"> 라이프/취미
+          <label class="btn">
+            <input type="radio" name="options" id="option3" autocomplete="off" @click="searchBigSeq(3)"> 어학/회화
           </label>
+          <label class="btn">
+            <input type="radio" name="options" id="option3" autocomplete="off" @click="searchBigSeq(4)"> 라이프/취미
+          </label>
+
         </div>
       </div>
       <!-- 그룹 리스트 css적용 html -->
@@ -94,6 +99,17 @@ export default {
     gotoDetail(seq){
       //alert("seq=" + seq)
       this.$router.push('/group/main/detail/'+seq)
+    },
+    searchBigSeq(seq){
+      //alert(seq)
+      this.loading = true
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('interBigSeq', seq);
+      axios.post("http://localhost:9000/groupSearchList", params)
+              .then(res => {
+          this.list = res.data
+          this.loading = false
+        })
     }
   },
   mounted(){
@@ -117,7 +133,7 @@ export default {
 <style scoped>
 
 /* 우주배경 배너 */
-.large-header {
+/* .large-header {
    position: relative;
    width: 100%;
    background: #111;
@@ -157,7 +173,7 @@ export default {
    .demo .main-title {
       font-size: 3em;
    }
-}
+} */
 /* 우주배경 배너 끝*/
 
 .Classification{

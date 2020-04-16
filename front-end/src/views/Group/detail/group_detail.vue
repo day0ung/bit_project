@@ -18,11 +18,12 @@
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
-        <h5>상세 정보</h5>
+        <h5><span>상세 정보</span></h5>
       </div>
       <div class="groupInfoContent">
+<<<<<<< HEAD
         <p>분류 : {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
-        <p>지역 : {location}</p>
+        <p>지역 : {{ groupOne.groupLocation }}</p>
         <p>인원 : {{ groupOne.currMember}} / {{ groupOne.maxMember}}</p>
         <p>일정 : <div class="sizes">
             <div v-if="groupOne.groupSchedule.monday == 0" class="size_blue">월</div>
@@ -39,9 +40,34 @@
             <div v-else class="size_blue_check">토</div>
             <div v-if="groupOne.groupSchedule.sunday == 0" class="size_blue">일</div>
             <div v-else class="size_blue_check">일</div>
-          </div></p>
+          </div>
         <p>시작일 : {{ groupOne.startDate }}</p>
         <p>완료일 : {{ groupOne.endDate }}</p>
+=======
+        <div><span>분류</span> {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</div>
+        <div><span>지역</span> {{ groupOne.groupLocation }}</div>
+        <div><span>인원</span> {{ groupOne.currMember}} / {{ groupOne.maxMember}}</div>
+        <div><span>일정</span></div>
+        <div class="schedules" style="line-height: 12px;">
+            <div v-if="groupOne.groupSchedule.monday == 0" class="schedule">월</div>
+            <div v-else class="schedule_check">월</div>
+            <div v-if="groupOne.groupSchedule.tuesday == 0" class="schedule">화</div>
+            <div v-else class="schedule_check">화</div>
+            <div v-if="groupOne.groupSchedule.wednesday == 0" class="schedule">수</div>
+            <div v-else class="schedule_check">수</div>
+            <div v-if="groupOne.groupSchedule.thursday == 0" class="schedule">목</div>
+            <div v-else class="schedule_check">목</div>
+            <div v-if="groupOne.groupSchedule.friday == 0" class="schedule">금</div>
+            <div v-else class="schedule_check">금</div>
+            <div v-if="groupOne.groupSchedule.saturday == 0" class="schedule">토</div>
+            <div v-else class="schedule_check">토</div>
+            <div v-if="groupOne.groupSchedule.sunday == 0" class="schedule">일</div>
+            <div v-else class="schedule_check">일</div>
+        </div>
+        
+        <div><span>시작일</span> {{ groupOne.startDate }}</div>
+        <div><span>완료일</span> {{ groupOne.endDate }}</div>
+>>>>>>> origin/submaster
       </div>
       <div class="hr"></div>
       <div class="groupName">
@@ -93,6 +119,8 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
 /* center container in the middle */
 .group_detail{
+  width: 950px;
+  margin: auto;
 }
 
 .groupDetailcCntainer {
@@ -100,7 +128,7 @@ export default {
 	 margin: auto;
 	 overflow: hidden;
    height: auto;
-	 background: #ebebeb;
+	 background: #f7f7f7;
 }
 
 .groupImage img{
@@ -117,11 +145,23 @@ export default {
   float: left;
   padding: 60px 0px 0px 100px;
 }
+.groupInfoTitle > h5 > span{
+  color: #727272;
+}
 .groupInfoContent{
   float: right;
   padding: 60px 100px 60px 0px;
   width: 600px;
   text-align: initial;
+}
+.groupInfoContent > div{
+  margin: 14px 0px;
+  line-height: 24px;
+}
+
+.groupInfoContent > div > span{
+  display: list-item;
+  color: #727272;
 }
 
 .hr{
@@ -129,31 +169,29 @@ export default {
   margin: auto;
   margin-top: 15px;
   margin-bottom: 5px;
-  background: #9e9e9e;
+  background: #c1c1c1;
   height: 1px;
   width: 80%;
 }
 
- .sizes {
+.schedules {
 	 display: grid;
 	 color: #4e4e4e;
 	 grid-template-columns: repeat(auto-fill, 30px);
 	 grid-gap: 4px;
-	 margin-left: 15px;
-	 margin-top: 5px;
 }
-.size_blue {
+.schedule {
 	 padding: 8px;
 	 border: 1px solid #4e4e4e;
 	 font-size: 0.7em;
 	 text-align: center;
 }
-.size_blue_check{
+.schedule_check{
   padding: 8px;
   border: 1px solid #4e4e4e;
   font-size: 0.7em;
   text-align: center;
-  background: #74b9ff;
+  background: #FF6C00;
   color: #f5f5f5;
   transition: all 0.4s ease-in-out;
 }

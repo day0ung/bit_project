@@ -26,5 +26,20 @@ public class MemberService {
 			
 			return memberDao.getOneMember(dto);
 		}
+		
+		public boolean checkid(MemberDto dto) {
+			int count = memberDao.checkId(dto);
+			return count > 0 ? true: false;
+		}
+		
+		public boolean createMember(MemberDto dto) {
+			int check = memberDao.createMember(dto);
+			return check > 0? true: false;
+		}
+		
+		//마이페이지용
+		public MemberDto getSelectMember(int memberSeq) {
+			return memberDao.getSelectMember(memberSeq);
+		}
     
 }

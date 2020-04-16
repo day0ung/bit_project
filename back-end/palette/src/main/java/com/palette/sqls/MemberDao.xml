@@ -8,9 +8,27 @@
   </select>
 
   <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
-  	SELECT *
+  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME
   	FROM MEMBER
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
+  </select>
+  
+  <select id="checkId" parameterType="com.palette.model.MemberDto" resultType="java.lang.Integer">
+	SELECT COALESCE(COUNT(*), 0)
+	FROM MEMBER
+	WHERE MEMBER_ID=#{memberId}
+  </select>
+
+  <insert id="createMember" parameterType="com.palette.model.MemberDto">
+  	INSERT INTO MEMBER ( MEMBER_NAME, MEMBER_ID, PWD, AGE, ADDRESS, EMAIL, AUTH, GENDER )
+  	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}) 
+  </insert>
+  
+  
+  <select id="getSelectMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
+  	SELECT MEMBER_SEQ, MEMBER_ID, PWD, MEMBER_NAME, AGE, INTERAREA, MYMONEY
+  	FROM MEMBER
+  	WHERE MEMBER_SEQ=#{memberSeq}
   </select>
   
 </mapper>

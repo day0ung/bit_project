@@ -13,6 +13,7 @@ import com.palette.model.BoardParams;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
+import com.palette.model.GroupParams;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
@@ -27,10 +28,44 @@ public class GroupController {
     @Autowired
     GroupService groupService;
 
+    // not-login
     @GetMapping(value = "/getAllGroup")
     public List<GroupDto> getAllGroup() {
     	System.out.println("getAllGroup 메소드 실행");
     	List<GroupDto> list = groupService.getAllGroup();
+    	return list;
+    }
+    // login
+    @PostMapping(value="/getMyGroup")
+    public ArrayList<GroupDto> getMyGroup(GroupParams groupParams){
+    	System.out.println("getMyGroup() 실행");
+    	 ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
+    	 for (int i = 0; i < list.size(); i++) {
+	    	 	System.out.println(list.get(i).toString());
+			 }
+    	 return list;
+    }
+    @PostMapping(value="/getMyOtherGroup")
+    public ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams){
+    	System.out.println("getMyOtherGroup() 실행");
+
+    	 ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
+    	 for (int i = 0; i < list.size(); i++) {
+	    	 	System.out.println(list.get(i).toString());
+			 }
+    	 return list;
+    }
+    
+    @PostMapping(value="/groupSearchList")
+    public ArrayList<GroupDto> groupSearchList(GroupParams groupParams){
+        ArrayList<GroupDto> list = null;
+        if(groupParams.getInterBigSeq() == 0){
+            list = (ArrayList)groupService.getAllGroup();
+        }else{
+            list = groupService.groupSearchList(groupParams);
+        }
+    	System.out.println("groupSearchList()실행 "+groupParams.toString()+ " / "+ list.size());
+    	
     	return list;
     }
     
@@ -40,20 +75,6 @@ public class GroupController {
         GroupDto outDto = groupService.getOneGroup(insertDto.getGroupInfoSeq());
         System.out.println(outDto.toString());
     	return outDto;
-    }
-
-    @PostMapping(value = "/getBigIndex")
-    public List<InterBigDto> getBigList(){
-        System.out.println("getBigList");
-        List<InterBigDto> list = groupService.getBigList();
-        return list;
-    }
-
-    @PostMapping(value = "/getSmallIndex")
-    public List<InterSmallDto> getSmallList(int interBigSeq){
-        System.out.println("getSmallList");
-        List<InterSmallDto> list = groupService.getSmallList(interBigSeq);
-        return list;
     }
 
     @GetMapping(value="/getGroupMemberName")
@@ -77,6 +98,7 @@ public class GroupController {
     	}
     	return list;
     }
+    
     @GetMapping(value="/groupBoardList")
     public ArrayList<GroupBoardDto> groupBoardList() {
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
@@ -101,8 +123,11 @@ public class GroupController {
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
     }
-    
-    
-    
 
+    @PostMapping(value = "/creatGroupApply")
+    public String creatGroupApply(GroupDto groupDto){
+        System.out.println("creatGroupApply");
+        System.out.println(groupDto.toString());
+        return "";
+    }
 }

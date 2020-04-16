@@ -49,6 +49,7 @@ export default new Vuex.Store({
     logout(state){
       state.isLogin = true
       state.loginUser = null
+      
       sessionStorage.removeItem("loginUser")
       router.push({path:'/'})
     }

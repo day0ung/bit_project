@@ -98,7 +98,7 @@ export default {
                 var login = JSON.parse(loginData); //JSON
                 this.$store.commit('loginSuccess', login )
                 alert('로그인성공')
-                this.$router.push ({path:'/'})
+                this.$router.push ({name:'home'})
                 this.$emit('close')   
             })
                           

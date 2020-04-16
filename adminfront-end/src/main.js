@@ -10,8 +10,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import ElementUI from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
 
-Vue.use(ElementUI, {locale});
-
+Vue.use(ElementUI, {locale})
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
