@@ -18,5 +18,9 @@ public interface EmploymentDao {
 	void readCount(int empBoardSeq);
 	
 	int insertRecruit(EmploymentBoardDto dto);
+	
+	int recruitUpdating(EmploymentBoardDto dto);
+	
+	int recruitDelete(int empBoardSeq);
 
 }

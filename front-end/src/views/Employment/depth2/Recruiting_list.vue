@@ -4,27 +4,28 @@
     <div class="inner_cont">
       <div class="top_product">
         <strong class="tit_cont">구인공고</strong>
-        <el-button type="primary" @click="recruitingWrite" style="float: right; background-color:#007bff; margin-top:3px; margin-right:30px">글쓰기</el-button>
+        <el-button v-if="login1.auth == 3" type="primary" @click="recruitingWrite" style="float: right; background-color:#007bff; margin-top:3px; margin-right:30px">글쓰기</el-button>
         <ul class="list_product basic" id="_special" style="margin-top:20px">
-          <li style="margin-right: 30px; margin-bottom: 15px;" v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
-            <div class="box_product">
-              <a @click="showEmpDetail(recruitingInfo.boardSeq)" class="link_box"></a> 
-              
-              <span class="product_logo">
-                <img src="https://www2.saraminbanner.co.kr/banner_logo//company/logo_banner/2018/05/p8pkyk_x5ry-2rxeec_specialplus5767144.png" class="img" alt="이미지없음" rel="nofollow">
-              </span>
-              <strong class="product_tit">{{recruitingInfo.memberDto.memberName}}</strong> 
-              <em class="product_desc">{{recruitingInfo.title}}</em> 
-              
-              <span class="recruit_func">
-                <span class="blind">공고 마감일</span>
-                <span class="num_dday" v-if="recruitingInfo.dDay > 0">D - {{recruitingInfo.dDay}} </span>
-                <span class="num_dday" v-else>오늘마감</span>  
-                <button class="sri_btn_xs" title="클릭하면 입사지원할 수 있는 창이 뜹니다." onclick="try{quickApplyForm(&#39;37993617&#39;,&#39;&#39;,&#39;t_category=main&t_content=platinum_fix_expand&#39;, &#39;&#39;); return false;} catch (e) {}; return false;" onmousedown="try{n_trackEvent(&#39;apply&#39;,&#39;main&#39;,&#39;quick_apply&#39;,&#39;&#39;);}catch(e){}"><span class="sri_btn_immediately track_event" data-track_event="main|Ads_quick_apply|platinum_fix_expand|1">즉시지원</span></button> 
-              </span> 
-              <span class="bg"></span>
-            </div> 
-          </li>
+          <div v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
+            <li v-if="$moment(recruitingInfo.cvStartDate).valueOf() - now < 0" style="margin-right: 30px; margin-bottom: 15px;" >
+              <div  class="box_product">
+                <a @click="showEmpDetail(recruitingInfo.boardSeq)" class="link_box"></a> 
+                <span class="product_logo">
+                  <img src="https://www2.saraminbanner.co.kr/banner_logo//company/logo_banner/2018/05/p8pkyk_x5ry-2rxeec_specialplus5767144.png" class="img" alt="이미지없음" rel="nofollow">
+                </span>
+                <strong class="product_tit">{{recruitingInfo.memberDto.memberName}}</strong> 
+                <em class="product_desc">{{recruitingInfo.title}}</em> 
+                
+                <span class="recruit_func">
+                  <span class="blind">공고 마감일</span>
+                  <span class="num_dday" v-if="recruitingInfo.dDay > 0">D - {{recruitingInfo.dDay}}</span>
+                  <span class="num_dday" v-else>오늘마감</span>  
+                  <button class="sri_btn_xs" title="클릭하면 입사지원할 수 있는 창이 뜹니다." onclick="try{quickApplyForm(&#39;37993617&#39;,&#39;&#39;,&#39;t_category=main&t_content=platinum_fix_expand&#39;, &#39;&#39;); return false;} catch (e) {}; return false;" onmousedown="try{n_trackEvent(&#39;apply&#39;,&#39;main&#39;,&#39;quick_apply&#39;,&#39;&#39;);}catch(e){}"><span class="sri_btn_immediately track_event" data-track_event="main|Ads_quick_apply|platinum_fix_expand|1">즉시지원</span></button> 
+                </span> 
+                <span class="bg"></span>
+              </div> 
+            </li>
+          </div>
         </ul>
       </div>
     </div>
@@ -35,23 +36,37 @@
 </template>
 
 <script>
+import Vue from "vue"
+import moment from "moment"
+import VueMomentJS from "vue-momentjs"
+
+Vue.use(VueMomentJS, moment)
+
 export default {
   data(){
     return{
       RecruitingList: this.$store.state.s_employment.RecruitingList,
       
-      getOneRecruit : this.$store.state.s_employment.getOneRecruit
+      login1 : "",
+      now : "",
+      
     }
   },
   mounted(){
+    this.now = moment().valueOf()
     
+    
+
     this.$store.state.currpage = this.$route.path
     axios.get("http://localhost:9000/getAllRecuritingInfo")
                       .then(res => {
                   // alert(JSON.stringify(res.data))
                   this.RecruitingList = res.data
                   this.$store.state.s_employment.RecruitingList = res.data
+                  
+                  
                 })
+
   },
     
   methods:{
@@ -65,7 +80,14 @@ export default {
         path: "/RecruitingWriting/"
         })
     }
-  }
+  },
+  created(){
+		let sMemberSeq = sessionStorage.getItem("loginUser")
+    this.login1 = JSON.parse(sMemberSeq)
+    
+    
+		// this.memberSeq = this.$store.state.loginUser.memberSeq
+	}
   
 }
 </script>
