@@ -39,6 +39,7 @@
               label="memberName"
               width="100">
             </el-table-column>
+            
             <el-table-column
               prop="birth"
               label="birth"
@@ -80,6 +81,7 @@
               label="companyInfo"
               width="100">
             </el-table-column>
+
             <el-table-column
               prop="companyLogo"
               label="companyLogo"
@@ -97,6 +99,7 @@
               label="del"
               width="100">
             </el-table-column>
+
             <el-table-column
               prop="dislike"
               label="dislike"

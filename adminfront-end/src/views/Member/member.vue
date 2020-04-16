@@ -3,10 +3,10 @@
         <div class="leftBar">
             <ul>
                 <li> <h2> {{title}} </h2> </li>
-                <li><router-link class="active" to="/managemember1"> 회원관리1 </router-link></li>
-                <li><router-link  to="/managemember2">  회원관리2 </router-link></li>
-                <li><router-link  to="/managemember3">  회원관리3 </router-link></li>
-                <li><router-link  to="/managemember4">  회원관리4 </router-link></li>
+                <li><router-link class="active" to="/managemember1"> 일반회원관리 </router-link></li>
+                <li><router-link  to="/managemember2">  기업회원관리 </router-link></li>
+                <li><router-link  to="/managemember3">  기타1 </router-link></li>
+                <li><router-link  to="/managemember4">  기타2 </router-link></li>
             </ul>
         </div> 
         <div  class="margin-L_25 contentPadding" >
