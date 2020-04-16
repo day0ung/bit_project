@@ -14,6 +14,7 @@ import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
+import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
@@ -125,9 +126,12 @@ public class GroupController {
     }
 
     @PostMapping(value = "/creatGroupApply")
-    public String creatGroupApply(GroupDto groupDto){
+    public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule){
         System.out.println("creatGroupApply");
-        System.out.println(groupDto.toString());
+        groupDto.setInterBigSeq(groupService.searchInterBigSeq(groupDto.getInterSmallSeq()));
+        groupService.createGroup(groupDto);
+        groupSchedule.setGroupInfoSeq(groupService.currGroupInfoSeq());
+        groupService.addSchedule(groupSchedule);
         return "";
     }
 }
