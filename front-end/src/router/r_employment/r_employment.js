@@ -19,6 +19,7 @@ export default [{
             component: () => import('@/views/Employment/depth2/CV_menu.vue')
         },
         
+        
     ]
 },
 {
@@ -30,6 +31,11 @@ export default [{
     path: '/RecruitingWriting/',
     name: 'RecruitingWriting',
     component: () => import('@/views/Employment/depth2/RecruitingWriting')
-}
+},
+{
+    path: '/recruitUpdate/:boardSeq',
+    name: 'recruitUpdate',
+    component: () => import('@/views/Employment/depth2/RecruitingUpdating')
+},
 
 ]
