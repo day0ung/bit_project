@@ -21,7 +21,7 @@ export default {
     components: { MyOtherGroup, MyGroup },
     methods:{
      createGroup(){
-
+      this.$router.push({name :"Create"})
      }
     }
 }

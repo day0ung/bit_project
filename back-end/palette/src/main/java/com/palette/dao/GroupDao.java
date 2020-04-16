@@ -11,6 +11,7 @@ import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
+import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 
@@ -34,6 +35,11 @@ public interface GroupDao {
 	List<InterBigDto> getInterListAll();
 
 	ArrayList<GroupDto> groupSearchList(GroupParams groupParams);
+	
+	int searchInterBigSeq(int interSmallSeq);
+	void createGroup(GroupDto groupDto);
+	int currGroupInfoSeq();
+	void addSchedule(GroupSchedule groupSchedule);
 
 
 }

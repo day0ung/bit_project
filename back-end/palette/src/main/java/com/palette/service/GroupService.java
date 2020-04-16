@@ -13,6 +13,7 @@ import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
+import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 
@@ -59,6 +60,18 @@ public class GroupService {
 
 	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {
 		return groupDao.groupSearchList(groupParams);
+	}
+	public void createGroup(GroupDto groupDto) {
+		groupDao.createGroup(groupDto);
+	}
+	public void addSchedule(GroupSchedule groupSchedule) {
+		groupDao.addSchedule(groupSchedule);
+	}
+	public int currGroupInfoSeq() {
+		return groupDao.currGroupInfoSeq();
+	}
+	public int searchInterBigSeq(int interSmallSeq) {
+		return groupDao.searchInterBigSeq(interSmallSeq);
 	}
 	
 
