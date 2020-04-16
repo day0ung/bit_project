@@ -10,5 +10,6 @@ import com.palette.model.MemberDto;
 @Mapper
 @Repository
 public interface AdminMemberDao {
+	
 
 }//end of adminMemberDao interface
