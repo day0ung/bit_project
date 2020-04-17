@@ -26,7 +26,7 @@ public class CVController {
 // 	전체 리스트
     @PostMapping(value = "/singlefile")
     public String singlefile() {
-    	System.out.println("파일 업로드");
+    	
     	return null;
     }
     

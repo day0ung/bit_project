@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.EmploymentBoardDto;
+
 import com.palette.service.EmploymentService;
 
 
