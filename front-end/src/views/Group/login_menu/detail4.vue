@@ -49,7 +49,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 
 export default {
-    
+  name : 'detail4',
   data() {
     return {
     

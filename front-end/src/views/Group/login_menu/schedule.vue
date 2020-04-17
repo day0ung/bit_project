@@ -17,7 +17,7 @@ import 'fullcalendar/dist/locale/ko'
 import { FullCalendar } from 'vue-full-calendar'
 
 export default {
-
+  name: 'GroupSchedule',
   data(){
     return{
 

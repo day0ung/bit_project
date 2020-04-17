@@ -64,6 +64,7 @@ import Pagination from '@/components/Pagination'
 import { loading } from 'element-ui';
 
 export default {
+  name: 'GroupBoard',
   components: { Pagination },
   data(){
     return{
