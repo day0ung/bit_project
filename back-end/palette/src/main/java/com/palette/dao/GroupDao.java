@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.palette.model.BoardParams;
+import com.palette.model.CalendarDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -40,6 +41,8 @@ public interface GroupDao {
 	void createGroup(GroupDto groupDto);
 	int currGroupInfoSeq();
 	void addSchedule(GroupSchedule groupSchedule);
+	
+	List<CalendarDto> getGroupSchedule(GroupDto groupDto);
 
 
 }

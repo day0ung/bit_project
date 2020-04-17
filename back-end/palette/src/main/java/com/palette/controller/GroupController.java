@@ -41,9 +41,9 @@ public class GroupController {
     public ArrayList<GroupDto> getMyGroup(GroupParams groupParams){
     	System.out.println("getMyGroup() 실행");
     	 ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
-    	 for (int i = 0; i < list.size(); i++) {
-	    	 	System.out.println(list.get(i).toString());
-			 }
+//    	 for (int i = 0; i < list.size(); i++) {
+//	    	 	System.out.println(list.get(i).toString());
+//			 }
     	 return list;
     }
     @PostMapping(value="/getMyOtherGroup")
@@ -88,6 +88,7 @@ public class GroupController {
     	return list;
     }
     
+    // board
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
     	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );

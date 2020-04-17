@@ -4,7 +4,7 @@
       <br>
       <div class="calendar">
 
-      <full-calendar :events="events" :config="config" @day-click="dayClick"></full-calendar>
+      <full-calendar :event-sources="eventSources" :config="config" @day-click="dayClick"></full-calendar>
 
       </div>
   </div>
@@ -20,29 +20,13 @@ export default {
 
   data(){
     return{
-      memberlist: this.$store.state.s_subStore.data,
-      events: [
-                    // {
-                    //     title  : 'event1',
-                    //     start  : '2020-01-01',
-                    // },
-                    // {
-                    //     title  : 'event2',
-                    //     start  : '2020-01-05',
-                    //     end    : '2020-01-07',
-                    // },
-                    // {
-                    //     title  : 'event3',
-                    //     start  : '2020-01-09T12:30:00',
-                    //     allDay : false,
-                    // },
 
-                ],
-                config: {
-                        locale: 'ko',
-                        defaultView:'month'
-                        
-                },
+      memberlist: this.$store.state.s_subStore.data,
+      eventSources: [],
+      config: {
+              locale: 'ko',
+              defaultView:'month'
+      },
       
     }
   },
@@ -50,10 +34,24 @@ export default {
     dayClick(args){
         alert(args)
    
-    }
+    },
+    events(start, end, timezone, callback){
+
+          var params = new URLSearchParams()	
+          var groupSeq = 1
+          params.append('groupSeq', groupSeq)
+          axios.post("http://localhost:9000/getGroupSchedule", params)
+          .then(res => {
+            alert(res.data)
+            this.eventSources = res.data
+          })
+      }
   },
   mounted(){
-      this.$store.state.currpage = this.$route.path
+      this.$store.state.currpage = this.$route.path;
+      this.events();
+      
+
   }
 }
 </script>
