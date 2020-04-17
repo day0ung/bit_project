@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import GroupInfo from '@views/Group/login_menu/groupInfo.vue'
+import GroupInfo from '@/views/Group/login_menu/groupInfo.vue'
 import GroupBoard from '@/views/Group/login_menu/board.vue'
 import GroupSchedule from '@/views/Group/login_menu/schedule.vue'
 

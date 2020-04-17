@@ -6,6 +6,12 @@
 
 <script>
 export default {
+    name : 'GroupInfo',
+    date(){
+        return{
+            
+        }
+    }
 
 }
 </script>
