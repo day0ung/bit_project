@@ -70,8 +70,8 @@ export default {
   },
   methods:{
     gotoDetail(groupSeq){
-      alert("groupSeq=" + groupSeq + "loginSeq" + this.loginSeq)
-      //this.$router.push('/group/login_menu/l_group_menu/'+groupSeq+'/'+loginSeq)
+      //alert("groupSeq=" + groupSeq + "loginSeq" + this.loginSeq)
+      this.$router.push('/group/menu/'+groupSeq)
     }
     
   }

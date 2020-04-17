@@ -46,10 +46,10 @@ export default [
         ]
     },
     {
-    name: 'login_group_menu',
-    path: '/group/login_menu',
-    component: () => import('@views/Group/login_menu/l_menu'),
-    children: [
+    name: 'l_main',
+    path: '/group/menu/:groupSeq',
+    component: () => import('@/views/Group/login_menu/menu'),
+    children:[
 
     ]
     },
