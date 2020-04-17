@@ -15,7 +15,7 @@ export default [
     path: '/group',
     name: 'Group',
     beforeEnter: group,
-    component: () => import('@/views/Group/Group.vue'),
+    component: () => import('@/views/Group/login_menu/l_main'),
     children:[
         {
             path: '',
@@ -46,6 +46,14 @@ export default [
         ]
     },
     {
+    name: 'l_main',
+    path: '/group/menu/:groupSeq',
+    component: () => import('@/views/Group/login_menu/menu'),
+    children:[
+
+    ]
+    },
+    {
     path: '/group/main',
     name: 'Non_login_group',
     component: () => import('@/views/Group/Non_login_menu/n_main'),
@@ -56,5 +64,5 @@ export default [
     name: 'groupdetail',
     path: '/group/main/detail/:contentId',
     component: () => import('@/views/Group/detail/group_detail')
-    },
+    }
 ]
