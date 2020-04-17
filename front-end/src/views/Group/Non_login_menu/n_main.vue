@@ -1,16 +1,5 @@
 <template>
   <div class="n_main">
-    <div class="group_detail bounce-top">
-    <!-- <div class="demo">
-      <div class="content">
-          <div id="large-header" class="large-header">
-            <canvas id="demo-canvas"></canvas>
-            <h1 class="main-title"><span class="thin">그룹스터디</span></h1>
-          </div>
-      </div>
-    </div> -->
-      <div>그룹스터디</div>
-    </div>
     <div class="n_main_background"><!-- 배경 -->
       <div class="n_main_component">
       <!-- 상단 버튼 -->
@@ -131,50 +120,6 @@ export default {
 </script>
 
 <style scoped>
-
-/* 우주배경 배너 */
-/* .large-header {
-   position: relative;
-   width: 100%;
-   background: #111;
-   overflow: hidden;
-   background-size: cover;
-   background-position: center center;
-   z-index: 1;
-}
-
-.demo .large-header {
-   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/499416/demo-bg.jpg");
-}
-
-.main-title {
-   position: absolute;
-   margin: 0;
-   padding: 0;
-   color: #f9f1e9;
-   text-align: center;
-   top: 50%;
-   left: 50%;
-   -webkit-transform: translate3d(-50%, -50%, 0);
-   transform: translate3d(-50%, -50%, 0);
-}
-
-.demo .main-title {
-   text-transform: uppercase;
-   font-size: 4.2em;
-   letter-spacing: 0.1em;
-}
-
-.main-title .thin {
-   font-weight: 200;
-}
-
-@media only screen and (max-width: 768px) {
-   .demo .main-title {
-      font-size: 3em;
-   }
-} */
-/* 우주배경 배너 끝*/
 
 .Classification{
   text-align: center;
