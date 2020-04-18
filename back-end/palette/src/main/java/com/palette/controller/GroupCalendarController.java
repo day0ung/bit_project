@@ -18,11 +18,17 @@ public class GroupCalendarController {
 	 @Autowired
 	 GroupService groupService;
 	  
-	 @PostMapping(value="/groupSchedule")
+	 @PostMapping(value="/getGroupSchedule")
 	    public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
-	    	System.out.println("getGroupSchedule()");
+	    	System.out.println("getGroupSchedule() seq: "+groupDto.toString());
 	    	List<CalendarDto> list = groupService.getGroupSchedule(groupDto);
-	    	
+	    	for (int i = 0; i < list.size(); i++) {
+	    		String str = list.get(i).toString();
+	    		System.out.println(str);
+	    		
+	    		
+			}
+	    	System.out.println(list.toString());
 	    	return list;
 	    }
 }

@@ -51,9 +51,9 @@ public class GroupController {
     	System.out.println("getMyOtherGroup() 실행");
 
     	 ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
-    	 for (int i = 0; i < list.size(); i++) {
-	    	 	System.out.println(list.get(i).toString());
-			 }
+//    	 for (int i = 0; i < list.size(); i++) {
+//	    	 	System.out.println(list.get(i).toString());
+//			 }
     	 return list;
     }
     
@@ -103,11 +103,12 @@ public class GroupController {
     
     @GetMapping(value="/groupBoardList")
     public ArrayList<GroupBoardDto> groupBoardList() {
+    	System.out.println("groupBoardList()");
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
-        for (int j = 0; j < list.size(); j++) {
-			
-        	System.out.println(list.get(j).toString());
-		}
+//        for (int j = 0; j < list.size(); j++) {
+//			
+//        	System.out.println(list.get(j).toString());
+//		}
         return list;
     }
 

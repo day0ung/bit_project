@@ -4,7 +4,7 @@
       <br>
       <div class="calendar">
 
-      <full-calendar :event-sources="eventSources" :config="config" @day-click="dayClick"></full-calendar>
+      <full-calendar :events="events" :config="config" @day-click="dayClick"></full-calendar>
 
       </div>
   </div>
@@ -22,7 +22,12 @@ export default {
     return{
 
       memberlist: this.$store.state.s_subStore.data,
-      eventSources: [],
+      events: [{
+            title  : 'event1',
+            start  : '2020-04-03',
+            color : '#cecece'
+        }
+      ],
       config: {
               locale: 'ko',
               defaultView:'month'
@@ -35,21 +40,31 @@ export default {
         alert(args)
    
     },
-    events(start, end, timezone, callback){
-
-          var params = new URLSearchParams()	
-          var groupSeq = 1
-          params.append('groupSeq', groupSeq)
-          axios.post("http://localhost:9000/getGroupSchedule", params)
-          .then(res => {
-            alert(res.data)
-            this.eventSources = res.data
-          })
-      }
+      
   },
   mounted(){
       this.$store.state.currpage = this.$route.path;
-      this.events();
+
+          var params = new URLSearchParams()	
+          var groupSeq = 1
+          params.append('groupInfoSeq', groupSeq)
+          axios.post("http://localhost:9000/getGroupSchedule", params)
+          .then(res => {
+            console.log(res.data.size())
+            for (let i = 0; i < array.length; i++) {
+              const element = array[i];
+              
+            }
+            res.data.forEach(element => {
+            alert( JSON.stringify(res.data[0].title) )
+             this.events[0].title = res.data[0].title
+             this.events[0].start = res.data[0].startDate
+             this.events[0].end = res.data[0].endDate 
+            });
+            
+             
+          })
+
       
 
   }
