@@ -24,8 +24,8 @@ public class CVController {
 //    EmploymentService employmentService;
 
 // 	전체 리스트
-    @PostMapping(value = "/singlefile")
-    public String singlefile() {
+    @PostMapping(value = "/getAllCV")
+    public String getAllCV() {
     	
     	return null;
     }
