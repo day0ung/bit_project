@@ -6,7 +6,7 @@
                 <!-- 아이디 설정 -->
                 <el-form-item label="아이디" prop="memberId">
                     <el-input placeholder="아이디를 입력해 주세요" v-model="ruleForm.memberId" style="width: 57%; margin-right: 10px"></el-input>
-                     <el-button type="success" @click="idcheck" plain>중복확인</el-button>
+                     <el-button type="success" @click="idcheck" plain v-model="checkIs">중복확인</el-button>
                 </el-form-item>
 				<!-- 비밀번호 -->
 				 <el-form-item label="비밀번호" prop="pass">
@@ -25,7 +25,7 @@
 				 </el-form-item>	 
                 <!--  나이대선택 -->
 				<el-form-item label="성별/ 연령" prop="age">
-					<el-select v-model="ruleForm.age" placeholder="나이대를 선택해주세요" style="margin-right: 20px; width: 75%;" >
+					<el-select v-model="ruleForm.age" placeholder="나이대를 선택해주세요" style="margin-right: 20px; width: 50%;" >
 						<el-option label="10대" value="10대"></el-option>
 						<el-option label="20-24" value="20-24"></el-option>
 						<el-option label="25-29" value="25-29"></el-option>
@@ -87,10 +87,10 @@ export default {
         }
       };
         return{
+            checkIs: false,
             ruleForm: {
                 memberId: '',
-                idcheck: false, 
-				pass: '',
+                pass: '',
                 checkPass: '',
                 memberName: '',
 				email: '', 
@@ -106,9 +106,6 @@ export default {
                     { required: true, message: '아이디를 입력해주세요', trigger: 'blur' },
                     { min: 3, max: 20, message: '아이디는 3글자에서 20자로 사이로 지어주세요', trigger: 'blur' },
                 ],
-                /* idcheck: [
-                    { validator: validateId, trigger: 'blur'}
-                ], */
                 pass: [
                     { required: true, validator: validatePass, trigger: 'blur' }
                 ],
@@ -142,16 +139,16 @@ export default {
          idcheck(){
             if( this.ruleForm.memberId == ''){
                 alert('아이디를 입력해주세요')
-            }else{
+            }else {
                 var params = new URLSearchParams();
                 params.append('memberId', this.ruleForm.memberId)
-                axios.get('http://localhost:9000/checkid', params)
+                axios.post('http://localhost:9000/checkid', params)
                 .then(res => {
-                    alert('통신성공')
                     if(res.data == true){
-                        alert(' 이미아이디가 존재합니다.')
+                        alert(' 아이디 사용이 가능합니다.')
+                        this.checkIs = true
                     }else{
-                        alert('아이디 사용이 가능합니다')
+                        alert('이미 아이디가 존재합니다')
                     }
                 }) 
             }
@@ -159,25 +156,31 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
-                var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
-                alert(memberAddress)
-                var params = new URLSearchParams();
-                params.append('memberId', this.ruleForm.memberId)
-                params.append('pwd', this.ruleForm.pass)
-                params.append('memberName', this.ruleForm.memberName)
-                params.append('email', this.ruleForm.email)
-                params.append('gender',  this.ruleForm.gender)
-                params.append('age', this.ruleForm.age)
-                params.append('address', memberAddress)
-                params.append('auth', this.ruleForm.auth)
-                console.log(params)
-                axios.post('http://localhost:9000/createMember', params).then(
-                    res => {
-                        if(res.data == true){
-                            alert('회원가입이 완료 되었습니다')
-                            this.$router.push ({name:'memberInter'})
-                        }
-                    }) 
+                if( this.checkIs  == false){
+                    alert('아이디 중복확인을 해주세요')
+                }else{
+                 
+                    var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
+               
+                    var params = new URLSearchParams();
+                    params.append('memberId', this.ruleForm.memberId)
+                    params.append('pwd', this.ruleForm.pass)
+                    params.append('memberName', this.ruleForm.memberName)
+                    params.append('email', this.ruleForm.email)
+                    params.append('gender',  this.ruleForm.gender)
+                    params.append('age', this.ruleForm.age)
+                    params.append('address', memberAddress)
+                    params.append('auth', this.ruleForm.auth)
+                    console.log(params)
+                    axios.post('http://localhost:9000/createMember', params).then(
+                        res => {
+                            if(res.data == true){
+                                alert('회원가입이 완료 되었습니다')
+                                this.$router.push ({name:'memberInter'})
+                            }
+                        }) 
+                }
+              
             } else {
                 console.log('error submit!!');
                 return false;

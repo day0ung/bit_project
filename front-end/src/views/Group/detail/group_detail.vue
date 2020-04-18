@@ -21,29 +21,6 @@
         <h5><span>상세 정보</span></h5>
       </div>
       <div class="groupInfoContent">
-<<<<<<< HEAD
-        <p>분류 : {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</p>
-        <p>지역 : {{ groupOne.groupLocation }}</p>
-        <p>인원 : {{ groupOne.currMember}} / {{ groupOne.maxMember}}</p>
-        <p>일정 : <div class="sizes">
-            <div v-if="groupOne.groupSchedule.monday == 0" class="size_blue">월</div>
-            <div v-else class="size_blue_check">월</div>
-            <div v-if="groupOne.groupSchedule.tuesday == 0" class="size_blue">화</div>
-            <div v-else class="size_blue_check">화</div>
-            <div v-if="groupOne.groupSchedule.wednesday == 0" class="size_blue">수</div>
-            <div v-else class="size_blue_check">수</div>
-            <div v-if="groupOne.groupSchedule.thursday == 0" class="size_blue">목</div>
-            <div v-else class="size_blue_check">목</div>
-            <div v-if="groupOne.groupSchedule.friday == 0" class="size_blue">금</div>
-            <div v-else class="size_blue_check">금</div>
-            <div v-if="groupOne.groupSchedule.saturday == 0" class="size_blue">토</div>
-            <div v-else class="size_blue_check">토</div>
-            <div v-if="groupOne.groupSchedule.sunday == 0" class="size_blue">일</div>
-            <div v-else class="size_blue_check">일</div>
-          </div>
-        <p>시작일 : {{ groupOne.startDate }}</p>
-        <p>완료일 : {{ groupOne.endDate }}</p>
-=======
         <div><span>분류</span> {{ groupOne.interBigDto.bigName }} > {{groupOne.interSmallDto.smallName}}</div>
         <div><span>지역</span> {{ groupOne.groupLocation }}</div>
         <div><span>인원</span> {{ groupOne.currMember}} / {{ groupOne.maxMember}}</div>
@@ -67,7 +44,6 @@
         
         <div><span>시작일</span> {{ groupOne.startDate }}</div>
         <div><span>완료일</span> {{ groupOne.endDate }}</div>
->>>>>>> origin/submaster
       </div>
       <div class="hr"></div>
       <div class="groupName">

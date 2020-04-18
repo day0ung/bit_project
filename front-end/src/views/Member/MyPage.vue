@@ -1,7 +1,21 @@
 <template>
   <div>
-	<h1>마이페이지</h1>
-	<p>{{myinfo.memberId}}</p>
+	  <div class="myPageHeader">
+		  <h1>마이페이지</h1>
+		<div class="tabBox">
+			<button class="myStudy">내 스터디</button>
+			<button class="myStudy">내 일정</button>
+			<button class="myStudy">내 관심분야</button>
+			<button class="myStudy">내 이력서</button>
+			<button class="myStudy">내 구매내역</button>
+			<button class="myStudy">내 정보수정</button>
+		</div>
+		  <div></div>
+		  <div></div>	
+	  </div>
+	  <div class="myPageContent">
+
+	  </div>	
   </div>
 </template>
 
@@ -42,6 +56,28 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.myPageHeader{
+	padding-top: 35px;
+    padding-left: 83px;
+    height: 169px;
+    width: 100%;
+}
+.tabBox{
+	margin-top: 30px;
+	height: 70px;
+	line-height: 70px;
+}
+.myStudy{
+	display: inline-block;
+    width: 80pt;
+    height: 50px;
+    line-height: 50px;
+    color: #717477;
+    font-size: 20px;
+	text-align: center;
+	margin-right: 30px;
+	
+}
+.myStudy:hover {color:#ff5151;}
 </style>
