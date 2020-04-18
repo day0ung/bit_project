@@ -90,8 +90,11 @@ export default {
 		  content: '',
 		  login1: [],
 		  dialogImageUrl: ""
-		},
 		
+		},
+		title1 : "",
+		files: [],
+		galleryDatas: [],
 		login : "",
         rules: {
 		  title: [
@@ -125,57 +128,80 @@ export default {
       };
     },
     methods: {
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-			
-			axios.get("http://localhost:9000/insertRecruit",{
-				params:{
-					memberSeq: this.login1.memberSeq,
-					title: this.ruleForm.title,
-					career: this.ruleForm.career,
-					education: this.ruleForm.education,
-					workingType: this.ruleForm.workingType,
-					cvStartDate : this.$moment(this.ruleForm.cvStartDate).format('YYYY.MM.DD HH:mm:ss'),
-					cvEndDate : this.$moment(this.ruleForm.cvEndDate).format('YYYY.MM.DD HH:mm:ss'),
-					salary: this.ruleForm.salary,
-					position: this.ruleForm.position,
-					workingLocation: this.ruleForm.workingLocation,
-					image: this.ruleForm.dialogImageUrl,
-					content:this.ruleForm.content
-
-				}
-			}).then(res =>{
-				alert("성공적으로 적용되었습니다.")
-				this.$router.push({
-        			name: 'Recruiting_list'
-        		})
-			})
-			
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-	  },
-	  handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePictureCardPreview(file) {
-            this.ruleForm.dialogImageUrl = file.url;
-            this.ruleForm.dialogVisible = true;
-        },
-        handleExceed(files, fileList){
-            this.$message({
-                showClose: true,
-                center: true,
-                message: '대표이미지는 1개만 업로드가능합니다.',
-                type: 'error'
-			})
+		submitFile() {
+			for (i = 0; i < this.files.length; i++) {
+				let formData = new FormData();
+				formData.append('title', this.title);
+				formData.append('files', this.files[i]);
+				axios.post('http://localhost:9000/api/gallery/upload',
+						formData, {
+							headers: {
+								'Content-Type': 'multipart/form-data'
+							}
+						}
+					).then(function() {
+						console.log('SUCCESS!!');
+					})
+					.catch(function() {
+						console.og('FAILURE!!');
+					});
+			}
 		},
+		handleFileUpload() {
+                    this.files = this.$refs.files.files;
+                    console.log(this.files);
+                },
+		submitForm(formName) {
+			this.$refs[formName].validate((valid) => {
+			if (valid) {
+			
+				axios.get("http://localhost:9000/insertRecruit",{
+					params:{
+						memberSeq: this.login1.memberSeq,
+						title: this.ruleForm.title,
+						career: this.ruleForm.career,
+						education: this.ruleForm.education,
+						workingType: this.ruleForm.workingType,
+						cvStartDate : this.$moment(this.ruleForm.cvStartDate).format('YYYY.MM.DD HH:mm:ss'),
+						cvEndDate : this.$moment(this.ruleForm.cvEndDate).format('YYYY.MM.DD HH:mm:ss'),
+						salary: this.ruleForm.salary,
+						position: this.ruleForm.position,
+						workingLocation: this.ruleForm.workingLocation,
+						image: this.ruleForm.dialogImageUrl,
+						content:this.ruleForm.content
+
+					}
+				}).then(res =>{
+					alert("성공적으로 적용되었습니다.")
+					this.$router.push({
+						name: 'Recruiting_list'
+					})
+				})
+				
+			} else {
+				console.log('error submit!!');
+				return false;
+			}
+			});
+		},
+		resetForm(formName) {
+			this.$refs[formName].resetFields();
+		},
+		handleRemove(file, fileList) {
+				console.log(file, fileList);
+			},
+			handlePictureCardPreview(file) {
+				this.ruleForm.dialogImageUrl = file.url;
+				this.ruleForm.dialogVisible = true;
+			},
+			handleExceed(files, fileList){
+				this.$message({
+					showClose: true,
+					center: true,
+					message: '대표이미지는 1개만 업로드가능합니다.',
+					type: 'error'
+				})
+			},
 	
 	},
 	created(){
@@ -183,5 +209,13 @@ export default {
 		this.login1 = JSON.parse(sMemberSeq)
 		// this.memberSeq = this.$store.state.loginUser.memberSeq
 	}
+	// mounted() {
+	// 		axios.get('http://localhost:9000/getImageList')
+	// 			.then(res => {
+	// 				console.log(res.data);
+	// 				this.galleryDatas = res.data
+	// 			})
+	// 			.catch(error => console.log(error));
+	// 	},
   }
 </script>

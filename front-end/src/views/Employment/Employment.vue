@@ -5,7 +5,7 @@
       <br>
       <br>
       <router-link to="/employment/recruiting">구인 공고</router-link>
-      <router-link to="/employment/CVpage">이력서 작성</router-link>
+      <router-link to="/employment/CVpage">이력서</router-link>
       
     </div>
     <br>
