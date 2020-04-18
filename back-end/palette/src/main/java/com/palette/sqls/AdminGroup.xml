@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.palette.dao.AdminMemberDao">
+<mapper namespace="com.palette.dao.AdminGroupDao">
 
 
 
+<!-- 
+    SELECT
+    g.GROUP_INFO_SEQ, cur.GROUP_INFO_SEQ AS 'groupinfoseqqqq',
+    g.MEMBER_SEQ, mem.MEMBER_NAME AS 'memberNAMEEEE',
+    g.INTER_BIG_SEQ, ib.BIG_NAME AS 'Big_name', 
+    g.INTER_SMALL_SEQ, iss.SMALL_NAME AS 'iss_small'
+    FROM GROUP_INFO g 
+    JOIN MEMBER mem
+		ON g.GROUP_INFO_SEQ = mem.MEMBER_SEQ
+	JOIN INTER_BIG ib
+ 		on g.INTER_BIG_SEQ= ib.INTER_BIG_SEQ
+	JOIN INTER_SMALL iss
+		ON g.INTER_SMALL_SEQ = iss.INTER_SMALL_SEQ
+	JOIN (SELECT GROUP_INFO_SEQ, COUNT(*) AS CURR_MEMBER FROM GROUP_MEMBER GROUP BY GROUP_INFO_SEQ)cur
+		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+-->
+<resultMap type="com.palette.model.GroupDto" id="testGroup">
+	<id column="GROUP_INFO_SEQ" property="groupinfoseqqqq"/>
+
+
+</resultMap>
+<select id="selfOutputTest" resultMap="testGroup">
+    SELECT
+    g.GROUP_INFO_SEQ, cur.GROUP_INFO_SEQ AS 'groupinfoseqqqq',
+    g.MEMBER_SEQ, mem.MEMBER_NAME AS 'memberNAMEEEE',
+    g.INTER_BIG_SEQ, ib.BIG_NAME AS 'Big_name', 
+    g.INTER_SMALL_SEQ, iss.SMALL_NAME AS 'iss_small'
+    FROM GROUP_INFO g 
+    JOIN MEMBER mem
+		ON g.GROUP_INFO_SEQ = mem.MEMBER_SEQ
+	JOIN INTER_BIG ib
+ 		on g.INTER_BIG_SEQ= ib.INTER_BIG_SEQ
+	JOIN INTER_SMALL iss
+		ON g.INTER_SMALL_SEQ = iss.INTER_SMALL_SEQ
+	JOIN (SELECT GROUP_INFO_SEQ, COUNT(*) AS CURR_MEMBER FROM GROUP_MEMBER GROUP BY GROUP_INFO_SEQ)cur
+		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+</select>
+		
+		
 </mapper>
