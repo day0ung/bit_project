@@ -1,13 +1,15 @@
 <template>
-  <div class="depth2">
-      <div>{{boardOne}}</div>
-      <div>{{boardOne.title}}</div>
-      <div>{{boardOne.content}}</div>
+  <div class="boardDetail">
+        <h1>111</h1>
+        <div>{{boardOne}}</div>
+        <div>{{boardOne.title}}</div>
+        <div>{{boardOne.content}}</div>
   </div>
 </template>
 
 <script>
 export default {
+    name: 'boardDetail',
     data(){
         return{
             boardOne: "",
