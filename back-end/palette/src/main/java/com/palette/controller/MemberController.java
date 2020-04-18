@@ -34,7 +34,7 @@ public class MemberController {
     
     @PostMapping(value= "/getOneMember")
     public MemberDto getOneMember(MemberDto dto) {
-    	System.out.println("getOneMember() 실행");
+    	System.out.println("getOneMember() 실행"+ dto.toString());
     	MemberDto member = memberService.getOneMember(dto);
     	return member;
     }
@@ -47,12 +47,12 @@ public class MemberController {
     	return check;
     }
     
-    @GetMapping(value="/checkid")
-    public boolean checkId(MemberDto dto) {
-    	System.out.println("checkid"  + dto);
-    	boolean idcheck = memberService.checkid(dto);
+    @PostMapping(value="/checkid")
+    public boolean checkId(String memberId) {
+    	System.out.println("checkid"  + memberId);
+    	int is = memberService.checkid(memberId);
+    	return is > 0? false: true;
     	
-    	return idcheck;
     }
     
     @PostMapping(value= "/selectMember")
@@ -61,6 +61,15 @@ public class MemberController {
     	System.out.println("======"+ memberSeq);
     	MemberDto member = memberService.getDetailMember(memberSeq);
     	return member;
+    }
+    
+    @PostMapping(value="/intersting")
+    public String intersting(String interSmallSeqs, MemberDto dto) {
+    	System.out.println("interesting!!!"+interSmallSeqs + dto.getInterArea());
+    	memberService.addInterArea(dto);
+    	int memberSeq = memberService.getSeq();
+    	memberService.InterstingInsert(interSmallSeqs, memberSeq);
+    	return "perfect";
     }
     
 }
