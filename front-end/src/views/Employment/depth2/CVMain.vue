@@ -1,7 +1,7 @@
 <template>
   <div class="CV">
     <!-- 일반 회원 / CV 없을 때 -->
-    <div v-if="login1.memberSeq === 12 && login1.cv === 0" class="writeNewCV">
+    <div v-if="login1.memberId === '1234' && login1.cv === 0" class="writeNewCV">
       <el-button type="primary" round @click="writeCV">새로운 이력서 작성</el-button>
     </div>
     <!-- 일반 회원 / CV 있을 때 -->
@@ -9,7 +9,7 @@
       <el-button type="primary" round>이력서 수정하기</el-button>
     </div>
     <!-- 기업 회원 -->
-    <div v-else-if="login1.memberSeq === 11 && login1.cv === 0" class="CVList">
+    <div v-else-if="login1.memberId === '114'" class="CVList">
       
       <div class="boardTableFrom">
       <h3>이력서 열람</h3>
@@ -96,7 +96,26 @@ export default {
       this.$router.push({
         name: "CvWriting"
         })
-    }
+    },
+    getList(){
+      this.loading = true
+      this.$store.state.currpage = this.$route.path
+      // axios.get("http://localhost:9000/groupBoardList")
+      //           .then(res => {
+        //       this.tableData = res.data
+      //       this.total = res.data.length
+      //     })
+     
+      // listQuery
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('page', this.listQuery.page);
+      params.append('limit', this.listQuery.limit);
+      axios.post("http://localhost:9000/groupPagingList", params)
+              .then(res => {
+          this.tableData = res.data
+          this.loading = false
+        })
+    },
   },
   mounted(){
     this.loading = true;

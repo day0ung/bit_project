@@ -4,6 +4,7 @@ public class MemberCVDto {
 	private int cvSeq; // CV_SEQ
 	private int memberSeq; // MEMBER_SEQ
 	private String title; // TITLE
+	private String category; // CATEGORY
 	private String writeDate; // WRITE_DATE
 	private int readCount; // READ_COUNT
 	private String fileName; // FILE_NAME
@@ -13,12 +14,13 @@ public class MemberCVDto {
 	public MemberCVDto() {
 	}
 
-	public MemberCVDto(int cvSeq, int memberSeq, String title, String writeDate, int readCount, String fileName,
-			String dbFileName, int del) {
+	public MemberCVDto(int cvSeq, int memberSeq, String title, String category, String writeDate, int readCount,
+			String fileName, String dbFileName, int del) {
 		super();
 		this.cvSeq = cvSeq;
 		this.memberSeq = memberSeq;
 		this.title = title;
+		this.category = category;
 		this.writeDate = writeDate;
 		this.readCount = readCount;
 		this.fileName = fileName;
@@ -48,6 +50,14 @@ public class MemberCVDto {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public String getWriteDate() {
@@ -92,10 +102,12 @@ public class MemberCVDto {
 
 	@Override
 	public String toString() {
-		return "MemberCVDto [cvSeq=" + cvSeq + ", memberSeq=" + memberSeq + ", title=" + title + ", writeDate="
-				+ writeDate + ", readCount=" + readCount + ", fileName=" + fileName + ", dbFileName=" + dbFileName
-				+ ", del=" + del + "]";
+		return "MemberCVDto [cvSeq=" + cvSeq + ", memberSeq=" + memberSeq + ", title=" + title + ", category="
+				+ category + ", writeDate=" + writeDate + ", readCount=" + readCount + ", fileName=" + fileName
+				+ ", dbFileName=" + dbFileName + ", del=" + del + "]";
 	}
+
+	
 	
 	
 	

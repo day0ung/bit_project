@@ -8,13 +8,16 @@
 			<el-form-item label="제목"  prop="title">
 				<el-input v-model="ruleForm.title"></el-input>
 			</el-form-item>
+            <el-form-item label="지원분야"  prop="category">
+				<el-input v-model="ruleForm.category"></el-input>
+			</el-form-item>
 			
 			<el-form-item label="이력서 업로드" prop="image">
 				<el-upload
 					v-model="ruleForm.dialogImageUrl"
 					action="https://jsonplaceholder.typicode.com/posts/"
 					list-type="picture-card"
-					accept=".jpg, .jpeg, .png, .bmp"
+					accept=".jpg, .jpeg, .png, .bmp, .pdf"
 					multiple
 					:limit="1"
 					:on-exceed="handleExceed"
@@ -47,7 +50,8 @@ export default {
 	 data() {
       return {
         ruleForm: {
-		  title: '',
+          title: '',
+          category: '',
 		  login1: [],
 		  dialogImageUrl: ""
 		
@@ -59,6 +63,9 @@ export default {
         rules: {
 		  title: [
 			{ required: true, message: '제목을 입력하세요', trigger: 'blur' },
+          ],
+          category: [
+			{ required: true, message: '지원분야를 입력하세요', trigger: 'blur' },
 		  ]
         }
       };
@@ -68,15 +75,16 @@ export default {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
 			
-				axios.get("http://localhost:9000/insertRecruit",{
+				axios.get("http://localhost:9000/insertCV",{
 					params:{
 						memberSeq: this.login1.memberSeq,
-						title: this.ruleForm.title,
+                        title: this.ruleForm.title,
+                        category: this.ruleForm.category
 					}
 				}).then(res =>{
 					alert("이력서가 성공적으로 업로드 되었습니다.")
 					this.$router.push({
-						name: 'Recruiting_list'
+						name: 'CVpage'
 					})
 				})
 			} else {
