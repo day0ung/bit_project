@@ -6,7 +6,12 @@
 
 <script>
 export default {
-name:'GroupInfo'
+    name : 'GroupInfo',
+    date(){
+        return{
+            
+        }
+    }
 
 }
 </script>
