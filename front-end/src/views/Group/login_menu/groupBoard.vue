@@ -109,8 +109,12 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$router.push({
-        path : "/group/board/detail/" + row.boardSeq
+      this.$emit("showDetail")
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('boardSeq', row.boardSeq);
+      axios.post("http://localhost:9000/groupBoardDetail", params).then(res => {
+        alert(res.data + '통신완료')
+        this.$store.state.s_group.groupBoardDetail = res.data
       })
     },
     clickableRows :function (row, rowIndex) {
@@ -122,7 +126,7 @@ export default {
    
   },
   created(){
-     axios.get("http://localhost:9000/groupBoardList")
+      axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
             this.total = res.data.length
           })

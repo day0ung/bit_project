@@ -17,32 +17,7 @@ export default [
     beforeEnter: group,
     component: () => import('@/views/Group/login_menu/l_main'),
     children:[
-        {
-            path: '',
-            component: () => import('@/views/Group/login_menu/l_main'),
-        },
-        {
-            path: 'board',  /* 게시판 이동 시 그룹 seq가지고 가야 함 */
-            component: () => import('@/views/Group/login_menu/board')
-        },
-        {
-            path: 'schedule',
-            component: () => import('@/views/Group/login_menu/schedule')
-        },
-        {
-            path: 'detail4',
-            component: () => import('@/views/Group/login_menu/detail4')
-        },
-        {
-            name: 'Create',
-            path: 'create',
-            component: () => import('@/views/Group/detail/group_create')
-        },
-        {
-            name: 'board_detail',
-            path: '/group/board/detail/:contentId',
-            component: () => import('@/views/Group/detail/board_detail')
-        },
+       
         ]
     },
     {

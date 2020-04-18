@@ -40,6 +40,8 @@ public interface GroupDao {
 	void createGroup(GroupDto groupDto);
 	int currGroupInfoSeq();
 	void addSchedule(GroupSchedule groupSchedule);
+	
+	GroupBoardDto getGroupBoardDetail(int boardSeq);
 
 
 }

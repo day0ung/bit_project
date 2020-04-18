@@ -112,6 +112,12 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
         on b.MEMBER_SEQ = m.MEMBER_SEQ WHERE BOARD_SEQ = #{seq}
 	</select>
 
+	<select id="getGroupBoardDetail" parameterType="java.lang.Integer" resultType="com.palette.model.GroupBoardDto">
+		SELECT *
+		FROM BOARD
+		WHERE BOARD_SEQ = #{boardSeq}
+	</select>
+
 
 
 

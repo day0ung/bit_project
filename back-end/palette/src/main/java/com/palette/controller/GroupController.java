@@ -18,6 +18,8 @@ import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -134,4 +136,11 @@ public class GroupController {
         groupService.addSchedule(groupSchedule);
         return "";
     }
+
+    @PostMapping(value="/groupBoardDetail")
+    public GroupBoardDto getGroupBoardDetail(int boardSeq) {
+        System.out.println("getGroupBoardDetail" + boardSeq);
+        return groupService.getGroupBoardDetail(boardSeq);
+    }
+    
 }
