@@ -113,7 +113,6 @@ export default {
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('boardSeq', row.boardSeq);
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => {
-        alert(res.data + '통신완료')
         this.$store.state.s_group.groupBoardDetail = res.data
       })
     },

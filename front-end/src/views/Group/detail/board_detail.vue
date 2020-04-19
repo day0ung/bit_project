@@ -2,31 +2,25 @@
   <div class="boardDetail">
     <br>
     <br>
-    <div class="groupDetailcCntainer">
+    <div class="groupDetailcCntainer" v-loading="loading">
       <div class="groupName">
         <h1>{{ this.$store.state.s_group.groupBoardDetail.title }}</h1>
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
-        <h5>스터디 소개</h5>
+        <h5>내용</h5>
       </div>
       <div class="groupInfoContent">
-        { groupOne.info }}
+        {{ this.$store.state.s_group.groupBoardDetail.content }}
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
         <h5><span>상세 정보</span></h5>
       </div>
       <div class="groupInfoContent">
-        <div><span>분류</span> { groupOne.interBigDto.bigName }} > {groupOne.interSmallDto.smallName}}</div>
-        <div><span>지역</span> { groupOne.groupLocation }}</div>
-        <div><span>인원</span> { groupOne.currMember}} / { groupOne.maxMember}}</div>
-        <div><span>일정</span></div>
-        <div class="schedules" style="line-height: 12px;">
-        </div>
-        
-        <div><span>시작일</span> { groupOne.startDate }}</div>
-        <div><span>완료일</span> { groupOne.endDate }}</div>
+        <div><span>작성자</span> {{ this.$store.state.s_group.groupBoardDetail.memberSeq }}</div>
+        <div><span>작성일</span> {{ this.$store.state.s_group.groupBoardDetail.writeDate }}</div>
+        <div><span>조회수</span> {{ this.$store.state.s_group.groupBoardDetail.readCount }}</div>
       </div>
       <div class="hr"></div>
       <div class="groupName">
@@ -41,27 +35,27 @@
 </template>
 
 <script>
+import { loading } from 'element-ui';
 export default {
     name: 'boardDetail',
     data(){
         return{
+            loading: true,
             boardOne: "",
             boardSeq: ""
         }
     },
     methods:{
         showList(){
+            this.loading = true
             this.$emit("showBoard")
         }
     },
     mounted(){
-    // this.boardSeq = this.$route.params.contentId
-    // var params = new URLSearchParams();	// post 방식으로 받아야함.
-    // params.append('boardSeq', this.boardSeq);
-    // axios.post("http://localhost:9000/groupBoardOne", params)
-    //             .then(res => {
-    //         this.boardOne = res.data
-    //       })
+
+    },
+    updated(){
+        this.loading = false
     }
 }
 </script>
