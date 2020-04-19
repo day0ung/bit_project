@@ -28,6 +28,7 @@ export default {
         return {
             groupBoard: true,
             boardDetail: false,
+            loading: true,
         };
     },
     methods:{
@@ -39,8 +40,10 @@ export default {
             this.groupBoard = true
             this.boardDetail = false
         }
-    }
+    },
+    mounted(){
 
+    }
 }
 </script>
 

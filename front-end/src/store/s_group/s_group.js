@@ -4,6 +4,7 @@ export default {
         groupList: [],
         detailSeq: 0,
         groupBoardDetail: [],
+        grouDetail: [],
     },
     getters: {
         getDetailSeq(){
