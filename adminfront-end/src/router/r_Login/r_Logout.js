@@ -1,11 +1,7 @@
 export default[{
-    path:'/login',
-    name:'login',
-    component:()=> import('@/components/Login.vue'),
-
-    // path:'/logout',
-    // name:'logout',
-    // component:()=> import('@/components/Logout.vue'),
+    path:'/logout',
+    name:'logout',
+    component:()=> import('@/components/Logout.vue'),
 
 
     children:[

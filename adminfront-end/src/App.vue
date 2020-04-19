@@ -20,8 +20,12 @@
           <li><router-link class="active" to="/recyclebin">휴지통</router-link></li>
           <li>&nbsp;</li>
           <li>
-            <router-link class="active" to="/login">로그인</router-link>
-            <router-link class="" to="/logout">로그아웃 </router-link>
+            <div v-if="isLogin">
+              <router-link class="active" to="/login">로그인</router-link>
+            </div>
+            <div v-else>
+              <router-link class="" to="/logout">로그아웃 </router-link>
+            </div>
           </li>
           
           
@@ -53,7 +57,7 @@
 <script>
 
 import global from '@/assets/css/mainStruct.css'
-
+import {mapState, mapMutations} from 'vuex'
 
 
 
@@ -63,6 +67,12 @@ export default {
   components:{
     
 
+  },
+  computed:{
+    ...mapState(['isLogin', 'loginUser'])
+  },
+  methods:{
+    ...mapMutations(['logout'])
   }
 }
 
