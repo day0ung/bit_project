@@ -18,6 +18,13 @@
           <li><router-link class="active" to="/statisticsNresearch">통계 및 설문조사</router-link></li>
           <li><router-link class="" to="/accept">승인</router-link></li>
           <li><router-link class="active" to="/recyclebin">휴지통</router-link></li>
+          <li>&nbsp;</li>
+          <li>
+            <router-link class="active" to="/login">로그인</router-link>
+            <router-link class="" to="/logout">로그아웃 </router-link>
+          </li>
+          
+          
         </ul>
       </div>
 
