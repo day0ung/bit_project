@@ -72,7 +72,6 @@
 -->
 <resultMap type="com.palette.model.GroupDto" id="testGroup">
  	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
-	<!-- <result column="GROUP_INFO_SEQ" property="groupInfoSeq"/> -->
 	<result column="MEMBER_SEQ" property="memberSeq"/>
 	<result column="MEMBER_NAME" property="memberNAMEEEE"/>
 	<result column="INTER_BIG_SEQ" property="interBigSeq"/>

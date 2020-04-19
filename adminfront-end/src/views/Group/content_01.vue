@@ -1,6 +1,7 @@
 <template>
     <div class="content01_view">
-        <h1> {{title}} group 11111111111111111111111111111111111111111111111111111111111111</h1>
+        <h1> {{title}} show Group list</h1>
+        
     </div>
 </template>
 
@@ -8,19 +9,25 @@
 export default {
     data(){
         return {
-            title:'group1'
+            title:'group1',
+            list:[]
         }
     },
+created(){
+
+    axios.post("http://localhost:9000/AdmingetAllGroup")
+    .then(res => {
+    this.list = res.data
+    })
+
+},
 methods:{
-    searchBigSeq(seq){
-      //alert(seq)
-    //   var params = new URLSearchParams();	// post 방식으로 받아야함.
-    //   params.append('interBigSeq', seq);
-      axios.post("http://localhost:9000/AdmingetAllGroup")
-              .then(res => {
-          this.list = res.data
-        })
-    }
+    // shwoAll(){
+    //   axios.post("http://localhost:9000/AdmingetAllGroup")
+    //           .then(res => {
+    //       this.list = res.data
+    //     })
+    // }
   }
 
 
