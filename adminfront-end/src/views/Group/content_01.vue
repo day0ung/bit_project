@@ -22,12 +22,11 @@ created(){
 
 },
 methods:{
-    // shwoAll(){
-    //   axios.post("http://localhost:9000/AdmingetAllGroup")
-    //           .then(res => {
-    //       this.list = res.data
-    //     })
-    // }
+    
+
+
+
+
   }
 
 
