@@ -71,14 +71,30 @@
 		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
 -->
 <resultMap type="com.palette.model.GroupDto" id="testGroup">
- 	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+<!--  	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+	<result column="groupInfoSeq" property="groupInfoSeq"/>
 	<result column="MEMBER_SEQ" property="memberSeq"/>
-	<result column="MEMBER_NAME" property="memberNAMEEEE"/>
+	<result column="MEMBER_NAME" property="memberName"/>
 	<result column="INTER_BIG_SEQ" property="interBigSeq"/>
-	<result column="BIG_NAME" property="Big_name"/>
+	<result column="BIG_NAME" property="bigName"/>
 	<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
-	<result column="SMALL_NAME" property="iss_small"/>
-	<result column="CURR_MEMBER" property="currMember"/>
+	<result column="SMALL_NAME" property="smallName"/> -->
+	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+		<result column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="GROUP_NAME" property="groupName"/>
+		<result column="GROUP_LOCATION" property="groupLocation"/>
+		<result column="SMALL_INFO" property="smallInfo"/>
+		<result column="INFO" property="info"/>
+		<result column="MAX_MEMBER" property="maxMember"/>
+		<result column="IMAGE" property="image"/>
+		<result column="START_DATE" property="startDate"/>
+		<result column="END_DATE" property="endDate"/>
+		<result column="PERMISSION" property="permission"/>
+		<result column="DEL" property="del"/>
+		<result column="CURR_MEMBER" property="currMember"/>
+		
 	<collection property="memberDto" resultMap="MemberInfo"/>
 	<collection property="interBigDto" resultMap="InterBig"/>
 	<collection property="interSmallDto" resultMap="InterSmall"/>
@@ -95,15 +111,15 @@
 
 <select id="selfOutputTest" resultMap="testGroup">
     SELECT
-    g.GROUP_INFO_SEQ, 
-    cur.GROUP_INFO_SEQ AS 'groupInfoSeq',
-    g.MEMBER_SEQ, 
-    mem.MEMBER_NAME AS 'memberName',
-    g.INTER_BIG_SEQ, 
-    ib.BIG_NAME AS 'bigName', 
-    g.INTER_SMALL_SEQ, 
-    iss.SMALL_NAME AS 'smallName'
-    
+		g.GROUP_INFO_SEQ, 
+		cur.GROUP_INFO_SEQ,
+		g.MEMBER_SEQ, 
+		mem.MEMBER_NAME,
+		g.INTER_BIG_SEQ, 
+		ib.BIG_NAME, 
+		g.INTER_SMALL_SEQ, 
+		iss.SMALL_NAME
+		    
     FROM GROUP_INFO g 
     JOIN MEMBER mem
 		ON g.GROUP_INFO_SEQ = mem.MEMBER_SEQ
@@ -114,7 +130,7 @@
 	JOIN (SELECT GROUP_INFO_SEQ, COUNT(*) AS CURR_MEMBER 
 			FROM GROUP_MEMBER 
 			GROUP BY GROUP_INFO_SEQ)cur
-		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 </select>
 
 

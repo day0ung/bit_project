@@ -2,69 +2,67 @@
     <div class="content02_view">
         <h1> {{title}} show Group list</h1>
     <pre>
-        groupInfoSeq
-        memberSeq
-        memberNAME
-        interBigSeq
-        Big_name
-        interSmallSeq
-        iss_small
-        currMember
-        <collection property="memberDto" resultMap="MemberInfo"/>
-        <collection property="interBigDto" resultMap="InterBig"/>
-        <collection property="interSmallDto" resultMap="InterSmall"/>
+ 	GROUP_INFO_SEQ  =  groupInfoSeq
+	GROUP_INFO_SEQ  =  groupInfoSeq
+	MEMBER_SEQ  =  memberSeq
+	MEMBER_NAME  =  memberName
+	INTER_BIG_SEQ  =  interBigSeq
+	BIG_NAME  =  bigName
+	INTER_SMALL_SEQ  =  interSmallSeq
+	SMALL_NAME  =  smallName
+	
     </pre>
         
     <el-table 
-    :data="list"
-    stripe
+    :data="GroupList" 
+    stripe 
     style="width:100%">
 
         <el-table-column
             prop="groupInfoSeq"
-            label="memberSeq"
+            label="groupInfoSeq"
+            width="100">
+        </el-table-column>
+
+        <el-table-column
+            prop="groupInfoSeq"
+            label="groupInfoSeq"
             width="100">
         </el-table-column>
 
         <el-table-column
             prop="memberSeq"
-            label="memberId"
+            label="memberSeq"
             width="100">
         </el-table-column>
 
         <el-table-column
-            prop="pwd"
-            label="pwd"
-            width="100">
-        </el-table-column>
-
-        <el-table-column
-            prop="memberName"
+            prop="memberDto.memberName"
             label="memberName"
             width="100">
         </el-table-column>
-        
+
         <el-table-column
-            prop="Big_name"
-            label="birth"
+            prop="interBigSeq"
+            label="interBigSeq"
+            width="100">
+        </el-table-column>
+
+        <el-table-column
+            prop="interBigDto.bigName"
+            label="bigName"
             width="100">
         </el-table-column>
 
         <el-table-column
             prop="interSmallSeq"
-            label="address"
+            label="interSmallSeq"
             width="100">
         </el-table-column>
 
         <el-table-column
-            prop="iss_small"
-            label="location"
-            width="100">
-        </el-table-column>
-
-        <el-table-column
-            prop="currMember"
-            label="email"
+            prop="interSmallDto.smallName"
+            label="smallName"
             width="100">
         </el-table-column>
 
@@ -82,14 +80,15 @@ export default {
     data(){
         return {
             title:'group1',
-            list:[]
+            GroupList:[]
         }
     },
 created(){
 
     axios.get("http://localhost:9000/AdmingetAllGroup")
     .then(res => {
-    this.list = res.data
+        console.log(res.data)
+    this.GroupList = res.data
     })
 
 },
