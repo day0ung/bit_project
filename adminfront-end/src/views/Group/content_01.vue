@@ -11,10 +11,18 @@ export default {
             title:'group1'
         }
     },
-    methods:{
-
-
+methods:{
+    searchBigSeq(seq){
+      //alert(seq)
+    //   var params = new URLSearchParams();	// post 방식으로 받아야함.
+    //   params.append('interBigSeq', seq);
+      axios.post("http://localhost:9000/AdmingetAllGroup")
+              .then(res => {
+          this.list = res.data
+        })
     }
+  }
+
 
 }
 </script>

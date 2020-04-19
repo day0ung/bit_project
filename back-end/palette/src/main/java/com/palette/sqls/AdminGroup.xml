@@ -6,6 +6,55 @@
 
 
 <!-- 
+
+	필요테이블: 
+	MEMBER
+	INTER_BIG
+	INTER_SAMLL
+	GROUP_MEMBER <<- inner join
+	
+
+ -->
+
+	<resultMap type="com.palette.model.MemberDto" id="MemberInfo">
+		<id column="MEMBER_SEQ" property="memberSeq"/>
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+		<result column="BIRTH" property="birth"/>
+		<result column="ADDRESS" property="address"/>
+		<result column="LOCATION" property="location"/>
+		<result column="EMAIL" property="email"/>
+		<result column="MYMONEY" property="myMoney"/>
+		<result column="CV" property="cv"/>
+		<result column="AUTH" property="auth"/>
+		<result column="DEL" property="del"/>
+		<result column="DISLIKE" property="dislike"/>
+	</resultMap> 
+	
+	<resultMap type="com.palette.model.InterBigDto" id="InterBig">
+		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="BIG_NAME" property="bigName"/>
+		<collection property="interSmallDtos" ofType="com.palette.model.InterSmallDto">
+			<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+			<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+			<result column="SMALL_NAME" property="smallName"/>
+		</collection>
+	</resultMap>
+	
+	<resultMap type="com.palette.model.InterSmallDto" id="InterSmall">
+		<id column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+		<result column="SMALL_NAME" property="smallName"/>
+	</resultMap>
+	
+	
+	
+	
+	
+
+
+
+<!-- 
     SELECT
     g.GROUP_INFO_SEQ, cur.GROUP_INFO_SEQ AS 'groupinfoseqqqq',
     g.MEMBER_SEQ, mem.MEMBER_NAME AS 'memberNAMEEEE',
@@ -22,16 +71,40 @@
 		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
 -->
 <resultMap type="com.palette.model.GroupDto" id="testGroup">
-	<id column="GROUP_INFO_SEQ" property="groupinfoseqqqq"/>
-
+ 	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
+	<!-- <result column="GROUP_INFO_SEQ" property="groupInfoSeq"/> -->
+	<result column="MEMBER_SEQ" property="memberSeq"/>
+	<result column="MEMBER_NAME" property="memberNAMEEEE"/>
+	<result column="INTER_BIG_SEQ" property="interBigSeq"/>
+	<result column="BIG_NAME" property="Big_name"/>
+	<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
+	<result column="SMALL_NAME" property="iss_small"/>
+	<result column="CURR_MEMBER" property="currMember"/>
+	<collection property="memberDto" resultMap="MemberInfo"/>
+	<collection property="interBigDto" resultMap="InterBig"/>
+	<collection property="interSmallDto" resultMap="InterSmall"/>
+	
+	<!-- 
+	<collection property="interBigDto" resultMap="InterBig"/>
+	<collection property="interSmallDto" resultMap="InterSmall"/>
+	<collection property="memberDto" resultMap="MemberInfo"/> 
+	-->
+ 
 
 </resultMap>
+
+
 <select id="selfOutputTest" resultMap="testGroup">
     SELECT
-    g.GROUP_INFO_SEQ, cur.GROUP_INFO_SEQ AS 'groupinfoseqqqq',
-    g.MEMBER_SEQ, mem.MEMBER_NAME AS 'memberNAMEEEE',
-    g.INTER_BIG_SEQ, ib.BIG_NAME AS 'Big_name', 
-    g.INTER_SMALL_SEQ, iss.SMALL_NAME AS 'iss_small'
+    g.GROUP_INFO_SEQ, 
+    cur.GROUP_INFO_SEQ AS 'groupInfoSeq',
+    g.MEMBER_SEQ, 
+    mem.MEMBER_NAME AS 'memberName',
+    g.INTER_BIG_SEQ, 
+    ib.BIG_NAME AS 'bigName', 
+    g.INTER_SMALL_SEQ, 
+    iss.SMALL_NAME AS 'smallName'
+    
     FROM GROUP_INFO g 
     JOIN MEMBER mem
 		ON g.GROUP_INFO_SEQ = mem.MEMBER_SEQ
@@ -39,9 +112,22 @@
  		on g.INTER_BIG_SEQ= ib.INTER_BIG_SEQ
 	JOIN INTER_SMALL iss
 		ON g.INTER_SMALL_SEQ = iss.INTER_SMALL_SEQ
-	JOIN (SELECT GROUP_INFO_SEQ, COUNT(*) AS CURR_MEMBER FROM GROUP_MEMBER GROUP BY GROUP_INFO_SEQ)cur
+	JOIN (SELECT GROUP_INFO_SEQ, COUNT(*) AS CURR_MEMBER 
+			FROM GROUP_MEMBER 
+			GROUP BY GROUP_INFO_SEQ)cur
 		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
 </select>
+
+
+	
+
+
+
+
+
+
+
+
 		
 		
 </mapper>
