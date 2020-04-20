@@ -3,6 +3,7 @@
     <br>
     <br>
     <div class="boardTableFrom">
+      <el-button type="primary" round>글쓰기</el-button>
       <div class="boardSearchBar">
         <el-input
           v-model="search"
@@ -74,10 +75,11 @@ export default {
       },
       search:"",
       loading: true,
+      groupSeq:0,
     }
   },
-   mounted(){
-    this.$store.state.currpage = this.$route.path
+  mounted(){
+    
   },
   methods:{
    getList(){
@@ -90,11 +92,14 @@ export default {
       //     })
      
       // listQuery
+      
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
+      params.append('groupSeq', this.groupSeq);
       axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
+         
           this.tableData = res.data
           this.loading = false
         })
@@ -104,9 +109,11 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$router.push({
-        path : "/group/board/detail/" + row.boardSeq
-      })
+      this.$emit("showDetail") 
+      var params = new URLSearchParams();	// post 방식으로 받아야함. 
+      params.append('boardSeq', row.boardSeq); 
+      axios.post("http://localhost:9000/groupBoardDetail", params).then(res => { 
+        this.$store.state.s_group.groupBoardDetail = res.data})
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
@@ -117,11 +124,19 @@ export default {
    
   },
   created(){
-     axios.get("http://localhost:9000/groupBoardList")
-                .then(res => {
-            this.total = res.data.length
+    //  axios.get("http://localhost:9000/groupBoardList")
+    //             .then(res => {
+    //          this.total = res.data.length
+    //       })
+   
+    this.groupSeq = this.$route.params.groupSeq
+    var params = new URLSearchParams()
+    params.append('groupSeq', this.groupSeq);
+    axios.post("http://localhost:9000/groupBoardTotal", params)
+          .then(res => {
+            this.total = res.data
           })
-      this.getList()
+    this.getList()
   }
 }
 </script>

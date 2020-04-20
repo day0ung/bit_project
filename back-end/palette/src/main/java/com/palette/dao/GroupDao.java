@@ -30,7 +30,6 @@ public interface GroupDao {
 	ArrayList<GroupBoardDto> getgroupPagingList(BoardParams boardParams);
 	ArrayList<GroupBoardDto> getgroupBoardList();
 	
-	GroupBoardDto groupBoardOne(int seq);
 
 	List<InterBigDto> getInterListAll();
 
@@ -42,6 +41,7 @@ public interface GroupDao {
 	void addSchedule(GroupSchedule groupSchedule);
 	
 	GroupBoardDto getGroupBoardDetail(int boardSeq);
+	int getGroupBoardTotal(BoardParams boardParams);
 
 
 }

@@ -43,10 +43,6 @@ public class GroupService {
 	}
 
 
-	public GroupBoardDto groupBoardOne(int seq) {
-		return groupDao.groupBoardOne(seq);
-	}
-
 	public List<InterBigDto> getInterListAll() {
 		return groupDao.getInterListAll();
 	}
@@ -75,6 +71,10 @@ public class GroupService {
 	}
 	public GroupBoardDto getGroupBoardDetail(int boardSeq) {
 		return groupDao.getGroupBoardDetail(boardSeq);
+	}
+	public int getGroupBoardTotal(BoardParams boardParams) {
+		
+		return groupDao.getGroupBoardTotal(boardParams);
 	}
 	
 
