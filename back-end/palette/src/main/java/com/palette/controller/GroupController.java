@@ -93,7 +93,7 @@ public class GroupController {
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
     	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
-    	// System.out.println(boardParams.toString());
+    	System.out.println(boardParams.toString());
     	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
     	// for (int j = 0; j < list.size(); j++) {
     		
@@ -110,6 +110,13 @@ public class GroupController {
         // 	System.out.println(list.get(j).toString());
 		// }
         return list;
+    }
+    @PostMapping(value="/groupBoardTotal")
+    public int getGroupBoardTotal(BoardParams boardParams) {
+    	System.out.println("getGroupBoardTotal()" + boardParams.toString());
+    	int total = groupService.getGroupBoardTotal(boardParams);
+    	System.out.println("total: "+total);
+    	return total;
     }
 
     @PostMapping(value="/groupBoardOne")

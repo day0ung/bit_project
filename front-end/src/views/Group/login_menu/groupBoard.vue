@@ -74,10 +74,11 @@ export default {
       },
       search:"",
       loading: true,
+      groupSeq:0,
     }
   },
    mounted(){
-    this.$store.state.currpage = this.$route.path
+    
   },
   methods:{
    getList(){
@@ -90,11 +91,16 @@ export default {
       //     })
      
       // listQuery
+      
+      alert(this.groupSeq)
+      
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
+      params.append('groupSeq', this.groupSeq);
       axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
+         
           this.tableData = res.data
           this.loading = false
         })
@@ -117,11 +123,19 @@ export default {
    
   },
   created(){
-     axios.get("http://localhost:9000/groupBoardList")
-                .then(res => {
+    //  axios.get("http://localhost:9000/groupBoardList")
+    //             .then(res => {
+    //          this.total = res.data.length
+    //       })
+   
+    this.groupSeq = this.$route.params.groupSeq
+    var params = new URLSearchParams()
+    params.append('groupSeq', this.groupSeq);
+    axios.post("http://localhost:9000/groupBoardTotal", params)
+          .then(res => {
             this.total = res.data.length
           })
-      this.getList()
+    this.getList()
   }
 }
 </script>
