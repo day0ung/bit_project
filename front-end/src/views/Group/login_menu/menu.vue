@@ -7,7 +7,7 @@
         <el-tab-pane label="그룹 게시판">
             <boardDetail v-show="boardDetail" v-on:showBoard="showBoard"/>
             <GroupBoard v-show="groupBoard" v-on:showDetail="showDetail"/>
-            <boardWrite></boardWrite>
+            <boardWrite v-show="boardWrite" v-on:showWrite="showWrite"/>
         </el-tab-pane>
         <el-tab-pane label="그룹 자료실">
             <GroupReference v-show="groupBoard" v-on:showDetail="showDetail"/>
@@ -33,16 +33,24 @@ export default {
         return {
             groupBoard: true,
             boardDetail: false,
+            boardWrite: false,
             loading: true,
         };
     },
     methods:{
         showDetail() {
-            this.groupBoard = false
             this.boardDetail = true
+            this.boardWrite = false
+            this.groupBoard = false
         },
         showBoard(){
             this.groupBoard = true
+            this.boardDetail = false
+            this.boardWrite = false
+        },
+        showWrite(){
+            this.boardWrite = true
+            this.groupBoard = false
             this.boardDetail = false
         }
     },

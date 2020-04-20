@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import quillexamplesnow from '@/views/Group/detail/qilledit'
+import quillexamplesnow from '@/components/Qilledit'
 
 export default {
     components:{
