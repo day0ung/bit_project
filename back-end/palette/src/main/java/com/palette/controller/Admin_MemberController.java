@@ -20,32 +20,48 @@ import org.springframework.web.bind.annotation.RestController;
 public class Admin_MemberController {
    @Autowired
    AdminMemberService AdminMemberService;
-//
-//    
-//    @GetMapping(value = "/adm_register")
-//    public String member(){
-//        System.out.println("register()");
-//        List<MemberDto> list = AdminMemberService.selectAll();
-//        System.out.println(list.size());
-//        return "";
-//    }
-//    
-//    @PostMapping(value= "/adm_getOneMember")
-//    public MemberDto getOneMember(MemberDto dto, HttpServletRequest request)throws Exception {
-//    	System.out.println("getOneMember() 실행");
-//    	MemberDto member = AdminMemberService.getOneMember(dto);
-//    	return member;
-//    }
-   @PostMapping(value = "/adminLoginCheck")
-   public MemberDto loginCheck(MemberDto memdto){
-       System.out.println("loginCheck()");
-       System.out.println(" receive data = " + memdto );
-       MemberDto member = AdminMemberService.idpwcheck(memdto);
-       System.out.println("logincheck result " + member );
-       return member;
+   
+   
+/*
+   for login function in the administrator
+   */
+@PostMapping(value = "/adminLoginCheck")
+public MemberDto loginCheck(MemberDto memdto){
+   //  System.out.println("loginCheck()");
+   //  System.out.println(" receive data = " + memdto );
+    MemberDto member = AdminMemberService.idpwcheck(memdto);
+   //  System.out.println("logincheck result " + member );
+    return member;
    }
 
+@PostMapping(value = "/AdminMemberSelectAll")
+public List<MemberDto> showGeneralMemberAll(){
+       System.out.println("showGeneralMemberAll()");
+      List<MemberDto> memberList = AdminMemberService.memberSelectAll();
+       System.out.println("logincheck result " + memberList );
+       return memberList;
+      }
 
-	
+      
 
-}//end of Admin_MemberController class
+      
+      
+
+      //
+      //    
+      //    @GetMapping(value = "/adm_register")
+      //    public String member(){
+      //        System.out.println("register()");
+      //        List<MemberDto> list = AdminMemberService.selectAll();
+      //        System.out.println(list.size());
+      //        return "";
+      //    }
+      //    
+      //    @PostMapping(value= "/adm_getOneMember")
+      //    public MemberDto getOneMember(MemberDto dto, HttpServletRequest request)throws Exception {
+      //    	System.out.println("getOneMember() 실행");
+      //    	MemberDto member = AdminMemberService.getOneMember(dto);
+      //    	return member;
+      //    }
+      
+   }//end of Admin_MemberController class

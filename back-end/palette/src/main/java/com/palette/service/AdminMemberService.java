@@ -21,6 +21,14 @@ public class AdminMemberService {
 
         return adminmemberdao.idpwcheck(memdto);
     }
+
+    public List<MemberDto> memberSelectAll(){
+
+        return adminmemberdao.memberSelectAll();
+    }
+
+
+    
 	
 
 }//end of adminMemberService class
