@@ -91,7 +91,7 @@ export default {
               }
                 //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
                 //세션에 저장						//json으로 넘어옴 세션에 저장할때는 
-                sessionStorage.setItem("loginUser", JSON.stringify(res.data.memberId)); //String
+                sessionStorage.setItem("loginUser", JSON.stringify(res.data)); //String
                 //alert(res.data.memberId)
                 var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
                 //alert('세션가져오기' + loginData)
