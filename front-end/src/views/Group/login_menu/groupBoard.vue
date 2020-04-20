@@ -3,7 +3,7 @@
     <br>
     <br>
     <div class="boardTableFrom">
-      <el-button type="primary" round>글쓰기</el-button>
+      <el-button type="primary" @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
         <el-input
           v-model="search"
@@ -118,6 +118,9 @@ export default {
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
       return "clickableRows";
+    },
+    showWrite(){
+      this.$emit("showWrite")
     }
   },
   computed:{

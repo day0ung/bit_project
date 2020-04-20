@@ -5,9 +5,9 @@
         <el-tab-pane label="그룹 정보"><GroupInfo></GroupInfo></el-tab-pane>
         <el-tab-pane label="그룹 일정"><GroupSchedule></GroupSchedule></el-tab-pane>
         <el-tab-pane label="그룹 게시판">
+            <GroupBoard v-show="groupBoard" v-on:showDetail="showDetail" v-on:showWrite="showWrite"/>
             <boardDetail v-show="boardDetail" v-on:showBoard="showBoard"/>
-            <GroupBoard v-show="groupBoard" v-on:showDetail="showDetail"/>
-            <boardWrite v-show="boardWrite" v-on:showWrite="showWrite"/>
+            <boardWrite v-show="boardWrite" v-on:showBoard="showBoard"/>
         </el-tab-pane>
         <el-tab-pane label="그룹 자료실">
             <GroupReference v-show="groupBoard" v-on:showDetail="showDetail"/>
