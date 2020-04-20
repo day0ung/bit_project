@@ -7,14 +7,15 @@
         <el-input
           v-model="search"
           size="large"
-          placeholder="검색 미완성 완성 시켜야함">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+          placeholder="Search">
+          <el-button slot="append" icon="el-icon-search" style="cursor: default;" round></el-button>
         </el-input>
       </div>
       <el-table 
         v-loading="loading"
         :row-class-name="clickableRows"
-        :data="tableData"
+        :data="tableData.filter( data => !search || data.title.toLowerCase().includes(search.toLowerCase())
+                                                || data.memberDto.memberId.toLowerCase().includes(search.toLowerCase()) )"
         stripe
         style="width: 100% cursor:pointer"
         @row-click="gotoClick"
@@ -48,9 +49,8 @@
           width="170px"
           >
         </el-table-column>
-      </el-table> <br>
+      </el-table>
       <div class="pageination">
-        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
       </div>
     </div>
   </div>
@@ -58,11 +58,10 @@
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
-import Pagination from '@/components/Pagination'
 import { loading } from 'element-ui';
 
 export default {
-  components: { Pagination },
+  name: 'GroupReference',
   data(){
     return{
       tableData: [],
@@ -76,36 +75,37 @@ export default {
       loading: true,
     }
   },
-   mounted(){
-    this.$store.state.currpage = this.$route.path
-  },
   methods:{
-   getList(){
+    getList(){
       this.loading = true
       this.$store.state.currpage = this.$route.path
-      // axios.get("http://localhost:9000/groupBoardList")
-      //           .then(res => {
-        //       this.tableData = res.data
-      //       this.total = res.data.length
-      //     })
+      axios.get("http://localhost:9000/groupBoardList")
+                .then(res => {
+              this.tableData = res.data
+            this.total = res.data.length
+            this.loading = false
+          })
      
       // listQuery
-      var params = new URLSearchParams();	// post 방식으로 받아야함.
-      params.append('page', this.listQuery.page);
-      params.append('limit', this.listQuery.limit);
-      axios.post("http://localhost:9000/groupPagingList", params)
-              .then(res => {
-          this.tableData = res.data
-          this.loading = false
-        })
+      // var params = new URLSearchParams();	// post 방식으로 받아야함.
+      // params.append('page', this.listQuery.page);
+      // params.append('limit', this.listQuery.limit);
+      // axios.post("http://localhost:9000/groupPagingList", params)
+      //         .then(res => {
+      //     this.tableData = res.data
+      //     this.loading = false
+      //   })
     },
      handleFilter() {
       this.listQuery.page = 1
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$router.push({
-        path : "/group/board/detail/" + row.boardSeq
+      this.$emit("showDetail")
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('boardSeq', row.boardSeq);
+      axios.post("http://localhost:9000/groupBoardDetail", params).then(res => {
+        this.$store.state.s_group.groupBoardDetail = res.data
       })
     },
     clickableRows :function (row, rowIndex) {
@@ -117,7 +117,7 @@ export default {
    
   },
   created(){
-     axios.get("http://localhost:9000/groupBoardList")
+      axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
             this.total = res.data.length
           })
