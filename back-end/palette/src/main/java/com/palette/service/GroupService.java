@@ -50,8 +50,8 @@ public class GroupService {
 	public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
 		return groupDao.getgroupPagingList(boardParams);
 	}
-	public ArrayList<GroupBoardDto> getGroupBoardList() {
-		return groupDao.getgroupBoardList();
+	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
+		return groupDao.getgroupPdsList(groupSeq);
 	}
 
 	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {

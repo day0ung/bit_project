@@ -106,9 +106,10 @@ public class GroupController {
     
     
     // Pds
-    @GetMapping(value="/groupBoardList")
-    public ArrayList<GroupBoardDto> groupBoardList() {
-        ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
+    @PostMapping(value="/groupPdsList")
+    public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
+    	System.out.println("getgroupPdsList");
+        ArrayList<GroupBoardDto> list =	groupService.getgroupPdsList(groupSeq);
         return list;
     }
     
