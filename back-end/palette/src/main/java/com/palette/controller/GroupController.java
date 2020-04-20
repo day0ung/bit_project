@@ -84,8 +84,10 @@ public class GroupController {
     // Board
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
+    	System.out.println("getGroupPagingList() : "+boardParams.toString());
     	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
     	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
+    	System.out.println("list.size= "+list.size());
     	return list;
     }
     
@@ -106,9 +108,10 @@ public class GroupController {
     
     
     // Pds
-    @GetMapping(value="/groupBoardList")
-    public ArrayList<GroupBoardDto> groupBoardList() {
-        ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
+    @PostMapping(value="/groupPdsList")
+    public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
+    	System.out.println("getgroupPdsList");
+        ArrayList<GroupBoardDto> list =	groupService.getgroupPdsList(groupSeq);
         return list;
     }
     

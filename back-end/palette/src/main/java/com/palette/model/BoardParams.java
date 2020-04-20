@@ -7,24 +7,44 @@ public class BoardParams {
 	private int start;			// 0	5
 	
 	private int groupSeq;
+	private String keyWord;
+	private String searchWord;
 	
 	public BoardParams() {
 	
 	}
 
-	public BoardParams(int page, int limit, int start, int groupSeq) {
+	public BoardParams(int page, int limit, int start, int groupSeq, String keyWord, String searchWord) {
 		super();
 		this.page = page;
 		this.limit = limit;
 		this.start = start;
 		this.groupSeq = groupSeq;
+		this.keyWord = keyWord;
+		this.searchWord = searchWord;
 	}
 
 	@Override
 	public String toString() {
-		return "BoardParams [page=" + page + ", limit=" + limit + ", start=" + start + ", groupSeq=" + groupSeq + "]";
+		return "BoardParams [page=" + page + ", limit=" + limit + ", start=" + start + ", groupSeq=" + groupSeq
+				+ ", keyWord=" + keyWord + ", searchWord=" + searchWord + "]";
 	}
 
+	public String getKeyWord() {
+		return keyWord;
+	}
+
+	public void setKeyWord(String keyWord) {
+		this.keyWord = keyWord;
+	}
+
+	public String getSearchWord() {
+		return searchWord;
+	}
+
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
+	}
 
 	public int getGroupSeq() {
 		return groupSeq;

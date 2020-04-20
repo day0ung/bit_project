@@ -28,7 +28,7 @@ public interface GroupDao {
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
 	ArrayList<GroupBoardDto> getgroupPagingList(BoardParams boardParams);
-	ArrayList<GroupBoardDto> getgroupBoardList();
+	ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq);
 	
 
 	List<InterBigDto> getInterListAll();

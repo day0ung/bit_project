@@ -44,21 +44,32 @@ from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 	from (select @rownum:=@rownum+1 as rownum, b.*, m.MEMBER_ID
 		 from BOARD b 
          join MEMBER m
-         on b.MEMBER_SEQ = m.MEMBER_SEQ
-         where (@rownum:=0)=0 and b.del = 0 and GROUP_INFO_SEQ=#{groupSeq}
+         	on b.MEMBER_SEQ = m.MEMBER_SEQ
+         where (@rownum:=0)=0 and b.del = 0 and b.BOARD_AUTH=2 and b.CATEGORY=0 
+         	and GROUP_INFO_SEQ= #{groupSeq}
 		 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
 	order by sub.rownum desc) fsub
+	<where>
+		<if test="keyWord == 'title'">
+			TITLE like CONCAT('%', #{searchWord}, '%')
+		</if>
+		<if test="keyWord == 'writer'">
+			MEMBER_ID = #{searchWord}
+		</if>
+	</where>	
 order by fsub.finalnum desc
 limit #{start}, #{limit}
 </select>
-<select id="getgroupBoardList" parameterType="com.palette.model.BoardParams" resultMap="AllBoardList">
+
+<select id="getgroupPdsList" parameterType="com.palette.model.BoardParams" resultMap="AllBoardList">
 select *
 from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 	from (select @rownum:=@rownum+1 as rownum, b.*, m.MEMBER_ID
 		 from BOARD b 
          join MEMBER m
-         on b.MEMBER_SEQ = m.MEMBER_SEQ
-         where (@rownum:=0)=0 and b.del = 0 and GROUP_INFO_SEQ=#{groupSeq}
+        	on b.MEMBER_SEQ = m.MEMBER_SEQ
+         where (@rownum:=0)=0 and b.del = 0 and b.BOARD_AUTH=2 and b.CATEGORY=2
+         	and GROUP_INFO_SEQ=#{groupSeq}
 		 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
 	order by sub.rownum desc) fsub
 order by fsub.finalnum desc
@@ -67,7 +78,16 @@ order by fsub.finalnum desc
 <select id="getGroupBoardTotal" parameterType="com.palette.model.BoardParams" resultType="java.lang.Integer">
 	select count(*)
 	from BOARD
-	where DEL=0 and GROUP_INFO_SEQ=#{groupSeq}
+	<where>
+		<if test="keyWord == 'title'">
+			TITLE like CONCAT('%', #{searchWord}, '%')
+		</if>
+		<if test="keyWord == 'writer'">
+			MEMBER_ID = #{searchWord}
+		</if>
+	and DEL=0 and BOARD_AUTH=2 and CATEGORY=0 
+		and GROUP_INFO_SEQ= #{groupSeq}
+	</where>	
 </select>
 
 <!-- <select id="bbsPagingList" parameterType="bit.com.a.model.BbsParam" resultType="bit.com.a.model.BbsDto">
