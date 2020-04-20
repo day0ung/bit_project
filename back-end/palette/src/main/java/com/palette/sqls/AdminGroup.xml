@@ -3,17 +3,12 @@
 
 <mapper namespace="com.palette.dao.AdminGroupDao">
 
-
-
 <!-- 
-
 	필요테이블: 
 	MEMBER
 	INTER_BIG
 	INTER_SAMLL
 	GROUP_MEMBER <<- inner join
-	
-
  -->
 
 	<resultMap type="com.palette.model.MemberDto" id="MemberInfo">
@@ -70,15 +65,7 @@
 	JOIN (SELECT GROUP_INFO_SEQ, COUNT(*) AS CURR_MEMBER FROM GROUP_MEMBER GROUP BY GROUP_INFO_SEQ)cur
 		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
 -->
-<resultMap type="com.palette.model.GroupDto" id="testGroup">
-<!--  	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
-	<result column="groupInfoSeq" property="groupInfoSeq"/>
-	<result column="MEMBER_SEQ" property="memberSeq"/>
-	<result column="MEMBER_NAME" property="memberName"/>
-	<result column="INTER_BIG_SEQ" property="interBigSeq"/>
-	<result column="BIG_NAME" property="bigName"/>
-	<result column="INTER_SMALL_SEQ" property="interSmallSeq"/>
-	<result column="SMALL_NAME" property="smallName"/> -->
+<resultMap type="com.palette.model.GroupDto" id="GroupList">
 	<id column="GROUP_INFO_SEQ" property="groupInfoSeq"/>
 		<result column="MEMBER_SEQ" property="memberSeq"/>
 		<result column="INTER_BIG_SEQ" property="interBigSeq"/>
@@ -104,12 +91,10 @@
 	<collection property="interSmallDto" resultMap="InterSmall"/>
 	<collection property="memberDto" resultMap="MemberInfo"/> 
 	-->
- 
-
 </resultMap>
 
 
-<select id="selfOutputTest" resultMap="testGroup">
+<select id="selfOutputTest" resultMap="GroupList">
     SELECT
 		g.GROUP_INFO_SEQ, 
 		cur.GROUP_INFO_SEQ,
@@ -133,8 +118,21 @@
 		ON g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 </select>
 
+<!--   
+ SELECT * FROM FINAL.GROUP_INFO;
+ request Create group
+ permission 0->1 (create)
+ permission 1->0 (decreate)
+-->
 
-	
+	<update id="acceptCreateGroup" parameterType="com.palette.model.GroupDto">
+		UPDATE GROUP_INFO
+		SET PERMISSION=1
+		WHERE 
+			GROUP_INFO_SEQ=#{groupInfoSeq}
+		AND 
+			MEMBER_SEQ=#{memberSeq}
+	</update>
 
 
 

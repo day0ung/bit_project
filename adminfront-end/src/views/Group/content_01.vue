@@ -10,14 +10,16 @@ export default {
     data(){
         return {
             title:'group1',
-            list:[]
+            adminAllGroupList:[]
         }
     },
 created(){
 
     axios.post("http://localhost:9000/AdmingetAllGroup")
     .then(res => {
-    this.list = res.data
+        console.log("admin all group print ")
+        this.adminAllGroupList = res.data
+        console.log(this.adminAllGroupList)
     })
 
 },

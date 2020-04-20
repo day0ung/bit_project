@@ -20,7 +20,10 @@ public class AdminGroupService {
 		return admingroupdao.selfOutputTest();
 	}
 	
-	
+	public boolean acceptCreateGroup(GroupDto dto){
+		return admingroupdao.acceptCreateGroup(dto);
+	}
+
 	
 	
 
