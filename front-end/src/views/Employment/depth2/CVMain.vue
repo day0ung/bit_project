@@ -1,15 +1,15 @@
 <template>
   <div class="CV">
     <!-- 일반 회원 / CV 없을 때 -->
-    <div v-if="login1.memberId === '1234' && login1.cv === 0" class="writeNewCV">
+    <div class="writeNewCV">
       <el-button type="primary" round @click="writeCV">새로운 이력서 작성</el-button>
     </div>
     <!-- 일반 회원 / CV 있을 때 -->
-    <div v-else-if="login1.memberSeq === 11 && login1.cv === 1" class="updateCV">
+    <div class="updateCV">
       <el-button type="primary" round>이력서 수정하기</el-button>
     </div>
     <!-- 기업 회원 -->
-    <div v-else-if="login1.memberId === '114'" class="CVList">
+    <div class="CVList">
       
       <div class="boardTableFrom">
       <h3>이력서 열람</h3>

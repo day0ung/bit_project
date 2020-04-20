@@ -12,7 +12,7 @@
               <div  class="box_product">
                 <a @click="showEmpDetail(recruitingInfo.boardSeq)" class="link_box"></a> 
                 <span class="product_logo">
-                  <img src="https://www2.saraminbanner.co.kr/banner_logo//company/logo_banner/2018/05/p8pkyk_x5ry-2rxeec_specialplus5767144.png" class="img" alt="이미지없음" rel="nofollow">
+                  <img :src="recruitingInfo.memberDto.companyLogo" class="img" alt="이미지없음" rel="nofollow">
                 </span>
                 <strong class="product_tit">{{recruitingInfo.memberDto.memberName}}</strong> 
                 <em class="product_desc">{{recruitingInfo.title}}</em> 
@@ -195,7 +195,7 @@ export default {
 .cont_special .open .box_product:hover:before,
 .cont_special .basic .open .box_product:hover:before {background:#4876ef}
 .cont_special .open .box_product:hover:after {border:1px solid #4876ef}
-.cont_special .product_logo {margin:19px auto 0;height:31px;font-size:18px;line-height:31px}
+.cont_special .product_logo {margin:19px auto 0;height:55px;font-size:18px;line-height:31px}
 .cont_special .product_tit {margin-top:8px;font-size:13px}
 .cont_special .product_desc {margin-top:1px;font-size:16px;line-height:22px}
 .cont_special .product_desc.open {width:186px}

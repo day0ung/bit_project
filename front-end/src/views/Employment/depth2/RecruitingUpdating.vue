@@ -146,7 +146,7 @@ export default {
 					content:this.ruleForm.content
 				}
 			}).then(res =>{
-				if(res.date === true){
+				if(res.data === true){
 					alert("성공적으로 수정되었습니다.")
 					this.$router.push({
 						name: 'recruiting'
