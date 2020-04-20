@@ -31,5 +31,13 @@ public interface MemberDao {
 	int addInterArea(MemberDto dto);
 	
 	int getSeq();
+	
+	int updateInfo(MemberDto dto);
+	
+	int updateAddr(MemberDto dto);
+	
+	int checkPass(MemberDto dto);
+	
+	int updatePass(MemberDto dto);
 
 }

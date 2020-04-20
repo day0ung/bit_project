@@ -56,7 +56,7 @@ public class MemberController {
     }
     
     @PostMapping(value= "/selectMember")
-    public MemberDto getOneMember(int memberSeq) {
+    public MemberDto selectMember(int memberSeq) {
     	System.out.println("getOneMember() 실행");
     	System.out.println("======"+ memberSeq);
     	MemberDto member = memberService.getDetailMember(memberSeq);
@@ -66,10 +66,38 @@ public class MemberController {
     @PostMapping(value="/intersting")
     public String intersting(String interSmallSeqs, MemberDto dto) {
     	System.out.println("interesting!!!"+interSmallSeqs + dto.getInterArea());
-    	memberService.addInterArea(dto);
     	int memberSeq = memberService.getSeq();
+    	dto.setMemberSeq(memberSeq);
+    	memberService.addInterArea(dto);
     	memberService.InterstingInsert(interSmallSeqs, memberSeq);
     	return "perfect";
     }
     
+    @PostMapping(value="/updateInfo")
+    public boolean updateInfo(MemberDto dto) {
+    	System.out.println("udpateinfo"+ dto.toString());
+    	boolean check = memberService.updateInfo(dto);
+    	return check;
+    }
+    
+    @PostMapping(value="/updateAddr")
+    public boolean updateAddr(MemberDto dto) {
+    	System.out.println("updateADdre"+ dto.getMemberSeq()+ dto.getAddress());
+    	boolean check = memberService.updateAddr(dto);
+    	return check;
+    }
+    
+    @PostMapping(value="/checkPass")
+    public boolean checkPass(MemberDto dto) {
+    	System.out.println("checkPass" + dto.getMemberSeq()+ dto.getPwd());
+    	int check = memberService.checkPass(dto);
+    	return check >0? true: false;
+    }
+    
+    @PostMapping(value="/updatePass")
+    public boolean updatePass(MemberDto dto) {
+    	System.out.println("updatePass" + dto.getMemberSeq()+ dto.getPwd());
+    	boolean pass = memberService.updatePass(dto);
+    	return pass;
+    }
 }

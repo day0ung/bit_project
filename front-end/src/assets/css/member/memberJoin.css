@@ -106,9 +106,7 @@
 /* Input,textarea,select */
 select{position:relative;}
 .input_box {height:45px;padding:0 15px;line-height:45px;color:#757575;border:1px solid #d5dbde;cursor:text;background:#fff;}
-.input_box:focus{border:1px solid #3db6ed;background-color:#f0f7fa;}
 .ndls_input {height:35px;padding:0 15px;line-height:35px;color:#757575;border:1px solid #d5dbde;cursor:text;background:#fff;}
-.ndls_input:focus{border:1px solid #3db6ed;background-color:#f0f7fa;}
 .none_put{height:38px;line-height:38px;padding:0 5px;border:0 none;font-size:12px;background:none;vertical-align:middle;}
 
 

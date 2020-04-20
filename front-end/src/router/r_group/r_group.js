@@ -17,6 +17,12 @@ export default [
     beforeEnter: group,
     component: () => import('@/views/Group/login_menu/l_main'),
     children:[
+
+        {
+            path: 'create',
+            name: 'Create',
+            component: () => import('@/views/Group/detail/group_detail'),
+        }
        
         ]
     },
