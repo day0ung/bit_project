@@ -142,14 +142,13 @@ export default {
             }else {
                 var params = new URLSearchParams();
                 params.append('memberId', this.ruleForm.memberId)
-                axios.get('http://localhost:9000/checkid', params)
+                axios.post('http://localhost:9000/checkid', params)
                 .then(res => {
-                    alert('통신성공')
                     if(res.data == true){
-                        alert(' 이미아이디가 존재합니다.')
-                    }else{
-                        alert('아이디 사용이 가능합니다')
+                        alert(' 아이디 사용이 가능합니다.')
                         this.checkIs = true
+                    }else{
+                        alert('이미 아이디가 존재합니다')
                     }
                 }) 
             }
@@ -160,9 +159,9 @@ export default {
                 if( this.checkIs  == false){
                     alert('아이디 중복확인을 해주세요')
                 }else{
-                    alert(this.checkIs)
+                 
                     var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
-                    alert(memberAddress)
+               
                     var params = new URLSearchParams();
                     params.append('memberId', this.ruleForm.memberId)
                     params.append('pwd', this.ruleForm.pass)

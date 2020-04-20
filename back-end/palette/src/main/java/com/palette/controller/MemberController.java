@@ -34,7 +34,7 @@ public class MemberController {
     
     @PostMapping(value= "/getOneMember")
     public MemberDto getOneMember(MemberDto dto) {
-    	System.out.println("getOneMember() 실행");
+    	System.out.println("getOneMember() 실행"+ dto.toString());
     	MemberDto member = memberService.getOneMember(dto);
     	return member;
     }
@@ -47,20 +47,57 @@ public class MemberController {
     	return check;
     }
     
-    @GetMapping(value="/checkid")
-    public boolean checkId(MemberDto dto) {
-    	System.out.println("checkid"  + dto);
-    	boolean idcheck = memberService.checkid(dto);
+    @PostMapping(value="/checkid")
+    public boolean checkId(String memberId) {
+    	System.out.println("checkid"  + memberId);
+    	int is = memberService.checkid(memberId);
+    	return is > 0? false: true;
     	
-    	return idcheck;
     }
     
     @PostMapping(value= "/selectMember")
-    public MemberDto getOneMember(int memberSeq) {
+    public MemberDto selectMember(int memberSeq) {
     	System.out.println("getOneMember() 실행");
     	System.out.println("======"+ memberSeq);
     	MemberDto member = memberService.getDetailMember(memberSeq);
     	return member;
     }
     
+    @PostMapping(value="/intersting")
+    public String intersting(String interSmallSeqs, MemberDto dto) {
+    	System.out.println("interesting!!!"+interSmallSeqs + dto.getInterArea());
+    	int memberSeq = memberService.getSeq();
+    	dto.setMemberSeq(memberSeq);
+    	memberService.addInterArea(dto);
+    	memberService.InterstingInsert(interSmallSeqs, memberSeq);
+    	return "perfect";
+    }
+    
+    @PostMapping(value="/updateInfo")
+    public boolean updateInfo(MemberDto dto) {
+    	System.out.println("udpateinfo"+ dto.toString());
+    	boolean check = memberService.updateInfo(dto);
+    	return check;
+    }
+    
+    @PostMapping(value="/updateAddr")
+    public boolean updateAddr(MemberDto dto) {
+    	System.out.println("updateADdre"+ dto.getMemberSeq()+ dto.getAddress());
+    	boolean check = memberService.updateAddr(dto);
+    	return check;
+    }
+    
+    @PostMapping(value="/checkPass")
+    public boolean checkPass(MemberDto dto) {
+    	System.out.println("checkPass" + dto.getMemberSeq()+ dto.getPwd());
+    	int check = memberService.checkPass(dto);
+    	return check >0? true: false;
+    }
+    
+    @PostMapping(value="/updatePass")
+    public boolean updatePass(MemberDto dto) {
+    	System.out.println("updatePass" + dto.getMemberSeq()+ dto.getPwd());
+    	boolean pass = memberService.updatePass(dto);
+    	return pass;
+    }
 }

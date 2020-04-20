@@ -66,10 +66,10 @@ export default {
 
 .headerBar{
     line-height: 30px;
-    height: 30px;
-    background: #FF6C00;
+    height: 1px;
+    background: #d6d6d6;
     margin: auto calc(0% - 50vw); /* container 무시하고 전체 적용 */
     text-align: center;
-}
+} 
 
 </style>

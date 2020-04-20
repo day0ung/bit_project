@@ -13,7 +13,7 @@
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
   
-  <select id="checkId" parameterType="com.palette.model.MemberDto" resultType="java.lang.Integer">
+  <select id="checkId" parameterType="java.lang.String" resultType="java.lang.Integer">
 	SELECT COALESCE(COUNT(*), 0)
 	FROM MEMBER
 	WHERE MEMBER_ID=#{memberId}
@@ -59,8 +59,48 @@
 		ON inter.SMALL_SEQ = sm.INTER_SMALL_SEQ
 	WHERE mem.MEMBER_SEQ =#{memberSeq};
  </select>
- 	
- 	
+ 
+ 
+ <!-- SMALL에서 INTER BIG SEQ 추출-->	
+ <select id="getBigSeq" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	SELECT INTER_BIG_SEQ
+	FROM INTER_SMALL
+	WHERE INTER_SMALL_SEQ =#{interSmallSeq};
+ </select>
+ 
+ <select id="getSeq" resultType="java.lang.Integer">
+ select max(MEMBER_SEQ) 
+	from MEMBER
+ </select>
+ 
+ 
+ <update id="addInterArea" parameterType="com.palette.model.MemberDto" >
+ 	update MEMBER SET INTERAREA =#{interArea}  where MEMBER_SEQ =#{memberSeq};
+ </update>
+ 
+ 
+ <!-- 추출후에 insert -->
+ <insert id="addInter" parameterType="com.palette.model.MemberInterParam">
+ 	INSERT INTO MEMBER_INTERREST(MEMBER_SEQ, BIG_SEQ, SMALL_SEQ, DEL)
+	VALUES (#{memberSeq}, #{bigSeq}, #{smallSeq}, 0)
+ </insert>
+ 
+ <update id="updateInfo">
+ 	update MEMBER SET AGE=#{age}, EMAIL=#{email} where MEMBER_SEQ =#{memberSeq}
+ </update>
+ 
+ <update id="updateAddr">
+ 	update MEMBER SET ADDRESS=#{address} where MEMBER_SEQ=#{memberSeq}
+ </update>
+ 
+ <select id="checkPass" resultType="java.lang.Integer">
+    SELECT COALESCE(COUNT(*), 0)
+	FROM MEMBER
+	WHERE PWD=#{pwd} AND MEMBER_SEQ=#{memberSeq}
+ </select>
+ <update id="updatePass">
+ 	update MEMBER SET PWD=#{pwd} where MEMBER_SEQ=#{memberSeq}
+ </update>
 	 <resultMap type="com.palette.model.InterBigDto" id="InterBig">
 		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="BIG_NAME" property="bigName"/>
