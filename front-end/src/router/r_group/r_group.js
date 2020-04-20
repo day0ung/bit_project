@@ -18,12 +18,6 @@ export default [
     component: () => import('@/views/Group/login_menu/l_main'),
     children:[
 
-        {
-            path: 'create',
-            name: 'Create',
-            component: () => import('@/views/Group/detail/group_detail'),
-        }
-       
         ]
     },
     {
@@ -45,5 +39,10 @@ export default [
     name: 'groupdetail',
     path: '/group/main/detail/:contentId',
     component: () => import('@/views/Group/detail/group_detail')
+    },
+    {
+    path: '/group/create',
+    name: 'Create',
+    component: () => import('@/views/Group/detail/group_create'),
     }
 ]
