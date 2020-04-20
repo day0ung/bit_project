@@ -76,6 +76,10 @@ public class GroupService {
 	public GroupBoardDto getGroupBoardDetail(int boardSeq) {
 		return groupDao.getGroupBoardDetail(boardSeq);
 	}
+	public int getGroupBoardTotal(BoardParams boardParams) {
+		
+		return groupDao.getGroupBoardTotal(boardParams);
+	}
 	
 
 	

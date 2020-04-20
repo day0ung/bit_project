@@ -42,6 +42,7 @@ public interface GroupDao {
 	void addSchedule(GroupSchedule groupSchedule);
 	
 	GroupBoardDto getGroupBoardDetail(int boardSeq);
+	int getGroupBoardTotal(BoardParams boardParams);
 
 
 }
