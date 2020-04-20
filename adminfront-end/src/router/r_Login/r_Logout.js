@@ -1,9 +1,11 @@
 export default[{
-    path:'/group',
-    name:'Group',
-    component:() => import('@/views/Group/group.vue'),
+    path:'/logout',
+    name:'logout',
+    component:()=> import('@/components/Logout.vue'),
+
+
     children:[
-  
+  /*
         {
             path:'/',
             name:'acceptlist',
@@ -30,6 +32,8 @@ export default[{
             component:() => import('@/views/Group/content_04.vue'),
         },
 
+        */
     ]
 
 }]
+

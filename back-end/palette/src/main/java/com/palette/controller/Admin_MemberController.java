@@ -4,6 +4,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.palette.model.MemberDto;
+import com.palette.service.AdminMemberService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 public class Admin_MemberController {
-//    @Autowired
-//    MemberService AdminMemberService;
+   @Autowired
+   AdminMemberService AdminMemberService;
 //
 //    
 //    @GetMapping(value = "/adm_register")
@@ -33,6 +36,16 @@ public class Admin_MemberController {
 //    	MemberDto member = AdminMemberService.getOneMember(dto);
 //    	return member;
 //    }
+   @PostMapping(value = "/adminLoginCheck")
+   public MemberDto loginCheck(MemberDto memdto){
+       System.out.println("loginCheck()");
+       System.out.println(" receive data = " + memdto );
+       MemberDto member = AdminMemberService.idpwcheck(memdto);
+       System.out.println("logincheck result " + member );
+       return member;
+   }
+
+
 	
 
 }//end of Admin_MemberController class
