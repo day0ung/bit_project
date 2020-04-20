@@ -92,8 +92,6 @@ export default {
      
       // listQuery
       
-      alert(this.groupSeq)
-      
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
@@ -133,7 +131,7 @@ export default {
     params.append('groupSeq', this.groupSeq);
     axios.post("http://localhost:9000/groupBoardTotal", params)
           .then(res => {
-            this.total = res.data.length
+            this.total = res.data
           })
     this.getList()
   }

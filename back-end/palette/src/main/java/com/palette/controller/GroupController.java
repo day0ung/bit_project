@@ -16,9 +16,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
-import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -112,11 +110,12 @@ public class GroupController {
         return list;
     }
     @PostMapping(value="/groupBoardTotal")
-    public int getGroupBoardTotal(BoardParams boardParams) {
+    public String getGroupBoardTotal(BoardParams boardParams) {
     	System.out.println("getGroupBoardTotal()" + boardParams.toString());
-    	int total = groupService.getGroupBoardTotal(boardParams);
+        int total = groupService.getGroupBoardTotal(boardParams);
+        String stotal = total +"";
     	System.out.println("total: "+total);
-    	return total;
+    	return stotal;
     }
 
     @PostMapping(value="/groupBoardOne")
@@ -149,5 +148,6 @@ public class GroupController {
         System.out.println("getGroupBoardDetail" + boardSeq);
         return groupService.getGroupBoardDetail(boardSeq);
     }
+    
     
 }
