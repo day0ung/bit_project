@@ -3,6 +3,7 @@
     <br>
     <br>
     <div class="boardTableFrom">
+      <el-button type="primary" round>글쓰기</el-button>
       <div class="boardSearchBar">
         <el-input
           v-model="search"
@@ -77,7 +78,7 @@ export default {
       groupSeq:0,
     }
   },
-   mounted(){
+  mounted(){
     
   },
   methods:{

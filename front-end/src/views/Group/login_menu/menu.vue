@@ -7,6 +7,7 @@
         <el-tab-pane label="그룹 게시판">
             <boardDetail v-show="boardDetail" v-on:showBoard="showBoard"/>
             <GroupBoard v-show="groupBoard" v-on:showDetail="showDetail"/>
+            <boardWrite></boardWrite>
         </el-tab-pane>
         <el-tab-pane label="그룹 자료실">
             <GroupReference v-show="groupBoard" v-on:showDetail="showDetail"/>
@@ -23,10 +24,11 @@ import GroupSchedule from '@/views/Group/login_menu/schedule.vue'
 import GroupReference from '@/views/Group/login_menu/groupReference.vue'
 
 import boardDetail from '@/views/Group/detail/board_detail.vue'
+import boardWrite from '@/views/Group/detail/board_write.vue'
 
 
 export default {
-    components:{ GroupInfo, GroupBoard, GroupSchedule, boardDetail, GroupReference },
+    components:{ GroupInfo, GroupBoard, GroupSchedule, boardDetail, GroupReference, boardWrite },
     data() {
         return {
             groupBoard: true,
