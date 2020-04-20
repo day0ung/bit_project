@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createPersistedState from 'vuex-persistedstate';
 
 import s_about from '@/store/s_about/s_aboutus.js'
 import s_private from '@/store/s_private/s_private.js'
@@ -67,6 +68,7 @@ export default new Vuex.Store({
     s_notice,
     s_search,
     s_subStore,
-    s_member
-  }
+    s_member,
+  },
+  plugins: [createPersistedState()]
 })

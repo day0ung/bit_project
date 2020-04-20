@@ -101,6 +101,7 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
+      alert("확인")
       this.$emit("showDetail")
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('boardSeq', row.boardSeq);

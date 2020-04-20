@@ -8,7 +8,10 @@
             <boardDetail v-show="boardDetail" v-on:showBoard="showBoard"/>
             <GroupBoard v-show="groupBoard" v-on:showDetail="showDetail"/>
         </el-tab-pane>
-        <el-tab-pane label="그룹 자료실"><GroupReference></GroupReference></el-tab-pane>
+        <el-tab-pane label="그룹 자료실">
+            <GroupReference v-show="groupBoard" v-on:showDetail="showDetail"/>
+            <boardDetail v-show="boardDetail" v-on:showBoard="showBoard"/>
+        </el-tab-pane>
     </el-tabs>
 </div>
 </template>
