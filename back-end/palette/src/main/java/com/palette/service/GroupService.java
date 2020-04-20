@@ -77,6 +77,8 @@ public class GroupService {
 	public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
 		
 		return groupDao.getGroupSchedule(groupDto);
+	public GroupBoardDto getGroupBoardDetail(int boardSeq) {
+		return groupDao.getGroupBoardDetail(boardSeq);
 	}
 	
 

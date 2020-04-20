@@ -1,7 +1,15 @@
 export default {
     namespaced: true,
     state: {
-        groupList: []
+        groupList: [],
+        detailSeq: 0,
+        groupBoardDetail: [],
+        grouDetail: [],
+    },
+    getters: {
+        getDetailSeq(){
+            this.detailSeq
+        }
     },
     mutations: {
     },

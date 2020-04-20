@@ -43,6 +43,7 @@ public interface GroupDao {
 	void addSchedule(GroupSchedule groupSchedule);
 	
 	List<CalendarDto> getGroupSchedule(GroupDto groupDto);
+	GroupBoardDto getGroupBoardDetail(int boardSeq);
 
 
 }
