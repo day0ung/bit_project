@@ -110,13 +110,6 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		<collection property="memberDto" resultMap="MemberBoardInfo"/>
 	</resultMap>
 
-	<select id="groupBoardOne" parameterType="java.lang.Integer" resultMap="GroupBoardOne">
-		SELECT * 
-		FROM BOARD b 
-        JOIN MEMBER m
-        on b.MEMBER_SEQ = m.MEMBER_SEQ WHERE BOARD_SEQ = #{seq}
-	</select>
-
 	<select id="getGroupBoardDetail" parameterType="java.lang.Integer" resultType="com.palette.model.GroupBoardDto">
 		SELECT *
 		FROM BOARD

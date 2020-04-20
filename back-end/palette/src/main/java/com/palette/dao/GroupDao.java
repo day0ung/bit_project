@@ -30,7 +30,6 @@ public interface GroupDao {
 	ArrayList<GroupBoardDto> getgroupPagingList(BoardParams boardParams);
 	ArrayList<GroupBoardDto> getgroupBoardList();
 	
-	GroupBoardDto groupBoardOne(int seq);
 
 	List<InterBigDto> getInterListAll();
 
