@@ -261,15 +261,12 @@ export default {
                 params.append('thursday', this.groupDto.groupSchedule.thursday);
                 params.append('friday', this.groupDto.groupSchedule.friday);
                 params.append('saturday', this.groupDto.groupSchedule.saturday);
-
+                // 로그인된 맴버Seq
                 params.append('memberSeq', this.loginMemberSeq);
 
-                alert(this.loginMemberSeq)
-
-                alert(JSON.stringify(this.groupDto))
                 axios.post("http://localhost:9000/creatGroupApply", params)
                             .then(res => {
-                                this.$router.push({name: "Home"})
+                                this.$router.push({name: "Group"})
                                 alert(res.data + "그룹스터디 개설신청이 완료 되었습니다.\n개설여부는 마이페이지에서 확인 가능합니다.\n매주 월요일 9시에 승인여부가 업데이트 됩니다.")
                             })
             } else {

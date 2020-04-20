@@ -69,5 +69,26 @@ public class MemberService {
 		public int getSeq() {
 			return memberDao.getSeq();
 		}
+		
+		public boolean updateInfo(MemberDto dto) {
+			int update = memberDao.updateInfo(dto);
+			return update >0 ? true: false;
+		}
+		
+		public boolean updateAddr(MemberDto dto) {
+			int update = memberDao.updateAddr(dto);
+			return update >0 ? true: false;
+		}
+		
+		public int checkPass(MemberDto dto) {
+			int pass = memberDao.checkPass(dto);
+			return pass;
+		}
+		
+		public boolean updatePass(MemberDto dto) {
+			int update = memberDao.updatePass(dto);
+			return update >0 ? true: false;
+		}
+		
     
 }

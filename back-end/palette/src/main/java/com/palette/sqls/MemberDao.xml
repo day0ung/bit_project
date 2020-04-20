@@ -85,7 +85,22 @@
 	VALUES (#{memberSeq}, #{bigSeq}, #{smallSeq}, 0)
  </insert>
  
- 	
+ <update id="updateInfo">
+ 	update MEMBER SET AGE=#{age}, EMAIL=#{email} where MEMBER_SEQ =#{memberSeq}
+ </update>
+ 
+ <update id="updateAddr">
+ 	update MEMBER SET ADDRESS=#{address} where MEMBER_SEQ=#{memberSeq}
+ </update>
+ 
+ <select id="checkPass" resultType="java.lang.Integer">
+    SELECT COALESCE(COUNT(*), 0)
+	FROM MEMBER
+	WHERE PWD=#{pwd} AND MEMBER_SEQ=#{memberSeq}
+ </select>
+ <update id="updatePass">
+ 	update MEMBER SET PWD=#{pwd} where MEMBER_SEQ=#{memberSeq}
+ </update>
 	 <resultMap type="com.palette.model.InterBigDto" id="InterBig">
 		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="BIG_NAME" property="bigName"/>

@@ -18,6 +18,8 @@ import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
 import com.palette.model.InterSmallDto;
 import com.palette.service.GroupService;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 
@@ -41,9 +43,9 @@ public class GroupController {
     public ArrayList<GroupDto> getMyGroup(GroupParams groupParams){
     	System.out.println("getMyGroup() 실행");
     	 ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
-    	 for (int i = 0; i < list.size(); i++) {
-	    	 	System.out.println(list.get(i).toString());
-			 }
+    	//  for (int i = 0; i < list.size(); i++) {
+	    // 	 	System.out.println(list.get(i).toString());
+		// 	 }
     	 return list;
     }
     @PostMapping(value="/getMyOtherGroup")
@@ -51,9 +53,9 @@ public class GroupController {
     	System.out.println("getMyOtherGroup() 실행");
 
     	 ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
-    	 for (int i = 0; i < list.size(); i++) {
-	    	 	System.out.println(list.get(i).toString());
-			 }
+    	//  for (int i = 0; i < list.size(); i++) {
+	    // 	 	System.out.println(list.get(i).toString());
+		// 	 }
     	 return list;
     }
     
@@ -65,7 +67,7 @@ public class GroupController {
         }else{
             list = groupService.groupSearchList(groupParams);
         }
-    	System.out.println("groupSearchList()실행 "+groupParams.toString()+ " / "+ list.size());
+    	//System.out.println("groupSearchList()실행 "+groupParams.toString()+ " / "+ list.size());
     	
     	return list;
     }
@@ -91,22 +93,22 @@ public class GroupController {
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
     	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
-    	System.out.println(boardParams.toString());
+    	// System.out.println(boardParams.toString());
     	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
-    	for (int j = 0; j < list.size(); j++) {
+    	// for (int j = 0; j < list.size(); j++) {
     		
-    		System.out.println(list.get(j).toString());
-    	}
+    	// 	System.out.println(list.get(j).toString());
+    	// }
     	return list;
     }
     
     @GetMapping(value="/groupBoardList")
     public ArrayList<GroupBoardDto> groupBoardList() {
         ArrayList<GroupBoardDto> list =	groupService.getGroupBoardList();
-        for (int j = 0; j < list.size(); j++) {
+        // for (int j = 0; j < list.size(); j++) {
 			
-        	System.out.println(list.get(j).toString());
-		}
+        // 	System.out.println(list.get(j).toString());
+		// }
         return list;
     }
 
@@ -114,7 +116,7 @@ public class GroupController {
     public GroupBoardDto getGroupBoardOne(int boardSeq) {
         System.out.println("groupBoardOne");
         GroupBoardDto dto = groupService.groupBoardOne(boardSeq);
-        System.out.println(dto.toString());
+        //System.out.println(dto.toString());
         return dto;
     }
 
@@ -134,4 +136,11 @@ public class GroupController {
         groupService.addSchedule(groupSchedule);
         return "";
     }
+
+    @PostMapping(value="/groupBoardDetail")
+    public GroupBoardDto getGroupBoardDetail(int boardSeq) {
+        System.out.println("getGroupBoardDetail" + boardSeq);
+        return groupService.getGroupBoardDetail(boardSeq);
+    }
+    
 }

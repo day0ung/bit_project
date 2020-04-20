@@ -9,8 +9,8 @@
         <div class="hr"></div>
         <p>전체 그룹</p>
         <MyOtherGroup></MyOtherGroup>
+    </div>
 
-      </div>
     
 </template>
 

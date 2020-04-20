@@ -22,13 +22,15 @@
         </div>
       </div>
       <div id="footer">
+        
         <div id="footer-nav">
           <div class="container">
             <!-- footer-nav -->
             <FooterNav></FooterNav>
           </div>
         </div>
-        <div id="footer-info">
+
+           <div id="footer-info">
           <div class="container">
             <!-- footer-info -->
             <FooterInfo></FooterInfo>

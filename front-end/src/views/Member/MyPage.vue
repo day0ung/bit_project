@@ -1,21 +1,40 @@
 <template>
-  <div>
-	  <div class="myPageHeader">
-		  <h1>마이페이지</h1>
-		<div class="tabBox">
-			<button class="myStudy">내 스터디</button>
-			<button class="myStudy">내 일정</button>
-			<button class="myStudy">내 관심분야</button>
-			<button class="myStudy">내 이력서</button>
-			<button class="myStudy">내 구매내역</button>
-			<button class="myStudy">내 정보수정</button>
-		</div>
-		  <div></div>
-		  <div></div>	
-	  </div>
-	  <div class="myPageContent">
-
-	  </div>	
+  <div class="myPageWrap">
+			<h5>만나서 반가워요 <strong>{{name}}</strong>님</h5>
+			<br>
+	  <div class="mymenu">
+			<el-menu
+			class="el-menu-vertical-demo"
+			active-text-color="#ff674b">
+			<el-menu-item index="1" @click="$router.push({name:'MyStudy', params: { seq: seq }}), show = false" >
+				<i class="el-icon-edit"></i>
+				<span>내 스터디</span>
+			</el-menu-item>
+			<el-menu-item index="2" @click="$router.push({name:'MySchedule', params: { seq: seq }}), show = false">
+				<i class="el-icon-postcard"></i>
+				<span>내 일정</span>
+			</el-menu-item>
+			<el-menu-item index="3" @click="$router.push({name:'MyResume', params: { seq: seq }}) ,show = false">
+				<i class="el-icon-document"></i>
+				<span>내 이력서</span>
+			</el-menu-item>
+			<el-menu-item index="4" @click="$router.push({name:'MyInter',  params: { seq: seq }}), show = false">
+				<i class="el-icon-star-off"></i>
+				<span>내 관심분야</span>
+			</el-menu-item>
+			<el-menu-item index="5"  @click="$router.push({name:'MyInfo', params: { seq: seq }}), show = false" >
+				<i class="el-icon-setting"></i>
+				<span>내 정보수정</span>
+			</el-menu-item>
+			</el-menu>
+	 </div>
+	 <div class="myContent" v-if="show">
+			<h2>default 뿌려줄것,,</h2>
+	 </div>
+	 <div class="myContent" v-else>
+		 	<router-view :key="$route.fullPath">
+			</router-view> 
+	 </div>
   </div>
 </template>
 
@@ -25,21 +44,21 @@ export default {
 	data(){
 		return{
 			myinfo: [],
+			name: '',
+			seq: '',
+			show: true
 			
 		}
 	}, 
 	 mounted(){
 		 var loginData = sessionStorage.getItem("loginUser");
 		 var login = JSON.parse(loginData); 
-		 var seq = login.memberSeq
-
-		 var params = new URLSearchParams();
-		 params.append('memberSeq', seq)
-		 axios.post('http://localhost:9000/selectMember', params)
-		 .then(res => {
-				this.myinfo = res.data
-		 }) 
+		 this.name = login.memberName
+		 this.seq = login.memberSeq
 	}, 
+	methods:{
+	
+	}
 	// computed(){
 	// 	function noEvent() { // 새로 고침 방지
     //         if (event.keyCode == 116) {
@@ -57,27 +76,24 @@ export default {
 </script>
 
 <style scoped>
-.myPageHeader{
-	padding-top: 35px;
-    padding-left: 83px;
-    height: 169px;
-    width: 100%;
+.myPageWrap{
+	min-height: 120vh;
 }
-.tabBox{
-	margin-top: 30px;
-	height: 70px;
-	line-height: 70px;
+
+.mymenu{
+	float: left;
+	width: 15%;
 }
-.myStudy{
-	display: inline-block;
-    width: 80pt;
-    height: 50px;
-    line-height: 50px;
-    color: #717477;
-    font-size: 20px;
-	text-align: center;
-	margin-right: 30px;
-	
+.myContent{
+	float: left;
+	width: 85%;
+	padding-left: 25px;
 }
-.myStudy:hover {color:#ff5151;}
+.el-menu-item:hover{
+	background-color: #fbfbfb;
+}
+.el-menu-item:focus{
+	background-color: #fbfbfb;
+}
+
 </style>

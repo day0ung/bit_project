@@ -22,9 +22,9 @@
             <header>
               <div class="imageCircle all">
                 <div style="height: 50px;"></div>
-                  <router-link :to="{ name: 'groupdetail', params: { contentId: groupInfo.groupInfoSeq }}">
-                    <img :src="groupInfo.image">
-                  </router-link>
+                <div @click="gotoDetail(groupInfo.groupInfoSeq)" style="cursor: pointer;">
+                  <img :src="groupInfo.image">
+                </div>
               </div>
             </header>
             <div class="backimage">
@@ -69,9 +69,9 @@ export default {
     
   },
   methods:{
-    gotoDetail(seq){
-      //alert("seq=" + seq)
-      this.$router.push('/group/main/detail/'+seq)
+    gotoDetail(groupSeq){
+      //alert("groupSeq=" + groupSeq + "loginSeq" + this.loginSeq)
+      this.$router.push('/group/menu/'+groupSeq)
     }
     
   }

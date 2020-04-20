@@ -73,6 +73,9 @@ public class GroupService {
 	public int searchInterBigSeq(int interSmallSeq) {
 		return groupDao.searchInterBigSeq(interSmallSeq);
 	}
+	public GroupBoardDto getGroupBoardDetail(int boardSeq) {
+		return groupDao.getGroupBoardDetail(boardSeq);
+	}
 	
 
 	

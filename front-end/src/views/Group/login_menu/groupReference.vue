@@ -3,13 +3,12 @@
     <br>
     <br>
     <div class="boardTableFrom">
-    <h3>그룹게시판</h3>
       <div class="boardSearchBar">
         <el-input
           v-model="search"
           size="large"
           placeholder="Search">
-          <el-button slot="append" icon="el-icon-search"  @click="displayData" round></el-button>
+          <el-button slot="append" icon="el-icon-search" style="cursor: default;" round></el-button>
         </el-input>
       </div>
       <el-table 
@@ -52,7 +51,6 @@
         </el-table-column>
       </el-table>
       <div class="pageination">
-        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
       </div>
     </div>
   </div>
@@ -60,11 +58,10 @@
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
-import Pagination from '@/components/Pagination'
 import { loading } from 'element-ui';
 
 export default {
-  components: { Pagination },
+  name: 'GroupReference',
   data(){
     return{
       tableData: [],
@@ -79,10 +76,6 @@ export default {
     }
   },
   methods:{
-    displayData(){
-      this.tableData=this.tableData.filter((data, index) =>{ console.log(index); !this.search || data.title.toLowerCase().includes(this.search.toLowerCase())
-                                                || data.memberDto.memberId.toLowerCase().includes(this.search.toLowerCase())})
-    },
     getList(){
       this.loading = true
       this.$store.state.currpage = this.$route.path
@@ -108,8 +101,11 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$router.push({
-        path : "/group/board/detail/" + row.boardSeq
+      this.$emit("showDetail")
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('boardSeq', row.boardSeq);
+      axios.post("http://localhost:9000/groupBoardDetail", params).then(res => {
+        this.$store.state.s_group.groupBoardDetail = res.data
       })
     },
     clickableRows :function (row, rowIndex) {
@@ -121,7 +117,7 @@ export default {
    
   },
   created(){
-     axios.get("http://localhost:9000/groupBoardList")
+      axios.get("http://localhost:9000/groupBoardList")
                 .then(res => {
             this.total = res.data.length
           })
