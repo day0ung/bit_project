@@ -54,7 +54,7 @@
       </el-table> <br>
       <div class="pageination">
         <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
-          :searchWord="listQuery.searchWord" :title="listQuery.s_keyWord" 
+          
           @pagination="getList" />
       </div>
     </div>
