@@ -57,7 +57,7 @@
             </div>
             <div class="buttons detailcontainer">
               <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">{{groupInfo.startDate}} 시작</button>
-              <button class="like"><span>♥</span></button>
+              <button class="like" @click="likeAdd(groupInfo.groupName)"><span>♥</span></button>
             </div>
           </div>
         </aside>
@@ -85,6 +85,10 @@ export default {
     }
   },
   methods:{
+    likeAdd(groupName){
+      alert("like Add 미완성")
+      alert(groupName + " 그룹을 찜목록에 추가되었습니다.\n마이페이지 찜목록에서 확인해주세요.")
+    },
     gotoDetail(seq){
       //alert("seq=" + seq)
       this.$router.push('/group/main/detail/'+seq)
