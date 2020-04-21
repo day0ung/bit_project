@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.GroupDao;
 import com.palette.model.BoardParams;
+import com.palette.model.CalendarDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;

@@ -73,8 +73,7 @@
                   <div class="jv_title blind">상세요강</div>
                     <div class="cont">
                       <div class="iframe_content" width="860" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="" title="상세요강" height="auto">
-                        <p>안녕하세요</p>
-                        <P>시간 테스트</P>
+                        {{getOneRecruit1.content}}
                       </div>
                     </div>
                   </div>
@@ -106,10 +105,10 @@
                       <p class="noti">마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
                   </div>
                 </div>
-                <el-row v-if="login1.memberSeq === getOneRecruit1.memberSeq">
-                    <el-button @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
-                    <el-button @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
-                </el-row>
+                <div v-if="login1.memberSeq === getOneRecruit1.memberSeq">
+                    <el-button type="primary" round @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
+                    <el-button type="primary" round @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
+                </div>
             </div>
             </section>
           </div> 
@@ -124,6 +123,7 @@ import Vue from "vue"
 import moment from "moment"
 import VueMomentJS from "vue-momentjs"
 import 'element-ui/lib/theme-chalk/index.css';
+import { loading } from 'element-ui';
 
 Vue.use(VueMomentJS, moment)
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.MemberDto;
@@ -19,7 +20,7 @@ public class Admin_CompanyController {
 	
 
 // 	show all company
-    @GetMapping(value = "/adminCompanyMemberShowAll")
+	@PostMapping(value = "/adminCompanyMemberShowAll")
     public List<MemberDto> getCompanyListAll() {
     	System.out.println("getAllRecuritingInfo Method execute Now..");
     	

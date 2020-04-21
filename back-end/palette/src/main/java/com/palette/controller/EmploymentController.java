@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.EmploymentBoardDto;
+
 import com.palette.service.EmploymentService;
 
 
@@ -39,16 +40,13 @@ public class EmploymentController {
 		    	
 		    	try {
 					d_today = df.parse(s_today);
-					System.out.println("오늘날짜(date) :" + d_today);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		    	String end_day = list.get(i).getCvEndDate(); // 엔드데이트string
-		    	System.out.println("마감일:" + end_day);
 		    	try {
 					d_end_day = df.parse(end_day);
-					System.out.println("마감일(date): " + d_end_day);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -65,7 +63,6 @@ public class EmploymentController {
     @PostMapping(value = "/getOneRecruit")
     public EmploymentBoardDto getOneRecruit(int empBoardSeq){
         System.out.println("getOneRecruit() 실행");
-        System.out.println("seq: "+ empBoardSeq);
 //		readcount 증가
         employmentService.readCount(empBoardSeq);
         
@@ -80,7 +77,6 @@ public class EmploymentController {
     	
     	try {
 			d_today = df.parse(s_today);
-			System.out.println("오늘날짜(date) :" + d_today);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,7 +84,6 @@ public class EmploymentController {
     	String end_day = dto.getCvEndDate(); // 엔드데이트string 
     	try {
 			d_end_day = df.parse(end_day);
-			System.out.println(d_end_day);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -104,10 +99,8 @@ public class EmploymentController {
     @GetMapping(value = "/insertRecruit")
     public boolean insertRecruit(EmploymentBoardDto dto){
     	System.out.println("insertRecruit() 실행");
-    	System.out.println(dto.toString());
     	
     	boolean isS = employmentService.insertRecruit(dto);
-    	System.out.println("취업공 추가 성공: " + isS);
     	
     	
     	return isS;
@@ -116,7 +109,6 @@ public class EmploymentController {
     @GetMapping(value = "/recruitUpdating")
     public boolean recruitUpdating(EmploymentBoardDto dto){
     	System.out.println("recruitUpdating() 실행");
-    	System.out.println("업데이트 dto: "+ dto.toString());
     	
     	boolean isS = employmentService.recruitUpdating(dto);
     	
@@ -126,10 +118,8 @@ public class EmploymentController {
     @PostMapping(value = "/recruitDelete")
     public boolean recruitDelete(int empBoardSeq){
     	System.out.println("recruitDelete() 실행");
-    	System.out.println("삭제 seq: "+ empBoardSeq);
     	
     	boolean isS = employmentService.recruitDelete(empBoardSeq);
-    	System.out.println("삭제 후 isS: " + isS);
     	return isS;
     }
     
