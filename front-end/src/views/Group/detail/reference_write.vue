@@ -1,8 +1,9 @@
 <template>
-    <div class="board_write">
+  <div class="reference_write">
+      <h1>reference_write.vue</h1>
         <quillexamplesnow @contentS="textContent" />
-        <el-button type="primary" @click="showList" round>돌아가기</el-button>
-    </div>
+        <el-button type="primary" @click="showGroupReference" round>돌아가기</el-button>
+  </div>
 </template>
 
 <script>
@@ -19,9 +20,8 @@ export default {
         }
     },
     methods:{
-        showList(){
-            this.loading = true
-            this.$emit("showBoard")
+        showGroupReference(){
+            this.$emit("showGroupReference")
         },
         textContent(value){
             this.content = value

@@ -3,8 +3,8 @@
     <br>
     <br>
     <div class="boardTableFrom">
+      <el-button @click="showReferenceWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
-        
         <el-input
           v-model="search"
           size="large"
@@ -84,17 +84,21 @@ export default {
             })
     },
     gotoClick(row, column, event){
-      alert("확인")
-      this.$emit("showDetail")
+      this.$emit("showReferenceDetail")
+      this.$store.state.s_group.showReferenceDetail = true
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('boardSeq', row.boardSeq);
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => {
-        this.$store.state.s_group.groupBoardDetail = res.data
+        this.$store.state.s_group.groupReferenceDetail = res.data
+        this.$store.state.s_group.showReferenceDetail = false
       })
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
       return "clickableRows";
+    },
+    showReferenceWrite(){
+      this.$emit("showReferenceWrite")
     }
   },
   computed:{

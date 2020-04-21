@@ -4,7 +4,10 @@ export default {
         groupList: [],
         detailSeq: 0,
         groupBoardDetail: [],
+        groupReferenceDetail: [],
         grouDetail: [],
+        showBoardDetail: false,
+        showReferenceDetail: false,
     },
     getters: {
         getDetailSeq(){
