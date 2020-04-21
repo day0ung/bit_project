@@ -1,30 +1,30 @@
 <template>
-  <div class="boardDetail">
+  <div class="reference_detail">
     <br>
     <br>
-    <div class="groupDetailcCntainer" v-loading="this.$store.state.s_group.showBoardDetail">
+    <div class="groupDetailcCntainer" v-loading="this.$store.state.s_group.showReferenceDetail">
       <div class="groupName">
-        <h1>{{ this.$store.state.s_group.groupBoardDetail.title }}</h1>
+        <h1>{{ this.$store.state.s_group.groupReferenceDetail.title }}</h1>
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
         <h5>내용</h5>
       </div>
       <div class="groupInfoContent">
-        {{ this.$store.state.s_group.groupBoardDetail.content }}
+        {{ this.$store.state.s_group.groupReferenceDetail.content }}
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
         <h5><span>상세 정보</span></h5>
       </div>
       <div class="groupInfoContent">
-        <div><span>작성자</span> {{ this.$store.state.s_group.groupBoardDetail.memberSeq }}</div>
-        <div><span>작성일</span> {{ this.$store.state.s_group.groupBoardDetail.writeDate }}</div>
-        <div><span>조회수</span> {{ this.$store.state.s_group.groupBoardDetail.readCount }}</div>
+        <div><span>작성자</span> {{ this.$store.state.s_group.groupReferenceDetail.memberSeq }}</div>
+        <div><span>작성일</span> {{ this.$store.state.s_group.groupReferenceDetail.writeDate }}</div>
+        <div><span>조회수</span> {{ this.$store.state.s_group.groupReferenceDetail.readCount }}</div>
       </div>
       <div class="hr"></div>
       <div class="groupName">
-        <el-button type="primary" @click="showList" round>돌아가기</el-button>
+        <el-button type="primary" @click="showGroupReference" round>돌아가기</el-button>
         <el-button type="primary" round>수정하기</el-button>
         <el-button type="primary" round>삭제하기</el-button>
       </div>
@@ -37,20 +37,20 @@
 <script>
 import { loading } from 'element-ui';
 export default {
-    data(){
-        return{
-            boardOne: "",
-            boardSeq: ""
-        }
-    },
-    methods:{
-        showList(){
-            this.$emit("showBoard")
-        }
+  data(){
+    return{
+        boardOne: "",
+        boardSeq: ""
+      }
+  },
+  methods:{
+    showGroupReference(){
+      this.$emit("showGroupReference")
+      }
     },
     mounted(){
 
-    },
+  },
 }
 </script>
 

@@ -7,3 +7,9 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
+cloud:
+  aws:
+    s3:
+      bucket: bit-palette
+    region:
+      static: ap-northeast-2
