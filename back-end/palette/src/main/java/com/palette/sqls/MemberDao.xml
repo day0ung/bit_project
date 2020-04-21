@@ -8,7 +8,7 @@
   </select>
 
   <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
-  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME
+  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, AUTH, CV
   	FROM MEMBER
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>

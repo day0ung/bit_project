@@ -55,8 +55,6 @@ export default {
   },
   mounted(){
     this.now = moment().valueOf()
-    
-    
 
     this.$store.state.currpage = this.$route.path
     axios.get("http://localhost:9000/getAllRecuritingInfo")
@@ -101,7 +99,7 @@ export default {
 
 /* component 분리 */
 .sri_btn_xs {display:inline-block;overflow:hidden;margin:0;padding:0;width:auto;height:auto;box-sizing:border-box;text-align:center;vertical-align:top;background:#fff;cursor:pointer}
-.sri_btn_xs>span {display:block;padding-top:1px;width:78px;height:18px;border:1px solid #dce2ef;box-sizing:border-box;color:#8a92a6;font-size:12px  !important;letter-spacing:-1px;line-height:12px;text-align:center;vertical-align:top}
+.sri_btn_xs>span {display:block;padding-top:1px;width:78px;height:18px;border:1px solid #dce2ef;box-sizing:border-box;color:#8a92a6;font-size:12px  !important;letter-spacing:-1px;line-height:12px;text-align:center;}
 .sri_btn_xs>span.sri_btn_immediately {position:relative;width:52px;border:1px solid #ff6d6a;color:#ff6d6a;background:0}
 .sri_btn_xs>span.sri_btn_tobe_apply,
 .sri_btn_xs>span.sri_btn_visit_apply,

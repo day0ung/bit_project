@@ -1,15 +1,15 @@
 <template>
   <div class="CV">
     <!-- 일반 회원 / CV 없을 때 -->
-    <div class="writeNewCV">
+    <div v-if="(login1.auth === 0 | login1.auth === 1) & login1.cv === 0" class="writeNewCV">
       <el-button type="primary" round @click="writeCV">새로운 이력서 작성</el-button>
     </div>
     <!-- 일반 회원 / CV 있을 때 -->
-    <div class="updateCV">
-      <el-button type="primary" round>이력서 수정하기</el-button>
+    <div v-else-if="(login1.auth === 0 | login1.auth === 1) & login1.cv === 1" class="updateCV">
+      <el-button type="primary" round @click="test">이력서 수정하기</el-button>
     </div>
     <!-- 기업 회원 -->
-    <div class="CVList">
+    <div v-else class="CVList">
       
       <div class="boardTableFrom">
       <h3>이력서 열람</h3>
@@ -87,11 +87,17 @@ export default {
         limit: 10,
         title: ""
       },
+      login1 : "",
       search:"",
       loading: true,
     }
   },
   methods:{
+    test(){
+      this.$router.push({
+        name: "test"
+        })
+    },
     writeCV(){
       this.$router.push({
         name: "CvWriting"

@@ -56,9 +56,12 @@
 					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
-			<el-form-item label="내용" prop="content">
-				<el-input type="textarea" v-model="ruleForm.content"></el-input>
-			</el-form-item>
+			<div class="board_write">
+        		<quillexamplesnow
+					:value="getOneRecruit1.content"
+					@contentS="qContent"
+				/>
+    		</div>
 			<el-form-item>
 				<el-button type="primary" @click="submitForm('ruleForm')">수정</el-button>
 				<el-button @click="resetForm('ruleForm')">취소</el-button>
@@ -68,6 +71,7 @@
 </template>
 
 <script>
+import quillexamplesnow from '@/components/Qilledit'
 import 'element-ui/lib/theme-chalk/index.css';
 import Vue from "vue"
 import moment from "moment"
@@ -76,6 +80,9 @@ import VueMomentJS from "vue-momentjs"
 Vue.use(VueMomentJS, moment)
 
 export default {
+	components:{
+        quillexamplesnow
+    },
 	 data() {
       return {
         ruleForm: {
@@ -125,6 +132,9 @@ export default {
       };
     },
     methods: {
+		qContent(value){
+			this.content = value
+		},
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
