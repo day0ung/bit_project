@@ -1,7 +1,7 @@
 <template>
   <div class="myPageWrap">
 			<h5>만나서 반가워요 <strong>{{name}}</strong>님</h5>
-			<br>
+		<br>
 	  <div class="mymenu">
 			<el-menu
 			class="el-menu-vertical-demo"
@@ -14,15 +14,15 @@
 				<i class="el-icon-postcard"></i>
 				<span>내 일정</span>
 			</el-menu-item>
-			<el-menu-item index="3" @click="$router.push({name:'MyResume', params: { seq: seq }}) ,show = false">
+			<el-menu-item index="3" @click="$router.push({name:'MyResume', params: { seq: memSeq }}) ,show = false">
 				<i class="el-icon-document"></i>
 				<span>내 이력서</span>
 			</el-menu-item>
-			<el-menu-item index="4" @click="$router.push({name:'MyInter',  params: { seq: seq }}), show = false">
+			<el-menu-item index="4" @click="$router.push({name:'MyInter',  params: { seq: memSeq }}), show = false">
 				<i class="el-icon-star-off"></i>
 				<span>내 관심분야</span>
 			</el-menu-item>
-			<el-menu-item index="5"  @click="$router.push({name:'MyInfo', params: { seq: seq }}), show = false" >
+			<el-menu-item index="5"  @click="$router.push({name:'MyInfo', params: { seq: memSeq }}), show = false" >
 				<i class="el-icon-setting"></i>
 				<span>내 정보수정</span>
 			</el-menu-item>
@@ -45,33 +45,19 @@ export default {
 		return{
 			myinfo: [],
 			name: '',
-			seq: '',
+			memSeq: '',
 			show: true
-			
 		}
 	}, 
 	 mounted(){
 		 var loginData = sessionStorage.getItem("loginUser");
 		 var login = JSON.parse(loginData); 
 		 this.name = login.memberName
-		 this.seq = login.memberSeq
+		 this.memSeq = login.memberSeq
 	}, 
 	methods:{
 	
 	}
-	// computed(){
-	// 	function noEvent() { // 새로 고침 방지
-    //         if (event.keyCode == 116) {
-    //             alert("새로고침을 할 수 없습니다.");
-    //             event.keyCode = 2;
-    //             return false;
-    //         } else if (event.ctrlKey
-    //                 && (event.keyCode == 78 || event.keyCode == 82)) {
-    //             return false;
-    //         }
-    //     }
-   	// 	 document.onkeydown = noEvent;
-	// }
 }
 </script>
 
