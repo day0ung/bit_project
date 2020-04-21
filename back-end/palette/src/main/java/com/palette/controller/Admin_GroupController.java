@@ -19,12 +19,20 @@ public class Admin_GroupController {
 	AdminGroupService adminGroupService;
 	
 	//selfOutputTest 요청   
-	
-	@PostMapping(value = "/AdmingetAllGroup")
-    public List<GroupDto> getAllGroup() {
-    	System.out.println("getAllGroup 메소드 실행");
+
+	@PostMapping(value = "/AdmingetTESTAllGroup")
+    public List<GroupDto> getAlTESTGroup() {
+    	System.out.println("getAlTESTGroup 메소드 실행");
     	List<GroupDto> list = adminGroupService.selfOutputTest();
     	System.out.println("list 출력 : " + list );
+    	return list;
+	}
+
+	@PostMapping(value = "/AdmingetAllStudyGroup")
+    public List<GroupDto> getAllGroup11() {
+    	System.out.println("getAllGroup 메소드 실행");
+    	List<GroupDto> list = adminGroupService.getAllStudyGroup();
+    	System.out.println("getAllGroup의 결과 list 출력 : " + list );
     	return list;
 	}
 

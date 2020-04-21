@@ -29,7 +29,10 @@
                     <el-button type="info"  @click="execDaumPostcode" plain>우편번호 찾기</el-button>
                     <el-input v-model="ruleForm.extraAddress" placeholder="상세주소"></el-input>
                 </el-form-item>
-
+                <!-- 로고 -->
+                <el-form-item prop="logo" label="회사로고">
+					<el-input v-model="ruleForm.logo"></el-input>
+				 </el-form-item>	 
 				<!-- 소개글 -->
 				 <el-form-item label="회사소개">
 					<el-input type="textarea" :rows="20" v-model="ruleForm.desc" placeholder="내용을 적어주세요"></el-input>
@@ -81,7 +84,8 @@ export default {
 				postcode: '',
       			address: '',
 				extraAddress: '',
-				desc: '',
+                desc: '',
+                logo:'',
                 auth: '3'
             },
             rules: {
@@ -108,7 +112,7 @@ export default {
                 ],
                 extraAddress:[
                     { required: true, message: '상세주소를 입력해주세요', trigger: 'blur' }
-				],
+                ],
 				desc:[
 					{ required: true, message: '회사소개를  입력해주세요', trigger: 'blur' }
 				]
@@ -129,7 +133,8 @@ export default {
                 params.append('email', this.ruleForm.email)
                 params.append('address', memberAddress)
                 params.append('auth', this.ruleForm.auth)
-                params.append('auth', this.ruleForm.desc)
+                params.append('companyInfo', this.ruleForm.desc)
+                params.append('companyLogo', this.ruleForm.logo)
                 console.log(params)
                 axios.post('http://localhost:9000/createMember', params).then(
                     res => {

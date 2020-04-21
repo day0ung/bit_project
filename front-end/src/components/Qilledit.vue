@@ -89,12 +89,6 @@
       },
       contentCode() {
         return hljs.highlightAuto(this.content).value
-      },
-      please() {
-        let content1 = this.content
-        alert(content1)
-        this.$emit("contents1", content1)
-        return content1
       }
     },
     mounted() {

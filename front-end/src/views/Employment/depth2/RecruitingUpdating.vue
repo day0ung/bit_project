@@ -56,9 +56,8 @@
 					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
-			<div class="board_write">
+			<div class="board_update">
         		<quillexamplesnow
-					:value="getOneRecruit1.content"
 					@contentS="qContent"
 				/>
     		</div>
@@ -94,10 +93,10 @@ export default {
 		  cvStartDate: '',
           position: '',
           workingLocation: '',
-		  content: '',
-		  login1: [],
 		  dialogImageUrl: ""
 		},
+		content: '',
+		login1: [],
 		getOneRecruit1 : "",
 		login1 : "",
         rules: {
@@ -124,9 +123,6 @@ export default {
 		  ],
 		  workingLocation: [
             { required: true, message: '근무지를 입력하세요', trigger: 'blur' },
-          ],
-          content: [
-            { required: true, message: '내용을 입력하세요', trigger: 'blur' }
           ]
         }
       };
@@ -153,7 +149,7 @@ export default {
 					position: this.ruleForm.position,
 					workingLocation: this.ruleForm.workingLocation,
 					image: this.ruleForm.dialogImageUrl,
-					content:this.ruleForm.content
+					content:this.content
 				}
 			}).then(res =>{
 				if(res.data === true){
@@ -219,7 +215,7 @@ export default {
 				this.ruleForm.salary = this.getOneRecruit1.salary
 				this.ruleForm.position = this.getOneRecruit1.position
 				this.ruleForm.workingLocation = this.getOneRecruit1.workingLocation
-				this.ruleForm.content = this.getOneRecruit1.content
+				this.content = this.getOneRecruit1.content
 			})
   	}
   }

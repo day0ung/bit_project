@@ -140,12 +140,14 @@ export default {
       startDate : "",
       endDate : "",
       final:"",
-      login1:[]
+      login1:[],
+      loading: true,
     }
   },
   mounted(){
      
     // 구인공고 리스트에서 공고를 클릭시 게시판seq를 파라미터로 가지고 와서 DTO를 불러와서 getOneRecruit에 담는다.
+    this.loading = true
     this.empBoardSeq = this.$route.params.boardId
       var params = new URLSearchParams()
       params.append("empBoardSeq", this.empBoardSeq)

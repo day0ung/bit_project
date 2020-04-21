@@ -43,20 +43,16 @@ export default {
       
   },
   mounted(){
-      this.$store.state.currpage = this.$route.path;
-
+      
           var params = new URLSearchParams()	
           var groupSeq = 1
           params.append('groupInfoSeq', groupSeq)
           axios.post("http://localhost:9000/getGroupSchedule", params)
           .then(res => {
             console.log(res.data.length)
-            for (let i = 0; i < array.length; i++) {
-              const element = array[i];
-              
-            }
+            
             res.data.forEach(element => {
-            alert( JSON.stringify(res.data[0].title) )
+            //alert( JSON.stringify(res.data[0].title) )
              this.events[0].title = res.data[0].title
              this.events[0].start = res.data[0].startDate
              this.events[0].end = res.data[0].endDate 

@@ -96,7 +96,6 @@ export default {
 		  cvStartDate: '',
           position: '',
           workingLocation: '',
-		  
 		  dialogImageUrl: ""
 		
 		},
