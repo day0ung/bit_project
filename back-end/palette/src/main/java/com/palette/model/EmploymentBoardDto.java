@@ -1,6 +1,9 @@
 package com.palette.model;
 
 public class EmploymentBoardDto {
+	
+	private int finalnum;
+	
 	private int boardSeq; // BOARD_SEQ
 	private int memberSeq; // MEMBER_SEQ
 
@@ -26,6 +29,7 @@ public class EmploymentBoardDto {
 	private String salary; // SALARY
 	private String position; // POSITION
 	private String workingLocation; // WORKING_LOCATION
+	private String webUrl;
 	
 	
 	private MemberDto memberDto;
@@ -33,11 +37,12 @@ public class EmploymentBoardDto {
 	public EmploymentBoardDto() {
 	}
 
-	public EmploymentBoardDto(int boardSeq, int memberSeq, int category, String title, String content, String writeDate,
-			int readCount, String image, String cvStartDate, String cvEndDate, String fileName, String dbFileName,
-			int del, int boardAuth, long dDay, String career, String education, String workingType, String salary,
-			String position, String workingLocation, MemberDto memberDto) {
+	public EmploymentBoardDto(int finalnum, int boardSeq, int memberSeq, int category, String title, String content,
+			String writeDate, int readCount, String image, String cvStartDate, String cvEndDate, String fileName,
+			String dbFileName, int del, int boardAuth, long dDay, String career, String education, String workingType,
+			String salary, String position, String workingLocation, String webUrl, MemberDto memberDto) {
 		super();
+		this.finalnum = finalnum;
 		this.boardSeq = boardSeq;
 		this.memberSeq = memberSeq;
 		this.category = category;
@@ -59,7 +64,16 @@ public class EmploymentBoardDto {
 		this.salary = salary;
 		this.position = position;
 		this.workingLocation = workingLocation;
+		this.webUrl = webUrl;
 		this.memberDto = memberDto;
+	}
+
+	public int getFinalnum() {
+		return finalnum;
+	}
+
+	public void setFinalnum(int finalnum) {
+		this.finalnum = finalnum;
 	}
 
 	public int getBoardSeq() {
@@ -230,6 +244,14 @@ public class EmploymentBoardDto {
 		this.workingLocation = workingLocation;
 	}
 
+	public String getWebUrl() {
+		return webUrl;
+	}
+
+	public void setWebUrl(String webUrl) {
+		this.webUrl = webUrl;
+	}
+
 	public MemberDto getMemberDto() {
 		return memberDto;
 	}
@@ -240,14 +262,17 @@ public class EmploymentBoardDto {
 
 	@Override
 	public String toString() {
-		return "BoardDto [boardSeq=" + boardSeq + ", memberSeq=" + memberSeq + ", category=" + category + ", title="
-				+ title + ", content=" + content + ", writeDate=" + writeDate + ", readCount=" + readCount + ", image="
-				+ image + ", cvStartDate=" + cvStartDate + ", cvEndDate=" + cvEndDate + ", fileName=" + fileName
-				+ ", dbFileName=" + dbFileName + ", del=" + del + ", boardAuth=" + boardAuth + ", dDay=" + dDay
-				+ ", career=" + career + ", education=" + education + ", workingType=" + workingType + ", salary="
-				+ salary + ", position=" + position + ", workingLocation=" + workingLocation + ", memberDto="
-				+ memberDto + "]";
+		return "EmploymentBoardDto [finalnum=" + finalnum + ", boardSeq=" + boardSeq + ", memberSeq=" + memberSeq
+				+ ", category=" + category + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
+				+ ", readCount=" + readCount + ", image=" + image + ", cvStartDate=" + cvStartDate + ", cvEndDate="
+				+ cvEndDate + ", fileName=" + fileName + ", dbFileName=" + dbFileName + ", del=" + del + ", boardAuth="
+				+ boardAuth + ", dDay=" + dDay + ", career=" + career + ", education=" + education + ", workingType="
+				+ workingType + ", salary=" + salary + ", position=" + position + ", workingLocation=" + workingLocation
+				+ ", webUrl=" + webUrl + ", memberDto=" + memberDto + "]";
 	}
+
+	
+	
 
 	
 

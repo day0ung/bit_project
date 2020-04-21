@@ -16,10 +16,8 @@ export default [{
         {
             path: 'CVpage',
             name: 'CVpage',
-            component: () => import('@/views/Employment/depth2/CV_menu.vue')
+            component: () => import('@/views/Employment/depth2/CVMain.vue')
         },
-        
-        
     ]
 },
 {
@@ -36,6 +34,11 @@ export default [{
     path: '/recruitUpdate/:boardSeq',
     name: 'recruitUpdate',
     component: () => import('@/views/Employment/depth2/RecruitingUpdating')
+},
+{
+    path: '/CvWriting/',
+    name: 'CvWriting',
+    component: () => import('@/views/Employment/depth2/CVWriting')
 },
 
 ]

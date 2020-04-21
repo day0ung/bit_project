@@ -25,6 +25,7 @@
 		<result column="SALARY" property="salary"/>
 		<result column="POSITION" property="position"/>
 		<result column="WORKING_LOCATION" property="workingLocation"/>
+		<result column="WEB_URL" property="webUrl"/>
 		<collection property="memberDto" resultMap="MemberInfo"/>
 	</resultMap>
 	 
@@ -40,13 +41,14 @@
 		<result column="CV" property="cv"/>
 		<result column="AUTH" property="auth"/>
 		<result column="DEL" property="del"/>
+		<result column="COMPANY_LOGO" property="companyLogo"/>
 		<result column="DISLIKE" property="dislike"/>
 	</resultMap>
 <!-- /get Employment Member Name -->
 
   <select id="getAllRecuritingInfo" resultMap="EmploymentBoard">
-    SELECT b.BOARD_SEQ, b.MEMBER_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME,
-    	   b.CAREER, b.EDUCATION, b.WORKING_TYPE, b.SALARY, b.POSITION, b.WORKING_LOCATION
+    SELECT b.BOARD_SEQ, b.MEMBER_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME, m.COMPANY_LOGO,
+    	   b.CAREER, b.EDUCATION, b.WORKING_TYPE, b.SALARY, b.POSITION, b.WORKING_LOCATION, b.WEB_URL
     FROM BOARD b
     JOIN MEMBER m
     ON b.MEMBER_SEQ = m.MEMBER_SEQ
@@ -54,8 +56,8 @@
   </select>
   
   <select id="getOneRecruit" parameterType="java.lang.Integer" resultMap="EmploymentBoard">
-    SELECT b.BOARD_SEQ, b.MEMBER_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME,
-    	   b.CAREER, b.EDUCATION, b.WORKING_TYPE, b.SALARY, b.POSITION, b.WORKING_LOCATION
+    SELECT b.BOARD_SEQ, b.MEMBER_SEQ, b.CATEGORY, b.TITLE, b.CONTENT, b.WRITE_DATE, b.READ_COUNT, b.IMAGE, b.CV_START_DATE, b.CV_END_DATE, b.FILE_NAME, b.DEL, b.BOARD_AUTH, m.MEMBER_NAME, m.COMPANY_LOGO,
+    	   b.CAREER, b.EDUCATION, b.WORKING_TYPE, b.SALARY, b.POSITION, b.WORKING_LOCATION, b.WEB_URL
     FROM BOARD b
     JOIN MEMBER m
     ON b.MEMBER_SEQ = m.MEMBER_SEQ
@@ -70,7 +72,7 @@
   
   <insert id="insertRecruit" parameterType="com.palette.model.EmploymentBoardDto">
   	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, IMAGE, CV_START_DATE, CV_END_DATE, FILE_NAME, DB_FILE_NAME, DEL, BOARD_AUTH, CAREER, EDUCATION, WORKING_TYPE, SALARY, POSITION, WORKING_LOCATION)
-  	VALUES(#{memberSeq}, 1, #{title}, #{content}, NOW(), 0, "", #{cvStartDate}, #{cvEndDate}, "", "", 0, 3, #{career}, #{education}, #{workingType}, #{salary}, #{position}, #{workingLocation})
+  	VALUES(#{memberSeq}, 1, #{title}, #{content}, NOW(), 0, "", #{cvStartDate}, #{cvEndDate}, #{fileName}, #{dbFileName}, 0, 3, #{career}, #{education}, #{workingType}, #{salary}, #{position}, #{workingLocation})
   </insert>
   
   <update id="recruitUpdating" parameterType="com.palette.model.EmploymentBoardDto">
