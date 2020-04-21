@@ -129,4 +129,17 @@ public class GroupController {
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
     }
+    
+    // attendance
+    @PostMapping(value="/attendGroup")
+    public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
+    	System.out.println("getAttendGroup() " +checkday +"/" + groupSchedule.toString());
+    	
+    	int result = groupService.getAttendGroup(checkday, groupSchedule);
+
+    	String s_result= result+"";
+    	    	
+    	return s_result;
+    }
+	
 }
