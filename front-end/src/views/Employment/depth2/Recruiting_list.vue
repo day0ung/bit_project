@@ -4,8 +4,8 @@
     <div class="inner_cont">
       <div class="top_product">
         <strong class="tit_cont">구인공고</strong>
-        <!-- v-if="login1.auth == 3" -->
-        <el-button type="primary" @click="recruitingWrite" style="float: right; margin-top:3px; margin-right:30px">글쓰기</el-button>
+        
+        <el-button v-if="login1.auth == 3" type="primary" @click="recruitingWrite" style="float: right; margin-top:3px; margin-right:30px">글쓰기</el-button>
         <ul class="list_product basic" id="_special" style="margin-top:20px">
           <div v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
             <li v-if="$moment(recruitingInfo.cvStartDate).valueOf() - now < 0" style="margin-right: 30px; margin-bottom: 15px;" >
@@ -40,6 +40,7 @@
 import Vue from "vue"
 import moment from "moment"
 import VueMomentJS from "vue-momentjs"
+import { loading } from 'element-ui';
 
 Vue.use(VueMomentJS, moment)
 
@@ -50,13 +51,12 @@ export default {
       
       login1 : "",
       now : "",
-      
+      loading: true,
     }
   },
   mounted(){
+    this.loading = true
     this.now = moment().valueOf()
-    
-    
 
     this.$store.state.currpage = this.$route.path
     axios.get("http://localhost:9000/getAllRecuritingInfo")
@@ -101,7 +101,7 @@ export default {
 
 /* component 분리 */
 .sri_btn_xs {display:inline-block;overflow:hidden;margin:0;padding:0;width:auto;height:auto;box-sizing:border-box;text-align:center;vertical-align:top;background:#fff;cursor:pointer}
-.sri_btn_xs>span {display:block;padding-top:1px;width:78px;height:18px;border:1px solid #dce2ef;box-sizing:border-box;color:#8a92a6;font-size:12px  !important;letter-spacing:-1px;line-height:12px;text-align:center;vertical-align:top}
+.sri_btn_xs>span {display:block;padding-top:1px;width:78px;height:18px;border:1px solid #dce2ef;box-sizing:border-box;color:#8a92a6;font-size:12px  !important;letter-spacing:-1px;line-height:12px;text-align:center;}
 .sri_btn_xs>span.sri_btn_immediately {position:relative;width:52px;border:1px solid #ff6d6a;color:#ff6d6a;background:0}
 .sri_btn_xs>span.sri_btn_tobe_apply,
 .sri_btn_xs>span.sri_btn_visit_apply,

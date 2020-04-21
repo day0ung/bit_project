@@ -72,10 +72,12 @@
                 <div class="jv_cont jv_detail">
                   <div class="jv_title blind">상세요강</div>
                     <div class="cont">
-                      <div class="iframe_content" width="860" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="" title="상세요강" height="auto">
-                        {{getOneRecruit1.content}}
-                      </div>
+                      <div class="output ql-snow">
+                        <div class="ql-editor" v-html="getOneRecruit1.content"></div>
                     </div>
+                      
+                    </div>
+                    
                   </div>
                   <div class="jv_cont jv_howto">
                     <div class="jv_title">접수기간 및 방법</div>
@@ -124,6 +126,8 @@ import moment from "moment"
 import VueMomentJS from "vue-momentjs"
 import 'element-ui/lib/theme-chalk/index.css';
 import { loading } from 'element-ui';
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
 
 Vue.use(VueMomentJS, moment)
 
@@ -136,12 +140,14 @@ export default {
       startDate : "",
       endDate : "",
       final:"",
-      login1:[]
+      login1:[],
+      loading: true,
     }
   },
   mounted(){
      
     // 구인공고 리스트에서 공고를 클릭시 게시판seq를 파라미터로 가지고 와서 DTO를 불러와서 getOneRecruit에 담는다.
+    this.loading = true
     this.empBoardSeq = this.$route.params.boardId
       var params = new URLSearchParams()
       params.append("empBoardSeq", this.empBoardSeq)
@@ -213,7 +219,39 @@ export default {
 
 
 </script>
+<style lang="scss" scoped>
 
+  .example {
+    display: flex;
+    flex-direction: column;
+
+    .editor {
+      height: 40rem;
+      overflow: hidden;
+    }
+
+    .output {
+      width: 100%;
+      height: 20rem;
+      margin: 0;
+      border: 1px solid #ccc;
+      overflow-y: auto;
+      resize: vertical;
+
+      &.code {
+        padding: 1rem;
+        height: 16rem;
+      }
+
+      &.ql-snow {
+        border-top: none;
+        height: 24rem;
+      }
+
+      
+    }
+  }
+</style>
 <style scoped>
 
 

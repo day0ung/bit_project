@@ -11,12 +11,12 @@
       @focus="onEditorFocus($event)"
       @ready="onEditorReady($event)"
     />
-    <div class="output code">
+    <!-- <div class="output code">
       <code class="hljs" v-html="contentCode"></code>
-    </div>
-    <div class="output ql-snow">
+    </div> -->
+    <!-- <div class="output ql-snow">
       <div class="ql-editor" v-html="content"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -46,18 +46,15 @@
             toolbar: [
               ['bold', 'italic', 'underline', 'strike'],
               ['blockquote', 'code-block'],
-              [{ 'header': 1 }, { 'header': 2 }],
               [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-              [{ 'script': 'sub' }, { 'script': 'super' }],
               [{ 'indent': '-1' }, { 'indent': '+1' }],
               [{ 'direction': 'rtl' }],
               [{ 'size': ['small', false, 'large', 'huge'] }],
               [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-              [{ 'font': [] }],
               [{ 'color': [] }, { 'background': [] }],
               [{ 'align': [] }],
               ['clean'],
-              ['link', 'image', 'video']
+              ['link', 'image']
             ],
             syntax: {
               highlight: text => hljs.highlightAuto(text).value
@@ -72,6 +69,9 @@
     methods: {
       onEditorChange: debounce(function(value) {
         this.content = value.html
+        let content1 = this.content
+        this.$emit('contentS', content1)
+        return content1
       }, 466),
       onEditorBlur(editor) {
         console.log('editor blur!', editor)
@@ -93,11 +93,13 @@
     },
     mounted() {
       console.log('this is Quill instance:', this.editor)
+      
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
   .example {
     display: flex;
     flex-direction: column;
@@ -124,6 +126,8 @@
         border-top: none;
         height: 24rem;
       }
+
+      
     }
   }
 </style>

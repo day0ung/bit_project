@@ -56,9 +56,11 @@
 					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
-			<el-form-item label="내용" prop="content">
-				<el-input type="textarea" v-model="ruleForm.content"></el-input>
-			</el-form-item>
+			<div class="board_update">
+        		<quillexamplesnow
+					@contentS="qContent"
+				/>
+    		</div>
 			<el-form-item>
 				<el-button type="primary" @click="submitForm('ruleForm')">수정</el-button>
 				<el-button @click="resetForm('ruleForm')">취소</el-button>
@@ -68,6 +70,7 @@
 </template>
 
 <script>
+import quillexamplesnow from '@/components/Qilledit'
 import 'element-ui/lib/theme-chalk/index.css';
 import Vue from "vue"
 import moment from "moment"
@@ -76,6 +79,9 @@ import VueMomentJS from "vue-momentjs"
 Vue.use(VueMomentJS, moment)
 
 export default {
+	components:{
+        quillexamplesnow
+    },
 	 data() {
       return {
         ruleForm: {
@@ -87,10 +93,10 @@ export default {
 		  cvStartDate: '',
           position: '',
           workingLocation: '',
-		  content: '',
-		  login1: [],
 		  dialogImageUrl: ""
 		},
+		content: '',
+		login1: [],
 		getOneRecruit1 : "",
 		login1 : "",
         rules: {
@@ -117,14 +123,14 @@ export default {
 		  ],
 		  workingLocation: [
             { required: true, message: '근무지를 입력하세요', trigger: 'blur' },
-          ],
-          content: [
-            { required: true, message: '내용을 입력하세요', trigger: 'blur' }
           ]
         }
       };
     },
     methods: {
+		qContent(value){
+			this.content = value
+		},
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -143,7 +149,7 @@ export default {
 					position: this.ruleForm.position,
 					workingLocation: this.ruleForm.workingLocation,
 					image: this.ruleForm.dialogImageUrl,
-					content:this.ruleForm.content
+					content:this.content
 				}
 			}).then(res =>{
 				if(res.data === true){
@@ -209,7 +215,7 @@ export default {
 				this.ruleForm.salary = this.getOneRecruit1.salary
 				this.ruleForm.position = this.getOneRecruit1.position
 				this.ruleForm.workingLocation = this.getOneRecruit1.workingLocation
-				this.ruleForm.content = this.getOneRecruit1.content
+				this.content = this.getOneRecruit1.content
 			})
   	}
   }

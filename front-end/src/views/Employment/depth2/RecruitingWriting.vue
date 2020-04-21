@@ -56,9 +56,14 @@
 					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
-			<el-form-item label="내용" prop="content">
+			<!-- <el-form-item label="내용" prop="content">
 				<el-input type="textarea" v-model="ruleForm.content"></el-input>
-			</el-form-item>
+			</el-form-item> -->
+			<div class="board_write">
+        		<quillexamplesnow
+					@contentS="qContent"
+				/>
+    		</div>
 			<el-form-item>
 				<el-button type="primary" @click="submitForm('ruleForm')">적용</el-button>
 				<el-button @click="resetForm('ruleForm')">취소</el-button>
@@ -68,6 +73,7 @@
 </template>
 
 <script>
+import quillexamplesnow from '@/components/Qilledit'
 import 'element-ui/lib/theme-chalk/index.css';
 import Vue from "vue"
 import moment from "moment"
@@ -76,6 +82,9 @@ import VueMomentJS from "vue-momentjs"
 Vue.use(VueMomentJS, moment)
 
 export default {
+	components:{
+        quillexamplesnow
+    },
 	 data() {
       return {
         ruleForm: {
@@ -87,15 +96,15 @@ export default {
 		  cvStartDate: '',
           position: '',
           workingLocation: '',
-		  content: '',
-		  login1: [],
 		  dialogImageUrl: ""
 		
 		},
+		content : "",
+		login1: [],
 		title1 : "",
 		files: [],
 		galleryDatas: [],
-		login : "",
+		
         rules: {
 		  title: [
 			{ required: true, message: '제목을 입력하세요', trigger: 'blur' },
@@ -121,13 +130,13 @@ export default {
 		  workingLocation: [
             { required: true, message: '근무지를 입력하세요', trigger: 'blur' },
           ],
-          content: [
-            { required: true, message: '내용을 입력하세요', trigger: 'blur' }
-          ]
         }
       };
     },
     methods: {
+		qContent(value){
+			this.content = value
+		},
 		submitFile() {
 			for (i = 0; i < this.files.length; i++) {
 				let formData = new FormData();
@@ -168,13 +177,13 @@ export default {
 						position: this.ruleForm.position,
 						workingLocation: this.ruleForm.workingLocation,
 						image: this.ruleForm.dialogImageUrl,
-						content:this.ruleForm.content
+						content:this.content
 
 					}
 				}).then(res =>{
 					alert("성공적으로 적용되었습니다.")
 					this.$router.push({
-						name: 'Recruiting_list'
+						name: 'recruiting'
 					})
 				})
 				
@@ -207,6 +216,8 @@ export default {
 	created(){
 		let sMemberSeq = sessionStorage.getItem("loginUser")
 		this.login1 = JSON.parse(sMemberSeq)
+		
+		
 		// this.memberSeq = this.$store.state.loginUser.memberSeq
 	}
 	// mounted() {

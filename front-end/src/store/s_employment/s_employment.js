@@ -8,9 +8,11 @@ export default new Vuex.Store({
     namespaced: true,
     state: {
         RecruitingList: [],
-        getOneRecruit : ""
+        getOneRecruit : "",
+        recuritContext: ""
     },
     mutations: {
+        
     }, 
     actions: {
     }  
