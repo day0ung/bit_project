@@ -137,6 +137,12 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		WHERE BOARD_SEQ = #{boardSeq}
 	</select>
 
+	<update id="groupBoardDelete" parameterType="java.lang.Integer">
+		UPDATE BOARD
+		SET DEL = 1
+		WHERE BOARD_SEQ = #{boardSeq}
+	</update>
+
 
 
 

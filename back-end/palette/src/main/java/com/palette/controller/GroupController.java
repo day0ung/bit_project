@@ -105,7 +105,13 @@ public class GroupController {
         System.out.println("getGroupBoardDetail" + boardSeq);
         return groupService.getGroupBoardDetail(boardSeq);
     }
-    
+
+    @PostMapping(value = "/groupBoardDelete")
+    public String groupBoardDelete(int boardSeq){
+        System.out.println("groupBoardDelete()" + boardSeq);
+        groupService.groupBoardDelete(boardSeq);
+        return "";
+    }
     
     // Pds
     @PostMapping(value="/groupPdsList")

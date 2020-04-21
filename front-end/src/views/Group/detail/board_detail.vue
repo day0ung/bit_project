@@ -26,7 +26,7 @@
       <div class="groupName">
         <el-button type="primary" @click="showList" round>돌아가기</el-button>
         <el-button type="primary" round>수정하기</el-button>
-        <el-button type="primary" round>삭제하기</el-button>
+        <el-button type="primary" @click="boardOneDelete" round>삭제하기</el-button>
       </div>
     </div>
     <br>
@@ -40,12 +40,57 @@ export default {
     data(){
         return{
             boardOne: "",
-            boardSeq: ""
+            boardSeq: 0,
+            groupSeq: 0,
+            total: 0,
+            listQuery:{
+              page: 1,
+              limit: 5,
+              searchWord: "",
+              s_keyWord: ""
+            },
         }
     },
     methods:{
         showList(){
-            this.$emit("showBoard")
+          this.$emit("showBoard")
+        },
+        boardOneDelete(){
+          var params = new URLSearchParams();	// post 방식으로 받아야함.
+          params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
+          axios.post("http://localhost:9000/groupBoardDelete", params)
+                  .then(res => {
+                    alert("게시글이 정상적으로 삭제 되었습니다.")
+                    this.allList()
+                    this.showList()
+          })
+        },
+        allList(){
+          this.$store.state.s_group.showBoardList = true
+          this.$store.state.s_group.s_keyWord=''
+          this.$store.state.s_group.searchWord=''
+          var params = new URLSearchParams();
+          params.append('page', 1);
+          params.append('limit', this.$store.state.s_group.listQuery.limit);
+          params.append('groupSeq', this.$store.state.s_group.groupSeq);
+          params.append('keyWord', this.$store.state.s_group.s_keyWord);
+          params.append('searchWord', this.$store.state.s_group.searchWord);
+          axios.post("http://localhost:9000/groupPagingList", params)
+                    .then(res => {
+                this.$store.state.s_group.groupBoardList = res.data
+                this.getTotal()
+                this.$store.state.s_group.showBoardList = false
+              })
+        },
+        getTotal(){
+                var params = new URLSearchParams()
+                params.append('groupSeq', this.$store.state.s_group.groupSeq);
+                params.append('keyWord', this.$store.state.s_group.s_keyWord);
+                params.append('searchWord', this.$store.state.s_group.searchWord);
+                axios.post("http://localhost:9000/groupBoardTotal", params)
+                      .then(res => {
+                        this.$store.state.s_group.total = res.data
+                      })
         }
     },
     mounted(){

@@ -44,6 +44,8 @@ public interface GroupDao {
 	GroupBoardDto getGroupBoardDetail(int boardSeq);
 	int getGroupBoardTotal(BoardParams boardParams);
 	List<CalendarDto> getGroupSchedule(GroupDto groupDto);
+	
+	void groupBoardDelete(int boardSeq);
 
 
 }

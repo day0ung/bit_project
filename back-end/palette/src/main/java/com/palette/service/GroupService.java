@@ -107,6 +107,9 @@ public class GroupService {
 						
 		return a;
 	}
+	public void groupBoardDelete(int boardSeq) {
+		groupDao.groupBoardDelete(boardSeq);
+	}
 	
 
 	
