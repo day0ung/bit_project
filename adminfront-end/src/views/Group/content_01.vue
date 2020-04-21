@@ -1,6 +1,7 @@
 <template>
     <div class="content01_view">
-        <h1> {{title}} group 11111111111111111111111111111111111111111111111111111111111111</h1>
+        <h1> {{title}} show Group list</h1>
+        
     </div>
 </template>
 
@@ -8,13 +9,32 @@
 export default {
     data(){
         return {
-            title:'group1'
+            title:'group1',
+            adminAllStudyGroupList:[]
         }
     },
-    methods:{
+created(){
+
+    // axios.post("http://localhost:9000/AdmingetTESTAllGroup")
+    // .then(res => {
+    //     console.log("admin all group print ")
+    //     this.adminAllGroupList = res.data
+    //     console.log(this.adminAllGroupList)
+    // })
 
 
-    }
+
+    // 
+
+},
+methods:{
+    
+
+
+
+
+  }
+
 
 }
 </script>

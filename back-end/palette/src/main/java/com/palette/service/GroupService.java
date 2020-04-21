@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.GroupDao;
 import com.palette.model.BoardParams;
+import com.palette.model.CalendarDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -75,6 +76,36 @@ public class GroupService {
 	public int getGroupBoardTotal(BoardParams boardParams) {
 		
 		return groupDao.getGroupBoardTotal(boardParams);
+	}
+	public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
+		
+		return groupDao.getGroupSchedule(groupDto);
+	}
+	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
+		int a = -1;
+		if(checkday.equals("Sunday")) {
+			a = groupSchedule.getSunday();
+		}
+		if(checkday.equals("Monday")) {
+			a = groupSchedule.getMonday();
+		}
+		if(checkday.equals("Tuesday")) {
+			a = groupSchedule.getTuesday();
+		}
+		if(checkday.equals("Wednesday")) {
+			a = groupSchedule.getWednesday();
+		}
+		if(checkday.equals("Thursday")) {
+			a = groupSchedule.getThursday();
+		}
+		if(checkday.equals("Friday")) {
+			a = groupSchedule.getFriday();
+		}
+		if(checkday.equals("Saturday")) {
+			a = groupSchedule.getSaturday();
+		}
+						
+		return a;
 	}
 	
 

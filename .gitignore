@@ -278,5 +278,7 @@ target/
 ## DataBase File
 application.properties
 
-
+## AWS s3 server config
+aws.yml
+application.yml
 

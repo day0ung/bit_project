@@ -2,7 +2,7 @@
   <div class="boardDetail">
     <br>
     <br>
-    <div class="groupDetailcCntainer" v-loading="loading">
+    <div class="groupDetailcCntainer" v-loading="this.$store.state.s_group.showBoardDetail">
       <div class="groupName">
         <h1>{{ this.$store.state.s_group.groupBoardDetail.title }}</h1>
       </div>
@@ -37,26 +37,20 @@
 <script>
 import { loading } from 'element-ui';
 export default {
-    name: 'boardDetail',
     data(){
         return{
-            loading: true,
             boardOne: "",
             boardSeq: ""
         }
     },
     methods:{
         showList(){
-            this.loading = true
             this.$emit("showBoard")
         }
     },
     mounted(){
 
     },
-    updated(){
-        this.loading = false
-    }
 }
 </script>
 

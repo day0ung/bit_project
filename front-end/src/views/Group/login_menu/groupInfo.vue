@@ -28,24 +28,35 @@
         <div><span>지역</span> {{ this.$store.state.s_group.grouDetail.groupLocation }}</div>
         <div><span>인원</span> {{ this.$store.state.s_group.grouDetail.currMember}} / {{ this.$store.state.s_group.grouDetail.maxMember}}</div>
         <div><span>일정</span></div>
+
         <div class="schedules" style="line-height: 12px;">
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.monday == 0" class="schedule">월</div>
             <div v-else class="schedule_check">월</div>
+            
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.tuesday == 0" class="schedule">화</div>
             <div v-else class="schedule_check">화</div>
+            
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.wednesday == 0" class="schedule">수</div>
             <div v-else class="schedule_check">수</div>
+            
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.thursday == 0" class="schedule">목</div>
             <div v-else class="schedule_check">목</div>
+            
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.friday == 0" class="schedule">금</div>
             <div v-else class="schedule_check">금</div>
+            
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.saturday == 0" class="schedule">토</div>
             <div v-else class="schedule_check">토</div>
+            
             <div v-if="this.$store.state.s_group.grouDetail.groupSchedule.sunday == 0" class="schedule">일</div>
             <div v-else class="schedule_check">일</div>
         </div>
         <div><span>시작일</span> {{ this.$store.state.s_group.grouDetail.startDate }}</div>
         <div><span>완료일</span> {{ this.$store.state.s_group.grouDetail.endDate }}</div>
+
+        <div>
+          <el-button type="primary" @click="attendClass">출석하기</el-button>
+        </div>
       </div>
       <div class="hr"></div>
     </div>
@@ -62,6 +73,7 @@ export default {
         return{
             groupInfoSeq: "",
             loading: true,
+            
         }
     },methods:{
         getGroupOne(){
@@ -75,6 +87,38 @@ export default {
                     this.loading = false;
                 })
 
+        },
+        attendClass(){
+          let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          let today = new Date();
+          let checkday = weekday[today.getDay()]
+          alert("출첵 "+weekday[today.getDay()])
+
+
+          let groupSchedule = this.$store.state.s_group.grouDetail.groupSchedule
+          alert(JSON.stringify(groupSchedule))
+          var params = new URLSearchParams();
+          params.append('checkday', checkday);
+          params.append('groupScheduleSeq', this.$store.state.s_group.grouDetail.groupSchedule.groupScheduleSeq)
+          params.append('groupInfoSeq', this.$store.state.s_group.grouDetail.groupSchedule.groupInfoSeq)
+          params.append('sunday', this.$store.state.s_group.grouDetail.groupSchedule.sunday);
+          params.append('monday', this.$store.state.s_group.grouDetail.groupSchedule.monday);
+          params.append('tuesday', this.$store.state.s_group.grouDetail.groupSchedule.tuesday);
+          params.append('wednesday', this.$store.state.s_group.grouDetail.groupSchedule.wednesday);
+          params.append('thursday', this.$store.state.s_group.grouDetail.groupSchedule.thursday);
+          params.append('friday', this.$store.state.s_group.grouDetail.groupSchedule.friday);
+          params.append('saturday', this.$store.state.s_group.grouDetail.groupSchedule.saturday);
+          params.append('groupSchedule', groupSchedule);
+          axios.post("http://localhost:9000/attendGroup", params)
+                        .then(res => {
+                    if(res.data === 0){
+                      alert('노출첵')
+                    }else{
+                      alert('출첵!!!!')
+                    }
+                    
+                })
+          
         }
 
     },

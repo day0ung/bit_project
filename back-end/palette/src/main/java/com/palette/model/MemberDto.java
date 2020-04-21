@@ -25,14 +25,16 @@ public class MemberDto {
 	private int dislike;
 
 	private MemberInterDto memberInterDto;
-	private List<InterBigDto> interBigDtos;
+	private List<InterBigDto> interBigDto;
+	private List<InterSmallDto> interSmallDto;
 	
 	public MemberDto() {
 	}
 
 	public MemberDto(int memberSeq, String memberId, String pwd, String memberName, String address, String interArea,
 			String email, String age, int gender, int myMoney, int cv, String companyInfo, String companyLogo, int auth,
-			int del, int dislike, MemberInterDto memberInterDto, List<InterBigDto> interBigDtos) {
+			int del, int dislike, MemberInterDto memberInterDto, List<InterBigDto> interBigDto,
+			List<InterSmallDto> interSmallDto) {
 		super();
 		this.memberSeq = memberSeq;
 		this.memberId = memberId;
@@ -51,7 +53,8 @@ public class MemberDto {
 		this.del = del;
 		this.dislike = dislike;
 		this.memberInterDto = memberInterDto;
-		this.interBigDtos = interBigDtos;
+		this.interBigDto = interBigDto;
+		this.interSmallDto = interSmallDto;
 	}
 
 	public int getMemberSeq() {
@@ -190,12 +193,20 @@ public class MemberDto {
 		this.memberInterDto = memberInterDto;
 	}
 
-	public List<InterBigDto> getInterBigDtos() {
-		return interBigDtos;
+	public List<InterBigDto> getInterBigDto() {
+		return interBigDto;
 	}
 
-	public void setInterBigDtos(List<InterBigDto> interBigDtos) {
-		this.interBigDtos = interBigDtos;
+	public void setInterBigDto(List<InterBigDto> interBigDto) {
+		this.interBigDto = interBigDto;
+	}
+
+	public List<InterSmallDto> getInterSmallDto() {
+		return interSmallDto;
+	}
+
+	public void setInterSmallDto(List<InterSmallDto> interSmallDto) {
+		this.interSmallDto = interSmallDto;
 	}
 
 	@Override
@@ -204,14 +215,10 @@ public class MemberDto {
 				+ memberName + ", address=" + address + ", interArea=" + interArea + ", email=" + email + ", age=" + age
 				+ ", gender=" + gender + ", myMoney=" + myMoney + ", cv=" + cv + ", companyInfo=" + companyInfo
 				+ ", companyLogo=" + companyLogo + ", auth=" + auth + ", del=" + del + ", dislike=" + dislike
-				+ ", memberInterDto=" + memberInterDto + ", interBigDtos=" + interBigDtos + "]";
+				+ ", memberInterDto=" + memberInterDto + ", interBigDto=" + interBigDto + ", interSmallDto="
+				+ interSmallDto + "]";
 	}
 
 	
-	
-	
-
-	
-
 	
 }

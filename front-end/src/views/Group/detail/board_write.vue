@@ -1,8 +1,7 @@
 <template>
     <div class="board_write">
-        <h1>board_write</h1>
-        <quillexamplesnow></quillexamplesnow>
-
+        <quillexamplesnow @contentS="textContent" />
+        <el-button type="primary" @click="showList" round>돌아가기</el-button>
     </div>
 </template>
 
@@ -12,8 +11,22 @@ import quillexamplesnow from '@/components/Qilledit'
 export default {
     components:{
         quillexamplesnow
-    }
+    },
+    data(){
+        return{
+            content: '',
 
+        }
+    },
+    methods:{
+        showList(){
+            this.loading = true
+            this.$emit("showBoard")
+        },
+        textContent(value){
+            this.content = value
+        }
+    }
 }
 </script>
 

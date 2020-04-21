@@ -1,20 +1,12 @@
 <template>
     <div class="content02_view">
         <h1> Company member Management tool </h1>
-      <pre>
--> callList
-/adminCompanyMemberShowAll
-/showCompanyInfo  (Memberdto)
-/adminGetCompanyInfoOne
-/finishApprovalCompanyList
-/adminGetCompanyLocationALl
-/adminGetCompanyNmaeAll
-      </pre>
+
 
       <el-table 
         :data="CompanyMemberAll"
         stripe
-        style="width:100$">
+        style="width:100%">
 
             <el-table-column
               prop="memberSeq"
@@ -28,21 +20,10 @@
               width="100">
             </el-table-column>
 
-            <el-table-column
-              prop="pwd"
-              label="pwd"
-              width="100">
-            </el-table-column>
 
             <el-table-column
               prop="memberName"
               label="memberName"
-              width="100">
-            </el-table-column>
-            
-            <el-table-column
-              prop="birth"
-              label="birth"
               width="100">
             </el-table-column>
 
@@ -52,11 +33,7 @@
               width="100">
             </el-table-column>
 
-            <el-table-column
-              prop="location"
-              label="location"
-              width="100">
-            </el-table-column>
+
 
             <el-table-column
               prop="email"
@@ -70,21 +47,10 @@
               width="100">
             </el-table-column>
 
-            <el-table-column
-              prop="cv"
-              label="cv"
-              width="100">
-            </el-table-column>
 
             <el-table-column
               prop="companyInfo"
               label="companyInfo"
-              width="100">
-            </el-table-column>
-
-            <el-table-column
-              prop="companyLogo"
-              label="companyLogo"
               width="100">
             </el-table-column>
 
@@ -100,10 +66,13 @@
               width="100">
             </el-table-column>
 
+
             <el-table-column
-              prop="dislike"
-              label="dislike"
+              prop=""
+              label="button"
               width="100">
+              <button type="button"> 상세정보 </button>
+
             </el-table-column>
 
 
@@ -111,12 +80,23 @@
       </el-table>
 
       <br> <hr>
+
+      <pre>
+-> callList
+/adminCompanyMemberShowAll
+/showCompanyInfo  (Memberdto)
+/adminGetCompanyInfoOne
+/finishApprovalCompanyList
+/adminGetCompanyLocationALl
+/adminGetCompanyNmaeAll
+      </pre>
       <!-- <button v-on:click="showAdminCompanyMamberShowAll"> Call Company List All </button> -->
-      <ul>
+      <!-- <ul>
         <li v-for="item in CompanyMemberAll" :key="item.memberSeq">{{item}}</li>
 
-      </ul>
+      </ul> -->
 
+    
 
       
 
@@ -127,19 +107,23 @@
 <script scoped>
 
 import 'element-ui/lib/theme-chalk/display.css';
-const path = "http://localhost:9000/";
+const path = "http://localhost:9000";
 
 export default {
     data(){
       return{
         CompanyMemberAll:[]
+        
+
+
+
 
       }
         
     },
     created(){
       
-        axios.get(path+"adminCompanyMemberShowAll")
+        axios.post(path+"/adminCompanyMemberShowAll")
         .then(res=>{
           console.log(res)
           this.CompanyMemberAll=res.data
@@ -148,6 +132,8 @@ export default {
     },
 
     methods:{
+
+      
       
         
           
@@ -180,3 +166,45 @@ export default {
         label="Address">
       </el-table-column>
     </el-table> -->
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+
+    ELEMENT UI 의 이미지 영역 참조. <<image preview >>
+
+    <div class="demo-image__preview">
+  <el-image 
+    style="width: 100px; height: 100px"
+    :src="url" 
+    :preview-src-list="srcList">
+  </el-image>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        srcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ]
+      }
+    }
+  }
+</script>
+
+
+
+
+-->

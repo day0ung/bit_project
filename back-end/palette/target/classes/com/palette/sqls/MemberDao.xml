@@ -8,7 +8,7 @@
   </select>
 
   <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
-  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, AUTH, CV
+  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, CV, COMPANY_LOGO
   	FROM MEMBER
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
@@ -46,7 +46,8 @@
 		<result column="DEL" property="del"/>
 		<result column="DISLIKE" property="dislike"/>
 		<collection property="memberInterDto" resultMap="MemberInter"></collection>
-		<collection property="interBigDtos" resultMap="InterBig"></collection>
+		<collection property="interBigDto" resultMap="InterBig"></collection>
+		<collection property="interSmallDto" resultMap="InterSmall"></collection>
  	</resultMap>
  <select id="getDetailMember" parameterType="java.lang.Integer" resultMap="MemberDetail">
 		SELECT * 

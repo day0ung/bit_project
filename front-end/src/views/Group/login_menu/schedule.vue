@@ -20,29 +20,18 @@ export default {
   name: 'GroupSchedule',
   data(){
     return{
-      memberlist: this.$store.state.s_subStore.data,
-      events: [
-                    // {
-                    //     title  : 'event1',
-                    //     start  : '2020-01-01',
-                    // },
-                    // {
-                    //     title  : 'event2',
-                    //     start  : '2020-01-05',
-                    //     end    : '2020-01-07',
-                    // },
-                    // {
-                    //     title  : 'event3',
-                    //     start  : '2020-01-09T12:30:00',
-                    //     allDay : false,
-                    // },
 
-                ],
-                config: {
-                        locale: 'ko',
-                        defaultView:'month'
-                        
-                },
+      memberlist: this.$store.state.s_subStore.data,
+      events: [{
+            title  : 'event1',
+            start  : '2020-04-03',
+            color : '#cecece'
+        }
+      ],
+      config: {
+              locale: 'ko',
+              defaultView:'month'
+      },
       
     }
   },
@@ -50,10 +39,30 @@ export default {
     dayClick(args){
         alert(args)
    
-    }
+    },
+      
   },
   mounted(){
-      this.$store.state.currpage = this.$route.path
+      
+          var params = new URLSearchParams()	
+          var groupSeq = 1
+          params.append('groupInfoSeq', groupSeq)
+          axios.post("http://localhost:9000/getGroupSchedule", params)
+          .then(res => {
+            console.log(res.data.length)
+            
+            res.data.forEach(element => {
+            //alert( JSON.stringify(res.data[0].title) )
+             this.events[0].title = res.data[0].title
+             this.events[0].start = res.data[0].startDate
+             this.events[0].end = res.data[0].endDate 
+            });
+            
+             
+          })
+
+      
+
   }
 }
 </script>
