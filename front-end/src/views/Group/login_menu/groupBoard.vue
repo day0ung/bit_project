@@ -3,12 +3,12 @@
     <br>
     <br>
     <div class="boardTableFrom">
-      <el-button type="primary" @click="showWrite" round>글쓰기</el-button>
+      <el-button @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
-        
         <el-input v-model="searchWord"
                   placeholder="전체목록보기버튼"
                   class="input-with-select">
+        <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right: 10px" @click="allList"></el-button>
           <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
             <el-option label="작성자" value="writer"></el-option>
             <el-option label="제목" value="title"></el-option>
@@ -90,6 +90,24 @@ export default {
     
   },
   methods:{
+   allList(){
+     this.s_keyWord=''
+     this.searchWord=''
+
+     this.loading = true
+     var params = new URLSearchParams();
+     params.append('page', 1);
+     params.append('limit', this.listQuery.limit);
+     params.append('groupSeq', this.groupSeq);
+     params.append('keyWord', this.s_keyWord);
+     params.append('searchWord', this.searchWord);
+     axios.post("http://localhost:9000/groupPagingList", params)
+              .then(res => {
+          this.tableData = res.data
+          this.getTotal()
+          this.loading = false
+        })
+   },
    getList(){
       this.loading = true
       var params = new URLSearchParams();	// post 방식으로 받아야함.
