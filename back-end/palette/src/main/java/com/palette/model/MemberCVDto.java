@@ -1,6 +1,9 @@
 package com.palette.model;
 
 public class MemberCVDto {
+	
+	private int finalnum;
+	
 	private int cvSeq; // CV_SEQ
 	private int memberSeq; // MEMBER_SEQ
 	private String title; // TITLE
@@ -11,12 +14,15 @@ public class MemberCVDto {
 	private String dbFileName; // DB_FILE_NAME
 	private int del; // DEL
 	
+	private MemberDto memberDto;
+	
 	public MemberCVDto() {
 	}
 
-	public MemberCVDto(int cvSeq, int memberSeq, String title, String category, String writeDate, int readCount,
-			String fileName, String dbFileName, int del) {
+	public MemberCVDto(int finalnum, int cvSeq, int memberSeq, String title, String category, String writeDate,
+			int readCount, String fileName, String dbFileName, int del, MemberDto memberDto) {
 		super();
+		this.finalnum = finalnum;
 		this.cvSeq = cvSeq;
 		this.memberSeq = memberSeq;
 		this.title = title;
@@ -26,6 +32,15 @@ public class MemberCVDto {
 		this.fileName = fileName;
 		this.dbFileName = dbFileName;
 		this.del = del;
+		this.memberDto = memberDto;
+	}
+
+	public int getFinalnum() {
+		return finalnum;
+	}
+
+	public void setFinalnum(int finalnum) {
+		this.finalnum = finalnum;
 	}
 
 	public int getCvSeq() {
@@ -100,12 +115,25 @@ public class MemberCVDto {
 		this.del = del;
 	}
 
+	public MemberDto getMemberDto() {
+		return memberDto;
+	}
+
+	public void setMemberDto(MemberDto memberDto) {
+		this.memberDto = memberDto;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberCVDto [cvSeq=" + cvSeq + ", memberSeq=" + memberSeq + ", title=" + title + ", category="
-				+ category + ", writeDate=" + writeDate + ", readCount=" + readCount + ", fileName=" + fileName
-				+ ", dbFileName=" + dbFileName + ", del=" + del + "]";
+		return "MemberCVDto [finalnum=" + finalnum + ", cvSeq=" + cvSeq + ", memberSeq=" + memberSeq + ", title="
+				+ title + ", category=" + category + ", writeDate=" + writeDate + ", readCount=" + readCount
+				+ ", fileName=" + fileName + ", dbFileName=" + dbFileName + ", del=" + del + ", memberDto=" + memberDto
+				+ "]";
 	}
+
+	
+
+	
 
 	
 	

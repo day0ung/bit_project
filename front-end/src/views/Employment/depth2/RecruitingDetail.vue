@@ -11,7 +11,7 @@
               <div class="wrap_jv_cont">
                 <div class="wrap_jv_header">
                    <div class="jv_header">
-                    <a href="#" class="company" target="_blank">
+                    <a :href="getOneRecruit1.webUrl" class="company" target="_blank">
                       <!-- 회사명 -->
                       {{getOneRecruit1.memberDto.memberName}}
                     </a>
@@ -24,7 +24,7 @@
                     </h1>
                     <div class="btn_apply">
                       <span class="dday">D-{{getOneRecruit1.dDay}}</span>
-                      <a class="sri_btn_lg for_btn_event" title="홈페이지 지원" href="http://ps.korchamhrd.net/" target="_blank" rel="nofollow" onclick="try{Saramin.updateHomepageLink(37953815, &quot;homepage&quot;);} catch(e) {}" onmousedown="try{n_trackEvent('homepage_apply', 'view', '37953815')}catch(e){}">
+                      <a class="sri_btn_lg for_btn_event" title="홈페이지 지원" :href="getOneRecruit1.webUrl" target="_blank" rel="nofollow" onclick="try{Saramin.updateHomepageLink(37953815, &quot;homepage&quot;);} catch(e) {}" onmousedown="try{n_trackEvent('homepage_apply', 'view', '37953815')}catch(e){}">
                         <span class="sri_btn_homepage_apply">홈페이지 지원</span>
                       </a>
                     </div>
@@ -99,7 +99,7 @@
                         <dl class="guide">
                           <dt>지원방법</dt>
                           <dd class="method">
-                            <a href="http://ps.korchamhrd.net/" onmousedown="#" class="link" target="_blank">홈페이지 지원</a>                
+                            <a :href="getOneRecruit1.webUrl" onmousedown="#" class="link" target="_blank">홈페이지 지원</a>                
                           </dd>
                         </dl>
                       <p class="noti">마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
