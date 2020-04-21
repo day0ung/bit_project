@@ -6,7 +6,9 @@
       <el-table 
         :data="CompanyMemberAll"
         stripe
-        style="width:100%">
+        style="width:100%"
+        
+        >
 
             <el-table-column
               prop="memberSeq"
@@ -95,7 +97,9 @@
             <el-table-column
               prop=""
               label="button"
-              width="100">
+              width="100"
+              
+              >
               <button type="button"> 상세정보 </button>
 
             </el-table-column>
@@ -160,10 +164,6 @@ export default {
     methods:{
 
       changePermission(){
-
-
-
-
         const confirmflag = confirm("그룹개설신청 허가하시겠습니까");
         if(confirmflag){
 
@@ -181,12 +181,11 @@ export default {
             console.log(res.data)
             //$router.path.push('/managemember2')
           })
-
         }else{
           alert("그룹개설신청 거부");
         }
+      },
 
-      }
 
       
         
