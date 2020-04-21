@@ -26,9 +26,9 @@
                         <td style="text-align: left;">{{myinfo.memberId}}</td>
                         <td>{{myinfo.age}}</td>
                         <td>{{myinfo.email}}</td>
-                        <td><i class="el-icon-paperclip" style="color: #fa5757"></i> </td>
+                        <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                         <td>
-                          <el-button type="text" @click="edit" style="color: #fa5757; font-size: 16px">수정</el-button>
+                          <el-button type="text" @click="edit" style="color: #ff5151; font-size: 16px">수정</el-button>
                         </td>
                       </tr>                   
                     </tbody>
@@ -88,9 +88,9 @@
                       <tbody>
                         <tr>
                           <td colspan="3">{{myinfo.address}}</td>
-                          <td><i class="el-icon-paperclip" style="color: #fa5757"></i> </td>
+                          <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                           <td>
-                            <el-button type="text" @click="editAddr" style="color: #fa5757; font-size: 16px">수정</el-button>
+                            <el-button type="text" @click="editAddr" style="color: #ff5151; font-size: 16px">수정</el-button>
                           </td>
                         </tr>                   
                       </tbody>
@@ -131,19 +131,19 @@
                     <el-input v-model="passCheck" placeholder="현재 비밀번호를 입력해주세요" style="width: 264px"></el-input>
                       </li>
                       <li>
-                    <el-button type="text" @click="passedit" style="color: #fa5757; font-size: 16px">비밀번호 확인</el-button>
+                    <el-button type="text" @click="passedit" style="color: #ff5151; font-size: 16px">비밀번호 확인</el-button>
                       </li>
                     </ul>
                </div>
                  <div v-else style="padding-left: 33px;">
-                  <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm" style="padding-top: 50px">
-                    <el-form-item label="변경할 비밀번호" prop="pass">
-                    <el-input type="password" v-model="ruleForm.pass" placeholder="비밀번호를 입력해 주세요" autocomplete="off" style="width: 93%;"></el-input>
+                  <el-form :model="ruleForm" :rules="rules" label-position="left"  ref="ruleForm" class="demo-ruleForm" style="padding-top: 50px">
+                    <el-form-item label="변경할 비밀번호 입력" prop="pass">
+                      <el-input type="password" v-model="ruleForm.pass" placeholder="비밀번호를 입력해 주세요" autocomplete="off" style="width: 100%;"></el-input>
                     </el-form-item>
                     <el-form-item label="변경할 비밀번호 확인" prop="checkPass">
-                    <el-input type="password" v-model="ruleForm.checkPass" placeholder="비밀번호를 확인해 주세요"  autocomplete="off" style="width: 93%;"></el-input>
+                    <el-input type="password" v-model="ruleForm.checkPass" placeholder="비밀번호를 확인해 주세요"  autocomplete="off" style="width: 100%;"></el-input>
                     </el-form-item> 
-                    <el-form-item style="margin-top: 57px">
+                    <el-form-item style="margin-left: 20px">
                         <el-button type="text" @click="submitForm('ruleForm')">변경하기</el-button>
                     </el-form-item>
                   </el-form>
@@ -153,7 +153,8 @@
         </div>
         <div class="slib">
           <div class="slib_info1">
-                 <el-button round style="float: right" @click="userOut">회원탈퇴</el-button>
+                 <el-button round style="float: right; margin-left: 24px;" @click="userOut">회원탈퇴</el-button>
+                 <el-button round style="float: right; border-color:#ff5151; color:#ff5151" @click="searchPass">비밀번호 찾기</el-button>
           </div>
         </div>
   </div>
@@ -304,6 +305,9 @@ export default {
       },
       userOut(){
         alert('정말 탈퇴하시겠습니까')
+      },
+      searchPass(){
+        alert('비밀번호찾기')
       },
       submitForm(formName) {
             this.$refs[formName].validate((valid) => {

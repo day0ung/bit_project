@@ -135,7 +135,7 @@ export default {
                     res => {
                         if(res.data == true){
                             alert('회원가입이 완료 되었습니다')
-                            this.$router.push ({name:'memberInter'})
+                            this.$router.push ({name:'home'})
                         }
                     }) 
             } else {
