@@ -25,7 +25,7 @@
       <div class="hr"></div>
       <div class="groupName">
         <el-button type="primary" @click="showList" round>돌아가기</el-button>
-        <el-button type="primary" round>수정하기</el-button>
+        <el-button type="primary" @click="boardOneUpdate" round>수정하기</el-button>
         <el-button type="primary" @click="boardOneDelete" round>삭제하기</el-button>
       </div>
     </div>
@@ -46,6 +46,9 @@ export default {
     methods:{
         showList(){
           this.$emit("showBoard")
+        },
+        boardOneUpdate(){
+          alert("update 미완성")
         },
         boardOneDelete(){
           var params = new URLSearchParams();	// post 방식으로 받아야함.

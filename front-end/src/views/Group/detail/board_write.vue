@@ -2,7 +2,7 @@
     <div class="board_write">
         <br>
         <br>
-        <el-button @click="showList" round>돌아가기</el-button>
+        <el-button @click="showList" round>목록으로</el-button>
         <br>
         <br>
         <br>

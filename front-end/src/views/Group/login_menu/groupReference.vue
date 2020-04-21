@@ -3,7 +3,7 @@
     <br>
     <br>
     <div class="boardTableFrom">
-      <el-button @click="showReferenceWrite" round>글쓰기</el-button>
+      <el-button @click="showReferenceWrite" round>자료올리기</el-button>
       <div class="boardSearchBar">
         <el-input
           v-model="search"

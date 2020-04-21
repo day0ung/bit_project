@@ -1,6 +1,8 @@
 <template>
   <div class="reference_write">
-        <el-button @click="showGroupReference" round>돌아가기</el-button>
+        <br>
+        <br>
+        <el-button @click="showGroupReference" round>목록으로</el-button>
         <quillexamplesnow @contentS="textContent" />
   </div>
 </template>
