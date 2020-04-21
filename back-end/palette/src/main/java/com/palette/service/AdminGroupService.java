@@ -24,6 +24,9 @@ public class AdminGroupService {
 		return admingroupdao.acceptCreateGroup(dto);
 	}
 
+	public List<GroupDto> getAllStudyGroup(){
+		return admingroupdao.getAllStudyGroup();
+	}
 	
 	
 

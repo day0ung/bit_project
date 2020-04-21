@@ -10,17 +10,21 @@ export default {
     data(){
         return {
             title:'group1',
-            adminAllGroupList:[]
+            adminAllStudyGroupList:[]
         }
     },
 created(){
 
-    axios.post("http://localhost:9000/AdmingetAllGroup")
-    .then(res => {
-        console.log("admin all group print ")
-        this.adminAllGroupList = res.data
-        console.log(this.adminAllGroupList)
-    })
+    // axios.post("http://localhost:9000/AdmingetTESTAllGroup")
+    // .then(res => {
+    //     console.log("admin all group print ")
+    //     this.adminAllGroupList = res.data
+    //     console.log(this.adminAllGroupList)
+    // })
+
+
+
+    // 
 
 },
 methods:{
