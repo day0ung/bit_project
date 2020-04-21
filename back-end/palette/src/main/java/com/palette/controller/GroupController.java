@@ -112,6 +112,13 @@ public class GroupController {
         groupService.groupBoardDelete(boardSeq);
         return "";
     }
+
+    @GetMapping(value = "/insertGroupBoard")
+    public String insertGroupBoard(GroupBoardDto groupBoardDto){
+        System.out.println("insertGroupBoard()");
+        groupService.insertGroupBoard(groupBoardDto);
+        return "";
+    }
     
     // Pds
     @PostMapping(value="/groupPdsList")

@@ -41,14 +41,6 @@ export default {
         return{
             boardOne: "",
             boardSeq: 0,
-            groupSeq: 0,
-            total: 0,
-            listQuery:{
-              page: 1,
-              limit: 5,
-              searchWord: "",
-              s_keyWord: ""
-            },
         }
     },
     methods:{

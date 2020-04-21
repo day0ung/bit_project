@@ -5,11 +5,11 @@
     <div class="boardTableFrom">
       <el-button @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
-        <el-input v-model="this.$store.state.s_group.searchWord"
+        <el-input v-model="searchWord"
                   placeholder="전체목록보기버튼"
                   class="input-with-select">
         <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right: 10px" @click="allList"></el-button>
-          <el-select v-model="this.$store.state.s_group.s_keyWord" slot="prepend" placeholder="Select">
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
             <el-option label="작성자" value="writer"></el-option>
             <el-option label="제목" value="title"></el-option>
           </el-select>
@@ -86,16 +86,16 @@ export default {
   },
   methods:{
    allList(){
-     this.$store.state.s_group.s_keyWord=''
-     this.$store.state.s_group.searchWord=''
+     this.s_keyWord=''
+     this.searchWord=''
 
      this.$store.state.s_group.showBoardList = true
      var params = new URLSearchParams();
      params.append('page', 1);
-     params.append('limit', listQuery.limit);
+     params.append('limit', this.listQuery.limit);
      params.append('groupSeq', this.groupSeq);
-     params.append('keyWord', this.$store.state.s_group.s_keyWord);
-     params.append('searchWord', this.$store.state.s_group.searchWord);
+     params.append('keyWord', this.s_keyWord);
+     params.append('searchWord', this.searchWord);
      axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
           this.$store.state.s_group.groupBoardList = res.data
@@ -109,8 +109,8 @@ export default {
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
       params.append('groupSeq', this.groupSeq);
-      params.append('keyWord', this.$store.state.s_group.s_keyWord);
-      params.append('searchWord', this.$store.state.s_group.searchWord);
+      params.append('keyWord', this.s_keyWord);
+      params.append('searchWord', this.searchWord);
       axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
           this.$store.state.s_group.groupBoardList = res.data
@@ -118,22 +118,21 @@ export default {
         })
     },
     searchBoard(){
-      if(this.$store.state.s_group.s_keyWord==''){
+      if(this.s_keyWord==''){
         alert('검색타입을 설정해주세요')
       }
-      if(this.$store.state.s_group.searchWord==""){
+      if(this.searchWord==""){
         alert('검색어를 입력해주세요')
       }
       
-      if(this.$store.state.s_group.s_keyWord != '' && this.$store.state.s_group.searchWord!=''){
-        alert(this.$store.state.s_group.s_keyWord +"/" + this.$store.state.s_group.searchWord)
+      if(this.s_keyWord != '' && this.searchWord!=''){
         this.$store.state.s_group.showBoardList = true
         var params = new URLSearchParams();	// post 방식으로 받아야함.
         params.append('page', 1);
         params.append('limit', this.listQuery.limit);
         params.append('groupSeq', this.groupSeq);
-        params.append('keyWord', this.$store.state.s_group.s_keyWord);
-        params.append('searchWord', this.$store.state.s_group.searchWord);
+        params.append('keyWord', this.s_keyWord);
+        params.append('searchWord', this.searchWord);
         axios.post("http://localhost:9000/groupPagingList", params)
                 .then(res => {
             this.$store.state.s_group.groupBoardList = res.data
@@ -147,8 +146,8 @@ export default {
         this.$store.state.s_group.groupSeq = this.$route.params.groupSeq
             var params = new URLSearchParams()
             params.append('groupSeq', this.groupSeq);
-            params.append('keyWord', this.$store.state.s_group.s_keyWord);
-            params.append('searchWord', this.$store.state.s_group.searchWord)
+            params.append('keyWord', this.s_keyWord);
+            params.append('searchWord', this.searchWord)
             axios.post("http://localhost:9000/groupBoardTotal", params)
                   .then(res => {
                     this.$store.state.s_group.total = res.data
