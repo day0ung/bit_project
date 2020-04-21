@@ -1,6 +1,7 @@
 package com.palette.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.BoardParams;
+import com.palette.model.EmploymentBoardDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.MemberCVDto;
 import com.palette.service.MemberCVService;
@@ -32,16 +34,20 @@ public class MemberCVController {
 		return isS;
 	}
 	
-//	@PostMapping(value="/CVPagingList")
-//    public ArrayList<MemberCVDto> getMemberCVPagingList(BoardParams boardParams) {
-//    	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
-//    	System.out.println(boardParams.toString());
-//    	ArrayList<MemberCVDto> list = memberCVService.getMemberCVPagingList(boardParams);
-//    	for (int j = 0; j < list.size(); j++) {
-//    		
-//    		System.out.println(list.get(j).toString());
-//    	}
-//    	return list;
-//    }
+//  cv페이징
+	@PostMapping(value="/CVPagingList")
+    public ArrayList<MemberCVDto> getCVPagingList(BoardParams boardParams) {
+		System.out.println("getGroupPagingList() : "+boardParams.toString());
+    	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
+    	ArrayList<MemberCVDto> list =	memberCVService.getCVPagingList(boardParams);
+    	return list;
+    }
+	
+	@GetMapping(value = "/CVList")
+    public ArrayList<MemberCVDto> CVList() {
+		System.out.println("CVLIST() 실행");
+		ArrayList<MemberCVDto> list =	memberCVService.CVList();
+		return list;
+	}
 	
 }

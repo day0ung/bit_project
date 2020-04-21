@@ -41,7 +41,7 @@
             >
           </el-table-column>
           <el-table-column
-            prop="memberDto.memberId"
+            prop="memberDto.memberName"
             label="작성자"
             width="100px"
             >
@@ -110,7 +110,7 @@ export default {
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
-      axios.post("http://localhost:9000/groupPagingList", params)
+      axios.post("http://localhost:9000/CVPagingList", params)
               .then(res => {
           this.tableData = res.data
           this.loading = false
@@ -133,7 +133,7 @@ export default {
     this.login1 = JSON.parse(sMemberSeq)
     
     //페이징
-    axios.get("http://localhost:9000/groupBoardList")
+    axios.get("http://localhost:9000/CVList")
                 .then(res => {
             this.total = res.data.length
           })
