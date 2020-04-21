@@ -5,6 +5,7 @@
     <div class="boardTableFrom">
       <el-button type="primary" @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
+        
         <el-input v-model="searchWord"
                   placeholder="전체목록보기버튼"
                   class="input-with-select">

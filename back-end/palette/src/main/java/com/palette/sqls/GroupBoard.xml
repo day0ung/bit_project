@@ -45,7 +45,8 @@ from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 		 from BOARD b 
          join MEMBER m
          on b.MEMBER_SEQ = m.MEMBER_SEQ
-         where (@rownum:=0)=0 and b.del = 0 and GROUP_INFO_SEQ=#{groupSeq}
+         where (@rownum:=0)=0 and b.del = 0 and b.BOARD_AUTH=2 and b.CATEGORY=0
+         	and GROUP_INFO_SEQ=#{groupSeq}
 		 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
 	order by sub.rownum desc) fsub
 	<where>
@@ -59,14 +60,15 @@ from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 order by fsub.finalnum desc
 limit #{start}, #{limit}
 </select>
-<select id="getgroupBoardList" parameterType="com.palette.model.BoardParams" resultMap="AllBoardList">
+<select id="getgroupPdsList" parameterType="com.palette.model.BoardParams" resultMap="AllBoardList">
 select *
 from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 	from (select @rownum:=@rownum+1 as rownum, b.*, m.MEMBER_ID
 		 from BOARD b 
          join MEMBER m
          on b.MEMBER_SEQ = m.MEMBER_SEQ
-         where (@rownum:=0)=0 and b.del = 0 and GROUP_INFO_SEQ=#{groupSeq}
+         where (@rownum:=0)=0 and b.del = 0 and b.BOARD_AUTH=2 and b.CATEGORY=2
+         	and GROUP_INFO_SEQ=#{groupSeq}
 		 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
 	order by sub.rownum desc) fsub
 order by fsub.finalnum desc
