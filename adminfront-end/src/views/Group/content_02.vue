@@ -195,17 +195,17 @@ export default {
 
             selectedvalue:'전체보기',
             options: [{
-            value: '전체보기',
+            value: '0',
             label: '전체보기'
             }, {
-            value: '승인완료',
+            value: '1',
             label: '승인완료'
             }, {
-            value: '비승인',
+            value: '2',
             label: '비승인'
             }],
-            value: '전체보기',
-            label:'전체보기'
+            value: '0',
+            lable:'전체보기'
 
 
 
