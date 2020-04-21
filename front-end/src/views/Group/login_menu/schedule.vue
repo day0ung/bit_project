@@ -50,7 +50,7 @@ export default {
           params.append('groupInfoSeq', groupSeq)
           axios.post("http://localhost:9000/getGroupSchedule", params)
           .then(res => {
-            console.log(res.data.size())
+            console.log(res.data.length)
             for (let i = 0; i < array.length; i++) {
               const element = array[i];
               

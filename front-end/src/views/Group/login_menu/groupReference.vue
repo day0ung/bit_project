@@ -4,6 +4,7 @@
     <br>
     <div class="boardTableFrom">
       <div class="boardSearchBar">
+        
         <el-input
           v-model="search"
           size="large"
