@@ -109,9 +109,12 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$router.push({
-        path : "/group/board/detail/" + row.boardSeq
-      })
+      cnoosole.log(row, column, event )
+      const row1 = JSON.stringify(row);
+      console.log(row1)
+      // this.$router.push({
+      //   path : "/group/board/detail/" + row.boardSeq
+      // })
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)

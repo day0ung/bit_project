@@ -20,10 +20,21 @@
               width="100">
             </el-table-column>
 
+            <el-table-column
+              prop="pwd"
+              label="pwd"
+              width="100">
+            </el-table-column>
 
             <el-table-column
               prop="memberName"
               label="memberName"
+              width="100">
+            </el-table-column>
+            
+            <el-table-column
+              prop="birth"
+              label="birth"
               width="100">
             </el-table-column>
 
@@ -33,7 +44,11 @@
               width="100">
             </el-table-column>
 
-
+            <el-table-column
+              prop="location"
+              label="location"
+              width="100">
+            </el-table-column>
 
             <el-table-column
               prop="email"
@@ -47,13 +62,18 @@
               width="100">
             </el-table-column>
 
+            <el-table-column
+              prop="cv"
+              label="cv"
+              width="100">
+            </el-table-column>
 
             <el-table-column
               prop="companyInfo"
               label="companyInfo"
               width="100">
             </el-table-column>
-
+            
             <el-table-column
               prop="auth"
               label="auth"
@@ -66,6 +86,11 @@
               width="100">
             </el-table-column>
 
+            <el-table-column
+              prop="dislike"
+              label="dislike"
+              width="100">
+            </el-table-column>
 
             <el-table-column
               prop=""
@@ -96,6 +121,7 @@
 
       </ul> -->
 
+      <button v-on:click="changePermission"> 1/1 권한 설정 </button>
     
 
       
@@ -133,7 +159,35 @@ export default {
 
     methods:{
 
-      
+      changePermission(){
+
+
+
+
+        const confirmflag = confirm("그룹개설신청 허가하시겠습니까");
+        if(confirmflag){
+
+          var params = new URLSearchParams();	// post 방식으로 받아야함.
+          // params.append('groupInfoSeq', this.listQuery.page);
+          // params.append('memberSeq', this.listQuery.limit);
+
+          //TestCode <<< START >>>
+          params.append('groupInfoSeq', 1);
+          params.append('memberSeq', 1);
+          //TestCode <<< END >>>
+
+          axios.post(path+"/AdminAcceptCreateGroup",params)
+          .then(res=>{
+            console.log(res.data)
+            //$router.path.push('/managemember2')
+          })
+
+        }else{
+          alert("그룹개설신청 거부");
+        }
+
+      }
+
       
         
           
