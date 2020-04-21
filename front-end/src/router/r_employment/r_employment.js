@@ -40,5 +40,10 @@ export default [{
     name: 'CvWriting',
     component: () => import('@/views/Employment/depth2/CVWriting')
 },
+{
+    path: '/test/',
+    name: 'test',
+    component: () => import('@/views/Employment/depth2/test')
+},
 
 ]
