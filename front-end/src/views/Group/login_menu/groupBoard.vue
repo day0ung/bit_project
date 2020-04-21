@@ -3,6 +3,7 @@
     <br>
     <br>
     <div class="boardTableFrom">
+      <el-button type="primary" @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
         <el-input v-model="searchWord"
                   placeholder="전체목록보기버튼"
@@ -84,7 +85,7 @@ export default {
       loading: true,
     }
   },
-   mounted(){
+  mounted(){
     
   },
   methods:{
@@ -152,6 +153,9 @@ export default {
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
       return "clickableRows";
+    },
+    showWrite(){
+      this.$emit("showWrite")
     }
   },
   computed:{
