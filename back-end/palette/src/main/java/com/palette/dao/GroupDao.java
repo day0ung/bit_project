@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.palette.model.BoardParams;
+import com.palette.model.CalendarDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -28,7 +29,7 @@ public interface GroupDao {
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
 	ArrayList<GroupBoardDto> getgroupPagingList(BoardParams boardParams);
-	ArrayList<GroupBoardDto> getgroupBoardList();
+	ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq);
 	
 
 	List<InterBigDto> getInterListAll();
@@ -42,6 +43,7 @@ public interface GroupDao {
 	
 	GroupBoardDto getGroupBoardDetail(int boardSeq);
 	int getGroupBoardTotal(BoardParams boardParams);
+	List<CalendarDto> getGroupSchedule(GroupDto groupDto);
 
 
 }

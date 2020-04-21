@@ -4,14 +4,15 @@
     <div class="inner_cont">
       <div class="top_product">
         <strong class="tit_cont">구인공고</strong>
-        <el-button v-if="login1.auth == 3" type="primary" @click="recruitingWrite" style="float: right; background-color:#007bff; margin-top:3px; margin-right:30px">글쓰기</el-button>
+        <!-- v-if="login1.auth == 3" -->
+        <el-button type="primary" @click="recruitingWrite" style="float: right; margin-top:3px; margin-right:30px">글쓰기</el-button>
         <ul class="list_product basic" id="_special" style="margin-top:20px">
           <div v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
             <li v-if="$moment(recruitingInfo.cvStartDate).valueOf() - now < 0" style="margin-right: 30px; margin-bottom: 15px;" >
               <div  class="box_product">
                 <a @click="showEmpDetail(recruitingInfo.boardSeq)" class="link_box"></a> 
                 <span class="product_logo">
-                  <img src="https://www2.saraminbanner.co.kr/banner_logo//company/logo_banner/2018/05/p8pkyk_x5ry-2rxeec_specialplus5767144.png" class="img" alt="이미지없음" rel="nofollow">
+                  <img :src="recruitingInfo.memberDto.companyLogo" class="img" alt="이미지없음" rel="nofollow">
                 </span>
                 <strong class="product_tit">{{recruitingInfo.memberDto.memberName}}</strong> 
                 <em class="product_desc">{{recruitingInfo.title}}</em> 
@@ -194,7 +195,7 @@ export default {
 .cont_special .open .box_product:hover:before,
 .cont_special .basic .open .box_product:hover:before {background:#4876ef}
 .cont_special .open .box_product:hover:after {border:1px solid #4876ef}
-.cont_special .product_logo {margin:19px auto 0;height:31px;font-size:18px;line-height:31px}
+.cont_special .product_logo {margin:19px auto 0;height:55px;font-size:18px;line-height:31px}
 .cont_special .product_tit {margin-top:8px;font-size:13px}
 .cont_special .product_desc {margin-top:1px;font-size:16px;line-height:22px}
 .cont_special .product_desc.open {width:186px}

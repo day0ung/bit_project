@@ -5,11 +5,15 @@
     <div class="boardTableFrom">
       <el-button type="primary" @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
-        <el-input
-          v-model="search"
-          size="large"
-          placeholder="검색 미완성 완성 시켜야함">
-          <el-button slot="append" icon="el-icon-search"></el-button>
+        
+        <el-input v-model="searchWord"
+                  placeholder="전체목록보기버튼"
+                  class="input-with-select">
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
+            <el-option label="작성자" value="writer"></el-option>
+            <el-option label="제목" value="title"></el-option>
+          </el-select>
+          <el-button slot="append" icon="el-icon-search" @click="searchBoard"></el-button>
         </el-input>
       </div>
       <el-table 
@@ -51,7 +55,9 @@
         </el-table-column>
       </el-table> <br>
       <div class="pageination">
-        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
+          
+          @pagination="getList" />
       </div>
     </div>
   </div>
@@ -68,14 +74,16 @@ export default {
     return{
       tableData: [],
       total: 0,
-      listQuery:{
-        page: 1,
-        limit: 10,
-        title: ""
-      },
-      search:"",
-      loading: true,
+        listQuery:{
+          page: 1,
+          limit: 5,
+          searchWord: "",
+          s_keyWord: ""
+        },
+      searchWord:'',
       groupSeq:0,
+      s_keyWord:'',
+      loading: true,
     }
   },
   mounted(){
@@ -84,25 +92,53 @@ export default {
   methods:{
    getList(){
       this.loading = true
-      this.$store.state.currpage = this.$route.path
-      // axios.get("http://localhost:9000/groupBoardList")
-      //           .then(res => {
-        //       this.tableData = res.data
-      //       this.total = res.data.length
-      //     })
-     
-      // listQuery
-      
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
       params.append('groupSeq', this.groupSeq);
+      params.append('keyWord', this.s_keyWord);
+      params.append('searchWord', this.searchWord);
       axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
-         
           this.tableData = res.data
           this.loading = false
         })
+    },
+    searchBoard(){
+      if(this.s_keyWord==''){
+        alert('검색타입을 설정해주세요')
+      }
+      if(this.searchWord==""){
+        alert('검색어를 입력해주세요')
+      }
+      
+      if(this.s_keyWord != '' && this.searchWord!=''){
+        alert(this.s_keyWord +"/" + this.searchWord)
+        this.loading = true
+        var params = new URLSearchParams();	// post 방식으로 받아야함.
+        params.append('page', 1);
+        params.append('limit', this.listQuery.limit);
+        params.append('groupSeq', this.groupSeq);
+        params.append('keyWord', this.s_keyWord);
+        params.append('searchWord', this.searchWord);
+        axios.post("http://localhost:9000/groupPagingList", params)
+                .then(res => {
+            this.tableData = res.data
+            this.getTotal()
+            this.loading = false
+          })
+      }
+    },
+    getTotal(){
+        this.groupSeq = this.$route.params.groupSeq
+            var params = new URLSearchParams()
+            params.append('groupSeq', this.groupSeq);
+            params.append('keyWord', this.s_keyWord);
+            params.append('searchWord', this.searchWord)
+            axios.post("http://localhost:9000/groupBoardTotal", params)
+                  .then(res => {
+                    this.total = res.data
+                  })
     },
      handleFilter() {
       this.listQuery.page = 1
@@ -127,18 +163,8 @@ export default {
    
   },
   created(){
-    //  axios.get("http://localhost:9000/groupBoardList")
-    //             .then(res => {
-    //          this.total = res.data.length
-    //       })
    
-    this.groupSeq = this.$route.params.groupSeq
-    var params = new URLSearchParams()
-    params.append('groupSeq', this.groupSeq);
-    axios.post("http://localhost:9000/groupBoardTotal", params)
-          .then(res => {
-            this.total = res.data
-          })
+    this.getTotal()
     this.getList()
   }
 }
@@ -155,5 +181,8 @@ export default {
 .pageination{
   margin: auto;
   display: table;
+}
+.el-select {
+  width: 100px;
 }
 </style>

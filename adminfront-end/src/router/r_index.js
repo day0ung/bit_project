@@ -8,10 +8,14 @@ import r_Member from '@/router/r_Member/r_Member.js'
 import r_recyclebin from '@/router/r_recyclebin/r_recyclebin.js'
 import r_statisticsNresearch from '@/router/r_statisticsNresearch/r_statisticsNresearch.js'
 import r_DashBoard from '@/router/r_DashBoard/r_DashBoard.js'
+import r_Login from '@/router/r_Login/r_Login.js'
+import r_Logout from '@/router/r_Login/r_Logout.js'
 import r_Home from './r_Home/r_Home'
 
 
 Vue.use(VueRouter)
+
+
 
 const router = new VueRouter({
   mode: 'history',
@@ -24,6 +28,8 @@ const router = new VueRouter({
     ...r_recyclebin,
     ...r_statisticsNresearch,
     ...r_DashBoard,
+    ...r_Login,
+    ...r_Logout,
     ...r_Home,
     { path: '*', component:() => import('@/components/NotFoundComponent.vue') }
 

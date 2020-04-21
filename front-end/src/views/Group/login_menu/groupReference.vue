@@ -50,8 +50,7 @@
           >
         </el-table-column>
       </el-table>
-      <div class="pageination">
-      </div>
+    
     </div>
   </div>
 </template>
@@ -65,40 +64,23 @@ export default {
   data(){
     return{
       tableData: [],
-      total: 0,
-      listQuery:{
-        page: 1,
-        limit: 10,
-        title: ""
-      },
       search:"",
       loading: true,
+      groupSeq:0,
     }
   },
   methods:{
     getList(){
       this.loading = true
-      this.$store.state.currpage = this.$route.path
-      axios.get("http://localhost:9000/groupBoardList")
-                .then(res => {
-              this.tableData = res.data
-            this.total = res.data.length
-            this.loading = false
-          })
-     
-      // listQuery
-      // var params = new URLSearchParams();	// post 방식으로 받아야함.
-      // params.append('page', this.listQuery.page);
-      // params.append('limit', this.listQuery.limit);
-      // axios.post("http://localhost:9000/groupPagingList", params)
-      //         .then(res => {
-      //     this.tableData = res.data
-      //     this.loading = false
-      //   })
-    },
-     handleFilter() {
-      this.listQuery.page = 1
-      this.getList()
+    
+      var params = new URLSearchParams()
+      params.append('groupSeq', this.groupSeq);
+      axios.post("http://localhost:9000/groupPdsList", params)
+                  .then(res => {
+                this.tableData = res.data
+              
+              this.loading = false
+            })
     },
     gotoClick(row, column, event){
       alert("확인")
@@ -118,11 +100,8 @@ export default {
    
   },
   created(){
-      axios.get("http://localhost:9000/groupBoardList")
-                .then(res => {
-            this.total = res.data.length
-          })
-      this.getList()
+    this.groupSeq = this.$route.params.groupSeq
+    this.getList()
   }
 }
 </script>

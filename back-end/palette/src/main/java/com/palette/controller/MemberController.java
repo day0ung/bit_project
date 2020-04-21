@@ -57,10 +57,11 @@ public class MemberController {
     
     @PostMapping(value= "/selectMember")
     public MemberDto selectMember(int memberSeq) {
-    	System.out.println("getOneMember() 실행");
+    	System.out.println("selectMember() 실행");
     	System.out.println("======"+ memberSeq);
     	MemberDto member = memberService.getDetailMember(memberSeq);
     	return member;
+
     }
     
     @PostMapping(value="/intersting")
@@ -77,6 +78,7 @@ public class MemberController {
     public boolean updateInfo(MemberDto dto) {
     	System.out.println("udpateinfo"+ dto.toString());
     	boolean check = memberService.updateInfo(dto);
+    	
     	return check;
     }
     

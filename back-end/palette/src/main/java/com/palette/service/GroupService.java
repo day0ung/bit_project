@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.GroupDao;
 import com.palette.model.BoardParams;
+import com.palette.model.CalendarDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -50,8 +51,8 @@ public class GroupService {
 	public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
 		return groupDao.getgroupPagingList(boardParams);
 	}
-	public ArrayList<GroupBoardDto> getGroupBoardList() {
-		return groupDao.getgroupBoardList();
+	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
+		return groupDao.getgroupPdsList(groupSeq);
 	}
 
 	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {
@@ -75,6 +76,10 @@ public class GroupService {
 	public int getGroupBoardTotal(BoardParams boardParams) {
 		
 		return groupDao.getGroupBoardTotal(boardParams);
+	}
+	public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
+		
+		return groupDao.getGroupSchedule(groupDto);
 	}
 	
 

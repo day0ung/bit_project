@@ -11,7 +11,7 @@
               <div class="wrap_jv_cont">
                 <div class="wrap_jv_header">
                    <div class="jv_header">
-                    <a href="#" class="company" target="_blank">
+                    <a :href="getOneRecruit1.webUrl" class="company" target="_blank">
                       <!-- 회사명 -->
                       {{getOneRecruit1.memberDto.memberName}}
                     </a>
@@ -24,7 +24,7 @@
                     </h1>
                     <div class="btn_apply">
                       <span class="dday">D-{{getOneRecruit1.dDay}}</span>
-                      <a class="sri_btn_lg for_btn_event" title="홈페이지 지원" href="http://ps.korchamhrd.net/" target="_blank" rel="nofollow" onclick="try{Saramin.updateHomepageLink(37953815, &quot;homepage&quot;);} catch(e) {}" onmousedown="try{n_trackEvent('homepage_apply', 'view', '37953815')}catch(e){}">
+                      <a class="sri_btn_lg for_btn_event" title="홈페이지 지원" :href="getOneRecruit1.webUrl" target="_blank" rel="nofollow" onclick="try{Saramin.updateHomepageLink(37953815, &quot;homepage&quot;);} catch(e) {}" onmousedown="try{n_trackEvent('homepage_apply', 'view', '37953815')}catch(e){}">
                         <span class="sri_btn_homepage_apply">홈페이지 지원</span>
                       </a>
                     </div>
@@ -73,8 +73,7 @@
                   <div class="jv_title blind">상세요강</div>
                     <div class="cont">
                       <div class="iframe_content" width="860" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" src="" title="상세요강" height="auto">
-                        <p>안녕하세요</p>
-                        <P>시간 테스트</P>
+                        {{getOneRecruit1.content}}
                       </div>
                     </div>
                   </div>
@@ -100,16 +99,16 @@
                         <dl class="guide">
                           <dt>지원방법</dt>
                           <dd class="method">
-                            <a href="http://ps.korchamhrd.net/" onmousedown="#" class="link" target="_blank">홈페이지 지원</a>                
+                            <a :href="getOneRecruit1.webUrl" onmousedown="#" class="link" target="_blank">홈페이지 지원</a>                
                           </dd>
                         </dl>
                       <p class="noti">마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
                   </div>
                 </div>
-                <el-row v-if="login1.memberSeq === getOneRecruit1.memberSeq">
-                    <el-button @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
-                    <el-button @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
-                </el-row>
+                <div v-if="login1.memberSeq === getOneRecruit1.memberSeq">
+                    <el-button type="primary" round @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
+                    <el-button type="primary" round @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
+                </div>
             </div>
             </section>
           </div> 
@@ -124,6 +123,7 @@ import Vue from "vue"
 import moment from "moment"
 import VueMomentJS from "vue-momentjs"
 import 'element-ui/lib/theme-chalk/index.css';
+import { loading } from 'element-ui';
 
 Vue.use(VueMomentJS, moment)
 
