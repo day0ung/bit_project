@@ -77,6 +77,10 @@ public class GroupService {
 		
 		return groupDao.getGroupBoardTotal(boardParams);
 	}
+	public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
+		
+		return groupDao.getGroupSchedule(groupDto);
+	}
 	
 
 	
