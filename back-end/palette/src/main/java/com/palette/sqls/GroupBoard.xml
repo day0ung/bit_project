@@ -54,7 +54,7 @@ from(select @finalnum:=@finalnum+1 as finalnum, sub.*
 			TITLE like CONCAT('%', #{searchWord}, '%')
 		</if>
 		<if test="keyWord == 'writer'">
-			MEMBER_ID = #{searchWord}
+			fsub.MEMBER_ID = #{searchWord}
 		</if>
 	</where>	
 order by fsub.finalnum desc
@@ -77,16 +77,18 @@ order by fsub.finalnum desc
 
 <select id="getGroupBoardTotal" parameterType="com.palette.model.BoardParams" resultType="java.lang.Integer">
 	select count(*)
-	from BOARD
+	from BOARD b
+	join MEMBER m
+	on b.MEMBER_SEQ = m.MEMBER_SEQ
 	<where>
 		<if test="keyWord == 'title'">
 			TITLE like CONCAT('%', #{searchWord}, '%')
 		</if>
 		<if test="keyWord == 'writer'">
-			MEMBER_ID = #{searchWord}
+			m.MEMBER_ID = #{searchWord}
 		</if>
-	and DEL=0 and BOARD_AUTH=2 and CATEGORY=0 
-		and GROUP_INFO_SEQ= #{groupSeq}
+	and b.DEL=0 and BOARD_AUTH=2 and CATEGORY=0 
+		and b.GROUP_INFO_SEQ= #{groupSeq}
 	</where>	
 </select>
 
