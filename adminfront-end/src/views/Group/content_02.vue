@@ -10,6 +10,9 @@
 </template>
 
 <script>
+import 'element-ui/lib/theme-chalk/display.css';
+const path = "http://localhost:9000";
+
 export default {
     data(){
         return {
