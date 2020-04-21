@@ -52,6 +52,13 @@
 			<version>2.2.1.RELEASE</version>
 			<type>pom</type>
 		</dependency>
+		
+		<!-- email인증에 관함 -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-mail</artifactId>
+			</dependency>
+
 	</dependencies>
 
 	<build>

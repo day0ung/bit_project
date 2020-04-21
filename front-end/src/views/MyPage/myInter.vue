@@ -36,15 +36,8 @@
       <h3 v-for="small in mySmall" :key="small.seq">
         {{small.smallName}}
       </h3>
-           <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">Check all</el-checkbox>
-          <div style="margin: 15px 0;"></div>
-          <el-checkbox-group v-model="checkedCities" @change="handleCheckedCitiesChange">
-            <el-checkbox v-for="city in cities" :label="city.seq" :key="city">{{city.name}}</el-checkbox>
-          </el-checkbox-group> 
+        
 
-         
-            <el-checkbox v-for="bgbg in intBigcheck" :label="bgbg.seq" :key="bgbg">{{bgbg.name}}</el-checkbox>
-          
 
   </div>
 </template>
@@ -52,7 +45,6 @@
 <script>
 export default {
   data(){
-    const cityOptions = [{name:'Shanghai', seq: '1'}, {name:'Beijing', seq:'2'}]
     const intBig = [
               {name:'대학생/취업', bigSeq: '1'},
               {name:'공무원/임용', bigSeq: '2'},
@@ -70,10 +62,7 @@ export default {
           bgSeq: [],
           intBigcheck: intBig,
           smSeq:[],
-          checkedCities: [],
-          checkAll: false,
-          cities: cityOptions,
-          isIndeterminate: true 
+     
       }
     },
      mounted(){
@@ -109,6 +98,7 @@ export default {
             } //bigSeq 할당
         }) 
     },   
+
      methods: {
       editArea(){
         this.addr = true;

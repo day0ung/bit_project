@@ -2,12 +2,14 @@ package com.palette.controller;
 
 import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.palette.model.MemberDto;
 import com.palette.service.MemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -102,4 +104,6 @@ public class MemberController {
     	boolean pass = memberService.updatePass(dto);
     	return pass;
     }
+    
+    
 }
