@@ -40,6 +40,7 @@
 import Vue from "vue"
 import moment from "moment"
 import VueMomentJS from "vue-momentjs"
+import { loading } from 'element-ui';
 
 Vue.use(VueMomentJS, moment)
 
@@ -50,10 +51,11 @@ export default {
       
       login1 : "",
       now : "",
-      
+      loading: true,
     }
   },
   mounted(){
+    this.loading = true
     this.now = moment().valueOf()
 
     this.$store.state.currpage = this.$route.path

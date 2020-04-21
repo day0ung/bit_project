@@ -1,25 +1,27 @@
 <template>
   <div class="employment">
-    
-    <div class="employment_detail circleBehind bounce-top">
-      <br>
-      <br>
-      <router-link to="/employment/recruiting">구인 공고</router-link>
-      <router-link to="/employment/CVpage">이력서</router-link>
-      
-    </div>
-    <br>
-    <div class="text-focus-in">
-      <router-view></router-view>
-    </div>
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="구인 공고" name="first">
+       <recruiting></recruiting>
+      </el-tab-pane>
+      <el-tab-pane label="이력서" name="second">
+       <CV></CV>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
+import recruiting from '@/views/Employment/depth2/Recruiting_list'
+import CV from '@/views/Employment/depth2/CVMain'
 
 export default {
+  components:{
+    recruiting, CV
+  },
   data(){
     return{
+      activeName: 'first',
       list: this.$store.state.s_employment.RecruitingList
     }
   },
@@ -31,7 +33,12 @@ export default {
                   //alert(JSON.stringify(res.data))
                   this.$store.state.s_employment.s_employment = res.data
                 })
-  }
+  },
+  methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
 }
 </script>
 
