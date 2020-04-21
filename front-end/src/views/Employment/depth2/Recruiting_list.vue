@@ -4,8 +4,8 @@
     <div class="inner_cont">
       <div class="top_product">
         <strong class="tit_cont">구인공고</strong>
-        <!-- v-if="login1.auth == 3" -->
-        <el-button type="primary" @click="recruitingWrite" style="float: right; margin-top:3px; margin-right:30px">글쓰기</el-button>
+        
+        <el-button v-if="login1.auth == 3" type="primary" @click="recruitingWrite" style="float: right; margin-top:3px; margin-right:30px">글쓰기</el-button>
         <ul class="list_product basic" id="_special" style="margin-top:20px">
           <div v-for="recruitingInfo in RecruitingList" :key="recruitingInfo.boardSeq">
             <li v-if="$moment(recruitingInfo.cvStartDate).valueOf() - now < 0" style="margin-right: 30px; margin-bottom: 15px;" >
