@@ -9,7 +9,12 @@ export default new Vuex.Store({
     state: {
         RecruitingList: [],
         getOneRecruit : "",
-        recuritContext: ""
+        cvDetail : "",
+        showCVList : false,
+        showCVDetail : false,
+        loadingCVList : false,
+        loadingCVDetail : false,
+
     },
     mutations: {
         

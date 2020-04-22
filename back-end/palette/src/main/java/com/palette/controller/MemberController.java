@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.palette.model.MemberDto;
+import com.palette.model.TodoListDto;
 import com.palette.service.MemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -105,5 +106,26 @@ public class MemberController {
     	return pass;
     }
     
+    @PostMapping(value="/addTodoList")
+    public boolean addTodoList(TodoListDto dto) {
+    	System.out.println("addTodoList"+ dto.getMemberSeq()+ dto.getTitle());
+    	boolean add = memberService.addTodoList(dto);
+    	return add;
+    }
+    
+    @PostMapping(value="/selectTodoList")
+    public List<TodoListDto> selectTodoList(TodoListDto dto) {
+    	System.out.println("selectTodoLsit"+ dto.getMemberSeq());
+    	List<TodoListDto> todo = memberService.selectTodoList(dto);
+    	return todo;
+    }
+    
+    @PostMapping(value="/selectOneList")
+    public TodoListDto selectOneList(TodoListDto dto) {
+    	System.out.println("selectOneList"+ dto.getMemberSeq()+ dto.getTitle());
+    	TodoListDto todo = memberService.selectOneList(dto);
+    	System.out.println("++++++++++++++"+todo.toString());
+    	return todo;
+    }
     
 }

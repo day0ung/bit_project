@@ -36,10 +36,20 @@ public class Admin_GroupController {
     	return list;
 	}
 
+
+	
+	// Create group : GROUP_INFO.PERMISSION = 0 -> 1
+	// remove group : GROUP_INFO.PERMISSION = 1 -> 0
+	// groupInfoSeq, memberSeq, permission values ​​are required.
+	// GROUP_INFO_SEQ=#{groupInfoSeq}
+	// MEMBER_SEQ=#{memberSeq}
 	@PostMapping(value = "/AdminAcceptCreateGroup")
     public boolean groupPermissionChange(GroupDto dto) {
+		
 		System.out.println("getAllGroup 메소드 실행");
-		//acceptCreateGroup
+		System.out.println("dto1111출력");
+		System.out.println(dto);
+
     	boolean isS = adminGroupService.acceptCreateGroup(dto);
     	System.out.println("성공여부 체크 : " + isS );
     	return isS;

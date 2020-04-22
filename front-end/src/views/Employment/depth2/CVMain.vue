@@ -15,19 +15,25 @@
       <h3>이력서 열람</h3>
         <div class="boardSearchBar">
           <el-input
-            v-model="search"
+            v-model="searchWord"
             size="large"
-            placeholder="미완성">
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            placeholder="전체목록보기버튼">
+            <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
+            <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
+            <el-option label="작성자" value="writer"></el-option>
+            <el-option label="제목" value="title"></el-option>
+          </el-select>
+          <el-button slot="append" icon="el-icon-search" @click="searchBoard"></el-button>
           </el-input>
         </div>
         <el-table 
-          v-loading="loading"
+          v-loading="this.$store.state.s_employment.loadingCVDetail"
           :row-class-name="clickableRows"
           :data="tableData"
           stripe
           style="width: 100% cursor:pointer"
           @row-click="gotoClick"
+
         >
           <el-table-column
             prop="finalnum"
@@ -37,13 +43,13 @@
           <el-table-column
             prop="title"
             label="글제목"
-            width="470px"
+            width="400px"
             >
           </el-table-column>
           <el-table-column
             prop="memberDto.memberName"
             label="작성자"
-            width="100px"
+            width="150px"
             >
           </el-table-column>
           <el-table-column
@@ -65,17 +71,13 @@
       </div>
     </div>
   </div>
-
-    
-  
-  
-
 </template>
 
 <script>
 import { loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Pagination from '@/components/Pagination'
+
 export default {
   components: { Pagination },
   data(){
@@ -85,11 +87,15 @@ export default {
       listQuery:{
         page: 1,
         limit: 10,
-        title: ""
+        title: "",
+        searchWord: "",
+        s_keyWord: ""
       },
-      login1 : "",
-      search:"",
+      searchWord:'',
+      
+      s_keyWord:'',
       loading: true,
+      login1 : "",
     }
   },
   methods:{
@@ -103,46 +109,103 @@ export default {
         name: "CvWriting"
         })
     },
+    allList(){
+     this.s_keyWord=''
+     this.searchWord=''
+
+     this.loading = true
+     var params = new URLSearchParams();
+     params.append('page', 1);
+     params.append('limit', this.listQuery.limit);
+     params.append('keyWord', this.s_keyWord);
+     params.append('searchWord', this.searchWord);
+     axios.post("http://localhost:9000/CVPagingList", params)
+              .then(res => {
+          this.tableData = res.data
+          this.getTotal()
+          this.loading = false
+        })
+    },
+    
     getList(){
       this.loading = true
-      this.$store.state.currpage = this.$route.path
-      // axios.get("http://localhost:9000/groupBoardList")
-      //           .then(res => {
-        //       this.tableData = res.data
-      //       this.total = res.data.length
-      //     })
-     
       // listQuery
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
+      
+      params.append('keyWord', this.s_keyWord);
+      params.append('searchWord', this.searchWord);
       axios.post("http://localhost:9000/CVPagingList", params)
               .then(res => {
           this.tableData = res.data
           this.loading = false
         })
     },
+    searchBoard(){
+      if(this.s_keyWord==''){
+        alert('검색타입을 설정해주세요')
+      }
+      if(this.searchWord==""){
+        alert('검색어를 입력해주세요')
+      }
+      
+      if(this.s_keyWord != '' && this.searchWord!=''){
+        // alert(this.s_keyWord +"/" + this.searchWord)
+        this.loading = true
+        var params = new URLSearchParams();	// post 방식으로 받아야함.
+        params.append('page', 1);
+        params.append('limit', this.listQuery.limit);
+        
+        params.append('keyWord', this.s_keyWord);
+        params.append('searchWord', this.searchWord);
+        axios.post("http://localhost:9000/CVPagingList", params)
+                .then(res => {
+            this.tableData = res.data
+            this.getTotal()
+            this.loading = false
+          })
+      }
+    },
+    getTotal(){
+      var params = new URLSearchParams()
+      params.append('keyWord', this.s_keyWord);
+      params.append('searchWord', this.searchWord)
+      axios.post("http://localhost:9000/CVList", params)
+            .then(res => {
+              this.total = res.data
+            })
+    },
+     handleFilter() {
+      this.listQuery.page = 1
+      this.getList()
+    },
+    gotoClick(row, column, event){
+      this.$emit("showCVDetail")
+      this.$store.state.s_employment.loadingCVDetail = true
+      var params = new URLSearchParams();	// post 방식으로 받아야함. 
+      params.append('cvSeq', row.cvSeq);
+      axios.post("http://localhost:9000/getOneCV", params).then(res => { 
+        this.$store.state.s_employment.cvDetail = res.data
+        this.$store.state.s_employment.loadingCVDetail = false
+        
+        })
+
+    },
+    clickableRows :function (row, rowIndex) {
+      //alert(row.rowIndex)
+      return "clickableRows";
+    },
   },
   mounted(){
-    this.loading = true;
-    this.groupInfoSeq = this.$route.params.contentId
-    var params = new URLSearchParams();	// post 방식으로 받아야함.
-    params.append('groupInfoSeq', this.groupInfoSeq);
-    axios.post("http://localhost:9000/getOneMember", params)
-                .then(res => {
-            this.groupOne = res.data
-            this.loading = false;
-          })
+    
   },
   created(){
 		let sMemberSeq = sessionStorage.getItem("loginUser")
     this.login1 = JSON.parse(sMemberSeq)
     
     //페이징
-    axios.get("http://localhost:9000/CVList")
-                .then(res => {
-            this.total = res.data.length
-          })
+      this.getTotal()
       this.getList()
     
 		// this.memberSeq = this.$store.state.loginUser.memberSeq
@@ -187,11 +250,8 @@ export default {
   margin: auto;
   display: table;
 }
-
-
-
-
-
-
+.el-select {
+  width: 100px;
+}
 
 </style>

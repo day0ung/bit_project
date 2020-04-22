@@ -5,7 +5,8 @@
        <recruiting></recruiting>
       </el-tab-pane>
       <el-tab-pane label="이력서" name="second">
-       <CV></CV>
+       <CVList v-show="cvList" v-on:showCVDetail="showCVDetail"></CVList>
+       <CVDetail v-show="cvDetail" v-on:showCVList="showCVList"></CVDetail>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -13,32 +14,38 @@
 
 <script>
 import recruiting from '@/views/Employment/depth2/Recruiting_list'
-import CV from '@/views/Employment/depth2/CVMain'
+import CVList from '@/views/Employment/depth2/CVMain'
+import CVDetail from '@/views/Employment/depth2/CVDetail'
 
 export default {
   components:{
-    recruiting, CV
+    recruiting, CVList, CVDetail
   },
   data(){
     return{
       activeName: 'first',
-      list: this.$store.state.s_employment.RecruitingList
+      cvList : true,
+      cvDetail : false
     }
   },
 
   mounted(){
-    this.$store.state.currpage = this.$route.path
-    axios.get("http://localhost:9000/getAllRecuritingInfo")
-                      .then(res => {
-                  //alert(JSON.stringify(res.data))
-                  this.$store.state.s_employment.s_employment = res.data
-                })
+    
   },
   methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      }
+    handleClick(tab, event) {
+      console.log(tab, event);
+    },
+    showCVList(){
+      this.cvList = true
+      this.cvDetail = false
+    },
+    showCVDetail(){
+      this.cvList = false
+      this.cvDetail = true
     }
+    
+  }
 }
 </script>
 

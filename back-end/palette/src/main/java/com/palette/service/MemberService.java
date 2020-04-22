@@ -6,6 +6,7 @@ import com.palette.dao.MemberDao;
 import com.palette.model.InterSmallDto;
 import com.palette.model.MemberDto;
 import com.palette.model.MemberInterParam;
+import com.palette.model.TodoListDto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,6 +89,22 @@ public class MemberService {
 		public boolean updatePass(MemberDto dto) {
 			int update = memberDao.updatePass(dto);
 			return update >0 ? true: false;
+		}
+		
+		//todoList add 
+		public boolean addTodoList(TodoListDto dto) {
+			int add = memberDao.addTodoList(dto);
+			return add > 0?  true: false;
+		}
+		
+		public List<TodoListDto> selectTodoList(TodoListDto dto) {
+			List<TodoListDto> todo = memberDao.selectTodoList(dto);
+			return todo;
+		}
+		
+		public TodoListDto selectOneList(TodoListDto dto) {
+			TodoListDto todo = memberDao.selectOneList(dto);
+			return todo;
 		}
 		
     

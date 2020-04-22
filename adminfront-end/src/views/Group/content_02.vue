@@ -2,21 +2,19 @@
     <div class="content02_view">
         <h1> {{title}} group 22222222222222222221122222222222222222222222221</h1>
         
-            <el-select v-model="selectedvalue" placeholder="Select" value-key="selectedvalue">
+            <el-select v-model="value" placeholder="Select" value-key="value">
                 <el-option
-                v-for="item in options"
+                v-for="item in selectedvalue"
                 :key="item.value"
                 :label="item.label"
-                :value="item.value">
+                :value="item"
+                >
+                <!-- :value="item.value" -->
                 </el-option>
             </el-select>
-    
-
-
-
-
+        
         <el-table 
-        :data="adminAllStudyGroupList"
+        :data="adminAllStudyGroupList.filter(data=> String(data.permission).includes(value.value))"
         stripe
         style="width:100%"
         >
@@ -32,7 +30,7 @@
             <el-table-column
             prop="del"
             label="del"
-            width="100">
+            width="50">
             </el-table-column>
 
             <el-table-column
@@ -60,23 +58,11 @@
             </el-table-column>
 
             <el-table-column
-            prop="groupMemberDto"
-            label="groupMemberDto"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
             prop="groupName"
             label="groupName"
             width="100">
             </el-table-column>
             
-            <el-table-column
-            prop="groupSchedule"
-            label="groupSchedule"
-            width="100">
-            </el-table-column>
-
             <el-table-column
             prop="image"
             label="image"
@@ -95,38 +81,20 @@
             </el-table-column>
 
             <el-table-column
-            prop="interBigDto"
-            label="interBigDto"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
             prop="interBigSeq"
             label="interBigSeq"
             width="100">
             </el-table-column>
 
             <el-table-column
-            prop="interSmallDto"
-            label="interSmallDto"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
             prop="interSmallSeq"
             label="interSmallSeq"
-            width="100">
+            width="90">
             </el-table-column>
 
             <el-table-column
             prop="maxMember"
             label="maxMember"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="memberDto"
-            label="memberDto"
             width="100">
             </el-table-column>
 
@@ -151,37 +119,30 @@
             <el-table-column
               prop=""
               label="button"
-              width="100" >
+              width="120" >
                 <template slot-scope="scope">
-                    <el-button
-                        size="mini"
-                        @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
-                    <el-button
-                        size="mini"
-                        type="danger"
-                        @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
+                    <div v-loading="loading">
+                        <el-button
+                            v-if="scope.row.permission===0"
+                            size="mini"
+                            @click="changePermission(scope,1)"> 개설허가 </el-button>
+
+                        <el-button
+                            v-if="scope.row.permission===1"
+                            size="mini"
+                            type="danger"
+                            @click="changePermission(scope,0)"> 개설취소 </el-button>
+                     </div>
                 </template>
-
-
-
-
-
-
             </el-table-column>
-
-
-
-      </el-table>
-
-
-
-         <button v-on:click="changePermission"> 1/1 권한 설정 </button>
+        </el-table>
     </div>
 </template>
 
 <script>
 import 'element-ui/lib/theme-chalk/display.css';
 import 'element-ui/lib/theme-chalk/index.css';
+import { loading } from 'element-ui';
 
 
 const path = "http://localhost:9000";
@@ -192,102 +153,144 @@ export default {
             title:'group2',
             adminAllStudyGroupList:[],
 
-
-            selectedvalue:'전체보기',
-            options: [{
-            value: '0',
-            label: '전체보기'
-            }, {
-            value: '1',
-            label: '승인완료'
-            }, {
-            value: '2',
-            label: '비승인'
+            selectedvalue: [{
+                value: '',
+                label: '전체보기'
+                }, {
+                value: '1',
+                label: '승인완료'
+                }, {
+                value: '0',
+                label: '비승인'
             }],
-            value: '0',
-            lable:'전체보기'
+            value: '',
+            loading:false,
 
-
-
+            search:'permission'
         }
-    },
-    watch:{
-        selectedvalue(input){
-            //this.$emit('onchange', input)
-            console.log("들어온값 바뀐값 : " + input)
-            console.log(" 저장된값 : " + this.selectedvalue)
-        }
-
     },
     created(){
-        axios.post("http://localhost:9000/AdmingetAllStudyGroup")
-        .then(res => {
-            console.log("admin all group print ")
-            this.adminAllStudyGroupList = res.data
-            console.log(this.adminAllStudyGroupList)
-            
-            console.log("base selected value : " + this.selectedvalue)
-
-        })
-
-
-
+        this.getGroupAllowList();
+        this.value = this.selectedvalue[0]
     },
     methods:{
-        changePermission(){
-            const confirmflag = confirm("그룹개설신청 허가하시겠습니까");
+
+        getGroupAllowList(){
+            
+            axios.post("http://localhost:9000/AdmingetAllStudyGroup")
+            .then(res => {
+                
+                console.log("admin all group print ")
+                this.$store.state.adminAllStudyGroupListSelector = this.value
+                this.$store.state.adminAllStudyGroupList = res.data
+
+                this.value=this.$store.state.adminAllStudyGroupListSelector
+                this.adminAllStudyGroupList = this.$store.state.adminAllStudyGroupList
+
+                console.log(this.adminAllStudyGroupList)
+                
+                console.log("base selected value : ") 
+                console.log(this.selectedvalue[0].value)
+
+            })
+        },
+        changePermission(scope, permissionStatus){
+
+            const groupInofSeq = scope.row.groupInfoSeq
+            const memberSeq =  scope.row.memberSeq
+            const perStatus = permissionStatus
+            var inputStr=""
+
+            
+            this.loading=true
+
+
+            console.log("투루펄스 여부 " + this.loading)
+        
+            if(permissionStatus=1){
+                inputStr="그룹개설신청 허가하시겠습니까"
+            }else{
+                inputStr="그룹개설을 취소하겠습니까"
+            }
+
+            const confirmflag = confirm(inputStr);
             if(confirmflag){
 
-            var params = new URLSearchParams();	// post 방식으로 받아야함.
-            // params.append('groupInfoSeq', this.listQuery.page);
-            // params.append('memberSeq', this.listQuery.limit);
+                var params = new URLSearchParams();	// post 방식으로 받아야함.
+                params.append('groupInfoSeq', groupInofSeq);
+                params.append('memberSeq', memberSeq);
+                params.append('permission', perStatus );
 
-            //TestCode <<< START >>>
-            params.append('groupInfoSeq', 1);
-            params.append('memberSeq', 1);
-            //TestCode <<< END >>>
-
-            axios.post(path+"/AdminAcceptCreateGroup",params)
-            .then(res=>{
-                console.log(res.data)
-                //$router.path.push('/managemember2')
-            })
-
+                axios.post(path+"/AdminAcceptCreateGroup",params)
+                .then(res=>{
+                    if(res.data = true)console.log(res.data);
+                    this.getGroupAllowList()
+                    this.loading=false;
+                }).catch(error=>{
+                    console.log("오류발생! 오류내용 : "+error)
+                    this.loading=false;
+                })
+                
+     
+                
             }else{
-            alert("그룹개설신청 거부");
+                alert("취소되었습니다.");
+                this.loading=false;
             }
+            
         },
         eventReceiver(row, column, event){
-        console.log(row);
-        console.log(column);
-        console.log(event);
+            console.log(row);
+            console.log(column);
+            console.log(event);
 
-        const row1 = JSON.stringify(row);
-        console.log(row1)
-        
+            const row1 = JSON.stringify(row);
+            console.log(row1)
 
-        // this.$router.push({
-        //   path : "/group/board/detail/" + row.boardSeq
-        // })
+
         },
-        inputcellclick(row, column, cell, event){
-        console.log(row);
-        console.log(column);
-        console.log(event);
-        console.log(event);
-        },
-         handleEdit(index, row) {
-        console.log(index) 
-        console.log(row.memberDto.address);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      }
+        // inputcellclick(row, column, cell, event){
+        // console.log(row);
+        // console.log(column);
+        // console.log(event);
+        // console.log(event);
+        // },
+        //  handleEdit(index, row) {
+        // console.log(index) 
+        // console.log(row.memberDto.address);
+        // },
+        // handleDelete(index, row) {
+        //     console.log(index, row);
+        // },
+        // resdataFunc(adminAllStudyGroupList){
+        //     console.log("resdata method 진입 ")
+        //     console.log(this.adminAllStudyGroupList);
+            
+        // },
+
+        // acceptPermissionStatus(scope){
+        //     // scope.row.groupInfoSeq, scope.row.memberSeq, 1
+        //     console.log(scope.row.groupInfoSeq);
+        //     console.log(scope.row.memberSeq);
+        //     console.log(1);
+        //     changePermission(scope.row.groupInfoSeq, scope.row.memberSeq, 1 )
+
+        // },
+        // canclePermissionStatus(scope){
+        //     // scope.row.groupInfoSeq, scope.row.memberSeq, 0
+        //     console.log(scope.row.groupInfoSeq);
+        //     console.log(scope.row.memberSeq);
+        //     console.log(0);
+        //     changePermission(scope.row.groupInfoSeq, scope.row.memberSeq, 0 )
+
+        // },
 
 
-    }
 
-}
+
+    }//end of methods()
+
+}// end of export default Area
 </script>
 
 <style>

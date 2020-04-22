@@ -45,5 +45,9 @@ export default [{
     name: 'test',
     component: () => import('@/views/Employment/depth2/test')
 },
-
+{
+    path: '/CVDetail/:cvSeq',
+    name: 'CVDetail',
+    component: () => import('@/views/Employment/depth2/CVDetail')
+},
 ]

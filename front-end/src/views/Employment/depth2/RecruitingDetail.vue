@@ -1,6 +1,6 @@
 <template>
     
-  <div id="sri_layout_popup" style="height: 100%" v-loading="loading">
+  <div id="sri_layout_popup" style="height: 100%">
     <section id="sri_section">
       <div id="sri_wrap">
         <div id="content">

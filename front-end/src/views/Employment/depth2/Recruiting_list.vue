@@ -51,14 +51,14 @@ export default {
       
       login1 : "",
       now : "",
-      loading: true,
+      
     }
   },
   mounted(){
-    this.loading = true
+    
     this.now = moment().valueOf()
 
-    this.$store.state.currpage = this.$route.path
+    // this.$store.state.currpage = this.$route.path
     axios.get("http://localhost:9000/getAllRecuritingInfo")
                       .then(res => {
                   // alert(JSON.stringify(res.data))
