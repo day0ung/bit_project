@@ -19,4 +19,6 @@ public interface MemberCVDao {
 	
 	ArrayList<MemberCVDto> CVList();
 	
+	int CVList(BoardParams boardParams);
+	
 }

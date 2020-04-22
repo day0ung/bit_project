@@ -51,11 +51,11 @@ export default {
       
       login1 : "",
       now : "",
-      loading: true,
+      
     }
   },
   mounted(){
-    this.loading = true
+    
     this.now = moment().valueOf()
 
     this.$store.state.currpage = this.$route.path
