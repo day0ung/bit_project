@@ -33,9 +33,7 @@ public class MemberCVService {
 		return list;
 	}
 	
-	public ArrayList<MemberCVDto> CVList() {
-		ArrayList<MemberCVDto> list = memberCVDao.CVList();
-		
-		return list;
+	public int CVList(BoardParams boardParams) {
+		return memberCVDao.CVList(boardParams);
 	}
 }

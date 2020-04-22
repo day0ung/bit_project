@@ -56,9 +56,20 @@
 		limit #{start}, #{limit}
 	</select>
 	
-	<select id="CVList" resultType="com.palette.model.MemberCVDto">
-		select *
-		from MEMBER_CV
+	<select id="CVList" parameterType="com.palette.model.BoardParams" resultType="java.lang.Integer">
+		select count(*)
+		from MEMBER_CV b
+		join MEMBER m
+		on b.MEMBER_SEQ = m.MEMBER_SEQ
+		<where>
+			<if test="keyWord == 'title'">
+				TITLE like CONCAT('%', #{searchWord}, '%')
+			</if>
+			<if test="keyWord == 'writer'">
+				m.MEMBER_NAME = #{searchWord}
+			</if>
+		and b.DEL=0
+		</where>	
 	</select>
 
 

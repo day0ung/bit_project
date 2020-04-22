@@ -43,11 +43,13 @@ public class MemberCVController {
     	return list;
     }
 	
-	@GetMapping(value = "/CVList")
-    public ArrayList<MemberCVDto> CVList() {
+	@PostMapping(value = "/CVList")
+    public String CVList(BoardParams boardParams) {
 		System.out.println("CVLIST() 실행");
-		ArrayList<MemberCVDto> list =	memberCVService.CVList();
-		return list;
+		int total =	memberCVService.CVList(boardParams);
+		String stotal = total + "";
+		System.out.println("total :" + total);
+		return stotal;
 	}
 	
 }
