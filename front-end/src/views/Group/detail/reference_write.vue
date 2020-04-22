@@ -1,8 +1,9 @@
 <template>
   <div class="reference_write">
-      <h1>reference_write.vue</h1>
+        <br>
+        <br>
+        <el-button @click="showGroupReference" round>목록으로</el-button>
         <quillexamplesnow @contentS="textContent" />
-        <el-button type="primary" @click="showGroupReference" round>돌아가기</el-button>
   </div>
 </template>
 

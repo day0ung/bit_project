@@ -11,7 +11,7 @@
         </el-tab-pane>
         <el-tab-pane label="그룹 자료실">
             <GroupReference v-show="groupReference" v-on:showReferenceWrite="showReferenceWrite" v-on:showReferenceDetail="showReferenceDetail"/>
-            <ReferenceDetail v-show="referenceDetail" v-on:showGroupReference="showGroupReference"/>
+            <ReferenceDetail v-show="referenceDetail" v-on:showGroupReference="showGroupReference" />
             <ReferenceWrite v-show="referenceWrite" v-on:showGroupReference="showGroupReference"/>
         </el-tab-pane>
     </el-tabs>
@@ -63,6 +63,11 @@ export default {
             this.boardWrite = true
             this.groupBoard = false
             this.boardDetail = false
+        },
+        setBoard(){
+            this.groupBoard = true
+            this.boardDetail = false
+            this.boardWrite = false
         },
         showReferenceWrite(){
             this.referenceWrite = true

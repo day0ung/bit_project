@@ -1,6 +1,8 @@
 package com.palette.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,6 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
-import com.palette.model.InterSmallDto;
 
 @Service
 @Transactional
@@ -35,8 +36,8 @@ public class GroupService {
 		return groupDao.getMyOtherGroup(groupParams);
 	}
 
-	public GroupDto getOneGroup(int seq) {
-		return groupDao.getOneGroup(seq);
+	public GroupDto getOneGroup(GroupDto insertDto) {
+		return groupDao.getOneGroup(insertDto);
 	}
 
 	public List<GroupMemberDto> getGroupMemberName(int seq){
@@ -81,6 +82,7 @@ public class GroupService {
 		
 		return groupDao.getGroupSchedule(groupDto);
 	}
+	
 	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
 		int a = -1;
 		if(checkday.equals("Sunday")) {
@@ -104,8 +106,30 @@ public class GroupService {
 		if(checkday.equals("Saturday")) {
 			a = groupSchedule.getSaturday();
 		}
-						
+		
+		if(a == 1) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        Calendar c1 = Calendar.getInstance();
+	        String strToday = sdf.format(c1.getTime());
+	        
+	        groupSchedule.setNowDate(strToday);
+			int b = groupDao.checkAttend(groupSchedule);
+		
+			if(b>0) {
+				a = 2;
+			}else {
+				groupDao.insertAttendGroup(groupSchedule);
+			}
+		}
 		return a;
+	}
+	public void groupBoardDelete(int boardSeq) {
+		groupDao.groupBoardDelete(boardSeq);
+	}
+
+	public void insertGroupBoard(GroupBoardDto groupBoardDto) {
+		groupBoardDto.setBoardAuth(2);
+		groupDao.insertGroupBoard(groupBoardDto);
 	}
 	
 
