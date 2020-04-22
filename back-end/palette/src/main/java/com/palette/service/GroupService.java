@@ -143,6 +143,10 @@ public class GroupService {
 	public void updateGroupBoard(GroupBoardDto groupBoardDto) {
 		groupDao.updateGroupBoard(groupBoardDto);
 	}
+
+	public void updateReadCount(int boardSeq) {
+		groupDao.updateReadCount(boardSeq);
+	}
 	
 
 	
