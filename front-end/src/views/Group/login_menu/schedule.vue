@@ -4,7 +4,7 @@
       <br>
       <div class="calendar">
 
-      <full-calendar :events="events" :config="config" @day-click="dayClick"></full-calendar>
+      <full-calendar :events="events" :config="config" @day-click="dayClick" @event-selected="eventSelected"></full-calendar>
 
       </div>
   </div>
@@ -21,13 +21,8 @@ export default {
   data(){
     return{
 
-      memberlist: this.$store.state.s_subStore.data,
-      events: [{
-            title  : 'event1',
-            start  : '2020-04-03',
-            color : '#cecece'
-        }
-      ],
+      //memberlist: this.$store.state.s_subStore.data,
+      events: [],
       config: {
               locale: 'ko',
               defaultView:'month'
@@ -36,41 +31,38 @@ export default {
     }
   },
   methods:{
-    dayClick(args){
-        alert(args)
-   
+    eventSelected(event, jsEvent, view){
+        alert(event.title + "/"+ event.start +" / " + event.content)
     },
-      
+    dayClick(args){
+        if(confirm("일정추가?")){
+          alert(args)
+        }
+    }
   },
-  mounted(){
-      
-          var params = new URLSearchParams()	
-          var groupSeq = 1
+    created(){
+        let params = new URLSearchParams()	
+          let groupSeq = 1
           params.append('groupInfoSeq', groupSeq)
           axios.post("http://localhost:9000/getGroupSchedule", params)
           .then(res => {
-            console.log(res.data.length)
-            
-            res.data.forEach(element => {
-            //alert( JSON.stringify(res.data[0].title) )
-             this.events[0].title = res.data[0].title
-             this.events[0].start = res.data[0].startDate
-             this.events[0].end = res.data[0].endDate 
-            });
-            
-             
-          })
-
-      
-
-  }
+            console.log(JSON.stringify(res.data))
+            let e = (JSON.stringify(res.data))
+            this.$store.state.s_group.groupCalendar = JSON.parse(e)
+            this.events=this.$store.state.s_group.groupCalendar
+          })  
+   }
+  
 }
+
 </script>
 
 <style scoped>
 .calendar{
   width: 80%;
   margin: auto;
+  margin-bottom: 50px;
+  height: auto;
 }
 
 </style>

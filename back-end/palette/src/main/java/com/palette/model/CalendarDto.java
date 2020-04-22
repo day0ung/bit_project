@@ -6,31 +6,31 @@ public class CalendarDto {
 	private int groupInfoSeq;
 	private String title;
 	private String content;
-	private String startDate;
-	private String endDate;
+	private String start;
+	private String end;
 	private int auth;
 	
 	public CalendarDto() {
 		
 	}
 
-	public CalendarDto(int calendarSeq, int memberSeq, int groupInfoSeq, String title, String content, String startDate,
-			String endDate, int auth) {
+	public CalendarDto(int calendarSeq, int memberSeq, int groupInfoSeq, String title, String content, String start,
+			String end, int auth) {
 		super();
 		this.calendarSeq = calendarSeq;
 		this.memberSeq = memberSeq;
 		this.groupInfoSeq = groupInfoSeq;
 		this.title = title;
 		this.content = content;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.start = start;
+		this.end = end;
 		this.auth = auth;
 	}
 
 	@Override
 	public String toString() {
 		return "CalendarDto [calendarSeq=" + calendarSeq + ", memberSeq=" + memberSeq + ", groupInfoSeq=" + groupInfoSeq
-				+ ", title=" + title + ", content=" + content + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", title=" + title + ", content=" + content + ", start=" + start + ", end=" + end
 				+ ", auth=" + auth + "]";
 	}
 
@@ -74,20 +74,20 @@ public class CalendarDto {
 		this.content = content;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getStart() {
+		return start;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setStart(String start) {
+		this.start = start;
 	}
 
-	public String getEndDate() {
-		return endDate;
+	public String getEnd() {
+		return end;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	public int getAuth() {

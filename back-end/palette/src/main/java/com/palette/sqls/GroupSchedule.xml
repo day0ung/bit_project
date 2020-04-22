@@ -3,7 +3,8 @@
 
 <mapper namespace="com.palette.dao.GroupDao">
 	<select id="getGroupSchedule" parameterType="com.palette.model.GroupDto" resultType="com.palette.model.CalendarDto">
-		select * from FINAL.CALENDAR
+		select * 
+		from FINAL.CALENDAR
 		where GROUP_INFO_SEQ = #{groupInfoSeq} and AUTH=1;
 	</select>
 </mapper>
