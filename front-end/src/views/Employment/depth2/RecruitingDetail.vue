@@ -1,5 +1,6 @@
 <template>
-  <div id="sri_layout_popup" style="height: 100%">
+    
+  <div id="sri_layout_popup" style="height: 100%" v-loading="loading">
     <section id="sri_section">
       <div id="sri_wrap">
         <div id="content">
@@ -147,7 +148,7 @@ export default {
   mounted(){
      
     // 구인공고 리스트에서 공고를 클릭시 게시판seq를 파라미터로 가지고 와서 DTO를 불러와서 getOneRecruit에 담는다.
-    this.loading = true
+    
     this.empBoardSeq = this.$route.params.boardId
       var params = new URLSearchParams()
       params.append("empBoardSeq", this.empBoardSeq)
@@ -158,7 +159,7 @@ export default {
             this.getOneRecruit1 = this.$store.state.s_employment.getOneRecruit
             this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm')
             this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm')
-
+            
       })
 
   },
