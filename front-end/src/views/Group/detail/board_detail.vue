@@ -48,7 +48,7 @@ export default {
           this.$emit("showBoard")
         },
         boardOneUpdate(){
-          alert("update 미완성")
+          this.$emit("showUpdate")
         },
         boardOneDelete(){
           var params = new URLSearchParams();	// post 방식으로 받아야함.
