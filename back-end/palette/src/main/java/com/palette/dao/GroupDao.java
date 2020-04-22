@@ -24,7 +24,7 @@ public interface GroupDao {
 	ArrayList<GroupDto> getMyGroup(GroupParams groupParams);
 	ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams);
 
-	GroupDto getOneGroup(int seq);
+	GroupDto getOneGroup(GroupDto insertDto);
 	
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
@@ -43,7 +43,11 @@ public interface GroupDao {
 	
 	GroupBoardDto getGroupBoardDetail(int boardSeq);
 	int getGroupBoardTotal(BoardParams boardParams);
+	
 	List<CalendarDto> getGroupSchedule(GroupDto groupDto);
+	
+	void insertAttendGroup(GroupSchedule groupSchedule);
+	int checkAttend(GroupSchedule groupSchedule);
 	
 	void groupBoardDelete(int boardSeq);
 	void insertGroupBoard(GroupBoardDto groupBoardDto);
