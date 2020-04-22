@@ -70,7 +70,7 @@
  </select>
  
  <select id="getSeq" resultType="java.lang.Integer">
- select max(MEMBER_SEQ) 
+ 	select max(MEMBER_SEQ) 
 	from MEMBER
  </select>
  
@@ -102,6 +102,24 @@
  <update id="updatePass">
  	update MEMBER SET PWD=#{pwd} where MEMBER_SEQ=#{memberSeq}
  </update>
+ 
+ <insert id="addTodoList" parameterType="com.palette.model.TodoListDto">
+ 	INSERT INTO TODOLIST(MEMBER_SEQ, TITLE, TODO_DATE, DEL)
+	values(#{memberSeq}, #{title}, NOW(), 0);
+ </insert>
+ 
+ <select id="selectTodoList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
+ 	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
+ 	FROM TODOLIST 
+ 	WHERE MEMBER_SEQ=#{memberSeq}
+ </select>
+ 
+ <select id="selectOneList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
+    SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
+ 	FROM TODOLIST 
+ 	WHERE TODO_SEQ=(select max(TODO_SEQ) from TODOLIST where MEMBER_SEQ=#{memberSeq} )
+ </select>
+ 
 	 <resultMap type="com.palette.model.InterBigDto" id="InterBig">
 		<id column="INTER_BIG_SEQ" property="interBigSeq"/>
 		<result column="BIG_NAME" property="bigName"/>
