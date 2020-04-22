@@ -12,6 +12,8 @@ export default {
         showGroupInfo: false,
         showBoardList: false,
         showBoardDetail: false,
+        showDeleteBtn: false,
+        showUpdateBtn: false,
         showReferenceDetail: false,
         total: 0,
         listQuery:{
@@ -29,6 +31,7 @@ export default {
         }
     },
     mutations: {
+        
     },
     actions: {
     }

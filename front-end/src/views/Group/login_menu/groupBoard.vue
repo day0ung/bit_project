@@ -55,7 +55,7 @@
         </el-table-column>
       </el-table> <br>
       <div class="pageination">
-        <pagination v-show="this.$store.state.s_group.total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
+        <pagination v-show="total>0" :total="this.$store.state.s_group.total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
           @pagination="getList" />
       </div>
     </div>
@@ -64,14 +64,14 @@
 
 <script scoped>
 import 'element-ui/lib/theme-chalk/index.css';
-import Pagination from '@/components/Pagination'
+import Pagination from '@/components/Pagination';
 import { loading } from 'element-ui';
 
 export default {
   components: { Pagination },
   data(){
     return{
-      total: this.$store.state.s_group.total,
+      total: 0,
         listQuery:{
           page: 1,
           limit: 5,
@@ -80,9 +80,6 @@ export default {
       s_keyWord:'',
       groupSeq:0,
     }
-  },
-  mounted(){
-    
   },
   methods:{
    allList(){
@@ -151,6 +148,7 @@ export default {
             axios.post("http://localhost:9000/groupBoardTotal", params)
                   .then(res => {
                     this.$store.state.s_group.total = res.data
+                    this.total = this.$store.state.s_group.total
                   })
     },
      handleFilter() {
@@ -164,7 +162,14 @@ export default {
       params.append('boardSeq', row.boardSeq); 
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => { 
         this.$store.state.s_group.groupBoardDetail = res.data
-        this.$store.state.s_group.showBoardDetail = false
+        if (String(res.data.memberSeq) === String(this.$store.state.loginUser.memberSeq)){
+          this.$store.state.s_group.showDeleteBtn = true
+          this.$store.state.s_group.showUpdateBtn = true
+        } else{
+          this.$store.state.s_group.showDeleteBtn = false
+          this.$store.state.s_group.showUpdateBtn = false
+        }
+          this.$store.state.s_group.showBoardDetail = false
         })
     },
     clickableRows :function (row, rowIndex) {

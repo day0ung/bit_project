@@ -103,12 +103,13 @@ public class GroupController {
     @PostMapping(value="/groupBoardDetail")
     public GroupBoardDto getGroupBoardDetail(int boardSeq) {
         System.out.println("getGroupBoardDetail" + boardSeq);
+        groupService.updateReadCount(boardSeq);
         return groupService.getGroupBoardDetail(boardSeq);
     }
 
     @PostMapping(value = "/groupBoardDelete")
     public String groupBoardDelete(int boardSeq){
-        System.out.println("groupBoardDelete()" + boardSeq);
+        System.out.println("groupBoardDelete()");
         groupService.groupBoardDelete(boardSeq);
         return "";
     }
@@ -117,6 +118,13 @@ public class GroupController {
     public String insertGroupBoard(GroupBoardDto groupBoardDto){
         System.out.println("insertGroupBoard()");
         groupService.insertGroupBoard(groupBoardDto);
+        return "";
+    }
+
+    @GetMapping(value = "/updateGroupBoard")
+    public String updateGroupBoard(GroupBoardDto groupBoardDto){
+        System.out.println("updateGroupBoard()" + groupBoardDto.toString());
+        groupService.updateGroupBoard(groupBoardDto);
         return "";
     }
     

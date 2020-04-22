@@ -25,8 +25,8 @@
       <div class="hr"></div>
       <div class="groupName">
         <el-button type="primary" @click="showList" round>돌아가기</el-button>
-        <el-button type="primary" @click="boardOneUpdate" round>수정하기</el-button>
-        <el-button type="primary" @click="boardOneDelete" round>삭제하기</el-button>
+        <el-button type="primary" v-show="this.$store.state.s_group.showUpdateBtn" @click="boardOneUpdate" round>수정하기</el-button>
+        <el-button type="primary" v-show="this.$store.state.s_group.showDeleteBtn" @click="boardOneDelete" round>삭제하기</el-button>
       </div>
     </div>
     <br>
@@ -45,10 +45,11 @@ export default {
     },
     methods:{
         showList(){
+          this.allList()
           this.$emit("showBoard")
         },
         boardOneUpdate(){
-          alert("update 미완성")
+          this.$emit("showUpdate")
         },
         boardOneDelete(){
           var params = new URLSearchParams();	// post 방식으로 받아야함.
@@ -56,7 +57,6 @@ export default {
           axios.post("http://localhost:9000/groupBoardDelete", params)
                   .then(res => {
                     alert("게시글이 정상적으로 삭제 되었습니다.")
-                    this.allList()
                     this.showList()
           })
         },
