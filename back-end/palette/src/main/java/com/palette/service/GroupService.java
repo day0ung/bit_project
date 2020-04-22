@@ -113,9 +113,10 @@ public class GroupService {
 	        String strToday = sdf.format(c1.getTime());
 	        
 	        groupSchedule.setNowDate(strToday);
+	        
 			int b = groupDao.checkAttend(groupSchedule);
 		
-			if(b>0) {
+			if(b == 1) {	// 이미 출석처리됨
 				a = 2;
 			}else {
 				groupDao.insertAttendGroup(groupSchedule);
@@ -123,10 +124,13 @@ public class GroupService {
 		}
 		return a;
 	}
+	public int checkAttend(GroupSchedule groupSchedule) {
+		return groupDao.checkAttend(groupSchedule);
+	}
+
 	public void groupBoardDelete(int boardSeq) {
 		groupDao.groupBoardDelete(boardSeq);
 	}
-
 	public void insertGroupBoard(GroupBoardDto groupBoardDto) {
 		groupBoardDto.setBoardAuth(2);
 		groupDao.insertGroupBoard(groupBoardDto);

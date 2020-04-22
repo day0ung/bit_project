@@ -55,7 +55,8 @@
         <div><span>완료일</span> {{ this.$store.state.s_group.grouDetail.endDate }}</div>
 
         <div>
-          <el-button type="primary" @click="attendClass">출석하기</el-button>
+          <el-button v-if="this.check != 1" type="primary" @click="attendClass">출석하기</el-button>
+           <el-button v-else-if="this.check == 1" type="primary" disabled="" @click="attendClass">출석완료</el-button>
         </div>
       </div>
       <div class="hr"></div>
@@ -74,7 +75,7 @@ export default {
             groupInfoSeq: "",
             loginSeq:0,
             loading: true,
-            
+            check:0,
             
         }
     },methods:{
@@ -83,13 +84,26 @@ export default {
             this.groupInfoSeq = this.$route.params.groupSeq
             var params = new URLSearchParams();	// post 방식으로 받아야함.
             params.append('groupInfoSeq', this.groupInfoSeq);
-            params.append('memberSeq', this.loginSeq)
+            
             axios.post("http://localhost:9000/getOneGroup", params)
                         .then(res => {
                     this.$store.state.s_group.grouDetail = res.data;
-                    this.loading = false;
                 })
+            this.attendStatus()
+            this.loading = false;
 
+        },
+        attendStatus(){
+          this.loginSeq = this.$store.state.loginUser.memberSeq
+          alert("loginSeq : "+this.loginSeq)
+          var params = new URLSearchParams();	
+          params.append('memberSeq', this.loginSeq)
+          params.append('groupInfoSeq', this.groupInfoSeq)
+          axios.post("http://localhost:9000/getAttendStatus", params)
+                      .then(res => {
+                  this.check = res.data;
+                  alert("data:" +  res.data) 
+              })
         },
         attendClass(){
           let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -130,8 +144,9 @@ export default {
 
     },
     created(){
-        this.getGroupOne();
-        this.loginSeq= JSON.parse(sessionStorage.getItem("loginUser")).memberSeq
+      this.loginSeq = this.$store.state.loginUser.memberSeq
+      this.getGroupOne();
+        
     }
 
 }

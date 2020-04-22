@@ -154,5 +154,15 @@ public class GroupController {
     	    	
     	return s_result;
     }
-	
+	@PostMapping(value="/getAttendStatus")
+	public String checkAttend(GroupSchedule groupSchedule) {
+		System.out.println("getAttendStatus()");
+		
+		int result = groupService.checkAttend(groupSchedule);
+		
+		String s_result = result+"";
+		
+		return s_result;
+		
+	}
 }
