@@ -11,7 +11,9 @@ export default new Vuex.Store({
     depth1:"",
     depth2:"",
     depth3:"",
-    totalDepth: ""
+    totalDepth: "",
+    adminAllStudyGroupList:[],//group/content2.vue
+    adminAllStudyGroupListSelector:""//group/content2.vue
   },
   getters:{
     pageName(state){
