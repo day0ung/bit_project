@@ -43,6 +43,7 @@ public class MemberCVController {
     	return list;
     }
 	
+//	cv 리스트 갯수
 	@PostMapping(value = "/CVList")
     public String CVList(BoardParams boardParams) {
 		System.out.println("CVLIST() 실행");
@@ -51,5 +52,20 @@ public class MemberCVController {
 		System.out.println("total :" + total);
 		return stotal;
 	}
+	
+//	cv 디테일
+	@PostMapping(value = "/getOneCV")
+    public MemberCVDto getOneCV(int cvSeq) {
+		System.out.println("getOneCV() 실행");
+		System.out.println("cvSeq:"+ cvSeq);
+		// 조회수 증가
+		memberCVService.readCount(cvSeq);
+		// cv 객체
+		MemberCVDto dto = memberCVService.getOneCV(cvSeq);
+		System.out.println("dto: "+ dto.toString());
+		
+		return dto;
+	}
+	
 	
 }
