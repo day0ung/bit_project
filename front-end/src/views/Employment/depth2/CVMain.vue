@@ -27,12 +27,13 @@
           </el-input>
         </div>
         <el-table 
-          v-loading="loading"
+          v-loading="this.$store.state.s_employment.loadingCVDetail"
           :row-class-name="clickableRows"
           :data="tableData"
           stripe
           style="width: 100% cursor:pointer"
           @row-click="gotoClick"
+
         >
           <el-table-column
             prop="finalnum"
@@ -42,13 +43,13 @@
           <el-table-column
             prop="title"
             label="글제목"
-            width="470px"
+            width="400px"
             >
           </el-table-column>
           <el-table-column
             prop="memberDto.memberName"
             label="작성자"
-            width="100px"
+            width="150px"
             >
           </el-table-column>
           <el-table-column
@@ -128,8 +129,6 @@ export default {
     
     getList(){
       this.loading = true
-      
-     
       // listQuery
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
@@ -152,7 +151,7 @@ export default {
       }
       
       if(this.s_keyWord != '' && this.searchWord!=''){
-        alert(this.s_keyWord +"/" + this.searchWord)
+        // alert(this.s_keyWord +"/" + this.searchWord)
         this.loading = true
         var params = new URLSearchParams();	// post 방식으로 받아야함.
         params.append('page', 1);
@@ -169,29 +168,29 @@ export default {
       }
     },
     getTotal(){
-        
-            var params = new URLSearchParams()
-            
-            params.append('keyWord', this.s_keyWord);
-            params.append('searchWord', this.searchWord)
-            axios.post("http://localhost:9000/CVList", params)
-                  .then(res => {
-                    this.total = res.data
-                  })
+      var params = new URLSearchParams()
+      params.append('keyWord', this.s_keyWord);
+      params.append('searchWord', this.searchWord)
+      axios.post("http://localhost:9000/CVList", params)
+            .then(res => {
+              this.total = res.data
+            })
     },
      handleFilter() {
       this.listQuery.page = 1
       this.getList()
     },
     gotoClick(row, column, event){
-      // this.$emit("showDetail")
-      
-      // var params = new URLSearchParams();	// post 방식으로 받아야함. 
-      // params.append('boardSeq', row.boardSeq); 
-      // axios.post("http://localhost:9000/CVPagingList", params).then(res => { 
-      //   this.$store.state.s_group.groupBoardDetail = res.data
-      //   this.$store.state.s_group.showBoardDetail = false
-      //   })
+      this.$emit("showCVDetail")
+      this.$store.state.s_employment.loadingCVDetail = true
+      var params = new URLSearchParams();	// post 방식으로 받아야함. 
+      params.append('cvSeq', row.cvSeq);
+      axios.post("http://localhost:9000/getOneCV", params).then(res => { 
+        this.$store.state.s_employment.cvDetail = res.data
+        this.$store.state.s_employment.loadingCVDetail = false
+        
+        })
+
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
@@ -254,11 +253,5 @@ export default {
 .el-select {
   width: 100px;
 }
-
-
-
-
-
-
 
 </style>

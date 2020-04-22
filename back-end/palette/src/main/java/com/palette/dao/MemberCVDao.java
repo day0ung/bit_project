@@ -21,4 +21,8 @@ public interface MemberCVDao {
 	
 	int CVList(BoardParams boardParams);
 	
+	MemberCVDto getOneCV(int cvSeq);
+	
+	void readCount(int cvSeq);
+	
 }

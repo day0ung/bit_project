@@ -11,6 +11,7 @@ import com.palette.model.BoardParams;
 import com.palette.model.MemberCVDto;
 
 
+
 @Service
 @Transactional
 public class MemberCVService {
@@ -35,5 +36,13 @@ public class MemberCVService {
 	
 	public int CVList(BoardParams boardParams) {
 		return memberCVDao.CVList(boardParams);
+	}
+	
+	public MemberCVDto getOneCV(int cvSeq) {
+		return memberCVDao.getOneCV(cvSeq);
+	}
+	
+	public void readCount(int cvSeq) {
+		memberCVDao.readCount(cvSeq);
 	}
 }
