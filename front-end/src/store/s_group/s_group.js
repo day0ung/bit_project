@@ -8,6 +8,7 @@ export default {
         groupBoardDetail: [],
         groupReferenceDetail: [],
         grouDetail: [],
+        showGroupInfo: false,
         showBoardList: false,
         showBoardDetail: false,
         showReferenceDetail: false,
@@ -18,6 +19,8 @@ export default {
         },
         searchWord:'',
         s_keyWord:'',
+        check1:false,
+        check2:false,
     },
     getters: {
         getDetailSeq(){

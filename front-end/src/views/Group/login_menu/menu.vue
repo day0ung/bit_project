@@ -39,8 +39,6 @@ export default {
         GroupReference, ReferenceDetail, ReferenceWrite },
     data() {
         return {
-            loading: true,
-
             groupBoard: true,
             boardDetail: false,
             boardWrite: false,
