@@ -1,8 +1,9 @@
 <template>
   <div>
       <h1>리스트 추가하는 곳</h1>
-      <el-input placeholder="TODO LIST를 작성해주세요. 예)매일 독서, #공부" v-model="list"></el-input>
-      <el-button type="success" plain @click="listAdd">할일 추가</el-button>
+      <el-input placeholder="TODO LIST를 작성해주세요. 예)매일 독서, #공부" v-model="list" @input="show"></el-input>
+      <el-button type="success" plain @click="listAdd" v-model="add" v-if="add">할일 추가</el-button>
+      <el-button type="success" plain @click="listAdd" v-model="add" disabled v-else>할일 추가</el-button>
       <el-button plain @click="cancle">취소</el-button>
   </div>
 </template>
@@ -11,19 +12,37 @@
 export default {
     data(){
         return{
-            list: null
+            list: '',
+            add: false
         }
     },
     methods:{
+        show(){
+            if(this.list == ''){
+                this.add = false
+            }else{
+                this.add = true
+            }
+        },
         cancle(){
             this.$emit("cancle")
         },
         listAdd(){
-            if(this.list == null){
-                alert('할일을 작성해주세요')
+            if(this.list == ''){
+                this.add =false
             }else{
-                this.$emit("listAdd", this.list)
-                this.list = null
+                var loginData = sessionStorage.getItem("loginUser");
+                var login = JSON.parse(loginData); 
+                var memSeq = login.memberSeq
+
+                var params = new URLSearchParams();
+                params.append('memberSeq', memSeq)
+                params.append('title', this.list)
+                axios.post('http://localhost:9000/addTodoList', params)
+                .then(res => {
+                    this.$emit("listAdd", this.list)
+                    this.list = ''
+                }) 
             }
         },
 
