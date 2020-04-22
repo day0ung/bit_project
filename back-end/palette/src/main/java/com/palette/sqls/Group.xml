@@ -148,7 +148,7 @@
 	</if>
 </select>
 
- <select id="getOneGroup" parameterType="java.lang.Integer" resultMap="GroupInfo">
+ <select id="getOneGroup" parameterType="com.palette.model.GroupDto" resultMap="GroupInfo">
     select *
 	from GROUP_INFO g
 	join MEMBER m
@@ -163,7 +163,17 @@
 			from GROUP_MEMBER
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where g.GROUP_INFO_SEQ = #{seq};
+	where g.GROUP_INFO_SEQ = #{groupInfoSeq};
+</select>
+
+<insert id="insertAttendGroup" parameterType="com.palette.model.GroupSchedule">
+	insert into GROUP_ATTEND(GROUP_INFO_SEQ, MEMBER_SEQ, ATTEND_SYSDATE)
+	values(#{groupInfoSeq}, #{memberSeq}, NOW())
+</insert>
+<select id="checkAttend" parameterType="com.palette.model.GroupSchedule" resultType="java.lang.Integer">
+	select count(*)
+	from GROUP_ATTEND
+	where GROUP_INFO_SEQ=#{groupInfoSeq} and MEMBER_SEQ=#{memberSeq} and ATTEND_SYSDATE = #{nowDate}
 </select>
  
 <!-- <select id="getGroupMemberName" parameterType="java.lang.Integer" resultMap="GroupMember">

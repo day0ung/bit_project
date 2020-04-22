@@ -72,7 +72,9 @@ export default {
     date(){
         return{
             groupInfoSeq: "",
+            loginSeq:0,
             loading: true,
+            
             
         }
     },methods:{
@@ -81,6 +83,7 @@ export default {
             this.groupInfoSeq = this.$route.params.groupSeq
             var params = new URLSearchParams();	// post 방식으로 받아야함.
             params.append('groupInfoSeq', this.groupInfoSeq);
+            params.append('memberSeq', this.loginSeq)
             axios.post("http://localhost:9000/getOneGroup", params)
                         .then(res => {
                     this.$store.state.s_group.grouDetail = res.data;
@@ -90,31 +93,35 @@ export default {
         },
         attendClass(){
           let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-          let today = new Date();
+          let today = new Date()
           let checkday = weekday[today.getDay()]
-          alert("출첵 "+weekday[today.getDay()])
-
-
+          //alert("출첵 "+weekday[today.getDay()])
           let groupSchedule = this.$store.state.s_group.grouDetail.groupSchedule
-          alert(JSON.stringify(groupSchedule))
-          var params = new URLSearchParams();
-          params.append('checkday', checkday);
+         
+          //alert(JSON.stringify(groupSchedule) +"/ "+loginSeq)
+          var params = new URLSearchParams()
+          params.append('checkday', checkday)
           params.append('groupScheduleSeq', this.$store.state.s_group.grouDetail.groupSchedule.groupScheduleSeq)
           params.append('groupInfoSeq', this.$store.state.s_group.grouDetail.groupSchedule.groupInfoSeq)
-          params.append('sunday', this.$store.state.s_group.grouDetail.groupSchedule.sunday);
-          params.append('monday', this.$store.state.s_group.grouDetail.groupSchedule.monday);
-          params.append('tuesday', this.$store.state.s_group.grouDetail.groupSchedule.tuesday);
-          params.append('wednesday', this.$store.state.s_group.grouDetail.groupSchedule.wednesday);
-          params.append('thursday', this.$store.state.s_group.grouDetail.groupSchedule.thursday);
-          params.append('friday', this.$store.state.s_group.grouDetail.groupSchedule.friday);
-          params.append('saturday', this.$store.state.s_group.grouDetail.groupSchedule.saturday);
-          params.append('groupSchedule', groupSchedule);
+          params.append('sunday', this.$store.state.s_group.grouDetail.groupSchedule.sunday)
+          params.append('monday', this.$store.state.s_group.grouDetail.groupSchedule.monday)
+          params.append('tuesday', this.$store.state.s_group.grouDetail.groupSchedule.tuesday)
+          params.append('wednesday', this.$store.state.s_group.grouDetail.groupSchedule.wednesday)
+          params.append('thursday', this.$store.state.s_group.grouDetail.groupSchedule.thursday)
+          params.append('friday', this.$store.state.s_group.grouDetail.groupSchedule.friday)
+          params.append('saturday', this.$store.state.s_group.grouDetail.groupSchedule.saturday)
+          params.append('memberSeq', this.loginSeq)
+
           axios.post("http://localhost:9000/attendGroup", params)
                         .then(res => {
                     if(res.data === 0){
                       alert('노출첵')
+                    }else if(res.data === 2){
+                      alert('이미 출석처리 됐습니다')
+                      
                     }else{
                       alert('출첵!!!!')
+                      
                     }
                     
                 })
@@ -124,7 +131,7 @@ export default {
     },
     created(){
         this.getGroupOne();
-
+        this.loginSeq= JSON.parse(sessionStorage.getItem("loginUser")).memberSeq
     }
 
 }

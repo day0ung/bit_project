@@ -11,12 +11,15 @@ public class GroupSchedule {
 	private int friday;
 	private int saturday;
 	
+	private int memberSeq;
+	private String nowDate;
+	
 	public GroupSchedule() {
 		
 	}
 
 	public GroupSchedule(int groupScheduleSeq, int groupInfoSeq, int sunday, int monday, int tuesday, int wednesday,
-			int thursday, int friday, int saturday) {
+			int thursday, int friday, int saturday, int memberSeq, String nowDate) {
 		super();
 		this.groupScheduleSeq = groupScheduleSeq;
 		this.groupInfoSeq = groupInfoSeq;
@@ -27,13 +30,33 @@ public class GroupSchedule {
 		this.thursday = thursday;
 		this.friday = friday;
 		this.saturday = saturday;
+		this.memberSeq = memberSeq;
+		this.nowDate = nowDate;
 	}
 
 	@Override
 	public String toString() {
 		return "GroupSchedule [groupScheduleSeq=" + groupScheduleSeq + ", groupInfoSeq=" + groupInfoSeq + ", sunday="
 				+ sunday + ", monday=" + monday + ", tuesday=" + tuesday + ", wednesday=" + wednesday + ", thursday="
-				+ thursday + ", friday=" + friday + ", saturday=" + saturday + "]";
+				+ thursday + ", friday=" + friday + ", saturday=" + saturday + ", memberSeq=" + memberSeq + ", nowDate="
+				+ nowDate + "]";
+	}
+
+	
+	public String getNowDate() {
+		return nowDate;
+	}
+
+	public void setNowDate(String nowDate) {
+		this.nowDate = nowDate;
+	}
+
+	public int getMemberSeq() {
+		return memberSeq;
+	}
+
+	public void setMemberSeq(int memberSeq) {
+		this.memberSeq = memberSeq;
 	}
 
 	public int getGroupScheduleSeq() {

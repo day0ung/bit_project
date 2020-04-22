@@ -63,7 +63,7 @@ public class GroupController {
     @PostMapping(value = "/getOneGroup")
     public GroupDto getOneGroup(GroupDto insertDto){
         System.out.println("getOneGroup()");
-        GroupDto outDto = groupService.getOneGroup(insertDto.getGroupInfoSeq());
+        GroupDto outDto = groupService.getOneGroup(insertDto);
     	return outDto;
     }
     
