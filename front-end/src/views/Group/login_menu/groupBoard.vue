@@ -164,7 +164,14 @@ export default {
       params.append('boardSeq', row.boardSeq); 
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => { 
         this.$store.state.s_group.groupBoardDetail = res.data
-        this.$store.state.s_group.showBoardDetail = false
+        if (String(res.data.memberSeq) === String(this.$store.state.loginUser.memberSeq)){
+          this.$store.state.s_group.showDeleteBtn = true
+          this.$store.state.s_group.showUpdateBtn = true
+        } else{
+          this.$store.state.s_group.showDeleteBtn = false
+          this.$store.state.s_group.showUpdateBtn = false
+        }
+          this.$store.state.s_group.showBoardDetail = false
         })
     },
     clickableRows :function (row, rowIndex) {

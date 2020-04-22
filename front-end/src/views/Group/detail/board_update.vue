@@ -9,8 +9,8 @@
         <br>
         <div class="form" style="width: 90%; margin: auto;">
             <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-                <el-form-item label="제목"  prop="title">
-                    <el-input v-model="currentTitle"></el-input>
+                <el-form-item label="제목" prop="title">
+                    <el-input v-model="ruleForm.title"></el-input>
                 </el-form-item>
                 <el-form-item label="내용" style="margin-bottom: 10px;"/>
                 <quillexamplesnow @contentS="textContent" />
@@ -56,8 +56,7 @@ export default {
             this.$emit("showBoard")
         },
         showOne(){
-            alert("글로이동")
-            alert(JSON.stringify(this.$store.state.s_group.groupBoardDetail.title))
+            this.$emit("showDetail")
         },
         textContent(value){
             this.content = value
@@ -65,20 +64,19 @@ export default {
         submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
-                alert(this.ruleForm.title)
-                alert(this.$store.state.s_group.groupSeq)
-				// axios.get("http://localhost:9000/insertGroupBoard",{
-				// 	params:{
-                // 		memberSeq: this.$store.state.loginUser.memberSeq,
-                //         groupInfoSeq: this.$store.state.s_group.groupSeq,
-				// 		title: this.ruleForm.title,
-				// 		content: this.content
-				// 	}
-				// }).then(res =>{
-                //     alert("게시글 작성이 완료되었습니다.")
-                //     this.allList()
-                //     this.showList()
-				// })
+				axios.get("http://localhost:9000/updateGroupBoard",{
+					params:{
+                		memberSeq: this.$store.state.loginUser.memberSeq,
+                        groupInfoSeq: this.$store.state.s_group.groupSeq,
+                        boardSeq: this.$store.state.s_group.groupBoardDetail.boardSeq,
+						title: this.ruleForm.title,
+						content: this.content
+					}
+				}).then(res =>{
+                    alert("게시글 수정이 완료되었습니다.")
+                    this.allList()
+                    this.showList()
+				})
 				
 			} else {
 				console.log('error submit!!');
@@ -86,17 +84,44 @@ export default {
 			}
 			});
         },
-    },
-    computed: {
-        currentTitle: {
-            get() {
-                return this.$store.state.s_group.groupBoardDetail.title
-            },
-            set(val) {
-                this.ruleForm.title = val
-            }
+        allList(){
+          this.$store.state.s_group.showBoardList = true
+          this.$store.state.s_group.s_keyWord=''
+          this.$store.state.s_group.searchWord=''
+          var params = new URLSearchParams();
+          params.append('page', 1);
+          params.append('limit', this.$store.state.s_group.listQuery.limit);
+          params.append('groupSeq', this.$store.state.s_group.groupSeq);
+          params.append('keyWord', this.$store.state.s_group.s_keyWord);
+          params.append('searchWord', this.$store.state.s_group.searchWord);
+          axios.post("http://localhost:9000/groupPagingList", params)
+                    .then(res => {
+                this.$store.state.s_group.groupBoardList = res.data
+                this.getTotal()
+                this.$store.state.s_group.showBoardList = false
+              })
+        },
+        getTotal(){
+                var params = new URLSearchParams()
+                params.append('groupSeq', this.$store.state.s_group.groupSeq);
+                params.append('keyWord', this.$store.state.s_group.s_keyWord);
+                params.append('searchWord', this.$store.state.s_group.searchWord);
+                axios.post("http://localhost:9000/groupBoardTotal", params)
+                      .then(res => {
+                        this.$store.state.s_group.total = res.data
+                      })
         }
     },
+    // computed: {
+    //     currentTitle: {
+    //         get() {
+    //             return this.$store.state.s_group.groupBoardDetail.title
+    //         },
+    //         set(val) {
+
+    //         }
+    //     }
+    // },
 
 }
 </script>

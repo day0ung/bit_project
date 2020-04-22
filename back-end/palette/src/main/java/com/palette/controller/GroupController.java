@@ -119,6 +119,13 @@ public class GroupController {
         groupService.insertGroupBoard(groupBoardDto);
         return "";
     }
+
+    @GetMapping(value = "/updateGroupBoard")
+    public String updateGroupBoard(GroupBoardDto groupBoardDto){
+        System.out.println("updateGroupBoard()" + groupBoardDto.toString());
+        groupService.updateGroupBoard(groupBoardDto);
+        return "";
+    }
     
     // Pds
     @PostMapping(value="/groupPdsList")

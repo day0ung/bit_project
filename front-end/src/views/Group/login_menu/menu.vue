@@ -8,11 +8,11 @@
             <GroupBoard v-show="groupBoard" v-on:showDetail="showDetail" v-on:showWrite="showWrite"/>
             <boardDetail v-show="boardDetail" v-on:showBoard="showBoard" v-on:showUpdate="showUpdate"/>
             <boardWrite v-show="boardWrite" v-on:showBoard="showBoard"/>
-            <boardUpdate v-show="boardUpdate" v-on:showBoard="showBoard"/>
+            <boardUpdate v-show="boardUpdate" v-on:showBoard="showBoard" v-on:showDetail="showDetail"/>
         </el-tab-pane>
         <el-tab-pane label="그룹 자료실">
             <GroupReference v-show="groupReference" v-on:showReferenceWrite="showReferenceWrite" v-on:showReferenceDetail="showReferenceDetail"/>
-            <ReferenceDetail v-show="referenceDetail" v-on:showGroupReference="showGroupReference" />
+            <ReferenceDetail v-show="referenceDetail" v-on:showGroupReference="showGroupReference"/>
             <ReferenceWrite v-show="referenceWrite" v-on:showGroupReference="showGroupReference"/>
         </el-tab-pane>
     </el-tabs>

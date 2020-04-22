@@ -148,5 +148,11 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		VALUES( #{groupInfoSeq}, #{memberSeq}, #{category}, #{title}, #{content}, NOW(), 0, #{boardAuth})
 	</insert>
 
+	<update id="updateGroupBoard" parameterType="com.palette.model.GroupBoardDto">
+		UPDATE BOARD
+		SET TITLE = #{title}, CONTENT = #{content}
+		WHERE BOARD_SEQ = #{boardSeq}
+	</update>
+
 
 </mapper>

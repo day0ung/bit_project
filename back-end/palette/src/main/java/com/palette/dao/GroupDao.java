@@ -51,6 +51,7 @@ public interface GroupDao {
 	
 	void groupBoardDelete(int boardSeq);
 	void insertGroupBoard(GroupBoardDto groupBoardDto);
+	void updateGroupBoard(GroupBoardDto groupBoardDto);
 
 
 }
