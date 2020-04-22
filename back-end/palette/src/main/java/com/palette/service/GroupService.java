@@ -123,6 +123,14 @@ public class GroupService {
 		}
 		return a;
 	}
+	public void groupBoardDelete(int boardSeq) {
+		groupDao.groupBoardDelete(boardSeq);
+	}
+
+	public void insertGroupBoard(GroupBoardDto groupBoardDto) {
+		groupBoardDto.setBoardAuth(2);
+		groupDao.insertGroupBoard(groupBoardDto);
+	}
 	
 
 	

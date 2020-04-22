@@ -47,8 +47,8 @@
       </div>
       <div class="hr"></div>
       <div class="groupName">
-        <el-button type="primary" round>그룹 스터디 참여신청</el-button>
-        <el-button type="primary" round>♥</el-button>
+        <el-button type="primary" @click="joinGroup" round>그룹 스터디 참여신청</el-button>
+        <el-button type="primary" @click="likeAdd" round>♥</el-button>
       </div>
     </div>
     <br>
@@ -69,8 +69,13 @@ export default {
     }
   },
   methods:{
+    likeAdd(){
+      alert("like Add 미완성")
+      alert(this.groupOne.groupName + " 그룹을 찜목록에 추가되었습니다.\n마이페이지 찜목록에서 확인해주세요.")
+    },
     joinGroup(){
-      alert("참여신청이 완료되었습니다.\n마이페이지 그룹에서 확인해주세요")
+      alert("join group 미완성")
+      alert("참여신청이 완료되었습니다.\n마이페이지 그룹에서 확인해주세요.")
     }
   },
   mounted(){

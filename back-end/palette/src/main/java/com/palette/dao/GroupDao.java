@@ -48,6 +48,8 @@ public interface GroupDao {
 	
 	void insertAttendGroup(GroupSchedule groupSchedule);
 	int checkAttend(GroupSchedule groupSchedule);
+	void groupBoardDelete(int boardSeq);
+	void insertGroupBoard(GroupBoardDto groupBoardDto);
 
 
 }

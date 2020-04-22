@@ -17,9 +17,9 @@
         </el-input>
       </div>
       <el-table 
-        v-loading="loading"
+        v-loading="this.$store.state.s_group.showBoardList"
         :row-class-name="clickableRows"
-        :data="tableData"
+        :data="this.$store.state.s_group.groupBoardList"
         stripe
         style="width: 100% cursor:pointer"
         @row-click="gotoClick"
@@ -55,8 +55,7 @@
         </el-table-column>
       </el-table> <br>
       <div class="pageination">
-        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
-          
+        <pagination v-show="this.$store.state.s_group.total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
           @pagination="getList" />
       </div>
     </div>
@@ -72,18 +71,14 @@ export default {
   components: { Pagination },
   data(){
     return{
-      tableData: [],
-      total: 0,
+      total: this.$store.state.s_group.total,
         listQuery:{
           page: 1,
           limit: 5,
-          searchWord: "",
-          s_keyWord: ""
         },
       searchWord:'',
-      groupSeq:0,
       s_keyWord:'',
-      loading: true,
+      groupSeq:0,
     }
   },
   mounted(){
@@ -94,7 +89,7 @@ export default {
      this.s_keyWord=''
      this.searchWord=''
 
-     this.loading = true
+     this.$store.state.s_group.showBoardList = true
      var params = new URLSearchParams();
      params.append('page', 1);
      params.append('limit', this.listQuery.limit);
@@ -103,13 +98,13 @@ export default {
      params.append('searchWord', this.searchWord);
      axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
-          this.tableData = res.data
+          this.$store.state.s_group.groupBoardList = res.data
           this.getTotal()
-          this.loading = false
+          this.$store.state.s_group.showBoardList = false
         })
    },
    getList(){
-      this.loading = true
+      this.$store.state.s_group.showBoardList = true
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('page', this.listQuery.page);
       params.append('limit', this.listQuery.limit);
@@ -118,8 +113,8 @@ export default {
       params.append('searchWord', this.searchWord);
       axios.post("http://localhost:9000/groupPagingList", params)
               .then(res => {
-          this.tableData = res.data
-          this.loading = false
+          this.$store.state.s_group.groupBoardList = res.data
+          this.$store.state.s_group.showBoardList = false
         })
     },
     searchBoard(){
@@ -131,8 +126,7 @@ export default {
       }
       
       if(this.s_keyWord != '' && this.searchWord!=''){
-        alert(this.s_keyWord +"/" + this.searchWord)
-        this.loading = true
+        this.$store.state.s_group.showBoardList = true
         var params = new URLSearchParams();	// post 방식으로 받아야함.
         params.append('page', 1);
         params.append('limit', this.listQuery.limit);
@@ -141,21 +135,22 @@ export default {
         params.append('searchWord', this.searchWord);
         axios.post("http://localhost:9000/groupPagingList", params)
                 .then(res => {
-            this.tableData = res.data
+            this.$store.state.s_group.groupBoardList = res.data
             this.getTotal()
-            this.loading = false
+            this.$store.state.s_group.showBoardList = false
           })
       }
     },
     getTotal(){
         this.groupSeq = this.$route.params.groupSeq
+        this.$store.state.s_group.groupSeq = this.$route.params.groupSeq
             var params = new URLSearchParams()
             params.append('groupSeq', this.groupSeq);
             params.append('keyWord', this.s_keyWord);
             params.append('searchWord', this.searchWord)
             axios.post("http://localhost:9000/groupBoardTotal", params)
                   .then(res => {
-                    this.total = res.data
+                    this.$store.state.s_group.total = res.data
                   })
     },
      handleFilter() {
