@@ -12,7 +12,7 @@
                 <!-- :value="item.value" -->
                 </el-option>
             </el-select>
-        <div v-loading="loading">            
+        
         <el-table 
         :data="adminAllStudyGroupList.filter(data=> String(data.permission).includes(value.value))"
         stripe
@@ -30,7 +30,7 @@
             <el-table-column
             prop="del"
             label="del"
-            width="100">
+            width="50">
             </el-table-column>
 
             <el-table-column
@@ -89,7 +89,7 @@
             <el-table-column
             prop="interSmallSeq"
             label="interSmallSeq"
-            width="100">
+            width="90">
             </el-table-column>
 
             <el-table-column
@@ -121,7 +121,6 @@
               label="button"
               width="120" >
                 <template slot-scope="scope">
-
                     <div v-loading="loading">
                         <el-button
                             v-if="scope.row.permission===0"
@@ -135,11 +134,8 @@
                             @click="changePermission(scope,0)"> 개설취소 </el-button>
                      </div>
                 </template>
-
             </el-table-column>
-      </el-table>
-
-    </div>
+        </el-table>
     </div>
 </template>
 
@@ -177,11 +173,6 @@ export default {
         this.getGroupAllowList();
         this.value = this.selectedvalue[0]
     },
-    // watch:{
-    //     value: function(val){
-    //         this.value = val;
-    //     }
-    // },
     methods:{
 
         getGroupAllowList(){
