@@ -22,7 +22,7 @@ public class GroupCalendarController {
 	  
 	 @PostMapping(value="/getGroupSchedule")
 	 public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
-		 	
+		System.out.println("getGroupSchedule() = "+groupDto); 	
 	  	List<CalendarDto> list = groupService.getGroupSchedule(groupDto);
     	System.out.println(list.toString());
 	    	
