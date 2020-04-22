@@ -111,7 +111,7 @@ public class GroupService {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        Calendar c1 = Calendar.getInstance();
 	        String strToday = sdf.format(c1.getTime());
-	        
+	        System.out.println("strToday");
 	        groupSchedule.setNowDate(strToday);
 	        
 			int b = groupDao.checkAttend(groupSchedule);
@@ -125,6 +125,11 @@ public class GroupService {
 		return a;
 	}
 	public int checkAttend(GroupSchedule groupSchedule) {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	        Calendar c1 = Calendar.getInstance();
+	        String strToday = sdf.format(c1.getTime());
+	        System.out.println(strToday);
+	        groupSchedule.setNowDate(strToday);
 		return groupDao.checkAttend(groupSchedule);
 	}
 
