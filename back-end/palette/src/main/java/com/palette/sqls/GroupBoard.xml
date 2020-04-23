@@ -144,8 +144,8 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 	</update>
 
 	<insert id="insertGroupBoard" parameterType="com.palette.model.GroupBoardDto">
-		INSERT INTO BOARD(GROUP_INFO_SEQ, MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, DEL, BOARD_AUTH)
-		VALUES( #{groupInfoSeq}, #{memberSeq}, #{category}, #{title}, #{content}, NOW(), 0, #{boardAuth})
+		INSERT INTO BOARD(GROUP_INFO_SEQ, MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, DEL, BOARD_AUTH, READ_COUNT)
+		VALUES( #{groupInfoSeq}, #{memberSeq}, #{category}, #{title}, #{content}, NOW(), 0, #{boardAuth}, 0)
 	</insert>
 
 	<update id="updateGroupBoard" parameterType="com.palette.model.GroupBoardDto">
