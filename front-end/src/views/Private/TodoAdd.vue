@@ -18,11 +18,7 @@ export default {
     },
     methods:{
         show(){
-            if(this.list == ''){
-                this.add = false
-            }else{
-                this.add = true
-            }
+            this.list == ''? this.add = false : this.add = true
         },
         cancle(){
             this.$emit("cancle")

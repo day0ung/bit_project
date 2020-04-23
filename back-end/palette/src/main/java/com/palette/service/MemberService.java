@@ -32,7 +32,6 @@ public class MemberService {
 		
 		public int checkid(String memberId) {
 			int is = memberDao.checkId(memberId);
-			
 			return is;
 		}
 		
@@ -46,7 +45,7 @@ public class MemberService {
 			return memberDao.getDetailMember(memberSeq);
 		}
 		
-		//insert
+		//내 관심분야 intert
 		public void InterstingInsert(String interSmallSeqs, int memberSeq) {
 			MemberInterParam param = new MemberInterParam(); 
 
@@ -66,7 +65,7 @@ public class MemberService {
 		public void addInterArea(MemberDto dto) {
 			memberDao.addInterArea(dto);
 		}
-		
+		//interest interBig seq얻기 위함
 		public int getSeq() {
 			return memberDao.getSeq();
 		}
@@ -105,6 +104,21 @@ public class MemberService {
 		public TodoListDto selectOneList(TodoListDto dto) {
 			TodoListDto todo = memberDao.selectOneList(dto);
 			return todo;
+		}
+		
+		public boolean todoDel(TodoListDto dto) {
+			int del = memberDao.todoDel(dto);
+			return del > 0? true: false;
+		}
+		
+		public boolean todoDone(TodoListDto dto) {
+			int done = memberDao.todoDone(dto);
+			return done > 0? true: false;
+		}
+		
+		public boolean todoEdit(TodoListDto dto) {
+			int edit = memberDao.todoEdit(dto);
+			return edit > 0? true: false;
 		}
 		
     

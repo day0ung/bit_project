@@ -211,7 +211,7 @@ export default {
      mounted(){
 		 var params = new URLSearchParams();
 		 params.append('memberSeq', this.$route.params.seq)
-		 axios.post('http://localhost:9000/selectMember', params)
+		 axios.post('http://localhost:9000/myPageMember', params)
 		 .then(res => {
         this.myinfo = res.data
 		 }) 

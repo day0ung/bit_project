@@ -1,17 +1,12 @@
 <template>
   <div>
-      <h1>TODO LIST </h1>
-       <el-card shadow="hover" v-for="(task, index) in todoList" :key="index">
-      <p>{{index}}</p>
-      <p>{{task.title}}</p>
-      <p v-if="task.del == 0">{{task.del}}</p>
-      <el-button>삭제버튼</el-button>
-      <el-button>완료버튼</el-button>
-      <el-button>취소버튼</el-button>
-    </el-card>
-      <!-- <ListShow
-      :list="todoList">
-      </ListShow> -->
+      <h1>전체 할일 {{todoList.length}}/ 완료된 할일:{{countDone}} / 남은 할일:{{todoList.length - countDone}} </h1>
+     <ListShow
+      :list="todoList"
+      @del="listDel"
+      @done="listDone"
+      @edit="listEdit">
+      </ListShow> 
       <el-button @click="showAdd"><i class="el-icon-plus"></i> 할일을 추가하세요</el-button>
       <ListAdd v-if="add"
       @listAdd="listAppend"
@@ -39,13 +34,21 @@ export default {
          var memSeq = login.memberSeq
          var params = new URLSearchParams();
          params.append('memberSeq', memSeq)
-         
          axios.post('http://localhost:9000/selectTodoList', params)
           .then(res => {
-              var datas = res.data
-              console.log(datas)
-              this.todoList = datas
+              /* this.$store.state.s_private.todoList = res.data
+              this.todoList = this.$store.state.s_private.todoList */
+              this.todoList = res.data
          }) 
+    },
+    computed:{
+      countDone(){
+          let count = 0
+          this.todoList.forEach(list =>{
+            if(list.del === '1') count++
+          })
+          return count
+      }
     },
     methods:{
       showAdd(){
@@ -69,7 +72,41 @@ export default {
               this.todoList.push({todoSeq: datas.todoSeq, title:datas.title, todoDate: datas.todoDate, del: datas.del})
               this.add = false
          }) 
-         
+       },
+       listDel(){
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+         axios.post('http://localhost:9000/selectTodoList', params)
+          .then(res => {
+            /*   this.$store.state.s_private.todoList = res.data
+              this.todoList = this.$store.state.s_private.todoList */
+              this.todoList = res.data
+         }) 
+       },
+       listDone(){
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+         axios.post('http://localhost:9000/selectTodoList', params)
+          .then(res => {
+              this.todoList = res.data
+         }) 
+       },
+       listEdit(){
+        var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+         axios.post('http://localhost:9000/selectTodoList', params)
+          .then(res => {
+              this.todoList = res.data
+         }) 
        }
     }
 }

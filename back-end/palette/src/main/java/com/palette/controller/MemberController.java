@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.PastOrPresent;
 
 import com.palette.model.MemberDto;
 import com.palette.model.TodoListDto;
@@ -27,14 +28,14 @@ public class MemberController {
     MemberService memberService;
 
     
-    @GetMapping(value = "/register")
+    @GetMapping(value = "/register") 
     public String member(){
         System.out.println("register()");
         List<MemberDto> list = memberService.selectAll();
         System.out.println(list.size());
         return "";
     }
-    
+    //session저장용 컨트롤러
     @PostMapping(value= "/getOneMember")
     public MemberDto getOneMember(MemberDto dto) {
     	System.out.println("getOneMember() 실행"+ dto.toString());
@@ -42,6 +43,7 @@ public class MemberController {
     	return member;
     }
     
+   //회원가입 컨트롤러
     @PostMapping(value="/createMember")
     public boolean createMember(MemberDto dto, HttpServletRequest request)throws Exception {
     	System.out.println("createMember" + dto.toString());
@@ -49,7 +51,7 @@ public class MemberController {
     	System.out.println(" 추가 성공: " + check);
     	return check;
     }
-    
+    //회원가입시 아이디체크 컨트롤러
     @PostMapping(value="/checkid")
     public boolean checkId(String memberId) {
     	System.out.println("checkid"  + memberId);
@@ -57,16 +59,17 @@ public class MemberController {
     	return is > 0? false: true;
     	
     }
-    
-    @PostMapping(value= "/selectMember")
+    //마이페이지 정보갖고 오는 컨트롤러
+    @PostMapping(value= "/myPageMember")
     public MemberDto selectMember(int memberSeq) {
-    	System.out.println("selectMember() 실행");
+    	System.out.println("myPageMember() 실행");
     	System.out.println("======"+ memberSeq);
     	MemberDto member = memberService.getDetailMember(memberSeq);
     	return member;
 
     }
     
+    //마이페이지 내가선택한 관심분야 갖고오는 컨트롤러
     @PostMapping(value="/intersting")
     public String intersting(String interSmallSeqs, MemberDto dto) {
     	System.out.println("interesting!!!"+interSmallSeqs + dto.getInterArea());
@@ -77,6 +80,7 @@ public class MemberController {
     	return "perfect";
     }
     
+    //마이페이지 내 정보 수정
     @PostMapping(value="/updateInfo")
     public boolean updateInfo(MemberDto dto) {
     	System.out.println("udpateinfo"+ dto.toString());
@@ -85,6 +89,7 @@ public class MemberController {
     	return check;
     }
     
+    //마이페이지 내 주소 변경
     @PostMapping(value="/updateAddr")
     public boolean updateAddr(MemberDto dto) {
     	System.out.println("updateADdre"+ dto.getMemberSeq()+ dto.getAddress());
@@ -92,6 +97,7 @@ public class MemberController {
     	return check;
     }
     
+    //마이페이지 내 비밀번호확인
     @PostMapping(value="/checkPass")
     public boolean checkPass(MemberDto dto) {
     	System.out.println("checkPass" + dto.getMemberSeq()+ dto.getPwd());
@@ -99,6 +105,7 @@ public class MemberController {
     	return check >0? true: false;
     }
     
+    //마이페이지 내 비밀번호변경
     @PostMapping(value="/updatePass")
     public boolean updatePass(MemberDto dto) {
     	System.out.println("updatePass" + dto.getMemberSeq()+ dto.getPwd());
@@ -106,6 +113,7 @@ public class MemberController {
     	return pass;
     }
     
+    //개인스터디 todo리스트 추가
     @PostMapping(value="/addTodoList")
     public boolean addTodoList(TodoListDto dto) {
     	System.out.println("addTodoList"+ dto.getMemberSeq()+ dto.getTitle());
@@ -113,6 +121,7 @@ public class MemberController {
     	return add;
     }
     
+    //개인스터디 todo리스트 출력
     @PostMapping(value="/selectTodoList")
     public List<TodoListDto> selectTodoList(TodoListDto dto) {
     	System.out.println("selectTodoLsit"+ dto.getMemberSeq());
@@ -120,6 +129,7 @@ public class MemberController {
     	return todo;
     }
     
+    //개인스터디 todo리스트 하나만 출력
     @PostMapping(value="/selectOneList")
     public TodoListDto selectOneList(TodoListDto dto) {
     	System.out.println("selectOneList"+ dto.getMemberSeq()+ dto.getTitle());
@@ -128,4 +138,27 @@ public class MemberController {
     	return todo;
     }
     
+    //개인스터디 todo리스트 삭제
+    @PostMapping(value="/todoDel")
+    public boolean todoDel(TodoListDto dto) {
+    	System.out.println("delet:====>"+ dto.getTodoSeq()+dto.getMemberSeq());
+    	boolean del = memberService.todoDel(dto);
+    	return del;
+    }
+    
+    //개인스터디 todo리스트 완료
+    @PostMapping(value="/todoDone")
+    public boolean todoDone(TodoListDto dto) {
+    	System.out.println("Done=----->:"+ dto.getMemberSeq()+ dto.getDel());
+    	boolean done = memberService.todoDone(dto);
+    	return done;
+    }
+    
+    //개인스터디 todo리스트 수정용
+    @PostMapping(value="/todoEdit")
+    public boolean todoEdit(TodoListDto dto) {
+    	System.out.println("----Edit---"+ dto.getTitle()+ dto.getMemberSeq()+ dto.getTodoSeq());
+    	boolean edit = memberService.todoEdit(dto);
+    	return edit;
+    }
 }

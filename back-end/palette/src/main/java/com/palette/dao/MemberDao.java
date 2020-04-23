@@ -49,7 +49,14 @@ public interface MemberDao {
 	
 	List<TodoListDto> selectTodoList(TodoListDto dto);
 	
-	//add하고나서 하나만
 	TodoListDto selectOneList(TodoListDto dto);
+	
+	int todoDel(TodoListDto dto);
+	
+	int todoDone(TodoListDto dto);
+	
+	int todoEdit(TodoListDto dto);
+	
+	
 
 }
