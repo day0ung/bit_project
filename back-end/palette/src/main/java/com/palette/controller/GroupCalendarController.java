@@ -1,6 +1,5 @@
 package com.palette.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.CalendarDto;
-import com.palette.model.CalendarResult;
 import com.palette.model.GroupDto;
 import com.palette.service.GroupService;
 

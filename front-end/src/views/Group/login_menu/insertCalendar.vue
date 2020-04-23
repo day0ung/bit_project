@@ -6,43 +6,56 @@
 
           <div class="modal-header">
             <slot name="header">
-   
+                일정 추가
             </slot>
           </div>
 
           <div class="modal-body">
             <slot name="body">
-                    <div class="login_page_wrap">
-            <div class="login_message">
-              <p> 회원이 아니면, 지금 <span><strong>
-                <button style="    vertical-align: baseline; font-size: 20px; padding-left: 5px; color: blue;" @click="regi">회원가입
-               </button></strong></span>을 해주세요.
-               </p>        
-            </div>
-            <div class="login_input_wrap">         
+                    
                 <!-- input box -->
-                <div class="setting">
-                    <input id="id_save" name="id_save" type="checkbox" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">
-                    <label for="id_save" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">아이디 저장</label>
-                </div>
-                <div class="login-form">
-                    <div class="id-input-box focus">
-                        <input type="text" v-model="id" class="txt_tool" placeholder="아이디">
-                    </div>
-                    <div class="pw-input-box">
-                        <input type="password" v-model="pwd" class="txt_tool" placeholder="비밀번호" maxlength="32">
-                    </div>
-                    <button @click="login" class="btn-login">로그인</button>
-                </div>
-                <p class="signup-forgotten">
-                 
-                   <span></span>
-                   <button class="forgotten" @click="join" style="font-weight: 5px">아이디/비밀번호 찾기</button>
-                </p>
-                 </div>
-             </div>
-            </slot>
-          </div>
+<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+  <el-form-item label="time" required>
+    <el-col :span="11">
+      <el-form-item prop="date1">
+        <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+      </el-form-item>
+    </el-col>
+    <el-col class="line" :span="2">-</el-col>
+    <el-col :span="11">
+      <el-form-item prop="date2">
+        <el-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+      </el-form-item>
+    </el-col>
+  </el-form-item>
+  <el-form-item label="기간설정" prop="date3">
+                    <el-date-picker
+                        style="width: 85%"
+                        v-model="date3"
+                        type="daterange"
+                        align="right"
+                        unlink-panels
+                        range-separator=" ~ "
+                        start-placeholder="시작일"
+                        end-placeholder="종료일"
+                        :picker-options="pickerOptions">
+                    </el-date-picker>
+                </el-form-item>
+  <el-form-item label="title" prop="title">
+    <el-input v-model="ruleForm.title"></el-input>
+  </el-form-item>
+  
+  <el-form-item label="content" prop="desc">
+    <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+  </el-form-item>
+  <el-form-item>
+    <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
+    <el-button @click="resetForm('ruleForm')">Reset</el-button>
+  </el-form-item>
+</el-form>
+           
+          </slot>
+        </div>
 
           <div class="modal-footer">
             <slot name="footer">
@@ -62,49 +75,53 @@ export default {
 
  data(){
       return{
-          id: null,
-          pwd: null
-      }
+         ruleForm: {
+          title: '',
+          date1: '',
+          date2: '',
+          date3: '',
+          desc: ''
+        },
+        rules: {
+          title: [
+            { required: true, message: 'Please input Activity name', trigger: 'blur' },
+            { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+          ],
+          date1: [
+            { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
+          ],
+          date2: [
+            { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
+          ],
+          desc: [
+            { required: true, message: 'Please input activity form', trigger: 'blur' }
+          ]
+        }
+      };
+      
     },
     methods:{
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            alert('submit!');
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      },
+
         exit(){
           this.$emit('close')
         },
         regi(){
           this.$emit('close')
         },
-        login(){
-           var params = new URLSearchParams();
-           params.append('memberId', this.id)
-           params.append('pwd', this.pwd)
-
-          this.id == null ? alert('아이디를 입력해주세요'):
-          this.pwd == null ? alert('비밀번호를 입력해 주세요'):
-          axios.post('http://localhost:9000/getOneMember', params).then(
-    				res => {
-              if(res.data.memberId == undefined){
-                alert("id나 password가 틀렸습니다.");
-                this.$store.state.isLogin = true;
-                return;
-              }
-                //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
-                //세션에 저장						//json으로 넘어옴 세션에 저장할때는 
-                sessionStorage.setItem("loginUser", JSON.stringify(res.data)); //String
-                //alert(res.data.memberId)
-                var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
-                //alert('세션가져오기' + loginData)
-                var login = JSON.parse(loginData); //JSON
-                this.$store.commit('loginSuccess', login )
-                alert('로그인성공')
-                this.$router.push ({path: '/'})
-                this.$emit('close')   
-            })
-                          
-
-        },
-        join(){
-          alert('마이페이지로 이동')
-        }
+       
     }
 
 }
