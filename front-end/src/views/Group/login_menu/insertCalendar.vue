@@ -15,34 +15,23 @@
                     
                 <!-- input box -->
 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-  <el-form-item label="time" required>
-    <el-col :span="11">
-      <el-form-item prop="date1">
-        <el-date-picker type="date" placeholder="Pick a date" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
-      </el-form-item>
-    </el-col>
-    <el-col class="line" :span="2">-</el-col>
-    <el-col :span="11">
-      <el-form-item prop="date2">
-        <el-time-picker placeholder="Pick a time" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
-      </el-form-item>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="기간설정" prop="date3">
-                    <el-date-picker
-                        style="width: 85%"
-                        v-model="date3"
-                        type="daterange"
-                        align="right"
-                        unlink-panels
-                        range-separator=" ~ "
-                        start-placeholder="시작일"
-                        end-placeholder="종료일"
-                        :picker-options="pickerOptions">
-                    </el-date-picker>
+  <el-form-item label="기간설정" prop="date1">
+                   <div class="block" >
+                      <el-date-picker
+                        size="mini"
+                        v-model="ruleForm.date1"
+                        type="datetimerange"
+                        range-separator="~"
+                        start-placeholder="Start date"
+                        end-placeholder="End date"
+                        
+                        style="width:288px">
+                      </el-date-picker>
+                    </div>
+                    {{ruleForm.date1}}
                 </el-form-item>
   <el-form-item label="title" prop="title">
-    <el-input v-model="ruleForm.title"></el-input>
+    <el-input v-model="ruleForm.title" size="mini"></el-input>
   </el-form-item>
   
   <el-form-item label="content" prop="desc">
@@ -78,20 +67,15 @@ export default {
          ruleForm: {
           title: '',
           date1: '',
-          date2: '',
-          date3: '',
           desc: ''
         },
         rules: {
           title: [
             { required: true, message: 'Please input Activity name', trigger: 'blur' },
-            { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
+            { min: 3, max: 10, message: 'Length should be 3 to 10', trigger: 'blur' }
           ],
           date1: [
             { type: 'date', required: true, message: 'Please pick a date', trigger: 'change' }
-          ],
-          date2: [
-            { type: 'date', required: true, message: 'Please pick a time', trigger: 'change' }
           ],
           desc: [
             { required: true, message: 'Please input activity form', trigger: 'blur' }
@@ -114,7 +98,15 @@ export default {
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-
+      mounted(){
+         console.log("cal 1")
+         this.setDate()
+        
+      },
+      setDate(){
+        console.log("cal 2")
+        this.ruleForm.date1 = this.$store.state.s_group.groupCalendarStartDate
+      },
         exit(){
           this.$emit('close')
         },
@@ -128,5 +120,7 @@ export default {
 </script>
 
 <style>
-
+.el-form-item__label{
+  font-size: 15px;
+}
 </style>

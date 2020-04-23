@@ -5,6 +5,7 @@ export default {
         groupList: [],
         detailSeq: 0,
         groupCalendar:[],
+        groupCalendarStartDate:'',
         groupBoardList: [],
         groupBoardDetail: [],
         groupReferenceDetail: [],
@@ -24,6 +25,7 @@ export default {
         s_keyWord:'',
         check1:false,
         check2:false,
+
     },
     getters: {
         getDetailSeq(){

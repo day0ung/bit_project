@@ -32,6 +32,7 @@ export default {
               locale: 'ko',
               defaultView:'month'
       },
+      clickDay:'',
     }
   },
   components:{
@@ -49,10 +50,10 @@ export default {
         }).then(() => {
           console.log(date)
 
-          let clickDay = this.$moment(date).format('YYYY-MM-DD')
-          alert(clickDay)
-          
-
+          let a = this.$moment(date).format('YYYY-MM-DD')
+          this.$store.state.s_group.groupCalendarStartDate = clickDay
+          alert(a)
+          this.clickDay = a
           this.showModal = true
 
         }).catch(() => {
