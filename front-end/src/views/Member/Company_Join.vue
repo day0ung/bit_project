@@ -86,7 +86,7 @@ export default {
 				extraAddress: '',
                 desc: '',
                 logo:'',
-                auth: '3'
+                auth: '2'
             },
             rules: {
                 memberId: [

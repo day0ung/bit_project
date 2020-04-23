@@ -22,8 +22,8 @@
             <div class="login_input_wrap">         
                 <!-- input box -->
                 <div class="setting">
-                    <input id="id_save" name="id_save" type="checkbox" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">
-                    <label for="id_save" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">아이디 저장</label>
+                    <input id="id_save" v-model="idSave" type="checkbox" @click="saveId">
+                    <label for="id_save">아이디 저장</label>
                 </div>
                 <div class="login-form">
                     <div class="id-input-box focus">
@@ -37,7 +37,7 @@
                 <p class="signup-forgotten">
                  
                    <span></span>
-                   <button class="forgotten" @click="join" style="font-weight: 5px">아이디/비밀번호 찾기</button>
+                   <button class="forgotten" @click="idSearch" style="font-weight: 5px">아이디/비밀번호 찾기</button>
                 </p>
                  </div>
              </div>
@@ -63,7 +63,8 @@ export default {
     data(){
       return{
           id: null,
-          pwd: null
+          pwd: null,
+          idSave: false
       }
     },
     methods:{
@@ -98,14 +99,22 @@ export default {
                 var login = JSON.parse(loginData); //JSON
                 this.$store.commit('loginSuccess', login )
                 alert('로그인성공')
-                this.$router.push ({path: '/'})
+                // this.$router.push ({path: '/'}) 
                 this.$emit('close')   
             })
                           
 
         },
-        join(){
-          alert('마이페이지로 이동')
+        saveId(){
+          alert(this.id)
+          //client측 쿠키저장
+          // $cookies.set('cookie_name', 'cookie_value');
+
+          //client측 쿠키 읽기
+          // let value = $cookies.get('key')
+        },
+        idSearch(){
+
         }
     }
 }

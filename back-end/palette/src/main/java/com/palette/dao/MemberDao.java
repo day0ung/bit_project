@@ -21,17 +21,16 @@ public interface MemberDao {
 	
 	int createMember(MemberDto dto);//register
 	
-	MemberDto getSelectMember(int memberSeq); //info
-	
-	//my page interest info
-	MemberDto getDetailMember(int memberSeq); 
-	
-	// interest add
+	// 회원가입후 nterest add
 	int getBigSeq(int interSmallSeq); 
 	
 	int addInter(MemberInterParam param);
 	
 	int addInterArea(MemberDto dto);
+	
+	MemberDto getMyInfo(MemberDto dto); //mypageInfo
+	
+	MemberDto getDetailMember(int memberSeq); 	//my page interest info
 	
 	//mypage 수정
 	int getSeq();

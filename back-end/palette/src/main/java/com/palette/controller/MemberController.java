@@ -27,7 +27,7 @@ public class MemberController {
     @Autowired
     MemberService memberService;
 
-    
+
     @GetMapping(value = "/register") 
     public String member(){
         System.out.println("register()");
@@ -35,7 +35,7 @@ public class MemberController {
         System.out.println(list.size());
         return "";
     }
-    //session저장용 컨트롤러
+    //로그인 session저장용 컨트롤러
     @PostMapping(value= "/getOneMember")
     public MemberDto getOneMember(MemberDto dto) {
     	System.out.println("getOneMember() 실행"+ dto.toString());
@@ -59,17 +59,8 @@ public class MemberController {
     	return is > 0? false: true;
     	
     }
-    //마이페이지 정보갖고 오는 컨트롤러
-    @PostMapping(value= "/myPageMember")
-    public MemberDto selectMember(int memberSeq) {
-    	System.out.println("myPageMember() 실행");
-    	System.out.println("======"+ memberSeq);
-    	MemberDto member = memberService.getDetailMember(memberSeq);
-    	return member;
-
-    }
     
-    //마이페이지 내가선택한 관심분야 갖고오는 컨트롤러
+    //회원가입후 관심분야 선택하는 컨트롤러
     @PostMapping(value="/intersting")
     public String intersting(String interSmallSeqs, MemberDto dto) {
     	System.out.println("interesting!!!"+interSmallSeqs + dto.getInterArea());
@@ -80,7 +71,22 @@ public class MemberController {
     	return "perfect";
     }
     
-    //마이페이지 내 정보 수정
+    //마이페이지 관심정보갖고 오는 컨트롤러
+    @PostMapping(value= "/myPageInter")
+    public MemberDto myPageInter(int memberSeq) {
+    	System.out.println("myPageInter() 실행=="+ memberSeq);
+    	MemberDto member = memberService.getDetailMember(memberSeq);
+    	return member;
+    }
+    
+    @PostMapping(value="/myPageInfomation")
+    public MemberDto myPageInfomation(MemberDto dto) {
+    	System.out.println("myPageInfomation "+ dto.getMemberSeq());
+    	MemberDto member = memberService.getMyInfo(dto);
+    	return member;
+    }
+    
+    //마이페이지 내 정보 가져오는 컨트롤러
     @PostMapping(value="/updateInfo")
     public boolean updateInfo(MemberDto dto) {
     	System.out.println("udpateinfo"+ dto.toString());

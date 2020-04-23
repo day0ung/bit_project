@@ -1,6 +1,9 @@
 <template>
   <div>
-      <h1>전체 할일 {{todoList.length}}/ 완료된 할일:{{countDone}} / 남은 할일:{{todoList.length - countDone}} </h1>
+ 
+      <el-button type="text" @click="allSelect">전체 TODO LIST: {{todoList.length}} </el-button>
+      <el-button type="text" @click="doneSelect">완료된 할일: {{countDone}} </el-button>
+      <el-button type="text" @click="remainSelect">남은 할일: {{todoList.length - countDone}} </el-button>
      <ListShow
       :list="todoList"
       @del="listDel"
@@ -24,8 +27,9 @@ export default {
     },
     data(){
       return{
-        add: false,
+        add: false, //추가하는곳 보여주기
         todoList:[]
+
       }
     },
     mounted(){
@@ -36,8 +40,6 @@ export default {
          params.append('memberSeq', memSeq)
          axios.post('http://localhost:9000/selectTodoList', params)
           .then(res => {
-              /* this.$store.state.s_private.todoList = res.data
-              this.todoList = this.$store.state.s_private.todoList */
               this.todoList = res.data
          }) 
     },
@@ -45,9 +47,11 @@ export default {
       countDone(){
           let count = 0
           this.todoList.forEach(list =>{
-            if(list.del === '1') count++
+            console.log(list.del)
+            if(list.del == '1') count++
+            console.log(count)
           })
-          return count
+          return count 
       }
     },
     methods:{
@@ -68,7 +72,6 @@ export default {
          axios.post('http://localhost:9000/selectOneList', params)
           .then(res => {
               var datas = res.data
-              console.log(datas)
               this.todoList.push({todoSeq: datas.todoSeq, title:datas.title, todoDate: datas.todoDate, del: datas.del})
               this.add = false
          }) 
@@ -107,6 +110,18 @@ export default {
           .then(res => {
               this.todoList = res.data
          }) 
+       },
+       //전체 보기로 
+       allSelect(){
+        
+       },
+       //완료된 할일 보여주는 곳
+       doneSelect(){
+
+       },
+       //남은 할일 보여주는 곳
+       remainSelect(){
+
        }
     }
 }

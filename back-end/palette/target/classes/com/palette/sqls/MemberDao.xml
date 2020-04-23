@@ -8,7 +8,7 @@
   </select>
 
   <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
-  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, CV, COMPANY_LOGO
+  	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, CV, COMPANY_LOGO, AUTH
   	FROM MEMBER
   	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
   </select>
@@ -24,9 +24,9 @@
   	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}) 
   </insert>
   
-  
-  <select id="getSelectMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
-  	SELECT MEMBER_SEQ, MEMBER_ID, PWD, MEMBER_NAME, AGE, INTERAREA, MYMONEY
+ 
+  <select id="getMyInfo" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto" >
+  	SELECT *
   	FROM MEMBER
   	WHERE MEMBER_SEQ=#{memberSeq}
   </select>
@@ -49,6 +49,7 @@
 		<collection property="interBigDto" resultMap="InterBig"></collection>
 		<collection property="interSmallDto" resultMap="InterSmall"></collection>
  	</resultMap>
+ 	
  <select id="getDetailMember" parameterType="java.lang.Integer" resultMap="MemberDetail">
 		SELECT * 
 	FROM MEMBER_INTERREST inter
