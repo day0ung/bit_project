@@ -151,12 +151,6 @@ public class GroupController {
         return list;
     }
 
-    @PostMapping(value = "/insertGroupReference")
-    public String insertGroupReference(){
-        System.out.println("insertGroupReference()");
-        return "";
-    }
-    
     // attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
