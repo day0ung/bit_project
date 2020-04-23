@@ -94,13 +94,34 @@
 	  	WHERE CV_SEQ = #{cvSeq}
 	</update>
 	
-	<!-- CV 디테일 -->
+	<!-- CV 디테일(MemberSEQ) -->
 	<select id="getOneCV" parameterType="java.lang.Integer" resultMap="CVPgaing">
 		SELECT *
 		FROM MEMBER_CV c
 		JOIN MEMBER m
 		ON c.MEMBER_SEQ = m.MEMBER_SEQ 
 		WHERE CV_SEQ = #{cvSeq}
+	</select>
+	
+	<!--멤버객체 -->
+	<select id="oneMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
+	  	SELECT *
+	  	FROM MEMBER
+	  	WHERE MEMBER_SEQ=#{memberSeq}
+  	</select>
+  	
+  	<!-- CV 수정 -->
+  	<update id="updateCV" parameterType="com.palette.model.MemberCVDto">
+  		UPDATE MEMBER_CV
+  		SET TITLE = #{title}, CATEGORY = #{category}, WRITE_DATE = NOW()
+  		WHERE MEMBER_SEQ = #{memberSeq};
+  	</update>
+	
+	<!-- CV 객체 가지고 오기(MemberSEQ) -->
+	<select id="getOneCVByMemberSeq" parameterType="java.lang.Integer" resultType="com.palette.model.MemberCVDto">
+		SELECT *
+		FROM MEMBER_CV
+		WHERE MEMBER_SEQ = #{memberSeq}
 	</select>
 	
 </mapper>

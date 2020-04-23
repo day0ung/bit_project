@@ -13,6 +13,7 @@ import com.palette.model.BoardParams;
 import com.palette.model.EmploymentBoardDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.MemberCVDto;
+import com.palette.model.MemberDto;
 import com.palette.service.MemberCVService;
 
 @CrossOrigin(origins = "*")
@@ -53,7 +54,7 @@ public class MemberCVController {
 		return stotal;
 	}
 	
-//	cv 디테일
+//	cv 디테일(cvSeq)
 	@PostMapping(value = "/getOneCV")
     public MemberCVDto getOneCV(int cvSeq) {
 		System.out.println("getOneCV() 실행");
@@ -66,6 +67,39 @@ public class MemberCVController {
 		
 		return dto;
 	}
+	
+//	cv 디테일(memberSeq)
+	@PostMapping(value = "/getOneCVByMemberSeq")
+    public MemberCVDto getOneCVByMemberSeq(int memberSeq) {
+		System.out.println("getOneCV() 실행");
+		System.out.println("memberSeq:"+ memberSeq);
+
+		// cv 객체
+		MemberCVDto dto = memberCVService.getOneCVByMemberSeq(memberSeq);
+		System.out.println("dto: "+ dto.toString());
+		
+		return dto;
+	}
+	
+// 단일멤버 객체 가지고 오기
+	@PostMapping(value= "/oneMember")
+    public MemberDto oneMember(int memberSeq) {
+    	System.out.println("oneMember() 실행");
+    	System.out.println("======"+ memberSeq);
+    	MemberDto member = memberCVService.oneMember(memberSeq);
+    	return member;
+	}
+	
+//  CV 수정
+	@GetMapping(value = "/updateCV")
+    public boolean updateCV(MemberCVDto dto){
+    	System.out.println("updateCV() 실행");
+    	
+    	boolean isS = memberCVService.updateCV(dto);
+    	
+    	return isS;
+    }
+	
 	
 	
 }

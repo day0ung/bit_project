@@ -5,8 +5,10 @@
        <recruiting></recruiting>
       </el-tab-pane>
       <el-tab-pane label="이력서" name="second">
-       <CVList v-show="cvList" v-on:showCVDetail="showCVDetail"></CVList>
-       <CVDetail v-show="cvDetail" v-on:showCVList="showCVList"></CVDetail>
+       <CVMain v-show="cvMain" v-on:showCVDetail="showCVDetail" v-on:showCVWriting="showCVWriting" v-on:showCVUpdate="showCVUpdate"></CVMain>
+       <CVDetail v-show="cvDetail" v-on:showCVMain="showCVMain"></CVDetail>
+       <CVWriting v-show="cvWriting" v-on:showCVMain="showCVMain"></CVWriting>
+       <CVUpdate v-show="cvUpdate" v-on:showCVMain="showCVMain"></CVUpdate>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -14,18 +16,22 @@
 
 <script>
 import recruiting from '@/views/Employment/depth2/Recruiting_list'
-import CVList from '@/views/Employment/depth2/CVMain'
+import CVMain from '@/views/Employment/depth2/CVMain'
 import CVDetail from '@/views/Employment/depth2/CVDetail'
+import CVWriting from '@/views/Employment/depth2/CVWriting'
+import CVUpdate from '@/views/Employment/depth2/CVUpdate'
 
 export default {
   components:{
-    recruiting, CVList, CVDetail
+    recruiting, CVMain, CVDetail, CVWriting, CVUpdate
   },
   data(){
     return{
       activeName: 'first',
-      cvList : true,
-      cvDetail : false
+      cvMain : true,
+      cvDetail : false,
+      cvWriting : false,
+      cvUpdate : false
     }
   },
 
@@ -36,13 +42,29 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event);
     },
-    showCVList(){
-      this.cvList = true
+    showCVMain(){
+      this.cvMain = true
       this.cvDetail = false
+      this.cvWriting = false
+      this.cvUpdate = false
     },
     showCVDetail(){
-      this.cvList = false
+      this.cvMain = false
       this.cvDetail = true
+      this.cvWriting = false
+      this.cvUpdate = false
+    },
+    showCVWriting(){
+      this.cvMain = false
+      this.cvDetail = false
+      this.cvWriting = true
+      this.cvUpdate = false
+    },
+    showCVUpdate(){
+      this.cvMain = false
+      this.cvDetail = false
+      this.cvWriting = false
+      this.cvUpdate = true
     }
     
   }
