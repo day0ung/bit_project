@@ -150,6 +150,12 @@ public class GroupController {
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
     }
+
+    @PostMapping(value = "/insertGroupReference")
+    public String insertGroupReference(){
+        System.out.println("insertGroupReference()");
+        return "";
+    }
     
     // attendance
     @PostMapping(value="/attendGroup")

@@ -45,12 +45,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws -->
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-aws-context -->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-aws</artifactId>
-			<version>2.2.1.RELEASE</version>
-			<type>pom</type>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-aws-context</artifactId>
+		    <version>2.2.1.RELEASE</version>
 		</dependency>
 		
 		<!-- email인증에 관함 -->

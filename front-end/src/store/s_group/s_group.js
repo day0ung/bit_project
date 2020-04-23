@@ -7,6 +7,7 @@ export default {
         groupCalendar:[],
         groupBoardList: [],
         groupBoardDetail: [],
+        groupReferenceList: [],
         groupReferenceDetail: [],
         grouDetail: [],
         showGroupInfo: false,
@@ -15,6 +16,7 @@ export default {
         showDeleteBtn: false,
         showUpdateBtn: false,
         showReferenceDetail: false,
+        showGroupReferenceList: false,
         total: 0,
         listQuery:{
           page: 1,

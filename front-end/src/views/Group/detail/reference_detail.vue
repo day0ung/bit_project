@@ -44,11 +44,22 @@ export default {
       }
   },
   methods:{
-    showGroupReference(){
-      this.$emit("showGroupReference")
-      }
+    getList(){
+      this.$store.state.s_group.showGroupReferenceList = true
+      var params = new URLSearchParams()
+      params.append('groupSeq', this.$store.state.s_group.groupSeq);
+      axios.post("http://localhost:9000/groupPdsList", params)
+                  .then(res => {
+              this.$store.state.s_group.groupReferenceList = res.data
+              this.$store.state.s_group.showGroupReferenceList = false
+            })
     },
-    mounted(){
+    showGroupReference(){
+      this.getList()
+      this.$emit("showGroupReference")
+    }
+  },
+  mounted(){
 
   },
 }
