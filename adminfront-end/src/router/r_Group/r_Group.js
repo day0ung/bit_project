@@ -15,9 +15,9 @@ export default[{
             component:() => import('@/views/Group/content_01.vue'),
         },
         {
-            path:'/group02',
+            path:'/group02/',
             name:'acceptlist2',
-            component:() => import('@/views/Group/content_02.vue'),
+            component:() => import('@/views/Group/content_02.vue')
         },
         {
             path:'/group03',
