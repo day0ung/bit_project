@@ -107,5 +107,20 @@ public class MemberService {
 			return todo;
 		}
 		
+		public boolean todoDel(TodoListDto dto) {
+			int del = memberDao.todoDel(dto);
+			return del > 0? true: false;
+		}
+		
+		public boolean todoDone(TodoListDto dto) {
+			int done = memberDao.todoDone(dto);
+			return done > 0? true: false;
+		}
+		
+		public boolean todoEdit(TodoListDto dto) {
+			int edit = memberDao.todoEdit(dto);
+			return edit > 0? true: false;
+		}
+		
     
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.PastOrPresent;
 
 import com.palette.model.MemberDto;
 import com.palette.model.TodoListDto;
@@ -58,9 +59,9 @@ public class MemberController {
     	
     }
     
-    @PostMapping(value= "/selectMember")
+    @PostMapping(value= "/myPageMember")
     public MemberDto selectMember(int memberSeq) {
-    	System.out.println("selectMember() 실행");
+    	System.out.println("myPageMember() 실행");
     	System.out.println("======"+ memberSeq);
     	MemberDto member = memberService.getDetailMember(memberSeq);
     	return member;
@@ -128,4 +129,23 @@ public class MemberController {
     	return todo;
     }
     
+    @PostMapping(value="/todoDel")
+    public boolean todoDel(TodoListDto dto) {
+    	System.out.println("deletedeldel"+ dto.getTodoSeq()+dto.getMemberSeq());
+    	boolean del = memberService.todoDel(dto);
+    	return del;
+    }
+    @PostMapping(value="/todoDone")
+    public boolean todoDone(TodoListDto dto) {
+    	System.out.println("DoneDone"+ dto.getMemberSeq()+ dto.getDel());
+    	boolean done = memberService.todoDone(dto);
+    	return done;
+    }
+    
+    @PostMapping(value="/todoEdit")
+    public boolean todoEdit(TodoListDto dto) {
+    	System.out.println("EditEditEdit"+ dto.getTitle()+ dto.getMemberSeq()+ dto.getTodoSeq());
+    	boolean edit = memberService.todoEdit(dto);
+    	return edit;
+    }
 }
