@@ -147,10 +147,10 @@ export default {
                 value: '',
                 label: '전체보기'
                 }, {
-                value: '3',
+                value: '2',
                 label: '비전환 기업리스트'
                 }, {
-                value: '2',
+                value: '3',
                 label: '기업회원 전환완료'
             }],
             value: '',
