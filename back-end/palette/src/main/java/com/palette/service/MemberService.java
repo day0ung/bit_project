@@ -32,7 +32,6 @@ public class MemberService {
 		
 		public int checkid(String memberId) {
 			int is = memberDao.checkId(memberId);
-			
 			return is;
 		}
 		
@@ -46,7 +45,7 @@ public class MemberService {
 			return memberDao.getDetailMember(memberSeq);
 		}
 		
-		//insert
+		//내 관심분야 intert
 		public void InterstingInsert(String interSmallSeqs, int memberSeq) {
 			MemberInterParam param = new MemberInterParam(); 
 
@@ -66,7 +65,7 @@ public class MemberService {
 		public void addInterArea(MemberDto dto) {
 			memberDao.addInterArea(dto);
 		}
-		
+		//interest interBig seq얻기 위함
 		public int getSeq() {
 			return memberDao.getSeq();
 		}
