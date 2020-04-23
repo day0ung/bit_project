@@ -106,15 +106,6 @@
 
         </el-table>    
 
-    
-    
-    
-
-
-
-
-
-        
     </div>
 </template>
 
@@ -152,10 +143,6 @@ export default {
         //         this.output_data=res.data;
         //     })
         // },
-
-        
-
-
 
     },
 //   mounted(){

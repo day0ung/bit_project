@@ -23,4 +23,6 @@ public interface adminCompanyDao {
 	
 	List<String> adminGetCompanyNmaeAll();
 
+	public boolean changeAUTHforCompanyMember(MemberDto dto);
+
 }
