@@ -22,10 +22,10 @@ public class Admin_CompanyController {
 // 	show all company
 	@PostMapping(value = "/adminCompanyMemberShowAll")
     public List<MemberDto> getCompanyListAll() {
-    	System.out.println("getAllRecuritingInfo Method execute Now..");
+    	System.out.println("getCompanyListAll Method execute Now..");
     	
     	List<MemberDto> list = adminCompanyService.adminGetCompanyMemberListAll();
-    	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + list );
+    	System.out.println("getCompanyListAll RESULT : \n" + list );
     	return list;
     }
     
@@ -80,7 +80,26 @@ public class Admin_CompanyController {
     	List<String> list = adminCompanyService.adminGetCompanyNmaeAll();
     	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + list );
     	return list;
+	}
+	
+
+	//changeAUTHforCompanyMember
+	/*
+		Table: MEMBER
+		Column:AUTH
+		Goal: Change AUTH column status '2' to '3' (watforCompanyMember => companyMember)
+		Mapping id : changeAUTHforCompanyMember(Memberdto dto)
+	*/
+
+	@PostMapping(value = "/changeAuthCompanyMember")
+    public boolean changeAuthCompanyMemberStatus(MemberDto dto) {
+    	System.out.println("changeAuthCompanyMemberStatus Method execute Now..");
+    	
+    	boolean isS = adminCompanyService.changeAUTHforCompanyMember(dto);
+    	System.out.println("changeAUTHforCompanyMember RESULT : \n" + isS );
+    	return isS;
     }
+    
     
     
 	

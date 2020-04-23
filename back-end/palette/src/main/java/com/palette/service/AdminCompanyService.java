@@ -43,6 +43,11 @@ public class AdminCompanyService {
 	}
 
 	
+	public boolean changeAUTHforCompanyMember(MemberDto dto){
+		return adminmemberdao.changeAUTHforCompanyMember(dto);
+	}
+
+	
 	
 	
 	

@@ -9,6 +9,26 @@
 		SELECT * FROM MEMBER
 		WHERE AUTH=2 OR AUTH=3
 	</select>
+
+
+	<update id="changeAUTHforCompanyMember" parameterType="com.palette.model.MemberDto">
+		<!--   
+		SELECT * FROM FINAL.MEMBER;
+		request join to companyMember
+		AUTH 2->3 (wait for companyMember)
+		AUTH 3->2 (cancle companyMember)
+		-->
+		UPDATE MEMBER
+		SET AUTH=#{auth}
+		WHERE 
+			MEMBER_SEQ=#{memberSeq}
+		AND 
+			MEMBER_ID=#{memberId};
+	</update>
+
+
+
+
 	
 	<!-- show company info (SELECT ONE) -->
 	<select id="adminGetCompanyInfoOne" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
