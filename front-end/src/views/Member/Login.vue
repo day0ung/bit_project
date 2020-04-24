@@ -22,7 +22,7 @@
             <div class="login_input_wrap">         
                 <!-- input box -->
                 <div class="setting">
-                    <input id="id_save" v-model="idSave" type="checkbox" @click="saveId">
+                    <input type="checkbox" id="id_save"  v-model="idSave" @click="saveId">
                     <label for="id_save">아이디 저장</label>
                 </div>
                 <div class="login-form">
@@ -96,8 +96,6 @@ export default {
                 this.$store.state.isLogin = true;
                 return;
               }
-                //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
-                //세션에 저장						//json으로 넘어옴 세션에 저장할때는 
                 sessionStorage.setItem("loginUser", JSON.stringify(res.data)); //String
                 //alert(res.data.memberId)
                 var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
@@ -117,7 +115,15 @@ export default {
                 }else{
                   this.$cookie.set('userId', this.id, 365);
                 }
-          }else{
+          }else if(this.idSave == ''){
+             if(this.id == null){
+                  alert('아이디를 입력해주세요')
+                  this.idSave = ''
+                }else{
+                  this.$cookie.set('userId', this.id, 365);
+                }
+          
+          }else {
             this.$cookie.delete('userId');
           }
         },
