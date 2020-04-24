@@ -211,7 +211,7 @@ export default {
      mounted(){
 		 var params = new URLSearchParams();
 		 params.append('memberSeq', this.$route.params.seq)
-		 axios.post('http://localhost:9000/myPageMember', params)
+		 axios.post('http://localhost:9000/myPageInfomation', params)
 		 .then(res => {
         this.myinfo = res.data
 		 }) 
@@ -293,6 +293,7 @@ export default {
            var params = new URLSearchParams();
            params.append('memberSeq', this.$route.params.seq)
            params.append('pwd', this.passCheck)
+      
            axios.post('http://localhost:9000/checkPass', params)
             .then(res => {
                 if(res.data == true){
@@ -314,9 +315,9 @@ export default {
             if (valid) {
                     var params = new URLSearchParams();
                     params.append('memberSeq', this.$route.params.seq)
-                    params.append('pwd', this.ruleForm.pass)
+                    params.append('pwd', this.ruleForm.checkPass)
                     console.log(params)
-                    axios.post('http://localhost:9000/createMember', params).then(
+                    axios.post('http://localhost:9000/updatePass', params).then(
                         res => {
                             if(res.data == true){
                                 alert('비밀번호가 변경되었습니다.')

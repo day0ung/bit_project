@@ -40,12 +40,7 @@ public class MemberService {
 			return check > 0? true: false;
 		}
 		
-		//마이페이지용
-		public MemberDto getDetailMember(int memberSeq) {
-			return memberDao.getDetailMember(memberSeq);
-		}
-		
-		//내 관심분야 intert
+		//회원가입-내 관심분야 insert
 		public void InterstingInsert(String interSmallSeqs, int memberSeq) {
 			MemberInterParam param = new MemberInterParam(); 
 
@@ -61,10 +56,23 @@ public class MemberService {
 				memberDao.addInter(param);
 			}
 		}
-		
+		//회원가입 내 관심지역 insert
 		public void addInterArea(MemberDto dto) {
 			memberDao.addInterArea(dto);
 		}
+		
+		//myPage Info용
+		public MemberDto getMyInfo(MemberDto dto) {
+			MemberDto member = memberDao.getMyInfo(dto);
+			return member;
+		}
+		
+		//마이페이지 MyInterest용
+		public MemberDto getDetailMember(int memberSeq) {
+			return memberDao.getDetailMember(memberSeq);
+		}
+		
+		
 		//interest interBig seq얻기 위함
 		public int getSeq() {
 			return memberDao.getSeq();

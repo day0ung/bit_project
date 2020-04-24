@@ -18,6 +18,7 @@ export default new Vuex.Store({
   state: {
     loginUser : null,
     isLogin : true,
+    auth: null,
     currpage: "/",
     depth1:"",
     depth2:"",
@@ -46,6 +47,7 @@ export default new Vuex.Store({
     loginSuccess(state, payload){
       state.isLogin = false  //로그인 성공시
       state.loginUser = payload
+      state.auth = payload.auth
     },
     logout(state){
       state.isLogin = true
