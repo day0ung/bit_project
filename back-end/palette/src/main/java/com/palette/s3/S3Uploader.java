@@ -18,7 +18,7 @@ import com.amazonaws.services.s3.model.PutObjectRequest;
 public class S3Uploader {
 
     // @Autowired
-    // private AmazonS3 amazonS3Client;
+    private AmazonS3 amazonS3Client;
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
