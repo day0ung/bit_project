@@ -3,9 +3,8 @@
       <br>
       <br>
       <div class="calendar">
- <el-date-picker type="date" placeholder="Pick a date" v-model="date1" style="width: 100%;"></el-date-picker>
       <full-calendar :events="events" :config="config" @day-click="dayClick" @event-selected="eventSelected"></full-calendar>
-      <Modal v-if="showModal" @close="showModal = false"></Modal>
+      <Modal v-if="showModal" @close="showModal = false" :startDate="clickDay"></Modal>
       </div>
   </div>
 </template>
@@ -51,9 +50,9 @@ export default {
           console.log(date)
 
           let a = this.$moment(date).format('YYYY-MM-DD')
-          this.$store.state.s_group.groupCalendarStartDate = clickDay
-          alert(a)
-          this.clickDay = a
+          alert(date)
+          this.clickDay = date
+          this.$store.state.s_group.groupCalendarStartDate = date
           this.showModal = true
 
         }).catch(() => {

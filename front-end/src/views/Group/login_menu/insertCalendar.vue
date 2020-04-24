@@ -20,15 +20,16 @@
                       <el-date-picker
                         size="mini"
                         v-model="ruleForm.date1"
+                        :picker-options="pickerOptions"
                         type="datetimerange"
                         range-separator="~"
                         start-placeholder="Start date"
                         end-placeholder="End date"
-                        
                         style="width:288px">
                       </el-date-picker>
                     </div>
-                    {{ruleForm.date1}}
+                    <p>{{startDate}}</p>
+                    {{this.$store.state.s_group.groupCalendarStartDate}}
                 </el-form-item>
   <el-form-item label="title" prop="title">
     <el-input v-model="ruleForm.title" size="mini"></el-input>
@@ -62,8 +63,22 @@
 <script>
 export default {
 
- data(){
+props:["startDate"], 
+data(){
       return{
+        selectedDate:'',
+        pickerOptions: {
+          shortcuts: [{
+            text: 'selected',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              console.log("end: "+end +"/ start: "+start)
+              //start.setTime(start.getTime());
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
          ruleForm: {
           title: '',
           date1: '',
@@ -98,21 +113,12 @@ export default {
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      mounted(){
-         console.log("cal 1")
-         this.setDate()
-        
+      exit(){
+        this.$emit('close')
       },
-      setDate(){
-        console.log("cal 2")
-        this.ruleForm.date1 = this.$store.state.s_group.groupCalendarStartDate
+      regi(){
+        this.$emit('close')
       },
-        exit(){
-          this.$emit('close')
-        },
-        regi(){
-          this.$emit('close')
-        },
        
     }
 
