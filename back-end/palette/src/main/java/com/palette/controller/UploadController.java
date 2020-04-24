@@ -15,16 +15,15 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 public class UploadController {
 
-    // @Autowired
-    // private S3Uploader s3Uploader;
+    @Autowired
+    private S3Uploader s3Uploader;
 
     @PostMapping(value = "/insertGroupReference")
     public String insertGroupReference(ReferenceVo from) throws IOException{
         System.out.println("insertGroupReference()");
-        // System.out.println(from.toString());
         for (MultipartFile file : from.getFiles()) {
             System.out.println(file.toString());
-            //s3Uploader.upload(file, from.getTitle());
+            s3Uploader.upload(file, from.getMemberId());
         }
         return "";
     }

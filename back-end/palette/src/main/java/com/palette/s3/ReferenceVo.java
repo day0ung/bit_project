@@ -8,20 +8,20 @@ public class ReferenceVo {
 
     private int gorupSeq;
     private int memberSeq;
+    private String memberId;
     private String title;
     private String content;
-
     private List<MultipartFile> files;
-
 
     public ReferenceVo() {
     }
 
-    public ReferenceVo(int gorupSeq, int memberSeq, String title, String content, List<MultipartFile> files) {
+    public ReferenceVo(int gorupSeq, int memberSeq, String title, String content, String memberId, List<MultipartFile> files) {
         this.gorupSeq = gorupSeq;
         this.memberSeq = memberSeq;
         this.title = title;
         this.content = content;
+        this.memberId = memberId;
         this.files = files;
     }
 
@@ -57,6 +57,14 @@ public class ReferenceVo {
         this.content = content;
     }
 
+    public String getMemberId() {
+        return this.memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
     public List<MultipartFile> getFiles() {
         return this.files;
     }
@@ -85,6 +93,11 @@ public class ReferenceVo {
         return this;
     }
 
+    public ReferenceVo memberId(String memberId) {
+        this.memberId = memberId;
+        return this;
+    }
+
     public ReferenceVo files(List<MultipartFile> files) {
         this.files = files;
         return this;
@@ -97,6 +110,7 @@ public class ReferenceVo {
             ", memberSeq='" + getMemberSeq() + "'" +
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
+            ", memberId='" + getMemberId() + "'" +
             ", files='" + getFiles() + "'" +
             "}";
     }

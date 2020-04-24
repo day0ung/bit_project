@@ -13,3 +13,6 @@ cloud:
       bucket: bit-palette
     region:
       static: ap-northeast-2
+    credentials:
+      accessKey: AKIAI6QY5OIW2BQUPOTQ
+      secretKey: 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

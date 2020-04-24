@@ -13,7 +13,7 @@
                     accept=".jpg, .jpeg, .png, .bmp, .txt, .ppt, .pptx, .hwp"
                     multiple
                     v-model="ruleForm.fileList"
-                    :limit="2"
+                    :limit="3"
                     :auto-upload="false"
                     :on-change="handleChange"
                     :on-exceed="handleExceed"
@@ -87,6 +87,7 @@ export default {
                 let formData = new FormData();
                 formData.append('groupSeq', this.$store.state.s_group.groupSeq)
                 formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
+                formData.append('memberId', this.$store.state.loginUser.memberId)
                 formData.append('title',this.ruleForm.title)
                 formData.append('content',this.ruleForm.content)
                 this.ruleForm.fileList.forEach(function(element){
