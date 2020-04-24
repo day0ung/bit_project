@@ -127,7 +127,7 @@ public class MemberController {
     	return add;
     }
     
-    //개인스터디 todo리스트 출력
+    //개인스터디 todo리스트 전체출력
     @PostMapping(value="/selectTodoList")
     public List<TodoListDto> selectTodoList(TodoListDto dto) {
     	System.out.println("selectTodoLsit"+ dto.getMemberSeq());
@@ -166,5 +166,21 @@ public class MemberController {
     	System.out.println("----Edit---"+ dto.getTitle()+ dto.getMemberSeq()+ dto.getTodoSeq());
     	boolean edit = memberService.todoEdit(dto);
     	return edit;
+    }
+    
+    //todolist 완료된 리스트 뿌리기
+    @PostMapping(value="/selectDoneTodoList")
+    public List<TodoListDto> selectDoneTodoList(TodoListDto dto) {
+    	System.out.println("selectDoneTodoList"+ dto.getMemberSeq());
+    	List<TodoListDto> todo = memberService.selectDoneTodoList(dto);
+    	return todo;
+    }
+    
+    //todolist 미완료된 리스트 
+    @PostMapping(value="/TodoListDoing")
+    public List<TodoListDto> TodoListDoing(TodoListDto dto) {
+    	System.out.println("selectDoneTodoList"+ dto.getMemberSeq());
+    	List<TodoListDto> todo = memberService.TodoListDoing(dto);
+    	return todo;
     }
 }

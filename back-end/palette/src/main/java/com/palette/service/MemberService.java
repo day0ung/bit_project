@@ -129,5 +129,15 @@ public class MemberService {
 			return edit > 0? true: false;
 		}
 		
+		public List<TodoListDto> selectDoneTodoList(TodoListDto dto) {
+			List<TodoListDto> list = memberDao.selectDoneTodoList(dto);
+			return list;
+		}
+		
+		public List<TodoListDto> TodoListDoing(TodoListDto dto) {
+			List<TodoListDto> list = memberDao.TodoListDoing(dto);
+			return list;
+		}
+		
     
 }
