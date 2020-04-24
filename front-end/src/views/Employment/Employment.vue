@@ -31,7 +31,9 @@ export default {
       cvMain : true,
       cvDetail : false,
       cvWriting : false,
-      cvUpdate : false
+      cvUpdate : false,
+      paramNum : 0
+
     }
   },
 
@@ -43,30 +45,43 @@ export default {
       console.log(tab, event);
     },
     showCVMain(){
+      this.activeName = 'second'
       this.cvMain = true
       this.cvDetail = false
       this.cvWriting = false
       this.cvUpdate = false
     },
     showCVDetail(){
+      this.activeName = 'second'
       this.cvMain = false
       this.cvDetail = true
       this.cvWriting = false
       this.cvUpdate = false
     },
     showCVWriting(){
+      this.activeName = 'second'
       this.cvMain = false
       this.cvDetail = false
       this.cvWriting = true
       this.cvUpdate = false
     },
     showCVUpdate(){
+      this.activeName = 'second'
       this.cvMain = false
       this.cvDetail = false
       this.cvWriting = false
       this.cvUpdate = true
     }
     
+  },
+  mounted(){
+    this.paramNum = this.$route.params.memberSeq
+    if(this.paramNum > 0){
+      this.showCVUpdate()
+    }
+    // alert("this.showCVUpdate()")
+      
+      
   }
 }
 </script>

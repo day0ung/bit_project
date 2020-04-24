@@ -205,6 +205,7 @@ export default {
 				this.$store.state.s_employment.getOneRecruit = res.data
 				this.getOneRecruit1 = this.$store.state.s_employment.getOneRecruit
 				this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm:ss')
+				// this.startDate = this.$moment(new Date()).format('YYYY.MM.DD HH:mm:ss')
             	this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm:ss')
 				this.ruleForm.title = this.getOneRecruit1.title
 				this.ruleForm.cvStartDate = this.startDate
