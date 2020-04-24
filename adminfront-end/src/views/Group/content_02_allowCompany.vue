@@ -23,9 +23,7 @@
 export default {
     data(){
         return{
-            request:'undefined',
-            showAllowCreateGroup,
-            showAllowCreateGroup
+            request:'undefined'
         }
     },
     watch:{

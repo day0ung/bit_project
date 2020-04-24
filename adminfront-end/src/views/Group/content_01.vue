@@ -14,79 +14,12 @@
             </el-select>
         
         <el-table 
-        :data="adminAllStudyGroupList.filter(data=> String(data.permission).includes(value.value))"
+        :data="adminAllStudyGroupList.filter(data=> String(data.auth).includes(value.value))"
         stripe
         style="width:100%"
         >
         <!-- @row-click="eventReceiver" -->
         <!-- @cell-click="inputcellclick()" -->
-
-            <el-table-column
-            prop="address"
-            label="address"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="age"
-            label="age"
-            width="50">
-            </el-table-column>
-
-            <el-table-column
-            prop="auth"
-            label="auth"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="companyInfo"
-            label="companyInfo"
-            width="100">
-            </el-table-column>
-
-
-             <el-table-column
-            prop="companyLogo"
-            label="companyLogo"
-            width="100">
-                <div slot-scope="{row}" class="img-container">
-                    <img :src="row.companyLogo" alt="NocompanyLogo"
-                    style="width:100px; height:100px;"
-                    >
-                </div>
-            </el-table-column>
-
-
-            <el-table-column
-            prop="cv"
-            label="cv"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="del"
-            label="del"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="dislike"
-            label="dislike"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="email"
-            label="email"
-            width="100">
-            </el-table-column>
-            
-            <el-table-column
-            prop="gender"
-            label="gender"
-            width="100">
-            </el-table-column>
 
             <el-table-column
             prop="memberId"
@@ -101,20 +34,58 @@
             width="100">
             </el-table-column>
 
+             <el-table-column
+            prop="companyLogo"
+            label="companyLogo"
+            width="100">
+                <div slot-scope="{row}" class="img-container">
+                    <img :src="row.companyLogo" alt="NocompanyLogo"
+                    style="width:100px; height:100px;"
+                    >
+                </div>
+            </el-table-column>
+
+            <el-table-column
+            prop="address"
+            label="address"
+            width="100">
+            </el-table-column>
+
+            <el-table-column
+            prop="cv"
+            label="cv"
+            width="100">
+            </el-table-column>
+
+            <el-table-column
+            prop="email"
+            label="email"
+            width="100">
+            </el-table-column>
+
+            <el-table-column
+            prop="companyInfo"
+            label="companyInfo"
+            width="100">
+            </el-table-column>
             
             <el-table-column
             prop="myMoney"
             label="myMoney"
             width="100">
             </el-table-column>
-            
+
             <el-table-column
-            prop="pwd"
-            label="pwd"
-            width="100">
+            prop="del"
+            label="del"
+            width="50">
             </el-table-column>
-            
-           
+
+            <el-table-column
+            prop="dislike"
+            label="dislike"
+            width="80">
+            </el-table-column>
 
             <el-table-column
             prop="info"
@@ -123,51 +94,34 @@
             </el-table-column>
 
             <el-table-column
-            prop="interBigSeq"
-            label="interBigSeq"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="interSmallSeq"
-            label="interSmallSeq"
-            width="90">
-            </el-table-column>
-
-            <el-table-column
-            prop="maxMember"
-            label="maxMember"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
             prop="memberSeq"
             label="memberSeq"
             width="100">
             </el-table-column>
-            
+
             <el-table-column
-            prop="smallInfo"
-            label="smallInfo"
-            width="100">
+            prop="auth"
+            label="auth"
+            width="60">
             </el-table-column>
+
 
             <el-table-column
               prop=""
               label="button"
-              width="120" >
+              width="170" >
                 <template slot-scope="scope">
                     <div v-loading="loading">
                         <el-button
-                            v-if="scope.row.permission===0"
+                            v-if="scope.row.auth===2"
                             size="mini"
-                            @click="changePermission(scope,1)"> 개설허가 </el-button>
+                            @click="changeATUH(scope,3)"> 기업회원으로 전환 </el-button>
 
                         <el-button
-                            v-if="scope.row.permission===1"
+                            v-if="scope.row.auth===3"
                             size="mini"
                             type="danger"
-                            @click="changePermission(scope,0)"> 개설취소 </el-button>
+                            @click="changeATUH(scope,2)"> 기업회원 허가 철회 </el-button>
                      </div>
                 </template>
             </el-table-column>
@@ -193,11 +147,11 @@ export default {
                 value: '',
                 label: '전체보기'
                 }, {
-                value: '1',
-                label: '승인완료'
+                value: '2',
+                label: '비전환 기업리스트'
                 }, {
-                value: '0',
-                label: '비승인'
+                value: '3',
+                label: '기업회원 전환완료'
             }],
             value: '',
             loading:false,
@@ -222,7 +176,7 @@ export default {
 
                 this.value=this.$store.state.adminAllStudyGroupListSelector
                 this.adminAllStudyGroupList = this.$store.state.adminAllStudyGroupList
-
+                console.log("adminAllStudyGroupList 출력 내역 ")
                 console.log(this.adminAllStudyGroupList)
                 
                 console.log("base selected value : ") 
@@ -230,11 +184,11 @@ export default {
 
             })
         },
-        changePermission(scope, permissionStatus){
+        changeATUH(scope, AuthStatus){
 
-            const groupInofSeq = scope.row.groupInfoSeq
-            const memberSeq =  scope.row.memberSeq
-            const perStatus = permissionStatus
+            const memberSeq = scope.row.memberSeq
+            const memberId =  scope.row.memberId
+            const auth = AuthStatus
             var inputStr=""
 
             
@@ -243,21 +197,21 @@ export default {
 
             console.log("투루펄스 여부 " + this.loading)
         
-            if(permissionStatus=1){
-                inputStr="그룹개설신청 허가하시겠습니까"
+            if(AuthStatus=1){
+                inputStr="기업회원 전환하시겠습니까?"
             }else{
-                inputStr="그룹개설을 취소하겠습니까"
+                inputStr="기업회원전환 대기로 변경 하시겠습니까?"
             }
 
             const confirmflag = confirm(inputStr);
             if(confirmflag){
 
                 var params = new URLSearchParams();	// post 방식으로 받아야함.
-                params.append('groupInfoSeq', groupInofSeq);
                 params.append('memberSeq', memberSeq);
-                params.append('permission', perStatus );
+                params.append('memberId', memberId);
+                params.append('auth', auth );
 
-                axios.post(path+"/AdminAcceptCreateGroup",params)
+                axios.post(path+"/changeAuthCompanyMember",params)
                 .then(res=>{
                     if(res.data = true)console.log(res.data);
                     this.getGroupAllowList()

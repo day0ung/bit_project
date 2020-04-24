@@ -96,7 +96,7 @@ public class Admin_CompanyController {
     	System.out.println("changeAuthCompanyMemberStatus Method execute Now..");
     	
     	boolean isS = adminCompanyService.changeAUTHforCompanyMember(dto);
-    	System.out.println("changeAUTHforCompanyMember RESULT : \n" + isS );
+    	System.out.println("changeAuthCompanyMemberStatus RESULT : \n" + isS );
     	return isS;
     }
     

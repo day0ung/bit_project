@@ -61,14 +61,14 @@ export default {
           var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
           console.log('세션가져오기' + loginData)
           var login = JSON.parse(loginData); //JSON
-          this.$store.commit('loginSuccess', login )
+          this.$store.commit('loginSuccess', login)
           console.log('로그인성공');
 
           console.log("출력 : " + this.$store.state.loginUser);
           console.log("출력 : " + this.$store.state.isLogin);
 
           this.$router.push ({path:'/'})
-          this.$emit('close')   
+          this.$emit('close')
 
 
       })
