@@ -4,7 +4,8 @@
       <br>
       <div class="calendar">
       <full-calendar :events="this.$store.state.s_group.groupCalendar" :config="config" @day-click="dayClick" @event-selected="eventSelected"></full-calendar>
-      <Cwrite v-if="show_calendar_write" @close="show_calendar_write = false" :startDate="clickDay"></Cwrite>
+        <Cwrite v-if="show_calendar_write" @close="show_calendar_write = false" :startDate="clickDay"></Cwrite>
+        <Cdetail v-if="show_calendar_detail" @close="show_calendar_detail = false"></Cdetail>
       </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ import 'fullcalendar/dist/fullcalendar.css'
 import 'fullcalendar/dist/locale/ko'
 import { FullCalendar } from 'vue-full-calendar'
 import Cwrite from '@/views/Group/detail/calendar_write.vue'
+import Cdetail from '@/views/Group/detail/calendar_detail.vue'
 
 export default {
   name: 'GroupSchedule',
@@ -24,6 +26,7 @@ export default {
     return{
       date1:'',
       show_calendar_write: false,
+      show_calendar_detail: false,
       //memberlist: this.$store.state.s_subStore.data,
       config: {
               locale: 'ko',
@@ -33,24 +36,27 @@ export default {
     }
   },
   components:{
-        Cwrite
+        Cwrite,
+        Cdetail
   },
   methods:{
     getCalendar(){
       let params = new URLSearchParams()	
-          let groupSeq = this.$store.state.s_group.groupSeq
-          params.append('groupInfoSeq', groupSeq)
-          axios.post("http://localhost:9000/getGroupCalendar", params)
-          .then(res => {
-            console.log(JSON.stringify(res.data))
-            let e = (JSON.stringify(res.data))
-            this.$store.state.s_group.groupCalendar = JSON.parse(e)
-            
-          })  
+      let groupSeq = this.$store.state.s_group.groupSeq
+      params.append('groupInfoSeq', groupSeq)
+      axios.post("http://localhost:9000/getGroupCalendar", params)
+      .then(res => {
+        console.log(JSON.stringify(res.data))
+        let e = (JSON.stringify(res.data))
+        this.$store.state.s_group.groupCalendar = JSON.parse(e)
+        
+      })  
     },
     eventSelected(event, jsEvent, view){
         alert(event.calendarSeq+"/"+event.title + "/"+ event.start +" / " + event.content)
+        this.$store.state.s_group.groupCalendarDetail = event
         
+        this.show_calendar_detail = true
     },
     dayClick(date, jsEvent, view){
         this.$confirm('추가하시겠습니까?', '일정추가', {
@@ -60,8 +66,7 @@ export default {
         }).then(() => {
           console.log(date)
 
-          let a = 
-          alert(date._i)
+          //alert(date._i)
           this.clickDay = date
           this.$store.state.s_group.groupCalendarStartDate = date._i
           this.show_calendar_write = true

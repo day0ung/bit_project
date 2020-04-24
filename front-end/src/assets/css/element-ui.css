@@ -4533,7 +4533,8 @@
 }
 
 .el-popup-parent--hidden {
-    overflow: hidden
+    overflow: hidden;
+    padding:0px !important
 }
 
 .el-message-box {

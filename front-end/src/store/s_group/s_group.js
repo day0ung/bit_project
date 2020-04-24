@@ -5,6 +5,7 @@ export default {
         groupList: [],
         detailSeq: 0,
         groupCalendar:[],
+        groupCalendarDetail:[],
         groupCalendarStartDate:'',
         groupBoardList: [],
         groupBoardDetail: [],
