@@ -150,7 +150,7 @@ public class GroupController {
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
     }
-    
+
     // attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {

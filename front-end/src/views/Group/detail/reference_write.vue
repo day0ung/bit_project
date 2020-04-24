@@ -6,18 +6,16 @@
         <br>
         <br>
         <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-            <el-form-item label="자료 올리기" prop="image">
+            <el-form-item label="자료 올리기" prop="fileList">
                 <el-upload
-                    ref="upload"
                     action=""
                     list-type="picture-card"
                     accept=".jpg, .jpeg, .png, .bmp, .txt, .ppt, .pptx, .hwp"
                     multiple
-                    :file-list="ruleForm.fileList"
+                    v-model="ruleForm.fileList"
                     :limit="2"
                     :auto-upload="false"
                     :on-change="handleChange"
-                    :on-success="handleSuccess"
                     :on-exceed="handleExceed"
                     :on-preview="handlePictureCardPreview"
                     :on-remove="handleRemove">
@@ -69,6 +67,9 @@ export default {
                 ],
                 content: [
                     { required: true, message: '간략하게 자료에 대한 설명을해주세요', trigger: 'blur' },
+                ],
+                fileList: [
+                    { required: true, message: '자료를 올려주세요', trigger: 'change' },
                 ]
             }
         }
@@ -83,26 +84,27 @@ export default {
         submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
-
                 let formData = new FormData();
-                //formData.append
-                alert(this.$refs.upload.fileList)
-                //alert(this.ruleForm.fileList[0].raw)
-                this.showGroupReference()
-                // alert(this.$store.state.loginUser.memberSeq)
-                // alert(this.$store.state.s_group.groupSeq)
-				// axios.get("http://localhost:9000/insertGroupBoard",{
-				// 	params:{
-                // 		memberSeq: this.$store.state.loginUser.memberSeq,
-                //         groupInfoSeq: this.$store.state.s_group.groupSeq,
-				// 		title: this.ruleForm.title,
-				// 		content: this.content
-				// 	}
-				// }).then(res =>{
-                //     alert("게시글 작성이 완료되었습니다.")
-                //     this.allList()
-                //     this.showList()
-				// })
+                formData.append('groupSeq', this.$store.state.s_group.groupSeq)
+                formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
+                formData.append('title',this.ruleForm.title)
+                formData.append('content',this.ruleForm.content)
+                this.ruleForm.fileList.forEach(function(element){
+                    formData.append('files', element)
+                })
+                for (let key of formData.entries()){
+                    console.log(`${key}`)
+                }
+				axios.post("http://localhost:9000/insertGroupReference", formData ,{
+					headers:{
+                        'Content-Type' : 'multipart/form-data'
+					}
+				}).then(res =>{
+                    alert("자료가 업로드 되었습니다.")
+                    this.showGroupReference()
+                    // this.allList()
+                    // this.showList()
+				})
 				
 			} else {
 				console.log('error submit!!');
@@ -111,14 +113,14 @@ export default {
             });
         },
         handleChange(file, fileList){
-            this.ruleForm.fileList = fileList
-            alert(this.ruleForm.fileList)
-        },
-        handleSuccess(response, file, fileList){
-            alert(fileList)
+            this.ruleForm.fileList.push(file.raw)
+            console.log("addList")
+            console.log(this.ruleForm.fileList)
         },
         handleRemove(file, fileList) {
-            console.log(file, fileList);
+            this.ruleForm.fileList = this.ruleForm.fileList.filter(data => data.name !== file.raw.name)
+            console.log("removeList")
+            console.log(this.ruleForm.fileList)
         },
         handlePictureCardPreview(file) {
             this.ruleForm.dialogImageUrl = file.url;
