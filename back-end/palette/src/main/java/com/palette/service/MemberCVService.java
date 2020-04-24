@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.palette.dao.MemberCVDao;
 import com.palette.model.BoardParams;
 import com.palette.model.MemberCVDto;
+import com.palette.model.MemberDto;
 
 
 
@@ -44,5 +45,18 @@ public class MemberCVService {
 	
 	public void readCount(int cvSeq) {
 		memberCVDao.readCount(cvSeq);
+	}
+	
+	public MemberDto oneMember(int memberSeq) {
+		return memberCVDao.oneMember(memberSeq);
+	}
+	
+	public boolean updateCV(MemberCVDto dto){
+		int len = memberCVDao.updateCV(dto);
+		return len > 0?true:false;
+	}
+	
+	public MemberCVDto getOneCVByMemberSeq(int memberSeq) {
+		return memberCVDao.getOneCVByMemberSeq(memberSeq);
 	}
 }

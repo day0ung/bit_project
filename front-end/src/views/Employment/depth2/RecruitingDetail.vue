@@ -7,14 +7,14 @@
           <div class="jview_progress" style="display: none;">
             <div class="row"></div>
           </div>
-          <div class="wrap_jview">
+          <div class="wrap_jview" v-loading="loading">
             <section class="jview">
               <div class="wrap_jv_cont">
                 <div class="wrap_jv_header">
                    <div class="jv_header">
                     <a :href="getOneRecruit1.webUrl" class="company" target="_blank">
                       <!-- 회사명 -->
-                      {{getOneRecruit1.memberDto.memberName}}
+                      {{ this.$store.state.s_employment.getOneRecruit.memberDto.memberName}}
                     </a>
                     <button type="button" title="관심기업 등록" class="btn_jview spr_jview btn_interest" onclick="#" onmousedown="#" first_nudge="off">
                       <span>관심기업 등록</span>
@@ -148,7 +148,7 @@ export default {
   mounted(){
      
     // 구인공고 리스트에서 공고를 클릭시 게시판seq를 파라미터로 가지고 와서 DTO를 불러와서 getOneRecruit에 담는다.
-    
+    this.loading = true
     this.empBoardSeq = this.$route.params.boardId
       var params = new URLSearchParams()
       params.append("empBoardSeq", this.empBoardSeq)
@@ -159,7 +159,7 @@ export default {
             this.getOneRecruit1 = this.$store.state.s_employment.getOneRecruit
             this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm')
             this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm')
-            
+            this.loading = false
       })
 
   },

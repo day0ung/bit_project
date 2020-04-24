@@ -1,18 +1,17 @@
 <template>
   <div class="CV">
     <!-- 일반 회원 / CV 없을 때 -->
-    <div v-if="(login1.auth === 0 | login1.auth === 1) & login1.cv === 0" class="writeNewCV">
+    <div v-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 0" class="writeNewCV">
       <el-button type="primary" round @click="writeCV">새로운 이력서 작성</el-button>
     </div>
     <!-- 일반 회원 / CV 있을 때 -->
-    <div v-else-if="(login1.auth === 0 | login1.auth === 1) & login1.cv === 1" class="updateCV">
-      <el-button type="primary" round @click="test">이력서 수정하기</el-button>
+    <div v-else-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 1" class="updateCV">
+      <el-button type="primary" round @click="updateCV">이력서 수정하기</el-button>
     </div>
     <!-- 기업 회원 -->
     <div v-else class="CVList">
-      
       <div class="boardTableFrom">
-      <h3>이력서 열람</h3>
+      <p>이력서 열람</p>
         <div class="boardSearchBar">
           <el-input
             v-model="searchWord"
@@ -99,15 +98,11 @@ export default {
     }
   },
   methods:{
-    test(){
-      this.$router.push({
-        name: "test"
-        })
+    updateCV(){
+      this.$emit("showCVUpdate")
     },
     writeCV(){
-      this.$router.push({
-        name: "CvWriting"
-        })
+      this.$emit("showCVWriting")
     },
     allList(){
      this.s_keyWord=''
@@ -195,10 +190,16 @@ export default {
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
       return "clickableRows";
-    },
+    }
   },
   mounted(){
+    var params = new URLSearchParams();	// post 방식으로 받아야함. 
+      params.append('memberSeq', this.login1.memberSeq);
+      axios.post("http://localhost:9000/oneMember", params).then(res => { 
+        this.$store.state.s_employment.oneMember = res.data
+      })
     
+  
   },
   created(){
 		let sMemberSeq = sessionStorage.getItem("loginUser")
@@ -207,6 +208,8 @@ export default {
     //페이징
       this.getTotal()
       this.getList()
+
+      
     
 		// this.memberSeq = this.$store.state.loginUser.memberSeq
   }

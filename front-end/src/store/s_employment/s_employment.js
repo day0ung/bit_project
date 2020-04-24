@@ -10,10 +10,13 @@ export default new Vuex.Store({
         RecruitingList: [],
         getOneRecruit : "",
         cvDetail : "",
-        showCVList : false,
+        showCVMain : false,
         showCVDetail : false,
+        showCVWriting : false,
+        showCVUpdate : false,
         loadingCVList : false,
         loadingCVDetail : false,
+        oneMember : ""
 
     },
     mutations: {
