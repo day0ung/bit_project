@@ -56,6 +56,10 @@ public interface MemberDao {
 	
 	int todoEdit(TodoListDto dto);
 	
+	List<TodoListDto> selectDoneTodoList(TodoListDto dto);
+	
+	List<TodoListDto> TodoListDoing(TodoListDto dto);
+	
 	
 
 }

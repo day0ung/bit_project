@@ -10,13 +10,26 @@
  <select id="selectTodoList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
  	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
  	FROM TODOLIST 
- 	WHERE MEMBER_SEQ=#{memberSeq}
+ 	WHERE MEMBER_SEQ=#{memberSeq} 
  </select>
+ 
+  
+ <select id="selectDoneTodoList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
+ 	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
+ 	FROM TODOLIST 
+ 	WHERE MEMBER_SEQ=#{memberSeq} AND DEL=1
+ </select>
+
+ <select id="TodoListDoing" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
+ 	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
+ 	FROM TODOLIST 
+ 	WHERE MEMBER_SEQ=#{memberSeq} AND DEL=0
+ </select> 
  
  <select id="selectOneList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
     SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
  	FROM TODOLIST 
- 	WHERE TODO_SEQ=(select max(TODO_SEQ) from TODOLIST where MEMBER_SEQ=#{memberSeq})
+ 	WHERE TODO_SEQ=(select max(TODO_SEQ) from TODOLIST where MEMBER_SEQ=#{memberSeq}) 
  </select>
  
  <delete id="todoDel" parameterType="com.palette.model.TodoListDto" >

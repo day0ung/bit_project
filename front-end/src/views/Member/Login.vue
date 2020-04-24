@@ -59,13 +59,19 @@
 <script>
 import logincss from '@/assets/css/member/login.css'
 export default {
-
     data(){
       return{
           id: null,
           pwd: null,
-          idSave: false
+          idSave: ''
       }
+    },
+    mounted(){
+        var userId = this.$cookie.get('userId')
+        if(userId != null){
+          this.id = userId
+          this.idSave = true
+        }
     },
     methods:{
         exit(){
@@ -102,16 +108,18 @@ export default {
                 // this.$router.push ({path: '/'}) 
                 this.$emit('close')   
             })
-                          
-
         },
         saveId(){
-          alert(this.id)
-          //client측 쿠키저장
-          // $cookies.set('cookie_name', 'cookie_value');
-
-          //client측 쿠키 읽기
-          // let value = $cookies.get('key')
+          if(this.idSave == false){
+                if(this.id == null){
+                  alert('아이디를 입력해주세요')
+                  this.idSave = false
+                }else{
+                  this.$cookie.set('userId', this.id, 365);
+                }
+          }else{
+            this.$cookie.delete('userId');
+          }
         },
         idSearch(){
 

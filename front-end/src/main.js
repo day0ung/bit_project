@@ -8,7 +8,8 @@ import FullCalendar from 'vue-full-calendar'
 
 Vue.use(FullCalendar)
 Vue.use(ElementUI, {locale});
-
+const VueCookie = require('vue-cookie');
+Vue.use(VueCookie);
 Vue.config.productionTip = true
 
 new Vue({
