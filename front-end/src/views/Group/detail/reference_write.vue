@@ -101,6 +101,7 @@ export default {
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
+                    console.log(res.data)
                     alert("자료가 업로드 되었습니다.")
                     this.showGroupReference()
                     // this.allList()
@@ -114,7 +115,7 @@ export default {
             });
         },
         handleChange(file, fileList){
-            this.ruleForm.fileList.push(file.raw)
+            this.ruleForm.fileList.push(file.raw) 
             console.log("addList")
             console.log(this.ruleForm.fileList)
         },

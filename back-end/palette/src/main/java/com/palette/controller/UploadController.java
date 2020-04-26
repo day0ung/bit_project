@@ -1,6 +1,8 @@
 package com.palette.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
@@ -19,11 +21,11 @@ public class UploadController {
     private S3Uploader s3Uploader;
 
     @PostMapping(value = "/insertGroupReference")
-    public String insertGroupReference(ReferenceVo from) throws IOException{
-        System.out.println("insertGroupReference()");
-        for (MultipartFile file : from.getFiles()) {
-            System.out.println(file.toString());
-            s3Uploader.upload(file, from.getMemberId());
+    public String insertGroupReference(ReferenceVo form) throws IOException{
+        System.out.println(form.getFiles().size());
+        for (MultipartFile file : form.getFiles()) {
+            String fileUrl = s3Uploader.upload(file, form.getMemberId());
+            System.out.println(fileUrl);
         }
         return "";
     }
