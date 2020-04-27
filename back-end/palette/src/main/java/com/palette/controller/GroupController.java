@@ -1,5 +1,6 @@
 package com.palette.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.s3.ReferenceVo;
 import com.palette.service.GroupService;
 
 
@@ -149,6 +151,12 @@ public class GroupController {
         System.out.println("getInterListAll()");
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
+    }
+
+    @PostMapping(value = "/insertGroupReference")
+    public String insertGroupReference(ReferenceVo form) throws IOException{
+        groupService.insertBoardReference(form);
+        return "";
     }
 
     // attendance

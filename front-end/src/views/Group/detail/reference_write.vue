@@ -85,7 +85,7 @@ export default {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
                 let formData = new FormData();
-                formData.append('groupSeq', this.$store.state.s_group.groupSeq)
+                formData.append('groupInfoSeq', this.$store.state.s_group.grouDetail.groupSchedule.groupInfoSeq)
                 formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
                 formData.append('memberId', this.$store.state.loginUser.memberId)
                 formData.append('title',this.ruleForm.title)

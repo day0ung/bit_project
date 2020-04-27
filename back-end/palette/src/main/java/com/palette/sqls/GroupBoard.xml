@@ -160,5 +160,15 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		WHERE BOARD_SEQ = #{boardSeq}
 	</update>
 
+	<insert id="insertBoardReference" parameterType="com.palette.model.BoardReferenceDto">
+		INSERT INTO BOARD_REFERENCE(BOARD_SEQ, MEMBER_SEQ, FILE_NAME)
+		VALUES (#{boardSeq}, #{memberSeq}, #{fileName})
+	</insert>
+
+	<select id="currBoardSeq" resultType="java.lang.Integer">
+        SELECT max(BOARD_SEQ)
+        FROM BOARD
+    </select>
+
 
 </mapper>

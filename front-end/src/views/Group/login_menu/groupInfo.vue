@@ -79,7 +79,7 @@ export default {
         getGroupOne(){
             this.$store.state.s_group.showGroupInfo = true
             this.$store.state.s_group.groupSeq = this.$route.params.groupSeq
-            this.groupInfoSeq = this.$store.state.s_group.groupSeq
+            this.groupInfoSeq = this.$store.state.s_group.groupInfoSeq
 
             var params = new URLSearchParams();	// post 방식으로 받아야함.
             params.append('groupInfoSeq', this.groupInfoSeq);
