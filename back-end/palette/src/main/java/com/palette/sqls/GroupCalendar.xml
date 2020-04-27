@@ -13,6 +13,10 @@
 		values(#{memberSeq}, #{groupInfoSeq}, #{title}, #{content}, #{start}, #{end}, 1)
 	</insert>
 	
+	<delete id="deleteGroupCalendar" parameterType="java.lang.Integer">
+		delete from FINAL.CALENDAR
+		where CALENDAR_SEQ = #{calendarSeq}
+	</delete>
 	
 	
 </mapper>

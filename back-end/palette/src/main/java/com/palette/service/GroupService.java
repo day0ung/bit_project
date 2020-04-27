@@ -97,8 +97,14 @@ public class GroupService {
 	public void insertGroupCalendar(CalendarDto calendarDto) {
 		groupDao.insertGroupCalendar(calendarDto);
 	}
-
-	// TODO: GROUP ATTENDENCE
+	public void deleteGroupCalendar(int seq) {
+		groupDao.deleteGroupCalendar(seq);
+	}
+	public void resizeCalendar(CalendarDto calendarDto) {
+		groupDao.resizeCalendar(calendarDto);
+	}
+	
+// TODO: GROUP ATTENDENCE	
 	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
 		int a = -1;
 		if (checkday.equals("Sunday")) {

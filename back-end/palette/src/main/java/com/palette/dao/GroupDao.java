@@ -45,6 +45,8 @@ public interface GroupDao {
 	
 	List<CalendarDto> getGroupCalendar(GroupDto groupDto);
 	void insertGroupCalendar(CalendarDto calendarDto);
+	void deleteGroupCalendar(int seq);
+	void resizeCalendar(CalendarDto calendarDto);
 	
 	void insertAttendGroup(GroupSchedule groupSchedule);
 	int checkAttend(GroupSchedule groupSchedule);
@@ -53,6 +55,8 @@ public interface GroupDao {
 	void insertGroupBoard(GroupBoardDto groupBoardDto);
 	void updateGroupBoard(GroupBoardDto groupBoardDto);
 	void updateReadCount(int boardSeq);
+	
+	
 
 	int currBoardSeq();
 	void insertBoardReference(BoardReferenceDto boardReferenceDto);

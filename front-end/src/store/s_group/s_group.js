@@ -13,6 +13,7 @@ export default {
         groupReferenceDetail: [],
         grouDetail: [],
         showGroupInfo: false,
+        showGroupCalendar: false,
         showBoardList: false,
         showBoardDetail: false,
         showDeleteBtn: false,

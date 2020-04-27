@@ -3,16 +3,20 @@
       <br>
       <br>
       <div class="calendar">
-      <full-calendar :events="this.$store.state.s_group.groupCalendar" :config="config" @day-click="dayClick" @event-selected="eventSelected"></full-calendar>
+      <full-calendar :events="this.$store.state.s_group.groupCalendar" :config="config" 
+                      @day-click="dayClick" @event-selected="eventSelected" @event-drop="eventDrop"
+                      v-loading="this.$store.state.s_group.showGroupCalendar"></full-calendar>
         <Cwrite v-if="show_calendar_write" @close="show_calendar_write = false" :startDate="clickDay"></Cwrite>
         <Cdetail v-if="show_calendar_detail" @close="show_calendar_detail = false"></Cdetail>
       </div>
+      <el-button 
+      @click="compareWith">수정하기</el-button>
   </div>
 </template>
 
 <script>
 
-
+import { loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import 'fullcalendar/dist/fullcalendar.css'
 import 'fullcalendar/dist/locale/ko'
@@ -24,7 +28,8 @@ export default {
   name: 'GroupSchedule',
   data(){
     return{
-      date1:'',
+      DBCalendar:[],
+      lastCalendar:[],
       show_calendar_write: false,
       show_calendar_detail: false,
       //memberlist: this.$store.state.s_subStore.data,
@@ -41,20 +46,27 @@ export default {
   },
   methods:{
     getCalendar(){
+      this.$store.state.s_group.showGroupCalendar = true
+
       let params = new URLSearchParams()	
       let groupSeq = this.$store.state.s_group.groupSeq
       params.append('groupInfoSeq', groupSeq)
       axios.post("http://localhost:9000/getGroupCalendar", params)
       .then(res => {
-        console.log(JSON.stringify(res.data))
-        let e = (JSON.stringify(res.data))
+        console.log("DB: "+JSON.stringify(res.data))
+        let e = JSON.stringify(res.data)
         this.$store.state.s_group.groupCalendar = JSON.parse(e)
-        
+        this.lastCalendar = JSON.parse(e)
+        console.log("last: "+JSON.stringify(this.lastCalendar))
+        this.$store.state.s_group.showGroupCalendar = false
+
+    
       })  
     },
     eventSelected(event, jsEvent, view){
-        alert(event.calendarSeq+"/"+event.title + "/"+ event.start +" / " + event.content)
+        alert(event.calendarSeq+"/"+event.title + "/"+ event.start +"/"+ event.end +"/" + event.content)
         this.$store.state.s_group.groupCalendarDetail = event
+        //alert(this.$store.state.s_group.groupCalendarDetail.start)
         
         this.show_calendar_detail = true
     },
@@ -77,14 +89,48 @@ export default {
             message: 'canceled'
           });          
         });
+    },
+    eventDrop(event){
+      
+      alert(event.calendarSeq+"/"+event.start +"/"+event.end)
+      if(event.end === null){
+        event.end = event.start
+      }
 
+      this.$confirm('변경하시겠습니까?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
 
-
-
+          this.$store.state.s_group.showGroupCalendar = true
+          let params = new URLSearchParams()	
+          let groupSeq = this.$store.state.s_group.groupSeq
+          params.append('calendarSeq', event.calendarSeq)
+          params.append('start', event.start)
+          params.append('end', event.end)
+          axios.post("http://localhost:9000/resizeCalendar", params)
+            .then(res => {
+              this.$message({ type: 'success', message:'update completed' });
+              
+              //console.log(JSON.stringify(res.data))
+              let e = (JSON.stringify(res.data))
+              this.$store.state.s_group.groupCalendar = JSON.parse(e)
+              this.$store.state.s_group.showGroupCalendar = false
+            })
         
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'update canceled'
+          });          
+        });
+
+
     }
   },
     mounted(){
+      
       this.getCalendar()
         
    }
