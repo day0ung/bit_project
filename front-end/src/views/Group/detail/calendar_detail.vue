@@ -76,8 +76,46 @@ export default {
 
 methods:{
     deleteCal(){
-        let seq = this.$store.state.s_group.groupCalendarDetail.calendarSeq
-        alert(seq)
+        this.$confirm('정말 삭제하시겠습니까?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          this.$store.state.s_group.showGroupCalendar = true
+          let seq = this.$store.state.s_group.groupCalendarDetail.calendarSeq
+          let params = new URLSearchParams()	
+          params.append('seq', seq)
+          axios.post("http://localhost:9000/deleteGroupCalendar", params)
+          .then(res => {
+            if(res.data === ""){
+              this.$message({ type: 'success', message:' Delete completed' });
+              
+                let params = new URLSearchParams()	
+                let groupSeq = this.$store.state.s_group.groupSeq
+                params.append('groupInfoSeq', groupSeq)
+                axios.post("http://localhost:9000/getGroupCalendar", params)
+                  .then(res => {
+                    //console.log(JSON.stringify(res.data))
+                    let e = (JSON.stringify(res.data))
+                    this.$store.state.s_group.groupCalendar = JSON.parse(e)
+                    this.$store.state.s_group.showGroupCalendar = false
+                  })
+            }
+          })
+
+          this.$emit('close')
+
+
+     
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Delete canceled'
+          });          
+        });
+
+
+
     },
     resetForm(formName) {
         this.$refs[formName].resetFields();
@@ -89,8 +127,8 @@ methods:{
 mounted(){
 //this.$moment(this.$store.state.s_group.groupCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
     
-    this.ruleForm.startDate = this.$store.state.s_group.groupCalendarDetail.startDate
-    this.ruleForm.endDate = this.$moment(this.$store.state.s_group.groupCalendarDetail.endDate).format('YYYY.MM.DD HH:mm:ss')
+    this.ruleForm.startDate = this.$moment(this.$store.state.s_group.groupCalendarDetail.start).format('YYYY.MM.DD HH:mm:ss')
+    this.ruleForm.endDate = this.$moment(this.$store.state.s_group.groupCalendarDetail.end).format('YYYY.MM.DD HH:mm:ss')
     this.ruleForm.title = this.$store.state.s_group.groupCalendarDetail.title
     this.ruleForm.content = this.$store.state.s_group.groupCalendarDetail.content
 }

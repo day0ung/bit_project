@@ -79,6 +79,12 @@ public class GroupService {
 	public void insertGroupCalendar(CalendarDto calendarDto) {
 		groupDao.insertGroupCalendar(calendarDto);
 	}
+	public void deleteGroupCalendar(int seq) {
+		groupDao.deleteGroupCalendar(seq);
+	}
+	public void resizeCalendar(CalendarDto calendarDto) {
+		groupDao.resizeCalendar(calendarDto);
+	}
 	
 // TODO: GROUP ATTENDENCE	
 	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
@@ -153,7 +159,9 @@ public class GroupService {
 // TODO: GROUP PDS BOARD
 	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
 		return groupDao.getgroupPdsList(groupSeq);
-	}	
+	}
+
+
 
 	
 }

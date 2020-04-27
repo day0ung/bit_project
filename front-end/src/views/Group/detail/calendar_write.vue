@@ -104,7 +104,9 @@ data(){
             }
             }).then(res =>{
               if(res.data === ""){
+                this.$store.state.s_group.showGroupCalendar = true
                 alert("성공적으로 등록되었습니다.")
+                this.$emit('close')
                 let params = new URLSearchParams()	
                 let groupSeq = this.$store.state.s_group.groupSeq
                 params.append('groupInfoSeq', groupSeq)
@@ -112,10 +114,12 @@ data(){
                   .then(res => {
                     console.log(JSON.stringify(res.data))
                     let e = (JSON.stringify(res.data))
-                    this.$store.state.s_group.groupCalendar = JSON.parse(e)
                     
-                  })  
-                this.$emit('close')
+                    this.$store.state.s_group.groupCalendar = JSON.parse(e)
+                    this.$store.state.s_group.showGroupCalendar = false
+                  })
+                  
+                
               }
               else {
                 alert("수정을 실패했습니다. 다시 확인해주시기 바랍니다.")
