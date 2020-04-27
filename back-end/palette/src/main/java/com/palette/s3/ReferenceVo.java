@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ReferenceVo {
 
-    private int gorupInfoSeq;
+    private int groupInfoSeq;
     private int boardSeq;
     private int memberSeq;
     private String memberId;
@@ -14,11 +14,12 @@ public class ReferenceVo {
     private String content;
     private List<MultipartFile> files;
 
+
     public ReferenceVo() {
     }
 
-    public ReferenceVo(int gorupInfoSeq, int boardSeq, int memberSeq, String memberId, String title, String content, List<MultipartFile> files) {
-        this.gorupInfoSeq = gorupInfoSeq;
+    public ReferenceVo(int groupInfoSeq, int boardSeq, int memberSeq, String memberId, String title, String content, List<MultipartFile> files) {
+        this.groupInfoSeq = groupInfoSeq;
         this.boardSeq = boardSeq;
         this.memberSeq = memberSeq;
         this.memberId = memberId;
@@ -27,12 +28,12 @@ public class ReferenceVo {
         this.files = files;
     }
 
-    public int getGorupInfoSeq() {
-        return this.gorupInfoSeq;
+    public int getGroupInfoSeq() {
+        return this.groupInfoSeq;
     }
 
-    public void setGorupInfoSeq(int gorupInfoSeq) {
-        this.gorupInfoSeq = gorupInfoSeq;
+    public void setGroupInfoSeq(int groupInfoSeq) {
+        this.groupInfoSeq = groupInfoSeq;
     }
 
     public int getBoardSeq() {
@@ -83,8 +84,8 @@ public class ReferenceVo {
         this.files = files;
     }
 
-    public ReferenceVo gorupInfoSeq(int gorupInfoSeq) {
-        this.gorupInfoSeq = gorupInfoSeq;
+    public ReferenceVo groupInfoSeq(int groupInfoSeq) {
+        this.groupInfoSeq = groupInfoSeq;
         return this;
     }
 
@@ -121,7 +122,7 @@ public class ReferenceVo {
     @Override
     public String toString() {
         return "{" +
-            " gorupInfoSeq='" + getGorupInfoSeq() + "'" +
+            " groupInfoSeq='" + getGroupInfoSeq() + "'" +
             ", boardSeq='" + getBoardSeq() + "'" +
             ", memberSeq='" + getMemberSeq() + "'" +
             ", memberId='" + getMemberId() + "'" +

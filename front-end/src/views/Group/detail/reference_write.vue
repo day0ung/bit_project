@@ -118,6 +118,7 @@ export default {
             this.ruleForm.fileList.push(file.raw) 
             console.log("addList")
             console.log(this.ruleForm.fileList)
+            console.log("seq: " + this.$route.params.groupSeq)
         },
         handleRemove(file, fileList) {
             this.ruleForm.fileList = this.ruleForm.fileList.filter(data => data.name !== file.raw.name)

@@ -180,8 +180,7 @@ public class GroupService {
 	public void insertBoardReference(ReferenceVo form) throws IOException {
 		// board insert 먼저
 		GroupBoardDto boardDto = new GroupBoardDto();
-		boardDto.setGroupInfoSeq(form.getGorupInfoSeq());
-		System.out.println("GroupService insertBoardReference() groupInfoSeq: " + form.getGorupInfoSeq());
+		boardDto.setGroupInfoSeq(form.getGroupInfoSeq());
 		boardDto.setMemberSeq(form.getMemberSeq());
 		boardDto.setCategory(2);
 		boardDto.setTitle(form.getTitle());
