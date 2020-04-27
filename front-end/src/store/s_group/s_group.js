@@ -1,7 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        groupInfoSeq: 0,
+        groupSeq: 0,
         groupList: [],
         detailSeq: 0,
         groupCalendar:[],
