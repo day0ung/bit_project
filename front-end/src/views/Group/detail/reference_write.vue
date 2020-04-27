@@ -13,7 +13,7 @@
                     accept=".jpg, .jpeg, .png, .bmp, .txt, .ppt, .pptx, .hwp"
                     multiple
                     v-model="ruleForm.fileList"
-                    :limit="2"
+                    :limit="3"
                     :auto-upload="false"
                     :on-change="handleChange"
                     :on-exceed="handleExceed"
@@ -87,6 +87,7 @@ export default {
                 let formData = new FormData();
                 formData.append('groupSeq', this.$store.state.s_group.groupSeq)
                 formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
+                formData.append('memberId', this.$store.state.loginUser.memberId)
                 formData.append('title',this.ruleForm.title)
                 formData.append('content',this.ruleForm.content)
                 this.ruleForm.fileList.forEach(function(element){
@@ -100,6 +101,7 @@ export default {
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
+                    console.log(res.data)
                     alert("자료가 업로드 되었습니다.")
                     this.showGroupReference()
                     // this.allList()
@@ -113,7 +115,7 @@ export default {
             });
         },
         handleChange(file, fileList){
-            this.ruleForm.fileList.push(file.raw)
+            this.ruleForm.fileList.push(file.raw) 
             console.log("addList")
             console.log(this.ruleForm.fileList)
         },

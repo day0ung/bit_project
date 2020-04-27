@@ -74,6 +74,7 @@ export default {
       params.append('groupSeq', this.$store.state.s_group.groupSeq);
       axios.post("http://localhost:9000/groupPdsList", params)
                   .then(res => {
+              console.log(res.data)
               this.$store.state.s_group.groupReferenceList = res.data
               this.$store.state.s_group.showGroupReferenceList = false
             })
