@@ -11,7 +11,7 @@
                 <el-form-item label="스터디 주제" prop="inter">
                     <el-select v-model="groupDto.inter" placeholder="주제를 선택해주세요" style="width: 85%">
                         <el-option-group v-for="bigInter in InterListAll" :key="bigInter.interBigSeq" :value="bigInter.interBigSeq" :label="bigInter.bigName">
-                            <el-option v-for="item in bigInter.interSmallDtos" :key="item.interSmallSeq" :value="item.interSmallSeq" :label="item.smallName"></el-option>
+                            <el-option v-for="item in bigInter.interSmallDtos" :key="item.interSmallSeq" :value="item.interSmallSeq" :label="item.smallName"/>
                         </el-option-group>
                     </el-select>
                 </el-form-item>
