@@ -116,6 +116,7 @@ export default {
             })
         
         }).catch(() => {
+          this.getCalendar()
           this.$message({
             type: 'info',
             message: 'update canceled'

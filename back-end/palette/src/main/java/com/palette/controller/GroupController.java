@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.palette.model.BoardParams;
+import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -142,6 +143,8 @@ public class GroupController {
         return "";
     }
     
+
+    
     // Pds
     @PostMapping(value="/groupPdsList")
     public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
@@ -169,6 +172,14 @@ public class GroupController {
     public String insertGroupReference(ReferenceVo form) throws IOException{
         groupService.insertBoardReference(form);
         return "";
+    }
+    
+    // Comment
+    @PostMapping(value="/groupBoardDetailComments")
+    public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {
+        System.out.println("getGroupBoardDetailComments() : " + boardSeq);
+        ArrayList<CommentDto> list = groupService.groupBoardDetailComments(boardSeq);
+        return list;
     }
 
     // attendance
