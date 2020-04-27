@@ -5,7 +5,8 @@
       <div class="calendar">
       <full-calendar :events="this.$store.state.s_group.groupCalendar" :config="config" 
                       @day-click="dayClick" @event-selected="eventSelected" @event-drop="eventDrop"
-                      v-loading="this.$store.state.s_group.showGroupCalendar"></full-calendar>
+                      v-loading="this.$store.state.s_group.showGroupCalendar"
+                      ></full-calendar>
         <Cwrite v-if="show_calendar_write" @close="show_calendar_write = false" :startDate="clickDay"></Cwrite>
         <Cdetail v-if="show_calendar_detail" @close="show_calendar_detail = false"></Cdetail>
       </div>
@@ -28,14 +29,14 @@ export default {
   name: 'GroupSchedule',
   data(){
     return{
-      DBCalendar:[],
-      lastCalendar:[],
+      
       show_calendar_write: false,
       show_calendar_detail: false,
       //memberlist: this.$store.state.s_subStore.data,
       config: {
               locale: 'ko',
-              defaultView:'month'
+              defaultView:'month',
+              
       },
       clickDay:'',
     }
@@ -56,15 +57,14 @@ export default {
         console.log("DB: "+JSON.stringify(res.data))
         let e = JSON.stringify(res.data)
         this.$store.state.s_group.groupCalendar = JSON.parse(e)
-        this.lastCalendar = JSON.parse(e)
-        console.log("last: "+JSON.stringify(this.lastCalendar))
         this.$store.state.s_group.showGroupCalendar = false
-
-    
       })  
     },
     eventSelected(event, jsEvent, view){
-        alert(event.calendarSeq+"/"+event.title + "/"+ event.start +"/"+ event.end +"/" + event.content)
+         if(event.end === null){
+        event.end = event.start
+      }
+        alert(event.calendarSeq+"/"+event.title + "/"+ event.start +"/"+ event.end +"/" + event.content+"/"+event.color)
         this.$store.state.s_group.groupCalendarDetail = event
         //alert(this.$store.state.s_group.groupCalendarDetail.start)
         
@@ -92,10 +92,10 @@ export default {
     },
     eventDrop(event){
       
-      alert(event.calendarSeq+"/"+event.start +"/"+event.end)
       if(event.end === null){
         event.end = event.start
       }
+      //alert(event.calendarSeq+"/"+event.start +"/"+event.end)
 
       this.$confirm('변경하시겠습니까?', 'Warning', {
           confirmButtonText: 'OK',
@@ -107,15 +107,11 @@ export default {
           let params = new URLSearchParams()	
           let groupSeq = this.$store.state.s_group.groupSeq
           params.append('calendarSeq', event.calendarSeq)
-          params.append('start', event.start)
-          params.append('end', event.end)
+          params.append('start', this.$moment(event.start).format('YYYY.MM.DD HH:mm:ss'))
+          params.append('end', this.$moment(event.end).format('YYYY.MM.DD HH:mm:ss'))
           axios.post("http://localhost:9000/resizeCalendar", params)
             .then(res => {
               this.$message({ type: 'success', message:'update completed' });
-              
-              //console.log(JSON.stringify(res.data))
-              let e = (JSON.stringify(res.data))
-              this.$store.state.s_group.groupCalendar = JSON.parse(e)
               this.$store.state.s_group.showGroupCalendar = false
             })
         

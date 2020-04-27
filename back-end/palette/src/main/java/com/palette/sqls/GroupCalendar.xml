@@ -9,8 +9,8 @@
 	</select>
 	
 	<insert id="insertGroupCalendar" parameterType="com.palette.model.CalendarDto">
-		insert into FINAL.CALENDAR(MEMBER_SEQ, GROUP_INFO_SEQ, TITLE, CONTENT, START, END, AUTH)
-		values(#{memberSeq}, #{groupInfoSeq}, #{title}, #{content}, #{start}, #{end}, 1)
+		insert into FINAL.CALENDAR(MEMBER_SEQ, GROUP_INFO_SEQ, TITLE, CONTENT, START, END, COLOR, AUTH)
+		values(#{memberSeq}, #{groupInfoSeq}, #{title}, #{content}, #{start}, #{end}, #{color}, 1)
 	</insert>
 	
 	<delete id="deleteGroupCalendar" parameterType="java.lang.Integer">
@@ -18,5 +18,16 @@
 		where CALENDAR_SEQ = #{calendarSeq}
 	</delete>
 	
+	<update id="resizeCalendar" parameterType="com.palette.model.CalendarDto">
+		update FINAL.CALENDAR
+		set START = #{start}, END = #{end}
+		where CALENDAR_SEQ =#{calendarSeq}
+	</update>
+	
+	<update id="updateGroupCalendar" parameterType="com.palette.model.CalendarDto">
+		update FINAL.CALENDAR
+		set START = #{start}, END = #{end}, TITLE=#{title}, CONTENT=#{content}, COLOR=#{color}
+		where CALENDAR_SEQ =#{calendarSeq}
+	</update>
 	
 </mapper>

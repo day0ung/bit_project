@@ -29,13 +29,23 @@
                     placeholder="마감일">
                   </el-date-picker>
                 </el-form-item>
-                <el-form-item label="title" prop="title">
+                <el-form-item label="제목" prop="title">
                   <el-input v-model="ruleForm.title" size="mini"></el-input>
                 </el-form-item>
-                
-                <el-form-item label="content" prop="content">
+                <el-form-item label="내용" prop="content">
                   <el-input type="textarea" v-model="ruleForm.content"></el-input>
                 </el-form-item>
+                <el-form-item label="배경" prop="backColor">
+                  <el-select v-model="ruleForm.backColor" placeholder="배경">
+                    <el-option label="노랑색" value="#ffff00" style="background-color:#ffff00;"></el-option>
+                    <el-option label="주황색" value="#ffa94d" style="background-color:#ffa94d; color:#fff"></el-option>
+                    <el-option label="파란색" value="#74c0fc" style="background-color:#74c0fc; color:#fff"></el-option>
+                    <el-option label="빨간색" value="#f06595" style="background-color:#f06595; color:#fff"></el-option>
+                    <el-option label="초록색" value="#a9e34b" style="background-color:#a9e34b; color:#fff"></el-option>
+                  </el-select>
+                </el-form-item>
+
+
                 <el-form-item>
                   <el-button type="primary" @click="submitForm('ruleForm')">Create</el-button>
                   <el-button @click="resetForm('ruleForm')">Reset</el-button>
@@ -67,7 +77,8 @@ data(){
           title: '',
           startDate: '',
           endDate: '',
-          content: ''
+          content: '',
+          backColor:''
         },
         rules: {
           title: [
@@ -100,6 +111,7 @@ data(){
               content: this.ruleForm.content,
               start : this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss'),
               end : this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'),
+              color : this.ruleForm.backColor
               
             }
             }).then(res =>{
@@ -122,7 +134,7 @@ data(){
                 
               }
               else {
-                alert("수정을 실패했습니다. 다시 확인해주시기 바랍니다.")
+                alert("실패했습니다. 다시 확인해주시기 바랍니다.")
               }
             })
 

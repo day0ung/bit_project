@@ -103,6 +103,9 @@ public class GroupService {
 	public void resizeCalendar(CalendarDto calendarDto) {
 		groupDao.resizeCalendar(calendarDto);
 	}
+	public void updateGroupCalendar(CalendarDto calendarDto) {
+		groupDao.updateGroupCalendar(calendarDto);
+	}
 	
 // TODO: GROUP ATTENDENCE	
 	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
@@ -202,7 +205,9 @@ public class GroupService {
             boardReferenceDto.setBoardSeq(boardSeq);
             groupDao.insertBoardReference(boardReferenceDto);
         }
-	}	
+	}
+
+		
 
 	
 }

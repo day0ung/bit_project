@@ -35,6 +35,14 @@ public class GroupCalendarController {
 		 return "";
 	 }
 	 
+	 @GetMapping(value="/updateGroupCalendar")
+	 public String updateGroupCalendar(CalendarDto calendarDto) {
+		 System.out.println("updateGroupCalendar() : "+calendarDto);
+		 groupService.updateGroupCalendar(calendarDto);
+		 return "";
+	 }
+	 
+	 
 	 @PostMapping(value="/deleteGroupCalendar")
 	 public String deleteGroupCalendar(int seq) {
 		 System.out.println("deleteGroupCalendar() : "+seq);
@@ -48,7 +56,7 @@ public class GroupCalendarController {
 		 groupService.resizeCalendar(calendarDto);
 		 
 		 return "";
-		 
 	 }
+	 
 	 
 }
