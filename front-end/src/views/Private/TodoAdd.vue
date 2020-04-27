@@ -1,6 +1,5 @@
 <template>
   <div>
-      <h1>리스트 추가하는 곳</h1>
       <el-input placeholder="TODO LIST를 작성해주세요. 예)매일 독서, #공부" v-model="list" @input="show"></el-input>
       <el-button type="success" plain @click="listAdd" v-model="add" v-if="add">할일 추가</el-button>
       <el-button type="success" plain @click="listAdd" v-model="add" disabled v-else>할일 추가</el-button>
@@ -18,11 +17,7 @@ export default {
     },
     methods:{
         show(){
-            if(this.list == ''){
-                this.add = false
-            }else{
-                this.add = true
-            }
+            this.list == ''? this.add = false : this.add = true
         },
         cancle(){
             this.$emit("cancle")

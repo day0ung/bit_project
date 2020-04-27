@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.palette.model.BoardParams;
 import com.palette.model.MemberCVDto;
+import com.palette.model.MemberDto;
 
 @Mapper
 @Repository
@@ -25,4 +26,9 @@ public interface MemberCVDao {
 	
 	void readCount(int cvSeq);
 	
+	MemberDto oneMember(int memberSeq);
+	
+	int updateCV(MemberCVDto dto);
+	
+	MemberCVDto getOneCVByMemberSeq(int memberSeq);
 }

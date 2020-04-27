@@ -25,7 +25,7 @@ public class GroupService {
 	
 	@Autowired
     GroupDao groupDao;
-
+// TODO: GROUP LIST
 	public List<GroupDto> getAllGroup() {
 		return groupDao.getAllGroup();
 	}
@@ -35,7 +35,9 @@ public class GroupService {
 	public ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams) {
 		return groupDao.getMyOtherGroup(groupParams);
 	}
-
+	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {
+		return groupDao.groupSearchList(groupParams);
+	}
 	public GroupDto getOneGroup(GroupDto insertDto) {
 		return groupDao.getOneGroup(insertDto);
 	}
@@ -49,16 +51,7 @@ public class GroupService {
 		return groupDao.getInterListAll();
 	}
 
-	public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
-		return groupDao.getgroupPagingList(boardParams);
-	}
-	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
-		return groupDao.getgroupPdsList(groupSeq);
-	}
-
-	public ArrayList<GroupDto> groupSearchList(GroupParams groupParams) {
-		return groupDao.groupSearchList(groupParams);
-	}
+// TODO: CREATE GROUP
 	public void createGroup(GroupDto groupDto) {
 		groupDao.createGroup(groupDto);
 	}
@@ -78,11 +71,16 @@ public class GroupService {
 		
 		return groupDao.getGroupBoardTotal(boardParams);
 	}
-	public List<CalendarDto> getGroupSchedule(GroupDto groupDto) {
-		
-		return groupDao.getGroupSchedule(groupDto);
+	
+// TODO: GROUP CALENDAR
+	public List<CalendarDto> getGroupCalendar(GroupDto groupDto) {
+		return groupDao.getGroupCalendar(groupDto);
+	}
+	public void insertGroupCalendar(CalendarDto calendarDto) {
+		groupDao.insertGroupCalendar(calendarDto);
 	}
 	
+// TODO: GROUP ATTENDENCE	
 	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
 		int a = -1;
 		if(checkday.equals("Sunday")) {
@@ -132,7 +130,11 @@ public class GroupService {
 	        groupSchedule.setNowDate(strToday);
 		return groupDao.checkAttend(groupSchedule);
 	}
-
+	
+// TODO: GROUP BOARD
+	public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
+		return groupDao.getgroupPagingList(boardParams);
+	}
 	public void groupBoardDelete(int boardSeq) {
 		groupDao.groupBoardDelete(boardSeq);
 	}
@@ -147,7 +149,11 @@ public class GroupService {
 	public void updateReadCount(int boardSeq) {
 		groupDao.updateReadCount(boardSeq);
 	}
-	
+
+// TODO: GROUP PDS BOARD
+	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
+		return groupDao.getgroupPdsList(groupSeq);
+	}	
 
 	
 }

@@ -1,5 +1,6 @@
 <template>
     <div class="content02_view">
+        
         <h1> {{title}} group 22222222222222222221122222222222222222222222221</h1>
         
             <el-select v-model="value" placeholder="Select" value-key="value">

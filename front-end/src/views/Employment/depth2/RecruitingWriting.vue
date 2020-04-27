@@ -52,7 +52,7 @@
 					<i class="el-icon-plus"></i>
 				</el-upload>
 				<el-dialog :visible.sync="ruleForm.dialogVisible"
-							append-to-body="true">
+							append-to-body=true>
 					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>

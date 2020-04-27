@@ -22,8 +22,8 @@
             <div class="login_input_wrap">         
                 <!-- input box -->
                 <div class="setting">
-                    <input id="id_save" name="id_save" type="checkbox" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">
-                    <label for="id_save" onmousedown="try{n_trackEvent('login', 'pc_login_page' , 'id_save', '');}catch(e){}">아이디 저장</label>
+                    <input type="checkbox" id="id_save"  v-model="idSave" @click="saveId">
+                    <label for="id_save">아이디 저장</label>
                 </div>
                 <div class="login-form">
                     <div class="id-input-box focus">
@@ -37,7 +37,7 @@
                 <p class="signup-forgotten">
                  
                    <span></span>
-                   <button class="forgotten" @click="join" style="font-weight: 5px">아이디/비밀번호 찾기</button>
+                   <button class="forgotten" @click="idSearch" style="font-weight: 5px">아이디/비밀번호 찾기</button>
                 </p>
                  </div>
              </div>
@@ -59,12 +59,19 @@
 <script>
 import logincss from '@/assets/css/member/login.css'
 export default {
-
     data(){
       return{
           id: null,
-          pwd: null
+          pwd: null,
+          idSave: ''
       }
+    },
+    mounted(){
+        var userId = this.$cookie.get('userId')
+        if(userId != null){
+          this.id = userId
+          this.idSave = true
+        }
     },
     methods:{
         exit(){
@@ -89,8 +96,6 @@ export default {
                 this.$store.state.isLogin = true;
                 return;
               }
-                //session사용시 -> vuex 사용, 혹은 html에서 사용 ->sessionStorage(objec저장)/ localstorage(string저장) -> cookie(String만 됨)
-                //세션에 저장						//json으로 넘어옴 세션에 저장할때는 
                 sessionStorage.setItem("loginUser", JSON.stringify(res.data)); //String
                 //alert(res.data.memberId)
                 var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
@@ -98,14 +103,32 @@ export default {
                 var login = JSON.parse(loginData); //JSON
                 this.$store.commit('loginSuccess', login )
                 alert('로그인성공')
-                this.$router.push ({path: '/'})
+                // this.$router.push ({path: '/'}) 
                 this.$emit('close')   
             })
-                          
-
         },
-        join(){
-          alert('마이페이지로 이동')
+        saveId(){
+          if(this.idSave == false){
+                if(this.id == null){
+                  alert('아이디를 입력해주세요')
+                  this.idSave = false
+                }else{
+                  this.$cookie.set('userId', this.id, 365);
+                }
+          }else if(this.idSave == ''){
+             if(this.id == null){
+                  alert('아이디를 입력해주세요')
+                  this.idSave = ''
+                }else{
+                  this.$cookie.set('userId', this.id, 365);
+                }
+          
+          }else {
+            this.$cookie.delete('userId');
+          }
+        },
+        idSearch(){
+
         }
     }
 }

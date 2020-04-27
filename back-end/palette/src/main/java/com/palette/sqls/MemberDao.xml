@@ -24,9 +24,9 @@
   	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}) 
   </insert>
   
-  
-  <select id="getSelectMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
-  	SELECT MEMBER_SEQ, MEMBER_ID, PWD, MEMBER_NAME, AGE, INTERAREA, MYMONEY
+ 
+  <select id="getMyInfo" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto" >
+  	SELECT *
   	FROM MEMBER
   	WHERE MEMBER_SEQ=#{memberSeq}
   </select>
@@ -49,6 +49,7 @@
 		<collection property="interBigDto" resultMap="InterBig"></collection>
 		<collection property="interSmallDto" resultMap="InterSmall"></collection>
  	</resultMap>
+ 	
  <select id="getDetailMember" parameterType="java.lang.Integer" resultMap="MemberDetail">
 		SELECT * 
 	FROM MEMBER_INTERREST inter
@@ -103,22 +104,7 @@
  	update MEMBER SET PWD=#{pwd} where MEMBER_SEQ=#{memberSeq}
  </update>
  
- <insert id="addTodoList" parameterType="com.palette.model.TodoListDto">
- 	INSERT INTO TODOLIST(MEMBER_SEQ, TITLE, TODO_DATE, DEL)
-	values(#{memberSeq}, #{title}, NOW(), 0);
- </insert>
- 
- <select id="selectTodoList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
- 	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
- 	FROM TODOLIST 
- 	WHERE MEMBER_SEQ=#{memberSeq}
- </select>
- 
- <select id="selectOneList" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
-    SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
- 	FROM TODOLIST 
- 	WHERE TODO_SEQ=(select max(TODO_SEQ) from TODOLIST where MEMBER_SEQ=#{memberSeq} )
- </select>
+
  
 	 <resultMap type="com.palette.model.InterBigDto" id="InterBig">
 		<id column="INTER_BIG_SEQ" property="interBigSeq"/>

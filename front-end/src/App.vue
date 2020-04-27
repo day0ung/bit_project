@@ -53,7 +53,7 @@ import FooterNav from '@/components/footer/Footer-nav.vue'
 import FooterInfo from '@/components/footer/Footer-info.vue'
 import Contents from '@/components/Contents.vue'
 import global from '@/assets/css/global.css'
-import elementUiCss from '@/assets/css/element-ui.css'
+//import elementUiCss from '@/assets/css/element-ui.css'
 
 export default {
   name: 'Home',

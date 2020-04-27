@@ -32,7 +32,6 @@ public class MemberService {
 		
 		public int checkid(String memberId) {
 			int is = memberDao.checkId(memberId);
-			
 			return is;
 		}
 		
@@ -41,12 +40,7 @@ public class MemberService {
 			return check > 0? true: false;
 		}
 		
-		//마이페이지용
-		public MemberDto getDetailMember(int memberSeq) {
-			return memberDao.getDetailMember(memberSeq);
-		}
-		
-		//insert
+		//회원가입-내 관심분야 insert
 		public void InterstingInsert(String interSmallSeqs, int memberSeq) {
 			MemberInterParam param = new MemberInterParam(); 
 
@@ -62,11 +56,24 @@ public class MemberService {
 				memberDao.addInter(param);
 			}
 		}
-		
+		//회원가입 내 관심지역 insert
 		public void addInterArea(MemberDto dto) {
 			memberDao.addInterArea(dto);
 		}
 		
+		//myPage Info용
+		public MemberDto getMyInfo(MemberDto dto) {
+			MemberDto member = memberDao.getMyInfo(dto);
+			return member;
+		}
+		
+		//마이페이지 MyInterest용
+		public MemberDto getDetailMember(int memberSeq) {
+			return memberDao.getDetailMember(memberSeq);
+		}
+		
+		
+		//interest interBig seq얻기 위함
 		public int getSeq() {
 			return memberDao.getSeq();
 		}
@@ -105,6 +112,31 @@ public class MemberService {
 		public TodoListDto selectOneList(TodoListDto dto) {
 			TodoListDto todo = memberDao.selectOneList(dto);
 			return todo;
+		}
+		
+		public boolean todoDel(TodoListDto dto) {
+			int del = memberDao.todoDel(dto);
+			return del > 0? true: false;
+		}
+		
+		public boolean todoDone(TodoListDto dto) {
+			int done = memberDao.todoDone(dto);
+			return done > 0? true: false;
+		}
+		
+		public boolean todoEdit(TodoListDto dto) {
+			int edit = memberDao.todoEdit(dto);
+			return edit > 0? true: false;
+		}
+		
+		public List<TodoListDto> selectDoneTodoList(TodoListDto dto) {
+			List<TodoListDto> list = memberDao.selectDoneTodoList(dto);
+			return list;
+		}
+		
+		public List<TodoListDto> TodoListDoing(TodoListDto dto) {
+			List<TodoListDto> list = memberDao.TodoListDoing(dto);
+			return list;
 		}
 		
     

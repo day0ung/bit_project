@@ -21,6 +21,11 @@ export default [{
     ]
 },
 {
+    path: '/employment/:memberSeq',
+    name: 'Employment',
+    component: () => import('@/views/Employment/Employment.vue'),
+},
+{
     path: '/RecruitingDetail/:boardId',
     name: 'RecruitingDetail',
     component: () => import('@/views/Employment/depth2/RecruitingDetail')
@@ -41,13 +46,13 @@ export default [{
     component: () => import('@/views/Employment/depth2/CVWriting')
 },
 {
-    path: '/test/',
-    name: 'test',
-    component: () => import('@/views/Employment/depth2/test')
-},
-{
     path: '/CVDetail/:cvSeq',
     name: 'CVDetail',
     component: () => import('@/views/Employment/depth2/CVDetail')
+},
+{
+    path: '/CVUpdate/',
+    name: 'CVUpdate',
+    component: () => import('@/views/Employment/depth2/CVUpdate')
 },
 ]

@@ -21,17 +21,16 @@ public interface MemberDao {
 	
 	int createMember(MemberDto dto);//register
 	
-	MemberDto getSelectMember(int memberSeq); //info
-	
-	//my page interest info
-	MemberDto getDetailMember(int memberSeq); 
-	
-	// interest add
+	// 회원가입후 nterest add
 	int getBigSeq(int interSmallSeq); 
 	
 	int addInter(MemberInterParam param);
 	
 	int addInterArea(MemberDto dto);
+	
+	MemberDto getMyInfo(MemberDto dto); //mypageInfo
+	
+	MemberDto getDetailMember(int memberSeq); 	//my page interest info
 	
 	//mypage 수정
 	int getSeq();
@@ -49,7 +48,18 @@ public interface MemberDao {
 	
 	List<TodoListDto> selectTodoList(TodoListDto dto);
 	
-	//add하고나서 하나만
 	TodoListDto selectOneList(TodoListDto dto);
+	
+	int todoDel(TodoListDto dto);
+	
+	int todoDone(TodoListDto dto);
+	
+	int todoEdit(TodoListDto dto);
+	
+	List<TodoListDto> selectDoneTodoList(TodoListDto dto);
+	
+	List<TodoListDto> TodoListDoing(TodoListDto dto);
+	
+	
 
 }
