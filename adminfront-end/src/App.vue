@@ -12,7 +12,7 @@
       <div class="topNavBar">
         <ul>
           <li><router-link class="active" to="/">Home</router-link></li>
-          <li><router-link class="" to="/member">회원관리</router-link></li>
+          <li><router-link class="" to="/memberNGroup">회원 및 소모임관리</router-link></li>
           <li><router-link class="active" to="/group">소모임관리</router-link></li>
           <li><router-link class="" to="/board">게시판관리</router-link></li>
           <li><router-link class="active" to="/statisticsNresearch">통계 및 설문조사</router-link></li>
