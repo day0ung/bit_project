@@ -25,8 +25,8 @@
       <div class="hr"></div>
       <div class="groupName">
         <el-button type="primary" @click="showGroupReference" round>돌아가기</el-button>
-        <el-button type="primary" round>수정하기</el-button>
-        <el-button type="primary" round>삭제하기</el-button>
+        <el-button type="primary" v-show="this.$store.state.s_group.showUpdateBtn" round>수정하기</el-button>
+        <el-button type="primary" v-show="this.$store.state.s_group.showDeleteBtn" round>삭제하기</el-button>
       </div>
     </div>
     <br>

@@ -1,5 +1,6 @@
 package com.palette.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.palette.model.BoardParams;
 import com.palette.model.GroupBoardDto;
@@ -16,12 +18,17 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.s3.ReferenceVo;
+import com.palette.s3.S3Uploader;
 import com.palette.service.GroupService;
 
 
 @CrossOrigin(origins = "*")
 @RestController
 public class GroupController {
+
+    @Autowired
+    S3Uploader s3Uploader;
 
     @Autowired
     GroupService groupService;
@@ -69,9 +76,16 @@ public class GroupController {
     
     
     @PostMapping(value = "/creatGroupApply")
-    public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule){
+    public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule, MultipartFile file)
+            throws IOException {
         System.out.println("creatGroupApply");
         groupDto.setInterBigSeq(groupService.searchInterBigSeq(groupDto.getInterSmallSeq()));
+        if(!file.isEmpty()){
+            String imagePath = s3Uploader.upload(file, "groupImage");
+            groupDto.setImage(imagePath);
+        }else{
+            groupDto.setImage("");
+        }
         groupService.createGroup(groupDto);
         groupSchedule.setGroupInfoSeq(groupService.currGroupInfoSeq());
         groupService.addSchedule(groupSchedule);
@@ -149,6 +163,12 @@ public class GroupController {
         System.out.println("getInterListAll()");
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
+    }
+
+    @PostMapping(value = "/insertGroupReference")
+    public String insertGroupReference(ReferenceVo form) throws IOException{
+        groupService.insertBoardReference(form);
+        return "";
     }
 
     // attendance

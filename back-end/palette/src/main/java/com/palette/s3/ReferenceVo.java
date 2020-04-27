@@ -6,31 +6,42 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class ReferenceVo {
 
-    private int gorupSeq;
+    private int groupInfoSeq;
+    private int boardSeq;
     private int memberSeq;
     private String memberId;
     private String title;
     private String content;
     private List<MultipartFile> files;
 
+
     public ReferenceVo() {
     }
 
-    public ReferenceVo(int gorupSeq, int memberSeq, String title, String content, String memberId, List<MultipartFile> files) {
-        this.gorupSeq = gorupSeq;
+    public ReferenceVo(int groupInfoSeq, int boardSeq, int memberSeq, String memberId, String title, String content, List<MultipartFile> files) {
+        this.groupInfoSeq = groupInfoSeq;
+        this.boardSeq = boardSeq;
         this.memberSeq = memberSeq;
+        this.memberId = memberId;
         this.title = title;
         this.content = content;
-        this.memberId = memberId;
         this.files = files;
     }
 
-    public int getGorupSeq() {
-        return this.gorupSeq;
+    public int getGroupInfoSeq() {
+        return this.groupInfoSeq;
     }
 
-    public void setGorupSeq(int gorupSeq) {
-        this.gorupSeq = gorupSeq;
+    public void setGroupInfoSeq(int groupInfoSeq) {
+        this.groupInfoSeq = groupInfoSeq;
+    }
+
+    public int getBoardSeq() {
+        return this.boardSeq;
+    }
+
+    public void setBoardSeq(int boardSeq) {
+        this.boardSeq = boardSeq;
     }
 
     public int getMemberSeq() {
@@ -39,6 +50,14 @@ public class ReferenceVo {
 
     public void setMemberSeq(int memberSeq) {
         this.memberSeq = memberSeq;
+    }
+
+    public String getMemberId() {
+        return this.memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
     public String getTitle() {
@@ -57,14 +76,6 @@ public class ReferenceVo {
         this.content = content;
     }
 
-    public String getMemberId() {
-        return this.memberId;
-    }
-
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
-
     public List<MultipartFile> getFiles() {
         return this.files;
     }
@@ -73,13 +84,23 @@ public class ReferenceVo {
         this.files = files;
     }
 
-    public ReferenceVo gorupSeq(int gorupSeq) {
-        this.gorupSeq = gorupSeq;
+    public ReferenceVo groupInfoSeq(int groupInfoSeq) {
+        this.groupInfoSeq = groupInfoSeq;
+        return this;
+    }
+
+    public ReferenceVo boardSeq(int boardSeq) {
+        this.boardSeq = boardSeq;
         return this;
     }
 
     public ReferenceVo memberSeq(int memberSeq) {
         this.memberSeq = memberSeq;
+        return this;
+    }
+
+    public ReferenceVo memberId(String memberId) {
+        this.memberId = memberId;
         return this;
     }
 
@@ -93,11 +114,6 @@ public class ReferenceVo {
         return this;
     }
 
-    public ReferenceVo memberId(String memberId) {
-        this.memberId = memberId;
-        return this;
-    }
-
     public ReferenceVo files(List<MultipartFile> files) {
         this.files = files;
         return this;
@@ -106,11 +122,12 @@ public class ReferenceVo {
     @Override
     public String toString() {
         return "{" +
-            " gorupSeq='" + getGorupSeq() + "'" +
+            " groupInfoSeq='" + getGroupInfoSeq() + "'" +
+            ", boardSeq='" + getBoardSeq() + "'" +
             ", memberSeq='" + getMemberSeq() + "'" +
+            ", memberId='" + getMemberId() + "'" +
             ", title='" + getTitle() + "'" +
             ", content='" + getContent() + "'" +
-            ", memberId='" + getMemberId() + "'" +
             ", files='" + getFiles() + "'" +
             "}";
     }

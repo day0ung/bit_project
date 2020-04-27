@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.palette.model.BoardParams;
+import com.palette.model.BoardReferenceDto;
 import com.palette.model.CalendarDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
@@ -14,7 +15,6 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
-import com.palette.model.InterSmallDto;
 
 @Mapper
 @Repository
@@ -57,6 +57,9 @@ public interface GroupDao {
 	void updateReadCount(int boardSeq);
 	
 	
+
+	int currBoardSeq();
+	void insertBoardReference(BoardReferenceDto boardReferenceDto);
 
 
 }

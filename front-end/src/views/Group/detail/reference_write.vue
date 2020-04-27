@@ -85,7 +85,7 @@ export default {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
                 let formData = new FormData();
-                formData.append('groupSeq', this.$store.state.s_group.groupSeq)
+                formData.append('groupInfoSeq', this.$route.params.groupSeq)
                 formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
                 formData.append('memberId', this.$store.state.loginUser.memberId)
                 formData.append('title',this.ruleForm.title)
@@ -103,9 +103,8 @@ export default {
 				}).then(res =>{
                     console.log(res.data)
                     alert("자료가 업로드 되었습니다.")
+                    this.getList()
                     this.showGroupReference()
-                    // this.allList()
-                    // this.showList()
 				})
 				
 			} else {
@@ -135,6 +134,16 @@ export default {
                 message: '자료는 한번에 2개만 업로드가능합니다.',
                 type: 'error'
             })
+        },
+        getList(){
+            this.$store.state.s_group.showGroupReferenceList = true
+            var params = new URLSearchParams()
+            params.append('groupSeq', this.$store.state.s_group.groupSeq);
+            axios.post("http://localhost:9000/groupPdsList", params)
+                        .then(res => {
+                    this.$store.state.s_group.groupReferenceList = res.data
+                    this.$store.state.s_group.showGroupReferenceList = false
+        })
         },
     }
 }
