@@ -12,8 +12,8 @@
             </div>
             <div v-else style="margin-right: 30px;">
                 <span>
-                    <!-- <p>{{loginUser.memberId}}님 환영합니다</p> -->
-                    <button @click="$router.push ({name:'mypage'})" >마이페이지</button>
+                    <!-- <p>{{loginUser.memberId}}님 환영합니다</p>  this.$store.state.show == true -->
+                    <button @click="$router.push ({name:'mypage'}) " >마이페이지</button>
                 </span> 
                 |
                 <span><button @click="logout">로그아웃</button></span>
@@ -44,7 +44,7 @@ export default {
         data(){
             return{
                 showModal: false,
-                auth: this.$store.state.auth
+                auth: this.$store.state.auth,
                 //loginUser: this.$store.state.loginUser,
                 //isLogin: this.$store.state.isLogin
             }

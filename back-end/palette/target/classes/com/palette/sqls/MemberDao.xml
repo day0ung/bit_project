@@ -10,7 +10,7 @@
   <select id="getOneMember" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
   	SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, CV, COMPANY_LOGO, AUTH
   	FROM MEMBER
-  	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
+  	WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd} AND DEL=0
   </select>
   
   <select id="checkId" parameterType="java.lang.String" resultType="java.lang.Integer">
@@ -20,8 +20,8 @@
   </select>
 
   <insert id="createMember" parameterType="com.palette.model.MemberDto">
-  	INSERT INTO MEMBER ( MEMBER_NAME, MEMBER_ID, PWD, AGE, ADDRESS, EMAIL, AUTH, GENDER )
-  	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}) 
+  	INSERT INTO MEMBER ( MEMBER_NAME, MEMBER_ID, PWD, AGE, ADDRESS, EMAIL, AUTH, GENDER, DEL )
+  	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}, 0) 
   </insert>
   
  
@@ -81,29 +81,43 @@
  </update>
  
  
- <!-- 추출후에 insert -->
+ <!-- interSeq 추출후에  관심분야insert -->
  <insert id="addInter" parameterType="com.palette.model.MemberInterParam">
  	INSERT INTO MEMBER_INTERREST(MEMBER_SEQ, BIG_SEQ, SMALL_SEQ, DEL)
 	VALUES (#{memberSeq}, #{bigSeq}, #{smallSeq}, 0)
  </insert>
  
+ <!-- 관심분야 update전 del하기 -->
+ <delete id="delInter" parameterType="java.lang.Integer">
+ 	DELETE FROM TODOLIST WHERE MEMBER_SEQ=#{memberSeq} 
+ </delete>
+ 
+ <!-- 이메일, 나이 수정 --> 
  <update id="updateInfo">
  	update MEMBER SET AGE=#{age}, EMAIL=#{email} where MEMBER_SEQ =#{memberSeq}
  </update>
  
+ <!-- 주소 수정 -->
  <update id="updateAddr">
  	update MEMBER SET ADDRESS=#{address} where MEMBER_SEQ=#{memberSeq}
  </update>
  
+ <!-- 비밀번호 수정전 확인 -->
  <select id="checkPass" resultType="java.lang.Integer">
     SELECT COALESCE(COUNT(*), 0)
 	FROM MEMBER
 	WHERE PWD=#{pwd} AND MEMBER_SEQ=#{memberSeq}
  </select>
- <update id="updatePass">
+ 
+ <!-- 비밀번호 수정 -->
+ <update id="updatePass" parameterType="com.palette.model.MemberDto">
  	update MEMBER SET PWD=#{pwd} where MEMBER_SEQ=#{memberSeq}
  </update>
  
+ <!-- 회원탈퇴 -->
+ <update id="delUser" parameterType="com.palette.model.MemberDto">
+ UPDATE MEMBER SET DEL=1 WHERE MEMBER_SEQ=#{memberSeq} AND MEMBER_ID=#{memberId}
+ </update>
 
  
 	 <resultMap type="com.palette.model.InterBigDto" id="InterBig">

@@ -4,34 +4,44 @@
       <el-button type="text" @click="allSelect">전체 TODO LIST: {{todoList.length}} </el-button>
       <el-button type="text" @click="doneSelect">완료된 할일: {{countDone}} </el-button>
       <el-button type="text" @click="remainSelect">남은 할일: {{todoList.length - countDone}} </el-button>
-      <el-button type="text" @click="open">Click to open the Message Box</el-button>
 
+      <ListAdd v-if="add"
+      @listAdd="listAppend"
+      @cancle="offAdd">
+      </ListAdd>
+      <el-button @click="showAdd" v-if="add ==false"><i class="el-icon-plus"></i> 할일을 추가하세요</el-button>
 
      <ListShow
+      v-if="done == false"
       :list="todoList"
       @del="listDel"
       @done="listDone"
       @edit="listEdit">
       </ListShow> 
-      <el-button @click="showAdd"><i class="el-icon-plus"></i> 할일을 추가하세요</el-button>
-      <ListAdd v-if="add"
-      @listAdd="listAppend"
-      @cancle="offAdd">
-      </ListAdd>
+      <ListDone
+      v-if="done"
+      :list="doneList">
+      </ListDone>
+     
+      
   </div>
+  
 </template>
 
 <script>
 import ListAdd from '@/views/Private/TodoAdd.vue'
 import ListShow from "@/views/Private/TodoShow.vue";
+import ListDone from "@/views/Private/TodoDone.vue";
 export default {
     components:{
-      ListAdd,ListShow
+      ListAdd,ListShow,ListDone
     },
     data(){
       return{
         add: false, //추가하는곳 보여주기
-        todoList:[]
+        todoList:[],
+        doneList:[],
+        done: false// 완료된곳 보여주기
 
       }
     },
@@ -50,9 +60,7 @@ export default {
       countDone(){
           let count = 0
           this.todoList.forEach(list =>{
-            console.log(list.del)
             if(list.del == '1') count++
-            console.log(count)
           })
           return count 
       }
@@ -116,11 +124,21 @@ export default {
        },
        //전체 보기로 
        allSelect(){
-        
+        this.done = false
        },
-       //완료된 할일 보여주는 곳
+       //완료된 할일 보여주는 곳 selectDoneTodoList
        doneSelect(){
-
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq //addTodoList
+        
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+         axios.post('http://localhost:9000/selectDoneTodoList', params)
+          .then(res => {
+              this.doneList= res.data
+              this.done = true
+         }) 
        },
        //남은 할일 보여주는 곳
        remainSelect(){
@@ -140,7 +158,3 @@ export default {
     }
 }
 </script>
-
-<style>
-
-</style>

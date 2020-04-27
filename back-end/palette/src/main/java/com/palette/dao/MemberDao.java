@@ -43,6 +43,15 @@ public interface MemberDao {
 	
 	int updatePass(MemberDto dto);
 	
+	//mypage interarea 수정
+	int updateInter(MemberInterParam param);
+	
+	//mypage 관심분야 수정전에 del
+	void delInter(int memberSeq);
+	
+	//myapge 회원탈퇴
+	int delUser(MemberDto dto);
+	
 	//todolist add after select todolist
 	int addTodoList(TodoListDto dto);
 	
@@ -59,6 +68,9 @@ public interface MemberDao {
 	List<TodoListDto> selectDoneTodoList(TodoListDto dto);
 	
 	List<TodoListDto> TodoListDoing(TodoListDto dto);
+	
+	List<TodoListDto> selectDate(TodoListDto dto);
+	List<TodoListDto> DateAndCount(TodoListDto dto);
 	
 	
 
