@@ -4,6 +4,9 @@
       <el-button type="text" @click="allSelect">전체 TODO LIST: {{todoList.length}} </el-button>
       <el-button type="text" @click="doneSelect">완료된 할일: {{countDone}} </el-button>
       <el-button type="text" @click="remainSelect">남은 할일: {{todoList.length - countDone}} </el-button>
+      <el-button type="text" @click="open">Click to open the Message Box</el-button>
+
+
      <ListShow
       :list="todoList"
       @del="listDel"
@@ -122,7 +125,18 @@ export default {
        //남은 할일 보여주는 곳
        remainSelect(){
 
-       }
+       },
+            open() {
+        this.$alert('This is a message', 'Title', {
+          confirmButtonText: 'OK',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: ${ action }`
+            });
+          }
+        });
+      }
     }
 }
 </script>
