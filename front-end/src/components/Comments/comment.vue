@@ -6,15 +6,21 @@
           <div class="report"><a href="">신고</a></div>  
           <div class="memberId">{{comment.memberId}}</div>  
           <div class="writeDate">{{comment.writeDate}}</div>
-          <div class="answerLink"><p @click="answer(comment.boardCommentSeq, index)">답글</p> 
-          <div v-if="index==clicked">
-            <div v-show="isShow">
-              <p @click="answerCancle(comment.boardCommentSeq, index)">답글 취소</p>
+          <div v-if="comment.boardCommentSeq==clicked">
+            <div class="answerLink" v-show="isShow == true">
+              <p @click="answerCancle(comment.boardCommentSeq)">답글 취소</p>
+              <el-input class="answerContent input-with-select" v-model="subContent" placeholder="수정사항을 작성해주세요." @input="editVal">
+              <el-button size="mini" slot="append" @click="addCoComment(comment.boardCommentSeq)">등록</el-button></el-input>
+            </div>
+             <div v-show="isShow == false">
+              <div class="answerLink"><p @click="answer(comment.boardCommentSeq)" >답글</p></div>
             </div>
           </div>
-                 
+          <div v-else-if="index != clicked">
+              <div class="answerLink"><p @click="answer(comment.boardCommentSeq)">답글</p></div>
           </div> 
           <div class="content">{{comment.content}}</div>
+          
           <div class="dotline"></div>
         </li>
 
@@ -40,12 +46,12 @@ export default {
 name: 'Comment',
  data() {
     return {
-      clicked:0,
+      clicked:-1,
       isShow:false,
-      answerNum : 0,
       boardSeq:'',
       loginSeq:'',
       content: '',
+      subContent:'',
     }
   },
   methods:{
@@ -59,7 +65,6 @@ name: 'Comment',
       })
     },
     insertComment(){
-      
       //alert("id:"+this.loginSeq + "/ boardSeq:"+ this.boardSeq +"/ content: "+this.content)
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('memberSeq', this.loginSeq);
@@ -72,16 +77,20 @@ name: 'Comment',
                 this.getComments()
               })
     },
-    answer(boardCommentSeq, index){
-       this.isShow = !this.isShow
-        this.clicked = index
-      this.answerNum = 1
-      alert(boardCommentSeq)
+    answer(boardCommentSeq){
+      this.subContent=""
+      this.isShow = true
+      this.clicked = boardCommentSeq
+      //alert(boardCommentSeq)
 
     },
     answerCancle(boardCommentSeq){
-      this.answerNum = 0
-      alert(boardCommentSeq)
+      this.isShow = false
+      this.clicked = boardCommentSeq
+      //alert(boardCommentSeq)
+    },
+    addCoComment(boardCommentSeq){
+      alert(boardCommentSeq+"/"+this.subContent)
     }
 
    
@@ -102,8 +111,8 @@ name: 'Comment',
 }
 
 .writeDate{
-  width: 100px;
-  float: left;
+width: 100px;
+float: left;
  font-size: 10px;
  margin-left: 70px;
  margin-bottom: 10px;
@@ -112,6 +121,8 @@ name: 'Comment',
 
 .content{
   margin: 20px;
+  margin-bottom: 20px;
+  z-index: 2;
 }
 
 .dotline{
@@ -135,5 +146,10 @@ name: 'Comment',
   margin-right: 20px;
 }
 
+.answerContent{
+  width:80%;
+  margin-left: 20px;
+  margin-top:10px;
+}
 
 </style>
