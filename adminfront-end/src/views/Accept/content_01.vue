@@ -143,16 +143,20 @@ export default {
             title:'group2',
             adminAllStudyGroupList:[],
 
-            selectedvalue: [{
+            selectedvalue: [
+                {
                 value: '',
                 label: '전체보기'
-                }, {
+                }, 
+                {
                 value: '2',
                 label: '비전환 기업리스트'
-                }, {
+                }, 
+                {
                 value: '3',
                 label: '기업회원 전환완료'
-            }],
+                }
+            ],
             value: '',
             loading:false,
 
@@ -166,8 +170,7 @@ export default {
     methods:{
 
         getGroupAllowList(){
-            
-            axios.post("http://localhost:9000/adminCompanyMemberShowAll")
+            axios.post(path+"/adminCompanyMemberShowAll")
             .then(res => {
                 
                 console.log("admin all group print ")

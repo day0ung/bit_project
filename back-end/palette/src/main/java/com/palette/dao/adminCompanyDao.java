@@ -24,6 +24,7 @@ public interface adminCompanyDao {
 
 	MemberDto adminGetCompanyInfoOne(MemberDto dto);
 	
-	public boolean changeAUTHforCompanyMember(MemberDto dto);
-
+	boolean changeAUTHforCompanyMember(MemberDto dto);
+	
+	
 }

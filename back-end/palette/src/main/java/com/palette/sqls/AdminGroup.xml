@@ -133,6 +133,18 @@
 			MEMBER_SEQ=#{memberSeq}
 	</update>
 
+
+	<!-- check list of member before group member table insert 
+		use by admin_CompanyController  -->
+	<select id="checkExistGroupMember" parameterType="com.palette.model.GroupDto" resultType="com.palette.model.GroupDto">
+		SELECT * FROM 
+		GROUP_MEMBER
+		WHERE GROUP_INFO_SEQ = #{groupInfoSeq}
+		AND MEMBER_SEQ = #{memberSeq}
+	</select>
+
+
+
 	<select id="getAllStudyGroup" resultMap="GroupList">
 	<!-- ALl group list call -->
 	select *
