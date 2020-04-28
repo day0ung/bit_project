@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import ListAdd from '@/views/Private/TodoAdd.vue'
-import ListShow from "@/views/Private/TodoShow.vue";
-import ListDone from "@/views/Private/TodoDone.vue";
+import ListAdd from '@/views/Private/TodoList/TodoAdd.vue'
+import ListShow from "@/views/Private/TodoList/TodoShow.vue";
+import ListDone from "@/views/Private/TodoList/TodoDone.vue";
 export default {
     components:{
       ListAdd,ListShow,ListDone

@@ -1,7 +1,9 @@
 export default {
     namespaced: true,
     state: {
-        todoList:[],
+        memberCalendar:[],
+        memberCalendarDetail:[],
+        memberCalendarStartDate:'',  
     },
     mutations: {
     },
