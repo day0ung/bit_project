@@ -93,15 +93,14 @@ export default {
                 this.ruleForm.fileList.forEach(function(element){
                     formData.append('files', element)
                 })
-                for (let key of formData.entries()){
-                    console.log(`${key}`)
-                }
+                // for (let key of formData.entries()){
+                //     console.log(`${key}`)
+                // }
 				axios.post("http://localhost:9000/insertGroupReference", formData ,{
 					headers:{
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
-                    console.log(res.data)
                     alert("자료가 업로드 되었습니다.")
                     this.getList()
                     this.showGroupReference()
@@ -115,13 +114,9 @@ export default {
         },
         handleChange(file, fileList){
             this.ruleForm.fileList.push(file.raw) 
-            console.log("addList")
-            console.log(this.ruleForm.fileList)
         },
         handleRemove(file, fileList) {
             this.ruleForm.fileList = this.ruleForm.fileList.filter(data => data.name !== file.raw.name)
-            console.log("removeList")
-            console.log(this.ruleForm.fileList)
         },
         handlePictureCardPreview(file) {
             this.ruleForm.dialogImageUrl = file.url;

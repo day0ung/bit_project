@@ -13,6 +13,7 @@
       <div class="groupInfoContent">
         {{ this.$store.state.s_group.groupReferenceDetail.content }}
         {{ this.$store.state.s_group.groupReferenceDetail.image }}
+        <a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/%EC%88%9C%EC%84%9C%EB%8F%84.png" download>DownLoad</a>
         <el-button @click="downloadBtn" round>DownLoad</el-button>
       </div>
       <div class="hr"></div>
@@ -61,9 +62,9 @@ export default {
       this.$emit("showGroupReference")
     },
     downloadBtn(){
-      console.log('https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/Awesome.PNG')
+      console.log('s3://bit-palette/111/Awesome.PNG')
       axios({
-      url: 'https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/Awesome.PNG' ,
+      url: 's3://bit-palette/111/Awesome.PNG' ,
       method: 'GET',
       responseType: 'blob',
       }).then((response) => {
