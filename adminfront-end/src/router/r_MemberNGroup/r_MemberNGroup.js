@@ -12,8 +12,8 @@ export default[{
             component:() => import('@/views/MemberNGroup/content_01.vue'),
         },
         {   //디테일 페이지로 이동
-            path:'/managemember1/:memid',
-            name:'managemember1',
+            path:'/managemember1/memdetail/:memid',
+            name:'managemember1Detail',
             component:() => import('@/views/MemberNGroup/content_01_memdetail.vue'),
         },
 
@@ -24,6 +24,13 @@ export default[{
             component:() => import('@/views/MemberNGroup/content_02.vue'),
             // beforeEnter: requireAuth,
         },
+        {   //디테일 페이지로 이동
+            path:'/managemember2/companydetail/:comid',
+            name:'managemember2Detial',
+            component:() => import('@/views/MemberNGroup/content_01_memdetail.vue'),
+        },
+
+
         {
             path:'/managemember3',
             name:'managemember3',
