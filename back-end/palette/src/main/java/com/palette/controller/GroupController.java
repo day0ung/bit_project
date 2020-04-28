@@ -181,6 +181,12 @@ public class GroupController {
         ArrayList<CommentDto> list = groupService.groupBoardDetailComments(boardSeq);
         return list;
     }
+    @PostMapping(value = "insertComment")
+    public String insertComment(CommentDto commentDto) {
+    	System.out.println("insertComment(): "+commentDto.toString());
+    	groupService.insertComment(commentDto);
+    	return "";
+    }
 
     // attendance
     @PostMapping(value="/attendGroup")

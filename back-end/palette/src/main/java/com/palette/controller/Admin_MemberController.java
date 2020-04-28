@@ -42,6 +42,19 @@ public List<MemberDto> showGeneralMemberAll(){
        return memberList;
       }
 
+@PostMapping(value = "/TestAdminChangeDetail")
+   public MemberDto TestAdminChangeDetail(MemberDto dto){
+         System.out.println("TestAdminChangeDetail()");
+         // System.out.println("산출된 TestAdminChangeDetail 의 dto\n\n");
+
+         System.out.println(dto);
+
+         // System.out.println("\n\n");
+         MemberDto memberdto = AdminMemberService.memberSelectOne(dto);
+         System.out.println(memberdto);
+         return memberdto;
+      }
+
       
 
       

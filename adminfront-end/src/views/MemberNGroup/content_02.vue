@@ -73,11 +73,13 @@
               width="100">
               <el-table-column align="center" label="Actions" width="120">
                 <template slot-scope="scope">
-                  <router-link :to="'/compinfo/'+scope.row.id">
+
+                  <router-link :to="'/managemember2/companydetail/'+scope.row.memberId">
                     <el-button type="primary" size="small" icon="el-icon-edit">
                       상세정보
                     </el-button>
                   </router-link>
+
                 </template>
               </el-table-column>
 
@@ -88,7 +90,7 @@
       </el-table>
 
       <br> <hr>
-
+<!-- 
       <pre>
 -> callList
 /adminCompanyMemberShowAll
@@ -97,7 +99,8 @@
 /finishApprovalCompanyList
 /adminGetCompanyLocationALl
 /adminGetCompanyNmaeAll
-      </pre>
+      </pre> -->
+
       <!-- <button v-on:click="showAdminCompanyMamberShowAll"> Call Company List All </button> -->
       <!-- <ul>
         <li v-for="item in CompanyMemberAll" :key="item.memberSeq">{{item}}</li>
@@ -130,16 +133,23 @@ export default {
         
     },
     created(){
-      
-        axios.post(path+"/adminCompanyMemberShowAll")
-        .then(res=>{
-          console.log(res)
-          this.CompanyMemberAll=res.data
-        })
+      this.showMemberDteailAll();
+
       
     },
 
     methods:{
+
+      showMemberDteailAll(){
+        axios.post(path+"/adminCompanyMemberShowAll")
+        .then(res=>{
+          console.log("companyDetail show all ")
+          console.log(res.data)
+          this.CompanyMemberAll=res.data
+        })
+
+
+      }
 
       
       

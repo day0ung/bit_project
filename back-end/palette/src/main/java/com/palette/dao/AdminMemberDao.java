@@ -14,9 +14,12 @@ import com.palette.model.MemberDto;
 public interface AdminMemberDao {
 
     public MemberDto idpwcheck(MemberDto memdto);
+
     public List<MemberDto> memberSelectAll();
 
-    
+    public MemberDto memberSelectOne(MemberDto dto);
+
+    public MemberDto adminGetCompanyInfoOne(MemberDto dto);
 	
 
 }//end of adminMemberDao interface

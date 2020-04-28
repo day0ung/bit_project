@@ -67,7 +67,7 @@ a:hover,a:focus{color:#333; text-decoration:none}
 
 table {border-collapse:collapse; border-spacing:0;}
 address,caption,cite,code,dfn,em,var {font-style:normal; font-weight:normal;}
-summary, caption, legend, hr {width:0; height:0; overflow: hidden; visibility: hidden; border: none; position:absolute; left:-1000em;}
+summary, caption, legend {width:0; height:0; overflow: hidden; visibility: hidden; border: none; position:absolute; left:-1000em;}
 caption {position:static;}
 /* label hidden 처리 */
 .invisible, .hide{overflow:hidden; visibility:hidden; width:0; height:0; font-size:0; line-height:0; position:absolute;}
@@ -105,9 +105,9 @@ a {text-decoration:none !important;}
 .logo { text-align: center; padding-left: 251px; padding-top: 38px; z-index: 1; float: left}
 #banner {width: 100%;height: 450px; line-height: 450px;}
 #contents {width: 100%;height: auto; min-height: 500px; background: #fff;}
-#footer {width: 100%;height: 220px; background: #eeeeee;}
+.footer {width: 100%;height: 220px; background: #fff;}
 #footer-nav {width: 100%; height: 60px;}
-#footer-info {width: 100%; height: 160px; line-height: 160px;}
+#footer-info {width: 100%; height: 160px; line-height: 10px;}
 .container {width: 1050px; margin: 0 auto; height: inherit;}
 
 .header-btm .inner {position:relative; }

@@ -5,7 +5,7 @@
                 <li> <h4> {{title}} </h4> </li>
                 <li><router-link class="active" to="/managemember1"> 일반회원관리 </router-link></li>
                 <li><router-link  to="/managemember2">  기업회원관리 </router-link></li>
-                <li><router-link  to="/managemember3">  기타1 </router-link></li>
+                <li><router-link  to="/managemember3">  소모임관리 </router-link></li>
                 <li><router-link  to="/managemember4">  기타2 </router-link></li>
                 <li>
                         <el-button
@@ -25,7 +25,7 @@
 export default {
     data(){
         return{
-            title:"회원 및 소모임 관리",
+            title:"회원, 기업 및 소모임 관리",
             isActive:[]
 
         }
@@ -38,7 +38,9 @@ export default {
     },
     methods:{
         showNowPage(){
-            console.log(this.$route);
+            // console.log("show now page");
+            // console.log(this.$route.params);
+            // console.log("end show now page");
         }
     }
 

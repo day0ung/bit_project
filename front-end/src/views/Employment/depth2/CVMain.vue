@@ -32,7 +32,6 @@
           stripe
           style="width: 100% cursor:pointer"
           @row-click="gotoClick"
-
         >
           <el-table-column
             prop="finalnum"

@@ -3,10 +3,10 @@
     <div id="banner">
       <div class="slide">
         <ul>
-          <li></li>
-          <li></li>
-          <li></li>
-          <li></li>
+          <li><img src="../../assets/css/images/welcome1.jpg"></li>
+          <li><img src="../../assets/css/images/welcome2.jpg"></li>
+          <li><img src="../../assets/css/images/welcome3.jpg"></li>
+          <li><img src="../../assets/css/images/welcome4.jpg"></li>
         </ul>
       </div>
     </div>
@@ -21,14 +21,11 @@
     <router-view class="viewOne" name="one"></router-view>
     <div class="hr_div"/>
     <!-- 취업 정보 -->
-    <h3>Employment information</h3>
+    <h3>취업</h3>
     <div>
-      <router-link :to="{ name : 'University'}">대학생/취업</router-link> |
-      <router-link :to="{ name : 'Official'}">공무원/임용</router-link> |
-      <router-link :to="{ name : 'Language'}">어학/회화</router-link> |
-      <router-link :to="{ name : 'Life'}">라이프/취미</router-link>
+      <router-link :to="{ name : 'University'}">구인 공고</router-link>
     </div>
-    <router-view class="viewTwo" name="two"></router-view>
+      <router-view class="viewTwo" name="two"></router-view>
     <div class="hr_div"/>
     <!-- 게시판 -->
     <h3>Notice</h3>
@@ -99,5 +96,7 @@ h3{
   30% {opacity:0;}
   100% {opacity:0;}
 }
+
+img{width:1030px; height:400px}
 
 </style>
