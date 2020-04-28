@@ -212,6 +212,8 @@ public class GroupService {
 		return groupDao.groupBoardDetailComments(boardSeq);
 	}
 	public void insertComment(CommentDto commentDto) {
+		int ref = groupDao.getRef();
+		commentDto.setRef(ref);
 		groupDao.insertComment(commentDto);
 	}
 }

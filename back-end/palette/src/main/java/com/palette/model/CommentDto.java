@@ -32,6 +32,15 @@ public class CommentDto {
 		this.del = del;
 		this.memberId = memberId;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "CommentDto [boardCommentSeq=" + boardCommentSeq + ", boardSeq=" + boardSeq + ", memberSeq=" + memberSeq
+				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", content=" + content + ", writeDate="
+				+ writeDate + ", del=" + del + ", memberId=" + memberId + "]";
+	}
+
 
 	public String getMemberId() {
 		return memberId;

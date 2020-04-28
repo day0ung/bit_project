@@ -64,6 +64,7 @@ public interface GroupDao {
 
 	int currBoardSeq();
 	void insertBoardReference(BoardReferenceDto boardReferenceDto);
+	int getRef();
 
 
 

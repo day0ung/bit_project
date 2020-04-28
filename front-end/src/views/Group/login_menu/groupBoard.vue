@@ -169,6 +169,7 @@ export default {
         })
       axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
         this.$store.state.s_group.groupBoardDetailComments = res.data
+        //this.$store.state.s_group.showBoardDetailComments = false
       })
     },
     clickableRows :function (row, rowIndex) {

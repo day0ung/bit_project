@@ -179,10 +179,12 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 	</select>
 	<insert id="insertComment" parameterType="com.palette.model.CommentDto">
 		insert into FINAL.BOARD_COMMENT(BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT, WRITE_DATE, DEL)
-		values( #{boardSeq}, #{memberSeq}, 
-				(select ifnull(MAX(REF),0)+1 from FINAL.BOARD_COMMENT),
-				 0, 0, #{content}, NOW(), 0)
+		values( #{boardSeq}, #{memberSeq}, #{ref}, 0, 0, #{content}, NOW(), 0)
 		
 	</insert>
+	<select id="getRef" resultType="java.lang.Integer">
+		select ifnull(MAX(REF),0)+1 
+		from FINAL.BOARD_COMMENT			
+	</select>
 
 </mapper>

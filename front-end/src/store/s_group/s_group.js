@@ -17,6 +17,7 @@ export default {
         showGroupCalendar: false,
         showBoardList: false,
         showBoardDetail: false,
+        showBoardDetailComments: false,
         showDeleteBtn: false,
         showUpdateBtn: false,
         showReferenceDetail: false,

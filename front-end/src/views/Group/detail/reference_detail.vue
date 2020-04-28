@@ -13,7 +13,7 @@
       <div class="groupInfoContent">
         {{ this.$store.state.s_group.groupReferenceDetail.content }}
         {{ this.$store.state.s_group.groupReferenceDetail.image }}
-        <a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/%EC%88%9C%EC%84%9C%EB%8F%84.png" download>DownLoad</a>
+        <a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/20200408134241751_8809681708104_BW_04.jpg" download>DownLoad</a>
         <el-button @click="downloadBtn" round>DownLoad</el-button>
       </div>
       <div class="hr"></div>

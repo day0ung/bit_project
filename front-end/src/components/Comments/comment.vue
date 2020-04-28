@@ -1,46 +1,26 @@
 <template>
   <div>
-    <el-table
-        v-loading="this.$store.state.s_group.showBoardList"
-        :row-class-name="clickableRows"
-        :data="this.$store.state.s_group.groupBoardDetailComments"
-        stripe
-        style="width: 100% cursor:pointer"
-        @row-click="gotoClick">
+    <div class="commentsList"  v-loading="this.$store.state.s_group.showBoardDetailComments">
+      <ul>
+        <li v-for="(comment, index) in this.$store.state.s_group.groupBoardDetailComments" :key="comment.boardCommentSeq">
+          <div class="report"><a href="">신고</a></div>  
+          <div class="memberId">{{comment.memberId}}</div>  
+          <div class="writeDate">{{comment.writeDate}}</div>
+          <div class="answerLink"><p @click="answer(comment.boardCommentSeq, index)">답글</p> 
+          <div v-if="index==clicked">
+            <div v-show="isShow">
+              <p @click="answerCancle(comment.boardCommentSeq, index)">답글 취소</p>
+            </div>
+          </div>
+                 
+          </div> 
+          <div class="content">{{comment.content}}</div>
+          <div class="dotline"></div>
+        </li>
 
-        <el-table-column
-          prop="memberId"
-          label="작성자"
-          width="150px">
-        </el-table-column>
-        <el-table-column align="center"
-          prop="content"
-          label="댓글"
-          width="500px">
-        </el-table-column>
-        <el-table-column
-          prop="writeDate"
-          label="작성일"
-          width="170px">
-        </el-table-column>
-        <el-table-column
-          prop="title"
-          label="수정"
-          width="50px">
-        </el-table-column>
-        <el-table-column
-          prop="title"
-          label="삭제"
-          width="50px">
-        </el-table-column>
-        <el-table-column
-          prop="readCount"
-          label="신고"
-          width="50px">
-        </el-table-column>
+      </ul>
+    </div>
 
-
-    </el-table>
     <div class="commentInput">
       <el-input style="width:80%"
         type="textarea"
@@ -54,37 +34,106 @@
 </template>
 
 <script>
+import { loading } from 'element-ui';
+
 export default {
 name: 'Comment',
  data() {
     return {
+      clicked:0,
+      isShow:false,
+      answerNum : 0,
       boardSeq:'',
       loginSeq:'',
       content: '',
     }
   },
   methods:{
+    getComments(){
+        this.$store.state.s_group.showBoardDetailComments = true
+        var params = new URLSearchParams();
+        params.append('boardSeq', this.boardSeq);
+        axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
+        this.$store.state.s_group.groupBoardDetailComments = res.data
+        this.$store.state.s_group.showBoardDetailComments = false
+      })
+    },
     insertComment(){
-
-      alert("id:"+this.loginSeq + "/ boardSeq:"+ this.boardSeq +"/ content: "+this.content)
+      
+      //alert("id:"+this.loginSeq + "/ boardSeq:"+ this.boardSeq +"/ content: "+this.content)
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('memberSeq', this.loginSeq);
       params.append('boardSeq', this.boardSeq);
       params.append('content', this.content);
       axios.post("http://localhost:9000/insertComment", params)
               .then(res => {
-                alert("답글달기")
-                
-      })
+                //alert("답글달기")
+                this.content = ""
+                this.getComments()
+              })
+    },
+    answer(boardCommentSeq, index){
+       this.isShow = !this.isShow
+        this.clicked = index
+      this.answerNum = 1
+      alert(boardCommentSeq)
+
+    },
+    answerCancle(boardCommentSeq){
+      this.answerNum = 0
+      alert(boardCommentSeq)
     }
+
+   
   },
   created(){
     this.loginSeq = this.$store.state.loginUser.memberSeq
     this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
+    
   }
 }
 </script>
 
-<style>
+<style scoped>
+.memberId {
+  font-weight: bold;
+  float: left;
+  margin-left: 20px;
+}
+
+.writeDate{
+  width: 100px;
+  float: left;
+ font-size: 10px;
+ margin-left: 70px;
+ margin-bottom: 10px;
+ color: darkgray;
+}
+
+.content{
+  margin: 20px;
+}
+
+.dotline{
+  height: 1px;
+    padding: 0px;
+    overflow: hidden;
+    font: 0/0 arial;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    margin-bottom: 20px;
+}
+.report{
+  float: right;
+  margin-bottom: 20px;
+  margin-right: 20px;
+  font-size: 12px
+}
+
+.answerLink{
+  cursor: pointer;
+  margin-right: 20px;
+}
+
 
 </style>
