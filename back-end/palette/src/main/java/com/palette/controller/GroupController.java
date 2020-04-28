@@ -173,7 +173,7 @@ public class GroupController {
         groupService.insertBoardReference(form);
         return "";
     }
-    
+
     // Comment
     @PostMapping(value="/groupBoardDetailComments")
     public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {

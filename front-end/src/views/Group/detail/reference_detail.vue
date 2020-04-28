@@ -12,9 +12,7 @@
       </div>
       <div class="groupInfoContent">
         {{ this.$store.state.s_group.groupReferenceDetail.content }}
-        {{ this.$store.state.s_group.groupReferenceDetail.image }}
-        <a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/%EC%88%9C%EC%84%9C%EB%8F%84.png" download>DownLoad</a>
-        <el-button @click="downloadBtn" round>DownLoad</el-button>
+        <a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/BlueMoonData.txt" download>DownLoad</a>
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
@@ -61,23 +59,6 @@ export default {
       this.getList()
       this.$emit("showGroupReference")
     },
-    downloadBtn(){
-      console.log('s3://bit-palette/111/Awesome.PNG')
-      axios({
-      url: 's3://bit-palette/111/Awesome.PNG' ,
-      method: 'GET',
-      responseType: 'blob',
-      }).then((response) => {
-            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-            var fileLink = document.createElement('a');
-
-            fileLink.href = fileURL;
-            fileLink.setAttribute('download', 'file.png');
-            document.body.appendChild(fileLink);
-
-            fileLink.click();
-      });
-    }
   },
   mounted(){
 
