@@ -73,7 +73,7 @@
               width="100">
               <el-table-column align="center" label="Actions" width="120">
                 <template slot-scope="scope">
-                  <router-link :to="'/example/edit/'+scope.row.id">
+                  <router-link :to="'/compinfo/'+scope.row.id">
                     <el-button type="primary" size="small" icon="el-icon-edit">
                       상세정보
                     </el-button>

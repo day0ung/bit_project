@@ -96,11 +96,15 @@
               width="100">
               <button type="button"> 상세정보 </button>
                 <template slot-scope="scope">
-                    <router-link :to="'/meminfo/'+scope.row.memberId">  <!--memberid가 파라미터로 전달됨 -->
+                     <router-link :to="'/managemember1/'+scope.row.memberId">  <!--memberid가 파라미터로 전달됨-->
                         <el-button type="primary" size="small" icon="el-icon-search">
                             상세정보
                         </el-button>
                     </router-link>
+
+                    <!-- content_01_memdetail -->
+
+
                 </template>
 
             </el-table-column>
@@ -115,11 +119,13 @@
 <script scoped>
 var output_data;
 import 'element-ui/lib/theme-chalk/index.css';
+// import memberdetail from '@/view/Member/content_01_memdetail';
 
 export default {
     data(){
         return {
-            showAllMember:null
+            showAllMember:null,
+            // memberdetail:false,
 
         }
     },
