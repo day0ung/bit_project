@@ -184,7 +184,7 @@ export default {
 .cont_narae.cont_product .lpop_wrap {top:35px}
 
 /* 스페셜 */
-.cont_special {padding-top:00px;background:#fff}
+.cont_special {padding-top:0px;background:#fff}
 .cont_special .list_product li {margin-top:13px;height:135px}
 .cont_special .box_product:after {border:1px solid #b4d2ff}
 .cont_special .box_product:hover:after,
