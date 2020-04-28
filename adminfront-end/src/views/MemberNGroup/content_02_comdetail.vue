@@ -1,5 +1,6 @@
 <template>
   <div class="showMemberDetailFrom">
+    <h1> company Detail show </h1>
     <el-form ref="form" :model="showAllMember" label-width="120px">
       
 
@@ -33,7 +34,7 @@
 
       <el-form-item
         v-loading="loading"
-        label="memberName">
+        label="회사명">
         <div class="width80per">
           <el-input v-model="showAllMember.memberName"></el-input>
         </div>
@@ -41,7 +42,7 @@
 
       <el-form-item 
         v-loading="loading"
-        label="address">
+        label="주소">
         <div class="width80per">
           <el-input v-model="showAllMember.address"></el-input>
         </div>
@@ -56,7 +57,7 @@
           </div>
       </el-form-item>
 
-      <el-form-item label="age">
+      <el-form-item label="설립일">
         <div class="width80per">
           <el-input 
             v-loading="loading"
@@ -64,15 +65,7 @@
           </div>
       </el-form-item>
 
-      <el-form-item label="gender">
-        <div class="width80per">
-          <el-input 
-            v-loading="loading"
-            v-model="showAllMember.gender"></el-input>
-          </div>
-      </el-form-item>
-
-      <el-form-item label="myMoney">
+      <el-form-item label="적립금">
         <div class="width80per">
           <el-input 
           v-loading="loading"
@@ -88,7 +81,7 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="auth">
+      <el-form-item label="권한">
         <div class="width80per">
           <el-input 
           v-loading="loading"
@@ -96,7 +89,7 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="del">
+      <el-form-item label="탈퇴여부">
         <div class="width80per">
           <el-input 
           v-loading="loading"
@@ -141,16 +134,17 @@ import { loading } from 'element-ui';
     methods: {
       // axios data processing
       showMemberList(){
-        const getThisParam = this.$route.params.memid;
+
+        const getThisParam = this.$route.params.comid;
         var params = new URLSearchParams();
         params.append('memberId', getThisParam);
-          axios.post("http://localhost:9000/TestAdminChangeDetail", params)
+          axios.post("http://localhost:9000/adminGetCompanyInfoOne", params)
               .then(res => {
                 this.loading=true
-                console.log("디테일 출력 부분입니다. ")
+                console.log("디테일 출력 부분입니다. comdetail ")
                 console.log(this.$route.params);
-              console.log(JSON.stringify(res.data))
-              console.log("디테일 출력 끝.  ")
+                console.log(this.$route.params);
+              console.log("디테일 출력 끝.  . comdetail")
               console.log(res.data)
               this.loading=false
               this.showAllMember=res.data;
@@ -171,7 +165,7 @@ import { loading } from 'element-ui';
       },
 
       gobacksite(){
-        this.$router.push('/managemember1')
+        this.$router.push('/managemember2')
         
       }
 

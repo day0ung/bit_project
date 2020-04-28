@@ -33,7 +33,7 @@
 
       <el-form-item
         v-loading="loading"
-        label="memberName">
+        label="회원명">
         <div class="width80per">
           <el-input v-model="showAllMember.memberName"></el-input>
         </div>
@@ -41,7 +41,7 @@
 
       <el-form-item 
         v-loading="loading"
-        label="address">
+        label="회원주소">
         <div class="width80per">
           <el-input v-model="showAllMember.address"></el-input>
         </div>
@@ -56,7 +56,7 @@
           </div>
       </el-form-item>
 
-      <el-form-item label="age">
+      <el-form-item label="나이">
         <div class="width80per">
           <el-input 
             v-loading="loading"
@@ -64,7 +64,7 @@
           </div>
       </el-form-item>
 
-      <el-form-item label="gender">
+      <el-form-item label="성별">
         <div class="width80per">
           <el-input 
             v-loading="loading"
@@ -72,7 +72,7 @@
           </div>
       </el-form-item>
 
-      <el-form-item label="myMoney">
+      <el-form-item label="적립금">
         <div class="width80per">
           <el-input 
           v-loading="loading"
@@ -80,7 +80,7 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="cv">
+      <el-form-item label="이력서여부">
         <div class="width80per">
           <el-input 
           v-loading="loading"
@@ -88,7 +88,7 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="auth">
+      <el-form-item label="권한">
         <div class="width80per">
           <el-input 
           v-loading="loading"
@@ -96,7 +96,7 @@
         </div>
       </el-form-item>
 
-      <el-form-item label="del">
+      <el-form-item label="탈퇴여부">
         <div class="width80per">
           <el-input 
           v-loading="loading"

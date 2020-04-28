@@ -27,7 +27,7 @@ export default[{
         {   //디테일 페이지로 이동
             path:'/managemember2/companydetail/:comid',
             name:'managemember2Detial',
-            component:() => import('@/views/MemberNGroup/content_01_memdetail.vue'),
+            component:() => import('@/views/MemberNGroup/content_02_comdetail.vue'),
         },
 
 
