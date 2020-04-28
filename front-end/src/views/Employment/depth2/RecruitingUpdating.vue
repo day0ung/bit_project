@@ -51,8 +51,7 @@
 					:on-remove="handleRemove">
 					<i class="el-icon-plus"></i>
 				</el-upload>
-				<el-dialog :visible.sync="ruleForm.dialogVisible"
-							append-to-body=true>
+				<el-dialog :visible.sync="ruleForm.dialogVisible" append-to-body=true>
 					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
 				</el-dialog>
 			</el-form-item>
@@ -91,6 +90,7 @@ export default {
           workingType: '',
 		  salary: '',
 		  cvStartDate: '',
+		  cvEndDate : '',
           position: '',
           workingLocation: '',
 		  dialogImageUrl: ""
@@ -131,64 +131,62 @@ export default {
 		qContent(value){
 			this.content = value
 		},
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-			
-			axios.get("http://localhost:9000/recruitUpdating",{
-				params:{
-					boardSeq: this.getOneRecruit1.boardSeq,
-					memberSeq: this.login1.memberSeq,
-					title: this.ruleForm.title,
-					career: this.ruleForm.career,
-					education: this.ruleForm.education,
-					workingType: this.ruleForm.workingType,
-					cvStartDate : this.$moment(this.ruleForm.cvStartDate).format('YYYY.MM.DD HH:mm:ss'),
-					cvEndDate : this.$moment(this.ruleForm.cvEndDate).format('YYYY.MM.DD HH:mm:ss'),
-					salary: this.ruleForm.salary,
-					position: this.ruleForm.position,
-					workingLocation: this.ruleForm.workingLocation,
-					image: this.ruleForm.dialogImageUrl,
-					content:this.content
-				}
-			}).then(res =>{
-				if(res.data === true){
-					alert("성공적으로 수정되었습니다.")
+		submitForm(formName) {
+			this.$refs[formName].validate((valid) => {
+				if (valid) {
+					axios.get("http://localhost:9000/recruitUpdating",{
+						params:{
+							boardSeq: this.getOneRecruit1.boardSeq,
+							memberSeq: this.login1.memberSeq,
+							title: this.ruleForm.title,
+							career: this.ruleForm.career,
+							education: this.ruleForm.education,
+							workingType: this.ruleForm.workingType,
+							cvStartDate : this.$moment(this.ruleForm.cvStartDate).format('YYYY.MM.DD HH:mm:ss'),
+							cvEndDate : this.$moment(this.ruleForm.cvEndDate).format('YYYY.MM.DD HH:mm:ss'),
+							salary: this.ruleForm.salary,
+							position: this.ruleForm.position,
+							workingLocation: this.ruleForm.workingLocation,
+							image: this.ruleForm.dialogImageUrl,
+							content:this.content
+						}
+					}).then(res =>{
+						if(res.data === true){
+							alert("성공적으로 수정되었습니다.")
+							this.$router.push({
+								name: 'recruiting'
+							})
+						}
+						else {
+							alert("수정을 실패했습니다. 다시 확인해주시기 바랍니다.")
+						}
+					})
+				} else {
+					alert('공고가 등록되지 않았습니다.');
 					this.$router.push({
 						name: 'recruiting'
 					})
 				}
-				else {
-					alert("수정을 실패했습니다. 다시 확인해주시기 바랍니다.")
-				}
-			})
-          } else {
-			alert('공고가 등록되지 않았습니다.');
-			this.$router.push({
-        			name: 'recruiting'
-            })
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-	  },
-	  handleRemove(file, fileList) {
-            console.log(file, fileList);
-        },
-        handlePictureCardPreview(file) {
-            this.ruleForm.dialogImageUrl = file.url;
-            this.ruleForm.dialogVisible = true;
-        },
-        handleExceed(files, fileList){
-            this.$message({
-                showClose: true,
-                center: true,
-                message: '대표이미지는 1개만 업로드가능합니다.',
-                type: 'error'
-			})
+			});
 		},
-
+		resetForm(formName) {
+			this.$refs[formName].resetFields();
+		},
+		handleRemove(file, fileList) {
+			console.log(file, fileList);
+		},
+		handlePictureCardPreview(file) {
+			this.ruleForm.dialogImageUrl = file.url;
+			this.ruleForm.dialogVisible = true;
+		},
+		handleExceed(files, fileList){
+			this.$message({
+				showClose: true,
+				center: true,
+				message: '대표이미지는 1개만 업로드가능합니다.',
+				type: 'error'
+			})
+		}
 	},
 	created(){
 		let sMemberSeq = sessionStorage.getItem("loginUser")
@@ -201,11 +199,9 @@ export default {
 		params.append("empBoardSeq", this.empBoardSeq)
 		axios.post("http://localhost:9000/getOneRecruit", params)
 			.then(res =>{
-				
 				this.$store.state.s_employment.getOneRecruit = res.data
 				this.getOneRecruit1 = this.$store.state.s_employment.getOneRecruit
 				this.startDate = this.$moment(res.data.cvStartDate).format('YYYY.MM.DD HH:mm:ss')
-				// this.startDate = this.$moment(new Date()).format('YYYY.MM.DD HH:mm:ss')
             	this.endDate = this.$moment(res.data.cvEndDate).format('YYYY.MM.DD HH:mm:ss')
 				this.ruleForm.title = this.getOneRecruit1.title
 				this.ruleForm.cvStartDate = this.startDate
