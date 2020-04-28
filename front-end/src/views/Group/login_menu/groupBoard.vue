@@ -32,26 +32,22 @@
         <el-table-column
           prop="title"
           label="글제목"
-          width="470px"
-          >
+          width="470px">
         </el-table-column>
         <el-table-column
           prop="memberDto.memberId"
           label="작성자"
-          width="100px"
-          >
+          width="100px">
         </el-table-column>
         <el-table-column
           prop="readCount"
           label="조회수"
-          width="100px"
-          >
+          width="100px">
         </el-table-column>
         <el-table-column
           prop="writeDate"
           label="작성일"
-          width="170px"
-          >
+          width="170px">
         </el-table-column>
       </el-table> <br>
       <div class="pageination">
@@ -171,6 +167,9 @@ export default {
         }
           this.$store.state.s_group.showBoardDetail = false
         })
+      axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
+        this.$store.state.s_group.groupBoardDetailComments = res.data
+      })
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)

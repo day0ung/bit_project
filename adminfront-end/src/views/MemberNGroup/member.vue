@@ -2,9 +2,9 @@
     <div class="memberManage">
         <div class="leftBar">
             <ul>
-                <li> <h2> {{title}} </h2> </li>
-                <li><router-link class="active" to="/managemember1"> 기타1 </router-link></li>
-                <li><router-link  to="/managemember2">  기타2 </router-link></li>
+                <li> <h4> {{title}} </h4> </li>
+                <li><router-link class="active" to="/managemember1"> 일반회원관리 </router-link></li>
+                <li><router-link  to="/managemember2">  기업회원관리 </router-link></li>
                 <li><router-link  to="/managemember3">  기타1 </router-link></li>
                 <li><router-link  to="/managemember4">  기타2 </router-link></li>
                 <li>
@@ -25,7 +25,7 @@
 export default {
     data(){
         return{
-            title:"회원관리",
+            title:"회원 및 소모임 관리",
             isActive:[]
 
         }

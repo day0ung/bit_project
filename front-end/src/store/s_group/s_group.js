@@ -9,6 +9,7 @@ export default {
         groupCalendarStartDate:'',
         groupBoardList: [],
         groupBoardDetail: [],
+        groupBoardDetailComments: [],
         groupReferenceList: [],
         groupReferenceDetail: [],
         grouDetail: [],
