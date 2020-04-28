@@ -10,8 +10,6 @@
         <Cwrite v-if="show_calendar_write" @close="show_calendar_write = false" :startDate="clickDay"></Cwrite>
         <Cdetail v-if="show_calendar_detail" @close="show_calendar_detail = false"></Cdetail>
       </div>
-      <el-button 
-      @click="compareWith">수정하기</el-button>
   </div>
 </template>
 

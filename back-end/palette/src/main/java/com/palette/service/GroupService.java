@@ -211,4 +211,7 @@ public class GroupService {
 	public ArrayList<CommentDto> groupBoardDetailComments(int boardSeq) {
 		return groupDao.groupBoardDetailComments(boardSeq);
 	}
+	public void insertComment(CommentDto commentDto) {
+		groupDao.insertComment(commentDto);
+	}
 }

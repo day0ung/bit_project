@@ -169,6 +169,20 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
         SELECT max(BOARD_SEQ)
         FROM BOARD
     </select>
-
+	
+	<select id="groupBoardDetailComments" parameterType="java.lang.Integer" resultType="com.palette.model.CommentDto">
+		select b.*, m.MEMBER_ID
+		from BOARD_COMMENT b
+		join MEMBER m
+		on b.MEMBER_SEQ = m.MEMBER_SEQ 
+		where BOARD_SEQ = #{boardSeq}
+	</select>
+	<insert id="insertComment" parameterType="com.palette.model.CommentDto">
+		insert into FINAL.BOARD_COMMENT(BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT, WRITE_DATE, DEL)
+		values( #{boardSeq}, #{memberSeq}, 
+				(select ifnull(MAX(REF),0)+1 from FINAL.BOARD_COMMENT),
+				 0, 0, #{content}, NOW(), 0)
+		
+	</insert>
 
 </mapper>

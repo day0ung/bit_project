@@ -12,11 +12,14 @@ public class CommentDto {
 	private String writeDate;
 	private int del;
 	
+	private String memberId;
+	
 	public CommentDto() {
 	}
 
+	
 	public CommentDto(int boardCommentSeq, int boardSeq, int memberSeq, int ref, int step, int depth, String content,
-			String writeDate, int del) {
+			String writeDate, int del, String memberId) {
 		super();
 		this.boardCommentSeq = boardCommentSeq;
 		this.boardSeq = boardSeq;
@@ -27,6 +30,15 @@ public class CommentDto {
 		this.content = content;
 		this.writeDate = writeDate;
 		this.del = del;
+		this.memberId = memberId;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public int getBoardCommentSeq() {

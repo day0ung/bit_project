@@ -59,6 +59,7 @@ public interface GroupDao {
 	void updateReadCount(int boardSeq);
 	
 	ArrayList<CommentDto> groupBoardDetailComments(int boardSeq);
+	void insertComment(CommentDto commentDto);
 	
 
 	int currBoardSeq();
