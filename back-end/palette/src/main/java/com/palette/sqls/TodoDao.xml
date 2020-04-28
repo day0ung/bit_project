@@ -44,4 +44,15 @@
  	UPDATE TODOLIST SET TITLE=#{title} WHERE MEMBER_SEQ=#{memberSeq} AND TODO_SEQ=#{todoSeq}
  </update>
  
+ <select id="selectDate" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
+  	SELECT distinct TODO_DATE
+ 	FROM TODOLIST 
+ 	WHERE MEMBER_SEQ=#{memberSeq} 
+ </select>
+ 
+ <select id="DateAndCount" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
+ SELECT TODO_DATE, (select count(*) from TODOLIST where MEMBER_SEQ=#{memberSeq} AND del =1 AND TODO_DATE = #{todoDate}) as delcount
+ FROM TODOLIST where MEMBER_SEQ=#{memberSeq} AND TODO_DATE=#{todoDate}
+ </select>
+ 
 </mapper>

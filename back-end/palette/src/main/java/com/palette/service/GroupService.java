@@ -15,6 +15,7 @@ import com.palette.dao.GroupDao;
 import com.palette.model.BoardParams;
 import com.palette.model.BoardReferenceDto;
 import com.palette.model.CalendarDto;
+import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -103,6 +104,9 @@ public class GroupService {
 	public void resizeCalendar(CalendarDto calendarDto) {
 		groupDao.resizeCalendar(calendarDto);
 	}
+	public void updateGroupCalendar(CalendarDto calendarDto) {
+		groupDao.updateGroupCalendar(calendarDto);
+	}
 	
 // TODO: GROUP ATTENDENCE	
 	public int getAttendGroup(String checkday, GroupSchedule groupSchedule) {
@@ -177,7 +181,7 @@ public class GroupService {
 	public void updateReadCount(int boardSeq) {
 		groupDao.updateReadCount(boardSeq);
 	}
-
+	
 	// TODO: GROUP PDS BOARD
 	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
 		return groupDao.getgroupPdsList(groupSeq);
@@ -202,7 +206,9 @@ public class GroupService {
             boardReferenceDto.setBoardSeq(boardSeq);
             groupDao.insertBoardReference(boardReferenceDto);
         }
-	}	
-
+	}
 	
+	public ArrayList<CommentDto> groupBoardDetailComments(int boardSeq) {
+		return groupDao.groupBoardDetailComments(boardSeq);
+	}
 }

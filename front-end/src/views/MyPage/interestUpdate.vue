@@ -1,21 +1,10 @@
-
-
 <template>
-    <div class="create">
-        <div class="createContainer">
-            <div class="title">회원가입이 완료되었습니다. 관심목록을 설정해 주세요</div>
-            <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
-               <!-- 관심지역 -->
-              
-               <el-form-item label="관심지역" prop="extraAddress">
-                    <el-input v-model="ruleForm.address" placeholder="주소" readonly="readonly" style="width: 65%; margin-right: 10px"></el-input>
-                    <el-button type="info"  @click="execDaumPostcode" plain>우편번호 찾기</el-button>
-                    <el-input v-model="ruleForm.extraAddress" placeholder="상세주소"  style="width: 87%;"></el-input>
-                </el-form-item>
-
-         
-
-
+  <transition name="modal">
+    <div class="modal-mask">
+        <div class="modal-container">
+            <div class="modal-body">
+        <div> 
+         <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <!-- 상세분야 -->
                 <el-form-item label="관심분야" prop="inter" >
                   <p style="color: #82CF1E; margin-bottom:-10px" >대학생/취업</p>
@@ -75,56 +64,46 @@
                 <!-- 서브밋버튼 -->
                 <div class="submitBtnDiv">
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">회원가입</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">수정하기</el-button>
                         <el-button @click="resetForm('ruleForm')">취소</el-button>
                     </el-form-item>
                 </div>
             </el-form>
+                </div>
+             </div>
         </div>
-
-    </div>
+     </div>
+  </transition>
 </template>
 
 <script>
-
 export default {
+    props:["memSeq"], 
     data(){
         return{
-            ruleForm: {
-                address:'',
-                postcode: '',
-      			address: '',
-                extraAddress: '',
-                inter: [],
-            },
-            rules: {
-                 address:[
-                    { required: true, message: '상세 주소를 입력해주세요', trigger: 'blur' },
-                ],
-                extraAddress:[
-                    { required: true, message: '상세주소를 입력해주세요', trigger: 'blur' }
-                ],
-                inter:[
-                    { required: true, message: '관심분야를 선택해주세요', trigger: 'change' },
-                ],
-            },
-           
+          
+          ruleForm: {
+              inter: [],
+          },
+          rules: {
+              inter:[ { required: true, message: '관심분야를 선택해주세요', trigger: 'change' } ]
+          },
         }
     },
     methods:{
-        
-        submitForm(formName) {
+         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
                 var interArea= this.ruleForm.address + this.ruleForm.extraAddress
                 var params = new URLSearchParams();
-                params.append('interArea', interArea)
+                params.append('memberSeq', this.memSeq)
+                alert(this.memSeq)
                 params.append('interSmallSeqs', this.ruleForm.inter)
-                axios.post('http://localhost:9000/intersting', params).then(
+                axios.post('http://localhost:9000/InterestingUpdate', params).then(
                 res => {
                     if(res.data == 'perfect'){
                         alert('작성이 완료 되었습니다')
-                        this.$router.push ({path:'/'})
+                         this.$emit('update')   
                     }
                 }) 
 
@@ -136,59 +115,31 @@ export default {
         },
         resetForm(formName) {
             this.$refs[formName].resetFields();
-		},
-        execDaumPostcode() {
-			new daum.Postcode({
-			onComplete: (data) => {
-			if (data.userSelectedType === 'R') {
-				this.ruleForm.address = data.roadAddress;
-			} else {
-				this.ruleForm.address = data.jibunAddress;
-			}
-			if (data.userSelectedType === 'R') {
-				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-				this.ruleForm.extraAddress += data.bname;
-				}
-				if (data.buildingName !== '' && data.apartment === 'Y') {
-				this.ruleForm.extraAddress +=
-					this.ruleForm.extraAddress !== ''
-					? `, ${data.buildingName}`
-					: data.buildingName;
-				}
-				if (this.ruleForm.extraAddress !== '') {
-				this.ruleForm.extraAddress = ` (${this.ruleForm.extraAddress})`;
-				}
-			} else {
-				this.ruleForm.extraAddress = '';
-			}
-			},
-        }).open();
-        }
+             this.$emit('close')   
+        },
+        
     }
-
 }
 </script>
 
-<style scope>
+<style scoped>
+.modal-container{
+    margin-left: 600px;
+    margin-top: 12px;
+    width: 500px;
+    padding: 0px 19px;
+    background-color: #fff;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease; 
+   
+}
 
-.createContainer {
-    position: relative;
-    margin: auto;
-    overflow: hidden;
-    width: 600px;
-    height: auto;
-    border-radius: 10px;
-}
-.title{
-    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
-    font-size: 18px;
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-.submitBtnDiv{
-    margin-left: -120px;
-    text-align: center;
+.modal-body {
+ margin: 0px 0; 
+ position: relative; 
+ flex:  none; 
 }
 </style>

@@ -119,6 +119,32 @@ public class MemberController {
     	return pass;
     }
     
+    //마이페이지 내 관심지역 변경
+    @PostMapping(value="/updateInterArea")
+    public void updateInterArea(MemberDto dto) {
+    	System.out.println("updateInterArea"+ dto.getMemberSeq()+ dto.getInterArea());
+    	memberService.addInterArea(dto);
+  
+    }
+    
+    //마이펭지 관심분야 변경
+    @PostMapping(value="/InterestingUpdate")
+    public String InterestingUpdate(String interSmallSeqs, MemberDto dto) {
+    	System.out.println("InterestingUpdate!!!"+interSmallSeqs + dto.getMemberSeq());
+    	memberService.InterestingUpdate(interSmallSeqs, dto.getMemberSeq());
+    	return "perfect";
+    }
+    
+    //mypage회원탈퇴
+    @PostMapping(value="/delUser")
+    public boolean delUser(MemberDto dto) {
+    	System.out.println("delUser"+ dto.getMemberId()+ "<< 아이디 시퀀스>>"+dto.getMemberSeq());
+    	boolean del = memberService.delUser(dto);
+    	return del;
+    }
+    
+    
+    
     //개인스터디 todo리스트 추가
     @PostMapping(value="/addTodoList")
     public boolean addTodoList(TodoListDto dto) {
@@ -181,6 +207,15 @@ public class MemberController {
     public List<TodoListDto> TodoListDoing(TodoListDto dto) {
     	System.out.println("selectDoneTodoList"+ dto.getMemberSeq());
     	List<TodoListDto> todo = memberService.TodoListDoing(dto);
+    	return todo;
+    }
+    
+    //todolist log 날짜데이터 뽑기
+    @PostMapping(value="/selectDate")
+    public List<TodoListDto> selectDate(TodoListDto dto) {
+    	System.out.println("selectDate"+ dto.getMemberSeq());
+    	List<TodoListDto> todo = memberService.selectDate(dto);
+   
     	return todo;
     }
 }

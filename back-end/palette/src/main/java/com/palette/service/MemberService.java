@@ -1,5 +1,6 @@
 package com.palette.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.palette.dao.MemberDao;
@@ -56,6 +57,7 @@ public class MemberService {
 				memberDao.addInter(param);
 			}
 		}
+		
 		//회원가입 내 관심지역 insert
 		public void addInterArea(MemberDto dto) {
 			memberDao.addInterArea(dto);
@@ -78,6 +80,23 @@ public class MemberService {
 			return memberDao.getSeq();
 		}
 		
+		//mypage 관심분야 update
+		public void InterestingUpdate(String interSmallSeqs, int memberSeq) {
+			MemberInterParam param = new MemberInterParam(); 
+			memberDao.delInter(memberSeq);
+			String arr[] = interSmallSeqs.split(",");
+			int smallArr[] = new int[arr.length];
+			int bigArr[] = new int[arr.length];
+			for (int i = 0; i < arr.length; i++) {
+				smallArr[i] = Integer.parseInt(arr[i]); //smallseq
+				bigArr[i] = memberDao.getBigSeq(smallArr[i]);//bigarr담을변수
+				param.setMemberSeq(memberSeq);
+				param.setSmallSeq(smallArr[i]);
+				param.setBigSeq(bigArr[i]);
+				memberDao.addInter(param);
+			}
+		}
+		
 		public boolean updateInfo(MemberDto dto) {
 			int update = memberDao.updateInfo(dto);
 			return update >0 ? true: false;
@@ -98,6 +117,11 @@ public class MemberService {
 			return update >0 ? true: false;
 		}
 		
+		public boolean delUser(MemberDto dto) {
+			int del = memberDao.delUser(dto);
+			return del > 0 ? true:false; 
+		}
+		//---------------TODOLIST------------------------
 		//todoList add 
 		public boolean addTodoList(TodoListDto dto) {
 			int add = memberDao.addTodoList(dto);
@@ -138,6 +162,18 @@ public class MemberService {
 			List<TodoListDto> list = memberDao.TodoListDoing(dto);
 			return list;
 		}
+		
+		public List<TodoListDto> selectDate(TodoListDto dto) {
+			List<TodoListDto> list = memberDao.selectDate(dto);
+			return list;
+		}
+		
+		public List<TodoListDto> DateAndCount(TodoListDto dto){
+			List<TodoListDto> list = memberDao.DateAndCount(dto);
+			return list;
+		}
+		
+		
 		
     
 }

@@ -19,6 +19,7 @@ export default new Vuex.Store({
     loginUser : null,
     isLogin : true,
     auth: null,
+    show: true,
     currpage: "/",
     depth1:"",
     depth2:"",
@@ -41,7 +42,12 @@ export default new Vuex.Store({
         state.totalDepth = state.depth1 + " > " + state.depth2 + " > " + state.depth3
       }
       return state.totalDepth
-    }
+    },
+    // showControll: state =>{
+    //   state.show = false
+    //   return state.show
+    // }
+    
   },
   mutations: {
     loginSuccess(state, payload){

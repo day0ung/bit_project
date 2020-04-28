@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.palette.model.BoardParams;
 import com.palette.model.BoardReferenceDto;
 import com.palette.model.CalendarDto;
+import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
@@ -47,6 +48,7 @@ public interface GroupDao {
 	void insertGroupCalendar(CalendarDto calendarDto);
 	void deleteGroupCalendar(int seq);
 	void resizeCalendar(CalendarDto calendarDto);
+	void updateGroupCalendar(CalendarDto calendarDto);
 	
 	void insertAttendGroup(GroupSchedule groupSchedule);
 	int checkAttend(GroupSchedule groupSchedule);
@@ -56,10 +58,12 @@ public interface GroupDao {
 	void updateGroupBoard(GroupBoardDto groupBoardDto);
 	void updateReadCount(int boardSeq);
 	
+	ArrayList<CommentDto> groupBoardDetailComments(int boardSeq);
 	
 
 	int currBoardSeq();
 	void insertBoardReference(BoardReferenceDto boardReferenceDto);
+
 
 
 }

@@ -8,6 +8,7 @@ public class CalendarDto {
 	private String content;
 	private String start;
 	private String end;
+	private String color;
 	private int auth;
 	
 	public CalendarDto() {
@@ -15,7 +16,7 @@ public class CalendarDto {
 	}
 
 	public CalendarDto(int calendarSeq, int memberSeq, int groupInfoSeq, String title, String content, String start,
-			String end, int auth) {
+			String end, String color, int auth) {
 		super();
 		this.calendarSeq = calendarSeq;
 		this.memberSeq = memberSeq;
@@ -24,14 +25,24 @@ public class CalendarDto {
 		this.content = content;
 		this.start = start;
 		this.end = end;
+		this.color = color;
 		this.auth = auth;
 	}
 
 	@Override
 	public String toString() {
 		return "CalendarDto [calendarSeq=" + calendarSeq + ", memberSeq=" + memberSeq + ", groupInfoSeq=" + groupInfoSeq
-				+ ", title=" + title + ", content=" + content + ", start=" + start + ", end=" + end
+				+ ", title=" + title + ", content=" + content + ", start=" + start + ", end=" + end + ", color=" + color
 				+ ", auth=" + auth + "]";
+	}
+
+	
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	public int getCalendarSeq() {
