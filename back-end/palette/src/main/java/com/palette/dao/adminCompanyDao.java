@@ -13,16 +13,17 @@ public interface adminCompanyDao {
 	
 	List<MemberDto> adminGetCompanyMemberListAll();
 	
-	MemberDto adminGetCompanyInfoOne(MemberDto dto);
 	
-	MemberDto approvalrequestCompanyList();
+	// MemberDto approvalrequestCompanyList(MemberDto dto);
 	
-	MemberDto finishApprovalCompanyList();
+	// MemberDto finishApprovalCompanyList(MemberDto dto);
 	
 	List<String> adminGetCompanyLocationALl();
 	
 	List<String> adminGetCompanyNmaeAll();
 
+	MemberDto adminGetCompanyInfoOne(MemberDto dto);
+	
 	public boolean changeAUTHforCompanyMember(MemberDto dto);
 
 }
