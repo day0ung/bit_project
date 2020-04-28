@@ -13,9 +13,9 @@
         </el-input>
       </div>
       <el-table 
-        v-loading="loading"
+        v-loading="this.$store.state.s_group.showGroupReferenceList"
         :row-class-name="clickableRows"
-        :data="tableData.filter( data => !search || data.title.toLowerCase().includes(search.toLowerCase())
+        :data="this.$store.state.s_group.groupReferenceList.filter( data => !search || data.title.toLowerCase().includes(search.toLowerCase())
                                                 || data.memberDto.memberId.toLowerCase().includes(search.toLowerCase()) )"
         stripe
         style="width: 100% cursor:pointer"
@@ -64,23 +64,19 @@ export default {
   name: 'GroupReference',
   data(){
     return{
-      tableData: [],
       search:"",
-      loading: true,
-      groupSeq:0,
     }
   },
   methods:{
     getList(){
-      this.loading = true
-    
+      this.$store.state.s_group.showGroupReferenceList = true
       var params = new URLSearchParams()
-      params.append('groupSeq', this.groupSeq);
+      params.append('groupSeq', this.$store.state.s_group.groupSeq);
       axios.post("http://localhost:9000/groupPdsList", params)
                   .then(res => {
-                this.tableData = res.data
-              
-              this.loading = false
+              console.log(res.data)
+              this.$store.state.s_group.groupReferenceList = res.data
+              this.$store.state.s_group.showGroupReferenceList = false
             })
     },
     gotoClick(row, column, event){
@@ -90,8 +86,15 @@ export default {
       params.append('boardSeq', row.boardSeq);
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => {
         this.$store.state.s_group.groupReferenceDetail = res.data
+        if (String(res.data.memberSeq) === String(this.$store.state.loginUser.memberSeq)){
+          this.$store.state.s_group.showDeleteBtn = true
+          this.$store.state.s_group.showUpdateBtn = true
+        } else{
+          this.$store.state.s_group.showDeleteBtn = false
+          this.$store.state.s_group.showUpdateBtn = false
+        }
         this.$store.state.s_group.showReferenceDetail = false
-      })
+        })
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
@@ -105,7 +108,6 @@ export default {
    
   },
   created(){
-    this.groupSeq = this.$route.params.groupSeq
     this.getList()
   }
 }

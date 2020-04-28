@@ -171,10 +171,11 @@
 	values(#{groupInfoSeq}, #{memberSeq}, NOW())
 </insert>
 <select id="checkAttend" parameterType="com.palette.model.GroupSchedule" resultType="java.lang.Integer">
-	select count(*)
+	select IFNULL(count(*),0)
 	from GROUP_ATTEND
 	where GROUP_INFO_SEQ=#{groupInfoSeq} and MEMBER_SEQ=#{memberSeq} and ATTEND_SYSDATE = #{nowDate}
 </select>
+
  
 <!-- <select id="getGroupMemberName" parameterType="java.lang.Integer" resultMap="GroupMember">
 	SELECT g.GROUP_INFO_SEQ, g.MEMBER_SEQ, m.MEMBER_ID, m.MEMBER_NAME, m.BIRTH, m.ADDRESS, m.LOCATION, m.EMAIL, m.MYMONEY, m.CV, m.AUTH, m.DISLIKE

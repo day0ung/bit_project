@@ -144,9 +144,31 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 	</update>
 
 	<insert id="insertGroupBoard" parameterType="com.palette.model.GroupBoardDto">
-		INSERT INTO BOARD(GROUP_INFO_SEQ, MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, DEL, BOARD_AUTH)
-		VALUES( #{groupInfoSeq}, #{memberSeq}, #{category}, #{title}, #{content}, NOW(), 0, #{boardAuth})
+		INSERT INTO BOARD(GROUP_INFO_SEQ, MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, DEL, BOARD_AUTH, READ_COUNT)
+		VALUES( #{groupInfoSeq}, #{memberSeq}, #{category}, #{title}, #{content}, NOW(), 0, #{boardAuth}, 0)
 	</insert>
+
+	<update id="updateGroupBoard" parameterType="com.palette.model.GroupBoardDto">
+		UPDATE BOARD
+		SET TITLE = #{title}, CONTENT = #{content}
+		WHERE BOARD_SEQ = #{boardSeq}
+	</update>
+
+	<update id="updateReadCount" parameterType="com.palette.model.GroupBoardDto">
+		UPDATE BOARD
+		SET READ_COUNT = READ_COUNT + 1
+		WHERE BOARD_SEQ = #{boardSeq}
+	</update>
+
+	<insert id="insertBoardReference" parameterType="com.palette.model.BoardReferenceDto">
+		INSERT INTO BOARD_REFERENCE(BOARD_SEQ, MEMBER_SEQ, FILE_NAME)
+		VALUES (#{boardSeq}, #{memberSeq}, #{fileName})
+	</insert>
+
+	<select id="currBoardSeq" resultType="java.lang.Integer">
+        SELECT max(BOARD_SEQ)
+        FROM BOARD
+    </select>
 
 
 </mapper>

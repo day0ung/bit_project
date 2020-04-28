@@ -1,5 +1,6 @@
 package com.palette.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,20 +9,27 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.palette.model.BoardParams;
+import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.s3.ReferenceVo;
+import com.palette.s3.S3Uploader;
 import com.palette.service.GroupService;
 
 
 @CrossOrigin(origins = "*")
 @RestController
 public class GroupController {
+
+    @Autowired
+    S3Uploader s3Uploader;
 
     @Autowired
     GroupService groupService;
@@ -69,9 +77,16 @@ public class GroupController {
     
     
     @PostMapping(value = "/creatGroupApply")
-    public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule){
+    public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule, MultipartFile file)
+            throws IOException {
         System.out.println("creatGroupApply");
         groupDto.setInterBigSeq(groupService.searchInterBigSeq(groupDto.getInterSmallSeq()));
+        if(!file.isEmpty()){
+            String imagePath = s3Uploader.upload(file, "groupImage");
+            groupDto.setImage(imagePath);
+        }else{
+            groupDto.setImage("");
+        }
         groupService.createGroup(groupDto);
         groupSchedule.setGroupInfoSeq(groupService.currGroupInfoSeq());
         groupService.addSchedule(groupSchedule);
@@ -103,12 +118,13 @@ public class GroupController {
     @PostMapping(value="/groupBoardDetail")
     public GroupBoardDto getGroupBoardDetail(int boardSeq) {
         System.out.println("getGroupBoardDetail" + boardSeq);
+        groupService.updateReadCount(boardSeq);
         return groupService.getGroupBoardDetail(boardSeq);
     }
 
     @PostMapping(value = "/groupBoardDelete")
     public String groupBoardDelete(int boardSeq){
-        System.out.println("groupBoardDelete()" + boardSeq);
+        System.out.println("groupBoardDelete()");
         groupService.groupBoardDelete(boardSeq);
         return "";
     }
@@ -119,6 +135,15 @@ public class GroupController {
         groupService.insertGroupBoard(groupBoardDto);
         return "";
     }
+
+    @GetMapping(value = "/updateGroupBoard")
+    public String updateGroupBoard(GroupBoardDto groupBoardDto){
+        System.out.println("updateGroupBoard()" + groupBoardDto.toString());
+        groupService.updateGroupBoard(groupBoardDto);
+        return "";
+    }
+    
+
     
     // Pds
     @PostMapping(value="/groupPdsList")
@@ -142,7 +167,21 @@ public class GroupController {
         List<InterBigDto> list = groupService.getInterListAll();
         return list;
     }
+
+    @PostMapping(value = "/insertGroupReference")
+    public String insertGroupReference(ReferenceVo form) throws IOException{
+        groupService.insertBoardReference(form);
+        return "";
+    }
     
+    // Comment
+    @PostMapping(value="/groupBoardDetailComments")
+    public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {
+        System.out.println("getGroupBoardDetailComments() : " + boardSeq);
+        ArrayList<CommentDto> list = groupService.groupBoardDetailComments(boardSeq);
+        return list;
+    }
+
     // attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
@@ -154,5 +193,15 @@ public class GroupController {
     	    	
     	return s_result;
     }
-	
+	@PostMapping(value="/getAttendStatus")
+	public String checkAttend(GroupSchedule groupSchedule) {
+		System.out.println("getAttendStatus()");
+		
+		int result = groupService.checkAttend(groupSchedule);
+		
+		String s_result = result+"";
+		
+		return s_result;
+		
+	}
 }

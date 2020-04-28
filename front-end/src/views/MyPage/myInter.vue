@@ -1,41 +1,85 @@
 <template>
   <div>
-      <h1>interesting</h1>
-      <p>관심지역</p>
-      <h4>{{myinfo.interArea}}</h4>
-      <br>
-      <el-button @click="editArea">수정하기</el-button>
-      <table class="table1" v-if="addr">
-        <tbody>
-          <tr>
-                <el-button type="info" plain style="width: 100px; padding: 11px;" @click="execDaumPostcode">우편번호 찾기</el-button>
-          </tr>
-          <tr>
-            <td>
-              <el-input  placeholder="주소" readonly="readonly" v-model="address"></el-input>
-            </td>
-            <td>
-              <el-input  placeholder="상세주소" style="width: 300px" v-model="extraAddress"></el-input>
-            </td>
-            <td style="width: 14px"></td>
-            <td><i class="el-icon-s-tools" style="color: #d77f4a"></i> </td>
-              <td>
-              <el-button type="text" @click="updateAdd" style="color: #d77f4a; font-size: 16px">수정하기</el-button>
-            </td>
-          </tr>                   
-        </tbody>
-      </table>
-
+   <div class="slib">
+            <div class="slib_info">
+                <div class="tit">
+                  <img src='../../assets/css/images/area.png'>
+                </div>
+                <div class="titup">
+                   <table class="table1" style="margin-left: 55px">
+                     <colgroup>
+                    <col style="width: 270px">
+                    <col style="width: 30px">
+                    <col style="width: 50px">
+                    </colgroup>
+                      <thead>
+                        <tr>
+                          <th style="text-align: center;">관심지역</th>
+                          <th></th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td colspan="3">{{myinter.interArea}}</td>
+                          <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
+                          <td>
+                            <el-button type="text" @click="editAddr" style="color: #ff5151; font-size: 16px">수정</el-button>
+                          </td>
+                        </tr>                   
+                      </tbody>
+                    </table>
+                    <table class="table1" v-if="addr">
+                      <tbody>
+                        <tr>
+                             <el-button type="info" plain style="width: 100px; padding: 11px;" @click="execDaumPostcode">우편번호 찾기</el-button>
+                        </tr>
+                        <tr>
+                          <td>
+                            <el-input  placeholder="주소" readonly="readonly" v-model="address"></el-input>
+                          </td>
+                          <td>
+                            <el-input  placeholder="상세주소" style="width: 300px" v-model="extraAddress"></el-input>
+                          </td>
+                          <td style="width: 14px"></td>
+                          <td><i class="el-icon-s-tools" style="color: #d77f4a"></i> </td>
+                            <td>
+                            <el-button type="text" @click="editArea" style="color: #d77f4a; font-size: 16px">수정하기</el-button>
+                          </td>
+                        </tr>                   
+                      </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+   <div class="slib">
+            <div class="slib_info">
+                <div class="tit">
+                  <img src='../../assets/css/images/puzzle.png'>
+                </div>
+                <div class="titup">
        
-      <p>관심분야</p>
-      <h3 v-for="big in myBig" :key="big.seq">
-        {{big.bigName}}
-      </h3>
-      <br>
-     <p>상세분야</p>
-      <h3 v-for="small in mySmall" :key="small.seq">
-        {{small.smallName}}
-      </h3>
+                <p>관심분야</p>
+                <h3 v-for="big in myBig" :key="big.seq">
+                  {{big.bigName}}
+                </h3>
+                <br>
+              <p>상세분야</p>
+                <h3 v-for="small in mySmall" :key="small.seq">
+                  {{small.smallName}}
+                </h3>
+                <el-button @click="showshow"></el-button>
+                <Inter 
+                v-if="showInter"
+                :memSeq="memSeq"
+                @close="showInter = false"
+                @update="updateInter">
+                </Inter>
+                </div>
+            </div>
+        </div>
+  
+
         
 
 
@@ -43,87 +87,41 @@
 </template>
 
 <script>
+import logincss from '@/assets/css/member/myinfo.css'
+import Inter from "@/views/MyPage/interestUpdate.vue"
 export default {
+  props:['myinter','myBig','mySmall','memSeq'],
+  components:{
+      Inter,
+    },
   data(){
-    const intBig = [
-              {name:'대학생/취업', bigSeq: '1'},
-              {name:'공무원/임용', bigSeq: '2'},
-              {name:'어학/회화', bigSeq: '3'},
-              {name:'라이프/취미', bigSeq: '4'}
-                ]
       return{
           addr: false,
+          showInter: false,
           address: '',
           extraAddress: '',
           postcode: '',
-          myinfo: [],
-          myBig: [],
-          mySmall: [],
-          bgSeq: [],
-          intBigcheck: intBig,
-          smSeq:[],
-     
       }
     },
-     mounted(){
-		 var params = new URLSearchParams();
-		 params.append('memberSeq', this.$route.params.seq)
-        axios.post('http://localhost:9000/oneMember', params)
-        .then(res => {
-            var smyinfo = res.data
-            this.myinfo = smyinfo
-            
-            var bg = smyinfo.interBigDto
-            var sm = smyinfo.interSmallDto
-        
-            var big;
-            big = JSON.stringify(bg)
-            big = JSON.parse(big)
-            this.myBig = big
-
-            var small;
-            small = JSON.stringify(sm)
-            small = JSON.parse(small)
-            this.mySmall = small
-            console.log(this.myBig)
-            
-            for (const key in small) {
-                const element = small[key];
-                this.smSeq = element.interSmallSeq
-            } //smallSeq 할당
-
-            for (const key in big) {
-                const element = big[key];
-                this.bgSeq = element.interBigSeq
-            } //bigSeq 할당
-        }) 
-    },   
-
      methods: {
+       editAddr(){
+         this.addr = true;
+       },
       editArea(){
-        this.addr = true;
-         params.append('memberSeq', this.$route.params.seq)
-         if(this.address =='' || this.extraAddress ==''){
-           alert('주소를 입력해주세요')
+        if(this.address =='' || this.extraAddress ==''){
+          alert('주소를 입력해주세요')
          }else{
-         var params = new URLSearchParams();
-         params.append('memberSeq', this.$route.params.seq)
-         var realAddr = this.address + this.extraAddress
-         axios.post('http://localhost:9000/updateArea', params)
+          var params = new URLSearchParams();
+          var realAddr = this.address + this.extraAddress
+          params.append('memberSeq', this.memSeq)
+          params.append('interArea', realAddr)
+         axios.post('http://localhost:9000/updateInterArea', params)
             .then(res => {
-            
+              alert('정보수정이 완료되었습니다')
+              this.addr = false
+              this.$emit('updateInterArea', this.memSeq)
             })
          }
-      },
-      handleCheckAllChange(val) {
-        this.checkedCities = val ? cityOptions : [];
-        this.isIndeterminate = false;
-      },
-      handleCheckedCitiesChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.cities.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
-        //alert(value) seq 가져옴
       },
        execDaumPostcode() {
             new daum.Postcode({
@@ -151,7 +149,33 @@ export default {
             }
             },
           }).open(); 
-        }
+        },
+       showshow(){
+         this.showInter = true
+       },
+       updateInter(){
+         this.showInter = false
+           var params = new URLSearchParams();
+		      params.append('memberSeq', this.$route.params.seq)
+          axios.post('http://localhost:9000/myPageInter', params)
+          .then(res => {
+            var smyinfo = res.data
+            this.myinfo = smyinfo
+            
+            var bg = smyinfo.interBigDto
+            var sm = smyinfo.interSmallDto
+        
+            var big;
+            big = JSON.stringify(bg)
+            big = JSON.parse(big)
+            this.myBig = big
+
+            var small;
+            small = JSON.stringify(sm)
+            small = JSON.parse(small)
+            this.mySmall = small
+          })
+       }
   }
 }
 </script>

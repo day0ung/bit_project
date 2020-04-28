@@ -126,7 +126,7 @@
 		permission 1->0 (decreate)
 		-->
 		UPDATE GROUP_INFO
-		SET PERMISSION=1
+		SET PERMISSION=#{permission}
 		WHERE 
 			GROUP_INFO_SEQ=#{groupInfoSeq}
 		AND 

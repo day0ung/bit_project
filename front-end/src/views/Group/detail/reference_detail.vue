@@ -12,6 +12,8 @@
       </div>
       <div class="groupInfoContent">
         {{ this.$store.state.s_group.groupReferenceDetail.content }}
+        {{ this.$store.state.s_group.groupReferenceDetail.image }}
+        <el-button @click="downloadBtn" round>DownLoad</el-button>
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
@@ -25,8 +27,8 @@
       <div class="hr"></div>
       <div class="groupName">
         <el-button type="primary" @click="showGroupReference" round>돌아가기</el-button>
-        <el-button type="primary" round>수정하기</el-button>
-        <el-button type="primary" round>삭제하기</el-button>
+        <el-button type="primary" v-show="this.$store.state.s_group.showUpdateBtn" round>수정하기</el-button>
+        <el-button type="primary" v-show="this.$store.state.s_group.showDeleteBtn" round>삭제하기</el-button>
       </div>
     </div>
     <br>
@@ -44,11 +46,39 @@ export default {
       }
   },
   methods:{
-    showGroupReference(){
-      this.$emit("showGroupReference")
-      }
+    getList(){
+      this.$store.state.s_group.showGroupReferenceList = true
+      var params = new URLSearchParams()
+      params.append('groupSeq', this.$store.state.s_group.groupSeq);
+      axios.post("http://localhost:9000/groupPdsList", params)
+                  .then(res => {
+              this.$store.state.s_group.groupReferenceList = res.data
+              this.$store.state.s_group.showGroupReferenceList = false
+            })
     },
-    mounted(){
+    showGroupReference(){
+      this.getList()
+      this.$emit("showGroupReference")
+    },
+    downloadBtn(){
+      console.log('https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/Awesome.PNG')
+      axios({
+      url: 'https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/Awesome.PNG' ,
+      method: 'GET',
+      responseType: 'blob',
+      }).then((response) => {
+            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+            var fileLink = document.createElement('a');
+
+            fileLink.href = fileURL;
+            fileLink.setAttribute('download', 'file.png');
+            document.body.appendChild(fileLink);
+
+            fileLink.click();
+      });
+    }
+  },
+  mounted(){
 
   },
 }

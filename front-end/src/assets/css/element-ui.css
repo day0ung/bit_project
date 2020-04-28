@@ -4523,17 +4523,18 @@
 }
 
 .v-modal {
-    position: fixed;
+    /* position: fixed; */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     opacity: .5;
-    background: #000
+    background: #000 
 }
 
 .el-popup-parent--hidden {
-    overflow: hidden
+    overflow: hidden;
+    padding:0 !important;
 }
 
 .el-message-box {

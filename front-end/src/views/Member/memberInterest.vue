@@ -116,7 +116,6 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
-                alert(this.ruleForm.inter);
                 var interArea= this.ruleForm.address + this.ruleForm.extraAddress
                 var params = new URLSearchParams();
                 params.append('interArea', interArea)
@@ -125,7 +124,7 @@ export default {
                 res => {
                     if(res.data == 'perfect'){
                         alert('작성이 완료 되었습니다')
-                        this.$router.push ({name:'home'})
+                        this.$router.push ({path:'/'})
                     }
                 }) 
 

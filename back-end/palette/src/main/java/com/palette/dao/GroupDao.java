@@ -7,14 +7,15 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.palette.model.BoardParams;
+import com.palette.model.BoardReferenceDto;
 import com.palette.model.CalendarDto;
+import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
 import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
-import com.palette.model.InterSmallDto;
 
 @Mapper
 @Repository
@@ -31,7 +32,6 @@ public interface GroupDao {
 	ArrayList<GroupBoardDto> getgroupPagingList(BoardParams boardParams);
 	ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq);
 	
-
 	List<InterBigDto> getInterListAll();
 
 	ArrayList<GroupDto> groupSearchList(GroupParams groupParams);
@@ -44,12 +44,26 @@ public interface GroupDao {
 	GroupBoardDto getGroupBoardDetail(int boardSeq);
 	int getGroupBoardTotal(BoardParams boardParams);
 	
-	List<CalendarDto> getGroupSchedule(GroupDto groupDto);
+	List<CalendarDto> getGroupCalendar(GroupDto groupDto);
+	void insertGroupCalendar(CalendarDto calendarDto);
+	void deleteGroupCalendar(int seq);
+	void resizeCalendar(CalendarDto calendarDto);
+	void updateGroupCalendar(CalendarDto calendarDto);
 	
 	void insertAttendGroup(GroupSchedule groupSchedule);
 	int checkAttend(GroupSchedule groupSchedule);
+	
 	void groupBoardDelete(int boardSeq);
 	void insertGroupBoard(GroupBoardDto groupBoardDto);
+	void updateGroupBoard(GroupBoardDto groupBoardDto);
+	void updateReadCount(int boardSeq);
+	
+	ArrayList<CommentDto> groupBoardDetailComments(int boardSeq);
+	
+
+	int currBoardSeq();
+	void insertBoardReference(BoardReferenceDto boardReferenceDto);
+
 
 
 }

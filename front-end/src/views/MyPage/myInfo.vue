@@ -154,7 +154,6 @@
         <div class="slib">
           <div class="slib_info1">
                  <el-button round style="float: right; margin-left: 24px;" @click="userOut">회원탈퇴</el-button>
-                 <el-button round style="float: right; border-color:#ff5151; color:#ff5151" @click="searchPass">비밀번호 찾기</el-button>
           </div>
         </div>
   </div>
@@ -162,7 +161,9 @@
 
 <script>
 import logincss from '@/assets/css/member/myinfo.css'
+
 export default {
+    props:["myinfo", "memSeq"], 
     data(){
       var validatePass = (rule, value, callback) => {
         if (value === '') {
@@ -193,7 +194,6 @@ export default {
         extraAddress: '',
         postcode: '',
         passCheck: '',
-        myinfo: [],
         ruleForm: {
             pass: '',
             checkPass: '',
@@ -208,41 +208,33 @@ export default {
         }
       }
     },
-     mounted(){
-		 var params = new URLSearchParams();
-		 params.append('memberSeq', this.$route.params.seq)
-		 axios.post('http://localhost:9000/selectMember', params)
-		 .then(res => {
-        this.myinfo = res.data
-		 }) 
-    }, 
     methods:{
         execDaumPostcode() {
-        new daum.Postcode({
-        onComplete: (data) => {
-        if (data.userSelectedType === 'R') {
-          this.address = data.roadAddress;
-        } else {
-          this.address = data.jibunAddress;
-        }
-        if (data.userSelectedType === 'R') {
-          if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-          this.extraAddress += data.bname;
-          }
-          if (data.buildingName !== '' && data.apartment === 'Y') {
-          this.extraAddress +=
-            this.extraAddress !== ''
-            ? `, ${data.buildingName}`
-            : data.buildingName;
-          }
-          if (this.extraAddress !== '') {
-          this.extraAddress = ` (${this.extraAddress})`;
-          }
-        } else {
-          this.extraAddress = '';
-        }
-        },
-      }).open();
+          new daum.Postcode({
+              onComplete: (data) => {
+              if (data.userSelectedType === 'R') {
+                this.address = data.roadAddress;
+              } else {
+                this.address = data.jibunAddress;
+              }
+              if (data.userSelectedType === 'R') {
+                if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                this.extraAddress += data.bname;
+                }
+                if (data.buildingName !== '' && data.apartment === 'Y') {
+                this.extraAddress +=
+                  this.extraAddress !== ''
+                  ? `, ${data.buildingName}`
+                  : data.buildingName;
+                }
+                if (this.extraAddress !== '') {
+                this.extraAddress = ` (${this.extraAddress})`;
+                }
+              } else {
+                this.extraAddress = '';
+              }
+            },
+          }).open();
       },
       edit(){
         this.table= true;
@@ -252,15 +244,15 @@ export default {
             alert('이메일이나나 나이를 입력해주세요')
         }else{
           var params = new URLSearchParams();
-          params.append('memberSeq', this.$route.params.seq)
+          params.append('memberSeq', this.memSeq)
           params.append('email', this.eamil)
           params.append('age', this.age)
           axios.post('http://localhost:9000/updateInfo', params)
           .then(res => {
               if(res.data == true){
-                alert('수정이 완료되었습니다.')
                 this.table = false;
-                this.$router.push ({name: 'mypage'})
+                alert('수정이 완료되었습니다.')
+                this.$emit('emailUpdate',this.memSeq)
               }
           }) 
         }
@@ -273,15 +265,15 @@ export default {
            alert('주소를 입력해주세요')
         }else{
         var params = new URLSearchParams();
-        params.append('memberSeq', this.$route.params.seq)
+        params.append('memberSeq', this.memSeq)
         var realAddr = this.address + this.extraAddress
         params.append('address', realAddr)     
          axios.post('http://localhost:9000/updateAddr', params)
           .then(res => {
               if(res.data == true){
                 alert('수정이 완료되었습니다.')
-                this.table = false;
-                this.$router.push ({name: 'mypage'})
+                this.addr = false;
+                this.$emit('addrUpdate',this.memSeq)
               }
           }) 
         }
@@ -291,11 +283,13 @@ export default {
           alert('비밀번호를 입력해주세요')
         }else{
            var params = new URLSearchParams();
-           params.append('memberSeq', this.$route.params.seq)
+           params.append('memberSeq', this.memSeq)
            params.append('pwd', this.passCheck)
+      
            axios.post('http://localhost:9000/checkPass', params)
             .then(res => {
                 if(res.data == true){
+                  this.passCheck = "";
                   this.passup = false;
                 }else{
                   alert('비밀번호가 맞지 않습니다.')
@@ -304,24 +298,54 @@ export default {
          }
       },
       userOut(){
-        alert('정말 탈퇴하시겠습니까')
-      },
-      searchPass(){
-        alert('비밀번호찾기')
+        this.$prompt('아이디를 입력해주세요', '회원 탈퇴', {
+          confirmButtonText: '탈퇴하기',
+          cancelButtonText: '취소',
+       
+        }).then(({ value }) => {
+          var params = new URLSearchParams();
+          params.append('memberSeq', this.memSeq)
+          params.append('memberId', value)
+          console.log(params)
+          axios.post('http://localhost:9000/delUser', params).then(
+              res => {
+                if(res.data == true){
+                  this.$message({
+                      type: 'success',
+                      message: '회원탈퇴가 완료되었습니다.'
+                  });
+                  sessionStorage.removeItem("loginUser")
+                  this.$store.commit( 'logout' ) 
+                  this.$router.push ({path:'/'})
+                }else{
+                  this.$message({
+                      type: 'error',
+                      message: '해당하는 아이디가 없습니다.'
+                  });
+                }
+              }) 
+         
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '취소되었습니다.'
+          });       
+        });
+    
       },
       submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
                     var params = new URLSearchParams();
-                    params.append('memberSeq', this.$route.params.seq)
-                    params.append('pwd', this.ruleForm.pass)
+                    params.append('memberSeq', this.memSeq)
+                    params.append('pwd', this.ruleForm.checkPass)
                     console.log(params)
-                    axios.post('http://localhost:9000/createMember', params).then(
+                    axios.post('http://localhost:9000/updatePass', params).then(
                         res => {
                             if(res.data == true){
                                 alert('비밀번호가 변경되었습니다.')
                                 this.passup = true;
-                                this.$router.push ({name:'mypage'})
+                                this.$emit('passUpdate', this.memSeq)
                             }
                         }) 
             } else {

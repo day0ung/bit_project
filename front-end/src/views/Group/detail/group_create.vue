@@ -11,7 +11,7 @@
                 <el-form-item label="스터디 주제" prop="inter">
                     <el-select v-model="groupDto.inter" placeholder="주제를 선택해주세요" style="width: 85%">
                         <el-option-group v-for="bigInter in InterListAll" :key="bigInter.interBigSeq" :value="bigInter.interBigSeq" :label="bigInter.bigName">
-                            <el-option v-for="item in bigInter.interSmallDtos" :key="item.interSmallSeq" :value="item.interSmallSeq" :label="item.smallName"></el-option>
+                            <el-option v-for="item in bigInter.interSmallDtos" :key="item.interSmallSeq" :value="item.interSmallSeq" :label="item.smallName"/>
                         </el-option-group>
                     </el-select>
                 </el-form-item>
@@ -66,11 +66,13 @@
                 <!-- 그룹 이미지 -->
                 <el-form-item label="그룹대표 이미지" prop="image">
                     <el-upload
-                        action="https://jsonplaceholder.typicode.com/posts/"
+                        action=""
                         list-type="picture-card"
                         accept=".jpg, .jpeg, .png, .bmp"
                         multiple
+                        :auto-upload="false"
                         :limit="1"
+                        :on-change="handleChange"
                         :on-exceed="handleExceed"
                         :on-preview="handlePictureCardPreview"
                         :on-remove="handleRemove">
@@ -101,6 +103,7 @@ export default {
             loading: true,
             dialogVisible: false,
             loginMemberSeq: '',
+            files: [],
             groupDto: {
                 groupName: '',
                 inter: '',
@@ -194,6 +197,11 @@ export default {
                 path: "/group"
             })
         },
+        handleChange(file, fileList){
+            this.files.push(file.raw) 
+            console.log("addList")
+            console.log(this.files)
+        },
         handleRemove(file, fileList) {
             console.log(file, fileList);
         },
@@ -242,30 +250,33 @@ export default {
                 this.groupDto.startDate = this.dateToYYYYMMDD(this.groupDto.date[0]) 
                 this.groupDto.endDate = this.dateToYYYYMMDD(this.groupDto.date[1])
                 // 기간 세팅
-                var params = new URLSearchParams();	// post 방식으로 받아야함.
-                params.append('interSmallSeq', this.groupDto.inter);
-                params.append('groupName', this.groupDto.groupName);
-                params.append('groupLocation', this.groupDto.address);
-                params.append('info', this.groupDto.info);
-                params.append('smallInfo', this.groupDto.smallInfo);
-                params.append('maxMember', this.groupDto.maxMember);
-                params.append('image', this.groupDto.dialogImageUrl);
-                params.append('startDate', this.groupDto.startDate);
-                params.append('endDate', this.groupDto.endDate);
-                params.append('maxMember', this.groupDto.maxMember);
+                let formData = new FormData();
+                formData.append('interSmallSeq', this.groupDto.inter);
+                formData.append('groupName', this.groupDto.groupName);
+                formData.append('groupLocation', this.groupDto.address);
+                formData.append('info', this.groupDto.info);
+                formData.append('smallInfo', this.groupDto.smallInfo);
+                formData.append('maxMember', this.groupDto.maxMember);
+                formData.append('image', this.groupDto.dialogImageUrl);
+                formData.append('startDate', this.groupDto.startDate);
+                formData.append('endDate', this.groupDto.endDate);
+                formData.append('maxMember', this.groupDto.maxMember);
                 // groupDto
-                params.append('sunday', this.groupDto.groupSchedule.sunday);
-                params.append('monday', this.groupDto.groupSchedule.monday);
-                params.append('tuesday', this.groupDto.groupSchedule.tuesday);
-                params.append('wednesday', this.groupDto.groupSchedule.wednesday);
-                params.append('thursday', this.groupDto.groupSchedule.thursday);
-                params.append('friday', this.groupDto.groupSchedule.friday);
-                params.append('saturday', this.groupDto.groupSchedule.saturday);
+                formData.append('sunday', this.groupDto.groupSchedule.sunday);
+                formData.append('monday', this.groupDto.groupSchedule.monday);
+                formData.append('tuesday', this.groupDto.groupSchedule.tuesday);
+                formData.append('wednesday', this.groupDto.groupSchedule.wednesday);
+                formData.append('thursday', this.groupDto.groupSchedule.thursday);
+                formData.append('friday', this.groupDto.groupSchedule.friday);
+                formData.append('saturday', this.groupDto.groupSchedule.saturday);
                 // 로그인된 맴버Seq
-                params.append('memberSeq', this.loginMemberSeq);
+                formData.append('memberSeq', this.loginMemberSeq);
+                // 파일업로드
+                formData.append('file', this.files[0]);
 
-                axios.post("http://localhost:9000/creatGroupApply", params)
-                            .then(res => {
+                axios.post("http://localhost:9000/creatGroupApply", formData,{
+					headers:{'Content-Type' : 'multipart/form-data'}
+                }).then(res => {
                                 this.$router.push({name: "Group"})
                                 alert(res.data + "그룹스터디 개설신청이 완료 되었습니다.\n개설여부는 마이페이지에서 확인 가능합니다.\n매주 월요일 9시에 승인여부가 업데이트 됩니다.")
                             })

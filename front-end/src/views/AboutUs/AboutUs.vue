@@ -1,6 +1,5 @@
 <template>
   <div class="about">
-    <p>>{{ this.$store.getters.pageName }}</p>
   </div>
 </template>
 

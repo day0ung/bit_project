@@ -2,7 +2,7 @@
     <div class="groupInfo">
         <br>
     <br>
-    <div class="groupDetailcCntainer">
+    <div class="groupDetailcCntainer" v-loading="this.$store.state.s_group.showGroupInfo">
       <!-- <div class="groupImage">
         <img :src="this.$store.state.s_group.grouDetail.image" />
       </div>
@@ -55,7 +55,8 @@
         <div><span>완료일</span> {{ this.$store.state.s_group.grouDetail.endDate }}</div>
 
         <div>
-          <el-button type="primary" @click="attendClass">출석하기</el-button>
+          <el-button v-show="this.$store.state.s_group.check1" type="primary" @click="attendClass">출석하기</el-button>
+          <el-button v-show="this.$store.state.s_group.check2" type="primary" disabled @click="attendClass">출석완료</el-button>
         </div>
       </div>
       <div class="hr"></div>
@@ -66,30 +67,51 @@
 </template>
 
 <script>
-
+import { loading } from 'element-ui';
 export default {
     name : 'GroupInfo',
     date(){
         return{
             groupInfoSeq: "",
             loginSeq:0,
-            loading: true,
-            
-            
         }
     },methods:{
         getGroupOne(){
-            this.loading = true;
-            this.groupInfoSeq = this.$route.params.groupSeq
+            this.$store.state.s_group.showGroupInfo = true
+            this.$store.state.s_group.groupSeq = this.$route.params.groupSeq
+            this.groupInfoSeq = this.$store.state.s_group.groupSeq
+
             var params = new URLSearchParams();	// post 방식으로 받아야함.
             params.append('groupInfoSeq', this.groupInfoSeq);
-            params.append('memberSeq', this.loginSeq)
+            
             axios.post("http://localhost:9000/getOneGroup", params)
                         .then(res => {
                     this.$store.state.s_group.grouDetail = res.data;
-                    this.loading = false;
                 })
+            this.attendStatus()
+            
 
+        },
+        attendStatus(){
+          this.loginSeq = this.$store.state.loginUser.memberSeq
+          //alert("loginSeq : "+this.loginSeq)
+          var params = new URLSearchParams();	
+          params.append('memberSeq', this.loginSeq)
+          params.append('groupInfoSeq', this.groupInfoSeq)
+          axios.post("http://localhost:9000/getAttendStatus", params)
+                      .then(res => {
+                  if(res.data === 0){  // 미출석
+                    //alert(res.data)
+                       this.$store.state.s_group.check1 = true;
+                       this.$store.state.s_group.check2 = false;
+                  }else{ 
+                    // alert("처음 상태: "+res.data)              // 출석
+                      this.$store.state.s_group.check1 = false;
+                      this.$store.state.s_group.check2 = true;
+                  }
+                  //alert("data:" +  res.data) 
+                  this.$store.state.s_group.showGroupInfo = false
+              })
         },
         attendClass(){
           let weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -115,13 +137,14 @@ export default {
           axios.post("http://localhost:9000/attendGroup", params)
                         .then(res => {
                     if(res.data === 0){
-                      alert('노출첵')
+                      alert('출석일이 아닙니다')
                     }else if(res.data === 2){
                       alert('이미 출석처리 됐습니다')
-                      
                     }else{
                       alert('출첵!!!!')
-                      
+                      this.$store.state.s_group.check1 = false;
+                      this.$store.state.s_group.check2 = true;
+                      //alert(this.check1)
                     }
                     
                 })
@@ -130,8 +153,10 @@ export default {
 
     },
     created(){
-        this.getGroupOne();
-        this.loginSeq= JSON.parse(sessionStorage.getItem("loginUser")).memberSeq
+     
+      this.loginSeq = this.$store.state.loginUser.memberSeq
+      this.getGroupOne();
+        
     }
 
 }
