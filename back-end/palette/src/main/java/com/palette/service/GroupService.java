@@ -200,8 +200,9 @@ public class GroupService {
 		// board Seq를 찾아서 다중파일 insert
 		int boardSeq = groupDao.currBoardSeq();
         for (MultipartFile file : form.getFiles()) {
-            BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
-            boardReferenceDto.setFileName(s3Uploader.upload(file, form.getMemberId()));
+			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
+			boardReferenceDto.setFileName(file.getOriginalFilename());
+            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()));
             boardReferenceDto.setMemberSeq(form.getMemberSeq());
             boardReferenceDto.setBoardSeq(boardSeq);
             groupDao.insertBoardReference(boardReferenceDto);
@@ -215,5 +216,9 @@ public class GroupService {
 		int ref = groupDao.getRef();
 		commentDto.setRef(ref);
 		groupDao.insertComment(commentDto);
+	}
+
+	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
+		return groupDao.getGroupReferenceDetailFileList(boardSeq);
 	}
 }

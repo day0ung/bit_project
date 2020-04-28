@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.palette.model.BoardParams;
+import com.palette.model.BoardReferenceDto;
 import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
@@ -172,6 +173,12 @@ public class GroupController {
     public String insertGroupReference(ReferenceVo form) throws IOException{
         groupService.insertBoardReference(form);
         return "";
+    }
+
+    @PostMapping(value = "/groupReferenceDetailFileList")
+    public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq){
+        System.out.println("getGroupReferenceDetailFileList()" + boardSeq);
+        return groupService.getGroupReferenceDetailFileList(boardSeq);
     }
 
     // Comment

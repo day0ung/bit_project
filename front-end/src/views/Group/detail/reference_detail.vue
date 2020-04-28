@@ -8,17 +8,17 @@
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
-        <h5>내용</h5>
+        <h5>자료</h5>
       </div>
       <div class="groupInfoContent">
-        {{ this.$store.state.s_group.groupReferenceDetail.content }}
-        <a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/BlueMoonData.txt" download>DownLoad</a>
+        <a v-for="file in this.$store.state.s_group.groupReferenceDetailFileList" :key="file.boardSeq" :href="file.url" download>{{file.fileName}}</a>
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
         <h5><span>상세 정보</span></h5>
       </div>
       <div class="groupInfoContent">
+        <div><span>파일정보</span>{{ this.$store.state.s_group.groupReferenceDetail.content }}</div>
         <div><span>작성자</span> {{ this.$store.state.s_group.groupReferenceDetail.memberSeq }}</div>
         <div><span>작성일</span> {{ this.$store.state.s_group.groupReferenceDetail.writeDate }}</div>
         <div><span>조회수</span> {{ this.$store.state.s_group.groupReferenceDetail.readCount }}</div>
