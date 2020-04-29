@@ -47,13 +47,6 @@ public class Admin_GroupController {
 		Map<String, String> resmap = new HashMap<>();
 		System.out.println("getAllGroup 메소드 실행");
 		System.out.println(dto);
-
-		// 그룹 개설시 바뀔것들.
-		// 1. Groupinfo의 Permission이 0->1로 변경,(그룹개설요청0, 그룹개설수락1)
-		// 2. Member의 AUTH를 0->1로     (일반회원0, 그룹리더1)
-		// 3. GROUP_MEMBER테이블서 MEMBER_SEQ, GROUP_INFO_SEQ로 조회한다.(FALSE시 3-1을 실행한다.)
-		//3-1. GROUP_MEMBER에 GROUP_INFO_SEQ, MEMBER_SEQ 를 insert 해준다. 
-
 		
 		if(dto.getPermission()==1){		// 그룹 개설 절차 진행.
 			// 1. Groupinfo의 Permission이 0->1로 변경,(그룹개설요청0, 그룹개설수락1)
