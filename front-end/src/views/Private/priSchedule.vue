@@ -118,7 +118,17 @@ export default {
 
     },
     mounted(){
-      this.getCalenarInfo()
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+        axios.post("http://localhost:9000/getMemberCalendar", params)
+          .then(res => {
+          console.log("DB: "+JSON.stringify(res.data))
+          let e = JSON.stringify(res.data)
+          this.$store.state.s_private.memberCalendar = JSON.parse(e)
+        })  
     }
   
 }

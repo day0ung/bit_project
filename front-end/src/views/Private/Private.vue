@@ -59,8 +59,8 @@ import TodoChart from '@/views/Private/priChart.vue'
     mounted(){
       var loginData = sessionStorage.getItem("loginUser");
       var login = JSON.parse(loginData); 
-      this.$store.state.s_private.memberSeq = login.memberSeq 
-      //alert("1qhs"+this.$store.state.s_private.memberSeq)
+      var memSeq = login.memberSeq
+      this.$store.state.s_private.memberSeq = memSeq 
     }
   };
 </script>
