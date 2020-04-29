@@ -31,7 +31,15 @@ public class AdminGroupService {
 	
 	public GroupDto checkExistGroupMember(GroupDto dto){
         return admingroupdao.checkExistGroupMember(dto);
-    }
+	}
+	
+	public boolean changeGroupMasterStatus(MemberDto dto){
+		return admingroupdao.changeGroupMasterStatus(dto);
+	}
+
+	public boolean insertGroupLeader(GroupDto dto){
+		return admingroupdao.insertGroupLeader(dto);
+	}
 
 	
 
