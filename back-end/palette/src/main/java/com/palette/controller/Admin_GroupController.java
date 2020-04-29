@@ -41,13 +41,6 @@ public class Admin_GroupController {
     	return list;
 	}
 
-
-	
-	// Create group : GROUP_INFO.PERMISSION = 0 -> 1
-	// remove group : GROUP_INFO.PERMISSION = 1 -> 0
-	// groupInfoSeq, memberSeq, permission values ​​are required.
-	// GROUP_INFO_SEQ=#{groupInfoSeq}
-	// MEMBER_SEQ=#{memberSeq}
 	@ResponseBody
 	@PostMapping(value = "/AdminAcceptCreateGroup")
     public Map<String, String> groupPermissionChange(GroupDto dto) {
@@ -69,18 +62,14 @@ public class Admin_GroupController {
 			System.out.println("성공여부 체크 : " + isS );
 			
 			// 2. Member의 AUTH를 0->1로     (일반회원0, 그룹리더1)
-			// MemberDto inputdto = new MemberDto();
-			// inputdto.setAuth(1);
-			// boolean changeAuthisS = adminGroupService.changeGroupMasterStatus(inputdto);
+			MemberDto inputdto = new MemberDto();
+			inputdto.setAuth(1);
+			boolean changeAuthisS = adminGroupService.changeGroupMasterStatus(inputdto);
 			
 			// 3. GROUP_MEMBER테이블서 MEMBER_SEQ, GROUP_INFO_SEQ로 조회한다.(FALSE시 3-1을 실행한다.)
-
 			//check insert data(memberId, groupId) from `GROUP_MEMBER` tabel
 			GroupDto createcheck = adminGroupService.checkExistGroupMember(dto);
-			//리턴되는 데이터가 없으면 null이 리턴될것이며
-			//기존 데이터가 존재한다면 group 전체가 리턴 될 것이다. 
-			System.out.println("\n\n\n기존 등록 여부 : " + createcheck + "\n\n\n\n");
-			//값이 있다면 insert를 실행하지 않고, 없다면 insert 실행한다.
+
 
 			// 3-1. GROUP_MEMBER에 GROUP_INFO_SEQ, MEMBER_SEQ 를 insert 해준다. 
 			if(createcheck==null){
