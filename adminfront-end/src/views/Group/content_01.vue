@@ -182,6 +182,9 @@ export default {
                 console.log("base selected value : ") 
                 console.log(this.selectedvalue[0].value)
 
+            }).catch(function (error) {
+                // handle error
+                console.log("getGroupAllowList \n ERROR Contents : "+error);
             })
         },
         changeATUH(scope, AuthStatus){

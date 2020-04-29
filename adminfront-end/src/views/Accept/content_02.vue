@@ -126,13 +126,13 @@
                         <el-button
                             v-if="scope.row.permission===0"
                             size="mini"
-                            @click="changePermission(scope,1)"> 개설허가 </el-button>
+                            @click="changePermission(scope,1)"> 그룹개설허가 </el-button>
 
                         <el-button
                             v-if="scope.row.permission===1"
                             size="mini"
                             type="danger"
-                            @click="changePermission(scope,0)"> 개설취소 </el-button>
+                            @click="changePermission(scope,0)"> 그룹개설취소 </el-button>
                      </div>
                 </template>
             </el-table-column>
@@ -196,7 +196,11 @@ export default {
             })
         },
         changePermission(scope, permissionStatus){
-
+            /*
+                 ** Variable information ** 
+                scope : all information of the table row clicked(행의정보)
+                permissionStatus : Requested permission value( 0-waiting, 1-approval )
+            */
             const groupInofSeq = scope.row.groupInfoSeq
             const memberSeq =  scope.row.memberSeq
             const perStatus = permissionStatus

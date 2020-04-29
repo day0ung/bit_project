@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.palette.dao.AdminGroupDao;
 import com.palette.model.GroupDto;
+import com.palette.model.MemberDto;
 
 @Service
 @Transactional
@@ -28,6 +29,18 @@ public class AdminGroupService {
 		return admingroupdao.getAllStudyGroup();
 	}
 	
+	public GroupDto checkExistGroupMember(GroupDto dto){
+        return admingroupdao.checkExistGroupMember(dto);
+	}
+	
+	public boolean changeGroupMasterStatus(MemberDto dto){
+		return admingroupdao.changeGroupMasterStatus(dto);
+	}
+
+	public boolean insertGroupLeader(GroupDto dto){
+		return admingroupdao.insertGroupLeader(dto);
+	}
+
 	
 
 }//end of adminMemberGroup class
