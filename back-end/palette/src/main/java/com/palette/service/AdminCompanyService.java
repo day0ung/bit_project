@@ -39,8 +39,8 @@ public class AdminCompanyService {
 		return adminmemberdao.adminGetCompanyInfoOne(dto);
 	}
 	
-	public List<String> adminGetCompanyNmaeAll(){
-		return adminmemberdao.adminGetCompanyNmaeAll();
+	public List<String> adminGetCompanyNameAll(){
+		return adminmemberdao.adminGetCompanyNameAll();
 	}
 
 	
@@ -49,7 +49,7 @@ public class AdminCompanyService {
 	}
 
 	
-	
+
 	
 	
 	

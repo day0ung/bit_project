@@ -241,6 +241,9 @@ public class GroupService {
 		return groupDao.getGroupReferenceDetailFileList(boardSeq);
 	}
 
+	public void answerDelete(CommentDto commentDto) {
+		groupDao.answerDelete(commentDto);
+	}
 	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
 		return groupDao.getMypageReferenceList(memberSeq);
 	}

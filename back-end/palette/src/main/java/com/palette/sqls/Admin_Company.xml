@@ -26,20 +26,16 @@
 			MEMBER_ID=#{memberId};
 	</update>
 
-
-
-
-	
 	<!-- show company info (SELECT ONE) -->
-	<select id="adminGetCompanyInfoOne" 
-	parameterType="com.palette.model.MemberDto" 
-	   resultType="com.palette.model.MemberDto">
+	<select id="adminGetCompanyInfoOne" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
 		SELECT * FROM MEMBER
 		WHERE (AUTH=2 OR AUTH=3)
 		AND MEMBER_ID = #{memberId}
-
-
 	</select>
+
+
+
+
 	
 	<!--  Approval Request Company List  -->
 	<!-- <select id="approvalrequestCompanyList" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
@@ -68,7 +64,7 @@
 			</select>
 			
 			<!-- show Company Name List All-->
-			<select id="adminGetCompanyNmaeAll" resultType="com.palette.model.MemberDto">
+			<select id="adminGetCompanyNameAll" resultType="com.palette.model.MemberDto">
 				SELECT Member_name FROM MEMBER
 				WHERE AUTH=2 or AUTH=3
 			</select>

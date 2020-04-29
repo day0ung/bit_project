@@ -12,9 +12,7 @@
 
           <div class="modal-body">
             <slot name="body">
-                    
-                <!-- input box -->
-              <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+                    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <el-form-item label="시작일" prop="startDate">
                   <el-date-picker 
                     v-model="ruleForm.startDate"
@@ -57,7 +55,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button" @click="exit">
+              <button class="modal-default-button"  @click="exit">
                       CLOSE
               </button>
             </slot>
@@ -70,7 +68,7 @@
 
 <script>
 export default {
-data(){
+    data(){
       return{
         selectedDate:'',
         ruleForm: {
@@ -93,80 +91,62 @@ data(){
           ],
           content: [
             { required: true, message: 'Please input activity form', trigger: 'blur' }
+          ],
+          backColor:[
+             { required: true, message: 'Please input activity form', trigger: 'blur' }
           ]
         }
-      };
-      
+      }
     },
     methods:{
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-
-            axios.get("http://localhost:9000/insertGroupCalendar",{
-            params:{
-              memberSeq: this.$store.state.loginUser.memberSeq,
-              groupInfoSeq: this.$store.state.s_group.groupSeq,
-              title: this.ruleForm.title,
-              content: this.ruleForm.content,
-              start : this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss'),
-              end : this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'),
-              color : this.ruleForm.backColor
-              
+        submitForm(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              //insertMemberCalendar
+             // alert(this.$store.state.s_private.memberSeq+"::::"+this.ruleForm.title+":::"+this.ruleForm.content+":::"+this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss')+this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'))
+              axios.get("http://localhost:9000/insertMemberCalendar",{
+                  params:{
+                    memberSeq: this.$store.state.s_private.memberSeq,
+                    title: this.ruleForm.title,
+                    content: this.ruleForm.content,
+                    start : this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss'),
+                    end : this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'),
+                    color : this.ruleForm.backColor
+                  }
+                  }).then(res =>{
+                    if(res.data === ""){
+                      alert("성공적으로 등록되었습니다.")
+                      this.$emit('insert')
+                    }
+                    else {
+                      alert("실패했습니다. 다시 확인해주시기 바랍니다.")
+                    }
+               })
+            } else {
+              console.log('error submit!!');
+              return false;
             }
-            }).then(res =>{
-              if(res.data === ""){
-                this.$store.state.s_group.showGroupCalendar = true
-                alert("성공적으로 등록되었습니다.")
-                this.$emit('close')
-                let params = new URLSearchParams()	
-                let groupSeq = this.$store.state.s_group.groupSeq
-                params.append('groupInfoSeq', groupSeq)
-                axios.post("http://localhost:9000/getGroupCalendar", params)
-                  .then(res => {
-                    console.log(JSON.stringify(res.data))
-                    let e = (JSON.stringify(res.data))
-                    
-                    this.$store.state.s_group.groupCalendar = JSON.parse(e)
-                    this.$store.state.s_group.showGroupCalendar = false
-                  })
-                  
-                
-              }
-              else {
-                alert("실패했습니다. 다시 확인해주시기 바랍니다.")
-              }
-            })
-
-            alert('submit!');
-            
-          } else {
-            console.log('error submit!!');
-            return false;
-          }
-        });
-      },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-      exit(){
-        this.$emit('close')
-      },
-      regi(){
-        this.$emit('close')
-      },
+          });
+        },
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
+        },
+        exit(){
+          this.$emit('close')
+        },
+        regi(){
+          this.$emit('close')
+        },
        
     },
     created(){
-     this.ruleForm.startDate = this.$moment(this.$store.state.s_group.groupCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
-     this.ruleForm.endDate = this.$moment(this.$store.state.s_group.groupCalendarEndDate).format('YYYY.MM.DD HH:mm:ss')
+     this.ruleForm.startDate = this.$moment(this.$store.state.s_private.memberCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
+     this.ruleForm.endDate = this.$moment(this.$store.state.s_private.memberCalendarEndDate).format('YYYY.MM.DD HH:mm:ss')
     }
 
 }
 </script>
 
 <style>
-.el-form-item__label{
-  font-size: 15px;
-}
+
 </style>

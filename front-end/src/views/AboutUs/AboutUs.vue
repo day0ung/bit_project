@@ -3,7 +3,7 @@
     <div class="introduce">
       <span class="orange bold">PALETTE는</span>
       <br>
-      <span class="bold">개인 스터디 관리</span>와
+      <span class="bold">개인 스터디 일정 관리</span>와
       <br>
       각양각색의
       <span class="bold">리더</span>와 함께하는

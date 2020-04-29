@@ -1,7 +1,7 @@
 <template>
   <div class="private">
    <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="TO DO LIST" name="first">
+    <el-tab-pane label="TO DO LIST" name="first" >
       <Todo></Todo>
     </el-tab-pane>
     <el-tab-pane label="활동로그" name="second">
@@ -44,8 +44,23 @@ import TodoChart from '@/views/Private/priChart.vue'
     },
     methods: {
       handleClick(tab, event) {
-        console.log(tab, event);
-      }
+      
+         if(this.activeName == 'first'){
+
+         }else if(this.activeName == 'second'){
+
+         }else if(this.activeName == 'third'){
+
+         }else if(this.activeName == 'forth'){
+
+         }       
+      },
+    },
+    mounted(){
+      var loginData = sessionStorage.getItem("loginUser");
+      var login = JSON.parse(loginData); 
+      this.$store.state.s_private.memberSeq = login.memberSeq 
+      //alert("1qhs"+this.$store.state.s_private.memberSeq)
     }
   };
 </script>

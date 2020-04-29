@@ -32,6 +32,7 @@ public class AdminMemberService {
         return adminmemberdao.memberSelectOne(dto);
     }
 
+
     
 	
 

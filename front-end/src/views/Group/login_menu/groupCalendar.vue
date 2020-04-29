@@ -4,7 +4,8 @@
       <br>
       <div class="calendar">
       <full-calendar :events="this.$store.state.s_group.groupCalendar" :config="config" 
-                      @day-click="dayClick" @event-selected="eventSelected" @event-drop="eventDrop"
+                      @event-selected="eventSelected" @event-drop="eventDrop"
+                      @event-created="scheduleCreate"
                       v-loading="this.$store.state.s_group.showGroupCalendar"
                       ></full-calendar>
         <Cwrite v-if="show_calendar_write" @close="show_calendar_write = false" :startDate="clickDay"></Cwrite>
@@ -68,27 +69,26 @@ export default {
         
         this.show_calendar_detail = true
     },
-    dayClick(date, jsEvent, view){
-        this.$confirm('추가하시겠습니까?', '일정추가', {
-          confirmButtonText: 'OK',
-          cancelButtonText: 'Cancel',
+    scheduleCreate(event){
+        //alert(event.start)
+        alert(event.start + "<<시작날짜-----종료날짜>>"+event.end)
+          this.$confirm('일정을 추가하시겠습니까?', '일정추가', {
+          confirmButtonText: '추가',
+          cancelButtonText: '취소',
           type: 'info'
         }).then(() => {
-          console.log(date)
-
-          //alert(date._i)
-          this.clickDay = date
-          this.$store.state.s_group.groupCalendarStartDate = date._i
+          this.$store.state.s_group.groupCalendarStartDate = event.start
+          this.$store.state.s_group.groupCalendarEndDate = event.end
           this.show_calendar_write = true
 
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: 'canceled'
+            message: '취소되었습니다.'
           });          
         });
-    },
-    eventDrop(event){
+      },
+     eventDrop(event){
       
       if(event.end === null){
         event.end = event.start

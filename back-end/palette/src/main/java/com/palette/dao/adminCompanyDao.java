@@ -20,10 +20,11 @@ public interface adminCompanyDao {
 	
 	List<String> adminGetCompanyLocationALl();
 	
-	List<String> adminGetCompanyNmaeAll();
+	List<String> adminGetCompanyNameAll();
 
 	MemberDto adminGetCompanyInfoOne(MemberDto dto);
 	
-	public boolean changeAUTHforCompanyMember(MemberDto dto);
-
+	boolean changeAUTHforCompanyMember(MemberDto dto);
+	
+	
 }

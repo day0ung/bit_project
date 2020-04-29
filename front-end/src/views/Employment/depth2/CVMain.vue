@@ -1,7 +1,8 @@
 <template>
   <div class="CV">
+    <div v-if="login1 == null">로그인 후에 사용가능합니다.</div>
     <!-- 일반 회원 / CV 없을 때 -->
-    <div v-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 0" class="writeNewCV">
+    <div v-else-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 0" class="writeNewCV">
       <el-button type="primary" round @click="writeCV">새로운 이력서 작성</el-button>
     </div>
     <!-- 일반 회원 / CV 있을 때 -->
@@ -17,8 +18,8 @@
             v-model="searchWord"
             size="large"
             placeholder="전체목록보기버튼">
-            <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
-            <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
+          <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
             <el-option label="작성자" value="writer"></el-option>
             <el-option label="제목" value="title"></el-option>
           </el-select>
@@ -192,11 +193,15 @@ export default {
     }
   },
   mounted(){
-    var params = new URLSearchParams();	// post 방식으로 받아야함. 
-      params.append('memberSeq', this.login1.memberSeq);
-      axios.post("http://localhost:9000/oneMember", params).then(res => { 
-        this.$store.state.s_employment.oneMember = res.data
-      })
+      if(this.login1 == null){
+
+		} else {
+        var params = new URLSearchParams();	// post 방식으로 받아야함. 
+        params.append('memberSeq', this.login1.memberSeq);
+        axios.post("http://localhost:9000/oneMember", params).then(res => { 
+          this.$store.state.s_employment.oneMember = res.data
+        })
+    }
     
   
   },

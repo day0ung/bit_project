@@ -58,17 +58,22 @@
                   <img src='../../assets/css/images/puzzle.png'>
                 </div>
                 <div class="titup">
-       
-                <p>관심분야</p>
-                <h3 v-for="big in myBig" :key="big.seq">
+                  <div>
+
+                  </div>
+                  <div>
+
+                  </div>
+                <p style="color: #909090">관심분야</p>
+                <h5 v-for="big in myBig" :key="big.seq">
                   {{big.bigName}}
-                </h3>
+                </h5>
                 <br>
-              <p>상세분야</p>
-                <h3 v-for="small in mySmall" :key="small.seq">
+              <p style="color: #909090">상세분야</p>
+                <h5 v-for="small in mySmall" :key="small.seq">
                   {{small.smallName}}
-                </h3>
-                <el-button @click="showshow"></el-button>
+                </h5>
+                <el-button @click="showshow">수정하기</el-button>
                 <Inter 
                 v-if="showInter"
                 :memSeq="memSeq"
@@ -78,11 +83,6 @@
                 </div>
             </div>
         </div>
-  
-
-        
-
-
   </div>
 </template>
 
