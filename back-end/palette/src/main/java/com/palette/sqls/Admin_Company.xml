@@ -68,7 +68,7 @@
 			</select>
 			
 			<!-- show Company Name List All-->
-			<select id="adminGetCompanyNmaeAll" resultType="com.palette.model.MemberDto">
+			<select id="adminGetCompanyNameAll" resultType="com.palette.model.MemberDto">
 				SELECT Member_name FROM MEMBER
 				WHERE AUTH=2 or AUTH=3
 			</select>

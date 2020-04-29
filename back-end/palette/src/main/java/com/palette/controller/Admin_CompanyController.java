@@ -73,12 +73,12 @@ public class Admin_CompanyController {
     // }
     
     
-//	List<String> adminGetCompanyNmaeAll();
-    @GetMapping(value = "/adminGetCompanyNmaeAll")
-    public List<String> adminGetCompanyNmaeAll() {
-    	System.out.println("adminGetCompanyNmaeAll Method execute Now..");
+//	List<String> adminGetCompanyNameAll();
+    @PostMapping(value = "/adminGetCompanyNameAll")
+    public List<String> adminGetCompanyNameAll() {
+    	System.out.println("adminGetCompanyNameAll Method execute Now..");
     	
-    	List<String> list = adminCompanyService.adminGetCompanyNmaeAll();
+    	List<String> list = adminCompanyService.adminGetCompanyNameAll();
     	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + list );
     	return list;
 	}
