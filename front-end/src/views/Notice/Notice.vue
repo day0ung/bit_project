@@ -3,64 +3,66 @@
     <br>
     <br>
     <div class="boardTableFrom">
-    <h3>익명게시판</h3>
+      <h3>익명게시판</h3>
       <div class="boardSearchBar">
         <el-input
-            v-model="searchWord"
-            size="large"
-            placeholder="검색">
+          v-model="searchWord"
+          size="large"
+          placeholder="검색">
           <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
           <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
             <!-- <el-option label="작성자" value="writer"></el-option> -->
             <el-option label="제목" value="title"></el-option>
           </el-select>
           <el-button slot="append" icon="el-icon-search" @click="searchBoard"></el-button>
-          </el-input>
+        </el-input>
       </div>
       <el-table 
-          v-loading="this.$store.state.s_employment.loadingCVDetail"
           :row-class-name="clickableRows"
           :data="tableData"
           stripe
           style="width: 100% cursor:pointer"
           @row-click="gotoClick"
-        >
-          <el-table-column
-            prop="sfinalnum"
-            label="글번호"
-            width="150px">
-          </el-table-column>
-          <el-table-column
-            prop="title"
-            label="글제목"
-            width="550px"
-            >
-          </el-table-column>
-          <!-- <el-table-column
-            prop="memberDto.memberName"
-            label="작성자"
-            width="150px"
-            >
-          </el-table-column> -->
-          <el-table-column
-            prop="readCount"
-            label="조회수"
-            width="100px"
-            >
-          </el-table-column>
-          <el-table-column
-            prop="writeDate"
-            label="작성일"
-            width="170px"
-            >
-          </el-table-column>
-        </el-table> <br>
-        <div class="pageination">
-          <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
-        </div>
+      >
+        <el-table-column
+          prop="sfinalnum"
+          label="글번호"
+          width="150px">
+        </el-table-column>
+        <el-table-column
+          prop="title"
+          label="글제목"
+          width="550px"
+          >
+        </el-table-column>
+        <!-- <el-table-column
+          prop="memberDto.memberName"
+          label="작성자"
+          width="150px"
+          >
+        </el-table-column> -->
+        <el-table-column
+          prop="readCount"
+          label="조회수"
+          width="100px"
+          >
+        </el-table-column>
+        <el-table-column
+          prop="writeDate"
+          label="작성일"
+          width="170px"
+          >
+        </el-table-column>
+      </el-table> <br>
+      <div class="pageination">
+        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+      </div>
+      <div class="writeNewAnonymousBoard">
+        <el-button type="primary" round @click="writeAnonymousBoard">글 쓰기</el-button>
       </div>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -93,7 +95,9 @@ export default {
       this.$emit("showAnonymousBoardUpdate")
     },
     writeAnonymousBoard(){
-      this.$emit("showAnonymousBoardWriting")
+      this.$router.push({
+        name : "noticeWriting"
+      })
     },
     allList(){
      this.s_keyWord=''
@@ -197,6 +201,7 @@ export default {
       this.getList()
 
       
+      
     
 		// this.memberSeq = this.$store.state.loginUser.memberSeq
   }
@@ -209,20 +214,20 @@ export default {
 /* center container in the middle */
 
 /* CV 버튼 */
-/* .CV{
+.CV{
   width: 950px;
   margin: auto;
 }
 
-.writeNewCV {
+.writeNewAnonymousBoard {
   text-align: center;
-  padding: 35px;
+  padding: 0px;
 }
 
 .updateCV{
   text-align: center;
   padding: 35px;
-} */
+} 
 
 /* 테이블 */
 .boardTableFrom{

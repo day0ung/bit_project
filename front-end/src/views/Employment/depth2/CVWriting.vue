@@ -11,25 +11,25 @@
             <el-form-item label="지원분야"  prop="category">
 				<el-input v-model="ruleForm.category"></el-input>
 			</el-form-item>
-			
-			<el-form-item label="이력서 업로드" prop="image">
-				<el-upload
-					v-model="ruleForm.dialogImageUrl"
-					action="https://jsonplaceholder.typicode.com/posts/"
-					list-type="picture-card"
-					accept=".jpg, .jpeg, .png, .bmp, .pdf"
-					multiple
-					:limit="1"
-					:on-exceed="handleExceed"
-					:on-preview="handlePictureCardPreview"
-					:on-remove="handleRemove">
-					<i class="el-icon-plus"></i>
-				</el-upload>
-				<el-dialog :visible.sync="ruleForm.dialogVisible"
-							append-to-body=true>
-					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
-				</el-dialog>
-			</el-form-item>
+			<el-form-item label="이력서 올리기" prop="fileList">
+                <el-upload
+                    action=""
+                    list-type="picture-card"
+                    accept=".jpg, .jpeg, .png, .bmp, .txt, .ppt, .pptx, .hwp"
+                    multiple
+                    v-model="ruleForm.fileList"
+                    :limit="3"
+                    :auto-upload="false"
+                    :on-change="handleChange"
+                    :on-exceed="handleExceed"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="ruleForm.dialogImageUrl" alt="">
+                </el-dialog>
+            </el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="submitForm('ruleForm')">적용</el-button>
 				<el-button @click="resetForm('ruleForm')">취소</el-button>
@@ -53,20 +53,19 @@ export default {
           title: '',
           category: '',
 		  login1: [],
-		  dialogImageUrl: ""
-		
+		  dialogImageUrl: "",
+		  fileList: []
 		},
-		title1 : "",
-		files: [],
-		galleryDatas: [],
-		login : "",
         rules: {
 		  title: [
 			{ required: true, message: '제목을 입력하세요', trigger: 'blur' },
           ],
           category: [
 			{ required: true, message: '지원분야를 입력하세요', trigger: 'blur' },
-		  ]
+		  ],
+		  fileList: [
+            { required: true, message: '이력서를 올려주세요', trigger: 'change' },
+        	]
         }
       };
     },
@@ -74,12 +73,19 @@ export default {
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
-			
-				axios.get("http://localhost:9000/insertCV",{
-					params:{
-						memberSeq: this.login1.memberSeq,
-                        title: this.ruleForm.title,
-                        category: this.ruleForm.category
+				let formData = new FormData();
+				formData.append('memberSeq', this.login1.memberSeq)
+				formData.append('title', this.ruleForm.title)
+				formData.append('category', this.ruleForm.category)
+				this.ruleForm.fileList.forEach(function(element){
+                    formData.append('files', element)
+                })
+                for (let key of formData.entries()){
+                    console.log(`${key}`)
+                }
+				axios.get("http://localhost:9000/insertCV", formData, {
+					headers:{
+                        'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
 					alert("이력서가 성공적으로 업로드 되었습니다.")
@@ -92,28 +98,32 @@ export default {
 					this.$emit("showCVMain")
 
 				})
-			} else {
-				console.log('error submit!!');
-				return false;
-			}
+			} 
 			});
 		},
 		resetForm(formName) {
 			this.$refs[formName].resetFields();
 		},
-		handleRemove(file, fileList) {
-				console.log(file, fileList);
+		handleChange(file, fileList){
+            this.ruleForm.fileList.push(file.raw) 
+            console.log("addList")
+            console.log(this.ruleForm.fileList)
+        },
+        handleRemove(file, fileList) {
+            this.ruleForm.fileList = this.ruleForm.fileList.filter(data => data.name !== file.raw.name)
+            console.log("removeList")
+            console.log(this.ruleForm.fileList)
         },
         handlePictureCardPreview(file) {
             this.ruleForm.dialogImageUrl = file.url;
-            this.ruleForm.dialogVisible = true;
+            this.dialogVisible = true;
         },
         handleExceed(files, fileList){
             this.$message({
                 showClose: true,
                 center: true,
-                message: '대표이미지는 1개만 업로드가능합니다.',
-                type: 'error'
+                message: '자료는 한번에 2개만 업로드가능합니다.',
+                type: 'error'  
             })
         },
 

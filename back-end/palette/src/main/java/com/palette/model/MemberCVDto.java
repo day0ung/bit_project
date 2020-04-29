@@ -1,5 +1,9 @@
 package com.palette.model;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberCVDto {
 	
 	private int finalnum;
@@ -13,6 +17,7 @@ public class MemberCVDto {
 	private String fileName; // FILE_NAME
 	private String dbFileName; // DB_FILE_NAME
 	private int del; // DEL
+	private List<MultipartFile> files;
 	
 	private MemberDto memberDto;
 	

@@ -47,40 +47,44 @@
 	</resultMap>
 <!-- /get Employment Member Name -->
 
-	<!-- 익명 게시판 리스트 호출 -->
-	<select id="getAnonymousBoardPagingList" parameterType="com.palette.model.BoardParams" resultMap="AnonymousBoard">
-		select *
-		from(select @finalnum:=@finalnum+1 as finalnum, sub.*
-			from (select @rownum:=@rownum+1 as rownum, b.*
-				 from BOARD b 
-		         join MEMBER m
-		         	on b.MEMBER_SEQ = m.MEMBER_SEQ
-		         where (@rownum:=0)=0 and b.del = 0 and b.board_auth = 1 
-				 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
-			order by sub.rownum desc) fsub
-			<where>
-				<if test="keyWord == 'title'">
-					TITLE like CONCAT('%', #{searchWord}, '%')
-				</if>
-			</where>
-		order by fsub.finalnum desc
-		limit #{start}, #{limit}
-	</select>
-	
-	<!-- 익명 게시판 리스트 갯수 -->
-	<select id="anonymousBoardList" parameterType="com.palette.model.BoardParams" resultType="java.lang.Integer">
-		select count(*)
-		from BOARD b
-		join MEMBER m
-		on b.MEMBER_SEQ = m.MEMBER_SEQ
+<!-- 익명 게시판 리스트 호출 -->
+<select id="getAnonymousBoardPagingList" parameterType="com.palette.model.BoardParams" resultMap="AnonymousBoard">
+	select *
+	from(select @finalnum:=@finalnum+1 as finalnum, sub.*
+		from (select @rownum:=@rownum+1 as rownum, b.*
+			 from BOARD b 
+	         join MEMBER m
+	         	on b.MEMBER_SEQ = m.MEMBER_SEQ
+	         where (@rownum:=0)=0 and b.del = 0 and b.board_auth = 1 
+			 order by WRITE_DATE desc) sub, (select @finalnum:=0) ftmp
+		order by sub.rownum desc) fsub
 		<where>
 			<if test="keyWord == 'title'">
 				TITLE like CONCAT('%', #{searchWord}, '%')
 			</if>
-		and b.DEL=0 and b.board_auth = 1
-		</where>	
-	</select>
+		</where>
+	order by fsub.finalnum desc
+	limit #{start}, #{limit}
+</select>
 
+<!-- 익명 게시판 리스트 갯수 -->
+<select id="anonymousBoardList" parameterType="com.palette.model.BoardParams" resultType="java.lang.Integer">
+	select count(*)
+	from BOARD b
+	join MEMBER m
+	on b.MEMBER_SEQ = m.MEMBER_SEQ
+	<where>
+		<if test="keyWord == 'title'">
+			TITLE like CONCAT('%', #{searchWord}, '%')
+		</if>
+	and b.DEL=0 and b.board_auth = 1
+	</where>	
+</select>
+
+<insert id="insertAnonymousBoard" parameterType="com.palette.model.AnonymousBoardDto">
+	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, DEL, BOARD_AUTH)
+  	VALUES(#{memberSeq}, 0, #{title}, #{content}, NOW(), 0, 0, 1)
+</insert>
 
 
 

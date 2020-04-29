@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.AnonymousBoardDto;
 import com.palette.model.BoardParams;
+import com.palette.model.MemberCVDto;
 import com.palette.service.AnonymousBoardService;
 
 
@@ -34,7 +36,7 @@ public class AnonymousBoardController {
     	return list;
     }
 	
-//	cv 리스트 갯수
+//	익명게시판 리스트 갯수
 	@PostMapping(value = "/anonymousBoardList")
     public String anonymousBoardList(BoardParams boardParams) {
 		System.out.println("anonymousBoardList() 실행");
@@ -43,4 +45,16 @@ public class AnonymousBoardController {
 		System.out.println("total :" + total);
 		return stotal;
 	}
+
+//	익명게시판 추가
+	@GetMapping(value = "/insertAnonymousBoard")
+    public boolean insertAnonymousBoard(AnonymousBoardDto dto){
+		System.out.println("insertAnonymousBoard() 실행");
+		
+		boolean isS = anonymousBoardService.insertAnonymousBoard(dto);
+		
+		
+		return isS;
+	}
+	
 }

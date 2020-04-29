@@ -23,7 +23,7 @@ public class MemberCVController {
 	MemberCVService memberCVService;
 	
 //	CV 추가
-	@GetMapping(value = "/insertCV")
+	@PostMapping(value = "/insertCV")
     public boolean insertCV(MemberCVDto dto){
 		System.out.println("insertCV() 실행");
 		
@@ -76,7 +76,7 @@ public class MemberCVController {
 
 		// cv 객체
 		MemberCVDto dto = memberCVService.getOneCVByMemberSeq(memberSeq);
-		System.out.println("dto: "+ dto.toString());
+		
 		
 		return dto;
 	}
