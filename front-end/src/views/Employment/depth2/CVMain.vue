@@ -17,8 +17,8 @@
             v-model="searchWord"
             size="large"
             placeholder="전체목록보기버튼">
-            <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
-            <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
+          <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
             <el-option label="작성자" value="writer"></el-option>
             <el-option label="제목" value="title"></el-option>
           </el-select>
