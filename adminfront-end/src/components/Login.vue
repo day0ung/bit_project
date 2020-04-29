@@ -52,7 +52,7 @@ export default {
         //this.$router.push(this.rPath)//rPath로 redirect
           if(res.data.memberId == undefined){
             alert("id나 password가 틀렸습니다.");
-            this.$store.state.isLogin = true;
+            this.$store.state.isLogin = true;//로그인 미완료시 true로 처리.
             return;
           }
 
