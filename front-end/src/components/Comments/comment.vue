@@ -9,17 +9,19 @@
           <div v-if="comment.boardCommentSeq==clicked">
             <div class="answerLink" v-show="isShow == true">
               <p @click="answerCancle(comment.boardCommentSeq)">답글 취소</p>
+              <div class="content">{{comment.content}}</div>
               <el-input class="answerContent input-with-select" v-model="subContent" placeholder="수정사항을 작성해주세요." @input="editVal">
               <el-button size="mini" slot="append" @click="addCoComment(comment.boardCommentSeq)">등록</el-button></el-input>
             </div>
              <div v-show="isShow == false">
               <div class="answerLink"><p @click="answer(comment.boardCommentSeq)" >답글</p></div>
+              <div class="content">{{comment.content}}</div>
             </div>
           </div>
           <div v-else-if="index != clicked">
               <div class="answerLink"><p @click="answer(comment.boardCommentSeq)">답글</p></div>
+              <div class="content">{{comment.content}}</div>
           </div> 
-          <div class="content">{{comment.content}}</div>
           
           <div class="dotline"></div>
         </li>
