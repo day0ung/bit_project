@@ -12,8 +12,9 @@
         </el-tab-pane>
         <el-tab-pane label="그룹 자료실">
             <GroupReference v-show="groupReference" v-on:showReferenceWrite="showReferenceWrite" v-on:showReferenceDetail="showReferenceDetail"/>
-            <ReferenceDetail v-show="referenceDetail" v-on:showGroupReference="showGroupReference"/>
+            <ReferenceDetail v-show="referenceDetail" v-on:showGroupReference="showGroupReference" v-on:showGroupReferenceUpdate="showGroupReferenceUpdate"/>
             <ReferenceWrite v-show="referenceWrite" v-on:showGroupReference="showGroupReference"/>
+            <ReferenceUpdate v-show="referenceUpdate" v-on:showGroupReference="showGroupReference"/>
         </el-tab-pane>
     </el-tabs>
 </div>
@@ -31,12 +32,14 @@ import boardUpdate from '@/views/Group/detail/board_update.vue'
 import GroupReference from '@/views/Group/login_menu/groupReference.vue'
 import ReferenceWrite from '@/views/Group/detail/reference_write.vue'
 import ReferenceDetail from '@/views/Group/detail/reference_detail.vue'
+import ReferenceUpdate from '@/views/Group/detail/reference_update.vue'
 
 export default {
     components:{ 
         GroupInfo, GroupCalendar,
         GroupBoard,  boardDetail, boardWrite, boardUpdate,
-        GroupReference, ReferenceDetail, ReferenceWrite },
+        GroupReference, ReferenceDetail, ReferenceWrite, ReferenceUpdate
+    },
     data() {
         return {
             groupBoard: true,
@@ -47,6 +50,7 @@ export default {
             groupReference: true,
             referenceDetail: false,
             referenceWrite: false,
+            referenceUpdate: false,
         };
     },
     methods:{
@@ -78,14 +82,23 @@ export default {
             this.referenceWrite = true
             this.groupReference = false
             this.referenceDetail = false
+             this.referenceUpdate = false
         },
         showGroupReference(){
             this.groupReference = true
             this.referenceWrite = false
             this.referenceDetail = false
+             this.referenceUpdate = false
         },
         showReferenceDetail(){
             this.referenceDetail = true
+            this.groupReference = false
+            this.referenceWrite = false
+            this.referenceUpdate = false
+        },
+        showGroupReferenceUpdate(){
+            this.referenceUpdate = true
+            this.referenceDetail = false
             this.groupReference = false
             this.referenceWrite = false
         }

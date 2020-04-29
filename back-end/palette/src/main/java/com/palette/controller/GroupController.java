@@ -193,6 +193,13 @@ public class GroupController {
         return "";
     }
 
+    @PostMapping(value = "/updateGroupReference")
+    public String updateGroupReference(ReferenceVo form) throws IOException {
+        System.out.println("updateGroupReference()");
+        groupService.updateGroupReference(form);
+        return "";
+    }
+
     // Comment
     @PostMapping(value="/groupBoardDetailComments")
     public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {

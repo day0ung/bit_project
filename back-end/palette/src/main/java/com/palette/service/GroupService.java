@@ -208,6 +208,25 @@ public class GroupService {
             groupDao.insertBoardReference(boardReferenceDto);
         }
 	}
+	public void updateGroupReference(ReferenceVo form) throws IOException {
+		// board update 먼저실행
+		GroupBoardDto boardDto = new GroupBoardDto();
+		boardDto.setBoardSeq(form.getBoardSeq());
+		boardDto.setTitle(form.getTitle());
+		boardDto.setContent(form.getContent());
+		groupDao.updateGroupBoard(boardDto);
+		// 기존 file delete 먼저실행후
+		groupDao.groupReferenceDelete(form.getBoardSeq());
+		// 같은 boardSeq로 file upload
+		for(MultipartFile file : form.getFiles()){
+			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
+			boardReferenceDto.setFileName(file.getOriginalFilename());
+			boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()));
+			boardReferenceDto.setMemberSeq(form.getMemberSeq());
+			boardReferenceDto.setBoardSeq(form.getBoardSeq());
+			groupDao.insertBoardReference(boardReferenceDto);
+		}
+	}
 	
 	public ArrayList<CommentDto> groupBoardDetailComments(int boardSeq) {
 		return groupDao.groupBoardDetailComments(boardSeq);
@@ -230,4 +249,5 @@ public class GroupService {
 		groupDao.groupBoardDelete(boardSeq);
 		groupDao.groupReferenceDelete(boardSeq);
 	}
+
 }

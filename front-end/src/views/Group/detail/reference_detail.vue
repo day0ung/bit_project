@@ -59,13 +59,12 @@ export default {
       this.getList()
       this.$emit("showGroupReference")
     },
+    showGroupReferenceWrive(){
+      this.getList()
+      this.$emit("showGroupReference")
+    },
     referenceUpdate(){
-      // var params = new URLSearchParams()
-      // params.append('boardSeq', this.$store.state.s_group.groupReferenceDetailFileList.boardSeq);
-      // axios.post("http://localhost:9000/groupRreferenceUpdate", params)
-      //             .then(res => {
-      //           this.getList()
-      // })
+      this.$emit("showGroupReferenceUpdate")
     },
     referenceDelete(){
       var params = new URLSearchParams()
