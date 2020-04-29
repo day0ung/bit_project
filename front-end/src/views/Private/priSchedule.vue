@@ -99,8 +99,6 @@ export default {
        this.getCalenarInfo()
       },
       scheduleCreate(event){
-        //alert(event.start)
-        alert(event.start + "<<시작날짜-----종료날짜>>"+event.end)
           this.$confirm('일정을 추가하시겠습니까?', '일정추가', {
           confirmButtonText: '추가',
           cancelButtonText: '취소',

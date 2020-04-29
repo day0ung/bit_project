@@ -98,8 +98,12 @@ export default {
 		 this.name = login.memberName
 		 this.memSeq = login.memberSeq
 		 this.auth = login.auth
-		 var params = new URLSearchParams();
-		 params.append('memberSeq', this.memSeq)
+		 this.getInfomation(this.memSeq)
+	}, 
+	methods:{
+		getInfomation(memSeq){
+		var params = new URLSearchParams();
+		 params.append('memberSeq', memSeq)
 		 axios.post('http://localhost:9000/myPageInfomation', params)
 		 .then(res => {
 		    this.myinfo = res.data
@@ -181,28 +185,13 @@ export default {
 			 }) 
 		},
 		emailUpdate(memSeq){
-			var params = new URLSearchParams();
-			params.append('memberSeq', memSeq)
-			axios.post('http://localhost:9000/myPageInfomation', params)
-			.then(res => {
-				this.myinfo = res.data
-			 }) 
+			this.getInfomation(memSeq)
 		},
 		addrUpdate(memSeq){
-			var params = new URLSearchParams();
-			params.append('memberSeq', memSeq)
-			axios.post('http://localhost:9000/myPageInfomation', params)
-			.then(res => {
-				this.myinfo = res.data
-			 }) 
+			this.getInfomation(memSeq)
 		},
 		passUpdate(memSeq){
-			var params = new URLSearchParams();
-			params.append('memberSeq', memSeq)
-			axios.post('http://localhost:9000/myPageInfomation', params)
-			.then(res => {
-				this.myinfo = res.data
-			 }) 
+			this.getInfomation(memSeq)
 		},
 		updateInterArea(memSeq){
 			var params = new URLSearchParams();
