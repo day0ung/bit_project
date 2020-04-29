@@ -15,6 +15,7 @@ export default {
         groupReferenceDetail: [],
         groupReferenceDetailFileList: [],
         grouDetail: [],
+        MypageReferenceList: [],
         showGroupInfo: false,
         showGroupCalendar: false,
         showBoardList: false,

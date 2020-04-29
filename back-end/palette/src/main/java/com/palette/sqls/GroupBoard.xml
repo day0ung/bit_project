@@ -221,7 +221,19 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 	<select id="getGroupReferenceDetailFileList" parameterType="java.lang.Integer" resultType="com.palette.model.BoardReferenceDto">
 		SELECT *
 		FROM BOARD_REFERENCE
-		WHERE BOARD_SEQ = #{boardSeq}
+		WHERE BOARD_SEQ = #{boardSeq} AND DEL = 0
 	</select>
+
+	<select id="getMypageReferenceList" parameterType="java.lang.Integer" resultType="com.palette.model.BoardReferenceDto">
+		SELECT *
+		FROM BOARD_REFERENCE
+		WHERE MEMBER_SEQ = #{memberSeq} AND DEL = 0
+	</select>
+
+	<update id="groupReferenceDelete" parameterType="java.lang.Integer">
+		UPDATE BOARD_REFERENCE
+		SET DEL = 1
+		WHERE BOARD_SEQ = #{boardSeq}
+	</update>
 
 </mapper>
