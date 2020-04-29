@@ -12,6 +12,7 @@ export default {
         groupBoardDetailComments: [],
         groupReferenceList: [],
         groupReferenceDetail: [],
+        groupReferenceDetailFileList: [],
         grouDetail: [],
         showGroupInfo: false,
         showGroupCalendar: false,

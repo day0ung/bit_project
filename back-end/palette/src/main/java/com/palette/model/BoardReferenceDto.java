@@ -5,15 +5,17 @@ public class BoardReferenceDto {
     private int boardReferenceSeq;
     private int boardSeq;
     private int memberSeq;
+    private String url;
     private String fileName;
 
     public BoardReferenceDto() {
     }
 
-    public BoardReferenceDto(int boardReferenceSeq, int boardSeq, int memberSeq, String fileName) {
+    public BoardReferenceDto(int boardReferenceSeq, int boardSeq, int memberSeq, String url, String fileName) {
         this.boardReferenceSeq = boardReferenceSeq;
         this.boardSeq = boardSeq;
         this.memberSeq = memberSeq;
+        this.url = url;
         this.fileName = fileName;
     }
 
@@ -41,6 +43,14 @@ public class BoardReferenceDto {
         this.memberSeq = memberSeq;
     }
 
+    public String getUrl() {
+        return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     public String getFileName() {
         return this.fileName;
     }
@@ -64,6 +74,11 @@ public class BoardReferenceDto {
         return this;
     }
 
+    public BoardReferenceDto url(String url) {
+        this.url = url;
+        return this;
+    }
+
     public BoardReferenceDto fileName(String fileName) {
         this.fileName = fileName;
         return this;
@@ -75,6 +90,7 @@ public class BoardReferenceDto {
             " boardReferenceSeq='" + getBoardReferenceSeq() + "'" +
             ", boardSeq='" + getBoardSeq() + "'" +
             ", memberSeq='" + getMemberSeq() + "'" +
+            ", url='" + getUrl() + "'" +
             ", fileName='" + getFileName() + "'" +
             "}";
     }

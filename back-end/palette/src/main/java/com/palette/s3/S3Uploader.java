@@ -1,6 +1,7 @@
 package com.palette.s3;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,17 +24,17 @@ public class S3Uploader {
     private String bucket;
 
     public String upload(MultipartFile uploadFile, String dirName) throws IOException {
-        String fileName = dirName + "/" + uploadFile.getOriginalFilename();
-        String uploadImageUrl = putS3(uploadFile, fileName);
-        return uploadImageUrl;
+        String uploadFileName = dirName + "/" + uploadFile.getOriginalFilename().replace(".", "-" + LocalDateTime.now() + ".");
+        String url = putS3(uploadFile, uploadFileName);
+        return url;
     }
 
-    private String putS3(MultipartFile uploadFile, String fileName) throws IOException {
+    private String putS3(MultipartFile uploadFile, String uploadFileName) throws IOException {
         ObjectMetadata objMeta = new ObjectMetadata();
         byte[] bytes = IOUtils.toByteArray(uploadFile.getInputStream());
         objMeta.setContentLength(bytes.length);
-        amazonS3Client.putObject(new PutObjectRequest(bucket, fileName, uploadFile.getInputStream(), objMeta).withCannedAcl(CannedAccessControlList.PublicRead));
-        return amazonS3Client.getUrl(bucket, fileName).toString();
+        amazonS3Client.putObject(new PutObjectRequest(bucket, uploadFileName, uploadFile.getInputStream(), objMeta).withCannedAcl(CannedAccessControlList.PublicRead));
+        return amazonS3Client.getUrl(bucket, uploadFileName).toString();
     }
 
 }
