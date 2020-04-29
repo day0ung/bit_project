@@ -202,7 +202,7 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 	<update id="groupReferenceDelete" parameterType="java.lang.Integer">
 		UPDATE BOARD_REFERENCE
 		SET DEL = 1
-		WHERE BOARD_REFERENCE_SEQ = #{boardSeq}
+		WHERE BOARD_SEQ = #{boardSeq}
 	</update>
 
 </mapper>
