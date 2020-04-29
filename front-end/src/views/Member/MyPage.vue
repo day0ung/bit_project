@@ -100,16 +100,16 @@ export default {
 		 this.auth = login.auth
 		 this.getInfomation(this.memSeq)
 	}, 
+
 	methods:{
 		getInfomation(memSeq){
-		var params = new URLSearchParams();
-		 params.append('memberSeq', memSeq)
-		 axios.post('http://localhost:9000/myPageInfomation', params)
-		 .then(res => {
-		    this.myinfo = res.data
-		})
-	}, 
-	methods:{
+			var params = new URLSearchParams();
+			params.append('memberSeq', memSeq)
+			axios.post('http://localhost:9000/myPageInfomation', params)
+			.then(res => {
+				this.myinfo = res.data
+			})
+		},
 		studyClick(){
 			this.study = true
 			this.schedule = false
