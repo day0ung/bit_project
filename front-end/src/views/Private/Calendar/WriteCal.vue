@@ -103,7 +103,7 @@ export default {
           this.$refs[formName].validate((valid) => {
             if (valid) {
               //insertMemberCalendar
-              alert(this.$store.state.s_private.memberSeq+"::::"+this.ruleForm.title+":::"+this.ruleForm.content+":::"+this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss')+this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'))
+             // alert(this.$store.state.s_private.memberSeq+"::::"+this.ruleForm.title+":::"+this.ruleForm.content+":::"+this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss')+this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'))
               axios.get("http://localhost:9000/insertMemberCalendar",{
                   params:{
                     memberSeq: this.$store.state.s_private.memberSeq,
@@ -141,7 +141,7 @@ export default {
     },
     created(){
      this.ruleForm.startDate = this.$moment(this.$store.state.s_private.memberCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
-     this.ruleForm.endDate = this.$moment(this.$store.state.s_private.memberCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
+     this.ruleForm.endDate = this.$moment(this.$store.state.s_private.memberCalendarEndDate).format('YYYY.MM.DD HH:mm:ss')
     }
 
 }
