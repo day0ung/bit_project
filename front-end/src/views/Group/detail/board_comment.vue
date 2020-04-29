@@ -3,23 +3,32 @@
     <div class="commentsList"  v-loading="this.$store.state.s_group.showBoardDetailComments">
       <ul>
         <li v-for="(comment, index) in this.$store.state.s_group.groupBoardDetailComments" :key="comment.boardCommentSeq">
-          <div class="report"><a href="">신고</a></div>  
+          <div class="report">
+            <div v-if="loginSeq == comment.memberSeq">
+              <span @click="answerUpdate(comment.boardCommentSeq)">수정</span>
+              <span @click="answerDelete(comment.boardCommentSeq)" style="margin: 0px 10px">삭제</span>
+            </div>
+            <div v-else>
+              <span @click="answerReport(comment.boardCommentSeq)">신고</span>
+            </div>
+          </div>  
           <div class="memberId">{{comment.memberId}}</div>  
           <div class="writeDate">{{comment.writeDate}}</div>
           <div v-if="comment.boardCommentSeq==clicked">
-            <div class="answerLink" v-show="isShow == true">
-              <p @click="answerCancle(comment.boardCommentSeq)">답글 취소</p>
+            <div v-show="isShow == true">
+              <span class="miniAnswer" @click="answerCancle(comment.boardCommentSeq)">답글 취소</span>
               <div class="content">{{comment.content}}</div>
-              <el-input class="answerContent input-with-select" v-model="subContent" placeholder="수정사항을 작성해주세요." @input="editVal">
-              <el-button size="mini" slot="append" @click="addCoComment(comment.boardCommentSeq)">등록</el-button></el-input>
+              <el-input class="answerContent input-with-select" v-model="subContent" placeholder="댓글을 작성해주세요." @input="editVal"
+                        >
+              <el-button size="mini" slot="append" @click="answerInsert(comment.boardCommentSeq)">등록</el-button></el-input>
             </div>
-             <div v-show="isShow == false">
-              <div class="answerLink"><p @click="answer(comment.boardCommentSeq)" >답글</p></div>
+            <div v-show="isShow == false">
+              <span class="miniAnswer" @click="answer(comment.boardCommentSeq)" >답글</span>
               <div class="content">{{comment.content}}</div>
             </div>
           </div>
           <div v-else-if="index != clicked">
-              <div class="answerLink"><p @click="answer(comment.boardCommentSeq)">답글</p></div>
+              <span class="miniAnswer" @click="answer(comment.boardCommentSeq)">답글</span>
               <div class="content">{{comment.content}}</div>
           </div> 
           
@@ -27,17 +36,17 @@
         </li>
 
       </ul>
-    </div>
-
     <div class="commentInput">
       <el-input style="width:80%"
         type="textarea"
         :autosize="{ minRows: 2, maxRows: 4}"
-        placeholder="Please input"
+        placeholder="댓글을 작성해주세요."
         v-model="content">
       </el-input>
-      <el-button @click="insertComment">댓글 달기</el-button>
+      <el-button @click="insertComment" style="margin:10px">댓글 달기</el-button>
     </div>
+    </div>
+
   </div>
 </template>
 
@@ -91,8 +100,23 @@ name: 'Comment',
       this.clicked = boardCommentSeq
       //alert(boardCommentSeq)
     },
-    addCoComment(boardCommentSeq){
+    answerUpdate(boardCommentSeq){
+      alert(boardCommentSeq+"/update")
+    },
+    answerDelete(boardCommentSeq){
+      alert(boardCommentSeq+"/delete")
+       var params = new URLSearchParams();
+        params.append('boardCommentSeq', boardCommentSeq);
+        axios.post("http://localhost:9000/answerDelete", params).then(res => { 
+          this.getComments()
+      })
+    },
+    answerReport(boardCommentSeq){
+      alert(boardCommentSeq+"/report")
+    },
+    answerInsert(boardCommentSeq){
       alert(boardCommentSeq+"/"+this.subContent)
+
     }
 
    
@@ -106,6 +130,11 @@ name: 'Comment',
 </script>
 
 <style scoped>
+.commentsList{
+  background-color: #f7f7f7;
+  margin: 30px;
+  padding: 30px;
+}
 .memberId {
   font-weight: bold;
   float: left;
@@ -122,19 +151,18 @@ float: left;
 }
 
 .content{
-  margin: 20px;
-  margin-bottom: 20px;
-  z-index: 2;
+  margin: 20px 20px 0px 20px;
+  /* margin-bottom: 20px; */
 }
 
 .dotline{
   height: 1px;
-    padding: 0px;
-    overflow: hidden;
-    font: 0/0 arial;
-    border-bottom-width: 1px;
-    border-bottom-style: dotted;
-    margin-bottom: 20px;
+  overflow: hidden;
+  font: 0/0 arial;
+  border-bottom-width: 1px;
+  border-bottom-style: dotted;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .report{
   float: right;
@@ -143,15 +171,19 @@ float: left;
   font-size: 12px
 }
 
-.answerLink{
+span{
   cursor: pointer;
-  margin-right: 20px;
 }
 
+span.miniAnswer {
+  padding-left: 10px;
+  background: url(https://cafe.pstatic.net/cafe4/bu_arr.png) no-repeat 0 0;
+}
 .answerContent{
   width:80%;
-  margin-left: 20px;
-  margin-top:10px;
+  margin:10px 0px 0px 40px;
+  padding-left: 10px; 
+  background: url(https://cafe.pstatic.net/cafe4/ico_comm_re2.gif) 0 13px no-repeat
 }
 
 </style>

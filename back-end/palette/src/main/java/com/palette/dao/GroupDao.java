@@ -67,6 +67,7 @@ public interface GroupDao {
 	int getRef();
 	
 	List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq);
+	void answerDelete(CommentDto commentDto);
 
 
 

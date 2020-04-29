@@ -175,17 +175,48 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		from BOARD_COMMENT b
 		join MEMBER m
 		on b.MEMBER_SEQ = m.MEMBER_SEQ 
-		where BOARD_SEQ = #{boardSeq}
+		where BOARD_SEQ = #{boardSeq} and b.DEL=0
+		order by REF, STEP DESC
 	</select>
 	<insert id="insertComment" parameterType="com.palette.model.CommentDto">
 		insert into FINAL.BOARD_COMMENT(BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT, WRITE_DATE, DEL)
 		values( #{boardSeq}, #{memberSeq}, #{ref}, 0, 0, #{content}, NOW(), 0)
-		
 	</insert>
 	<select id="getRef" resultType="java.lang.Integer">
 		select ifnull(MAX(REF),0)+1 
 		from FINAL.BOARD_COMMENT			
 	</select>
+
+
+	<update id="updateCommentAnswer" parameterType="com.palette.model.CommentDto">
+		update FINAL.BOARD_COMMENT
+		set STEP = STEP + 1
+		where REF=(select REF from FINAL.BOARD_COMMENT where BOARD_COMMENT_SEQ=#{boardCommentSeq})
+		<![CDATA[ 
+			and STEP > (select STEP from FINAL.BOARD_COMMENT where BOARD_COMMENT_SEQ=#{boardCommentSeq}) 
+		]]>
+	</update>
+	<select id="selectRefStepDepth" parameterType="com.palette.model.CommentDto" resultType="com.palette.model.CommentDto">
+		select REF, STEP + 1, DEPTH + 1
+		from FINAL.BOARD_COMMENT
+		where BOARD_COMMENT_SEQ = #{boardCommentSeq}
+	</select>
+	<insert id="insertCommentAnswer" parameterType="com.palette.model.CommentDto">
+		insert into FINAL.BOARD_COMMENT (BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT, WRITE_DATE, DEL)
+		values(#{boardSeq}, #{memberSeq}, #{ref}, #{step}, #{depth}, #{content}, NOW(), 0)
+	</insert>
+
+	<update id="answerDelete" parameterType="com.palette.model.CommentDto">
+		update FINAL.BOARD_COMMENT
+		SET DEL = 1
+		WHERE BOARD_COMMENT_SEQ = #{boardCommentSeq}
+	</update>
+	<update id="answerUpdate" parameterType="com.palette.model.CommentDto">
+		update FINAL.BOARD_COMMENT
+		SET CONTENT = #{content}
+		WHERE BOARD_COMMENT_SEQ = #{boardCommentSeq}
+	</update>
+
 
 	<select id="getGroupReferenceDetailFileList" parameterType="java.lang.Integer" resultType="com.palette.model.BoardReferenceDto">
 		SELECT *

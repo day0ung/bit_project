@@ -221,4 +221,9 @@ public class GroupService {
 	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
 		return groupDao.getGroupReferenceDetailFileList(boardSeq);
 	}
+
+	public void answerDelete(CommentDto commentDto) {
+		groupDao.answerDelete(commentDto);
+		
+	}
 }

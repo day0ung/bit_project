@@ -159,7 +159,7 @@ data(){
     },
     created(){
      this.ruleForm.startDate = this.$moment(this.$store.state.s_group.groupCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
-     this.ruleForm.endDate = this.$moment(this.$store.state.s_group.groupCalendarStartDate).format('YYYY.MM.DD HH:mm:ss')
+     this.ruleForm.endDate = this.$moment(this.$store.state.s_group.groupCalendarEndDate).format('YYYY.MM.DD HH:mm:ss')
     }
 
 }

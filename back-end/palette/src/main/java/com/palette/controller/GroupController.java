@@ -188,13 +188,21 @@ public class GroupController {
         ArrayList<CommentDto> list = groupService.groupBoardDetailComments(boardSeq);
         return list;
     }
-    @PostMapping(value = "insertComment")
+    @PostMapping(value = "/insertComment")
     public String insertComment(CommentDto commentDto) {
     	System.out.println("insertComment(): "+commentDto.toString());
     	groupService.insertComment(commentDto);
     	return "";
     }
 
+    @PostMapping(value = "/answerDelete")
+    public String answerDelete(CommentDto commentDto) {
+    	System.out.println("answerDelete()");
+    	groupService.answerDelete(commentDto);
+    	return "";
+    }
+    
+    
     // attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
