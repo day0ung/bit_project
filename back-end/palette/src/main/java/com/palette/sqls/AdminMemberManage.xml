@@ -19,6 +19,12 @@
 		FROM MEMBER
 		WHERE auth=0 or auth=1
 	</select>
+
+	<select id="memberSelectOne" resultType="com.palette.model.MemberDto">
+		SELECT *
+		FROM MEMBER
+		WHERE (auth=0 or auth=1) AND MEMBER_ID=#{memberId}
+	</select>
 	
 
 

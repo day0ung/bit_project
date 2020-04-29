@@ -20,26 +20,27 @@ public class AdminCompanyService {
 		return adminmemberdao.adminGetCompanyMemberListAll();
 	}
 	
+	
+	// public MemberDto approvalrequestCompanyList(MemberDto dto){
+	// 	return adminmemberdao.approvalrequestCompanyList(dto);
+	// }
+	
+	// public MemberDto finishApprovalCompanyList(MemberDto dto) {
+	// 	return adminmemberdao.finishApprovalCompanyList(dto);
+	// }
+	
+	// public List<String> adminGetCompanyLocationALl(){
+	// 	return adminmemberdao.adminGetCompanyLocationALl();
+		
+	// }
+	
 	public MemberDto adminGetCompanyInfoOne(MemberDto dto) {
 		
 		return adminmemberdao.adminGetCompanyInfoOne(dto);
 	}
 	
-	public MemberDto approvalrequestCompanyList(){
-		return adminmemberdao.approvalrequestCompanyList();
-	}
-	
-	public MemberDto finishApprovalCompanyList() {
-		return adminmemberdao.finishApprovalCompanyList();
-	}
-	
-	public List<String> adminGetCompanyLocationALl(){
-		return adminmemberdao.adminGetCompanyLocationALl();
-		
-	}
-	
-	public List<String> adminGetCompanyNmaeAll(){
-		return adminmemberdao.adminGetCompanyNmaeAll();
+	public List<String> adminGetCompanyNameAll(){
+		return adminmemberdao.adminGetCompanyNameAll();
 	}
 
 	

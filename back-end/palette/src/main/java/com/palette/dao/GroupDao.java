@@ -59,10 +59,14 @@ public interface GroupDao {
 	void updateReadCount(int boardSeq);
 	
 	ArrayList<CommentDto> groupBoardDetailComments(int boardSeq);
+	void insertComment(CommentDto commentDto);
 	
 
 	int currBoardSeq();
 	void insertBoardReference(BoardReferenceDto boardReferenceDto);
+	int getRef();
+	
+	List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq);
 
 
 

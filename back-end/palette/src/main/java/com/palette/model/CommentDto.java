@@ -12,11 +12,14 @@ public class CommentDto {
 	private String writeDate;
 	private int del;
 	
+	private String memberId;
+	
 	public CommentDto() {
 	}
 
+	
 	public CommentDto(int boardCommentSeq, int boardSeq, int memberSeq, int ref, int step, int depth, String content,
-			String writeDate, int del) {
+			String writeDate, int del, String memberId) {
 		super();
 		this.boardCommentSeq = boardCommentSeq;
 		this.boardSeq = boardSeq;
@@ -27,6 +30,24 @@ public class CommentDto {
 		this.content = content;
 		this.writeDate = writeDate;
 		this.del = del;
+		this.memberId = memberId;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "CommentDto [boardCommentSeq=" + boardCommentSeq + ", boardSeq=" + boardSeq + ", memberSeq=" + memberSeq
+				+ ", ref=" + ref + ", step=" + step + ", depth=" + depth + ", content=" + content + ", writeDate="
+				+ writeDate + ", del=" + del + ", memberId=" + memberId + "]";
+	}
+
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public int getBoardCommentSeq() {

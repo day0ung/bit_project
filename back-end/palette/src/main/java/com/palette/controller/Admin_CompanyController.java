@@ -41,43 +41,44 @@ public class Admin_CompanyController {
     }
     
 //	MemberDto approvalrequestCompanyList();
-    @GetMapping(value = "/adminGetCompanyInfoOne")
-    public MemberDto approvalrequestCompanyList() {
-    	System.out.println("getAllRecuritingInfo Method execute Now..");
-    	
-    	MemberDto dto = adminCompanyService.approvalrequestCompanyList();
-    	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + dto );
-    	return dto;
+    @PostMapping(value = "/adminGetCompanyInfoOne")
+    public MemberDto approvalrequestCompanyList(MemberDto dto) {
+    	System.out.println("approvalrequestCompanyList Method execute Now..\n\n");
+		System.out.println("dto");
+		System.out.println(dto);
+    	MemberDto resdto = adminCompanyService.adminGetCompanyInfoOne(dto);
+    	System.out.println("\n\n approvalrequestCompanyList RESULT : \n" + dto + "\n\n");
+    	return resdto;
     }
     
     
 //	MemberDto finishApprovalCompanyList();
-    @GetMapping(value = "/finishApprovalCompanyList")
-    public MemberDto finishApprovalCompanyList() {
-    	System.out.println("finishApprovalCompanyList Method execute Now..");
+    // @GetMapping(value = "/finishApprovalCompanyList")
+    // public MemberDto finishApprovalCompanyList() {
+    // 	System.out.println("finishApprovalCompanyList Method execute Now..");
     	
-    	MemberDto dto = adminCompanyService.finishApprovalCompanyList();
-    	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + dto );
-    	return dto;
-    }
+    // 	MemberDto dto = adminCompanyService.finishApprovalCompanyList();
+    // 	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + dto );
+    // 	return dto;
+    // }
 
 //	List<String> adminGetCompanyLocationALl();
-    @GetMapping(value = "/adminGetCompanyLocationALl")
-    public List<String> adminGetCompanyLocationALl() {
-    	System.out.println("adminGetCompanyLocationALl Method execute Now..");
+    // @GetMapping(value = "/adminGetCompanyLocationALl")
+    // public List<String> adminGetCompanyLocationALl() {
+    // 	System.out.println("adminGetCompanyLocationALl Method execute Now..");
     	
-    	List<String> list = adminCompanyService.adminGetCompanyLocationALl();
-    	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + list );
-    	return list;
-    }
+    // 	List<String> list = adminCompanyService.adminGetCompanyLocationALl();
+    // 	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + list );
+    // 	return list;
+    // }
     
     
-//	List<String> adminGetCompanyNmaeAll();
-    @GetMapping(value = "/adminGetCompanyNmaeAll")
-    public List<String> adminGetCompanyNmaeAll() {
-    	System.out.println("adminGetCompanyNmaeAll Method execute Now..");
+//	List<String> adminGetCompanyNameAll();
+    @PostMapping(value = "/adminGetCompanyNameAll")
+    public List<String> adminGetCompanyNameAll() {
+    	System.out.println("adminGetCompanyNameAll Method execute Now..");
     	
-    	List<String> list = adminCompanyService.adminGetCompanyNmaeAll();
+    	List<String> list = adminCompanyService.adminGetCompanyNameAll();
     	System.out.println("adminGetCompanyMemberListAll RESULT : \n" + list );
     	return list;
 	}
@@ -90,7 +91,6 @@ public class Admin_CompanyController {
 		Goal: Change AUTH column status '2' to '3' (watforCompanyMember => companyMember)
 		Mapping id : changeAUTHforCompanyMember(Memberdto dto)
 	*/
-
 	@PostMapping(value = "/changeAuthCompanyMember")
     public boolean changeAuthCompanyMemberStatus(MemberDto dto) {
     	System.out.println("changeAuthCompanyMemberStatus Method execute Now..");

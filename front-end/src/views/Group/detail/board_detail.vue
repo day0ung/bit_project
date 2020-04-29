@@ -28,9 +28,12 @@
         <el-button type="primary" v-show="this.$store.state.s_group.showUpdateBtn" @click="boardOneUpdate" round>수정하기</el-button>
         <el-button type="primary" v-show="this.$store.state.s_group.showDeleteBtn" @click="boardOneDelete" round>삭제하기</el-button>
       </div>
-      <div class="hr"></div>
-      <div class="hr"></div>
 
+
+      <div class="comment">
+        <Comments></Comments>
+
+      </div>
 
     </div>
     <br>
@@ -39,9 +42,11 @@
 </template>
 
 <script>
+import Comments from '@/components/Comments/comment.vue';
 import { loading } from 'element-ui';
 export default {
-    data(){
+components: { Comments },
+data(){
         return{
             boardOne: "",
             boardSeq: 0,

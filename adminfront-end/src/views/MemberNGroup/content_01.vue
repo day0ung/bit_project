@@ -96,11 +96,20 @@
               width="100">
               <button type="button"> 상세정보 </button>
                 <template slot-scope="scope">
-                     <router-link :to="'/managemember1/'+scope.row.memberId">  <!--memberid가 파라미터로 전달됨-->
+                    
+                     <router-link :to="'/managemember1/memdetail/'+scope.row.memberId">  <!--memberid가 파라미터로 전달됨-->
                         <el-button type="primary" size="small" icon="el-icon-search">
                             상세정보
                         </el-button>
                     </router-link>
+
+                    <!-- <router-link :to="'/managemember1/memdetail/'+scope.row.memberId">-->  <!--memberid가 파라미터로 전달됨-->
+                        <!-- <el-button type="primary" size="small" icon="el-icon-search">
+                            상세정보
+                        </el-button>
+                    </router-link> -->
+
+                    <!-- companydetail -->
 
                     <!-- content_01_memdetail -->
 

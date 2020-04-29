@@ -8,18 +8,17 @@
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
-        <h5>내용</h5>
+        <h5>자료</h5>
       </div>
       <div class="groupInfoContent">
-        {{ this.$store.state.s_group.groupReferenceDetail.content }}
-        {{ this.$store.state.s_group.groupReferenceDetail.image }}
-        <el-button @click="downloadBtn" round>DownLoad</el-button>
+        <a v-for="file in this.$store.state.s_group.groupReferenceDetailFileList" :key="file.boardSeq" :href="file.url" download>{{file.fileName}}</a>
       </div>
       <div class="hr"></div>
       <div class="groupInfoTitle">
         <h5><span>상세 정보</span></h5>
       </div>
       <div class="groupInfoContent">
+        <div><span>파일정보</span>{{ this.$store.state.s_group.groupReferenceDetail.content }}</div>
         <div><span>작성자</span> {{ this.$store.state.s_group.groupReferenceDetail.memberSeq }}</div>
         <div><span>작성일</span> {{ this.$store.state.s_group.groupReferenceDetail.writeDate }}</div>
         <div><span>조회수</span> {{ this.$store.state.s_group.groupReferenceDetail.readCount }}</div>
@@ -60,23 +59,6 @@ export default {
       this.getList()
       this.$emit("showGroupReference")
     },
-    downloadBtn(){
-      console.log('https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/Awesome.PNG')
-      axios({
-      url: 'https://bit-palette.s3.ap-northeast-2.amazonaws.com/111/Awesome.PNG' ,
-      method: 'GET',
-      responseType: 'blob',
-      }).then((response) => {
-            var fileURL = window.URL.createObjectURL(new Blob([response.data]));
-            var fileLink = document.createElement('a');
-
-            fileLink.href = fileURL;
-            fileLink.setAttribute('download', 'file.png');
-            document.body.appendChild(fileLink);
-
-            fileLink.click();
-      });
-    }
   },
   mounted(){
 

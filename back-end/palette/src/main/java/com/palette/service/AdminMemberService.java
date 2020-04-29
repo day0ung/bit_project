@@ -28,6 +28,10 @@ public class AdminMemberService {
     }
 
 
+    public MemberDto memberSelectOne(MemberDto dto){
+        return adminmemberdao.memberSelectOne(dto);
+    }
+
     
 	
 

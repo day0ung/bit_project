@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.palette.model.BoardParams;
+import com.palette.model.BoardReferenceDto;
 import com.palette.model.CommentDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.GroupDto;
@@ -173,13 +174,25 @@ public class GroupController {
         groupService.insertBoardReference(form);
         return "";
     }
-    
+
+    @PostMapping(value = "/groupReferenceDetailFileList")
+    public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq){
+        System.out.println("getGroupReferenceDetailFileList()" + boardSeq);
+        return groupService.getGroupReferenceDetailFileList(boardSeq);
+    }
+
     // Comment
     @PostMapping(value="/groupBoardDetailComments")
     public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {
         System.out.println("getGroupBoardDetailComments() : " + boardSeq);
         ArrayList<CommentDto> list = groupService.groupBoardDetailComments(boardSeq);
         return list;
+    }
+    @PostMapping(value = "insertComment")
+    public String insertComment(CommentDto commentDto) {
+    	System.out.println("insertComment(): "+commentDto.toString());
+    	groupService.insertComment(commentDto);
+    	return "";
     }
 
     // attendance

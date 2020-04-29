@@ -11,44 +11,36 @@
       </div>
     </div>
     <!-- 그룹 스터디 -->
-    <h3>Group Study</h3>
+    <h3>그룹 스터디</h3>
     <div>
-      <router-link :to="{ name : 'University'}">대학생/취업</router-link> |
-      <router-link :to="{ name : 'Official'}">공무원/임용</router-link> |
-      <router-link :to="{ name : 'Language'}">어학/회화</router-link> |
-      <router-link :to="{ name : 'Life'}">라이프/취미</router-link>
+      <homegroup></homegroup>
     </div>
-    <router-view class="viewOne" name="one"></router-view>
     <div class="hr_div"/>
     <!-- 취업 정보 -->
     <h3>취업</h3>
     <div>
-      <router-link :to="{ name : 'University'}">구인 공고</router-link>
+      <recruiting></recruiting>
     </div>
-      <router-view class="viewTwo" name="two"></router-view>
     <div class="hr_div"/>
     <!-- 게시판 -->
-    <h3>Notice</h3>
+    <h3>게시판</h3>
     <div>
-      <router-link :to="{ name : 'University'}">대학생/취업</router-link> |
-      <router-link :to="{ name : 'Official'}">공무원/임용</router-link> |
-      <router-link :to="{ name : 'Language'}">어학/회화</router-link> |
-      <router-link :to="{ name : 'Life'}">라이프/취미</router-link>
+      <notice></notice>
     </div>
-    <router-view class="viewThree" name="three"></router-view>
     <div class="hr_div"/>
 
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/views/Home/HelloWorld.vue'
+import recruiting from '@/views/Employment/depth2/Recruiting_list'
+import homegroup from '@/views/Group/Non_login_menu/n_main'
+import notice from '@/views/Notice/Notice'
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    recruiting, homegroup, notice
   },
 
 }

@@ -79,6 +79,16 @@ export default {
               this.$store.state.s_group.showGroupReferenceList = false
             })
     },
+    getReferenceFileList(boardSeq){
+      console.log("확인")
+      var params = new URLSearchParams();	// post 방식으로 받아야함.
+      params.append('boardSeq', boardSeq);
+      axios.post("http://localhost:9000/groupReferenceDetailFileList", params).then(res=> {
+      this.$store.state.s_group.groupReferenceDetailFileList = res.data
+      console.log(res.data)
+      this.$store.state.s_group.showReferenceDetail = false
+    })
+    },
     gotoClick(row, column, event){
       this.$emit("showReferenceDetail")
       this.$store.state.s_group.showReferenceDetail = true
@@ -93,7 +103,7 @@ export default {
           this.$store.state.s_group.showDeleteBtn = false
           this.$store.state.s_group.showUpdateBtn = false
         }
-        this.$store.state.s_group.showReferenceDetail = false
+        this.getReferenceFileList(row.boardSeq)
         })
     },
     clickableRows :function (row, rowIndex) {

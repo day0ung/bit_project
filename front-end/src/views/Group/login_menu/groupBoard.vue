@@ -165,10 +165,11 @@ export default {
           this.$store.state.s_group.showDeleteBtn = false
           this.$store.state.s_group.showUpdateBtn = false
         }
-          this.$store.state.s_group.showBoardDetail = false
+        this.$store.state.s_group.showBoardDetail = false
         })
       axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
         this.$store.state.s_group.groupBoardDetailComments = res.data
+        //this.$store.state.s_group.showBoardDetailComments = false
       })
     },
     clickableRows :function (row, rowIndex) {
