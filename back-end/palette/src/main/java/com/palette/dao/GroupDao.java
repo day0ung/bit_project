@@ -72,6 +72,10 @@ public interface GroupDao {
 
 	void groupReferenceDelete(int boardSeq);
 	void joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+	
+	void likeGroupAdd(GroupMemberDto groupMemberDto);
+	int checkLikeGroup(GroupMemberDto groupMemberDto);
+	void likeGroupDelete(GroupMemberDto groupMemberDto);
 
 
 

@@ -89,6 +89,7 @@
 		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where g.INTER_BIG_SEQ= #{interBigSeq} AND g.DEL = 0;
@@ -104,6 +105,7 @@
 		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 		WHERE g.DEL= 0;
@@ -121,6 +123,7 @@
 		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where gm.MEMBER_SEQ =#{memberSeq} AND gm.DEL = 0;
@@ -136,6 +139,7 @@
 		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where i.GROUP_INFO_SEQ not in 
@@ -163,6 +167,7 @@
 		on g.GROUP_INFO_SEQ = s.GROUP_INFO_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where g.GROUP_INFO_SEQ = #{groupInfoSeq};
@@ -215,5 +220,22 @@
 	INSERT INTO GROUP_MEMBER (GROUP_INFO_SEQ, MEMBER_SEQ, DEL)
 	VALUES (#{groupInfoSeq}, #{memberSeq}, 2);
 </insert>
+
+<select id="checkLikeGroup" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM GROUP_LIKE
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 0;
+</select>
+
+<insert id="likeGroupAdd" parameterType="com.palette.model.GroupMemberDto">
+	INSERT INTO GROUP_LIKE (GROUP_INFO_SEQ, MEMBER_SEQ)
+	VALUES (#{groupInfoSeq}, #{memberSeq});
+</insert>
+
+<update id="likeGroupDelete" parameterType="com.palette.model.GroupMemberDto">
+	UPDATE GROUP_LIKE
+	SET DEL = 1
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
 
 </mapper>

@@ -97,11 +97,17 @@ public class GroupController {
     // join like mypage
     @PostMapping(value = "/joinGroupMemberRegistrationRequest")
     public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
+        System.out.println("joinGroupMemberRegistrationRequest()");
         groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
         return "";
-    } 
+    }
 
-    
+    @PostMapping(value = "/likeGroupAdd")
+    public String likeGroupAdd(GroupMemberDto groupMemberDto){
+        System.out.println("likeGroupAdd()");
+        groupService.likeGroupAdd(groupMemberDto);
+        return "";
+    }
     
     // Board
     @PostMapping(value="/groupPagingList")
