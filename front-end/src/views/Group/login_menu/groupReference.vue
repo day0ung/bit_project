@@ -74,18 +74,15 @@ export default {
       params.append('groupSeq', this.$store.state.s_group.groupSeq);
       axios.post("http://localhost:9000/groupPdsList", params)
                   .then(res => {
-              console.log(res.data)
               this.$store.state.s_group.groupReferenceList = res.data
               this.$store.state.s_group.showGroupReferenceList = false
             })
     },
     getReferenceFileList(boardSeq){
-      console.log("확인")
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('boardSeq', boardSeq);
       axios.post("http://localhost:9000/groupReferenceDetailFileList", params).then(res=> {
       this.$store.state.s_group.groupReferenceDetailFileList = res.data
-      console.log(res.data)
       this.$store.state.s_group.showReferenceDetail = false
     })
     },

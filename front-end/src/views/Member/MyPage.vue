@@ -103,7 +103,7 @@ export default {
 		 axios.post('http://localhost:9000/myPageInfomation', params)
 		 .then(res => {
 		    this.myinfo = res.data
-		  }) 
+		})
 	}, 
 	methods:{
 		studyClick(){

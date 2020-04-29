@@ -225,4 +225,9 @@ public class GroupService {
 	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
 		return groupDao.getMypageReferenceList(memberSeq);
 	}
+
+	public void groupReferenceDelete(int boardSeq) {
+		groupDao.groupBoardDelete(boardSeq);
+		groupDao.groupReferenceDelete(boardSeq);
+	}
 }

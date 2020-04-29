@@ -186,6 +186,13 @@ public class GroupController {
         return groupService.getMypageReferenceList(memberSeq);
     }
 
+    @PostMapping(value = "/groupReferenceDelete")
+    public String groupReferenceDelete(int boardSeq){
+        System.out.println("groupReferenceDelete()");
+        groupService.groupReferenceDelete(boardSeq);
+        return "";
+    }
+
     // Comment
     @PostMapping(value="/groupBoardDetailComments")
     public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {
