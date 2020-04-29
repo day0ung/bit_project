@@ -22,6 +22,12 @@ public interface AdminGroupDao {
 
 	public List<GroupDto> getAllStudyGroup();
 	
+	public GroupDto checkExistGroupMember(GroupDto dto);
+
+	public boolean changeGroupMasterStatus(MemberDto dto);
+
+	public boolean insertGroupLeader(GroupDto dto);
+
 	
 	
 

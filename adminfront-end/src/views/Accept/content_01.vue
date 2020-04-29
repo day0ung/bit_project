@@ -116,12 +116,16 @@
                             v-if="scope.row.auth===2"
                             size="mini"
                             @click="changeATUH(scope,3)"> 기업회원으로 전환 </el-button>
+                            <!-- auth를 2-> 3으로 전환 -->
 
                         <el-button
                             v-if="scope.row.auth===3"
                             size="mini"
                             type="danger"
                             @click="changeATUH(scope,2)"> 기업회원 허가 철회 </el-button>
+                            <!-- auth를 3-> 2으로 전환 -->
+
+                            <!-- -->
                      </div>
                 </template>
             </el-table-column>
@@ -143,16 +147,20 @@ export default {
             title:'group2',
             adminAllStudyGroupList:[],
 
-            selectedvalue: [{
+            selectedvalue: [
+                {
                 value: '',
                 label: '전체보기'
-                }, {
+                }, 
+                {
                 value: '2',
                 label: '비전환 기업리스트'
-                }, {
+                }, 
+                {
                 value: '3',
                 label: '기업회원 전환완료'
-            }],
+                }
+            ],
             value: '',
             loading:false,
 
@@ -166,8 +174,7 @@ export default {
     methods:{
 
         getGroupAllowList(){
-            
-            axios.post("http://localhost:9000/adminCompanyMemberShowAll")
+            axios.post(path+"/adminCompanyMemberShowAll")
             .then(res => {
                 
                 console.log("admin all group print ")
@@ -188,7 +195,7 @@ export default {
 
             const memberSeq = scope.row.memberSeq
             const memberId =  scope.row.memberId
-            const auth = AuthStatus
+            const auth = AuthStatus //  2->3   3->2
             var inputStr=""
 
             
@@ -206,7 +213,7 @@ export default {
             const confirmflag = confirm(inputStr);
             if(confirmflag){
 
-                var params = new URLSearchParams();	// post 방식으로 받아야함.
+                var params = new URLSearchParams();	
                 params.append('memberSeq', memberSeq);
                 params.append('memberId', memberId);
                 params.append('auth', auth );

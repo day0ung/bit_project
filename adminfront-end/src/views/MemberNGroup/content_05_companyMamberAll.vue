@@ -117,7 +117,7 @@
 /adminGetCompanyInfoOne
 /finishApprovalCompanyList
 /adminGetCompanyLocationALl
-/adminGetCompanyNmaeAll
+/adminGetCompanyNameAll
       </pre>
       <!-- <button v-on:click="showAdminCompanyMamberShowAll"> Call Company List All </button> -->
       <!-- <ul>
