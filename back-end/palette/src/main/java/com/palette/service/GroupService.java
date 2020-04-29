@@ -253,4 +253,8 @@ public class GroupService {
 		groupDao.groupReferenceDelete(boardSeq);
 	}
 
+	public void joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto) {
+		groupDao.joinGroupMemberRegistrationRequest(groupMemberDto);
+	}
+
 }

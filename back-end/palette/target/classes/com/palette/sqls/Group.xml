@@ -91,7 +91,7 @@
 			from GROUP_MEMBER
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where g.INTER_BIG_SEQ= #{interBigSeq};
+	where g.INTER_BIG_SEQ= #{interBigSeq} AND g.DEL = 0;
 </select>
 <select id="getAllGroup" resultMap="GroupList">
 	select *
@@ -123,7 +123,7 @@
 			from GROUP_MEMBER
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where gm.MEMBER_SEQ =#{memberSeq};
+	where gm.MEMBER_SEQ =#{memberSeq} AND gm.DEL = 0;
 </select>
 <select id="getMyOtherGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
@@ -145,8 +145,9 @@
 								     on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
 								 where gm.MEMBER_SEQ = #{memberSeq} )
 	<if test="interBigSeq != 0">
-	and i.INTER_BIG_SEQ = #{interBigSeq};
+	and i.INTER_BIG_SEQ = #{interBigSeq}
 	</if>
+	AND i.DEL = 0;
 </select>
 
  <select id="getOneGroup" parameterType="com.palette.model.GroupDto" resultMap="GroupInfo">
@@ -204,10 +205,15 @@
 
 
 <select id="getInterListAll" resultMap="InterBig">
-SELECT *
-FROM INTER_BIG b
-JOIN INTER_SMALL s
-on b.INTER_BIG_SEQ = s.INTER_BIG_SEQ;
+	SELECT *
+	FROM INTER_BIG b
+	JOIN INTER_SMALL s
+	on b.INTER_BIG_SEQ = s.INTER_BIG_SEQ;
 </select>
+
+<insert id="joinGroupMemberRegistrationRequest" parameterType="com.palette.model.GroupMemberDto">
+	INSERT INTO GROUP_MEMBER (GROUP_INFO_SEQ, MEMBER_SEQ, DEL)
+	VALUES (#{groupInfoSeq}, #{memberSeq}, 2);
+</insert>
 
 </mapper>

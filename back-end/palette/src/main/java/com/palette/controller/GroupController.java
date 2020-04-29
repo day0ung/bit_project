@@ -94,6 +94,12 @@ public class GroupController {
         return "";
     }
 
+    // join like mypage
+    @PostMapping(value = "/joinGroupMemberRegistrationRequest")
+    public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
+        groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
+        return "";
+    } 
 
     
     

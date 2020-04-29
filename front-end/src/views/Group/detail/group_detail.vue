@@ -69,13 +69,23 @@ export default {
     }
   },
   methods:{
+    islogin(){
+      alert("로그인처리 이후")
+    },
     likeAdd(){
+      this.islogin()
       alert("like Add 미완성")
       alert(this.groupOne.groupName + " 그룹을 찜목록에 추가되었습니다.\n마이페이지 찜목록에서 확인해주세요.")
     },
     joinGroup(){
-      alert("join group 미완성")
-      alert("참여신청이 완료되었습니다.\n마이페이지 그룹에서 확인해주세요.")
+      this.islogin()
+      let params = new URLSearchParams();
+      params.append("groupInfoSeq", this.$route.params.contentId)
+      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+      axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
+        alert("참여신청이 완료되었습니다.\n마이페이지 그룹에서 확인해주세요.")
+        this.$router.push({name : "Group"})
+      })
     }
   },
   mounted(){
