@@ -11,6 +11,7 @@
  	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
  	FROM TODOLIST 
  	WHERE MEMBER_SEQ=#{memberSeq} 
+	order by del desc, TODO_DATE asc
  </select>
  
   

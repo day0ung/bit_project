@@ -1,6 +1,6 @@
 <template>
     <div>
-  <highcharts :options="chartOptions"></highcharts>
+        <highcharts :options="chartOptions"></highcharts>
     </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
                 type: 'column'
             },
             title: {
-                text: '주간 목표 달성'
+                text: 'TODO LIST 달성'
             },
             series: [{
                 data: [3, 2, 1, 5, 0, 0, 0],
@@ -43,28 +43,32 @@ export default {
         }
     }, 
     mounted(){
-        var loginData = sessionStorage.getItem("loginUser");
+         var loginData = sessionStorage.getItem("loginUser");
          var login = JSON.parse(loginData); 
          var memSeq = login.memberSeq
          var params = new URLSearchParams();
          params.append('memberSeq', memSeq)
          axios.post('http://localhost:9000/selectDate', params)
           .then(res => {
-              
              let count = 0
              var list = res.data
+
+
+             let params = new URLSearchParams();
+             params.append('todoDate', list)
+             axios.post('http://localhost:9000/selectDate', params)
+             .then(res => {
+
+             })
              console.log(list)
-            for(const key in list){
-                const element = list[key]
-                this.chartOptions.xAxis.categories.push(element.todoDate)
-                // if(element.del == '1'){
-                //     count ++
-                //     this.chartOptions.series[0].data[0] = count
-                // }
-            }
+                for(const key in list){
+                    const element = list[key]
+                    this.chartOptions.xAxis.categories.push(element.todoDate)
+                }
               //this.this.chartOptions.series[0].data = res.data.
 
-         }) 
+
+            }) 
         //axios
         // alert(this.chartOptions.series[0].data)
         // alert(this.chartOptions.xAxis.categories[0])
