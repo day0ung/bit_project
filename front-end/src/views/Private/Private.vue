@@ -11,7 +11,7 @@
       <Schedule></Schedule>
     </el-tab-pane>
     <el-tab-pane label="자료실" name="forth">
-      <Board></Board>
+      <Board></Board>asdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf
     </el-tab-pane>
   </el-tabs>
   </div>
