@@ -154,7 +154,6 @@ public class GroupController {
         return list;
     }
     
-  
     @GetMapping(value="/getGroupMemberName")
     public List<GroupMemberDto> getGroupMemberName(int interGroupSeq){
     	System.out.println("getGroupMemberName()");
@@ -179,6 +178,12 @@ public class GroupController {
     public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq){
         System.out.println("getGroupReferenceDetailFileList()" + boardSeq);
         return groupService.getGroupReferenceDetailFileList(boardSeq);
+    }
+
+    @PostMapping(value = "/MypageReferenceList")
+    public List<BoardReferenceDto> getMypageReferenceList(int memberSeq){
+        System.out.println("getMypageReferenceList()");
+        return groupService.getMypageReferenceList(memberSeq);
     }
 
     // Comment

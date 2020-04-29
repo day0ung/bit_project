@@ -221,4 +221,8 @@ public class GroupService {
 	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
 		return groupDao.getGroupReferenceDetailFileList(boardSeq);
 	}
+
+	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
+		return groupDao.getMypageReferenceList(memberSeq);
+	}
 }

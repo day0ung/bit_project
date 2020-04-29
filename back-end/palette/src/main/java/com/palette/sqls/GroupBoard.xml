@@ -193,4 +193,10 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		WHERE BOARD_SEQ = #{boardSeq}
 	</select>
 
+	<select id="getMypageReferenceList" parameterType="java.lang.Integer" resultType="com.palette.model.BoardReferenceDto">
+		SELECT *
+		FROM BOARD_REFERENCE
+		WHERE MEMBER_SEQ = #{memberSeq}
+	</select>
+
 </mapper>

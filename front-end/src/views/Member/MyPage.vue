@@ -15,6 +15,10 @@
 				<i class="el-icon-postcard"></i>
 				<span>내 일정</span>
 			</el-menu-item>
+			<el-menu-item index="6" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="referenceClick(memSeq)">
+				<i class="el-icon-takeaway-box"></i>
+				<sapn>내 자료</sapn>
+			</el-menu-item>
 			<el-menu-item index="3" v-model="auth"  @click="resumeClick(memSeq)">
 				<i class="el-icon-document"></i>
 				<span>내 이력서</span>
@@ -34,6 +38,7 @@
 		</MyStudy>
 		<MySchedule v-if="schedule">
 		</MySchedule>
+		<MyReference v-if="reference"/>
 		<MyResume v-if="resume">
 		</MyResume>
 		<MyInter v-if="inter"
@@ -64,14 +69,17 @@ import MySchedule from '@/views/MyPage/mySchedule.vue'
 import MyResume from '@/views/MyPage/myResume.vue'
 import MyInter from '@/views/MyPage/myInter.vue'
 import MyInfo from '@/views/MyPage/myInfo.vue'
+import MyReference from '@/views/MyPage/reference.vue'
+
 export default {
 	components:{
-		MyStudy, MySchedule, MyResume, MyInter, MyInfo
+		MyStudy, MySchedule, MyResume, MyInter, MyInfo, MyReference
 	},
 	data(){
 		return{
 			study: false,
 			schedule:false,
+			reference: false,
 			resume:false,
 			inter:false,
 			info:true,
@@ -104,10 +112,20 @@ export default {
 			this.resume = false
 			this.inter = false
 			this.info = false
+			this.reference = false
 		},
 		scheduleClick(){
 			this.study = false
 			this.schedule = true
+			this.resume = false
+			this.inter = false
+			this.info = false
+			this.reference = false
+		},
+		referenceClick(){
+			this.study = false
+			this.schedule = false
+			this.reference = true
 			this.resume = false
 			this.inter = false
 			this.info = false
@@ -118,6 +136,7 @@ export default {
 			this.resume = true
 			this.inter = false
 			this.info = false
+			this.reference = false
 		},
 		interclick(memSeq){
 			this.study = false
@@ -125,6 +144,7 @@ export default {
 			this.resume = false
 			this.inter = true
 			this.info = false
+			this.reference = false
 			var params = new URLSearchParams();
 			params.append('memberSeq', memSeq)
 			axios.post('http://localhost:9000/myPageInter', params)
@@ -151,7 +171,8 @@ export default {
 			this.schedule = false
 			this.resume = false
 			this.inter = false
-			this.info = true		
+			this.info = true	
+			this.reference = false	
 			var params = new URLSearchParams();
 			params.append('memberSeq', memSeq)
 			axios.post('http://localhost:9000/myPageInfomation', params)
