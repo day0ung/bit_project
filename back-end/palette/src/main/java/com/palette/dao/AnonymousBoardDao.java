@@ -15,5 +15,7 @@ public interface AnonymousBoardDao {
 	ArrayList<AnonymousBoardDto> getAnonymousBoardPagingList(BoardParams boardParams);
 	
 	int anonymousBoardList(BoardParams boardParams);
+	
+	int insertAnonymousBoard(AnonymousBoardDto dto);
 
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="employment">
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="activeName">
       <el-tab-pane label="구인 공고" name="first">
        <recruiting></recruiting>
       </el-tab-pane>

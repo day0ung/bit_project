@@ -132,7 +132,7 @@ export default {
                 showClose: true,
                 center: true,
                 message: '자료는 한번에 2개만 업로드가능합니다.',
-                type: 'error'
+                type: 'error'  
             })
         },
         getList(){

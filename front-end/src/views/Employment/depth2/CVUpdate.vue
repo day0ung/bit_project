@@ -1,7 +1,8 @@
 <template>
     <el-form>
         <h3>이력서 수정</h3><br>
-		<el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+		<el-form v-if="login1 == null"></el-form>
+		<el-form v-else :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
 			<el-form-item label="이름">
 				<el-input readonly="readonly" :value="login1.memberName"></el-input>
 			</el-form-item>
@@ -121,16 +122,20 @@ export default {
 		let sMemberSeq = sessionStorage.getItem("loginUser")
 		this.login1 = JSON.parse(sMemberSeq)
         // this.memberSeq = this.$store.state.loginUser.memberSeq
-        var params = new URLSearchParams();	// post 방식으로 받아야함. 
-        params.append('memberSeq', this.login1.memberSeq);
-        axios.post("http://localhost:9000/getOneCVByMemberSeq", params).then(res => { 
-            this.$store.state.s_employment.cvDetail = res.data
-            this.ruleForm.title = this.$store.state.s_employment.cvDetail.title
-            this.ruleForm.category = this.$store.state.s_employment.cvDetail.category
-        })
+        
     },
     mounted(){
-        
+		if(this.login1 == null){
+
+		} else {
+			var params = new URLSearchParams();	// post 방식으로 받아야함. 
+			params.append('memberSeq', this.login1.memberSeq);
+			axios.post("http://localhost:9000/getOneCVByMemberSeq", params).then(res => { 
+				this.$store.state.s_employment.cvDetail = res.data
+				this.ruleForm.title = this.$store.state.s_employment.cvDetail.title
+				this.ruleForm.category = this.$store.state.s_employment.cvDetail.category
+			})
+		}
     }
 	
   }
