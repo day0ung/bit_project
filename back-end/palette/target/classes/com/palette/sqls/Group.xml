@@ -105,7 +105,8 @@
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
 			group by GROUP_INFO_SEQ) cur
-		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+		WHERE g.DEL= 0;
 </select>
 <select id="getMyGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
