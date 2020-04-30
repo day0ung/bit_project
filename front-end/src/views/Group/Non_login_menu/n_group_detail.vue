@@ -70,21 +70,10 @@ export default {
   },
   methods:{
     likeAdd(){
-      let params = new URLSearchParams();
-      params.append("groupInfoSeq", this.$route.params.contentId)
-      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
-      axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
-        alert(this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
-      })
+      alert("로그인 이후 사용 가능합니다.")
     },
     joinGroup(){
-      let params = new URLSearchParams();
-      params.append("groupInfoSeq", this.$route.params.contentId)
-      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
-      axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
-        alert("참여신청이 완료되었습니다.\n마이페이지 내 그룹에서 확인해주세요.")
-        this.$router.push({name : "Group"})
-      })
+      alert("로그인 이후 사용 가능합니다.")
     }
   },
   mounted(){

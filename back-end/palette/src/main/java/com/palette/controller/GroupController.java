@@ -94,8 +94,20 @@ public class GroupController {
         return "";
     }
 
+    // join like mypage
+    @PostMapping(value = "/joinGroupMemberRegistrationRequest")
+    public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
+        System.out.println("joinGroupMemberRegistrationRequest()");
+        groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
+        return "";
+    }
 
-    
+    @PostMapping(value = "/likeGroupAdd")
+    public String likeGroupAdd(GroupMemberDto groupMemberDto){
+        System.out.println("likeGroupAdd()");
+        groupService.likeGroupAdd(groupMemberDto);
+        return "";
+    }
     
     // Board
     @PostMapping(value="/groupPagingList")
@@ -190,6 +202,13 @@ public class GroupController {
     public String groupReferenceDelete(int boardSeq){
         System.out.println("groupReferenceDelete()");
         groupService.groupReferenceDelete(boardSeq);
+        return "";
+    }
+
+    @PostMapping(value = "/updateGroupReference")
+    public String updateGroupReference(ReferenceVo form) throws IOException {
+        System.out.println("updateGroupReference()");
+        groupService.updateGroupReference(form);
         return "";
     }
 

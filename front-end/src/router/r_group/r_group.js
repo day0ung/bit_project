@@ -41,6 +41,11 @@ export default [
     component: () => import('@/views/Group/detail/group_detail')
     },
     {
+    name: 'nonloginGroupDetail',
+    path: '/group/n_main/detail/:contentId',
+    component: () => import('@/views/Group/Non_login_menu/n_group_detail')
+    },
+    {
     path: '/group/create',
     name: 'Create',
     component: () => import('@/views/Group/detail/group_create'),

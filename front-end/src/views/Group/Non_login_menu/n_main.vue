@@ -47,7 +47,7 @@
             <header>
               <div class="imageCircle all">
                 <div style="height: 50px;"></div>
-                  <router-link :to="{ name: 'groupdetail', params: { contentId: groupInfo.groupInfoSeq }}">
+                  <router-link :to="{ name: 'nonloginGroupDetail', params: { contentId: groupInfo.groupInfoSeq }}">
                     <img :src="groupInfo.image">
                   </router-link>
               </div>
@@ -86,12 +86,11 @@ export default {
   },
   methods:{
     likeAdd(groupName){
-      alert("like Add 미완성")
-      alert(groupName + " 그룹을 찜목록에 추가되었습니다.\n마이페이지 찜목록에서 확인해주세요.")
+      alert("로그인 이후 사용 가능합니다.")
     },
     gotoDetail(seq){
-      //alert("seq=" + seq)
-      this.$router.push('/group/main/detail/'+seq)
+      alert("비로그인 버튼" + seq)
+      this.$router.push('/group/n_main/detail/'+seq)
     },
     searchBigSeq(seq){
       //alert(seq)

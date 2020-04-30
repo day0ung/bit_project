@@ -69,8 +69,13 @@ public interface GroupDao {
 	List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq);
 	void answerDelete(CommentDto commentDto);
 	List<BoardReferenceDto> getMypageReferenceList(int memberSeq);
-	
+
 	void groupReferenceDelete(int boardSeq);
+	void joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+	
+	void likeGroupAdd(GroupMemberDto groupMemberDto);
+	int checkLikeGroup(GroupMemberDto groupMemberDto);
+	void likeGroupDelete(GroupMemberDto groupMemberDto);
 
 
 
