@@ -103,6 +103,12 @@
 		WHERE CV_SEQ = #{cvSeq}
 	</select>
 	
+	<select id="getGroupReferenceDetailFileList" parameterType="java.lang.Integer" resultType="com.palette.model.BoardReferenceDto">
+		SELECT *
+		FROM BOARD_REFERENCE
+		WHERE BOARD_SEQ = #{boardSeq}
+	</select>
+	
 	<!--멤버객체 -->
 	<select id="oneMember" parameterType="java.lang.Integer" resultType="com.palette.model.MemberDto">
 	  	SELECT *
@@ -122,6 +128,23 @@
 		SELECT *
 		FROM MEMBER_CV
 		WHERE MEMBER_SEQ = #{memberSeq}
+	</select>
+	
+	<!-- CV 맥스값 -->
+	<select id="currCVSeq" resultType="java.lang.Integer">
+        SELECT max(CV_SEQ)
+        FROM MEMBER_CV
+    </select>
+    
+    <insert id="insertCVReference" parameterType="com.palette.model.CVReferenceDto">
+		INSERT INTO BOARD_REFERENCE(CV_SEQ, MEMBER_SEQ, URL, FILE_NAME, DEL)
+		VALUES (#{cvSeq}, #{memberSeq}, #{url}, #{fileName}, 0)
+	</insert>
+	
+	<select id="cvDetailRef" parameterType="java.lang.Integer" resultType="com.palette.model.CVReferenceDto">
+		SELECT *
+		FROM BOARD_REFERENCE
+		WHERE CV_SEQ = #{cvSeq}
 	</select>
 	
 </mapper>

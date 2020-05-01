@@ -16,7 +16,9 @@
         <h5>이력서</h5>
       </div>
       <div class="cvInfoContent">
-        <div></div>
+        <div>
+          <a :href="file.url" download>{{file.fileName}}</a>
+        </div>
       </div>
       <div class="hr"></div>
       <div class="cvtitle">
@@ -31,12 +33,20 @@ import { loading } from 'element-ui';
 export default {
   data(){
     return{
-      
+      file : ""
       
     }
   },
   mounted(){
-    
+    var params = new URLSearchParams();	// post 방식으로 받아야함. 
+      params.append('cvSeq', this.$store.state.s_employment.cvDetail.cvSeq);
+      axios.post("http://localhost:9000/cvDetailRef", params).then(res => { 
+        alert(res.data.fileName)
+        this.$store.state.s_employment.cvDetailRef = res.data
+        this.file = res.data
+        
+        
+        })
     
   },
   methods:{

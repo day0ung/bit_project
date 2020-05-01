@@ -1,5 +1,6 @@
 package com.palette.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.BoardParams;
+import com.palette.model.BoardReferenceDto;
+import com.palette.model.CVReferenceDto;
 import com.palette.model.EmploymentBoardDto;
 import com.palette.model.GroupBoardDto;
 import com.palette.model.MemberCVDto;
 import com.palette.model.MemberDto;
+import com.palette.s3.CVFile;
+import com.palette.s3.ReferenceVo;
 import com.palette.service.MemberCVService;
 
 @CrossOrigin(origins = "*")
@@ -23,17 +28,12 @@ public class MemberCVController {
 	MemberCVService memberCVService;
 	
 //	CV 추가
-	@PostMapping(value = "/insertCV")
-    public boolean insertCV(MemberCVDto dto){
-		System.out.println("insertCV() 실행");
-		
-		
-		memberCVService.CVNumChange(dto.getMemberSeq());
-		boolean isS = memberCVService.insertCV(dto);
-		
-		
-		return isS;
-	}
+    @PostMapping(value = "/insertCV")
+    public String insertCV(CVFile form) throws IOException{
+    	memberCVService.insertCV(form);
+        return "";
+    }
+    
 	
 //  cv페이징
 	@PostMapping(value="/CVPagingList")
@@ -63,7 +63,7 @@ public class MemberCVController {
 		memberCVService.readCount(cvSeq);
 		// cv 객체
 		MemberCVDto dto = memberCVService.getOneCV(cvSeq);
-		System.out.println("dto: "+ dto.toString());
+		
 		
 		return dto;
 	}
@@ -98,6 +98,14 @@ public class MemberCVController {
     	boolean isS = memberCVService.updateCV(dto);
     	
     	return isS;
+    }
+	
+	@PostMapping(value = "/cvDetailRef")
+    public CVReferenceDto cvDetailRef(int cvSeq){
+        System.out.println("cvDetailRef()" + cvSeq);
+        CVReferenceDto dto = memberCVService.cvDetailRef(cvSeq);
+        System.out.println("파일" + dto);
+        return dto;
     }
 	
 	

@@ -1,11 +1,13 @@
-package com.palette.model;
+package com.palette.s3;
 
-public class MemberCVDto {
-	
-	private int finalnum;
-	
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class CVFile {
 	private int cvSeq; // CV_SEQ
 	private int memberSeq; // MEMBER_SEQ
+	private String memberId; // MEMBER_ID
 	private String title; // TITLE
 	private String category; // CATEGORY
 	private String writeDate; // WRITE_DATE
@@ -13,19 +15,17 @@ public class MemberCVDto {
 	private String fileName; // FILE_NAME
 	private String dbFileName; // DB_FILE_NAME
 	private int del; // DEL
+	private List<MultipartFile> files;
 	
-	
-	private MemberDto memberDto;
-	
-	public MemberCVDto() {
+	public CVFile() {
 	}
 
-	public MemberCVDto(int finalnum, int cvSeq, int memberSeq, String title, String category, String writeDate,
-			int readCount, String fileName, String dbFileName, int del, MemberDto memberDto) {
+	public CVFile(int cvSeq, int memberSeq, String memberId, String title, String category, String writeDate,
+			int readCount, String fileName, String dbFileName, int del, List<MultipartFile> files) {
 		super();
-		this.finalnum = finalnum;
 		this.cvSeq = cvSeq;
 		this.memberSeq = memberSeq;
+		this.memberId = memberId;
 		this.title = title;
 		this.category = category;
 		this.writeDate = writeDate;
@@ -33,15 +33,7 @@ public class MemberCVDto {
 		this.fileName = fileName;
 		this.dbFileName = dbFileName;
 		this.del = del;
-		this.memberDto = memberDto;
-	}
-
-	public int getFinalnum() {
-		return finalnum;
-	}
-
-	public void setFinalnum(int finalnum) {
-		this.finalnum = finalnum;
+		this.files = files;
 	}
 
 	public int getCvSeq() {
@@ -58,6 +50,14 @@ public class MemberCVDto {
 
 	public void setMemberSeq(int memberSeq) {
 		this.memberSeq = memberSeq;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getTitle() {
@@ -116,22 +116,22 @@ public class MemberCVDto {
 		this.del = del;
 	}
 
-	public MemberDto getMemberDto() {
-		return memberDto;
+	public List<MultipartFile> getFiles() {
+		return files;
 	}
 
-	public void setMemberDto(MemberDto memberDto) {
-		this.memberDto = memberDto;
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
 	}
 
 	@Override
 	public String toString() {
-		return "MemberCVDto [finalnum=" + finalnum + ", cvSeq=" + cvSeq + ", memberSeq=" + memberSeq + ", title="
-				+ title + ", category=" + category + ", writeDate=" + writeDate + ", readCount=" + readCount
-				+ ", fileName=" + fileName + ", dbFileName=" + dbFileName + ", del=" + del + ", memberDto=" + memberDto
-				+ "]";
+		return "CVFile [cvSeq=" + cvSeq + ", memberSeq=" + memberSeq + ", memberId=" + memberId + ", title=" + title
+				+ ", category=" + category + ", writeDate=" + writeDate + ", readCount=" + readCount + ", fileName="
+				+ fileName + ", dbFileName=" + dbFileName + ", del=" + del + ", files=" + files + "]";
 	}
 
 	
+		
 	
 }

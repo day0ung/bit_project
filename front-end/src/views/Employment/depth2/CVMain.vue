@@ -181,6 +181,7 @@ export default {
       var params = new URLSearchParams();	// post 방식으로 받아야함. 
       params.append('cvSeq', row.cvSeq);
       axios.post("http://localhost:9000/getOneCV", params).then(res => { 
+        
         this.$store.state.s_employment.cvDetail = res.data
         this.$store.state.s_employment.loadingCVDetail = false
         
