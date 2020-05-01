@@ -22,12 +22,12 @@
                 </thead>
                 <tbody>
                   <tr v-for="groupOne in mylike" :key="groupOne.groupInfoSeq">
-                    <td colspan="3">{{groupOne.groupInfoSeq}}</td>
+                    <td colspan="3">{{groupOne.groupName}}</td>
                     <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                     <td>
-                      <el-button v-if="groupOne.del === 0" type="text" style="color: #ff5151; font-size: 16px">가입멤버</el-button>
-                      <el-button v-else-if="groupOne.del === 2" type="text" style="color: #ff5151; font-size: 16px">가입대기</el-button>
-                      <el-button v-else type="text" @click="joinGroup(groupOne.groupInfoSeq)" style="color: #ff5151; font-size: 16px">가입신청</el-button>
+                      <el-button v-if="groupOne.del === 0" type="text" style="color: #ff5151; font-size: 16px">가입된멤버</el-button>
+                      <el-button v-else-if="groupOne.del === 2" type="text" style="color: #ff5151; font-size: 16px">가입대기중</el-button>
+                      <el-button v-else type="text" @click="joinGroup(groupOne.groupInfoSeq)" style="color: #ff5151; font-size: 16px">가입신청하기</el-button>
                     </td>
                   </tr>                   
                 </tbody>
