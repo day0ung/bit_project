@@ -78,6 +78,8 @@ public interface GroupDao {
 	int checkLikeGroup(GroupMemberDto groupMemberDto);
 	void likeGroupDelete(GroupMemberDto groupMemberDto);
 	List<MemberLikeDto> getMylikeList(int memberSeq);
+	int checkGroupMember(GroupMemberDto groupMemberDto);
+	int checkWaitingGroupMember(GroupMemberDto groupMemberDto);
 
 
 

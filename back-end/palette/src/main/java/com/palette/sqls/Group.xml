@@ -244,4 +244,16 @@
 	WHERE MEMBER_SEQ = #{memberSeq} AND DEL = 0
 </select>
 
+<select id="checkGroupMember" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM GROUP_MEMBER
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 0
+</select>
+
+<select id="checkWaitingGroupMember" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM GROUP_MEMBER
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 2
+</select>
+
 </mapper>
