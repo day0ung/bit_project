@@ -20,6 +20,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberLikeDto;
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
 import com.palette.service.GroupService;
@@ -107,6 +108,12 @@ public class GroupController {
         System.out.println("likeGroupAdd()");
         groupService.likeGroupAdd(groupMemberDto);
         return "";
+    }
+
+    @PostMapping(value = "/getMylikeList")
+    public List<MemberLikeDto> getMylikeList(int memberSeq){
+        System.out.println("getMylikeList()");
+        return  groupService.getMylikeList(memberSeq);
     }
     
     // Board

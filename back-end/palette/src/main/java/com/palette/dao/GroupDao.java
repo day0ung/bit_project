@@ -16,6 +16,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberLikeDto;
 
 @Mapper
 @Repository
@@ -76,6 +77,7 @@ public interface GroupDao {
 	void likeGroupAdd(GroupMemberDto groupMemberDto);
 	int checkLikeGroup(GroupMemberDto groupMemberDto);
 	void likeGroupDelete(GroupMemberDto groupMemberDto);
+	List<MemberLikeDto> getMylikeList(int memberSeq);
 
 
 
