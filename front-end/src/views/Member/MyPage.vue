@@ -25,7 +25,7 @@
 			</el-menu-item>
 			<el-menu-item index="4" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="interclick(memSeq)">
 				<i class="el-icon-star-off"></i>
-				<span>내 관심분야</span>
+				<span>내 찜목록</span>
 			</el-menu-item><!-- $router.push({name:'MyInfo', params: { seq: memSeq }}), show = false" -->
 			<el-menu-item index="5" v-model="auth"  @click="infoClick(memSeq)" >
 				<i class="el-icon-setting"></i>
@@ -34,27 +34,23 @@
 			</el-menu>
 	 </div>
 	 <div class="myContent" >
-		<MyStudy v-if="study">
-		</MyStudy>
-		<MySchedule v-if="schedule">
-		</MySchedule>
+		<MyStudy v-if="study"/>
+		<MySchedule v-if="schedule"/>
 		<MyReference v-if="reference"/>
-		<MyResume v-if="resume">
-		</MyResume>
+		<MyResume v-if="resume"/>
 		<MyInter v-if="inter"
 		:memSeq="memSeq"
 		:myinter="myinter"
+		:mylike="mylike"
 		:myBig="myBig"
 		:mySmall="mySmall"
-		@updateInterArea="updateInterArea">
-		</MyInter>
+		@updateInterArea="updateInterArea"/>
 		<MyInfo v-if="info"
 		:memSeq="memSeq"
 		:myinfo="myinfo"
 		@emailUpdate="emailUpdate"
 		@addrUpdate="addrUpdate"
-		@passUpdate="passUpdate">
-		</MyInfo>
+		@passUpdate="passUpdate"/>
 	 </div> 
 	 <!-- <div class="myContent" v-else>
 		 	<router-view :key="$route.fullPath">
@@ -83,6 +79,7 @@ export default {
 			resume:false,
 			inter:false,
 			info:true,
+			mylike: [],
 			myinfo: [],
 			myinter:[],
          	myBig: [],
@@ -99,9 +96,18 @@ export default {
 		 this.memSeq = login.memberSeq
 		 this.auth = login.auth
 		 this.getInfomation(this.memSeq)
+		 this.getMylikeList(this.memSeq)
 	}, 
 
 	methods:{
+		getMylikeList(memSeq){
+			let params = new URLSearchParams();
+			params.append('memberSeq', memSeq)
+			axios.post('http://localhost:9000/getMylikeList', params).then(res => {
+				this.mylike = res.data
+				console.log(res.data)
+			})
+		},
 		getInfomation(memSeq){
 			var params = new URLSearchParams();
 			params.append('memberSeq', memSeq)

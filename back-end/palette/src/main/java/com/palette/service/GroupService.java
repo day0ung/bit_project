@@ -22,6 +22,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberLikeDto;
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
 
@@ -280,5 +281,9 @@ public class GroupService {
 		
 	}
 
+
+	public List<MemberLikeDto> getMylikeList(int memberSeq) {
+		return groupDao.getMylikeList(memberSeq);
+	}
 
 }

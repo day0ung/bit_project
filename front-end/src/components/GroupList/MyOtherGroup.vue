@@ -57,7 +57,7 @@
                 </div>
                 <div class="buttons detailcontainer">
                 <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">{{groupInfo.startDate}} 시작</button>
-                <button class="like"><span>♥</span></button>
+                <button class="like" @click="addlike(groupInfo.groupInfoSeq)"><span>♥</span></button>
                 </div>
             </div>
             </aside>
@@ -113,6 +113,14 @@ export default {
           this.list = res.data
           this.loading = false
         })
+    },
+    addlike(seq){
+      let params = new URLSearchParams();
+      params.append("groupInfoSeq", seq)
+      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+      axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
+        alert(this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+      })
     }
   },
 

@@ -238,4 +238,10 @@
 	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
 </update>
 
+<select id="getMylikeList" parameterType="java.lang.Integer" resultType="com.palette.model.MemberLikeDto">
+	SELECT *
+	FROM GROUP_LIKE
+	WHERE MEMBER_SEQ = #{memberSeq} AND DEL = 0
+</select>
+
 </mapper>
