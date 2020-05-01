@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <h2>Log in to Trello</h2>
+    <h2>Log in Page</h2>
     <form @submit.prevent="onSubmit">
       <div>
         <label for="email">Email</label>
