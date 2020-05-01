@@ -18,4 +18,10 @@ public interface AnonymousBoardDao {
 	
 	int insertAnonymousBoard(AnonymousBoardDto dto);
 
+	AnonymousBoardDto anonymousBoardDetail(AnonymousBoardDto anonymousBoardDto);
+	void updateReadCount(AnonymousBoardDto anonymousBoardDto);
+
+	void anonymousBoardDelete(AnonymousBoardDto anonymousBoardDto);
+
+
 }

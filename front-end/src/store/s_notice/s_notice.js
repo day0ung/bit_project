@@ -2,10 +2,10 @@ export default {
     namespaced: true,
     state: {
         anonymousBoardDetail : "",
-        showAnonymousBoardWriting : false,
-        showAnonymousBoardMain : false,
+        anonymousBoardComments : [],
         tableData : "",
-        total : ""
+        total : "",
+        boardSeq:''
     },
     mutations: {
     },

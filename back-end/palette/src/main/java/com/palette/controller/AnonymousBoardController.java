@@ -50,11 +50,22 @@ public class AnonymousBoardController {
 	@GetMapping(value = "/insertAnonymousBoard")
     public boolean insertAnonymousBoard(AnonymousBoardDto dto){
 		System.out.println("insertAnonymousBoard() 실행");
-		
 		boolean isS = anonymousBoardService.insertAnonymousBoard(dto);
-		
-		
 		return isS;
+	}
+	
+	@PostMapping(value = "/anonymousBoardDetail")
+    public AnonymousBoardDto anonymousBoardDetail(AnonymousBoardDto anonymousBoardDto) {
+		System.out.println("anonymousBoardDetail() 실행");
+		AnonymousBoardDto dto =	anonymousBoardService.anonymousBoardDetail(anonymousBoardDto);
+		return dto;
+	}
+	
+	@PostMapping(value = "/anonymousBoardDelete")
+    public String anonymousBoardDelete(AnonymousBoardDto anonymousBoardDto) {
+		System.out.println("anonymousBoardDelete() 실행");
+		anonymousBoardService.anonymousBoardDelete(anonymousBoardDto);
+		return "";
 	}
 	
 }

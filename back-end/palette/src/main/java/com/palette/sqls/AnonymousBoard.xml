@@ -85,9 +85,21 @@
 	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, DEL, BOARD_AUTH)
   	VALUES(#{memberSeq}, 0, #{title}, #{content}, NOW(), 0, 0, 1)
 </insert>
-
-
-
+<update id="updateReadCount" parameterType="com.palette.model.AnonymousBoardDto">
+	UPDATE BOARD
+	SET READ_COUNT = READ_COUNT + 1
+	WHERE BOARD_SEQ = #{boardSeq}
+</update>
+<select id="anonymousBoardDetail" resultType="com.palette.model.AnonymousBoardDto">
+	select *
+	from BOARD
+	where BOARD_AUTH = 1 and CATEGORY =0 and BOARD_SEQ = #{boardSeq}
+</select>
+<delete id="anonymousBoardDelete" parameterType="com.palette.model.AnonymousBoardDto">
+	update BOARD
+	set DEL = 1
+	where BOARD_SEQ = #{boardSeq}
+</delete>
 
 
 

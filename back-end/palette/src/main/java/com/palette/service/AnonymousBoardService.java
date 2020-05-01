@@ -36,5 +36,15 @@ public class AnonymousBoardService {
 		int len = anonymousBoardtDao.insertAnonymousBoard(dto);
 		return len>0?true:false;
 	}
+
+	public AnonymousBoardDto anonymousBoardDetail(AnonymousBoardDto anonymousBoardDto) {
+		anonymousBoardtDao.updateReadCount(anonymousBoardDto);
+		return anonymousBoardtDao.anonymousBoardDetail(anonymousBoardDto);
+	}
+
+	public void anonymousBoardDelete(AnonymousBoardDto anonymousBoardDto) {
+		anonymousBoardtDao.anonymousBoardDelete(anonymousBoardDto);
+		
+	}
 	
 }
