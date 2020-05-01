@@ -80,7 +80,6 @@ import Todo from '@/views/Private/priTodo.vue'
         .then(res => {
             let count = 0
             var list = res.data
-                console.log(list)
                   for(const key in list){
                       const element = list[key]
                       this.chartOptions.xAxis.categories.push(element.todoDate)

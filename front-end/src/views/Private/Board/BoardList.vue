@@ -8,7 +8,7 @@
           @row-click="gotoClick"
         >
         <el-table-column
-          prop="rownum"
+          prop="rowNum"
           label="글번호"
           >
         </el-table-column>
@@ -36,7 +36,7 @@
 export default {
     data(){
         return{
-            
+           
         }
     },
     methods:{
@@ -44,23 +44,32 @@ export default {
         this.$store.state.s_private.list = false
         this.$store.state.s_private.write = true
        },
-       getMemberBoard(){
-        var loginData = sessionStorage.getItem("loginUser");
-         var login = JSON.parse(loginData); 
-         var memSeq = login.memberSeq
-         var params = new URLSearchParams();
-         params.append('memberSeq', memSeq)
-         axios.post('http://localhost:9000/getMemberBoard', params)
-         .then(res => {
-            this.$store.state.s_private.BoardData = res.data
-           }) 
-       },
        gotoClick(row, column, event){
-         alert(row.boardSeq)
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq 
+         //alert(row.boardSeq)
+         //게시판
+         axios.get("http://localhost:9000/detailLibarary",{ params:{ boardSeq: row.boardSeq} }  )
+              .then(res => {
+                this.$store.state.s_private.boardDetail = res.data
+                //alert("게시판"+JSON.stringify(this.$store.state.s_private.boardDetail))
+              })
+
+          //파일
+          var params = new URLSearchParams()
+          params.append('memberSeq', memSeq)
+          params.append('boardSeq', row.boardSeq);
+          axios.post("http://localhost:9000/detailFile", params)
+              .then(res => {
+                this.$store.state.s_private.fileDetail = res.data
+                //alert("파일"+JSON.stringify(this.$store.state.s_private.fileDetail))
+              })
+
        }
     },
     mounted(){
-        this.getMemberBoard()
+      this
     }
 }
 </script>

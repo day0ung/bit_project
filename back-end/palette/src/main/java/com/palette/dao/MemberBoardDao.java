@@ -24,4 +24,6 @@ public interface MemberBoardDao {
 	void memberReferenceDelete(int boardSeq);
 	
 	void memberBoardUpdate(MemberBoardDto dto);
+	
+	List<BoardReferenceDto> detailFile(BoardReferenceDto dto);
 }
