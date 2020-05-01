@@ -28,13 +28,14 @@ public class MemberBoardService {
 	}
 	
 	public void uploadBoard(ReferenceVo form) throws IOException {
+		//게시판 insert 싷행 먼저
 		MemberBoardDto memberBoard = new MemberBoardDto();
 		memberBoard.setMemberSeq(form.getMemberSeq());
 		memberBoard.setTitle(form.getTitle());
 		memberBoard.setContent(form.getContent());
 		dao.writeBoard(memberBoard);
 		int boardSeq = dao.currBoardSeq();
-		
+		//자료실 insert
 		for (MultipartFile file : form.getFiles()) {
 			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
 			boardReferenceDto.setFileName(file.getOriginalFilename());
@@ -44,6 +45,39 @@ public class MemberBoardService {
             dao.writeLibrary(boardReferenceDto);
         }
 	}
+	
+	public MemberBoardDto detailLibarary(int boardSeq) {
+		return dao.detailLibarary(boardSeq);
+	}
+	
+	public void deleteLibarary(int boardSeq) {
+		dao.memberReferenceDelete(boardSeq);
+	}
+	
+	public void updateLibarary(ReferenceVo form) throws IOException {
+		MemberBoardDto memberBoard = new MemberBoardDto();
+		memberBoard.setTitle(form.getTitle());
+		memberBoard.setContent(form.getContent());
+		memberBoard.setBoardSeq(form.getBoardSeq());
+		dao.memberBoardUpdate(memberBoard);
+		
+		//기존 file del
+		dao.memberReferenceDelete(form.getBoardSeq());
+		//새로운 file insert
+		for (MultipartFile file : form.getFiles()) {
+			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
+			boardReferenceDto.setFileName(file.getOriginalFilename());
+            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()) ); //접근할 수 있는  url
+            boardReferenceDto.setMemberSeq(form.getMemberSeq());
+            boardReferenceDto.setBoardSeq(form.getBoardSeq());
+            dao.writeLibrary(boardReferenceDto);
+        }
+		
+	}
+	
+	
+	
+	
 	
 
 }

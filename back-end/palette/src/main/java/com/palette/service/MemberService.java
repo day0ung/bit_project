@@ -42,7 +42,7 @@ public class MemberService {
 		//회원가입-내 관심분야 insert
 		public void InterstingInsert(String interSmallSeqs, int memberSeq) {
 			MemberInterParam param = new MemberInterParam(); 
-
+	
 			String arr[] = interSmallSeqs.split(",");
 			int smallArr[] = new int[arr.length];
 			int bigArr[] = new int[arr.length];

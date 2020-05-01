@@ -26,16 +26,40 @@ public class MemberBoardController {
 			System.out.println(memberBoardDto.toString());
 		}
 		return list;
-		
-			
 	}
 	
+	//자료실 올리기
 	@PostMapping(value = "/uploadBoard") 
 	public String writeBoard(ReferenceVo form) throws IOException{
-		System.out.println("writeBoard"+form.toString());
+		System.out.println("uploadBoard"+form.toString());
 		service.uploadBoard(form);
 		return "";
 	}
 	
+	//자료실 상세보기
+	@PostMapping(value="/detailLibarary")
+	public MemberBoardDto detailLibarary(int boardSeq) {
+		System.out.println("detailLibarary"+ boardSeq);
+		MemberBoardDto dto = service.detailLibarary(boardSeq);
+		return dto;
+	}
+	
+	//자료실 삭제
+	@PostMapping(value = "/deleteLibarary") 
+	public String deleteLibarary(ReferenceVo form) throws IOException{
+		System.out.println("deleteLibarary"
+				+ ""
+				+ ""+form.toString());
+		service.deleteLibarary(form.getBoardSeq());
+		return "";
+	}
+	
+	//자료실 수정
+	@PostMapping(value = "/updateLibarary") 
+	public String updateLibarary(ReferenceVo form) throws IOException{
+		System.out.println("updateLibarary"+form.toString());
+		service.updateLibarary(form);
+		return "";
+	}
 	
 }

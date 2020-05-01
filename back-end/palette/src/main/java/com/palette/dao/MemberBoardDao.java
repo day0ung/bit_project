@@ -16,4 +16,12 @@ public interface MemberBoardDao {
 	void writeBoard(MemberBoardDto dto);
 	int currBoardSeq();
 	void writeLibrary(BoardReferenceDto dto);
+	
+	MemberBoardDto detailLibarary(int boardSeq);
+	
+	void memberBoardDel(int boardSeq );
+	
+	void memberReferenceDelete(int boardSeq);
+	
+	void memberBoardUpdate(MemberBoardDto dto);
 }
