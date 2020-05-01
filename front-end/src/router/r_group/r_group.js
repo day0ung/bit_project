@@ -7,7 +7,7 @@ const group = (to, from , next) => {
     }else{
         next()
     }
-  }
+}
 
 export default [
 
