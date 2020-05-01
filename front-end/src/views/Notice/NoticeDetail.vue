@@ -77,7 +77,7 @@ data(){
             this.loading = false;
           })
         this.$store.state.s_notice.boardSeq = this.boardSeq
-        axios.post("http://localhost:9000/anonymousBoardComments", params)
+        axios.post("http://localhost:9000/noticeComments", params)
                 .then(res => {
             this.$store.state.s_notice.anonymousBoardComments = res.data
             this.loading = false;

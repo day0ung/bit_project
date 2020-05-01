@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.AnonymousBoardDto;
 import com.palette.model.BoardParams;
+import com.palette.model.CommentDto;
 import com.palette.model.MemberCVDto;
 import com.palette.service.AnonymousBoardService;
 
@@ -67,5 +68,38 @@ public class AnonymousBoardController {
 		anonymousBoardService.anonymousBoardDelete(anonymousBoardDto);
 		return "";
 	}
+
+// comment
+	@PostMapping(value = "/noticeInsertComment")
+	public String noticeInsertComment(CommentDto commentDto) {
+		System.out.println("NoticeInsertComment()");
+		anonymousBoardService.noticeInsertComment(commentDto);
+		return "";
+	}
+	@PostMapping(value = "/noticeComments")
+	public ArrayList<CommentDto> noticeComments(CommentDto commentDto){
+		System.out.println("noticeComments()");
+		ArrayList<CommentDto> list = anonymousBoardService.noticeComments(commentDto);
+		
+		return list;
+	}
+	@PostMapping(value = "/noticeRealAnswerUpdate")
+	public String noticeRealAnswerUpdate(CommentDto commentDto) {
+		System.out.println("noticeRealAnswerUpdate()");
+		anonymousBoardService.noticeRealAnswerUpdate(commentDto);
+		return "";
+	}
+	@PostMapping(value = "/noticeAnswerDelete")
+	public String noticeAnswerDelete(CommentDto commentDto) {
+		System.out.println("noticeAnswerDelete()");
+		anonymousBoardService.noticeAnswerDelete(commentDto);
+		return"";
+	}
 	
+	@PostMapping(value = "/noticeAnswerInsert")
+	public String noticeAnswerInsert(CommentDto commentDto) {
+		System.out.println("noticeAnswerInsert()");
+		anonymousBoardService.noticeAnswerInsert(commentDto);
+		return"";
+	}
 }

@@ -10,6 +10,7 @@ import com.palette.dao.AnonymousBoardDao;
 import com.palette.dao.EmploymentDao;
 import com.palette.model.AnonymousBoardDto;
 import com.palette.model.BoardParams;
+import com.palette.model.CommentDto;
 import com.palette.model.MemberCVDto;
 
 @Service
@@ -44,6 +45,37 @@ public class AnonymousBoardService {
 
 	public void anonymousBoardDelete(AnonymousBoardDto anonymousBoardDto) {
 		anonymousBoardtDao.anonymousBoardDelete(anonymousBoardDto);
+		
+	}
+
+	public void noticeInsertComment(CommentDto commentDto) {
+		int ref = anonymousBoardtDao.getRef();
+		commentDto.setRef(ref);
+		anonymousBoardtDao.noticeInsertComment(commentDto);
+		
+	}
+
+	public ArrayList<CommentDto> noticeComments(CommentDto commentDto) {
+		return anonymousBoardtDao.noticeComments(commentDto);
+	}
+
+	public void noticeRealAnswerUpdate(CommentDto commentDto) {
+		 anonymousBoardtDao.noticeRealAnswerUpdate(commentDto);
+		
+	}
+
+	public void noticeAnswerDelete(CommentDto commentDto) {
+		anonymousBoardtDao.noticeAnswerDelete(commentDto);
+		
+	}
+
+	public void noticeAnswerInsert(CommentDto commentDto) {
+		anonymousBoardtDao.updateCommentAnswer(commentDto);
+		CommentDto dto = anonymousBoardtDao.selectRefStepDepth(commentDto);
+		commentDto.setRef(dto.getRef());
+		commentDto.setStep(dto.getRef()+1);
+		commentDto.setDepth(dto.getDepth()+1);
+		anonymousBoardtDao.noticeAnswerInsert(commentDto);
 		
 	}
 	

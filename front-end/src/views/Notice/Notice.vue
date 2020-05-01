@@ -173,6 +173,7 @@ export default {
     },
     gotoClick(row, column, event){
       alert(row.boardSeq)
+      this.$store.state.s_notice.boardSeq = row.boardSeq
       this.$router.push('/Notice/detail/'+row.boardSeq)
       //this.$router.push('/group/menu/'+groupSeq)
     },
