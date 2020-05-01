@@ -5,7 +5,7 @@
       <Write v-if="this.$store.state.s_private.write"
       @upload="uploadData">
       </Write>
-      <Detail v-if="this.$store.state.s_private.detail">
+      <Detail >
       </Detail>
   </div>
 </template>
@@ -39,6 +39,7 @@ export default {
        },
        uploadData(){
          this.getBoard()
+         this.$store.state.s_private.list = true
        }
 
     },

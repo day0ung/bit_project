@@ -46,9 +46,16 @@ public class MemberBoardService {
         }
 	}
 	
+	// ----------상세보기-----
 	public MemberBoardDto detailLibarary(int boardSeq) {
 		return dao.detailLibarary(boardSeq);
 	}
+	
+	public List<BoardReferenceDto> detailFile(BoardReferenceDto dto) {
+		return dao.detailFile(dto);
+	}
+	//----------------------
+	
 	
 	public void deleteLibarary(int boardSeq) {
 		dao.memberReferenceDelete(boardSeq);

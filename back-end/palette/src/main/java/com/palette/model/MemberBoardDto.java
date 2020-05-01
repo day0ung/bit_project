@@ -7,6 +7,7 @@ public class MemberBoardDto implements Serializable{
 	private int rowNum;
 	private int boardSeq;
 	private int memberSeq;
+	private String memberId;
 	private String title;
 	private String content;
 	private String writeDate;
@@ -20,12 +21,13 @@ public class MemberBoardDto implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public MemberBoardDto(int rowNum, int boardSeq, int memberSeq, String title, String content, String writeDate,
-			int del, String image, String fileName, String dbFileName) {
+	public MemberBoardDto(int rowNum, int boardSeq, int memberSeq, String memberId, String title, String content,
+			String writeDate, int del, String image, String fileName, String dbFileName) {
 		super();
 		this.rowNum = rowNum;
 		this.boardSeq = boardSeq;
 		this.memberSeq = memberSeq;
+		this.memberId = memberId;
 		this.title = title;
 		this.content = content;
 		this.writeDate = writeDate;
@@ -57,6 +59,14 @@ public class MemberBoardDto implements Serializable{
 
 	public void setMemberSeq(int memberSeq) {
 		this.memberSeq = memberSeq;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getTitle() {
@@ -117,13 +127,11 @@ public class MemberBoardDto implements Serializable{
 
 	@Override
 	public String toString() {
-		return "MemberBoardDto [rowNum=" + rowNum + ", boardSeq=" + boardSeq + ", memberSeq=" + memberSeq + ", title="
-				+ title + ", content=" + content + ", writeDate=" + writeDate + ", del=" + del + ", image=" + image
-				+ ", fileName=" + fileName + ", dbFileName=" + dbFileName + "]";
+		return "MemberBoardDto [rowNum=" + rowNum + ", boardSeq=" + boardSeq + ", memberSeq=" + memberSeq
+				+ ", memberId=" + memberId + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
+				+ ", del=" + del + ", image=" + image + ", fileName=" + fileName + ", dbFileName=" + dbFileName + "]";
 	}
 
-	
-	
 	
 	
 	
