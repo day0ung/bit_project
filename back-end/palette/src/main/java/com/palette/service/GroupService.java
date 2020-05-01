@@ -266,6 +266,7 @@ public class GroupService {
 	public void likeGroupAdd(GroupMemberDto groupMemberDto) {
 		if(groupDao.checkLikeGroup(groupMemberDto) == 0){
 			groupDao.likeGroupAdd(groupMemberDto);
+			groupDao.likeJoinGroupMemberRegistrationRequest(groupMemberDto);
 		}
 	}
 

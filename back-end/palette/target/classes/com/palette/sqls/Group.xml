@@ -221,6 +221,11 @@
 	VALUES (#{groupInfoSeq}, #{memberSeq}, 2);
 </insert>
 
+<insert id="likeJoinGroupMemberRegistrationRequest" parameterType="com.palette.model.GroupMemberDto">
+	INSERT INTO GROUP_MEMBER (GROUP_INFO_SEQ, MEMBER_SEQ, DEL)
+	VALUES (#{groupInfoSeq}, #{memberSeq}, 3);
+</insert>
+
 <select id="checkLikeGroup" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
 	SELECT COUNT(*)
 	FROM GROUP_LIKE

@@ -84,6 +84,7 @@ public interface GroupDao {
 	List<MemberLikeDto> getMylikeList(int memberSeq);
 	int checkGroupMember(GroupMemberDto groupMemberDto);
 	int checkWaitingGroupMember(GroupMemberDto groupMemberDto);
+	void likeJoinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
 
 
 
