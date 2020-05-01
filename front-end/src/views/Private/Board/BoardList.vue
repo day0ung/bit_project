@@ -4,7 +4,8 @@
        <el-table 
           :data="this.$store.state.s_private.BoardData"
           stripe
-          style="width: 100% cursor:pointer"
+          style="width: 100%; cursor:pointer"
+          @row-click="gotoClick"
         >
         <el-table-column
           prop="rownum"
@@ -53,6 +54,9 @@ export default {
          .then(res => {
             this.$store.state.s_private.BoardData = res.data
            }) 
+       },
+       gotoClick(row, column, event){
+         alert(row.boardSeq)
        }
     },
     mounted(){
