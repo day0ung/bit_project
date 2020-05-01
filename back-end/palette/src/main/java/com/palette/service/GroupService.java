@@ -275,11 +275,29 @@ public class GroupService {
 	public void likeGroupAdd(GroupMemberDto groupMemberDto) {
 		if(groupDao.checkLikeGroup(groupMemberDto) == 0){
 			groupDao.likeGroupAdd(groupMemberDto);
+			groupDao.likeJoinGroupMemberRegistrationRequest(groupMemberDto);
 		}
 	}
 
 	public List<MemberLikeDto> getMylikeList(int memberSeq) {
 		return groupDao.getMylikeList(memberSeq);
+	}
+
+	public boolean joinGroupMemberCheck(GroupMemberDto groupMemberDto) {
+		if(groupDao.checkGroupMember(groupMemberDto) == 0){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+
+	public boolean checkWaitingGroupMember(GroupMemberDto groupMemberDto) {
+		if(groupDao.checkWaitingGroupMember(groupMemberDto) == 0){
+			return false;
+		}else{
+			return true;
+		}
 	}
 
 }

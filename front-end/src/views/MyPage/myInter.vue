@@ -22,10 +22,12 @@
                 </thead>
                 <tbody>
                   <tr v-for="groupOne in mylike" :key="groupOne.groupInfoSeq">
-                    <td colspan="3">{{groupOne.groupInfoSeq}}</td>
+                    <td colspan="3">{{groupOne.groupName}}</td>
                     <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                     <td>
-                      <el-button type="text" @click="editAddr" style="color: #ff5151; font-size: 16px">가입하기</el-button>
+                      <el-button v-if="groupOne.del === 0" type="text" style="color: #ff5151; font-size: 16px">가입된멤버</el-button>
+                      <el-button v-else-if="groupOne.del === 2" type="text" style="color: #ff5151; font-size: 16px">가입대기중</el-button>
+                      <el-button v-else type="text" @click="joinGroup(groupOne.groupInfoSeq)" style="color: #ff5151; font-size: 16px">가입신청하기</el-button>
                     </td>
                   </tr>                   
                 </tbody>
@@ -44,7 +46,7 @@
                     </td>
                     <td style="width: 14px"></td>
                     <td><i class="el-icon-s-tools" style="color: #d77f4a"></i> </td>
-                      <td>
+                    <td>
                       <el-button type="text" @click="editArea" style="color: #d77f4a; font-size: 16px">수정하기</el-button>
                     </td>
                   </tr>                   
@@ -157,6 +159,14 @@ export default {
       }
     },
      methods: {
+       joinGroup(groupInfoSeq){
+        let params = new URLSearchParams();
+        params.append("groupInfoSeq", groupInfoSeq)
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
+          console.log(res.data)
+        })
+       },
        editAddr(){
          this.addr = true;
        },

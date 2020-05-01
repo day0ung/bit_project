@@ -99,8 +99,15 @@ public class GroupController {
     @PostMapping(value = "/joinGroupMemberRegistrationRequest")
     public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
         System.out.println("joinGroupMemberRegistrationRequest()");
-        groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
-        return "";
+        if(groupService.checkWaitingGroupMember(groupMemberDto)){
+            return "waiting";
+        }
+        if(groupService.joinGroupMemberCheck(groupMemberDto)){
+            groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
+            return "success";
+        }else{
+            return "fail";
+        }
     }
 
     @PostMapping(value = "/likeGroupAdd")

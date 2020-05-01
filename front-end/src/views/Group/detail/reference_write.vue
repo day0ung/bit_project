@@ -75,6 +75,7 @@ export default {
     },
     methods:{
         showGroupReference(){
+            this.getList()
             this.$emit("showGroupReference")
         },
         textContent(value){
@@ -84,21 +85,21 @@ export default {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
                 let formData = new FormData();
+                formData.append('groupInfoSeq', this.$route.params.groupSeq)
                 formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
+                formData.append('memberId', this.$store.state.loginUser.memberId)
                 formData.append('title',this.ruleForm.title)
                 formData.append('content',this.ruleForm.content)
                 this.ruleForm.fileList.forEach(function(element){
                     formData.append('files', element)
                 })
-         
-				axios.post("http://localhost:9000/uploadBoard", formData ,{
+				axios.post("http://localhost:9000/insertGroupReference", formData ,{
 					headers:{
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
                     alert("자료가 업로드 되었습니다.")
-                    //this.getList()
-                    //this.showGroupReference()
+                    this.showGroupReference()
 				})
 				
 			} else {

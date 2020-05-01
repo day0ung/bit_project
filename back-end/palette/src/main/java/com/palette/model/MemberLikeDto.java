@@ -5,16 +5,17 @@ public class MemberLikeDto {
     private int groupLikeSeq;
     private int groupInfoSeq;
     private int memberSeq;
+    private String groupName;
     private int del;
-
 
     public MemberLikeDto() {
     }
 
-    public MemberLikeDto(int groupLikeSeq, int groupInfoSeq, int memberSeq, int del) {
+    public MemberLikeDto(int groupLikeSeq, int groupInfoSeq, int memberSeq, String groupName, int del) {
         this.groupLikeSeq = groupLikeSeq;
         this.groupInfoSeq = groupInfoSeq;
         this.memberSeq = memberSeq;
+        this.groupName = groupName;
         this.del = del;
     }
 
@@ -42,6 +43,14 @@ public class MemberLikeDto {
         this.memberSeq = memberSeq;
     }
 
+    public String getGroupName() {
+        return this.groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
     public int getDel() {
         return this.del;
     }
@@ -65,6 +74,11 @@ public class MemberLikeDto {
         return this;
     }
 
+    public MemberLikeDto groupName(String groupName) {
+        this.groupName = groupName;
+        return this;
+    }
+
     public MemberLikeDto del(int del) {
         this.del = del;
         return this;
@@ -76,6 +90,7 @@ public class MemberLikeDto {
             " groupLikeSeq='" + getGroupLikeSeq() + "'" +
             ", groupInfoSeq='" + getGroupInfoSeq() + "'" +
             ", memberSeq='" + getMemberSeq() + "'" +
+            ", groupName='" + getGroupName() + "'" +
             ", del='" + getDel() + "'" +
             "}";
     }
