@@ -1,5 +1,11 @@
 package com.palette.controller;
 
+import java.util.List;
+
+import com.palette.model.MemberDto;
+import com.palette.service.AdminStatisticsService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -7,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*")
 @RestController
 public class Admin_StatisticsController {
-    // @Autowired
-    // adminMemberService adminservice;
+    @Autowired
+    AdminStatisticsService adminstatisticsservice;
 
     // @PostMapping(value = "/changeAuthCompanyMember")
     // public boolean changeAuthCompanyMemberStatus(MemberDto dto) {
@@ -19,6 +25,21 @@ public class Admin_StatisticsController {
     // 	return isS;
     // }
     
+
+    // getMemberGenderInfo
+
+    
+    @PostMapping(value = "/getMemberGenderInfo")
+    public List<MemberDto> getMemberGenderInfo() {
+    	System.out.println("getMemberGenderInfo Method execute Now..");
+    	
+    	List<MemberDto> genderInfoList = adminstatisticsservice.getMemberGenderInfo();
+        System.out.println("getMemberGenderInfo RESULT : \n" + genderInfoList );
+        
+        
+    	return genderInfoList;
+    }
+
     
 
 

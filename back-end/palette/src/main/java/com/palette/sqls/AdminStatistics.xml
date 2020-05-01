@@ -3,6 +3,11 @@
 
 <mapper namespace="com.palette.dao.AdminStatisticsDao">
 
+<select id="getMemberGenderInfo" resultType="com.palette.model.MemberDto" >
+    SELECT *    <!-- MEMBER_ID, MEMBER_NAME, AGE -->
+    FROM MEMBER
+    WHERE (AUTH=0 OR AUTH=1);
+</select>
 
 
 	
