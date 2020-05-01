@@ -13,13 +13,22 @@
       </div>
       <div class="hr"></div>
       <div class="cvInfoTitle">
+        <h5>지원분야</h5>
+      </div>
+      <div class="cvInfoContent">
+        <div> {{ this.$store.state.s_employment.cvDetail.category }} </div>
+      </div>
+      <div class="hr"></div>
+      <div class="cvInfoTitle">
         <h5>이력서</h5>
       </div>
       <div class="cvInfoContent">
-        <div></div>
+        <div>
+          <a :href="file.url" download>{{file.fileName}}</a>
+        </div>
       </div>
       <div class="hr"></div>
-      <div class="cvtitle">
+      <div style="text-align:center">
         <el-button type="primary" @click="cvMain" round>돌아가기</el-button>
       </div>
     </div>
@@ -31,13 +40,18 @@ import { loading } from 'element-ui';
 export default {
   data(){
     return{
-      
+      file : "",
+      memberName: ""
       
     }
   },
   mounted(){
-    
-    
+    var params = new URLSearchParams();	// post 방식으로 받아야함. 
+      params.append('cvSeq', this.$store.state.s_employment.cvDetail.cvSeq);
+      axios.post("http://localhost:9000/cvDetailRef", params).then(res => { 
+        this.$store.state.s_employment.cvDetailRef = res.data
+        this.file = res.data
+      })
   },
   methods:{
     cvMain(){

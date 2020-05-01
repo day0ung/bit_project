@@ -7,17 +7,21 @@ public class TodoListDto {
 	private String todoDate;
 	private int del;
 	
+	
+	private int delCount; //as
+	
 	public TodoListDto() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TodoListDto(int todoSeq, int memberSeq, String title, String todoDate, int del) {
+	public TodoListDto(int todoSeq, int memberSeq, String title, String todoDate, int del, int delCount) {
 		super();
 		this.todoSeq = todoSeq;
 		this.memberSeq = memberSeq;
 		this.title = title;
 		this.todoDate = todoDate;
 		this.del = del;
+		this.delCount = delCount;
 	}
 
 	public int getTodoSeq() {
@@ -44,7 +48,6 @@ public class TodoListDto {
 		this.title = title;
 	}
 
-
 	public String getTodoDate() {
 		return todoDate;
 	}
@@ -61,10 +64,21 @@ public class TodoListDto {
 		this.del = del;
 	}
 
+	public int getDelCount() {
+		return delCount;
+	}
+
+	public void setDelCount(int delCount) {
+		this.delCount = delCount;
+	}
+
 	@Override
 	public String toString() {
-		return "TodoListDto [todoSeq=" + todoSeq + ", memberSeq=" + memberSeq + ", title=" + title +", todoDate=" + todoDate + ", del=" + del + "]";
+		return "TodoListDto [todoSeq=" + todoSeq + ", memberSeq=" + memberSeq + ", title=" + title + ", todoDate="
+				+ todoDate + ", del=" + del + ", delCount=" + delCount + "]";
 	}
+
+	
 	
 	
 	

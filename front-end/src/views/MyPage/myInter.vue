@@ -216,10 +216,10 @@ export default {
        showshow(){
          this.showInter = true
        },
-       updateInter(){
+       updateInter(memSeq){
          this.showInter = false
            var params = new URLSearchParams();
-		      params.append('memberSeq', this.$route.params.seq)
+		      params.append('memberSeq', memSeq)
           axios.post('http://localhost:9000/myPageInter', params)
           .then(res => {
             var smyinfo = res.data

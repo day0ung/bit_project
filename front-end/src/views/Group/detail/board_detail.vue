@@ -147,8 +147,8 @@ data(){
 }
 .groupInfoContent{
     /* float: left; */
-    padding: 10px 10px 60px 100px;
-    width: 600px;
+    padding: 10px 100px 60px 100px;
+    width: auto;
     text-align: initial;
 }
 .groupInfoContent > div{

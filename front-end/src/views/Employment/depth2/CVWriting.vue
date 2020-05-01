@@ -49,6 +49,7 @@ Vue.use(VueMomentJS, moment)
 export default {
 	 data() {
       return {
+		  dialogVisible: false,
         ruleForm: {
           title: '',
           category: '',
@@ -75,6 +76,7 @@ export default {
 			if (valid) {
 				let formData = new FormData();
 				formData.append('memberSeq', this.login1.memberSeq)
+				formData.append('memberId', this.login1.memberId)
 				formData.append('title', this.ruleForm.title)
 				formData.append('category', this.ruleForm.category)
 				this.ruleForm.fileList.forEach(function(element){
@@ -83,7 +85,7 @@ export default {
                 for (let key of formData.entries()){
                     console.log(`${key}`)
                 }
-				axios.get("http://localhost:9000/insertCV", formData, {
+				axios.post("http://localhost:9000/insertCV", formData, {
 					headers:{
                         'Content-Type' : 'multipart/form-data'
 					}

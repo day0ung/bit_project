@@ -61,16 +61,20 @@ public interface GroupDao {
 	
 	ArrayList<CommentDto> groupBoardDetailComments(int boardSeq);
 	void insertComment(CommentDto commentDto);
+	int getRef();
+	void answerDelete(CommentDto commentDto);
+	void answerUpdate(CommentDto commentDto);
+	void updateCommentAnswer(CommentDto commentDto);
+	CommentDto selectRefStepDepth(int boardCommentSeq);
+	void insertCommentAnswer(CommentDto commentDto);
 	
 
 	int currBoardSeq();
 	void insertBoardReference(BoardReferenceDto boardReferenceDto);
-	int getRef();
 	
 	List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq);
-	void answerDelete(CommentDto commentDto);
-	List<BoardReferenceDto> getMypageReferenceList(int memberSeq);
 
+	List<BoardReferenceDto> getMypageReferenceList(int memberSeq);
 	void groupReferenceDelete(int boardSeq);
 	void joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
 	

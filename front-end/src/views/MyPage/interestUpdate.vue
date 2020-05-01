@@ -81,7 +81,6 @@ export default {
     props:["memSeq"], 
     data(){
         return{
-          
           ruleForm: {
               inter: [],
           },
@@ -103,7 +102,7 @@ export default {
                 res => {
                     if(res.data == 'perfect'){
                         alert('작성이 완료 되었습니다')
-                         this.$emit('update')   
+                         this.$emit('update', this.memSeq)   
                     }
                 }) 
 

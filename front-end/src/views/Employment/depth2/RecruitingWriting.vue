@@ -38,27 +38,9 @@
 			<el-form-item label="근무지" prop="workingLocation">
 				<el-input v-model="ruleForm.workingLocation"></el-input>
 			</el-form-item>
-			<el-form-item label="기업로고 이미지" prop="image">
-				<el-upload
-					v-model="ruleForm.dialogImageUrl"
-					action="https://jsonplaceholder.typicode.com/posts/"
-					list-type="picture-card"
-					accept=".jpg, .jpeg, .png, .bmp"
-					multiple
-					:limit="1"
-					:on-exceed="handleExceed"
-					:on-preview="handlePictureCardPreview"
-					:on-remove="handleRemove">
-					<i class="el-icon-plus"></i>
-				</el-upload>
-				<el-dialog :visible.sync="ruleForm.dialogVisible"
-							append-to-body=true>
-					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
-				</el-dialog>
+			<el-form-item label="지원홈페이지 주소"  prop="webUrl">
+				<el-input v-model="ruleForm.webUrl" placeholder="https://는 생략하고 입력해주세요"></el-input>
 			</el-form-item>
-			<!-- <el-form-item label="내용" prop="content">
-				<el-input type="textarea" v-model="ruleForm.content"></el-input>
-			</el-form-item> -->
 			<div class="board_write">
         		<quillexamplesnow
 					@contentS="qContent"
@@ -96,7 +78,8 @@ export default {
 		  cvStartDate: '',
           position: '',
           workingLocation: '',
-		  dialogImageUrl: ""
+		  dialogImageUrl: "",
+		  webUrl : ''
 		
 		},
 		content : "",
@@ -113,7 +96,7 @@ export default {
 			{ required: true, message: '경력을 입력하세요', trigger: 'blur' },
 		  ],
 		  period: [
-			{ required: true, message: '경력을 입력하세요', trigger: 'blur' },
+			{ required: true, message: '접수기간을 입력하세요', trigger: 'blur' },
 		  ],
 		  education: [
 			{ required: true, message: '학력을 입력하세요', trigger: 'blur' },
@@ -129,7 +112,10 @@ export default {
 		  ],
 		  workingLocation: [
             { required: true, message: '근무지를 입력하세요', trigger: 'blur' },
-          ],
+		  ],
+		  webUrl: [
+            { required: true, message: '지원홈페이지 주소를 입력하세요', trigger: 'blur' },
+		  ]
         }
       };
     },
@@ -156,10 +142,6 @@ export default {
 					});
 			}
 		},
-		handleFileUpload() {
-                    this.files = this.$refs.files.files;
-                    console.log(this.files);
-                },
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
 			if (valid) {
@@ -176,7 +158,7 @@ export default {
 						salary: this.ruleForm.salary,
 						position: this.ruleForm.position,
 						workingLocation: this.ruleForm.workingLocation,
-						image: this.ruleForm.dialogImageUrl,
+						webUrl: this.ruleForm.webUrl,
 						content:this.content
 
 					}
@@ -195,22 +177,7 @@ export default {
 		},
 		resetForm(formName) {
 			this.$refs[formName].resetFields();
-		},
-		handleRemove(file, fileList) {
-				console.log(file, fileList);
-			},
-			handlePictureCardPreview(file) {
-				this.ruleForm.dialogImageUrl = file.url;
-				this.ruleForm.dialogVisible = true;
-			},
-			handleExceed(files, fileList){
-				this.$message({
-					showClose: true,
-					center: true,
-					message: '대표이미지는 1개만 업로드가능합니다.',
-					type: 'error'
-				})
-			},
+		}
 	
 	},
 	created(){

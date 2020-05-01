@@ -18,27 +18,27 @@ export default {
     data(){
         return{
             chartOptions: {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'TODO LIST 달성'
-            },
-            series: [{
-                data: [3, 2, 1, 5, 0, 0, 0],
-                color: '#6fcd98',
-                name: '달성 수',
-               
-            }],
-            xAxis: {
-                categories: [],
-            },
-            yAxis: {
-                min: 0,
+                chart: {
+                    type: 'column'
+                },
                 title: {
-                    text: ''
+                    text: 'TODO LIST 달성'
+                },
+                series: [{
+                    data: [],
+                    color: '#fa5151',
+                    name: '달성 수',
+                
+                }],
+                xAxis: {
+                    categories: [],
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: ''
+                    }
                 }
-            },
             } 
         }
     }, 
@@ -52,26 +52,13 @@ export default {
           .then(res => {
              let count = 0
              var list = res.data
-
-
-             let params = new URLSearchParams();
-             params.append('todoDate', list)
-             axios.post('http://localhost:9000/selectDate', params)
-             .then(res => {
-
-             })
-             console.log(list)
-                for(const key in list){
-                    const element = list[key]
-                    this.chartOptions.xAxis.categories.push(element.todoDate)
-                }
-              //this.this.chartOptions.series[0].data = res.data.
-
-
+                 console.log(list)
+                    for(const key in list){
+                        const element = list[key]
+                        this.chartOptions.xAxis.categories.push(element.todoDate)
+                        this.chartOptions.series[0].data.push(element.delCount)
+                    }
             }) 
-        //axios
-        // alert(this.chartOptions.series[0].data)
-        // alert(this.chartOptions.xAxis.categories[0])
     }
 
 

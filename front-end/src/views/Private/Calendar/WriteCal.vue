@@ -80,20 +80,19 @@ export default {
         },
         rules: {
           title: [
-            { required: true, message: 'Please input Activity name', trigger: 'blur' },
-            { min: 3, max: 10, message: 'Length should be 3 to 10', trigger: 'blur' }
+            { required: true, message: '제목을 입력해주세요', trigger: 'blur' },
           ],
           startDate: [
-            { required: true, message: 'Please pick a date', trigger: 'change' }
+            { required: true, message: '날짜를 선택해주세요', trigger: 'change' }
           ],
           endDate: [
-            { required: true, message: 'Please pick a date', trigger: 'change' }
+            { required: true, message: '날짜를 선택해주세요', trigger: 'change' }
           ],
           content: [
-            { required: true, message: 'Please input activity form', trigger: 'blur' }
+            { required: true, message: '내용을 입력해주세요', trigger: 'blur' }
           ],
           backColor:[
-             { required: true, message: 'Please input activity form', trigger: 'blur' }
+             { required: true, message: '색상을 선택해주세요', trigger: 'blur' }
           ]
         }
       }
@@ -102,11 +101,12 @@ export default {
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              //insertMemberCalendar
-             // alert(this.$store.state.s_private.memberSeq+"::::"+this.ruleForm.title+":::"+this.ruleForm.content+":::"+this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss')+this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'))
+               var loginData = sessionStorage.getItem("loginUser");
+               var login = JSON.parse(loginData); 
+               var memSeq = login.memberSeq
               axios.get("http://localhost:9000/insertMemberCalendar",{
                   params:{
-                    memberSeq: this.$store.state.s_private.memberSeq,
+                    memberSeq: memSeq,
                     title: this.ruleForm.title,
                     content: this.ruleForm.content,
                     start : this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss'),

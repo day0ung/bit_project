@@ -203,7 +203,7 @@ public class GroupService {
         for (MultipartFile file : form.getFiles()) {
 			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
 			boardReferenceDto.setFileName(file.getOriginalFilename());
-            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()));
+            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId())); //접근할 수 있는  url
             boardReferenceDto.setMemberSeq(form.getMemberSeq());
             boardReferenceDto.setBoardSeq(boardSeq);
             groupDao.insertBoardReference(boardReferenceDto);
@@ -245,6 +245,11 @@ public class GroupService {
 	public void answerDelete(CommentDto commentDto) {
 		groupDao.answerDelete(commentDto);
 	}
+	public void answerUpdate(CommentDto commentDto) {
+		groupDao.answerUpdate(commentDto);
+	}
+	
+	
 	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
 		return groupDao.getMypageReferenceList(memberSeq);
 	}
@@ -263,6 +268,19 @@ public class GroupService {
 			groupDao.likeGroupAdd(groupMemberDto);
 		}
 	}
+
+	public void answerInsert(CommentDto commentDto) {
+		groupDao.updateCommentAnswer(commentDto);
+		CommentDto dto = groupDao.selectRefStepDepth(commentDto.getBoardCommentSeq());
+		commentDto.setRef(dto.getRef());
+		commentDto.setStep(dto.getStep()+1);
+		commentDto.setDepth(dto.getDepth()+1);
+		
+		System.out.println("answerInsert Service: " + commentDto.toString());
+		groupDao.insertCommentAnswer(commentDto);
+		
+	}
+
 
 	public List<MemberLikeDto> getMylikeList(int memberSeq) {
 		return groupDao.getMylikeList(memberSeq);
