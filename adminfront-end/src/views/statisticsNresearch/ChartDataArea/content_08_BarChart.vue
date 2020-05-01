@@ -17,7 +17,7 @@ export default {
             borderWidth: 1,
             pointBorderColor: '#249EBF',
             //Data to be represented on y-axis
-            data: [11, 8]
+            data: []
           }
         ]
       },
@@ -51,6 +51,9 @@ export default {
     this.renderChart(this.datacollection, this.options)
     this.getGenderDataMethod();
   },
+
+
+
   methods : {
     getGenderDataMethod () {  //axios process
         //getMemberGenderInfo
@@ -100,7 +103,8 @@ export default {
         testList.push(mancheck);
         testList.push(womancheck);
         console.log(testList)
-        this.datacollection.datasets[0].data=testList
+        console.log(JSON.stringify(testList))
+        this.datacollection.datasets[0].data= JSON.stringify(testList)
 
         console.log("durlaslkjasdfl;asdfasfdasfdasfdasdfasfdsafdasdfasfdjasdfjlljkafsljk;afljk;")
         console.log(this.datacollection.datasets[0].data);
@@ -122,7 +126,15 @@ export default {
         // console.log(testListToJsonData);
       }
 
-  }
+  },
+    watch: {
+    data: function() {
+      this._chart.destroy();
+      //this.renderChart(this.data, this.options);
+      this.renderChart(this.datacollection, this.options)
+    }
+  },
+  
 }
 
 </script>
