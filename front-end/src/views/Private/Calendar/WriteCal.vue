@@ -101,11 +101,12 @@ export default {
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              //insertMemberCalendar
-             // alert(this.$store.state.s_private.memberSeq+"::::"+this.ruleForm.title+":::"+this.ruleForm.content+":::"+this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss')+this.$moment(this.ruleForm.endDate).format('YYYY.MM.DD HH:mm:ss'))
+               var loginData = sessionStorage.getItem("loginUser");
+               var login = JSON.parse(loginData); 
+               var memSeq = login.memberSeq
               axios.get("http://localhost:9000/insertMemberCalendar",{
                   params:{
-                    memberSeq: this.$store.state.s_private.memberSeq,
+                    memberSeq: memSeq,
                     title: this.ruleForm.title,
                     content: this.ruleForm.content,
                     start : this.$moment(this.ruleForm.startDate).format('YYYY.MM.DD HH:mm:ss'),
