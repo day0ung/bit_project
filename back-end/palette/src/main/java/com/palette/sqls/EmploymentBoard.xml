@@ -71,8 +71,8 @@
   </update>
   
   <insert id="insertRecruit" parameterType="com.palette.model.EmploymentBoardDto">
-  	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, IMAGE, CV_START_DATE, CV_END_DATE, FILE_NAME, DB_FILE_NAME, DEL, BOARD_AUTH, CAREER, EDUCATION, WORKING_TYPE, SALARY, POSITION, WORKING_LOCATION)
-  	VALUES(#{memberSeq}, 1, #{title}, #{content}, NOW(), 0, "", #{cvStartDate}, #{cvEndDate}, #{fileName}, #{dbFileName}, 0, 3, #{career}, #{education}, #{workingType}, #{salary}, #{position}, #{workingLocation})
+  	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, IMAGE, CV_START_DATE, CV_END_DATE, FILE_NAME, DB_FILE_NAME, DEL, BOARD_AUTH, CAREER, EDUCATION, WORKING_TYPE, SALARY, POSITION, WORKING_LOCATION, WEB_URL)
+  	VALUES(#{memberSeq}, 1, #{title}, #{content}, NOW(), 0, "", #{cvStartDate}, #{cvEndDate}, #{fileName}, #{dbFileName}, 0, 3, #{career}, #{education}, #{workingType}, #{salary}, #{position}, #{workingLocation}, #{webUrl})
   </insert>
   
   <update id="recruitUpdating" parameterType="com.palette.model.EmploymentBoardDto">
@@ -80,7 +80,7 @@
   	SET TITLE = #{title}, CV_START_DATE = #{cvStartDate}, CV_END_DATE=#{cvEndDate}, CAREER=#{career},
       	EDUCATION = #{education}, WORKING_TYPE= #{workingType}, SALARY = #{salary},
       	POSITION = #{position}, WORKING_LOCATION=#{workingLocation}, CONTENT = #{content},
-      	WRITE_DATE = NOW()
+      	WRITE_DATE = NOW(), WEB_URL = #{webUrl}
   	WHERE BOARD_SEQ = #{boardSeq};
   </update>
   

@@ -30,9 +30,14 @@ public class MemberCVController {
 //	CV 추가
     @PostMapping(value = "/insertCV")
     public String insertCV(CVFile form) throws IOException{
+    	memberCVService.CVNumChange(form.getMemberSeq());
+    	
     	memberCVService.insertCV(form);
         return "";
     }
+
+//	CV 유무변경
+    
     
 	
 //  cv페이징
@@ -100,10 +105,20 @@ public class MemberCVController {
     	return isS;
     }
 	
+//	cvSeq로 이력서 파일 불러오기
 	@PostMapping(value = "/cvDetailRef")
     public CVReferenceDto cvDetailRef(int cvSeq){
         System.out.println("cvDetailRef()" + cvSeq);
         CVReferenceDto dto = memberCVService.cvDetailRef(cvSeq);
+        System.out.println("파일" + dto);
+        return dto;
+    }
+	
+//	memberSeq로 이력서 파일 불러오기
+	@PostMapping(value = "/cvDetailRefByMemberSeq")
+    public CVReferenceDto cvDetailRefByMemberSeq(int memberSeq){
+        System.out.println("cvDetailRefByMemberSeq()" + memberSeq);
+        CVReferenceDto dto = memberCVService.cvDetailRefByMemberSeq(memberSeq);
         System.out.println("파일" + dto);
         return dto;
     }

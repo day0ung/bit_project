@@ -80,7 +80,7 @@
 		VALUES (#{memberSeq}, #{title}, #{category}, NOW(), 0, "", "", 0)
 	</insert>
 	
-	<!-- CV 유무 -->	
+	<!-- CV 유무변경 -->	
 	<update id="CVNumChange" parameterType="java.lang.Integer">
 		UPDATE MEMBER
 		SET CV = 1
@@ -145,6 +145,12 @@
 		SELECT *
 		FROM BOARD_REFERENCE
 		WHERE CV_SEQ = #{cvSeq}
+	</select>
+	
+	<select id="cvDetailRefByMemberSeq" parameterType="java.lang.Integer" resultType="com.palette.model.CVReferenceDto">
+		SELECT *
+		FROM BOARD_REFERENCE
+		WHERE MEMBER_SEQ = #{memberSeq} AND BOARD_SEQ is null
 	</select>
 	
 </mapper>

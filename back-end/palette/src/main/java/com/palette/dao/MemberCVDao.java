@@ -40,4 +40,6 @@ public interface MemberCVDao {
 	void insertCVReference(CVReferenceDto cvReferenceDto);
 	
 	CVReferenceDto cvDetailRef(int cvSeq);
+	
+	CVReferenceDto cvDetailRefByMemberSeq(int memberSeq);
 }

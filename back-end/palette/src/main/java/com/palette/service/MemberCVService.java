@@ -113,4 +113,8 @@ public class MemberCVService {
 	public CVReferenceDto cvDetailRef(int cvSeq) {
 		return memberCVDao.cvDetailRef(cvSeq);
 	}
+	
+	public CVReferenceDto cvDetailRefByMemberSeq(int memberSeq) {
+		return memberCVDao.cvDetailRefByMemberSeq(memberSeq);
+	}
 }
