@@ -67,6 +67,7 @@ public class EmploymentController {
         employmentService.readCount(empBoardSeq);
         
         EmploymentBoardDto dto =  employmentService.getOneRecruit(empBoardSeq);
+        System.out.println("겟원디티오" + dto.toString());
         
 //		디데이 함수      
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -99,9 +100,8 @@ public class EmploymentController {
     @GetMapping(value = "/insertRecruit")
     public boolean insertRecruit(EmploymentBoardDto dto){
     	System.out.println("insertRecruit() 실행");
-    	
+    	dto.setWebUrl("https://" + dto.getWebUrl());
     	boolean isS = employmentService.insertRecruit(dto);
-    	
     	
     	return isS;
     }

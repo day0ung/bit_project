@@ -38,22 +38,8 @@
 			<el-form-item label="근무지" prop="workingLocation">
 				<el-input v-model="ruleForm.workingLocation"></el-input>
 			</el-form-item>
-			<el-form-item label="기업로고 이미지" prop="image">
-				<el-upload
-					v-model="ruleForm.dialogImageUrl"
-					action="https://jsonplaceholder.typicode.com/posts/"
-					list-type="picture-card"
-					accept=".jpg, .jpeg, .png, .bmp"
-					multiple
-					:limit="1"
-					:on-exceed="handleExceed"
-					:on-preview="handlePictureCardPreview"
-					:on-remove="handleRemove">
-					<i class="el-icon-plus"></i>
-				</el-upload>
-				<el-dialog :visible.sync="ruleForm.dialogVisible" append-to-body=true>
-					<img width="100%"  :src="ruleForm.dialogImageUrl" alt="">
-				</el-dialog>
+			<el-form-item label="지원홈페이지 주소" prop="webUrl">
+				<el-input v-model="ruleForm.webUrl" placeholder="https://는 생략하고 입력해주세요"></el-input>
 			</el-form-item>
 			<div class="board_update">
         		<quillexamplesnow
@@ -93,7 +79,8 @@ export default {
 		  cvEndDate : '',
           position: '',
           workingLocation: '',
-		  dialogImageUrl: ""
+		  dialogImageUrl: "",
+		  webUrl : ''
 		},
 		content: '',
 		login1: [],
@@ -123,7 +110,10 @@ export default {
 		  ],
 		  workingLocation: [
             { required: true, message: '근무지를 입력하세요', trigger: 'blur' },
-          ]
+		  ],
+		  webUrl: [
+            { required: true, message: '지원홈페이지 주소를 입력하세요', trigger: 'blur' },
+		  ]
         }
       };
     },
@@ -147,7 +137,7 @@ export default {
 							salary: this.ruleForm.salary,
 							position: this.ruleForm.position,
 							workingLocation: this.ruleForm.workingLocation,
-							image: this.ruleForm.dialogImageUrl,
+							webUrl: this.ruleForm.webUrl,
 							content:this.content
 						}
 					}).then(res =>{
@@ -172,21 +162,7 @@ export default {
 		resetForm(formName) {
 			this.$refs[formName].resetFields();
 		},
-		handleRemove(file, fileList) {
-			console.log(file, fileList);
-		},
-		handlePictureCardPreview(file) {
-			this.ruleForm.dialogImageUrl = file.url;
-			this.ruleForm.dialogVisible = true;
-		},
-		handleExceed(files, fileList){
-			this.$message({
-				showClose: true,
-				center: true,
-				message: '대표이미지는 1개만 업로드가능합니다.',
-				type: 'error'
-			})
-		}
+		
 	},
 	created(){
 		let sMemberSeq = sessionStorage.getItem("loginUser")
@@ -213,6 +189,7 @@ export default {
 				this.ruleForm.position = this.getOneRecruit1.position
 				this.ruleForm.workingLocation = this.getOneRecruit1.workingLocation
 				this.content = this.getOneRecruit1.content
+				this.ruleForm.webUrl = this.getOneRecruit1.webUrl
 			})
   	}
   }

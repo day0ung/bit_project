@@ -108,9 +108,9 @@
                       <p class="noti">마감일은 기업의 사정, 조기마감 등으로 변경될 수 있습니다.</p>
                   </div>
                 </div>
-                <div v-if="login1.memberSeq === getOneRecruit1.memberSeq">
-                    <el-button type="primary" round @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
-                    <el-button type="primary" round @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
+                <div v-if="login1.memberSeq === getOneRecruit1.memberSeq" style="text-align:center">
+                    <el-button style="background-color:red" type="primary" round @click="recruitUpdate(getOneRecruit1.boardSeq)">수정</el-button>
+                    <el-button style="background-color:red" type="primary" round @click="recruitDelete(getOneRecruit1.boardSeq)">삭제</el-button>
                 </div>
             </div>
             </section>
