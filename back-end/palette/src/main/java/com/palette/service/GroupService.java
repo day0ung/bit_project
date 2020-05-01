@@ -244,6 +244,11 @@ public class GroupService {
 	public void answerDelete(CommentDto commentDto) {
 		groupDao.answerDelete(commentDto);
 	}
+	public void answerUpdate(CommentDto commentDto) {
+		groupDao.answerUpdate(commentDto);
+	}
+	
+	
 	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
 		return groupDao.getMypageReferenceList(memberSeq);
 	}
@@ -262,5 +267,18 @@ public class GroupService {
 			groupDao.likeGroupAdd(groupMemberDto);
 		}
 	}
+
+	public void answerInsert(CommentDto commentDto) {
+		groupDao.updateCommentAnswer(commentDto);
+		CommentDto dto = groupDao.selectRefStepDepth(commentDto.getBoardCommentSeq());
+		commentDto.setRef(dto.getRef());
+		commentDto.setStep(dto.getStep()+1);
+		commentDto.setDepth(dto.getDepth()+1);
+		
+		System.out.println("answerInsert Service: " + commentDto.toString());
+		groupDao.insertCommentAnswer(commentDto);
+		
+	}
+
 
 }

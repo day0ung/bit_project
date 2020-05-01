@@ -233,6 +233,20 @@ public class GroupController {
     	return "";
     }
     
+    @PostMapping(value = "/realAnswerUpdate")
+    public String answerUpdate(CommentDto commentDto) {
+    	System.out.println("answerUpdate()");
+    	groupService.answerUpdate(commentDto);
+    	return "";
+    }
+    
+    @PostMapping(value = "/answerInsert")
+    public String answerInsert(CommentDto commentDto) {
+    	System.out.println("answerInsert()" +commentDto.toString());
+    	groupService.answerInsert(commentDto);
+    	return "";
+    }
+    
     
     // attendance
     @PostMapping(value="/attendGroup")
