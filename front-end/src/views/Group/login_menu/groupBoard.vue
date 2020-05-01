@@ -153,7 +153,6 @@ export default {
     },
     gotoClick(row, column, event){
       this.$emit("showDetail")
-      this.$store.state.s_group.showBoardDetail = true
       var params = new URLSearchParams();	// post 방식으로 받아야함. 
       params.append('boardSeq', row.boardSeq); 
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => { 
@@ -171,6 +170,7 @@ export default {
         this.$store.state.s_group.groupBoardDetailComments = res.data
         //this.$store.state.s_group.showBoardDetailComments = false
       })
+        this.$store.state.s_group.showBoardDetail = true
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)

@@ -2,7 +2,7 @@
   <div>
     <div class="commentsList"  v-loading="this.$store.state.s_group.showBoardDetailComments">
       <ul>
-        <li v-for="(comment, index) in this.$store.state.s_group.groupBoardDetailComments" 
+        <li v-for="comment in this.$store.state.s_group.groupBoardDetailComments" 
             :key="comment.boardCommentSeq"
             :class="comment.depth>0?'depth':''">
           <div class="report">
@@ -20,7 +20,7 @@
             <div v-show="isShow == 1"> <!-- 답글 -->
               <span class="miniAnswer" @click="answerCancle(comment.boardCommentSeq)">답글 취소</span>
               <div class="content">{{comment.content}}</div>
-              <el-input class="answerContent input-with-select" size="medium"
+              <el-input class="answerContent input-with-select" size="medium" style="width:80%"
                         v-model="subContent" placeholder="댓글을 작성해주세요.">
               <el-button size="mini" slot="append" @click="answerInsert(comment.boardCommentSeq)">등록</el-button></el-input>
             </div>
@@ -32,14 +32,14 @@
                 </el-input>
               </div>
             </div>
-            <div v-show="isShow == false">
+            <div v-show="isShow == false"><!-- 답글 취소 -->
               <span class="miniAnswer" @click="answer(comment.boardCommentSeq)" >답글</span>
               <div class="content">{{comment.content}}</div>
             </div>
           </div>
-          <div v-else-if="index != clicked">
+          <div v-else>
               <span class="miniAnswer" @click="answer(comment.boardCommentSeq)">답글</span>
-              <div class="content">{{comment.content}}</div>
+              <div class="content" style="90px">{{comment.content}}</div>
           </div> 
           <div class="dotline"></div>
         </li>
@@ -70,7 +70,6 @@ name: 'Comment',
       updateStatus:0,
       clicked:-1,
       isShow:false,
-      boardSeq:'',
       loginSeq:'',
       content: '',
       subContent:'',
@@ -79,18 +78,20 @@ name: 'Comment',
   methods:{
     getComments(){
         this.$store.state.s_group.showBoardDetailComments = true
+        //this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
         var params = new URLSearchParams();
-        params.append('boardSeq', this.boardSeq);
+        params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
         axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
         this.$store.state.s_group.groupBoardDetailComments = res.data
         this.$store.state.s_group.showBoardDetailComments = false
       })
     },
     insertComment(){
-      //alert("id:"+this.loginSeq + "/ boardSeq:"+ this.boardSeq +"/ content: "+this.content)
+      //alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_group.groupBoardDetail.boardSeq +"/ content: "+this.content)
+      //this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('memberSeq', this.loginSeq);
-      params.append('boardSeq', this.boardSeq);
+      params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
       params.append('content', this.content);
       axios.post("http://localhost:9000/insertComment", params)
               .then(res => {
@@ -113,16 +114,16 @@ name: 'Comment',
     },
     answerUpdate(boardCommentSeq, content){
       //alert(boardCommentSeq+"/update")
-      this.clicked=boardCommentSeq
       this.answertxt= content
         if(this.isShow==2){
           this.isShow = false
         }else{
           this.isShow = 2
         }
+          this.clicked=boardCommentSeq
     },
     realAnswerUpdate(boardCommentSeq){
-      alert(boardCommentSeq +"/"+this.answertxt)
+      //alert(boardCommentSeq +"/"+this.answertxt)
       var params = new URLSearchParams();
       params.append('boardCommentSeq', boardCommentSeq);
       params.append('content', this.answertxt);
@@ -147,9 +148,9 @@ name: 'Comment',
     answerInsert(boardCommentSeq){
       alert(boardCommentSeq+"/"+this.subContent)
       var params = new URLSearchParams();
-      params.append('memberSeq', this.loginSeq)
+      params.append('memberSeq', this.$store.state.loginUser.memberSeq)
       params.append('boardCommentSeq', boardCommentSeq);
-      params.append('boardSeq', this.boardSeq);
+      params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
       params.append('content', this.subContent);
       axios.post("http://localhost:9000/answerInsert", params).then(res => { 
           this.getComments()
@@ -160,9 +161,9 @@ name: 'Comment',
 
    
   },
-  created(){
+  mounted(){
     this.loginSeq = this.$store.state.loginUser.memberSeq
-    this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
+   
     
   }
 }
