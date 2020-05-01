@@ -87,9 +87,9 @@
 	VALUES (#{memberSeq}, #{bigSeq}, #{smallSeq}, 0)
  </insert>
  
- <!-- 관심분야 update전 del하기 -->
+ <!-- 관심분야 수정전 del하기 -->
  <delete id="delInter" parameterType="java.lang.Integer">
- 	DELETE FROM TODOLIST WHERE MEMBER_SEQ=#{memberSeq} 
+ 	DELETE FROM MEMBER_INTERREST WHERE MEMBER_SEQ=#{memberSeq} 
  </delete>
  
  <!-- 이메일, 나이 수정 --> 

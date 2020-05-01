@@ -1,10 +1,8 @@
 package com.palette.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.palette.dao.MemberDao;
-import com.palette.model.InterSmallDto;
 import com.palette.model.MemberDto;
 import com.palette.model.MemberInterParam;
 import com.palette.model.TodoListDto;
@@ -80,8 +78,9 @@ public class MemberService {
 			return memberDao.getSeq();
 		}
 		
-		//mypage 관심분야 update
+		//mypage 관심분야 update 하기전에 모두 지우기
 		public void InterestingUpdate(String interSmallSeqs, int memberSeq) {
+			System.out.println("서비스에서 멤버seq"+memberSeq);
 			MemberInterParam param = new MemberInterParam(); 
 			memberDao.delInter(memberSeq);
 			String arr[] = interSmallSeqs.split(",");

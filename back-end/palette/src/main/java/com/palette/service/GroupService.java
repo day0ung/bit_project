@@ -203,7 +203,7 @@ public class GroupService {
         for (MultipartFile file : form.getFiles()) {
 			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
 			boardReferenceDto.setFileName(file.getOriginalFilename());
-            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()));
+            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId())); //접근할 수 있는  url
             boardReferenceDto.setMemberSeq(form.getMemberSeq());
             boardReferenceDto.setBoardSeq(boardSeq);
             groupDao.insertBoardReference(boardReferenceDto);
