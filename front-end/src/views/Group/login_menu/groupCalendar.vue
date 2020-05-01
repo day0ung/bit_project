@@ -53,7 +53,7 @@ export default {
       params.append('groupInfoSeq', groupSeq)
       axios.post("http://localhost:9000/getGroupCalendar", params)
       .then(res => {
-        console.log("DB: "+JSON.stringify(res.data))
+        //console.log("DB: "+JSON.stringify(res.data))
         let e = JSON.stringify(res.data)
         this.$store.state.s_group.groupCalendar = JSON.parse(e)
         this.$store.state.s_group.showGroupCalendar = false
@@ -63,7 +63,7 @@ export default {
          if(event.end === null){
         event.end = event.start
       }
-        alert(event.calendarSeq+"/"+event.title + "/"+ event.start +"/"+ event.end +"/" + event.content+"/"+event.color)
+        //alert(event.calendarSeq+"/"+event.title + "/"+ event.start +"/"+ event.end +"/" + event.content+"/"+event.color)
         this.$store.state.s_group.groupCalendarDetail = event
         //alert(this.$store.state.s_group.groupCalendarDetail.start)
         
@@ -71,7 +71,7 @@ export default {
     },
     scheduleCreate(event){
         //alert(event.start)
-        alert(event.start + "<<시작날짜-----종료날짜>>"+event.end)
+        //alert(event.start + "<<시작날짜-----종료날짜>>"+event.end)
           this.$confirm('일정을 추가하시겠습니까?', '일정추가', {
           confirmButtonText: '추가',
           cancelButtonText: '취소',

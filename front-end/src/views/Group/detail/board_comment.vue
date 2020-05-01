@@ -146,7 +146,7 @@ name: 'Comment',
       alert(boardCommentSeq+"/report")
     },
     answerInsert(boardCommentSeq){
-      alert(boardCommentSeq+"/"+this.subContent)
+      //alert(boardCommentSeq+"/"+this.subContent)
       var params = new URLSearchParams();
       params.append('memberSeq', this.$store.state.loginUser.memberSeq)
       params.append('boardCommentSeq', boardCommentSeq);
