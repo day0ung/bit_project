@@ -47,7 +47,6 @@ export default {
         params.append('memberSeq', memSeq)
         axios.post("http://localhost:9000/getMemberCalendar", params)
           .then(res => {
-          console.log("DB: "+JSON.stringify(res.data))
           let e = JSON.stringify(res.data)
           this.$store.state.s_private.memberCalendar = JSON.parse(e)
         })  
@@ -123,7 +122,6 @@ export default {
          params.append('memberSeq', memSeq)
          axios.post("http://localhost:9000/getMemberCalendar", params)
           .then(res => {
-          console.log("DB: "+JSON.stringify(res.data))
           let e = JSON.stringify(res.data)
           this.$store.state.s_private.memberCalendar = JSON.parse(e)
         })  

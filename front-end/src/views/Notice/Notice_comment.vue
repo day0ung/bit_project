@@ -1,10 +1,11 @@
 <template>
   <div>
-    <div class="commentsList"  v-loading="this.$store.state.s_group.showBoardDetailComments">
+    <div class="commentsList"  v-loading="loading">
       <ul>
-        <li v-for="comment in this.$store.state.s_group.groupBoardDetailComments" 
+        <li v-for="comment in this.$store.state.s_notice.anonymousBoardComments" 
             :key="comment.boardCommentSeq"
-            :class="comment.depth>0?'depth':''">
+            :class="comment.depth>0?'depth':''"
+            >
           <div class="report">
             <div v-if="loginSeq == comment.memberSeq">
               <span @click="answerUpdate(comment.boardCommentSeq, comment.content)">수정</span>
@@ -14,7 +15,7 @@
               <span @click="answerReport(comment.boardCommentSeq)">신고</span>
             </div>
           </div>
-          <div class="memberId">{{comment.memberId}}</div>  
+          <div class="memberId">익 명</div>  
           <div class="writeDate">{{comment.writeDate}}</div>
           <div v-if="comment.boardCommentSeq==clicked">
             <div v-show="isShow == 1"> <!-- 답글 -->
@@ -39,9 +40,9 @@
           </div>
           <div v-else>
               <span class="miniAnswer" @click="answer(comment.boardCommentSeq)">답글</span>
-              <div class="content" style="90px">{{comment.content}}</div>
+              <div class="content">{{comment.content}}</div>
           </div> 
-          <div class="dotline"></div>
+          <!-- <div class="dotline"></div> -->
         </li>
 
       </ul>
@@ -73,27 +74,28 @@ name: 'Comment',
       loginSeq:'',
       content: '',
       subContent:'',
+      loading:false,
     }
   },
   methods:{
     getComments(){
-        this.$store.state.s_group.showBoardDetailComments = true
+        this.loading = true
         //this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
         var params = new URLSearchParams();
-        params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
-        axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
-        this.$store.state.s_group.groupBoardDetailComments = res.data
-        this.$store.state.s_group.showBoardDetailComments = false
+        params.append('boardSeq', this.$store.state.s_notice.boardSeq);
+        axios.post("http://localhost:9000/noticeComments", params).then(res => { 
+        this.$store.state.s_notice.anonymousBoardComments = res.data
+        this.loading = false
       })
     },
     insertComment(){
-      //alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_group.groupBoardDetail.boardSeq +"/ content: "+this.content)
+      alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_notice.boardSeq +"/ content: "+this.content)
       //this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('memberSeq', this.loginSeq);
-      params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
+      params.append('boardSeq', this.$store.state.s_notice.boardSeq);
       params.append('content', this.content);
-      axios.post("http://localhost:9000/insertComment", params)
+      axios.post("http://localhost:9000/noticeInsertComment", params)
               .then(res => {
                 //alert("답글달기")
                 this.content = ""
@@ -127,7 +129,7 @@ name: 'Comment',
       var params = new URLSearchParams();
       params.append('boardCommentSeq', boardCommentSeq);
       params.append('content', this.answertxt);
-      axios.post("http://localhost:9000/realAnswerUpdate", params).then(res => { 
+      axios.post("http://localhost:9000/noticeRealAnswerUpdate", params).then(res => { 
         alert("수정완료")
           this.getComments()
           this.isShow = false
@@ -138,7 +140,7 @@ name: 'Comment',
       alert(boardCommentSeq+"/delete")
         var params = new URLSearchParams();
         params.append('boardCommentSeq', boardCommentSeq);
-        axios.post("http://localhost:9000/answerDelete", params).then(res => { 
+        axios.post("http://localhost:9000/noticeAnswerDelete", params).then(res => { 
           this.getComments()
       })
     },
@@ -150,9 +152,9 @@ name: 'Comment',
       var params = new URLSearchParams();
       params.append('memberSeq', this.$store.state.loginUser.memberSeq)
       params.append('boardCommentSeq', boardCommentSeq);
-      params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
+      params.append('boardSeq', this.$store.state.s_notice.boardSeq);
       params.append('content', this.subContent);
-      axios.post("http://localhost:9000/answerInsert", params).then(res => { 
+      axios.post("http://localhost:9000/noticeAnswerInsert", params).then(res => { 
           this.getComments()
           this.isShow = false
           this.clicked = -1
@@ -163,6 +165,7 @@ name: 'Comment',
   },
   mounted(){
     this.loginSeq = this.$store.state.loginUser.memberSeq
+    this.getComments() 
    
     
   }

@@ -1,11 +1,15 @@
 <template>
+    
+    <div class="content01_view">
+            <h1> {{title}} member1444444444444444444444444444444444444444</h1>
         <div class="small">
+
             <line-chart :chart-data="datacollection"></line-chart>
             <button @click="fillData()">Randomize</button>
-            <div class="content01_view">
-                <h1> {{title}} member1444444444444444444444444444444444444444</h1>
-            </div>
+
+
         </div>
+    </div>
 
 </template>
 
@@ -28,16 +32,25 @@ export default {
     methods: {
       fillData () {
         this.datacollection = {
-          labels: [this.getRandomInt(), this.getRandomInt()],
+          labels: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
           datasets: [
             {
               label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
+              backgroundColor: '#aabbcc',
+              data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
             }, {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
+              label: 'Data two',
+              backgroundColor: 'Green',
+              data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
+            }, {
+              label: 'Data Three',
+              backgroundColor: 'Yello',
+              data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
+            }, {
+              label: 'Data Four',
+              backgroundColor: 'Blue',
+              data: [this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt(), this.getRandomInt()],
+            
             }
           ]
         }

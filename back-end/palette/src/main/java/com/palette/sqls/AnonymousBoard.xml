@@ -85,10 +85,74 @@
 	INSERT INTO BOARD(MEMBER_SEQ, CATEGORY, TITLE, CONTENT, WRITE_DATE, READ_COUNT, DEL, BOARD_AUTH)
   	VALUES(#{memberSeq}, 0, #{title}, #{content}, NOW(), 0, 0, 1)
 </insert>
+<update id="updateReadCount" parameterType="com.palette.model.AnonymousBoardDto">
+	UPDATE BOARD
+	SET READ_COUNT = READ_COUNT + 1
+	WHERE BOARD_SEQ = #{boardSeq}
+</update>
+<select id="anonymousBoardDetail" resultType="com.palette.model.AnonymousBoardDto">
+	select *
+	from BOARD
+	where BOARD_AUTH = 1 and CATEGORY =0 and BOARD_SEQ = #{boardSeq}
+</select>
+<delete id="anonymousBoardDelete" parameterType="com.palette.model.AnonymousBoardDto">
+	update BOARD
+	set DEL = 1
+	where BOARD_SEQ = #{boardSeq}
+</delete>
 
+<!-- comment -->
+<select id="getRef" resultType="java.lang.Integer">
+		select ifnull(MAX(REF),0)+1 
+		from FINAL.BOARD_COMMENT			
+</select>
+<insert id="noticeInsertComment" parameterType="com.palette.model.AnonymousBoardDto">
+insert into FINAL.BOARD_COMMENT(BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT, WRITE_DATE, DEL)
+		values( #{boardSeq}, #{memberSeq}, #{ref}, 0, 0, #{content}, NOW(), 0)
+</insert>
 
+<select id="noticeComments" parameterType="java.lang.Integer" resultType="com.palette.model.CommentDto">
+		select *
+		from BOARD_COMMENT
+		where BOARD_SEQ = #{boardSeq} and DEL=0
+		order by REF, STEP 
+</select>
 
+<update id="noticeRealAnswerUpdate" parameterType="com.palette.model.CommentDto">
+		update FINAL.BOARD_COMMENT
+		SET CONTENT = #{content}
+		WHERE BOARD_COMMENT_SEQ = #{boardCommentSeq}
+</update>
+<update id="noticeAnswerDelete" parameterType="com.palette.model.CommentDto">
+		update FINAL.BOARD_COMMENT
+		SET DEL = 1
+		WHERE BOARD_COMMENT_SEQ = #{boardCommentSeq}
+</update>
 
+<update id="updateCommentAnswer" parameterType="com.palette.model.CommentDto">
+		update FINAL.BOARD_COMMENT
+		set STEP = STEP + 1
+		where BOARD_SEQ=#{boardSeq} 
+			and REF=( select REF
+					  from (select REF 
+					  		from FINAL.BOARD_COMMENT
+							where BOARD_COMMENT_SEQ=#{boardCommentSeq}) tmp )
+		<![CDATA[ 
+			and STEP > ( select STEP
+						 from ( select STEP 
+						 		from FINAL.BOARD_COMMENT 
+						 		where BOARD_COMMENT_SEQ=#{boardCommentSeq}) tmp)  
+		]]>
+</update>
+<select id="selectRefStepDepth" parameterType="com.palette.model.CommentDto" resultType="com.palette.model.CommentDto">
+	select REF, STEP, DEPTH
+	from FINAL.BOARD_COMMENT
+	where BOARD_COMMENT_SEQ = #{boardCommentSeq}
+</select>
+<insert id="noticeAnswerInsert" parameterType="com.palette.model.CommentDto">
+	insert into FINAL.BOARD_COMMENT (BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT, WRITE_DATE, DEL)
+	values(#{boardSeq}, #{memberSeq}, #{ref}, #{step}, #{depth}, #{content}, NOW(), 0)
+</insert>
 
 
 </mapper>

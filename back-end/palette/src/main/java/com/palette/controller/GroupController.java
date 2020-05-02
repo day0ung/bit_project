@@ -95,7 +95,7 @@ public class GroupController {
         return "";
     }
 
-    // join like mypage
+//TODO join like mypage
     @PostMapping(value = "/joinGroupMemberRegistrationRequest")
     public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
         System.out.println("joinGroupMemberRegistrationRequest()");
@@ -123,7 +123,7 @@ public class GroupController {
         return  groupService.getMylikeList(memberSeq);
     }
     
-    // Board
+//TODO Board
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
     	System.out.println("getGroupPagingList() : "+boardParams.toString());
@@ -172,7 +172,7 @@ public class GroupController {
     
 
     
-    // Pds
+//TODO Reference
     @PostMapping(value="/groupPdsList")
     public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
     	System.out.println("getgroupPdsList");
@@ -226,7 +226,7 @@ public class GroupController {
         return "";
     }
 
-    // Comment
+//TODO Comment
     @PostMapping(value="/groupBoardDetailComments")
     public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {
         System.out.println("getGroupBoardDetailComments() : " + boardSeq);
@@ -262,7 +262,7 @@ public class GroupController {
     }
     
     
-    // attendance
+//TODO attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
     	System.out.println("getAttendGroup() " +checkday +"/" + groupSchedule.toString());

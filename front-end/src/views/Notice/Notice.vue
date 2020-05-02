@@ -23,6 +23,7 @@
           stripe
           style="width: 100% cursor:pointer"
           @row-click="gotoClick"
+          v-loading="loading"
       >
         <el-table-column
           prop="sfinalnum"
@@ -86,7 +87,7 @@ export default {
       searchWord:'',
       
       s_keyWord:'',
-      loading: true,
+      loading: false,
       login1 : "",
     }
   },
@@ -171,16 +172,10 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$emit("showAnonymousBoardDetail")
-      this.$store.state.s_employment.loadingAnonymousBoardDetail = true
-      var params = new URLSearchParams();	// post 방식으로 받아야함. 
-      params.append('boardSeq', row.boardSeq);
-      axios.post("http://localhost:9000/getOneAnonymousBoard", params).then(res => { 
-        this.$store.state.s_employment.anonymousBoardDetail = res.data
-        this.$store.state.s_employment.loadingCVDetail = false
-        
-        })
-
+      alert(row.boardSeq)
+      this.$store.state.s_notice.boardSeq = row.boardSeq
+      this.$router.push('/Notice/detail/'+row.boardSeq)
+      //this.$router.push('/group/menu/'+groupSeq)
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)

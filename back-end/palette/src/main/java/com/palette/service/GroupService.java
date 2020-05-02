@@ -36,7 +36,7 @@ public class GroupService {
 	@Autowired
 	GroupDao groupDao;
 
-	// TODO: GROUP LIST
+// TODO: GROUP LIST
 	public List<GroupDto> getAllGroup() {
 		return groupDao.getAllGroup();
 	}
@@ -65,7 +65,7 @@ public class GroupService {
 		return groupDao.getInterListAll();
 	}
 
-	// TODO: CREATE GROUP
+// TODO: CREATE GROUP
 	public void createGroup(GroupDto groupDto) {
 		groupDao.createGroup(groupDto);
 	}
@@ -91,7 +91,7 @@ public class GroupService {
 		return groupDao.getGroupBoardTotal(boardParams);
 	}
 
-	// TODO: GROUP CALENDAR
+// TODO: GROUP CALENDAR
 	public List<CalendarDto> getGroupCalendar(GroupDto groupDto) {
 		return groupDao.getGroupCalendar(groupDto);
 	}
@@ -161,7 +161,7 @@ public class GroupService {
 		return groupDao.checkAttend(groupSchedule);
 	}
 
-	// TODO: GROUP BOARD
+// TODO: GROUP BOARD
 	public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
 		return groupDao.getgroupPagingList(boardParams);
 	}
@@ -183,7 +183,7 @@ public class GroupService {
 		groupDao.updateReadCount(boardSeq);
 	}
 	
-	// TODO: GROUP PDS BOARD
+// TODO: GROUP PDS BOARD
 	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
 		return groupDao.getgroupPdsList(groupSeq);
 	}
@@ -228,7 +228,7 @@ public class GroupService {
 			groupDao.insertBoardReference(boardReferenceDto);
 		}
 	}
-	
+//TODO Comment
 	public ArrayList<CommentDto> groupBoardDetailComments(int boardSeq) {
 		return groupDao.groupBoardDetailComments(boardSeq);
 	}
@@ -237,19 +237,28 @@ public class GroupService {
 		commentDto.setRef(ref);
 		groupDao.insertComment(commentDto);
 	}
-
-	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
-		return groupDao.getGroupReferenceDetailFileList(boardSeq);
-	}
-
 	public void answerDelete(CommentDto commentDto) {
 		groupDao.answerDelete(commentDto);
 	}
 	public void answerUpdate(CommentDto commentDto) {
 		groupDao.answerUpdate(commentDto);
 	}
+	public void answerInsert(CommentDto commentDto) {
+		groupDao.updateCommentAnswer(commentDto);
+		CommentDto dto = groupDao.selectRefStepDepth(commentDto.getBoardCommentSeq());
+		commentDto.setRef(dto.getRef());
+		commentDto.setStep(dto.getStep()+1);
+		commentDto.setDepth(dto.getDepth()+1);
+		
+		System.out.println("answerInsert Service: " + commentDto.toString());
+		groupDao.insertCommentAnswer(commentDto);
+		
+	}
 	
 	
+	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
+		return groupDao.getGroupReferenceDetailFileList(boardSeq);
+	}
 	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
 		return groupDao.getMypageReferenceList(memberSeq);
 	}
@@ -269,19 +278,6 @@ public class GroupService {
 			groupDao.likeJoinGroupMemberRegistrationRequest(groupMemberDto);
 		}
 	}
-
-	public void answerInsert(CommentDto commentDto) {
-		groupDao.updateCommentAnswer(commentDto);
-		CommentDto dto = groupDao.selectRefStepDepth(commentDto.getBoardCommentSeq());
-		commentDto.setRef(dto.getRef());
-		commentDto.setStep(dto.getStep()+1);
-		commentDto.setDepth(dto.getDepth()+1);
-		
-		System.out.println("answerInsert Service: " + commentDto.toString());
-		groupDao.insertCommentAnswer(commentDto);
-		
-	}
-
 
 	public List<MemberLikeDto> getMylikeList(int memberSeq) {
 		return groupDao.getMylikeList(memberSeq);

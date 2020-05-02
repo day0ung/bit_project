@@ -7,27 +7,27 @@
 			class="el-menu-vertical-demo"
 			active-text-color="#ff674b"
 			default-active="5">
-			<el-menu-item index="1" v-model="auth" v-if="auth == '1' | auth == '0' " @click="studyClick(memSeq)" >
+			<el-menu-item index="1"  v-if="auth == '1' | auth == '0' " @click="studyClick(memSeq)" >
 				<i class="el-icon-edit"></i>
 				<span>내 스터디</span>
 			</el-menu-item>
-			<el-menu-item index="2" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="scheduleClick(memSeq)">
+			<el-menu-item index="2" v-if="auth == '1' | auth == '0' "  @click="scheduleClick(memSeq)">
 				<i class="el-icon-postcard"></i>
 				<span>내 일정</span>
 			</el-menu-item>
-			<el-menu-item index="6" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="referenceClick(memSeq)">
+			<el-menu-item index="6"  v-if="auth == '1' | auth == '0' "  @click="referenceClick(memSeq)">
 				<i class="el-icon-takeaway-box"></i>
-				<sapn>내 자료</sapn>
+				<span>내 자료</span>
 			</el-menu-item>
-			<el-menu-item index="3" v-model="auth"  @click="resumeClick(memSeq)">
+			<el-menu-item index="3"   @click="resumeClick(memSeq)">
 				<i class="el-icon-document"></i>
 				<span>내 이력서</span>
 			</el-menu-item>
-			<el-menu-item index="4" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="interclick(memSeq)">
+			<el-menu-item index="4"  v-if="auth == '1' | auth == '0' "  @click="interclick(memSeq)">
 				<i class="el-icon-star-off"></i>
 				<span>내 찜목록</span>
 			</el-menu-item><!-- $router.push({name:'MyInfo', params: { seq: memSeq }}), show = false" -->
-			<el-menu-item index="5" v-model="auth"  @click="infoClick(memSeq)" >
+			<el-menu-item index="5"   @click="infoClick(memSeq)" >
 				<i class="el-icon-setting"></i>
 				<span>내 정보수정</span>
 			</el-menu-item>
@@ -52,10 +52,7 @@
 		@addrUpdate="addrUpdate"
 		@passUpdate="passUpdate"/>
 	 </div> 
-	 <!-- <div class="myContent" v-else>
-		 	<router-view :key="$route.fullPath">
-			</router-view> 
-	 </div> -->
+
   </div>
 </template>
 

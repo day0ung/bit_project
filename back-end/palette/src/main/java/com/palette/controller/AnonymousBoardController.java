@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.palette.model.AnonymousBoardDto;
 import com.palette.model.BoardParams;
+import com.palette.model.CommentDto;
 import com.palette.model.MemberCVDto;
 import com.palette.service.AnonymousBoardService;
 
@@ -50,11 +51,55 @@ public class AnonymousBoardController {
 	@GetMapping(value = "/insertAnonymousBoard")
     public boolean insertAnonymousBoard(AnonymousBoardDto dto){
 		System.out.println("insertAnonymousBoard() 실행");
-		
 		boolean isS = anonymousBoardService.insertAnonymousBoard(dto);
-		
-		
 		return isS;
 	}
 	
+	@PostMapping(value = "/anonymousBoardDetail")
+    public AnonymousBoardDto anonymousBoardDetail(AnonymousBoardDto anonymousBoardDto) {
+		System.out.println("anonymousBoardDetail() 실행");
+		AnonymousBoardDto dto =	anonymousBoardService.anonymousBoardDetail(anonymousBoardDto);
+		return dto;
+	}
+	
+	@PostMapping(value = "/anonymousBoardDelete")
+    public String anonymousBoardDelete(AnonymousBoardDto anonymousBoardDto) {
+		System.out.println("anonymousBoardDelete() 실행");
+		anonymousBoardService.anonymousBoardDelete(anonymousBoardDto);
+		return "";
+	}
+
+// comment
+	@PostMapping(value = "/noticeInsertComment")
+	public String noticeInsertComment(CommentDto commentDto) {
+		System.out.println("NoticeInsertComment()");
+		anonymousBoardService.noticeInsertComment(commentDto);
+		return "";
+	}
+	@PostMapping(value = "/noticeComments")
+	public ArrayList<CommentDto> noticeComments(CommentDto commentDto){
+		System.out.println("noticeComments()");
+		ArrayList<CommentDto> list = anonymousBoardService.noticeComments(commentDto);
+		
+		return list;
+	}
+	@PostMapping(value = "/noticeRealAnswerUpdate")
+	public String noticeRealAnswerUpdate(CommentDto commentDto) {
+		System.out.println("noticeRealAnswerUpdate()");
+		anonymousBoardService.noticeRealAnswerUpdate(commentDto);
+		return "";
+	}
+	@PostMapping(value = "/noticeAnswerDelete")
+	public String noticeAnswerDelete(CommentDto commentDto) {
+		System.out.println("noticeAnswerDelete()");
+		anonymousBoardService.noticeAnswerDelete(commentDto);
+		return"";
+	}
+	
+	@PostMapping(value = "/noticeAnswerInsert")
+	public String noticeAnswerInsert(CommentDto commentDto) {
+		System.out.println("noticeAnswerInsert()");
+		anonymousBoardService.noticeAnswerInsert(commentDto);
+		return"";
+	}
 }
