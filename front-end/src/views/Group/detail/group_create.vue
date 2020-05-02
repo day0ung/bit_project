@@ -1,6 +1,7 @@
 <template>
     <div class="create">
         <div class="createContainer">
+            <el-button @click="gotoMypage" round>돌아가기</el-button>
             <div class="title">그룹 스터디 생성</div>
             <el-form :model="groupDto" label-position="top" :rules="rules" ref="groupDto" label-width="120px" class="demo-groupDto" v-loading="loading">
                 <!-- 그룹명 설정 -->
@@ -191,6 +192,11 @@ export default {
             }
     },
     methods:{
+        gotoMypage(){
+            this.$router.push({
+                path: "/mypage"
+            })
+        },
         gruopCreateApply: function (event) {
             alert("그룹신청이 완료되었습니다.\n심사 후 그룹개설이 완료됩니다.")
             this.$router.push({
