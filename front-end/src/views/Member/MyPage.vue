@@ -102,6 +102,7 @@ export default {
 			params.append('memberSeq', memSeq)
 			axios.post('http://localhost:9000/getMylikeList', params).then(res => {
 				this.mylike = res.data
+				this.$store.state.s_member.MyPageInterLikeList = res.data
 				console.log(res.data)
 			})
 		},

@@ -7,7 +7,7 @@
             <img src='../../assets/css/images/like.png'>
           </div>
           <div class="titup">
-              <table class="table1" style="margin-left: 55px">
+              <table class="table1" style="margin-left: 55px" v-loading="this.$store.state.s_member.MyPageInterLikeListLoading">
                 <colgroup>
               <col style="width: 270px">
               <col style="width: 30px">
@@ -21,7 +21,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="groupOne in mylike" :key="groupOne.groupInfoSeq">
+                  <tr v-for="groupOne in this.$store.state.s_member.MyPageInterLikeList" :key="groupOne.groupInfoSeq">
                     <td colspan="3">{{groupOne.groupName}}</td>
                     <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                     <td style="width: 100px; text-align: left;">
@@ -149,6 +149,8 @@
 <script>
 import logincss from '@/assets/css/member/myinfo.css'
 import Inter from "@/views/MyPage/interestUpdate.vue"
+import { loading } from 'element-ui';
+
 export default {
   props:['myinter','myBig','mySmall','memSeq', 'mylike'],
   components:{
@@ -164,37 +166,60 @@ export default {
       }
     },
      methods: {
+       likeListUpdate(){
+        this.$store.state.s_member.MyPageInterLikeListLoading = true
+        let params = new URLSearchParams();
+        params.append('memberSeq', this.$store.state.loginUser.memberSeq)
+        axios.post('http://localhost:9000/getMylikeList', params).then(res => {
+          this.$store.state.s_member.MyPageInterLikeList = res.data
+          console.log(res.data)
+          this.$store.state.s_member.MyPageInterLikeListLoading = false
+        })
+       },
        likeDelete(groupInfoSeq){
+        this.$store.state.s_member.MyPageInterLikeListLoading = true
         // like table로 가야함
         let params = new URLSearchParams();
         params.append("groupInfoSeq", groupInfoSeq)
         params.append("memberSeq", this.$store.state.loginUser.memberSeq)
         axios.post("http://localhost:9000/likeGroupDelete", params).then(res =>{
           console.log(res.data)
+          this.likeListUpdate()
           alert("찜목록에서 제외되었습니다.")
+          this.$store.state.s_member.MyPageInterLikeListLoading = false
         })
        },
        waitingDelete(groupInfoSeq){
+         this.$store.state.s_member.MyPageInterLikeListLoading = true
         //group member table 로 가야함
         let params = new URLSearchParams();
         params.append("groupInfoSeq", groupInfoSeq)
         params.append("memberSeq", this.$store.state.loginUser.memberSeq)
         axios.post("http://localhost:9000/groupWaitingDelete", params).then(res =>{
           console.log(res.data)
+          this.likeListUpdate()
           alert("가입신청이 취소되었습니다.")
+          this.$store.state.s_member.MyPageInterLikeListLoading = false
         })
        },
        joinGroup(groupInfoSeq){
+        this.$store.state.s_member.MyPageInterLikeListLoading = true
         let params = new URLSearchParams();
         params.append("groupInfoSeq", groupInfoSeq)
         params.append("memberSeq", this.$store.state.loginUser.memberSeq)
         axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
           if (res.data === "success"){
+            this.likeListUpdate()
             alert("가입신청이 완료되었습니다.\n그룹장이 승인하면 가입이완료됩니다.")
+            this.$store.state.s_member.MyPageInterLikeListLoading = false
           }else if(res.data === "fail"){
+            this.likeListUpdate()
             alert("이미 가입된 그룹입니다")
+            this.$store.state.s_member.MyPageInterLikeListLoading = false
           }else if(res.data === "waiting"){
+            this.likeListUpdate()
             alert("가입대기중인 그룹입니다.")
+            this.$store.state.s_member.MyPageInterLikeListLoading = false
           }
         })
        },

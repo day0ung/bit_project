@@ -8,7 +8,8 @@ export default new Vuex.Store({
     namespaced: true,
     state: {
         todoList:[],
-        
+        MyPageInterLikeListLoading: false,
+        MyPageInterLikeList: [],
     },
     actions: {
    
