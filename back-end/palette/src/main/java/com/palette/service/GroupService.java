@@ -300,4 +300,12 @@ public class GroupService {
 		}
 	}
 
+	public void likeGroupDelete(GroupMemberDto groupMemberDto) {
+		groupDao.likeGroupDelete(groupMemberDto);
+	}
+
+	public void groupWaitingDelete(GroupMemberDto groupMemberDto) {
+		groupDao.groupWaitingDelete(groupMemberDto);
+	}
+
 }

@@ -267,4 +267,10 @@
 	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 2
 </select>
 
+<update id="groupWaitingDelete" parameterType="com.palette.model.GroupMemberDto">
+	UPDATE GROUP_MEMBER
+	SET DEL = 1
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
+
 </mapper>

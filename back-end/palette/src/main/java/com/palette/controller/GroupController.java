@@ -122,6 +122,20 @@ public class GroupController {
         System.out.println("getMylikeList()");
         return  groupService.getMylikeList(memberSeq);
     }
+
+    @PostMapping(value = "/likeGroupDelete")
+    public String likeGroupDelete(GroupMemberDto groupMemberDto){
+        System.out.println("likeGroupDelete()");
+        groupService.likeGroupDelete(groupMemberDto);
+        return "";
+    }
+
+    @PostMapping(value = "/groupWaitingDelete")
+    public String groupWaitingDelete(GroupMemberDto groupMemberDto){
+        System.out.println("groupWaitingDelete()");
+        groupService.groupWaitingDelete(groupMemberDto);
+        return "";
+    }
     
 //TODO Board
     @PostMapping(value="/groupPagingList")

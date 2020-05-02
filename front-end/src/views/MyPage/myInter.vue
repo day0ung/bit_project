@@ -24,10 +24,15 @@
                   <tr v-for="groupOne in mylike" :key="groupOne.groupInfoSeq">
                     <td colspan="3">{{groupOne.groupName}}</td>
                     <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
-                    <td>
+                    <td style="width: 100px; text-align: left;">
                       <el-button v-if="groupOne.del === 0" type="text" style="color: #ff5151; font-size: 16px">가입된멤버</el-button>
                       <el-button v-else-if="groupOne.del === 2" type="text" style="color: #ff5151; font-size: 16px">가입대기중</el-button>
                       <el-button v-else type="text" @click="joinGroup(groupOne.groupInfoSeq)" style="color: #ff5151; font-size: 16px">가입신청하기</el-button>
+                    </td>
+                    <td style="width: 100px; text-align: left;">
+                      <el-button v-if="groupOne.del === 0" type="text" style="color: #ff5151; font-size: 16px" @click="likeDelete(groupOne.groupInfoSeq)">| 삭제</el-button>
+                      <el-button v-else-if="groupOne.del === 2" type="text" style="color: #ff5151; font-size: 16px" @click="waitingDelete(groupOne.groupInfoSeq)">| 가입대기 취소</el-button>
+                      <el-button v-else type="text" style="color: #ff5151; font-size: 16px" @click="likeDelete(groupOne.groupInfoSeq)">| 삭제</el-button>
                     </td>
                   </tr>                   
                 </tbody>
@@ -159,12 +164,35 @@ export default {
       }
     },
      methods: {
+       likeDelete(groupInfoSeq){
+        alert("likeDelete" + groupInfoSeq + this.$store.state.loginUser.memberSeq )
+        // like table로 가야함
+        let params = new URLSearchParams();
+        params.append("groupInfoSeq", groupInfoSeq)
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/likeGroupDelete", params).then(res =>{
+          console.log(res.data)
+          alert("찜목록에서 제외되었습니다.")
+        })
+       },
+       waitingDelete(groupInfoSeq){
+        alert("watingDelete" + groupInfoSeq + this.$store.state.loginUser.memberSeq )
+        //group member table 로 가야함
+        let params = new URLSearchParams();
+        params.append("groupInfoSeq", groupInfoSeq)
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/groupWaitingDelete", params).then(res =>{
+          console.log(res.data)
+          alert("가입신청이 취소되었습니다.")
+        })
+       },
        joinGroup(groupInfoSeq){
         let params = new URLSearchParams();
         params.append("groupInfoSeq", groupInfoSeq)
         params.append("memberSeq", this.$store.state.loginUser.memberSeq)
         axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
           console.log(res.data)
+          alert("가입신청이 완료되었습니다.")
         })
        },
        editAddr(){
