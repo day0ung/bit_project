@@ -16,6 +16,8 @@ export default {
         groupReferenceDetailFileList: [],
         grouDetail: [],
         MypageReferenceList: [],
+        MyGroupLoading: false,
+        MyOtherGroupLoading: false,
         showGroupInfo: false,
         showGroupCalendar: false,
         showBoardList: false,

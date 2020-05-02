@@ -283,20 +283,17 @@ public class GroupService {
 		return groupDao.getMylikeList(memberSeq);
 	}
 
-	public boolean joinGroupMemberCheck(GroupMemberDto groupMemberDto) {
-		if(groupDao.checkGroupMember(groupMemberDto) == 0){
-			return true;
+	public String checkGroupMember(GroupMemberDto groupMemberDto) {
+		if(groupDao.checkGroupMember(groupMemberDto).getDel() == 0){
+				return "가입된회원";
+		}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 1){
+			return "가입가능한회원";
+		}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 2){
+			return "가입대기중회원";
+		}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 3){
+			return "업데이트해야하회원";
 		}else{
-			return false;
-		}
-		
-	}
-
-	public boolean checkWaitingGroupMember(GroupMemberDto groupMemberDto) {
-		if(groupDao.checkWaitingGroupMember(groupMemberDto) == 0){
-			return false;
-		}else{
-			return true;
+			return "가입가능한회원";
 		}
 	}
 
@@ -306,6 +303,10 @@ public class GroupService {
 
 	public void groupWaitingDelete(GroupMemberDto groupMemberDto) {
 		groupDao.groupWaitingDelete(groupMemberDto);
+	}
+
+	public void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto) {
+		groupDao.updateGroupMemberRegistrationRequest(groupMemberDto);
 	}
 
 }

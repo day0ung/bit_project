@@ -99,14 +99,18 @@ public class GroupController {
     @PostMapping(value = "/joinGroupMemberRegistrationRequest")
     public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
         System.out.println("joinGroupMemberRegistrationRequest()");
-        if(groupService.checkWaitingGroupMember(groupMemberDto)){
-            return "waiting";
-        }
-        if(groupService.joinGroupMemberCheck(groupMemberDto)){
+        if(groupService.checkGroupMember(groupMemberDto).equals("가입된회원")){
+            return "fail";
+        }else if(groupService.checkGroupMember(groupMemberDto).equals("가입가능한회원")){
             groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
             return "success";
+        }else if(groupService.checkGroupMember(groupMemberDto).equals("가입대기중회원")){
+            return "waiting";
+        }else if(groupService.checkGroupMember(groupMemberDto).equals("업데이트해야하회원")){
+            groupService.updateGroupMemberRegistrationRequest(groupMemberDto);
+            return "success";
         }else{
-            return "fail";
+            return "메소드 로직 실패";
         }
     }
 

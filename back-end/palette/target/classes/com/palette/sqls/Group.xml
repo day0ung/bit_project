@@ -221,6 +221,12 @@
 	VALUES (#{groupInfoSeq}, #{memberSeq}, 2);
 </insert>
 
+<update id="updateGroupMemberRegistrationRequest">
+	UPDATE GROUP_MEMBER
+	SET DEL = 2
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
+
 <insert id="likeJoinGroupMemberRegistrationRequest" parameterType="com.palette.model.GroupMemberDto">
 	INSERT INTO GROUP_MEMBER (GROUP_INFO_SEQ, MEMBER_SEQ, DEL)
 	VALUES (#{groupInfoSeq}, #{memberSeq}, 3);
@@ -255,21 +261,15 @@
 	WHERE m.MEMBER_SEQ = #{memberSeq};
 </select>
 
-<select id="checkGroupMember" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
-	SELECT COUNT(*)
+<select id="checkGroupMember" parameterType="com.palette.model.GroupMemberDto" resultType="com.palette.model.GroupMemberDto">
+	SELECT *
 	FROM GROUP_MEMBER
-	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 0
-</select>
-
-<select id="checkWaitingGroupMember" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
-	SELECT COUNT(*)
-	FROM GROUP_MEMBER
-	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 2
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
 </select>
 
 <update id="groupWaitingDelete" parameterType="com.palette.model.GroupMemberDto">
 	UPDATE GROUP_MEMBER
-	SET DEL = 1
+	SET DEL = 3
 	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
 </update>
 

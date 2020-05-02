@@ -23,7 +23,7 @@
         </div>
       </div>
       <!-- 그룹 리스트 css적용 html -->
-      <div style="display: flex; flex-wrap: wrap;" v-loading="loading">
+      <div style="display: flex; flex-wrap: wrap;" v-loading="this.$store.state.s_group.MyOtherGroupLoading">
          
             <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
             <div class="blue">
@@ -57,7 +57,7 @@
                 </div>
                 <div class="buttons detailcontainer">
                 <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">{{groupInfo.startDate}} 시작</button>
-                <button class="like" @click="addlike(groupInfo.groupInfoSeq)"><span>♥</span></button>
+                <button class="like" @click="addlike(groupInfo.groupInfoSeq, groupInfo.groupName)"><span>♥</span></button>
                 </div>
             </div>
             </aside>
@@ -83,7 +83,7 @@ export default {
     }
   },  
   mounted(){
-    this.loading = true
+    this.$store.state.s_group.MyOtherGroupLoading = true
     this.$store.state.currpage = this.$route.path
     this.loginSeq = JSON.parse(sessionStorage.getItem("loginUser")).memberSeq
     var params = new URLSearchParams();	
@@ -94,7 +94,7 @@ export default {
         //alert(JSON.stringify(res.data))
         this.list = res.data
         this.$store.state.s_group.groupList = res.data
-        this.loading = false;
+        this.$store.state.s_group.MyOtherGroupLoading = false;
       })
   },
   methods:{
@@ -104,22 +104,24 @@ export default {
     },
     searchBigSeq(seq){
       //alert(seq)
-      this.loading = true
+      this.$store.state.s_group.MyOtherGroupLoading = true
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('interBigSeq', seq);
       params.append('memberSeq', this.loginSeq)
       axios.post("http://localhost:9000/getMyOtherGroup", params)
               .then(res => {
           this.list = res.data
-          this.loading = false
+          this.$store.state.s_group.MyOtherGroupLoading = false
         })
     },
-    addlike(seq){
+    addlike(seq, groupName){
+      this.$store.state.s_group.MyOtherGroupLoading = true
       let params = new URLSearchParams();
       params.append("groupInfoSeq", seq)
       params.append("memberSeq", this.$store.state.loginUser.memberSeq)
       axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
-        alert(this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+        alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+        this.$store.state.s_group.MyOtherGroupLoading = false
       })
     }
   },
