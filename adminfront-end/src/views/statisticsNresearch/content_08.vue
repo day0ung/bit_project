@@ -1,10 +1,12 @@
 <template>
         <div class="small">
             <bar-chart></bar-chart>
-            
             <div class="content01_view">
                 <!-- <h1> {{title}} member333333333333333333</h1> -->
+                <h3> doughnut graph </h3>
             </div>
+            <doughnut-chart></doughnut-chart>
+            
         </div>
 
 </template>
@@ -13,10 +15,12 @@
 //Importing Bar class from the vue-chartjs wrapper
 // import {Bar} from 'vue-chartjs'
 import BarChart from './ChartDataArea/content_08_BarChart'
+import DonutChart from './ChartDataArea/content_08_DonutChart'
 //Exporting this so it can be used in other components
 export default {
   components:{
-    BarChart
+    BarChart,
+    DonutChart
   },
     data() {
       return {
@@ -45,7 +49,15 @@ export default {
         // JS function to generate numbers to be used for the chart
         return Math.floor(Math.random() * (50 - 5 + 1)) + 5
       }
-    }
+    },
+    watch: {
+    data: function() {
+      this._chart.destroy();
+      //this.renderChart(this.data, this.options);
+      this.getGenderDataMethod()
+      this.renderChart()
+      }
+    },
   
 }
 </script>
