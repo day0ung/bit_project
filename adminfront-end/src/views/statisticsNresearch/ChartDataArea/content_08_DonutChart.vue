@@ -8,7 +8,7 @@ export default {
   data() {
     return {
       datacollection: {
-        labels: ['skill1', 'skill2'],
+        labels: ['Man', 'woma'],
         datasets: [
           {
             backgroundColor: [randomColor()],
@@ -36,7 +36,14 @@ export default {
             // display: true
           },
         // responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
+
+        //add option for click
+        responsive: true, 
+        maintainAspectRatio: false, 
+        onClick:this.handle
+        //add option for click
+        
       }
      }
   },
@@ -44,6 +51,9 @@ export default {
     //renderChart function renders the chart with the datacollection and options object.
     this.renderChart(this.datacollection, this.options);
     this.getGenderDataMethod();
+
+
+
 
 
   
@@ -106,6 +116,21 @@ export default {
         console.log(this.datacollection.datasets[0].data)
         this.$data._chart.update()
         console.log("=========================checkdata=====================")
+      },
+
+      handle (point, event) {
+    	  const item = event[0]
+    	  this.$emit('on-receive', {
+      	index: item._index,
+        backgroundColor: item._view.backgroundColor,
+        value: this.datacollection.datasets[0].data[item._index]
+        
+        })
+      },
+
+
+      updateValue(data){
+        console.log(data);
       }
 
   }

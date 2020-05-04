@@ -7,7 +7,7 @@
             </div>
             <div class="dounutChartArea">
               <h3> 남여 가입자 비율(DonutChart) </h3>
-              <DonutChart width="500"></DonutChart>
+              <DonutChart  @on-receive="updateValue1"></DonutChart>
             </div>
           </div>
             <div class="content01_view">
@@ -31,41 +31,33 @@ export default {
   },
     data() {
       return {
-        datacollection: null // instantiating datacollection with null
+
       }
     },
     created() {
-      this.fillData() //anytime the vue instance is created, call the fillData() function.
+   
+    },
+    mounted(){
+
     },
     methods: {
-      fillData() {
-        this.datacollection = {
-          // Data for the y-axis of the chart
-          labels: ['January', 'February'],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              // Data for the x-axis of the chart
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }
-          ]
-        }
-      },
-      getRandomInt() {
-        // JS function to generate numbers to be used for the chart
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+
+    //   handle (point, event) {
+    // 	const item = event[0]
+    // 	this.$emit('on-receive', {
+    //   	index: item._index,
+    //     backgroundColor: item._view.backgroundColor,
+    //     value: this.values[item._index]
+    //   })
+    // },
+
+
+      updateValue1(data1){
+        // DonutChart.updateValue(data1);
+        console.log(data1.value);
       }
+
     },
-    watch: {
-    data: function() {
-      this._chart.destroy();
-      //this.renderChart(this.data, this.options);
-      this.getGenderDataMethod()
-      this.renderChart()
-      }
-    },
-  
 }
 </script>
 

@@ -54,9 +54,6 @@ export default {
     //renderChart function renders the chart with the datacollection and options object.
     this.renderChart(this.datacollection, this.options);
     this.getGenderDataMethod();
-
-
-  
     
     
   },
