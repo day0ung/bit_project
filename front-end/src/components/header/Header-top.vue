@@ -21,15 +21,15 @@
              
             <div class="logo">
                 <router-link :to="{path: '/'}" exact>
-                    <img style="height: 55px; margin-top: -25px;" src='../../assets/css/images/logo.png' alt="팔레트" />
+                    <img style="height: 75px; margin-top: -35px;" src='../../assets/css/images/logo.png' alt="팔레트" />
                 </router-link>
             </div>
-            <div class="searchWrap">
+            <!-- <div class="searchWrap">
                 <form name="search" method="get" action="#">
                     <input type="text" maxlength="20" name="mainSearchWord" placeholder="검색어를 입력해주세요">
                     <el-button icon="el-icon-search" size="small" circle></el-button>
                 </form>
-            </div>
+            </div> -->
             </div>
         </div>
     </div>

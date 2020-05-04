@@ -20,6 +20,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberDto;
 import com.palette.model.MemberLikeDto;
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
@@ -76,7 +77,16 @@ public class GroupController {
         GroupDto outDto = groupService.getOneGroup(insertDto);
     	return outDto;
     }
-    
+    @PostMapping(value = "/getGroupMember")
+    public List<MemberDto> getGroupMember(GroupDto groupDto){
+    	System.out.println("getGroupMember()");
+    	List<MemberDto> list = groupService.getGroupMember(groupDto);
+    	for (int i = 0; i < list.size(); i++) {
+    		System.out.println("groupMember"+list.get(i));
+			
+		}
+    	return list;
+    }
     
     @PostMapping(value = "/creatGroupApply")
     public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule, MultipartFile file)

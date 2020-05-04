@@ -22,6 +22,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberDto;
 import com.palette.model.MemberLikeDto;
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
@@ -55,6 +56,9 @@ public class GroupService {
 
 	public GroupDto getOneGroup(GroupDto insertDto) {
 		return groupDao.getOneGroup(insertDto);
+	}
+	public List<MemberDto> getGroupMember(GroupDto groupDto) {
+		return groupDao.getGroupMember(groupDto);
 	}
 
 	public List<GroupMemberDto> getGroupMemberName(int seq) {
@@ -308,5 +312,7 @@ public class GroupService {
 	public void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto) {
 		groupDao.updateGroupMemberRegistrationRequest(groupMemberDto);
 	}
+
+	
 
 }

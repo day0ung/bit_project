@@ -16,6 +16,7 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberDto;
 import com.palette.model.MemberLikeDto;
 
 @Mapper
@@ -27,6 +28,7 @@ public interface GroupDao {
 	ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams);
 
 	GroupDto getOneGroup(GroupDto insertDto);
+	List<MemberDto> getGroupMember(GroupDto groupDto);
 	
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
@@ -86,6 +88,7 @@ public interface GroupDao {
 	void likeJoinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
 	void groupWaitingDelete(GroupMemberDto groupMemberDto);
 	void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+	
 
 
 
