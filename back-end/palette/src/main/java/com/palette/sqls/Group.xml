@@ -108,7 +108,7 @@
 			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-		WHERE g.DEL= 0;
+		WHERE g.PERMISSION= 1 and g.DEL=0;
 </select>
 <select id="getMyGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
@@ -126,7 +126,7 @@
 			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0;
+	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0 and i.PERMISSION = 1;
 </select>
 <select id="getMyOtherGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
@@ -151,7 +151,7 @@
 	<if test="interBigSeq != 0">
 	and i.INTER_BIG_SEQ = #{interBigSeq}
 	</if>
-	AND i.DEL = 0;
+	AND i.DEL = 0 AND i.PERMISSION = 1;
 </select>
 
  <select id="getOneGroup" parameterType="com.palette.model.GroupDto" resultMap="GroupInfo">
