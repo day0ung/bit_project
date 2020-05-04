@@ -1,9 +1,9 @@
 <script>
 //Importing Bar class from the vue-chartjs wrapper
-import {Bar} from 'vue-chartjs'
+import {Doughnut} from 'vue-chartjs'
 //Exporting this so it can be used in other components
 export default {
-  extends: Bar,
+  extends: Doughnut,
   data() {
     return {
       datacollection: {
@@ -17,7 +17,7 @@ export default {
             borderWidth: 1,
             pointBorderColor: '#249EBF',
             //Data to be represented on y-axis
-            data: [100, 100]
+            data: []
           }
         ]
       },
