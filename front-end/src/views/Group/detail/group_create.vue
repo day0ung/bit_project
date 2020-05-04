@@ -198,6 +198,7 @@ export default {
             })
         },
         gruopCreateApply: function (event) {
+            //this.$message({ type: 'success',title:'그룹신청이 완료되었습니다', message:'심사 후 그룹개설이 완료됩니다.' })
             alert("그룹신청이 완료되었습니다.\n심사 후 그룹개설이 완료됩니다.")
             this.$router.push({
                 path: "/group"

@@ -191,7 +191,8 @@ export default {
             axios.post("http://localhost:9000/recruitDelete", params)
                 .then(res =>{
                     if(res.data === true){
-                        alert("성공적으로 삭제되었습니다.")
+                        this.$message({ type: 'success', message:'성공적으로 삭제되었습니다.' })
+                        //alert("성공적으로 삭제되었습니다.")
                         this.$router.push({
 						name: 'recruiting'
 					    })

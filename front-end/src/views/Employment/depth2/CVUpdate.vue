@@ -62,7 +62,8 @@ export default {
 							category: this.ruleForm.category
 						}
 					}).then(res =>{
-						alert("이력서가 성공적으로 수정 되었습니다.")
+						this.$message({ type: 'success', message:'이력서가 성공적으로 수정 되었습니다.' })
+						//alert("이력서가 성공적으로 수정 되었습니다.")
 						var params = new URLSearchParams();	// post 방식으로 받아야함. 
 						params.append('memberSeq', this.login1.memberSeq);
 						axios.post("http://localhost:9000/oneMember", params).then(res => { 

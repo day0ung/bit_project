@@ -125,7 +125,7 @@ export default {
             this.$refs[formName].validate((valid) => {
             if (valid) {
                 var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
-                alert(memberAddress)
+                //alert(memberAddress)
                 var params = new URLSearchParams();
                 params.append('memberId', this.ruleForm.memberId)
                 params.append('pwd', this.ruleForm.pass)
@@ -139,7 +139,8 @@ export default {
                 axios.post('http://localhost:9000/createMember', params).then(
                     res => {
                         if(res.data == true){
-                            alert('회원가입이 완료 되었습니다')
+                            this.$message({ type: 'success', message:'회원가입이 완료 되었습니다'})
+                            //alert('회원가입이 완료 되었습니다')
                             this.$router.push ({name:'home'})
                         }
                     }) 

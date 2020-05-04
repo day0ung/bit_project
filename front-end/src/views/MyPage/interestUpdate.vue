@@ -96,12 +96,13 @@ export default {
                 var interArea= this.ruleForm.address + this.ruleForm.extraAddress
                 var params = new URLSearchParams();
                 params.append('memberSeq', this.memSeq)
-                alert(this.memSeq)
+                //alert(this.memSeq)
                 params.append('interSmallSeqs', this.ruleForm.inter)
                 axios.post('http://localhost:9000/InterestingUpdate', params).then(
                 res => {
                     if(res.data == 'perfect'){
-                        alert('작성이 완료 되었습니다')
+                        this.$message({ type: 'success', message:'수정이 완료 되었습니다'})
+                        //alert('작성이 완료 되었습니다')
                          this.$emit('update', this.memSeq)   
                     }
                 }) 

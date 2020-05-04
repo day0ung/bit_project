@@ -123,7 +123,8 @@ export default {
                 axios.post('http://localhost:9000/intersting', params).then(
                 res => {
                     if(res.data == 'perfect'){
-                        alert('작성이 완료 되었습니다')
+                        this.$message({ type: 'success', message:'작성이 완료 되었습니다'})
+                        //alert('작성이 완료 되었습니다')
                         this.$router.push ({path:'/'})
                     }
                 }) 

@@ -12,8 +12,11 @@
     </div>
     <!-- 그룹 스터디 -->
     <h3>그룹 스터디</h3>
-    <div>
-      <homegroup></homegroup>
+    <div v-if="this.$store.state.loginUser == null">
+      <nhomegroup></nhomegroup>
+    </div>
+    <div v-else>
+      <lhomegroup></lhomegroup>
     </div>
     <div class="hr_div"/>
     <!-- 취업 정보 -->
@@ -34,13 +37,14 @@
 
 <script>
 import recruiting from '@/views/Employment/depth2/Recruiting_list'
-import homegroup from '@/views/Group/Non_login_menu/n_main'
+import nhomegroup from '@/views/Group/Non_login_menu/n_main'
+import lhomegroup from '@/views/Group/login_menu/l_main'
 import notice from '@/views/Notice/Notice'
 
 export default {
   name: 'Home',
   components: {
-    recruiting, homegroup, notice
+    recruiting, nhomegroup, lhomegroup, notice
   },
 
 }

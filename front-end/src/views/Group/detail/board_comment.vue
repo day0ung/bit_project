@@ -92,7 +92,7 @@ name: 'Comment',
       })
     },
     insertComment(){
-      alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_group.detailSeq +"/ content: "+this.content)
+      //alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_group.detailSeq +"/ content: "+this.content)
       //this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('memberSeq', this.loginSeq);
@@ -141,7 +141,7 @@ name: 'Comment',
       })
     },
     answerDelete(boardCommentSeq){
-      alert(boardCommentSeq+"/delete")
+      //alert(boardCommentSeq+"/delete")
         var params = new URLSearchParams();
         params.append('boardCommentSeq', boardCommentSeq);
         axios.post("http://localhost:9000/answerDelete", params).then(res => { 
@@ -153,7 +153,7 @@ name: 'Comment',
       alert(boardCommentSeq+"/report")
     },
     answerInsert(boardCommentSeq){
-      alert(boardCommentSeq+"/"+this.subContent)
+      //alert(boardCommentSeq+"/"+this.subContent)
       var params = new URLSearchParams();
       params.append('memberSeq', this.$store.state.loginUser.memberSeq)
       params.append('boardCommentSeq', boardCommentSeq);

@@ -6,7 +6,7 @@
       <el-button @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
         <el-input v-model="searchWord"
-                  placeholder="전체목록보기버튼"
+                  placeholder="검색어를 입력하세요"
                   class="input-with-select">
         <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right: 10px" @click="allList"></el-button>
           <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
@@ -112,10 +112,12 @@ export default {
     },
     searchBoard(){
       if(this.s_keyWord==''){
-        alert('검색타입을 설정해주세요')
+        this.$message({ type: 'info', message:'검색타입을 설정해주세요' });
+        //alert('검색타입을 설정해주세요')
       }
       if(this.searchWord==""){
-        alert('검색어를 입력해주세요')
+        this.$message({ type: 'info', message:'검색어를 입력해주세요' });
+        //alert('검색어를 입력해주세요')
       }
       
       if(this.s_keyWord != '' && this.searchWord!=''){

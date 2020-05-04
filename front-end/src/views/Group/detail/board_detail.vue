@@ -55,13 +55,24 @@ data(){
           this.$emit("showUpdate")
         },
         boardOneDelete(){
-          var params = new URLSearchParams();	// post 방식으로 받아야함.
-          params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
-          axios.post("http://localhost:9000/groupBoardDelete", params)
-                  .then(res => {
-                    alert("게시글이 정상적으로 삭제 되었습니다.")
-                    this.showList()
-          })
+          this.$confirm('정말 삭제하시겠습니까?', 'Warning', {
+            confirmButtonText: 'OK',
+            cancelButtonText: 'Cancel',
+            type: 'warning'
+          }).then(() => {
+            var params = new URLSearchParams();	// post 방식으로 받아야함.
+            params.append('boardSeq', this.$store.state.s_group.groupBoardDetail.boardSeq);
+            axios.post("http://localhost:9000/groupBoardDelete", params)
+                    .then(res => {
+                      this.$message({ type: 'success', message:' Delete completed' });
+                      this.showList()
+            })
+              }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: 'Delete canceled'
+            });          
+          });
         },
         allList(){
           this.$store.state.s_group.showBoardList = true
