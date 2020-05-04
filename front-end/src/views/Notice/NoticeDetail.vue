@@ -58,7 +58,8 @@ data(){
           params.append('boardSeq', this.boardSeq);
           axios.post("http://localhost:9000/anonymousBoardDelete", params)
                   .then(res => {
-                    alert("게시글이 정상적으로 삭제 되었습니다.")
+                    this.$message({ type: 'success', message:'게시글이 정상적으로 삭제 되었습니다.'})
+                    //alert("게시글이 정상적으로 삭제 되었습니다.")
                     this.$router.push({ name : "Notice" })
           })
         },

@@ -162,10 +162,12 @@ export default {
     },
     searchBoard(){
       if(this.s_keyWord==''){
-        alert('검색타입을 설정해주세요')
+        this.$message({ type: 'info', message:'검색타입을 설정해주세요' })
+        //alert('검색타입을 설정해주세요')
       }
       if(this.searchWord==""){
-        alert('검색어를 입력해주세요')
+        this.$message({ type: 'info', message:'검색어를 입력해주세요' })
+        //alert('검색어를 입력해주세요')
       }
       
       if(this.s_keyWord != '' && this.searchWord!=''){
@@ -218,7 +220,7 @@ export default {
   },
   mounted(){
     if(this.login1 == null){
-      alert("a")
+      //alert("a")
 		} else {
       var params = new URLSearchParams();	// post 방식으로 받아야함. 
       params.append('memberSeq', this.login1.memberSeq);

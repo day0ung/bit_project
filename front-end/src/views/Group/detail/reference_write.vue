@@ -98,7 +98,8 @@ export default {
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
-                    alert("자료가 업로드 되었습니다.")
+                    this.$message({ type: 'success', message:'성공적으로 등록되었습니다' });
+                    //alert("자료가 업로드 되었습니다.")
                     this.showGroupReference()
 				})
 				

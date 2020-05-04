@@ -87,7 +87,7 @@ export default {
     })
     },
     gotoClick(row, column, event){
-      alert(row.boardSeq)
+      //alert(row.boardSeq)
       this.$emit("showReferenceDetail")
       this.$store.state.s_group.detailSeq = row.boardSeq
       this.$store.state.s_group.showReferenceDetail = true

@@ -115,7 +115,8 @@ export default {
                   }
                   }).then(res =>{
                     if(res.data === ""){
-                      alert("성공적으로 등록되었습니다.")
+                      this.$message({ type: 'success', message:'성공적으로 등록되었습니다.'})
+                      //alert("성공적으로 등록되었습니다.")
                       this.$emit('insert')
                     }
                     else {

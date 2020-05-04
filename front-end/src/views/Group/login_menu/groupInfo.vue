@@ -154,11 +154,14 @@ export default {
           axios.post("http://localhost:9000/attendGroup", params)
                         .then(res => {
                     if(res.data === 0){
-                      alert('출석일이 아닙니다')
+                      this.$message({ type: 'info', message:'출석일이 아닙니다'});
+                      //alert('출석일이 아닙니다')
                     }else if(res.data === 2){
-                      alert('이미 출석처리 됐습니다')
+                      this.$message({ type: 'info', message:'이미 출석처리 됐습니다'});
+                      //alert('이미 출석처리 됐습니다')
                     }else{
-                      alert('출첵!!!!')
+                      this.$message({ type: 'success', message:'출석되었습니다'});
+                      //alert('출첵!!!!')
                       this.$store.state.s_group.check1 = false;
                       this.$store.state.s_group.check2 = true;
                       //alert(this.check1)

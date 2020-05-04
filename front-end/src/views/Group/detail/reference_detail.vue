@@ -74,7 +74,8 @@ export default {
       var params = new URLSearchParams()
       params.append('boardSeq', this.$store.state.s_group.groupReferenceDetail.boardSeq);
       axios.post("http://localhost:9000/groupReferenceDelete", params).then(res => {
-        alert("자료가 삭제되었습니다.")
+        this.$message({ type: 'success', message:'성공적으로 삭제되었습니다' });
+        //alert("자료가 삭제되었습니다.")
         this.showGroupReference()
       })
     },

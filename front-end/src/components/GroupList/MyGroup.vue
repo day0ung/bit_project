@@ -89,8 +89,8 @@ export default {
       params.append("groupInfoSeq", seq)
       params.append("memberSeq", this.$store.state.loginUser.memberSeq)
       axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
-        //this.$message(groupName + '그룹이 찜목록에 추가되었습니다.')
-        alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+        this.$message(groupName + ' 그룹이 찜목록에 추가되었습니다. 마이페이지에서 확인해주세요')
+        //alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
         this.$store.state.s_group.MyGroupLoading = false
       })
     }
