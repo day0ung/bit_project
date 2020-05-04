@@ -173,7 +173,7 @@
 	where g.GROUP_INFO_SEQ = #{groupInfoSeq};
 </select>
 <select id="getGroupMember" parameterType="com.palette.model.GroupDto" resultType="com.palette.model.MemberDto">
-	select m.MEMBER_SEQ, m.MEMBER_ID
+	select m.MEMBER_SEQ, m.MEMBER_ID, g.del AS del
 	from GROUP_MEMBER g
 	join MEMBER m
 		on g.MEMBER_SEQ = m.MEMBER_SEQ
@@ -279,6 +279,18 @@
 	UPDATE GROUP_MEMBER
 	SET DEL = 3
 	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
+
+<update id="permissionGroupMember" parameterType="java.lang.Integer">
+	UPDATE GROUP_MEMBER
+	SET DEL = 0
+	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
+</update>
+
+<update id="groupMemberDelete" parameterType="java.lang.Integer">
+	UPDATE GROUP_MEMBER
+	SET DEL = 1
+	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
 </update>
 
 </mapper>

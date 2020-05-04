@@ -105,7 +105,21 @@ public class GroupController {
         return "";
     }
 
-//TODO join like mypage
+    @PostMapping (value = "/permissionGroupMember")
+    public String permissionGroupMember(GroupMemberDto groupMemberDto){
+        System.out.println("permissionGroupMember()");
+        groupService.permissionGroupMember(groupMemberDto);
+        return "";
+    }
+
+    @PostMapping(value = "/groupMemberDelete")
+    public String groupMemberDelete(GroupMemberDto groupMemberDto){
+        System.out.println("groupMemberDelete()");
+        groupService.groupMemberDelete(groupMemberDto);
+        return "";
+    }
+
+    //TODO join like mypage
     @PostMapping(value = "/joinGroupMemberRegistrationRequest")
     public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
         System.out.println("joinGroupMemberRegistrationRequest()");

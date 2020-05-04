@@ -24,13 +24,17 @@
                   <tr v-for="groupOne in this.$store.state.s_member.MyPageGroupList" :key="groupOne.groupInfoSeq">
                     <td colspan="3">{{groupOne.groupName}}</td>
                     <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
-                    <td style="width: 100px; text-align: left;">
+                    <td style="width: 50px; text-align: left;">
                       <el-button v-if="groupOne.memberSeq === loginSeq" type="text" style="color: #ff5151; font-size: 16px">그룹장</el-button>
                       <el-button v-else="" type="text" style="color: #ff5151; font-size: 16px">멤버</el-button>
                     </td>
-                    <td style="width: 100px; text-align: left;">
+                    <td style="width: 80px; text-align: left;">
                       <el-button v-if="groupOne.memberSeq === loginSeq" type="text" style="color: #ff5151; font-size: 16px" @click="gotoDetail(groupOne.groupInfoSeq)">| 관리하기</el-button>
                       <el-button v-else="" type="text" style="color: #ff5151; font-size: 16px" @click="gotoDetail(groupOne.groupInfoSeq)">| 활동하기</el-button>
+                    </td>
+                    <td style="width: 100px; text-align: left;">
+                      <el-button v-if="groupOne.memberSeq === loginSeq" type="text" style="color: #ff5151; font-size: 16px"></el-button>
+                      <el-button v-else="" type="text" style="color: #ff5151; font-size: 16px" @click="groupMemberDelete(loginSeq, groupOne.groupName, groupOne.groupInfoSeq)">| 탈퇴하기</el-button>
                     </td>
                   </tr>                   
                 </tbody>
@@ -71,6 +75,22 @@ export default {
     }
   },
     methods:{
+      groupMemberDelete(memberSeq, groupName, groupInfoSeq){
+        this.$confirm(groupName + '그룹에서 정말 탈퇴하시겠습니까?', 'Warning', {
+          confirmButtonText: '예',
+          cancelButtonText: '아니오',
+          type: 'warning'
+        }).then(() => {
+          this.$message({ type: 'warning', message: groupName +'그룹에서 탈퇴하였습니다.' });
+          console.log("탈퇴" + memberSeq)
+          let params = new URLSearchParams();
+          params.append("memberSeq", memberSeq)
+          params.append("groupInfoSeq", groupInfoSeq)
+          axios.post("http://localhost:9000/groupMemberDelete", params).then(res => {
+            console.log("groupMemberDelete()")
+          })
+        })
+      },
       createGroup(){
         this.$router.push({name :"Create"})
       },

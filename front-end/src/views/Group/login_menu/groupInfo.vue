@@ -41,7 +41,17 @@
         <div><span>분류</span> {{ this.$store.state.s_group.grouDetail.interBigDto.bigName }} > {{this.$store.state.s_group.grouDetail.interSmallDto.smallName}}</div>
         <div><span>지역</span> {{ this.$store.state.s_group.grouDetail.groupLocation }}</div>
         <div><span>인원</span> {{ this.$store.state.s_group.grouDetail.currMember}} / {{ this.$store.state.s_group.grouDetail.maxMember}}</div>
-        <div><span>멤버</span><li v-for="person in this.$store.state.s_group.groupMember" :key="person.memberSeq">{{person.memberId}}</li></div>
+        <div><span>멤버</span>
+          <li v-for="person in this.$store.state.s_group.groupMember" :key="person.memberSeq">
+            <div v-if="person.del === 0"> {{person.memberId}}
+              <span class="el-icon-circle-check" v-if="person.memberSeq === groupInfoMemberSeq">그룹장</span>
+              <span class="el-icon-circle-check" v-else="">멤버</span>
+            </div>
+            <div v-if="person.del === 2"> {{person.memberId}}
+              <span class="el-icon-circle-plus-outline">가입신청한 멤버</span>
+              <span class="el-icon-check" v-if="groupInfoMemberSeq = loginSeq" @click="permissionBtn(person.memberSeq, person.memberId)">가입승인하기</span>
+            </div>
+          </li></div>
         <div><span>시작일</span> {{ this.$store.state.s_group.grouDetail.startDate }}</div>
         <div><span>완료일</span> {{ this.$store.state.s_group.grouDetail.endDate }}</div>
 
@@ -68,20 +78,28 @@ export default {
         return{
             groupInfoSeq: "",
             loginSeq:0,
-            
+            groupInfoMemberSeq: 0,
         }
     },methods:{
+        permissionBtn(permissionMemberSeq, memberId){
+          let params = new URLSearchParams();	// post 방식으로 받아야함.
+          params.append('memberSeq', permissionMemberSeq);
+          params.append('groupInfoSeq', this.$route.params.groupSeq);
+          axios.post("http://localhost:9000/permissionGroupMember", params)
+                      .then(res => {
+                        alert(memberId + "님이 그룹에 가입되었습니다.")
+              })
+        },
         getGroupOne(){
             this.$store.state.s_group.showGroupInfo = true
             this.$store.state.s_group.groupSeq = this.$route.params.groupSeq
             this.groupInfoSeq = this.$store.state.s_group.groupSeq
-
             var params = new URLSearchParams();	// post 방식으로 받아야함.
             params.append('groupInfoSeq', this.groupInfoSeq);
-            
             axios.post("http://localhost:9000/getOneGroup", params)
                         .then(res => {
                     this.$store.state.s_group.grouDetail = res.data;
+                    this.groupInfoMemberSeq = res.data.memberSeq;
                 })
             this.attendStatus()
             

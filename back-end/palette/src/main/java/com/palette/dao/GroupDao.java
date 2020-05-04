@@ -88,6 +88,9 @@ public interface GroupDao {
 	void likeJoinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
 	void groupWaitingDelete(GroupMemberDto groupMemberDto);
 	void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+
+	void permissionGroupMember(GroupMemberDto groupMemberDto);
+	void groupMemberDelete(GroupMemberDto groupMemberDto);
 	
 
 

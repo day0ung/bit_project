@@ -288,16 +288,20 @@ public class GroupService {
 	}
 
 	public String checkGroupMember(GroupMemberDto groupMemberDto) {
-		if(groupDao.checkGroupMember(groupMemberDto).getDel() == 0){
-				return "가입된회원";
-		}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 1){
+		if (groupDao.checkGroupMember(groupMemberDto) == null){
 			return "가입가능한회원";
-		}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 2){
-			return "가입대기중회원";
-		}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 3){
-			return "업데이트해야하회원";
 		}else{
-			return "가입가능한회원";
+			if(groupDao.checkGroupMember(groupMemberDto).getDel() == 0){
+					return "가입된회원";
+			}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 1){
+				return "가입가능한회원";
+			}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 2){
+				return "가입대기중회원";
+			}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 3){
+				return "업데이트해야하회원";
+			}else{
+				return "가입가능한회원";
+			}
 		}
 	}
 
@@ -311,6 +315,14 @@ public class GroupService {
 
 	public void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto) {
 		groupDao.updateGroupMemberRegistrationRequest(groupMemberDto);
+	}
+
+	public void permissionGroupMember(GroupMemberDto groupMemberDto) {
+		groupDao.permissionGroupMember(groupMemberDto);
+	}
+
+	public void groupMemberDelete(GroupMemberDto groupMemberDto) {
+		groupDao.groupMemberDelete(groupMemberDto);
 	}
 
 	
