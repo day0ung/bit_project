@@ -2,13 +2,11 @@
         <div class="chartArea">
           <div class="set_one">
             <div class="barchartArea">
-              <h3> line graph </h3>
+              <h3> 남여 가입자 비율(lineChart) </h3>
               <bar-chart></bar-chart>
             </div>
-
-
             <div class="dounutChartArea">
-              <h3> doughnut graph </h3>
+              <h3> 남여 가입자 비율(DonutChart) </h3>
               <DonutChart width="500"></DonutChart>
             </div>
           </div>
@@ -21,9 +19,10 @@
 
 <script>
 //Importing Bar class from the vue-chartjs wrapper
-// import {Bar} from 'vue-chartjs'
+
 import BarChart from './ChartDataArea/content_08_BarChart'
 import DonutChart from './ChartDataArea/content_08_DonutChart'
+
 //Exporting this so it can be used in other components
 export default {
   components:{
@@ -77,9 +76,8 @@ export default {
     margin:  150px auto;
   } */
 
-  .dounutChartArea{
-  max-block-size: 300px;
-  
+.set_one{
+  display:flex;
 }
 
 </style>
