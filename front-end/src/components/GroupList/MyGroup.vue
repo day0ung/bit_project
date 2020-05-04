@@ -1,5 +1,9 @@
 <template>
-   <div style="display: flex; flex-wrap: wrap;" v-loading="this.$store.state.s_group.MyGroupLoading">
+   <div >
+     <div class="sizeZero" v-if="groupSize ==0">
+       <h6>스터디 그룹에 가입하세요</h6>
+     </div>
+     <div v-else style="display: flex; flex-wrap: wrap;" v-loading="this.$store.state.s_group.MyGroupLoading">
         <aside class="profile-card shadow-drop-br" v-for="groupInfo in list" :key="groupInfo.groupInfoSeq" style="margin: 20px auto;">
           <div class="blue">
             <br>
@@ -39,6 +43,7 @@
         <div class="back_footer">
         </div>
       </div>
+    </div>
 </template>
 
 <script>
@@ -51,7 +56,8 @@ export default {
       loading: true,
       list: [],
       image: "",
-      loginSeq:""      
+      loginSeq:"",
+      groupSize:-1,      
     }
   },  
   mounted(){
@@ -64,6 +70,10 @@ export default {
             .then(res => {
         //alert(JSON.stringify(res.data))
         this.list = res.data
+        //alert(res.data.length)
+        if(res.data.length == 0){
+          this.groupSize = res.data.length
+        }
         this.$store.state.s_group.MyGroupLoading = false
       })
     
@@ -79,6 +89,7 @@ export default {
       params.append("groupInfoSeq", seq)
       params.append("memberSeq", this.$store.state.loginUser.memberSeq)
       axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
+        //this.$message(groupName + '그룹이 찜목록에 추가되었습니다.')
         alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
         this.$store.state.s_group.MyGroupLoading = false
       })
@@ -136,12 +147,12 @@ div.group_detail
 }
 
 .hr{
-  margin: auto;
+  display: flex;
   margin-top: 15px;
   margin-bottom: 5px;
-  background: #9e9e9e;
+  background:#c1c1c1;
   height: 1px;
-  width: 70%;
+  width: 100%;
 }
 
 .detail_desc {
@@ -231,6 +242,10 @@ header {
   padding: 1px 20px 10px 20px !important;
   transition: all linear 0.7s;
   height: 85px;
+}
+
+.sizeZero{
+  margin:50px; text-align:center;
 }
 
 /*PROFILE IMAGE ANIMATE */

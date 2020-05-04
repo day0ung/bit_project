@@ -6,7 +6,7 @@
       <el-button @click="showWrite" round>글쓰기</el-button>
       <div class="boardSearchBar">
         <el-input v-model="searchWord"
-                  placeholder="전체목록보기버튼"
+                  placeholder="검색어를 입력하세요"
                   class="input-with-select">
         <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right: 10px" @click="allList"></el-button>
           <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">

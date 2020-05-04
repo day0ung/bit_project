@@ -10,7 +10,7 @@
           size="large"
           placeholder="검색">
           <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
-          <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="제목" :value="title">
             <!-- <el-option label="작성자" value="writer"></el-option> -->
             <el-option label="제목" value="title"></el-option>
           </el-select>
@@ -82,7 +82,7 @@ export default {
         limit: 10,
         title: "",
         searchWord: "",
-        s_keyWord: ""
+        s_keyWord: "title"
       },
       searchWord:'',
       
@@ -101,7 +101,7 @@ export default {
       })
     },
     allList(){
-     this.s_keyWord=''
+     
      this.searchWord=''
 
      this.loading = true
@@ -135,7 +135,7 @@ export default {
     },
     searchBoard(){
       if(this.s_keyWord==''){
-        alert('검색타입을 설정해주세요')
+        this.s_keyWord = 'title'
       }
       if(this.searchWord==""){
         alert('검색어를 입력해주세요')
