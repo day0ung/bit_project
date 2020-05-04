@@ -172,6 +172,14 @@
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where g.GROUP_INFO_SEQ = #{groupInfoSeq};
 </select>
+<select id="getGroupMember" parameterType="com.palette.model.GroupDto" resultType="com.palette.model.MemberDto">
+	select m.MEMBER_SEQ, m.MEMBER_ID
+	from GROUP_MEMBER g
+	join MEMBER m
+		on g.MEMBER_SEQ = m.MEMBER_SEQ
+	where g.GROUP_INFO_SEQ = #{groupInfoSeq}
+
+</select>
 
 <insert id="insertAttendGroup" parameterType="com.palette.model.GroupSchedule">
 	insert into GROUP_ATTEND(GROUP_INFO_SEQ, MEMBER_SEQ, ATTEND_SYSDATE)
