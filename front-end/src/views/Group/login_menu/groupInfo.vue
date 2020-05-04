@@ -41,7 +41,7 @@
         <div><span>분류</span> {{ this.$store.state.s_group.grouDetail.interBigDto.bigName }} > {{this.$store.state.s_group.grouDetail.interSmallDto.smallName}}</div>
         <div><span>지역</span> {{ this.$store.state.s_group.grouDetail.groupLocation }}</div>
         <div><span>인원</span> {{ this.$store.state.s_group.grouDetail.currMember}} / {{ this.$store.state.s_group.grouDetail.maxMember}}</div>
-        <div><span>멤버</span><li v-for="person in member" :key="person.memberSeq">{{person.memberId}}</li></div>
+        <div><span>멤버</span><li v-for="person in this.$store.state.s_group.groupMember" :key="person.memberSeq">{{person.memberId}}</li></div>
         <div><span>시작일</span> {{ this.$store.state.s_group.grouDetail.startDate }}</div>
         <div><span>완료일</span> {{ this.$store.state.s_group.grouDetail.endDate }}</div>
 
@@ -68,7 +68,7 @@ export default {
         return{
             groupInfoSeq: "",
             loginSeq:0,
-            member:[]
+            
         }
     },methods:{
         getGroupOne(){
@@ -87,7 +87,7 @@ export default {
             
             axios.post("http://localhost:9000/getGroupMember", params)
                         .then(res => {
-                    this.member = res.data;
+                    this.$store.state.s_group.groupMember = res.data;
             })
 
         },
