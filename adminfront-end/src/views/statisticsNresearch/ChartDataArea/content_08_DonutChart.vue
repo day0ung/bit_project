@@ -1,54 +1,44 @@
 <script>
 //Importing Bar class from the vue-chartjs wrapper
 import {Doughnut} from 'vue-chartjs'
+import randomColor from 'randomcolor'
 //Exporting this so it can be used in other components
 export default {
   extends: Doughnut,
   data() {
     return {
       datacollection: {
-        //Data to be represented on x-axis
-        labels: ['Man', 'woman'],
+        labels: ['skill1', 'skill2'],
         datasets: [
           {
-            label: 'Data One',
-            backgroundColor: '#4CAF50',
-            pointBackgroundColor: 'white',
-            borderWidth: 1,
-            pointBorderColor: '#249EBF',
-            //Data to be represented on y-axis
-            data: []
+            backgroundColor: [randomColor()],
+            data: [1, 1]
           }
         ]
       },
-      //Chart.js options that controls the appearance of the chart
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            },
-            gridLines: {
-              display: true
-            }
-          }],
-          xAxes: [ {
-            gridLines: {
-              display: false
-            }
-          }]
+      options:{
+         scales: {
+          // yAxes: [{
+            // ticks: {
+              // beginAtZero: true
+            // },
+            // gridLines: {
+              // display: true
+            // }
+          // }],
+          // xAxes: [ {
+            // gridLines: {
+              // display: false
+            // }
+          // }]
         },
         legend: {
-            display: true
+            // display: true
           },
-        responsive: true,
+        // responsive: true,
         maintainAspectRatio: false
-      },
-
-      // setting receive data area
-      getRawData:'',
-
-    }
+      }
+     }
   },
   mounted() {
     //renderChart function renders the chart with the datacollection and options object.
@@ -118,16 +108,13 @@ export default {
         console.log("=========================checkdata=====================")
       }
 
-  },
-    watch: {
-    data: function() {
-      this._chart.destroy();
-      //this.renderChart(this.data, this.options);
-      this.getGenderDataMethod()
-      
-    }
-  },
+  }
+
   
 }
 
 </script>
+<style scoped>
+
+
+</style>

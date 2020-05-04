@@ -1,12 +1,20 @@
 <template>
-        <div class="small">
-            <bar-chart></bar-chart>
+        <div class="chartArea">
+          <div class="set_one">
+            <div class="barchartArea">
+              <h3> line graph </h3>
+              <bar-chart></bar-chart>
+            </div>
+
+
+            <div class="dounutChartArea">
+              <h3> doughnut graph </h3>
+              <DonutChart width="500"></DonutChart>
+            </div>
+          </div>
             <div class="content01_view">
                 <!-- <h1> {{title}} member333333333333333333</h1> -->
-                <h3> doughnut graph </h3>
             </div>
-            <doughnut-chart></doughnut-chart>
-            
         </div>
 
 </template>
@@ -68,5 +76,10 @@ export default {
     max-width: 600px;
     margin:  150px auto;
   } */
+
+  .dounutChartArea{
+  max-block-size: 300px;
+  
+}
 
 </style>
