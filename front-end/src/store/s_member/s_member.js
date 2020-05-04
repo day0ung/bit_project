@@ -10,6 +10,7 @@ export default new Vuex.Store({
         todoList:[],
         MyPageInterLikeListLoading: false,
         MyPageInterLikeList: [],
+        MyPageGroupList: [],
     },
     actions: {
    
