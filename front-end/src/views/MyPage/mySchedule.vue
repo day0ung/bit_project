@@ -1,12 +1,17 @@
 <template>
   <div>
       <h1>MY SCHEDULE</h1>
+      <myschedule></myschedule>
   </div>
 </template>
 
 <script>
-export default {
+import myschedule from '@/views/Private/priSchedule.vue'
 
+export default {
+  components:{
+    myschedule
+  }
 }
 </script>
 
