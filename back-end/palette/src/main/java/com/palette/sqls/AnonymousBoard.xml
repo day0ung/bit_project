@@ -114,7 +114,7 @@ insert into FINAL.BOARD_COMMENT(BOARD_SEQ, MEMBER_SEQ, REF, STEP, DEPTH, CONTENT
 <select id="noticeComments" parameterType="java.lang.Integer" resultType="com.palette.model.CommentDto">
 		select *
 		from BOARD_COMMENT
-		where BOARD_SEQ = #{boardSeq} and DEL=0
+		where BOARD_SEQ = #{boardSeq}
 		order by REF, STEP 
 </select>
 

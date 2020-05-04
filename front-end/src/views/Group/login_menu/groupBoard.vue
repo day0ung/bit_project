@@ -153,6 +153,7 @@ export default {
     },
     gotoClick(row, column, event){
       this.$emit("showDetail")
+       this.$store.state.s_group.detailSeq = row.boardSeq
       var params = new URLSearchParams();	// post 방식으로 받아야함. 
       params.append('boardSeq', row.boardSeq); 
       axios.post("http://localhost:9000/groupBoardDetail", params).then(res => { 
