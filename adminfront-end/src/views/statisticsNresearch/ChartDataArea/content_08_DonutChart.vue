@@ -11,8 +11,8 @@ export default {
         labels: ['Man', 'woma'],
         datasets: [
           {
-            backgroundColor: [randomColor()],
-            data: [1, 1]
+            backgroundColor: [randomColor(), randomColor()],
+            data: [0,1]
           }
         ]
       },
@@ -39,8 +39,8 @@ export default {
         maintainAspectRatio: false,
 
         //add option for click
-        responsive: true, 
-        maintainAspectRatio: false, 
+        // responsive: true, 
+        // maintainAspectRatio: false, 
         onClick:this.handle
         //add option for click
         
@@ -121,7 +121,7 @@ export default {
       handle (point, event) {
     	  const item = event[0]
     	  this.$emit('on-receive', {
-      	index: item._index,
+      	// index: item._index,
         backgroundColor: item._view.backgroundColor,
         value: this.datacollection.datasets[0].data[item._index]
         
