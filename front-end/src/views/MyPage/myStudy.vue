@@ -15,22 +15,22 @@
               </colgroup>
                 <thead>
                   <tr>
-                    <th style="text-align: center;">가입한그룹</th>
+                    <th style="text-align: center;">가입한 스터디 그룹</th>
                     <th></th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="groupOne in this.$store.state.s_member.MyPageInterLikeList" :key="groupOne.groupInfoSeq">
+                  <tr v-for="groupOne in this.$store.state.s_member.MyPageGroupList" :key="groupOne.groupInfoSeq">
                     <td colspan="3">{{groupOne.groupName}}</td>
                     <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                     <td style="width: 100px; text-align: left;">
-                      <el-button v-if="groupOne.del === 0" type="text" style="color: #ff5151; font-size: 16px">멤버</el-button>
-                      <el-button v-else-if="groupOne.del === 1" type="text" style="color: #ff5151; font-size: 16px">그룹장</el-button>
+                      <el-button v-if="groupOne.memberSeq === loginSeq" type="text" style="color: #ff5151; font-size: 16px">그룹장</el-button>
+                      <el-button v-else="" type="text" style="color: #ff5151; font-size: 16px">멤버</el-button>
                     </td>
                     <td style="width: 100px; text-align: left;">
-                      <el-button type="text" style="color: #ff5151; font-size: 16px" @click="management(groupOne.groupInfoSeq)">| 관리하기</el-button>
-                      <el-button type="text" style="color: #ff5151; font-size: 16px" @click="groupActive(groupOne.groupInfoSeq)">| 활동하기</el-button>
+                      <el-button v-if="groupOne.memberSeq === loginSeq" type="text" style="color: #ff5151; font-size: 16px" @click="gotoDetail(groupOne.groupInfoSeq)">| 관리하기</el-button>
+                      <el-button v-else="" type="text" style="color: #ff5151; font-size: 16px" @click="gotoDetail(groupOne.groupInfoSeq)">| 활동하기</el-button>
                     </td>
                   </tr>                   
                 </tbody>
@@ -65,22 +65,34 @@
 
 <script>
 export default {
+  data(){
+    return{
+      loginSeq: 0,
+    }
+  },
     methods:{
       createGroup(){
         this.$router.push({name :"Create"})
       },
-      management(seq){
-        alert("관리하기" + seq)
+      // management(seq){
+      //   alert("관리하기" + seq)
+      // },
+      // groupActive(seq){
+      //   alert("활동하기" + seq)
+      // },
+      gotoDetail(groupSeq){
+        //alert("groupSeq=" + groupSeq + "loginSeq" + this.loginSeq)
+        this.$router.push('/group/menu/'+ groupSeq)
       },
-      groupActive(seq){
-        alert("활동하기" + seq)
-      }
     },
     mounted(){
+      this.loginSeq = this.$store.state.loginUser.memberSeq
       let params = new URLSearchParams();
       params.append("memberSeq", this.$store.state.loginUser.memberSeq)
-      axios.post("http://localhost:9000/MypageReferenceList", params).then(res => {
-          this.$store.state.s_member.MyPageGroupList = res.data
+      axios.post("http://localhost:9000/getMyGroup", params).then(res => {
+        console.log("getMyGroup()")
+        console.log(res.data)
+        this.$store.state.s_member.MyPageGroupList = res.data
       })
     }
 }

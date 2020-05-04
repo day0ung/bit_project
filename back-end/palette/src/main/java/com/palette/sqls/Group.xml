@@ -126,7 +126,7 @@
 			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where gm.MEMBER_SEQ =#{memberSeq} AND gm.DEL = 0;
+	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0;
 </select>
 <select id="getMyOtherGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
