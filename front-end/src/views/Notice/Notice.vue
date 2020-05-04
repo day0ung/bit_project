@@ -172,7 +172,7 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      alert(row.boardSeq)
+      //alert(row.boardSeq)
       this.$store.state.s_notice.boardSeq = row.boardSeq
       this.$router.push('/Notice/detail/'+row.boardSeq)
       //this.$router.push('/group/menu/'+groupSeq)

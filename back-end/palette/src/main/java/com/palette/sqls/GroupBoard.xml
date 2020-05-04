@@ -175,7 +175,7 @@ FROM ( SELECT ROW_NUMBER()OVER(ORDER BY RNUM DESC) AS LNUM,
 		from BOARD_COMMENT b
 		join MEMBER m
 		on b.MEMBER_SEQ = m.MEMBER_SEQ 
-		where BOARD_SEQ = #{boardSeq} and b.DEL=0
+		where BOARD_SEQ = #{boardSeq}
 		order by REF, STEP 
 	</select>
 	<insert id="insertComment" parameterType="com.palette.model.CommentDto">

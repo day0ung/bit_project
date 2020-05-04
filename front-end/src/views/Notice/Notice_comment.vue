@@ -6,43 +6,49 @@
             :key="comment.boardCommentSeq"
             :class="comment.depth>0?'depth':''"
             >
-          <div class="report">
-            <div v-if="loginSeq == comment.memberSeq">
-              <span @click="answerUpdate(comment.boardCommentSeq, comment.content)">수정</span>
-              <span @click="answerDelete(comment.boardCommentSeq)" style="margin: 0px 10px">삭제</span>
-            </div>
-            <div v-else>
-              <span @click="answerReport(comment.boardCommentSeq)">신고</span>
-            </div>
-          </div>
-          <div class="memberId">익 명</div>  
-          <div class="writeDate">{{comment.writeDate}}</div>
-          <div v-if="comment.boardCommentSeq==clicked">
-            <div v-show="isShow == 1"> <!-- 답글 -->
-              <span class="miniAnswer" @click="answerCancle(comment.boardCommentSeq)">답글 취소</span>
-              <div class="content">{{comment.content}}</div>
-              <el-input class="answerContent input-with-select" size="medium" style="width:80%"
-                        v-model="subContent" placeholder="댓글을 작성해주세요.">
-              <el-button size="mini" slot="append" @click="answerInsert(comment.boardCommentSeq)">등록</el-button></el-input>
-            </div>
-            <div v-show="isShow == 2"> <!-- 수정 -->
-              <span class="miniAnswer" @click="answerCancle(comment.boardCommentSeq)">답글</span>
-              <div class="content">
-                <el-input size="medium" v-model="answertxt" :value="comment.content" style="width:80%">
-                <el-button size="medium" slot="append" @click="realAnswerUpdate(comment.boardCommentSeq)">수정</el-button>
-                </el-input>
+          <div v-if="comment.del == 0">
+            <div class="report">
+              <div v-if="loginSeq == comment.memberSeq">
+                <span @click="answerUpdate(comment.boardCommentSeq, comment.content)">수정</span>
+                <span @click="answerDelete(comment.boardCommentSeq)" style="margin: 0px 10px">삭제</span>
+              </div>
+              <div v-else>
+                <span @click="answerReport(comment.boardCommentSeq)">신고</span>
               </div>
             </div>
-            <div v-show="isShow == false"><!-- 답글 취소 -->
-              <span class="miniAnswer" @click="answer(comment.boardCommentSeq)" >답글</span>
-              <div class="content">{{comment.content}}</div>
+            <div class="memberId">익 명</div>  
+            <div class="writeDate">{{comment.writeDate}}</div>
+            <div v-if="comment.boardCommentSeq==clicked">
+              <div v-show="isShow == 1"> <!-- 답글 -->
+                <span class="miniAnswer" @click="answerCancle(comment.boardCommentSeq)">답글 취소</span>
+                <div class="content">{{comment.content}}</div>
+                <el-input class="answerContent input-with-select" size="medium" style="width:80%"
+                          v-model="subContent" placeholder="댓글을 작성해주세요.">
+                <el-button size="mini" slot="append" @click="answerInsert(comment.boardCommentSeq)">등록</el-button></el-input>
+              </div>
+              <div v-show="isShow == 2"> <!-- 수정 -->
+                <span class="miniAnswer" @click="answerCancle(comment.boardCommentSeq)">답글</span>
+                <div class="content">
+                  <el-input size="medium" v-model="answertxt" :value="comment.content" style="width:80%">
+                  <el-button size="medium" slot="append" @click="realAnswerUpdate(comment.boardCommentSeq)">수정</el-button>
+                  </el-input>
+                </div>
+              </div>
+              <div v-show="isShow == false"><!-- 답글 취소 -->
+                <span class="miniAnswer" @click="answer(comment.boardCommentSeq)" >답글</span>
+                <div class="content">{{comment.content}}</div>
+              </div>
+            </div>
+            <div v-else>
+                <span class="miniAnswer" @click="answer(comment.boardCommentSeq)">답글</span>
+                <div class="content">{{comment.content}}</div>
             </div>
           </div>
           <div v-else>
-              <span class="miniAnswer" @click="answer(comment.boardCommentSeq)">답글</span>
-              <div class="content">{{comment.content}}</div>
-          </div> 
-          <!-- <div class="dotline"></div> -->
+            <p style="color:red; margin-left:20px">-------- 작성자가 삭제한 댓글입니다 --------</p>
+          </div>  
+          <div class="dotline"></div>
+
         </li>
 
       </ul>
@@ -130,17 +136,19 @@ name: 'Comment',
       params.append('boardCommentSeq', boardCommentSeq);
       params.append('content', this.answertxt);
       axios.post("http://localhost:9000/noticeRealAnswerUpdate", params).then(res => { 
-        alert("수정완료")
+        this.$message({ type: 'success', message:'update completed' });
+        //alert("수정완료")
           this.getComments()
           this.isShow = false
           this.clicked = -1
       })
     },
     answerDelete(boardCommentSeq){
-      alert(boardCommentSeq+"/delete")
+      //alert(boardCommentSeq+"/delete")
         var params = new URLSearchParams();
         params.append('boardCommentSeq', boardCommentSeq);
         axios.post("http://localhost:9000/noticeAnswerDelete", params).then(res => { 
+          this.$message({ type: 'success', message:'delete completed' });
           this.getComments()
       })
     },

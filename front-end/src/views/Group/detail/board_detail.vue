@@ -27,7 +27,6 @@
 
       <div class="comment">
         <Comments></Comments>
-
       </div>
 
     </div>
