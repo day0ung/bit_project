@@ -277,7 +277,7 @@ export default {
                 axios.post("http://localhost:9000/creatGroupApply", formData,{
 					headers:{'Content-Type' : 'multipart/form-data'}
                 }).then(res => {
-                                this.$router.push({name: "Group"})
+                                this.$router.push({path: "/mypage"})
                                 alert(res.data + "그룹스터디 개설신청이 완료 되었습니다.\n개설여부는 마이페이지에서 확인 가능합니다.\n매주 월요일 9시에 승인여부가 업데이트 됩니다.")
                                 this.$store.state.s_group.groupCreateSubmitLoading = false
                             })
