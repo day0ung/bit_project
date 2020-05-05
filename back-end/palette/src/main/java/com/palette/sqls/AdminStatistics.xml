@@ -27,7 +27,11 @@
     <!-- 1	1	대학생/취업	1	공기업	group1 -->
 </select>
 
-<select id="receiveinterBigCountAll" resultType="com.palette.model.GroupDto" >
+
+
+
+
+<select id="receiveinterBigCountAll" resultType="HashMap" >
 
 SELECT 
 	COUNT(CASE WHEN INTER_BIG_SEQ=1 THEN 1 END) AS 'big1', 
