@@ -3,7 +3,7 @@
         <div class="createContainer">
             <el-button @click="gotoMypage" round>돌아가기</el-button>
             <div class="title">그룹 스터디 생성</div>
-            <el-form :model="groupDto" label-position="top" :rules="rules" ref="groupDto" label-width="120px" class="demo-groupDto" v-loading="loading">
+            <el-form :model="groupDto" label-position="top" :rules="rules" ref="groupDto" label-width="120px" class="demo-groupDto" v-loading="this.$store.state.s_group.groupCreateSubmitLoading">
                 <!-- 그룹명 설정 -->
                 <el-form-item label="그룹 스터디명" prop="groupName">
                     <el-input placeholder="그룹 스터디명을 적어주세요" v-model="groupDto.groupName" style="width: 85%"></el-input>
@@ -101,7 +101,6 @@ import { loading } from 'element-ui';
 export default {
     data(){
         return{
-            loading: true,
             dialogVisible: false,
             loginMemberSeq: '',
             files: [],
@@ -197,13 +196,6 @@ export default {
                 path: "/mypage"
             })
         },
-        gruopCreateApply: function (event) {
-            //this.$message({ type: 'success',title:'그룹신청이 완료되었습니다', message:'심사 후 그룹개설이 완료됩니다.' })
-            alert("그룹신청이 완료되었습니다.\n심사 후 그룹개설이 완료됩니다.")
-            this.$router.push({
-                path: "/group"
-            })
-        },
         handleChange(file, fileList){
             this.files.push(file.raw) 
             console.log("addList")
@@ -233,6 +225,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
+                this.$store.state.s_group.groupCreateSubmitLoading = true
                 let setGroupSchedule = new Object();
                 setGroupSchedule.groupScheduleSeq = 0;
                 setGroupSchedule.groupInfoSeq = 0;
@@ -286,6 +279,7 @@ export default {
                 }).then(res => {
                                 this.$router.push({name: "Group"})
                                 alert(res.data + "그룹스터디 개설신청이 완료 되었습니다.\n개설여부는 마이페이지에서 확인 가능합니다.\n매주 월요일 9시에 승인여부가 업데이트 됩니다.")
+                                this.$store.state.s_group.groupCreateSubmitLoading = false
                             })
             } else {
                 console.log('error submit!!');

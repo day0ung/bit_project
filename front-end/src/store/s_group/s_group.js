@@ -29,6 +29,7 @@ export default {
         showReferenceDetail: false,
         showGroupReferenceList: false,
         groupDetailLoading: false,
+        groupCreateSubmitLoading: false,
         total: 0,
         listQuery:{
           page: 1,
