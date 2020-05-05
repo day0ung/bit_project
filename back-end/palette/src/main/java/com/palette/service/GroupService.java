@@ -325,6 +325,18 @@ public class GroupService {
 		groupDao.groupMemberDelete(groupMemberDto);
 	}
 
+	public ArrayList<GroupDto> getMyPremissionGroup(GroupParams groupParams) {
+		return groupDao.getMyPremissionGroup(groupParams);
+	}
+
+	public ArrayList<GroupDto> getMyPageCreatGroupList(GroupParams groupParams) {
+		return groupDao.getMyPageCreatGroupList(groupParams);
+	}
+
+	public void groupCreateCancle(GroupDto groupDto) {
+		groupDao.groupCreateCancle(groupDto);
+	}
+
 	
 
 }

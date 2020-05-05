@@ -11,6 +11,12 @@ export default new Vuex.Store({
         MyPageInterLikeListLoading: false,
         MyPageInterLikeList: [],
         MyPageGroupList: [],
+        MyPageStudyListLoading: false,
+        MyPagePermissionListLoading: false,
+        MyPagePermissionList: [],
+        MyPageCreatGroupListLoading: false,
+        MyPageCreatGroupList: [],
+        MyPageCreatGroupListLength: false,
     },
     actions: {
    

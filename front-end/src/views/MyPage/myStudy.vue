@@ -1,13 +1,47 @@
 <template>
   <div>
-      <button class="btn btn-primary" @click="createGroup" style="float: right;">그룹개설 신청</button>
+    <button class="btn btn-primary" @click="createGroup" style="float: right;">그룹개설 신청</button>
+    <!-- 개설신청한 그룹 -->
+    <div class="slib" v-show="this.$store.state.s_member.MyPageCreatGroupListLength">
+      <div class="slib_info">
+          <div class="tit">
+            <img src='../../assets/css/images/group_submit.png'>
+          </div>
+          <div class="titup">
+              <table class="table1" style="margin-left: 55px" v-loading="this.$store.state.s_member.MyPageCreatGroupListLoading">
+                <colgroup>
+              <col style="width: 270px">
+              <col style="width: 30px">
+              <col style="width: 50px">
+              </colgroup>
+                <thead>
+                  <tr>
+                    <th style="text-align: center;">개설신청한 그룹</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="groupOne in this.$store.state.s_member.MyPageCreatGroupList" :key="groupOne.groupInfoSeq">
+                    <td colspan="3">{{groupOne.groupName}}</td>
+                    <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
+                    <td style="width: 50px; text-align: left;">
+                      <el-button type="text" style="color: #ff5151; font-size: 16px" @click="groupCreateCancle(groupOne.groupInfoSeq, groupOne.memberSeq)">개설신청 취소</el-button>
+                    </td>
+                  </tr>                   
+                </tbody>
+              </table>
+          </div>
+      </div>
+    </div>
+    <!-- 가입된 스터디 그룹 -->
     <div class="slib">
       <div class="slib_info">
           <div class="tit">
             <img src='../../assets/css/images/networking.png'>
           </div>
           <div class="titup">
-              <table class="table1" style="margin-left: 55px" v-loading="this.$store.state.s_member.MyPageInterLikeListLoading">
+              <table class="table1" style="margin-left: 55px" v-loading="this.$store.state.s_member.MyPageStudyListLoading">
                 <colgroup>
               <col style="width: 270px">
               <col style="width: 30px">
@@ -39,22 +73,35 @@
                   </tr>                   
                 </tbody>
               </table>
-              <table class="table1" v-if="addr">
-                <tbody>
+          </div>
+      </div>
+    </div>
+    <!-- 가입신청한 스터디 그룹 -->
+    <div class="slib">
+      <div class="slib_info">
+          <div class="tit">
+            <img src='../../assets/css/images/permission_user.png'>
+          </div>
+          <div class="titup">
+              <table class="table1" style="margin-left: 55px" v-loading="this.$store.state.s_member.MyPagePermissionListLoading">
+              <colgroup>
+                <col style="width: 270px">
+                <col style="width: 30px">
+                <col style="width: 50px">
+              </colgroup>
+                <thead>
                   <tr>
-                        <el-button type="info" plain style="width: 100px; padding: 11px;" @click="execDaumPostcode">우편번호 찾기</el-button>
+                    <th style="text-align: center;">가입신청 한 스터디 그룹</th>
+                    <th></th>
+                    <th></th>
                   </tr>
-                  <tr>
-                    <td>
-                      <el-input  placeholder="주소" readonly="readonly" v-model="address"></el-input>
-                    </td>
-                    <td>
-                      <el-input  placeholder="상세주소" style="width: 300px" v-model="extraAddress"></el-input>
-                    </td>
-                    <td style="width: 14px"></td>
-                    <td><i class="el-icon-s-tools" style="color: #d77f4a"></i> </td>
-                    <td>
-                      <el-button type="text" @click="editArea" style="color: #d77f4a; font-size: 16px">수정하기</el-button>
+                </thead>
+                <tbody>
+                  <tr v-for="groupOne in this.$store.state.s_member.MyPagePermissionList" :key="groupOne.groupInfoSeq">
+                    <td colspan="3">{{groupOne.groupName}}</td>
+                    <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
+                    <td style="width: 50px; text-align: left;">
+                      <el-button type="text" style="color: #ff5151; font-size: 16px" @click="waitingDelete(groupOne.groupInfoSeq)">가입신청 취소</el-button>
                     </td>
                   </tr>                   
                 </tbody>
@@ -62,12 +109,13 @@
           </div>
       </div>
     </div>
-    <div class="slib">
-  </div>
+
   </div>
 </template>
 
 <script>
+import { loading } from 'element-ui';
+
 export default {
   data(){
     return{
@@ -75,6 +123,28 @@ export default {
     }
   },
     methods:{
+      groupCreateCancle(groupInfoSeq, memberSeq){
+        this.$store.state.s_member.MyPageCreatGroupListLoading = true
+        let params = new URLSearchParams();
+        params.append("groupInfoSeq", groupInfoSeq)
+        params.append("memberSeq", memberSeq)
+        axios.post("http://localhost:9000/groupCreateCancle", params).then(res => {
+          this.getMyPageCreatGroupList()
+          this.$store.state.s_member.MyPageCreatGroupListLoading = false
+        })
+      },
+      waitingDelete(groupInfoSeq){
+        this.$store.state.s_member.MyPagePermissionListLoading = true
+        //group member table 로 가야함
+        let params = new URLSearchParams();
+        params.append("groupInfoSeq", groupInfoSeq)
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/groupWaitingDelete", params).then(res =>{
+          this.getMyPremissionGroup()
+          alert("가입신청이 취소되었습니다.")
+          this.$store.state.s_member.MyPagePermissionListLoading = false
+        })
+      },
       groupMemberDelete(memberSeq, groupName, groupInfoSeq){
         this.$confirm(groupName + '그룹에서 정말 탈퇴하시겠습니까?', 'Warning', {
           confirmButtonText: '예',
@@ -83,37 +153,61 @@ export default {
         }).then(() => {
           this.$message({ type: 'warning', message: groupName +'그룹에서 탈퇴하였습니다.' });
           console.log("탈퇴" + memberSeq)
+          this.$store.state.s_member.MyPageStudyListLoading = true
           let params = new URLSearchParams();
           params.append("memberSeq", memberSeq)
           params.append("groupInfoSeq", groupInfoSeq)
           axios.post("http://localhost:9000/groupMemberDelete", params).then(res => {
             console.log("groupMemberDelete()")
+            this.getList()
+            this.$store.state.s_member.MyPageStudyListLoading = false
           })
         })
       },
       createGroup(){
         this.$router.push({name :"Create"})
       },
-      // management(seq){
-      //   alert("관리하기" + seq)
-      // },
-      // groupActive(seq){
-      //   alert("활동하기" + seq)
-      // },
       gotoDetail(groupSeq){
-        //alert("groupSeq=" + groupSeq + "loginSeq" + this.loginSeq)
         this.$router.push('/group/menu/'+ groupSeq)
       },
+      getList(){
+        this.$store.state.s_member.MyPageStudyListLoading = true
+        this.loginSeq = this.$store.state.loginUser.memberSeq
+        let params = new URLSearchParams();
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/getMyGroup", params).then(res => {
+          this.$store.state.s_member.MyPageGroupList = res.data
+          this.$store.state.s_member.MyPageStudyListLoading = false
+        })
+      },
+      getMyPremissionGroup(){
+        this.$store.state.s_member.MyPagePermissionListLoading = true
+        let params = new URLSearchParams();
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/getMyPremissionGroup", params).then(res => {
+          this.$store.state.s_member.MyPagePermissionList = res.data
+          this.$store.state.s_member.MyPagePermissionListLoading = false
+        })
+      },
+      getMyPageCreatGroupList(){
+        this.$store.state.s_member.MyPageCreatGroupListLoading = true
+        let params = new URLSearchParams();
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/getMyPageCreatGroupList", params).then(res => {
+          if(res.data.length === 0){
+            this.$store.state.s_member.MyPageCreatGroupListLength = false
+          }else{
+            this.$store.state.s_member.MyPageCreatGroupListLength = true
+          }
+          this.$store.state.s_member.MyPageCreatGroupList = res.data
+          this.$store.state.s_member.MyPageCreatGroupListLoading = false
+        })
+      }
     },
     mounted(){
-      this.loginSeq = this.$store.state.loginUser.memberSeq
-      let params = new URLSearchParams();
-      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
-      axios.post("http://localhost:9000/getMyGroup", params).then(res => {
-        console.log("getMyGroup()")
-        console.log(res.data)
-        this.$store.state.s_member.MyPageGroupList = res.data
-      })
+      this.getList()
+      this.getMyPremissionGroup()
+      this.getMyPageCreatGroupList()
     }
 }
 </script>

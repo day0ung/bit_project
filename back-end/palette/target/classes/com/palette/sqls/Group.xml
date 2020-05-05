@@ -128,6 +128,37 @@
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0 and i.PERMISSION = 1 AND gm.DEL = 0;
 </select>
+<select id="getMyPremissionGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select * 
+	from GROUP_INFO i
+	join MEMBER m
+		on i.MEMBER_SEQ = m.MEMBER_SEQ
+	join GROUP_MEMBER gm
+		on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
+	join INTER_BIG ib
+		on i.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+			from GROUP_MEMBER
+			WHERE DEL = 0
+			group by GROUP_INFO_SEQ) cur
+		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0 and i.PERMISSION = 1 AND gm.DEL = 2;
+</select>
+
+<select id="getMyPageCreatGroupList" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select * 
+	from GROUP_INFO i
+	join MEMBER m
+		on i.MEMBER_SEQ = m.MEMBER_SEQ
+	join INTER_BIG ib
+		on i.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	where i.MEMBER_SEQ = #{memberSeq} AND i.DEL = 0 and i.PERMISSION = 0;
+</select>
+
 <select id="getMyOtherGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
 	from GROUP_INFO i
@@ -289,6 +320,12 @@
 
 <update id="groupMemberDelete" parameterType="java.lang.Integer">
 	UPDATE GROUP_MEMBER
+	SET DEL = 1
+	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
+</update>
+
+<update id="groupCreateCancle" parameterType="com.palette.model.GroupDto">
+	UPDATE GROUP_INFO
 	SET DEL = 1
 	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
 </update>

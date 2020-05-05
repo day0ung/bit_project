@@ -28,6 +28,7 @@ export default {
         showUpdateBtn: false,
         showReferenceDetail: false,
         showGroupReferenceList: false,
+        groupDetailLoading: false,
         total: 0,
         listQuery:{
           page: 1,

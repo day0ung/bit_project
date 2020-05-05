@@ -67,7 +67,6 @@ public class GroupController {
         }else{
             list = groupService.groupSearchList(groupParams);
         }
-    	
     	return list;
     }
     
@@ -162,6 +161,26 @@ public class GroupController {
     public String groupWaitingDelete(GroupMemberDto groupMemberDto){
         System.out.println("groupWaitingDelete()");
         groupService.groupWaitingDelete(groupMemberDto);
+        return "";
+    }
+
+    @PostMapping(value = "/getMyPremissionGroup")
+    public ArrayList<GroupDto> getMyPremissionGroup(GroupParams groupParams){
+        System.out.println("getMyPremissionGroup()");
+        ArrayList<GroupDto> list = groupService.getMyPremissionGroup(groupParams);
+        return list;
+    }
+
+    @PostMapping(value = "/getMyPageCreatGroupList")
+    public ArrayList<GroupDto> getMyPageCreatGroupList(GroupParams groupParams){
+        System.out.println("getMyPageCreatGroupList()");
+        return groupService.getMyPageCreatGroupList(groupParams);
+    }
+
+    @PostMapping(value = "/groupCreateCancle")
+    public String groupCreateCancle(GroupDto groupDto){
+        System.out.println("groupCreateCancle()");
+        groupService.groupCreateCancle(groupDto);
         return "";
     }
     

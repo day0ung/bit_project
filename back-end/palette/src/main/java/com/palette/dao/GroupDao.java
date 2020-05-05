@@ -91,6 +91,9 @@ public interface GroupDao {
 
 	void permissionGroupMember(GroupMemberDto groupMemberDto);
 	void groupMemberDelete(GroupMemberDto groupMemberDto);
+	ArrayList<GroupDto> getMyPremissionGroup(GroupParams groupParams);
+	ArrayList<GroupDto> getMyPageCreatGroupList(GroupParams groupParams);
+	void groupCreateCancle(GroupDto groupDto);
 	
 
 
