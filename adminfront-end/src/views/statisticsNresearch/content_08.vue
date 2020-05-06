@@ -1,21 +1,28 @@
 <template>
-        <div class="small">
-            <bar-chart></bar-chart>
+        <div class="chartArea">
+          <div class="set_one">
+            <div class="barchartArea">
+              <h3> 남여 가입자 비율(lineChart) </h3>
+              <bar-chart></bar-chart>
+            </div>
+            <div class="dounutChartArea">
+              <h3> 남여 가입자 비율(DonutChart) </h3>
+              <DonutChart  @on-receive="updateValue1"></DonutChart>
+            </div>
+          </div>
             <div class="content01_view">
                 <!-- <h1> {{title}} member333333333333333333</h1> -->
-                <h3> doughnut graph </h3>
             </div>
-            <doughnut-chart></doughnut-chart>
-            
         </div>
 
 </template>
 
 <script>
 //Importing Bar class from the vue-chartjs wrapper
-// import {Bar} from 'vue-chartjs'
+
 import BarChart from './ChartDataArea/content_08_BarChart'
 import DonutChart from './ChartDataArea/content_08_DonutChart'
+
 //Exporting this so it can be used in other components
 export default {
   components:{
@@ -24,41 +31,33 @@ export default {
   },
     data() {
       return {
-        datacollection: null // instantiating datacollection with null
+
       }
     },
     created() {
-      this.fillData() //anytime the vue instance is created, call the fillData() function.
+   
+    },
+    mounted(){
+
     },
     methods: {
-      fillData() {
-        this.datacollection = {
-          // Data for the y-axis of the chart
-          labels: ['January', 'February'],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: '#f87979',
-              // Data for the x-axis of the chart
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }
-          ]
-        }
-      },
-      getRandomInt() {
-        // JS function to generate numbers to be used for the chart
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
+
+    //   handle (point, event) {
+    // 	const item = event[0]
+    // 	this.$emit('on-receive', {
+    //   	index: item._index,
+    //     backgroundColor: item._view.backgroundColor,
+    //     value: this.values[item._index]
+    //   })
+    // },
+
+
+      updateValue1(data1){
+        // DonutChart.updateValue(data1);
+        console.log(data1.value);
       }
+
     },
-    watch: {
-    data: function() {
-      this._chart.destroy();
-      //this.renderChart(this.data, this.options);
-      this.getGenderDataMethod()
-      this.renderChart()
-      }
-    },
-  
 }
 </script>
 
@@ -68,5 +67,9 @@ export default {
     max-width: 600px;
     margin:  150px auto;
   } */
+
+.set_one{
+  display:flex;
+}
 
 </style>

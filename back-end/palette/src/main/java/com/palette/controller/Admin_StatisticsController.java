@@ -40,6 +40,27 @@ public class Admin_StatisticsController {
     	return genderInfoList;
     }
 
+
+    @PostMapping(value = "/getGroupInfo_InterBigCount")
+    public List<MemberDto> getGroupInfo_InterBigCount() {
+
+        
+ 
+        
+    	return null;
+    }
+
+    
+    @PostMapping(value = "/getGroupInfo_InterSmallCount")
+    public List<MemberDto> getGroupInfo_InterSmallCount() {
+
+        
+    	return null;
+    }
+
+
+    
+
     
 
 
