@@ -19,9 +19,13 @@
 				<i class="el-icon-takeaway-box"></i>
 				<sapn>내 자료</sapn>
 			</el-menu-item>
-			<el-menu-item index="3" v-model="auth"  @click="resumeClick(memSeq)">
+			<el-menu-item index="3" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="resumeClick(memSeq)">
 				<i class="el-icon-document"></i>
 				<span>내 이력서</span>
+			</el-menu-item>
+			<el-menu-item index="3" v-model="auth" v-else @click="recruitClick(memSeq)">
+				<i class="el-icon-document"></i>
+				<span>내 공고</span>
 			</el-menu-item>
 			<el-menu-item index="4" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="interclick(memSeq)">
 				<i class="el-icon-star-off"></i>
@@ -38,6 +42,7 @@
 		<MySchedule v-if="schedule"/>
 		<MyReference v-if="reference"/>
 		<MyResume v-if="resume"/>
+		<MyRecruit v-if="recruit"/>
 		<MyInter v-if="inter"
 		:memSeq="memSeq"
 		:myinter="myinter"
@@ -63,13 +68,14 @@
 import MyStudy from '@/views/MyPage/myStudy.vue'
 import MySchedule from '@/views/MyPage/mySchedule.vue'
 import MyResume from '@/views/MyPage/myResume.vue'
+import MyRecruit from '@/views/MyPage/myRecruit.vue'
 import MyInter from '@/views/MyPage/myInter.vue'
 import MyInfo from '@/views/MyPage/myInfo.vue'
 import MyReference from '@/views/MyPage/reference.vue'
 
 export default {
 	components:{
-		MyStudy, MySchedule, MyResume, MyInter, MyInfo, MyReference
+		MyStudy, MySchedule, MyResume, MyInter, MyInfo, MyReference, MyRecruit
 	},
 	data(){
 		return{
@@ -77,6 +83,7 @@ export default {
 			schedule:false,
 			reference: false,
 			resume:false,
+			recruit:false,
 			inter:false,
 			info:true,
 			mylike: [],
@@ -120,6 +127,7 @@ export default {
 			this.study = true
 			this.schedule = false
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = false
 			this.reference = false
@@ -128,6 +136,7 @@ export default {
 			this.study = false
 			this.schedule = true
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = false
 			this.reference = false
@@ -137,6 +146,7 @@ export default {
 			this.schedule = false
 			this.reference = true
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = false
 		},
@@ -144,6 +154,7 @@ export default {
 			this.study = false
 			this.schedule = false
 			this.resume = true
+			this.recruit = false
 			this.inter = false
 			this.info = false
 			this.reference = false
@@ -152,6 +163,7 @@ export default {
 			this.study = false
 			this.schedule = false
 			this.resume = false
+			this.recruit = false
 			this.inter = true
 			this.info = false
 			this.reference = false
@@ -180,6 +192,7 @@ export default {
 			this.study = false
 			this.schedule = false
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = true	
 			this.reference = false	
@@ -190,6 +203,16 @@ export default {
 			this.myinfo = res.data
 			 }) 
 		},
+		recruitClick(){
+			this.study = false
+			this.schedule = false
+			this.reference = false
+			this.resume = false
+			this.recruit = true
+			this.inter = false
+			this.info = false
+		},
+
 		emailUpdate(memSeq){
 			this.getInfomation(memSeq)
 		},
