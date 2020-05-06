@@ -1,6 +1,7 @@
 package com.palette.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.palette.dao.AdminStatisticsDao;
 import com.palette.model.MemberDto;
@@ -23,6 +24,12 @@ public class AdminStatisticsService {
 		return adminStaticsdao.getMemberGenderInfo();
 	}
 	
+
+	public List<Map<String, Object>> receiveinterBigCountAll(){
+
+		return adminStaticsdao.receiveinterBigCountAll();
+	}
+
 
 
 
