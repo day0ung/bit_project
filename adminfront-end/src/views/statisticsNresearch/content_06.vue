@@ -29,12 +29,6 @@ export default {
         setGenderData:[],
         SetMan:[],
         setWoman:[],
-
-
-
-
-        
-
       }
     },
     // mounted () {
