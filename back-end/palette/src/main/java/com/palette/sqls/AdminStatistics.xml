@@ -31,8 +31,8 @@
 
 
 
-<select id="receiveinterBigCountAll" resultType="HashMap" >
-
+<select id="receiveinterBigCountAll" resultType="HashMap">
+<!-- '대학생/취업', '공무원임용', '어학/회화', '라이프/취미' 순서 -->
 SELECT 
 	COUNT(CASE WHEN INTER_BIG_SEQ=1 THEN 1 END) AS 'value1', 
     COUNT(CASE WHEN INTER_BIG_SEQ=2 THEN 1 END) AS 'value2', 
@@ -42,6 +42,50 @@ FROM GROUP_INFO
 
 </select>
 
+
+<select id="receiveinterSmall_1" resultType="HashMap">
+    <!-- '대학생/취업' -->
+
+    SELECT s.SMALL_NAME, count(*) as smallTotal
+    FROM FINAL.GROUP_INFO i
+    join INTER_SMALL s
+    on i.INTER_SMALL_SEQ = s.INTER_SMALL_SEQ 
+    where i.INTER_BIG_SEQ=1 group by i.INTER_SMALL_SEQ
+</select>
+
+
+<select id="receiveinterSmall_2" resultType="HashMap">
+    <!-- '공무원임용'-->
+    SELECT s.SMALL_NAME, count(*) as smallTotal
+    FROM FINAL.GROUP_INFO i
+    join INTER_SMALL s
+    on i.INTER_SMALL_SEQ = s.INTER_SMALL_SEQ 
+    where i.INTER_BIG_SEQ=2 group by i.INTER_SMALL_SEQ
+
+</select>
+
+
+<select id="receiveinterSmall_3" resultType="HashMap">
+    <!-- '어학/회화' -->
+
+    SELECT s.SMALL_NAME, count(*) as smallTotal
+    FROM FINAL.GROUP_INFO i
+    join INTER_SMALL s
+    on i.INTER_SMALL_SEQ = s.INTER_SMALL_SEQ 
+    where i.INTER_BIG_SEQ=3 group by i.INTER_SMALL_SEQ
+
+</select>
+
+<select id="receiveinterSmall_4" resultType="HashMap">
+    <!-- '라이프/취미' -->
+
+    SELECT s.SMALL_NAME, count(*) as smallTotal
+    FROM FINAL.GROUP_INFO i
+    join INTER_SMALL s
+    on i.INTER_SMALL_SEQ = s.INTER_SMALL_SEQ 
+    where i.INTER_BIG_SEQ=4 group by i.INTER_SMALL_SEQ
+
+</select>
 
 
 	

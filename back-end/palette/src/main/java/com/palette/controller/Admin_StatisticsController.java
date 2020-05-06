@@ -48,15 +48,9 @@ public class Admin_StatisticsController {
     //대분류 카운트 산출
     @PostMapping(value = "/getGroupInfo_InterBigCount")
     public JSONArray getGroupInfo_InterBigCount() {
-
         //adminStaticsdao.receiveinterBigCountAll();
-
         ListANDMapConvertToJSON convertjson = new ListANDMapConvertToJSON();
-
         List<Map<String, Object>> listMap = adminstatisticsservice.receiveinterBigCountAll();
-    
-
-
         JSONArray res_jsonobj = convertjson.getJsonArrayFromList(listMap);
         
         System.out.print("change list to json array = ");
@@ -70,10 +64,29 @@ public class Admin_StatisticsController {
 
 	//소분류 카운트 산출 
     @PostMapping(value = "/getGroupInfo_InterSmallCount")
-    public List<MemberDto> getGroupInfo_InterSmallCount() {
+    public JSONArray getGroupInfo_InterSmallCount() {
+        System.out.println("getGroupInfo_InterSmallCount 실행됨.");
+
+
+        // getJsonArrayFromListInList
+
+        ListANDMapConvertToJSON convertjson = new ListANDMapConvertToJSON();
+
+        JSONArray allResult = adminstatisticsservice.receiveinterSmall_All();
+
+        System.out.println(allResult);
+
+        // JSONArray res_ListJsonArray = convertjson.getJsonArrayFromListInList(allResult);
 
         
-    	return null;
+        System.out.println("\n\n");
+        // System.out.println(res_ListJsonArray);
+        System.out.println("\n\n");
+
+
+
+        
+    	return allResult;
     }
 
 

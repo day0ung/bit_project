@@ -16,6 +16,12 @@ public interface AdminStatisticsDao {
 
     //Map<String, Object> receiveinterBigCountAll();
     List<Map<String, Object>> receiveinterBigCountAll();
+
+    List<Map<String, Object>> receiveinterSmall_1();
+    List<Map<String, Object>> receiveinterSmall_2();
+    List<Map<String, Object>> receiveinterSmall_3();
+    List<Map<String, Object>> receiveinterSmall_4();
+    
     
     
 	

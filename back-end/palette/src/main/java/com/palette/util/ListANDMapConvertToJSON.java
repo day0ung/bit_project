@@ -1,6 +1,7 @@
 package com.palette.util;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,53 @@ public class ListANDMapConvertToJSON {
         return jsonArray;
     }
 
+    /**
+     * List<Map>을 jsonArray로 변환한다.
+     *
+     * @param list List<Map<String, Object>>.
+     * @return JSONArray.
+     */
+    public static JSONArray getJsonArrayFromListInList( List<List<Map<String, Object>>> listlist )
+    {
+        JSONArray finishData = new JSONArray();
+        JSONArray jsonArray = new JSONArray();
+        
+        // List<List<Map<String, Object>>> listlist
+        // List<Map<String, Object>> list
+
+
+        for(int i=0; i<listlist.size(); i++){
+
+
+            for( Map<String, Object> map : listlist.get(i) ) {
+                //1개의 대분류에 속한 소분류 json으로 변환.
+                jsonArray.add(getJsonStringFromMap(map) );
+                System.out.println("소분류맵");
+                System.out.println(map);
+            }
+
+            if(jsonArray != null){
+
+                finishData.add(jsonArray);
+                System.out.println(jsonArray);
+
+                System.out.println("데이터 타입 측정");
+                System.out.println(jsonArray.getClass());
+                System.out.println(finishData.getClass());
+                System.out.println("데이터 타입 측정");
+
+            }
+            jsonArray.clear();
+            System.out.println("\n대분류단위 : ");
+            System.out.println(finishData);
+            System.out.println("\n");
+        }
+
+        return finishData;
+    }
+
+
+
 /**
      * List<Map>을 jsonString으로 변환한다.
      *
@@ -41,6 +89,8 @@ public class ListANDMapConvertToJSON {
         JSONArray jsonArray = getJsonArrayFromList( list );
         return jsonArray.toJSONString();
     }
+
+  
 
 
     /**
