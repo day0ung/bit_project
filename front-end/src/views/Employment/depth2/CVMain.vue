@@ -3,6 +3,40 @@
     <div v-if="login1 == null">로그인 후에 사용가능합니다.</div>
     <!-- 일반 회원 / CV 없을 때 -->
     <div v-else-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 0" class="writeNewCV">
+    <div class="slib">
+      <div class="slib_info">
+        <div class="tit">
+          <img src='@/assets/css/images/resume.png'>
+        </div>
+        <div class="titup">
+          <table class="table1" style="margin-left: 55px">
+            <colgroup>
+              <col style="width: 600px">
+              
+            </colgroup>
+            <thead>
+              <tr>
+                <th>이력서 샘플</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a href="https://bit-palette.s3.ap-northeast-2.amazonaws.com/112/%E1%84%8B%E1%85%B5%E1%84%85%E1%85%A7%E1%86%A8%E1%84%89%E1%85%A5_%E1%84%8C%E1%85%A1%E1%84%89%E1%85%A9%E1%84%89%E1%85%A5%20%E1%84%89%E1%85%A2%E1%86%B7%E1%84%91%E1%85%B3%E1%86%AF-2020-05-01T12%3A39%3A38.108.hwp" download>이력서 샘플 다운로드</a></td>
+                <td>{{category}}</td>
+              </tr>
+              <br><br>
+              <tr>
+                <td colspan="2">
+                  <el-button type="text" @click="writeCV" style="color: #ff5151; font-size: 16px">내 이력서 작성하기</el-button>
+                </td>
+              </tr>               
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- <div v-else-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 0" class="writeNewCV">
       <div class="cvCntainer">
         <div class="cvInfoTitle">
           <h5>이력서 샘플</h5>
@@ -13,10 +47,46 @@
       </div>
       <div class="hr"></div>
       <el-button type="primary" round @click="writeCV">새로운 이력서 업로드하기</el-button>
-    </div>
+    </div> -->
     <!-- 일반 회원 / CV 있을 때 -->
     <div v-else-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 1" class="updateCV">
-      <div class="cvCntainer">
+      <div class="slib">
+      <div class="slib_info">
+        <div class="tit">
+          <img src='@/assets/css/images/resume.png'>
+        </div>
+        <div class="titup">
+          <table class="table1" style="margin-left: 55px">
+            <colgroup>
+            <col style="width: 400px">
+            <col style="width: 30%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>제목</th>
+                <th>관심분야</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{this.$store.state.s_employment.cvDetail.title}}</td>
+                <td>{{this.$store.state.s_employment.cvDetail.category}}</td>
+              </tr>
+              <br><br>
+              <tr>
+                <td colspan="2">
+                  <el-button type="text" @click="updateCV" style="color: #ff5151; font-size: 16px">이력서 수정하기</el-button>
+                </td>
+              </tr>               
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    </div>
+      <!-- <div class="cvCntainer">
         <div class="cvInfoTitle">
           <h5>내 이력서</h5>
         </div>
@@ -26,7 +96,7 @@
       </div>
       <div class="hr"></div>
       <el-button type="primary" round @click="updateCV">이력서 수정하기</el-button>
-    </div>
+    </div> -->
     <!-- 기업 회원 -->
     <div v-else class="CVList">
       <div class="boardTableFrom">
@@ -99,6 +169,7 @@
 import { loading } from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import Pagination from '@/components/Pagination'
+import logincss from '@/assets/css/member/myinfo.css'
 
 export default {
   components: { Pagination },
@@ -218,20 +289,24 @@ export default {
   },
   mounted(){
     if(this.login1 == null){
-      alert("a")
+      
 		} else {
       var params = new URLSearchParams();	// post 방식으로 받아야함. 
       params.append('memberSeq', this.login1.memberSeq);
       axios.post("http://localhost:9000/cvDetailRefByMemberSeq", params).then(res => { 
         this.$store.state.s_employment.cvDetailRef = res.data
         this.file = res.data
-      },
+      }),
       axios.post("http://localhost:9000/oneMember", params).then(res => { 
         this.$store.state.s_employment.oneMember = res.data
-      }
-      )
+      }),
+      axios.post("http://localhost:9000/getOneCVByMemberSeq", params).then(res => { 
+        this.$store.state.s_employment.cvDetail = res.data
+        this.title = this.$store.state.s_employment.cvDetail.title
+        this.category = this.$store.state.s_employment.cvDetail.category
+        })
 
-      )
+      
     }
 
     
