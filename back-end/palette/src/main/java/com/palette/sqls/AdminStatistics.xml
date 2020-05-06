@@ -10,6 +10,40 @@
 </select>
 
 
+<select id="practice" resultType="com.palette.model.GroupDto" >
+    
+    SELECT GI.GROUP_INFO_SEQ, 
+            GI.INTER_BIG_SEQ, IB.BIG_NAME, 
+            GI.INTER_SMALL_SEQ, ISM.SMALL_NAME, 
+            GI.GROUP_NAME
+
+    FROM GROUP_INFO GI
+    JOIN INTER_BIG IB
+            ON GI.INTER_BIG_SEQ = IB.INTER_BIG_SEQ
+    JOIN INTER_SMALL ISM
+        ON GI.INTER_SMALL_SEQ = ISM.INTER_SMALL_SEQ
+    
+
+    <!-- 1	1	대학생/취업	1	공기업	group1 -->
+</select>
+
+
+
+
+
+<select id="receiveinterBigCountAll" resultType="HashMap" >
+
+SELECT 
+	COUNT(CASE WHEN INTER_BIG_SEQ=1 THEN 1 END) AS 'big1', 
+    COUNT(CASE WHEN INTER_BIG_SEQ=2 THEN 1 END) AS 'big2', 
+    COUNT(CASE WHEN INTER_BIG_SEQ=3 THEN 1 END) AS 'big3', 
+    COUNT(CASE WHEN INTER_BIG_SEQ=4 THEN 1 END) AS 'big4'
+FROM GROUP_INFO
+
+</select>
+
+
+
 	
 	
 

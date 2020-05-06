@@ -96,6 +96,18 @@ public class EmploymentController {
 
     	return dto;
     }
+    
+    @PostMapping(value = "/getOneRecruitByMemberSeq")
+    public List<EmploymentBoardDto> getOneRecruitByMemberSeq(int memberSeq){
+        System.out.println("getOneRecruitByMemberSeq() 실행");
+        
+        List<EmploymentBoardDto> list =  employmentService.getOneRecruitByMemberSeq(memberSeq);
+        for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).toString());
+		}
+
+    	return list;
+    }
    
     @GetMapping(value = "/insertRecruit")
     public boolean insertRecruit(EmploymentBoardDto dto){

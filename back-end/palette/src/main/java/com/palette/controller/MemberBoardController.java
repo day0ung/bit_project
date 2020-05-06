@@ -55,10 +55,10 @@ public class MemberBoardController {
 	}
 	
 	//자료실 삭제
-	@PostMapping(value = "/deleteLibarary") 
-	public String deleteLibarary(ReferenceVo form) throws IOException{
-		System.out.println("deleteLibarary"+form.toString());
-		service.deleteLibarary(form.getBoardSeq());
+	@GetMapping(value = "/memberBoardDel") 
+	public String memberBoardDel(int boardSeq) {
+		System.out.println("memberBoardDel"+boardSeq);
+		service.memberBoardDel(boardSeq);
 		return "";
 	}
 	

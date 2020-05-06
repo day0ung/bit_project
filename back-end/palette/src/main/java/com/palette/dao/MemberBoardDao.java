@@ -19,7 +19,7 @@ public interface MemberBoardDao {
 	
 	MemberBoardDto detailLibarary(int boardSeq);
 	
-	void memberBoardDel(int boardSeq );
+	void memberBoardDel(int boardSeq);
 	
 	void memberReferenceDelete(int boardSeq);
 	

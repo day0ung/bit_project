@@ -86,7 +86,8 @@ export default {
 
 					}
 				}).then(res =>{
-					alert("성공적으로 적용되었습니다.")
+					this.$message({ type: 'success', message:'성공적으로 적용되었습니다.'})
+					//alert("성공적으로 적용되었습니다.")
      				this.$router.push({
 						 name : "Notice"
 					 })

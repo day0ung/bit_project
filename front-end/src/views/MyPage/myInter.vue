@@ -185,7 +185,8 @@ export default {
         axios.post("http://localhost:9000/likeGroupDelete", params).then(res =>{
           console.log(res.data)
           this.likeListUpdate()
-          alert("찜목록에서 제외되었습니다.")
+          this.$message({ type: 'info', message:'찜목록에서 제외되었습니다.'})
+          //alert("찜목록에서 제외되었습니다.")
           this.$store.state.s_member.MyPageInterLikeListLoading = false
         })
        },
@@ -198,7 +199,8 @@ export default {
         axios.post("http://localhost:9000/groupWaitingDelete", params).then(res =>{
           console.log(res.data)
           this.likeListUpdate()
-          alert("가입신청이 취소되었습니다.")
+          this.$message({ type: 'info', message:'가입신청이 취소되었습니다.'})
+          //alert("가입신청이 취소되었습니다.")
           this.$store.state.s_member.MyPageInterLikeListLoading = false
         })
        },
@@ -210,15 +212,18 @@ export default {
         axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
           if (res.data === "success"){
             this.likeListUpdate()
-            alert("가입신청이 완료되었습니다.\n그룹장이 승인하면 가입이완료됩니다.")
+            this.$message({ type: 'success', message:'가입신청 완료. 그룹장이 승인하면 가입이완료됩니다.'})
+            //alert("가입신청이 완료되었습니다.\n그룹장이 승인하면 가입이완료됩니다.")
             this.$store.state.s_member.MyPageInterLikeListLoading = false
           }else if(res.data === "fail"){
             this.likeListUpdate()
-            alert("이미 가입된 그룹입니다")
+            this.$message({ type: 'info', message:'이미 가입된 그룹입니다'})
+            //alert("이미 가입된 그룹입니다")
             this.$store.state.s_member.MyPageInterLikeListLoading = false
           }else if(res.data === "waiting"){
             this.likeListUpdate()
-            alert("가입대기중인 그룹입니다.")
+            this.$message({ type: 'info', message:'가입대기중인 그룹입니다.'})
+            //alert("가입대기중인 그룹입니다.")
             this.$store.state.s_member.MyPageInterLikeListLoading = false
           }
         })
@@ -228,7 +233,8 @@ export default {
        },
       editArea(){
         if(this.address =='' || this.extraAddress ==''){
-          alert('주소를 입력해주세요')
+          this.$message({ type: 'info', message:'주소를 입력해주세요'})
+          //alert('주소를 입력해주세요')
          }else{
           var params = new URLSearchParams();
           var realAddr = this.address + this.extraAddress
@@ -236,7 +242,8 @@ export default {
           params.append('interArea', realAddr)
          axios.post('http://localhost:9000/updateInterArea', params)
             .then(res => {
-              alert('정보수정이 완료되었습니다')
+              this.$message({ type: 'success', message:'정보수정이 완료되었습니다'})
+              //alert('정보수정이 완료되었습니다')
               this.addr = false
               this.$emit('updateInterArea', this.memSeq)
             })

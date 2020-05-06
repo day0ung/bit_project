@@ -138,7 +138,8 @@ export default {
         this.s_keyWord = 'title'
       }
       if(this.searchWord==""){
-        alert('검색어를 입력해주세요')
+        this.$message({ type: 'info', message:'검색어를 입력해주세요'})
+        //alert('검색어를 입력해주세요')
       }
       
       if(this.s_keyWord != '' && this.searchWord!=''){

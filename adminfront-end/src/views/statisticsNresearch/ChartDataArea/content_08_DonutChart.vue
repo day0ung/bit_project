@@ -1,59 +1,59 @@
 <script>
 //Importing Bar class from the vue-chartjs wrapper
 import {Doughnut} from 'vue-chartjs'
+import randomColor from 'randomcolor'
 //Exporting this so it can be used in other components
 export default {
   extends: Doughnut,
   data() {
     return {
       datacollection: {
-        //Data to be represented on x-axis
-        labels: ['Man', 'woman'],
+        labels: ['Man', 'woma'],
         datasets: [
           {
-            label: 'Data One',
-            backgroundColor: '#4CAF50',
-            pointBackgroundColor: 'white',
-            borderWidth: 1,
-            pointBorderColor: '#249EBF',
-            //Data to be represented on y-axis
-            data: []
+            backgroundColor: [randomColor(), randomColor()],
+            data: [0,1]
           }
         ]
       },
-      //Chart.js options that controls the appearance of the chart
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            },
-            gridLines: {
-              display: true
-            }
-          }],
-          xAxes: [ {
-            gridLines: {
-              display: false
-            }
-          }]
+      options:{
+         scales: {
+          // yAxes: [{
+            // ticks: {
+              // beginAtZero: true
+            // },
+            // gridLines: {
+              // display: true
+            // }
+          // }],
+          // xAxes: [ {
+            // gridLines: {
+              // display: false
+            // }
+          // }]
         },
         legend: {
-            display: true
+            // display: true
           },
-        responsive: true,
-        maintainAspectRatio: false
-      },
+        // responsive: true,
+        maintainAspectRatio: false,
 
-      // setting receive data area
-      getRawData:'',
-
-    }
+        //add option for click
+        // responsive: true, 
+        // maintainAspectRatio: false, 
+        onClick:this.handle
+        //add option for click
+        
+      }
+     }
   },
   mounted() {
     //renderChart function renders the chart with the datacollection and options object.
     this.renderChart(this.datacollection, this.options);
     this.getGenderDataMethod();
+
+
+
 
 
   
@@ -116,18 +116,30 @@ export default {
         console.log(this.datacollection.datasets[0].data)
         this.$data._chart.update()
         console.log("=========================checkdata=====================")
+      },
+
+      handle (point, event) {
+    	  const item = event[0]
+    	  this.$emit('on-receive', {
+      	// index: item._index,
+        backgroundColor: item._view.backgroundColor,
+        value: this.datacollection.datasets[0].data[item._index]
+        
+        })
+      },
+
+
+      updateValue(data){
+        console.log(data);
       }
 
-  },
-    watch: {
-    data: function() {
-      this._chart.destroy();
-      //this.renderChart(this.data, this.options);
-      this.getGenderDataMethod()
-      
-    }
-  },
+  }
+
   
 }
 
 </script>
+<style scoped>
+
+
+</style>

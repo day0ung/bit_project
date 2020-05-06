@@ -7,8 +7,8 @@
                 <li><router-link  to="/statisticsNresearch2">  통계및조사2 </router-link></li>
                 <li><router-link  to="/statisticsNresearch3">  통계및조사3 </router-link></li>
                 <li><router-link  to="/statisticsNresearch4">  통계및조사4 </router-link></li>
-                <li><router-link  to="/statisticsNresearch5">  통계및조사5 </router-link></li>
-                <li><router-link  to="/statisticsNresearch6">  통계및조사6 </router-link></li>
+                <li><router-link  to="/statisticsNresearch5">  통계5_대분류비율 </router-link></li>
+                <li><router-link  to="/statisticsNresearch6">  통계6_소분류비율 </router-link></li>
                 <li><router-link  to="/statisticsNresearch7">  통계및조사7_BarGraph </router-link></li>
                 <li><router-link  to="/statisticsNresearch8">  통계및조사7_gender_Bar </router-link></li>
             </ul>

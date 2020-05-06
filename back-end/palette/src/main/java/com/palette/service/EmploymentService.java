@@ -24,6 +24,10 @@ public class EmploymentService {
 		return employmentDao.getOneRecruit(empBoardSeq);
 	}
 	
+	public List<EmploymentBoardDto> getOneRecruitByMemberSeq(int memberSeq) {
+		return employmentDao.getOneRecruitByMemberSeq(memberSeq);
+	}
+	
 	public void readCount(int empBoardSeq) {
 		employmentDao.readCount(empBoardSeq);
 	}

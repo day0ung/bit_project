@@ -1,14 +1,17 @@
 <script>
 //Importing Bar class from the vue-chartjs wrapper
-import {Bar} from 'vue-chartjs'
+import {HorizontalBar} from 'vue-chartjs'
 //Exporting this so it can be used in other components
 export default {
-  extends: Bar,
+  extends: HorizontalBar,
   data() {
     return {
       datacollection: {
         //Data to be represented on x-axis
-        labels: ['Man', 'woman'],
+        labels: [
+                  'Man', 
+                  'woman'
+                ],
         datasets: [
           {
             label: 'Data One',
@@ -17,37 +20,25 @@ export default {
             borderWidth: 1,
             pointBorderColor: '#249EBF',
             //Data to be represented on y-axis
-            data: [0,0 ]
+            data: []
           }
         ]
       },
       //Chart.js options that controls the appearance of the chart
-      options: {
+    options: {
         scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            },
-            gridLines: {
-              display: true
-            }
+            yAxes: [{
+                stacked: true
           }],
-          xAxes: [ {
-            gridLines: {
-              display: false
+          xAxes:[{
+            ticks:{
+              min:0
             }
+
           }]
-        },
-        legend: {
-            display: true
-          },
-        responsive: true,
-        maintainAspectRatio: false
-      },
+        }
 
-      // setting receive data area
-      getRawData:'',
-
+      }
     }
   },
   mounted() {
@@ -108,11 +99,11 @@ export default {
         testList.push(JSON.stringify(mancheck));
         testList.push(JSON.stringify(womancheck));
         this.datacollection.datasets[0].data= testList
-        console.log("=========================checkdata=====================")
+        console.log("=========================checkdata05=====================")
         console.log(testList)
         console.log(this.datacollection.datasets[0].data)
         this.$data._chart.update()
-        console.log("=========================checkdata=====================")
+        console.log("=========================checkdata05=====================")
       }
 
   },
