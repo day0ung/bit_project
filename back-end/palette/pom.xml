@@ -59,6 +59,14 @@
 				<artifactId>spring-boot-starter-mail</artifactId>
 			</dependency>
 
+		<!-- Convert List<map< , >> to JSON-->
+		<!-- https://mvnrepository.com/artifact/net.minidev/json-smart -->
+		<dependency>
+			<groupId>net.minidev</groupId>
+			<artifactId>json-smart</artifactId>
+			<version>2.3</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
