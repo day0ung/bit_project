@@ -75,7 +75,8 @@ export default {
       params.append("groupInfoSeq", this.$route.params.contentId)
       params.append("memberSeq", this.$store.state.loginUser.memberSeq)
       axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
-        alert(this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+        this.$message({ type: 'success', message: this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다. 마이페이지에서 확인해주세요."})
+        //alert(this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
         this.$store.state.s_group.groupDetailLoading = false
       })
     },
@@ -85,7 +86,8 @@ export default {
       params.append("groupInfoSeq", this.$route.params.contentId)
       params.append("memberSeq", this.$store.state.loginUser.memberSeq)
       axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
-        alert("참여신청이 완료되었습니다.\n마이페이지 내 그룹에서 확인해주세요.")
+        this.$message({ type: 'success', message:"참여신청이 완료. 마이페이지에서 확인해주세요."})
+        //alert("참여신청이 완료되었습니다.\n마이페이지 내 그룹에서 확인해주세요.")
         this.$store.state.s_group.groupDetailLoading = false
         this.$router.push({name : "Group"})
       })

@@ -241,7 +241,8 @@ export default {
       },
       editInfo(){
         if(this.eamil == "" ||this.age ==""){
-            alert('이메일이나나 나이를 입력해주세요')
+          this.$message({ type: 'info', message:'이메일이나나 나이를 입력해주세요'})
+            //alert('이메일이나나 나이를 입력해주세요')
         }else{
           var params = new URLSearchParams();
           params.append('memberSeq', this.memSeq)
@@ -251,7 +252,8 @@ export default {
           .then(res => {
               if(res.data == true){
                 this.table = false;
-                alert('수정이 완료되었습니다.')
+                this.$message({ type: 'success', message:'수정이 완료되었습니다.'})
+                //alert('수정이 완료되었습니다.')
                 this.$emit('emailUpdate',this.memSeq)
               }
           }) 
@@ -262,7 +264,8 @@ export default {
       },
       updateAdd(){
         if(this.address =='' || this.extraAddress ==''){
-           alert('주소를 입력해주세요')
+          this.$message({ type: 'info', message:'주소를 입력해주세요'})
+           //alert('주소를 입력해주세요')
         }else{
         var params = new URLSearchParams();
         params.append('memberSeq', this.memSeq)
@@ -271,7 +274,8 @@ export default {
          axios.post('http://localhost:9000/updateAddr', params)
           .then(res => {
               if(res.data == true){
-                alert('수정이 완료되었습니다.')
+                this.$message({ type: 'success', message:'수정이 완료되었습니다.'})
+                //alert('수정이 완료되었습니다.')
                 this.addr = false;
                 this.$emit('addrUpdate',this.memSeq)
               }
@@ -280,7 +284,8 @@ export default {
       },
       passedit(){
         if(this.passCheck ==""){
-          alert('비밀번호를 입력해주세요')
+          this.$message({ type: 'info', message:'비밀번호를 입력해주세요'})
+          //alert('비밀번호를 입력해주세요')
         }else{
            var params = new URLSearchParams();
            params.append('memberSeq', this.memSeq)
@@ -292,7 +297,8 @@ export default {
                   this.passCheck = "";
                   this.passup = false;
                 }else{
-                  alert('비밀번호가 맞지 않습니다.')
+                  this.$message({ type: 'warning', message:'비밀번호가 맞지 않습니다'})
+                  //alert('비밀번호가 맞지 않습니다.')
                 }
             }) 
          }
@@ -343,7 +349,8 @@ export default {
                     axios.post('http://localhost:9000/updatePass', params).then(
                         res => {
                             if(res.data == true){
-                                alert('비밀번호가 변경되었습니다.')
+                              this.$message({ type: 'info', message:'비밀번호가 변경되었습니다'})
+                                //alert('비밀번호가 변경되었습니다.')
                                 this.passup = true;
                                 this.$emit('passUpdate', this.memSeq)
                             }

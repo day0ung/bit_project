@@ -87,14 +87,16 @@ export default {
   methods:{
     likeAdd(groupInfoSeq, groupName){
       if(this.$store.state.isLogin === true){ //아직 로그인이 안된 유저니까 막음
-        alert('로그인이 필요한 기능입니다')
+        this.$message({ type: 'info', message:"로그인이 필요한 기능입니다"})
+        //alert('로그인이 필요한 기능입니다')
         this.$router.push('/login')
       }else{
         let params = new URLSearchParams();
         params.append("groupInfoSeq", groupInfoSeq)
         params.append("memberSeq", this.$store.state.loginUser.memberSeq)
         axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
-          alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+          this.$message({ type: 'success', message:"그룹이 찜목록에 추가되었습니다. 마이페이지에서 확인해주세요."})
+          //alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
         })
       }
     },
