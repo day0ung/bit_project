@@ -1,125 +1,75 @@
 <template>
-        <div class="small">
-          <div v-loading="loading">
-            <line-chart
-             :chart-data="datacollection"></line-chart>
+        <div class="chartArea">
+          <div class="set_one">
+            <div class="barchartArea">
+              <!-- <h3> 남여 가입자 비율(lineChart) </h3>
+              <HorizontalBar></HorizontalBar> -->
+            </div>
+            <div class="dounutChartArea">
+              <h3> 그룹별 대분류 비율(DonutChart) </h3>
+              <DonutChart  @on-receive="updateValue1"></DonutChart>
+            </div>
           </div>
-            <button @click="fillData()">Randomize</button>
             <div class="content01_view">
-                <h1> {{title}} member333333333333333333</h1>
+                <!-- <h1> {{title}} member333333333333333333</h1> -->
             </div>
         </div>
 
 </template>
 
 <script>
-import LineChart from '@/api/LineChart.js'
-import { loading } from 'element-ui';
+//Importing Bar class from the vue-chartjs wrapper
 
+// import HorizontalBar from './ChartDataArea/content_05_horizontalBarChart'
+import DonutChart from './ChartDataArea/content_06_DonutChart'
+
+//Exporting this so it can be used in other components
 export default {
-    components: {
-      LineChart
-    },
-    data () {
+  components:{
+    // HorizontalBar,
+    DonutChart
+  },
+    data() {
       return {
-        loading:false,
-        datacollection: null,
-        title:'statisticsNresearch1',
-        getRawData:'',
-        setGenderData:[],
-        SetMan:[],
-        setWoman:[],
+
       }
     },
-    // mounted () {
-    //   this.fillData()
-    //   this.getGenderDataMethod()
-    // },
-    created(){
-      this.fillData()
-      this.getGenderDataMethod()
+    created() {
+   
+    },
+    mounted(){
+
     },
     methods: {
-      fillData () {
-        this.datacollection = {
-          labels: [this.getRandomInt(), this.getRandomInt()],
-          datasets: [
-            {
-              label: '남자',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }, {
-              label: '여자',
-              backgroundColor: '#f87979',
-              data: [this.getRandomInt(), this.getRandomInt()]
-            }
-          ]
-        }
-      },
-      getRandomInt () {
-        return Math.floor(Math.random() * (50 - 5 + 1)) + 5
-      },
-      getGenderDataMethod () {  //axios process
 
-        //getMemberGenderInfo
+    //   handle (point, event) {
+    // 	const item = event[0]
+    // 	this.$emit('on-receive', {
+    //   	index: item._index,
+    //     backgroundColor: item._view.backgroundColor,
+    //     value: this.values[item._index]
+    //   })
+    // },
 
-        
 
-        axios.post("http://localhost:9000/getMemberGenderInfo")
-        .then(res=>{
-          this.loading=true;
-          this.getRawData=res.data;
-          console.log("getRawData");
-          console.log(this.getRawData);
-          console.log("only gender : ");
-          console.log(this.getRawData[0]);
-
-          // for(var i=0; i<this.getRawData.length; i++){
-          //   console.log("genderdata = "+ i + "["+this.getRawData[i].gender+"]")
-          //   // console.log(this.getRawData[i].gender);
-          // }
-
-          this.pickGender();
-
-          this.loading=false;
-        }).catch(error=>{
-          this.loading=true;
-          
-          console.log("오류발생! 오류내용 : "+error)
-
-          this.loading=false;
-        })
-      },
-
-      pickGender(){
-        this.getRawData;
-        this.setGenderData;
-
-        var testList = new Array();
-
-        for(var i=0; i<this.getRawData.length; i++){
-          // console.log("genderdata = "+ i + "["+this.getRawData[i].gender+"]")
-          testList.push(this.getRawData[i].gender);
-        }
-
-        var testListToJsonData = JSON.stringify(testList);
-        console.log("testList : ");
-        console.log(testList);
-        console.log("json.stringify : ");
-        console.log(testListToJsonData);
+      updateValue1(data1){
+        // DonutChart.updateValue(data1);
+        console.log(data1.value);
       }
 
-
-    }
-
+    },
 }
 </script>
 
 <style>
 
- .small {
+ /* .small {
     max-width: 600px;
     margin:  150px auto;
-  }
+  } */
+
+.set_one{
+  display:flex;
+}
 
 </style>

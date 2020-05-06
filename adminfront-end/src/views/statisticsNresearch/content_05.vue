@@ -6,7 +6,7 @@
               <HorizontalBar></HorizontalBar> -->
             </div>
             <div class="dounutChartArea">
-              <h3> 대분류그룹 비율(DonutChart) </h3>
+              <h3> 그룹별 대분류 비율(DonutChart) </h3>
               <DonutChart  @on-receive="updateValue1"></DonutChart>
             </div>
           </div>

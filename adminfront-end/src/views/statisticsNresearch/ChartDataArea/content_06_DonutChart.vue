@@ -8,7 +8,7 @@ export default {
   data() {
     return { 
       datacollection: {
-        labels: ['대학생/취업', '공무원임용', '어학/회화', '라이프/취미'],
+        labels: ['', '', '', ''],
         datasets: [
           {
             backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor()],
@@ -66,11 +66,11 @@ export default {
   methods : {
     getGenderDataMethod () {  //axios process
         //getMemberGenderInfo
-      axios.post("http://localhost:9000/getGroupInfo_InterBigCount")
+      axios.post("http://localhost:9000/getGroupInfo_InterSmallCount")
       .then(res=>{
-        console.log("대분류 내용 출력 시작");
+        console.log("소분류 내용 출력 시작");
         const dataRes = res.data
-        console.log(dataRes)
+        console.log(res.data[0])
         
         
 
@@ -88,24 +88,11 @@ export default {
       })
     },
       pushChartData(dataRes){
-        var pushData = new Array();
-        pushData.push(dataRes.value1);
-        pushData.push(dataRes.value2);
-        pushData.push(dataRes.value3);
-        pushData.push(dataRes.value4);
+        // var pushData = new Array();
+        
+ 
 
-
-        this.datacollection.datasets[0].data=[];
-        this.datacollection.datasets[0].data.push(dataRes[0].value1);
-        this.datacollection.datasets[0].data.push(dataRes[0].value2);
-        this.datacollection.datasets[0].data.push(dataRes[0].value3);
-        this.datacollection.datasets[0].data.push(dataRes[0].value4);
-        // this.datacollection.datasets[0].data
-        // console.log("들어온값 : ")
-        console.log(dataRes)
-        console.log(pushData)
-
-        this.$data._chart.update()
+        // this.$data._chart.update()
         
       },
 
