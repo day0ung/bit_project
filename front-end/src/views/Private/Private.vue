@@ -88,8 +88,10 @@ import Todo from '@/views/Private/priTodo.vue'
           }) 
       },
       handleClick(tab, event) {
-          this.$store.state.s_private.list = true
-          this.$store.state.s_private.write = false
+            this.$store.state.s_private.list = true
+            this.$store.state.s_private.detail = false
+            this.$store.state.s_private.write = false
+            this.$store.state.s_private.update = false
          if(this.activeName == 'second'){
            this.chartOptions.xAxis.categories = []
            this.chartOptions.series[0].data = []
@@ -97,7 +99,18 @@ import Todo from '@/views/Private/priTodo.vue'
          }else if(this.activeName == 'third'){
 
          }else if(this.activeName == 'forth'){
-
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+         axios.post('http://localhost:9000/getMemberBoard', params)
+         .then(res => {
+            this.$store.state.s_private.BoardData = res.data
+           }) 
+            this.$store.state.s_private.detail = false
+            this.$store.state.s_private.write = false
+            this.$store.state.s_private.update = false
          }       
       }
     },

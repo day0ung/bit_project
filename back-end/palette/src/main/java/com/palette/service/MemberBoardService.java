@@ -82,6 +82,10 @@ public class MemberBoardService {
 		
 	}
 	
+	public void memberBoardDel(int boardSeq) {
+		dao.memberBoardDel(boardSeq);
+	}
+	
 	
 	
 	
