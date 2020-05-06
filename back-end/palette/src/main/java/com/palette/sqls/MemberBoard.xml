@@ -9,8 +9,8 @@
 	join MEMBER m
 	on b.MEMBER_SEQ = m.MEMBER_SEQ
 	where (@rownum:=0)=0 and b.del = 0 and b.BOARD_AUTH=0 and b.CATEGORY=2
-	         	and b.MEMBER_SEQ=#{memberSeq}
-	order by b.WRITE_DATE, rowNum asc
+         	and b.MEMBER_SEQ=#{memberSeq}
+	order by b.WRITE_DATE desc, rowNum asc
  </select>
  
  <!--게시판 글쓰기 -->
@@ -48,8 +48,8 @@
  <!-- 자료실삭제 -->
  <update id="memberBoardDel" parameterType="java.lang.Integer">
  	UPDATE BOARD
-	SET DEL = 1
-	WHERE BOARD_SEQ = #{boardSeq}
+	SET DEL=1
+	WHERE BOARD_SEQ=#{boardSeq}
  </update>
  
  <!-- 자료실 수정전 삭제 -->

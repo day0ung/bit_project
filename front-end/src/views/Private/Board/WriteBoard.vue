@@ -75,15 +75,11 @@ export default {
 			if (valid) {
                  let formData = new FormData();
                  formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
-                 formData.append('memberId', this.$store.state.loginUser.memberId)
                  formData.append('title',this.ruleForm.title)
                  formData.append('content',this.ruleForm.content)
                  this.ruleForm.fileList.forEach(function(element){
                      formData.append('files', element)
                  })
-                 // for (let key of formData.entries()){
-                 // //     console.log(`${key}`)
-                 // }
 				 axios.post("http://localhost:9000/uploadBoard", formData ,{
 				 	headers:{
                          'Content-Type' : 'multipart/form-data'
@@ -91,8 +87,10 @@ export default {
 				 }).then(res =>{
                      this.$message({ type: 'success', message:'자료가 업로드 되었습니다.'})
                      //alert("자료가 업로드 되었습니다.")
+                     //alert("자료가 업로드 되었습니다.")
+                     this.$store.state.s_private.BoardData = res.data
                      this.$store.state.s_private.write = false
-                     this.$emit('upload')
+                     this.$emit('upload', this.$store.state.loginUser.memberSeq)
 				 })
 				
 			} else {
