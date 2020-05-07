@@ -2,12 +2,12 @@
         <div class="chartArea">
           <div class="set_one">
             <div class="barchartArea">
-              <h3> 남여 가입자 비율(lineChart) </h3>
-              <HorizontalBar></HorizontalBar>
+              <!-- <h3> 남여 가입자 비율(lineChart) </h3>
+              <HorizontalBar></HorizontalBar> -->
             </div>
             <div class="dounutChartArea">
-              <h3> 남여 가입자 비율(DonutChart) </h3>
-              <!-- <DonutChart  @on-receive="updateValue1"></DonutChart> -->
+              <h3> 그룹별 대분류 비율(DonutChart) </h3>
+              <DonutChart  @on-receive="updateValue1"></DonutChart>
             </div>
           </div>
             <div class="content01_view">
@@ -20,14 +20,14 @@
 <script>
 //Importing Bar class from the vue-chartjs wrapper
 
-import HorizontalBar from './ChartDataArea/content_05_content_08_horizontalBarChart'
-// import DonutChart from './ChartDataArea/content_08_DonutChart'
+// import HorizontalBar from './ChartDataArea/content_05_horizontalBarChart'
+import DonutChart from './ChartDataArea/content_05_DonutChart'
 
 //Exporting this so it can be used in other components
 export default {
   components:{
-    HorizontalBar,
-    // DonutChart
+    // HorizontalBar,
+    DonutChart
   },
     data() {
       return {

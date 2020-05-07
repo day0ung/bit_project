@@ -284,3 +284,4 @@ application.yml
 .yml
 
 *.yml
+/back-end/.vscode/settings.json

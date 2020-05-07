@@ -2,14 +2,12 @@ package com.palette.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import com.palette.model.MemberDto;
 import com.palette.service.AdminMemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
