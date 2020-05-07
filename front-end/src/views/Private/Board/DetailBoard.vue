@@ -22,7 +22,6 @@
                         <td>
                          <h5> {{ this.$store.state.s_private.boardDetail.content }}</h5>
                         </td>
-                        <td>{{this.$store.state.s_private.boardDetail.boardSeq}}</td>
                       </tr>
                     </tbody>
               </table>

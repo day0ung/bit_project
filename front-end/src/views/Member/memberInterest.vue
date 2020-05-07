@@ -75,7 +75,7 @@
                 <!-- 서브밋버튼 -->
                 <div class="submitBtnDiv">
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">회원가입</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">작성완료</el-button>
                         <el-button @click="resetForm('ruleForm')">취소</el-button>
                     </el-form-item>
                 </div>
