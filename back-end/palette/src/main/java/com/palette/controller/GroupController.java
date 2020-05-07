@@ -92,11 +92,13 @@ public class GroupController {
             throws IOException {
         System.out.println("creatGroupApply");
         groupDto.setInterBigSeq(groupService.searchInterBigSeq(groupDto.getInterSmallSeq()));
-        if(!file.isEmpty()){
-            String imagePath = s3Uploader.upload(file, "groupImage");
-            groupDto.setImage(imagePath);
-        }else{
+        if(file == null){
             groupDto.setImage("https://bit-palette.s3.ap-northeast-2.amazonaws.com/groupImage/1.png");
+        }else{
+            if(!file.isEmpty()){
+                String imagePath = s3Uploader.upload(file, "groupImage");
+                groupDto.setImage(imagePath);
+            }
         }
         groupService.createGroup(groupDto);
         groupSchedule.setGroupInfoSeq(groupService.currGroupInfoSeq());
