@@ -184,19 +184,21 @@ export default {
     }
   },
   mounted(){
-    
+ 
     
   
   },
   created(){
-		let sMemberSeq = sessionStorage.getItem("loginUser")
+    
+    
+    let sMemberSeq = sessionStorage.getItem("loginUser")
     this.login1 = JSON.parse(sMemberSeq)
     
     //페이징
       this.getTotal()
       this.getList()
 
-      
+    
       
     
 		// this.memberSeq = this.$store.state.loginUser.memberSeq

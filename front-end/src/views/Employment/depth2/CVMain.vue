@@ -48,6 +48,7 @@
       <div class="hr"></div>
       <el-button type="primary" round @click="writeCV">새로운 이력서 업로드하기</el-button>
     </div> -->
+
     <!-- 일반 회원 / CV 있을 때 -->
     <div v-else-if="(login1.auth === 0 | login1.auth === 1) & this.$store.state.s_employment.oneMember.cv === 1" class="updateCV">
       <div class="slib">
@@ -97,6 +98,7 @@
       <div class="hr"></div>
       <el-button type="primary" round @click="updateCV">이력서 수정하기</el-button>
     </div> -->
+    
     <!-- 기업 회원 -->
     <div v-else class="CVList">
       <div class="boardTableFrom">

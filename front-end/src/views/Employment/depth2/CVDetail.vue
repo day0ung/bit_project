@@ -41,13 +41,15 @@ export default {
   data(){
     return{
       file : "",
-      memberName: ""
+      
       
     }
   },
   mounted(){
     var params = new URLSearchParams();	// post 방식으로 받아야함. 
-      params.append('cvSeq', this.$store.state.s_employment.cvDetail.cvSeq);
+    let seq = this.$store.state.s_employment.cvDetail.cvSeq
+    //alert(seq)
+      params.append('cvSeq', seq);
       axios.post("http://localhost:9000/cvDetailRef", params).then(res => { 
         this.$store.state.s_employment.cvDetailRef = res.data
         this.file = res.data
