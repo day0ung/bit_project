@@ -30,9 +30,28 @@
                     <el-input v-model="ruleForm.extraAddress" placeholder="상세주소"></el-input>
                 </el-form-item>
                 <!-- 로고 -->
-                <el-form-item prop="logo" label="회사로고">
+                <!-- <el-form-item prop="logo" label="회사로고">
 					<el-input v-model="ruleForm.logo"></el-input>
-				 </el-form-item>	 
+				 </el-form-item>	 -->
+                <el-form-item label="회사로고" prop="fileList">
+                <el-upload
+                    action=""
+                    list-type="picture-card"
+                    accept=".jpg, .jpeg, .png, .bmp, .txt, .ppt, .pptx, .hwp"
+                    multiple
+                    v-model="ruleForm.fileList"
+                    :limit="3"
+                    :auto-upload="false"
+                    :on-change="handleChange"
+                    :on-exceed="handleExceed"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+                <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="ruleForm.dialogImageUrl" alt="">
+                </el-dialog>
+            </el-form-item>
 				<!-- 소개글 -->
 				 <el-form-item label="회사소개">
 					<el-input type="textarea" :rows="20" v-model="ruleForm.desc" placeholder="내용을 적어주세요"></el-input>
@@ -75,6 +94,7 @@ export default {
         }
       };
         return{
+            dialogVisible: false,
             ruleForm: {
 				memberId: '',
 				pass: '',
@@ -85,7 +105,8 @@ export default {
       			address: '',
 				extraAddress: '',
                 desc: '',
-                logo:'',
+                dialogImageUrl: '',
+                fileList: [],
                 auth: '2'
             },
             rules: {
@@ -106,7 +127,6 @@ export default {
                     { required: true, message: '이메일을 입력해주세요', trigger: 'blur' },
                     { type: 'email', message: '이메일 형식으로 입력해주세요', trigger: ['blur', 'change'] }
                 ],
-    
                 address:[
                     { required: true, message: '상세 주소를 입력해주세요', trigger: 'blur' },
                 ],
@@ -125,25 +145,30 @@ export default {
             this.$refs[formName].validate((valid) => {
             if (valid) {
                 var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
-                //alert(memberAddress)
-                var params = new URLSearchParams();
-                params.append('memberId', this.ruleForm.memberId)
-                params.append('pwd', this.ruleForm.pass)
-                params.append('memberName', this.ruleForm.memberName)
-                params.append('email', this.ruleForm.email)
-                params.append('address', memberAddress)
-                params.append('auth', this.ruleForm.auth)
-                params.append('companyInfo', this.ruleForm.desc)
-                params.append('companyLogo', this.ruleForm.logo)
-                console.log(params)
-                axios.post('http://localhost:9000/createMember', params).then(
-                    res => {
-                        if(res.data == true){
+                let formData = new FormData();
+                formData.append('memberId', this.ruleForm.memberId)
+                formData.append('pwd', this.ruleForm.pass)
+                formData.append('memberName', this.ruleForm.memberName)
+                formData.append('email', this.ruleForm.email)
+                formData.append('address', memberAddress)
+                formData.append('auth', this.ruleForm.auth)
+                formData.append('companyInfo', this.ruleForm.desc)
+               	this.ruleForm.fileList.forEach(function(element){
+                    formData.append('files', element)
+                })
+                console.log(formData)
+    
+				 axios.post("http://localhost:9000/createCompanyMember", formData ,{
+				 	headers:{
+                         'Content-Type' : 'multipart/form-data'
+				 	}
+				 }).then(res =>{
+                     if(res.data == ""){
                             this.$message({ type: 'success', message:'회원가입이 완료 되었습니다'})
                             //alert('회원가입이 완료 되었습니다')
-                            this.$router.push ({name:'home'})
+                            this.$router.push ({name:'Home'})
                         }
-                    }) 
+				 })
             } else {
                 console.log('error submit!!');
                 return false;
@@ -179,7 +204,29 @@ export default {
 			}
 			},
 		}).open();
-		}
+        },
+        handleChange(file, fileList){
+            this.ruleForm.fileList.push(file.raw) 
+            console.log("addList")
+            console.log(this.ruleForm.fileList)
+        },
+        handleRemove(file, fileList) {
+            this.ruleForm.fileList = this.ruleForm.fileList.filter(data => data.name !== file.raw.name)
+            console.log("removeList")
+            console.log(this.ruleForm.fileList)
+        },
+        handlePictureCardPreview(file) {
+            this.ruleForm.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
+        handleExceed(files, fileList){
+            this.$message({
+                showClose: true,
+                center: true,
+                message: '자료는 한번에 2개만 업로드가능합니다.',
+                type: 'error'  
+            })
+        },
     }
 
 }

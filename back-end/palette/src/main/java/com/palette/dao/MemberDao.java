@@ -2,10 +2,10 @@ package com.palette.dao;
 
 import java.util.List;
 
+import com.palette.model.BoardReferenceDto;
 import com.palette.model.MemberDto;
 import com.palette.model.MemberInterParam;
 import com.palette.model.TodoListDto;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -21,6 +21,14 @@ public interface MemberDao {
 	
 	int createMember(MemberDto dto);//register
 	
+	void createCompanyMember(MemberDto dto);
+	
+	void companyLogo(BoardReferenceDto dto);
+	 
+	BoardReferenceDto getUrl(BoardReferenceDto dto); //memberSeq넣고 dto  urlset
+	
+	void updateLogo(MemberDto dto);
+
 	// 회원가입후 nterest add
 	int getBigSeq(int interSmallSeq); 
 	
