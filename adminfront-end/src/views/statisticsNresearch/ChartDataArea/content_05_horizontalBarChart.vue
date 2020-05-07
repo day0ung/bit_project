@@ -79,32 +79,7 @@ export default {
         // this.loading=false;
       })
     },
-      pickGender(){
-        this.getRawData;
 
-        var testList = new Array();
-        var mancheck = 0;
-        var womancheck=0;
-
-
-        for(var i=0; i<this.getRawData.length; i++){
-          // console.log("genderdata = "+ i + "["+this.getRawData[i].gender+"]")
-          // testList.push(this.getRawData[i].gender);
-          if(this.getRawData[i].gender == 1){
-              mancheck++;
-          }else{
-            womancheck++;
-          }
-        }
-        testList.push(JSON.stringify(mancheck));
-        testList.push(JSON.stringify(womancheck));
-        this.datacollection.datasets[0].data= testList
-        console.log("=========================checkdata05=====================")
-        console.log(testList)
-        console.log(this.datacollection.datasets[0].data)
-        this.$data._chart.update()
-        console.log("=========================checkdata05=====================")
-      }
 
   },
     watch: {
