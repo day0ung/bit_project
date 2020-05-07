@@ -48,8 +48,8 @@
               <span class="el-icon-circle-check" v-else="">멤버</span>
             </div>
             <div v-if="person.del === 2"> {{person.memberId}}
-              <span class="el-icon-circle-plus-outline">가입신청한 멤버</span>
-              <span class="el-icon-check" v-if="groupInfoMemberSeq = loginSeq" @click="permissionBtn(person.memberSeq, person.memberId)">가입승인하기</span>
+              <span class="el-icon-circle-plus-outline" style="color: #78c791">가입신청한 멤버</span>
+              <span class="el-icon-check" v-if="groupInfoMemberSeq = loginSeq" @click="permissionBtn(person.memberSeq, person.memberId)" style="cursor: pointer; color: #ff5757; font-weight: bold;">가입승인하기</span>
             </div>
           </li></div>
         <div><span>시작일</span> {{ this.$store.state.s_group.grouDetail.startDate }}</div>
