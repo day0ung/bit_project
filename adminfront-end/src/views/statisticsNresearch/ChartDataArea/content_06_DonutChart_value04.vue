@@ -8,11 +8,11 @@ export default {
   data() {
     return { 
       datacollection: {
-        labels: ['1','1','1','1','1','1'],
+        labels: ['여행/아웃도어', '운동', '봉사활동', '공예/만들기', '댄스/무용', '요리/제조', '자유'],
         datasets: [
           {
-            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(),  randomColor(),  randomColor()],
-            data: [1,1,1,1,1,1]
+            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(), randomColor(), randomColor(), randomColor()],
+            data: [0, 0, 0, 0, 0, 0, 1]
           }
         ]
       },

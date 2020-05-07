@@ -8,11 +8,11 @@ export default {
   data() {
     return { 
       datacollection: {
-        labels: ['1','1','1','1','1','1'],
+        labels: ['공기업','자격증','자소서','면접','경영/사무','디자인','전문직','IT/Internet','유통/무역', '서비스'],
         datasets: [
           {
-            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(),  randomColor(),  randomColor()],
-            data: [1,1,1,1,1,1]
+            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(),  randomColor(),  randomColor(), randomColor(), randomColor(), randomColor(), randomColor()],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]
           }
         ]
       },
