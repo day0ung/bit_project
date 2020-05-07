@@ -10,7 +10,7 @@
           size="large"
           placeholder="검색">
           <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
-          <el-select v-model="s_keyWord" slot="prepend" placeholder="제목" :value="title">
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="제목" >
             <!-- <el-option label="작성자" value="writer"></el-option> -->
             <el-option label="제목" value="title"></el-option>
           </el-select>
