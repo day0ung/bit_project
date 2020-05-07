@@ -3,7 +3,7 @@
         <h3>새 이력서</h3><br>
 		<el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
 			<el-form-item label="이름">
-				<el-input readonly="readonly" >{{login1.memberName}}</el-input>
+				<el-input readonly="readonly" :value="login1.memberName"></el-input>
 			</el-form-item>
 			<el-form-item label="제목"  prop="title">
 				<el-input v-model="ruleForm.title"></el-input>

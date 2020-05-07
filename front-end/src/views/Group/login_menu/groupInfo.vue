@@ -4,7 +4,7 @@
  
       
       <div class="groupInfoTitle">
-        <img :src="this.$store.state.s_group.grouDetail.image" style="margin: 10px; height: 250px;"/>
+        <img :src="this.$store.state.s_group.grouDetail.image" style="margin: 0px; height: 250px; width:250px "/>
         <div style="margin:10px"><span>출석일</span></div>
 
         <div class="schedules" style="line-height: 12px;">
@@ -88,6 +88,7 @@ export default {
           axios.post("http://localhost:9000/permissionGroupMember", params)
                       .then(res => {
                         alert(memberId + "님이 그룹에 가입되었습니다.")
+                        this.getGroupOne()
               })
         },
         getGroupOne(){
