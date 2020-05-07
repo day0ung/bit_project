@@ -59,9 +59,9 @@
       
       <div class="hr"></div>
        
-        <h6 style="width:30%; margin-top:40px; float:left; text-align:center; vertical-align:middle"><span>스터디 소개</span></h6>
+        <h6 style="width:30%; margin-top:40px; float:left; text-align:center; vertical-align:middle;"><span>스터디 소개</span></h6>
       
-       <div class="groupInfoContent">
+       <div class="groupInfoContent" style="line-height:20px">
         {{ this.$store.state.s_group.grouDetail.info }}
       </div>
     </div>
