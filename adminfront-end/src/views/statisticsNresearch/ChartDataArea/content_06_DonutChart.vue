@@ -18,19 +18,19 @@ export default {
       },
       options:{
          scales: {
-          // yAxes: [{
-            // ticks: {
-              // beginAtZero: true
-            // },
-            // gridLines: {
-              // display: true
-            // }
-          // }],
-          // xAxes: [ {
-            // gridLines: {
-              // display: false
-            // }
-          // }]
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            },
+            gridLines: {
+              display: true
+            }
+          }],
+          xAxes: [ {
+            gridLines: {
+              display: false
+            }
+          }]
         },
         legend: {
             // display: true
@@ -50,7 +50,7 @@ export default {
   mounted() {
     //renderChart function renders the chart with the datacollection and options object.
     this.renderChart(this.datacollection, this.options);
-    this.getGenderDataMethod();
+    // this.getGenderDataMethod();
 
 
 
@@ -62,7 +62,7 @@ export default {
   },
 
 
-
+/*
   methods : {
     getGenderDataMethod () {  //axios process
         //getMemberGenderInfo
@@ -71,29 +71,18 @@ export default {
         console.log("소분류 내용 출력 시작");
         const dataRes = res.data
         console.log(res.data)
-        
-        
-
         console.log("소분류 내용 출력끝. ");
-
         this.pushChartData(dataRes);
-
         this.loading=false;
       }).catch(error=>{
         // this.loading=true;
-        
         console.log("오류발생! 오류내용 : "+error)
-
         // this.loading=false;
       })
     },
       pushChartData(dataRes){
         // var pushData = new Array();
-        
- 
-
         // this.$data._chart.update()
-        
       },
 
       handle (point, event) {
@@ -102,19 +91,16 @@ export default {
       	// index: item._index,
         backgroundColor: item._view.backgroundColor,
         value: this.datacollection.datasets[0].data[item._index]
-        
-        
         })
       },
-
-
       updateValue(data){
         console.log(data);
       }
-
   }
+*/
 
-  
+
+
 }
 
 </script>
