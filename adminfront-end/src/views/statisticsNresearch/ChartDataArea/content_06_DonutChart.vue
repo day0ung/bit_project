@@ -70,11 +70,11 @@ export default {
       .then(res=>{
         console.log("소분류 내용 출력 시작");
         const dataRes = res.data
-        console.log(res.data[0])
+        console.log(res.data)
         
         
 
-        console.log("대분류 내용 출력끝. ");
+        console.log("소분류 내용 출력끝. ");
 
         this.pushChartData(dataRes);
 
