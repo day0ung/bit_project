@@ -95,7 +95,7 @@ name: 'Comment',
       })
     },
     insertComment(){
-      alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_notice.boardSeq +"/ content: "+this.content)
+      //alert("id:"+this.loginSeq + "/ boardSeq:"+  this.$store.state.s_notice.boardSeq +"/ content: "+this.content)
       //this.boardSeq = this.$store.state.s_group.groupBoardDetail.boardSeq
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('memberSeq', this.loginSeq);

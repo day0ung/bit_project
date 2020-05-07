@@ -8,11 +8,11 @@ export default {
   data() {
     return { 
       datacollection: {
-        labels: ['1','1','1','1','1','1'],
+        labels: ['일반행정', '세무', '교육행정', '교정', '군무원', '사회복지', '검찰사무', '소방', '경찰'],
         datasets: [
           {
-            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(),  randomColor(),  randomColor()],
-            data: [1,1,1,1,1,1]
+            backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(), randomColor(), randomColor(), randomColor(), randomColor(), randomColor()],
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 1]
           }
         ]
       },

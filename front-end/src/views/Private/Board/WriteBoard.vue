@@ -75,6 +75,7 @@ export default {
 			if (valid) {
                  let formData = new FormData();
                  formData.append('memberSeq', this.$store.state.loginUser.memberSeq)
+                 formData.append('memberId', this.$store.state.loginUser.memberId)
                  formData.append('title',this.ruleForm.title)
                  formData.append('content',this.ruleForm.content)
                  this.ruleForm.fileList.forEach(function(element){

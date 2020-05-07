@@ -142,4 +142,7 @@ export default {
  position: relative; 
  flex:  none; 
 }
+.submitBtnDiv{
+    margin-left: 20px
+}
 </style>

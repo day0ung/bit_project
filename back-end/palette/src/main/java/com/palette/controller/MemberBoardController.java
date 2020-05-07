@@ -33,7 +33,7 @@ public class MemberBoardController {
 	//자료실 올리기
 	@PostMapping(value = "/uploadBoard") 
 	public String writeBoard(ReferenceVo form) throws IOException{
-		System.out.println("uploadBoard"+form.toString());
+		System.out.println("uploadBoard");
 		service.uploadBoard(form);
 		return "";
 	}

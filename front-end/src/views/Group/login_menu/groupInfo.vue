@@ -4,7 +4,7 @@
  
       
       <div class="groupInfoTitle">
-        <img :src="this.$store.state.s_group.grouDetail.image" style="margin: 10px; height: 250px;"/>
+        <img :src="this.$store.state.s_group.grouDetail.image" style="margin: 0px; height: 250px; width:250px "/>
         <div style="margin:10px"><span>출석일</span></div>
 
         <div class="schedules" style="line-height: 12px;">
@@ -48,8 +48,8 @@
               <span class="el-icon-circle-check" v-else="">멤버</span>
             </div>
             <div v-if="person.del === 2"> {{person.memberId}}
-              <span class="el-icon-circle-plus-outline">가입신청한 멤버</span>
-              <span class="el-icon-check" v-if="groupInfoMemberSeq = loginSeq" @click="permissionBtn(person.memberSeq, person.memberId)">가입승인하기</span>
+              <span class="el-icon-circle-plus-outline" style="color: #78c791">가입신청한 멤버</span>
+              <span class="el-icon-check" v-if="groupInfoMemberSeq = loginSeq" @click="permissionBtn(person.memberSeq, person.memberId)" style="cursor: pointer; color: #ff5757; font-weight: bold;">가입승인하기</span>
             </div>
           </li></div>
         <div><span>시작일</span> {{ this.$store.state.s_group.grouDetail.startDate }}</div>
@@ -88,6 +88,7 @@ export default {
           axios.post("http://localhost:9000/permissionGroupMember", params)
                       .then(res => {
                         alert(memberId + "님이 그룹에 가입되었습니다.")
+                        this.getGroupOne()
               })
         },
         getGroupOne(){
