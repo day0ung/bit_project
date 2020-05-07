@@ -1,7 +1,7 @@
 <template>
     <div class="create">
         <div class="createContainer">
-            <div class="title">그룹 스터디 생성</div>
+            <div class="title">PALETTE 회원가입</div>
             <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <!-- 아이디 설정 -->
                 <el-form-item label="아이디" prop="memberId">
@@ -49,7 +49,7 @@
                 <div class="submitBtnDiv">
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('ruleForm')">회원가입</el-button>
-                        <el-button @click="resetForm('ruleForm')">취소</el-button>
+                        <el-button @click="resetForm('ruleForm')">지우기</el-button>
                     </el-form-item>
                 </div>
             </el-form>

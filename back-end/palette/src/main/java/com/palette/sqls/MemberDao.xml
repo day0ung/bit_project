@@ -24,6 +24,24 @@
   	VALUES( #{memberName}, #{memberId}, #{pwd}, #{age}, #{address}, #{email}, #{auth}, #{gender}, 0) 
   </insert>
   
+  <insert id="createCompanyMember" parameterType="com.palette.model.MemberDto">
+  	INSERT INTO MEMBER(MEMBER_ID, PWD, MEMBER_NAME, EMAIL, AUTH,  ADDRESS, COMPANY_INFO)
+  	VALUES(#{memberId}, #{pwd}, #{memberName}, 
+  	#{email}, #{auth}, #{address},#{companyInfo}) 
+  </insert>
+  
+
+  <insert id="companyLogo" parameterType="com.palette.model.BoardReferenceDto">
+  	insert into BOARD_REFERENCE(MEMBER_SEQ, URL, FILE_NAME)
+	values (#{memberSeq}, #{url}, #{fileName})
+  </insert>
+  
+
+  
+  <!-- url 업데이트 -->
+  <update id="updateLogo" parameterType="com.palette.model.MemberDto">
+  	UPDATE MEMBER SET COMPANY_LOGO=#{companyLogo} where MEMBER_SEQ=#{memberSeq}
+  </update>
  
   <select id="getMyInfo" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto" >
   	SELECT *
