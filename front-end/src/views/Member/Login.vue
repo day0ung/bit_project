@@ -37,7 +37,7 @@
                 <p class="signup-forgotten">
                  
                    <span></span>
-                   <button class="forgotten" @click="idSearch" style="font-weight: 5px">아이디/비밀번호 찾기</button>
+                 
                 </p>
                  </div>
              </div>
@@ -127,9 +127,6 @@ export default {
             this.$cookie.delete('userId');
           }
         },
-        idSearch(){
-
-        }
     }
 }
 
