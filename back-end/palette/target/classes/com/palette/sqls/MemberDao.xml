@@ -25,9 +25,8 @@
   </insert>
   
   <insert id="createCompanyMember" parameterType="com.palette.model.MemberDto">
-  	INSERT INTO MEMBER(MEMBER_ID, PWD, MEMBER_NAME, EMAIL, AUTH,  ADDRESS, COMPANY_INFO)
-  	VALUES(#{memberId}, #{pwd}, #{memberName}, 
-  	#{email}, #{auth}, #{address},#{companyInfo}) 
+  	INSERT INTO MEMBER(MEMBER_ID, PWD, MEMBER_NAME, EMAIL, AUTH,  ADDRESS, COMPANY_INFO, DEL)
+  	VALUES(#{memberId}, #{pwd}, #{memberName}, #{email}, #{auth}, #{address},#{companyInfo}, 0) 
   </insert>
   
 
