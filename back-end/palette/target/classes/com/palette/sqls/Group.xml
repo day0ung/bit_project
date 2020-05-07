@@ -178,7 +178,7 @@
 								 from GROUP_INFO i
 								 join GROUP_MEMBER gm
 								     on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
-								 where gm.MEMBER_SEQ = #{memberSeq} )
+								 where gm.MEMBER_SEQ = #{memberSeq} gm.DEL = 0)
 	<if test="interBigSeq != 0">
 	and i.INTER_BIG_SEQ = #{interBigSeq}
 	</if>
