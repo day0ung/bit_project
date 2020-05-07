@@ -96,7 +96,7 @@ public class GroupController {
             String imagePath = s3Uploader.upload(file, "groupImage");
             groupDto.setImage(imagePath);
         }else{
-            groupDto.setImage("");
+            groupDto.setImage("https://bit-palette.s3.ap-northeast-2.amazonaws.com/groupImage/1.png");
         }
         groupService.createGroup(groupDto);
         groupSchedule.setGroupInfoSeq(groupService.currGroupInfoSeq());

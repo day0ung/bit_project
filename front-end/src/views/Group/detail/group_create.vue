@@ -257,7 +257,6 @@ export default {
                 formData.append('info', this.groupDto.info);
                 formData.append('smallInfo', this.groupDto.smallInfo);
                 formData.append('maxMember', this.groupDto.maxMember);
-                formData.append('image', this.groupDto.dialogImageUrl);
                 formData.append('startDate', this.groupDto.startDate);
                 formData.append('endDate', this.groupDto.endDate);
                 formData.append('maxMember', this.groupDto.maxMember);
@@ -272,7 +271,11 @@ export default {
                 // 로그인된 맴버Seq
                 formData.append('memberSeq', this.loginMemberSeq);
                 // 파일업로드
-                formData.append('file', this.files[0]);
+                if(this.files.length === 0){
+                    formData.append('image', "https://bit-palette.s3.ap-northeast-2.amazonaws.com/groupImage/1.png")
+                }else{
+                    formData.append('file', this.files[0]);
+                }
 
                 axios.post("http://localhost:9000/creatGroupApply", formData,{
 					headers:{'Content-Type' : 'multipart/form-data'}
