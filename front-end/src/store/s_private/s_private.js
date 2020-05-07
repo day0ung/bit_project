@@ -5,7 +5,8 @@ export default {
         memberCalendar:[], 
         memberCalendarDetail:[],
         memberCalendarStartDate:'',  
-        memberCalendarEndDate:'',  
+        memberCalendarEndDate:'', 
+        loading:false, 
         BoardData:[], //게시판List
         list: true, //자료실 리스트 view
         write: false, //자료실 글쓰기 view

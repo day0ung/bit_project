@@ -60,6 +60,7 @@ export default {
     // this.$store.state.currpage = this.$route.path
     axios.get("http://localhost:9000/getAllRecuritingInfo")
                       .then(res => {
+                        
                   // alert(JSON.stringify(res.data))
                   this.RecruitingList = res.data
                   this.$store.state.s_employment.RecruitingList = res.data

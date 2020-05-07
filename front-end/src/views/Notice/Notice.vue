@@ -59,7 +59,7 @@
         <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
       </div>
       <div class="writeNewAnonymousBoard">
-        <el-button type="primary" round @click="writeAnonymousBoard">글 쓰기</el-button>
+        <el-button v-if="login1 != null" type="primary" round @click="writeAnonymousBoard">글 쓰기</el-button>
       </div>
     </div>
   </div>
@@ -184,19 +184,21 @@ export default {
     }
   },
   mounted(){
-    
+ 
     
   
   },
   created(){
-		let sMemberSeq = sessionStorage.getItem("loginUser")
+    
+    
+    let sMemberSeq = sessionStorage.getItem("loginUser")
     this.login1 = JSON.parse(sMemberSeq)
     
     //페이징
       this.getTotal()
       this.getList()
 
-      
+    
       
     
 		// this.memberSeq = this.$store.state.loginUser.memberSeq

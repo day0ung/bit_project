@@ -1,14 +1,19 @@
 package com.palette.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import com.palette.dao.MemberDao;
+import com.palette.model.BoardReferenceDto;
 import com.palette.model.MemberDto;
 import com.palette.model.MemberInterParam;
 import com.palette.model.TodoListDto;
+import com.palette.s3.ReferenceVo;
+import com.palette.s3.S3Uploader;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * MemberService
@@ -18,6 +23,9 @@ public class MemberService {
 
         @Autowired
         MemberDao memberDao;
+        
+        @Autowired
+        S3Uploader s3Uploader;
 
 		public List<MemberDto> selectAll() {
             //System.out.println("service");
@@ -38,6 +46,38 @@ public class MemberService {
 			int check = memberDao.createMember(dto);
 			return check > 0? true: false;
 		}
+		
+		public void createCompanyMember(ReferenceVo vo) throws IOException {
+			 //( #{memberName}, #{pwd}, #{memberId}, #{email}, #{auth}, #{address},#{companyInfo}, #{companyLogo} ) 
+			 MemberDto member = new MemberDto();
+			 member.setMemberName(vo.getMemberName());
+			 member.setPwd(vo.getPwd());
+			 member.setMemberId(vo.getMemberId());
+			 member.setEmail(vo.getEmail());
+			 member.setAuth(vo.getAuth());
+			 member.setAddress(vo.getAddress());
+			 member.setCompanyInfo(vo.getCompanyInfo());
+			 
+			 memberDao.createCompanyMember(member);
+			 int memberSeq = memberDao.getSeq();
+			 
+			 for (MultipartFile file : vo.getFiles()) {
+					BoardReferenceDto dto = new BoardReferenceDto();
+					dto.setFileName(file.getOriginalFilename());
+					dto.setUrl(s3Uploader.upload(file, vo.getMemberId())); //접근할 수 있는  url
+					dto.setMemberSeq(memberSeq);
+					memberDao.companyLogo(dto);
+					
+					MemberDto seq = new MemberDto();
+					seq.setMemberSeq(memberSeq);
+					seq.setCompanyLogo(dto.getUrl());
+					memberDao.updateLogo(seq);
+		        }
+		//	 BoardReferenceDto getUrl(BoardReferenceDto dto); //memberSeq넣고 dto  urlset
+				
+			//	void updateLogo(MemberDto dto);
+		}
+		
 		
 		//회원가입-내 관심분야 insert
 		public void InterstingInsert(String interSmallSeqs, int memberSeq) {

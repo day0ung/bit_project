@@ -178,10 +178,10 @@
 		on g.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
 	join INTER_SMALL ism
 		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
-	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+	<!-- join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
 			group by GROUP_INFO_SEQ) cur
-		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ; -->
 </select>
 
 

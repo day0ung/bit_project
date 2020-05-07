@@ -5,7 +5,8 @@
         :config="config"
         @event-selected="eventSelected" 
         @event-drop="eventDrop"
-        @event-created="scheduleCreate"></full-calendar>
+        @event-created="scheduleCreate"
+        v-loading="this.$store.state.s_private.loading"></full-calendar>
         <CalDetail 
         v-if="caldetail"
         @close="detail">
@@ -24,6 +25,7 @@ import CalWrite from '@/views/Private/Calendar/WriteCal.vue'
 import 'fullcalendar/dist/fullcalendar.css'
 import 'fullcalendar/dist/locale/ko'
 import { FullCalendar } from 'vue-full-calendar'
+import { loading } from 'element-ui'
 export default {
     components:{ CalDetail,CalWrite },
     data(){
@@ -40,6 +42,7 @@ export default {
     },
     methods:{
       getCalenarInfo(){
+        this.$store.state.s_private.loading = true
         var loginData = sessionStorage.getItem("loginUser");
         var login = JSON.parse(loginData); 
         var memSeq = login.memberSeq
@@ -49,6 +52,7 @@ export default {
           .then(res => {
           let e = JSON.stringify(res.data)
           this.$store.state.s_private.memberCalendar = JSON.parse(e)
+          this.$store.state.s_private.loading = false
         })  
       },
       eventSelected(event, jsEvent, view){ //detail

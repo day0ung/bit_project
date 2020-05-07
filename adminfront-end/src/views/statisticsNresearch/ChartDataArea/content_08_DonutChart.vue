@@ -108,6 +108,8 @@ export default {
             womancheck++;
           }
         }
+
+        
         testList.push(JSON.stringify(mancheck));
         testList.push(JSON.stringify(womancheck));
         this.datacollection.datasets[0].data= testList

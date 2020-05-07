@@ -56,7 +56,7 @@ public class EmploymentController {
 		    	long calDateDay = calDate / (24*60*60*1000);
 				list.get(i).setdDay(calDateDay);
 			}
-	    	
+	    	System.out.println("------------------"+list.size());
     	return list;
     }
     
