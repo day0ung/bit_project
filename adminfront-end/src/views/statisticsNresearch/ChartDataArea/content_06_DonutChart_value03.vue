@@ -8,11 +8,11 @@ export default {
   data() {
     return { 
       datacollection: {
-        labels: ['1','1','1','1','1','1'],
+        labels: ['토익', '토스/오픽', '기초영어회화', '일본어', '중국어', '제2외국어'],
         datasets: [
           {
             backgroundColor: [randomColor(), randomColor(), randomColor(), randomColor(),  randomColor(),  randomColor()],
-            data: [1,1,1,1,1,1]
+            data: [0, 0, 0, 0, 0, 1]
           }
         ]
       },
