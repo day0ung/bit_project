@@ -271,10 +271,13 @@ export default {
                 // 로그인된 맴버Seq
                 formData.append('memberSeq', this.loginMemberSeq);
                 // 파일업로드
+                console.log(this.files.length)
                 if(this.files.length === 0){
+                    console.log("if 들어왔음")
                     formData.append('image', "https://bit-palette.s3.ap-northeast-2.amazonaws.com/groupImage/1.png")
                 }else{
                     formData.append('file', this.files[0]);
+                    console.log("else 들어왔음")
                 }
 
                 axios.post("http://localhost:9000/creatGroupApply", formData,{
@@ -328,7 +331,7 @@ export default {
         axios.get("http://localhost:9000/getInterListAll")
         .then(res => {
             this.InterListAll = res.data
-            this.loading = false
+            this.$store.state.s_group.groupCreateSubmitLoading =false
         })
     }
 }
