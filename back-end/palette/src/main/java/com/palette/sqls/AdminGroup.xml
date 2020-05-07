@@ -127,7 +127,7 @@
 		-->
 		UPDATE GROUP_INFO
 		SET PERMISSION=#{permission}
-		WHERE 
+		WHERE
 			GROUP_INFO_SEQ=#{groupInfoSeq}
 		AND 
 			MEMBER_SEQ=#{memberSeq}
@@ -145,7 +145,7 @@
 
 	UPDATE MEMBER
 	SET AUTH=#{auth}
-	WHERE MEMBER_ID=#{membderId}
+	WHERE MEMBER_SEQ=#{memberSeq}
 	</update>
 
 

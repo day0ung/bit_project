@@ -56,8 +56,19 @@ public class Admin_GroupController {
 			// 2. Member의 AUTH를 0->1로     (일반회원0, 그룹리더1)
 			MemberDto inputdto = new MemberDto();
 			inputdto.setAuth(1);
-			boolean changeAuthisS = adminGroupService.changeGroupMasterStatus(inputdto);
-			
+			inputdto.setMemberSeq(dto.getMemberSeq());
+			System.out.println("setting된 memberdto = ");
+			System.out.println(inputdto);
+			System.out.println("\n\n\n");
+			//membertable auth바꾸기
+			// group_member테이블에 insert 
+			boolean changeMemberAuthNo = adminGroupService.changeGroupMasterStatus(inputdto);
+			if(changeMemberAuthNo == true){
+				System.out.println("Member AUTH change 0->1");
+			} else {
+				System.out.println("변경 실패");
+			}
+
 			// 3. GROUP_MEMBER테이블서 MEMBER_SEQ, GROUP_INFO_SEQ로 조회한다.(FALSE시 3-1을 실행한다.)
 			//check insert data(memberId, groupId) from `GROUP_MEMBER` tabel
 			GroupDto createcheck = adminGroupService.checkExistGroupMember(dto);
