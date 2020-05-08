@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="header_top">
-            <div class="inner"> 
+            <div class="inner" > 
             <div v-if="isLogin" style="margin-right: 30px; padding-right: 10px; margin-top: 10px">
                     <span>
                         <button  @click="showModal = true">로그인</button>
@@ -10,7 +10,7 @@
                     </span> |
                     <span><button @click="$router.push({name:'join'})">회원가입</button></span>
             </div>
-            <div v-else style="margin-right: 30px;">
+            <div v-else style="margin-right: 30px; padding-right: 10px; margin-top: 10px">
                 <span>
                     <!-- <p>{{loginUser.memberId}}님 환영합니다</p>  this.$store.state.show == true -->
                     <button @click="$router.push ({name:'mypage'}) " >마이페이지</button>
