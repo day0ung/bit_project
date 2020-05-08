@@ -43,7 +43,7 @@
                 <el-form-item label="지역선택" prop="address">
                     <el-button type="primary" round @click="execDaumPostcode">우편번호찾기</el-button>
                     <el-input placeholder="주소" v-model="groupDto.address" style="width: 85%" readonly="readonly"></el-input>
-                    <el-input placeholder="상세주소" v-model="groupDto.extraAddress" style="width: 85%" readonly="readonly"></el-input>
+                    <el-input placeholder="상세주소" v-model="groupDto.extraAddress" style="width: 85%"></el-input>
                 </el-form-item>
                 <!-- 주간일정 -->
                 <el-form-item label="주간 일정" prop="groupSchedule">

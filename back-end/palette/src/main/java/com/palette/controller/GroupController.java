@@ -44,19 +44,20 @@ public class GroupController {
     	List<GroupDto> list = groupService.getAllGroup();
     	return list;
     }
+
     // login
     @PostMapping(value="/getMyGroup")
     public ArrayList<GroupDto> getMyGroup(GroupParams groupParams){
     	System.out.println("getMyGroup() 실행");
-    	 ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
-    	 return list;
+        ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
+        return list;
     }
+    
     @PostMapping(value="/getMyOtherGroup")
     public ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams){
     	System.out.println("getMyOtherGroup() 실행");
-
-    	 ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
-    	 return list;
+        ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
+        return list;
     }
     
     @PostMapping(value="/groupSearchList")
@@ -80,10 +81,6 @@ public class GroupController {
     public List<MemberDto> getGroupMember(GroupDto groupDto){
     	System.out.println("getGroupMember()");
     	List<MemberDto> list = groupService.getGroupMember(groupDto);
-    	for (int i = 0; i < list.size(); i++) {
-    		System.out.println("groupMember"+list.get(i));
-			
-		}
     	return list;
     }
     
@@ -189,19 +186,17 @@ public class GroupController {
 //TODO Board
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
-    	System.out.println("getGroupPagingList() : "+boardParams.toString());
+    	System.out.println("getGroupPagingList()");
     	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
     	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
-    	System.out.println("list.size= "+list.size());
     	return list;
     }
     
     @PostMapping(value="/groupBoardTotal")
     public String getGroupBoardTotal(BoardParams boardParams) {
-    	System.out.println("getGroupBoardTotal()" + boardParams.toString());
+    	System.out.println("getGroupBoardTotal()");
         int total = groupService.getGroupBoardTotal(boardParams);
         String stotal = total +"";
-    	System.out.println("total: "+total);
     	return stotal;
     }
     
@@ -232,8 +227,6 @@ public class GroupController {
         groupService.updateGroupBoard(groupBoardDto);
         return "";
     }
-    
-
     
 //TODO Reference
     @PostMapping(value="/groupPdsList")
@@ -298,7 +291,7 @@ public class GroupController {
     }
     @PostMapping(value = "/insertComment")
     public String insertComment(CommentDto commentDto) {
-    	System.out.println("insertComment(): "+commentDto.toString());
+    	System.out.println("insertComment()");
     	groupService.insertComment(commentDto);
     	return "";
     }
@@ -319,32 +312,25 @@ public class GroupController {
     
     @PostMapping(value = "/answerInsert")
     public String answerInsert(CommentDto commentDto) {
-    	System.out.println("answerInsert()" +commentDto.toString());
+    	System.out.println("answerInsert()");
     	groupService.answerInsert(commentDto);
     	return "";
     }
     
-    
 //TODO attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
-    	System.out.println("getAttendGroup() " +checkday +"/" + groupSchedule.toString());
-    	
+    	System.out.println("getAttendGroup() ");
     	int result = groupService.getAttendGroup(checkday, groupSchedule);
-
     	String s_result= result+"";
-    	    	
     	return s_result;
     }
+
 	@PostMapping(value="/getAttendStatus")
 	public String checkAttend(GroupSchedule groupSchedule) {
 		System.out.println("getAttendStatus()");
-		
 		int result = groupService.checkAttend(groupSchedule);
-		
 		String s_result = result+"";
-		
 		return s_result;
-		
 	}
 }
