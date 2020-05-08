@@ -1,6 +1,8 @@
 <template>
     <div class="LeftNavBar">
-        <!-- <el-radio-group v-model="isCollapse" style="margin: 20px 0px 0px 9px;" >
+        <el-scrollbar>
+        <!-- 
+        <el-radio-group v-model="isCollapse" style="margin: 20px 0px 0px 9px;" >
         <el-radio-button :label="true">collapse</el-radio-button>
         <el-radio-button :label="false">expand</el-radio-button>
         </el-radio-group>
@@ -102,8 +104,8 @@
             <span>게시판관리</span>
         </template>
         <el-menu-item-group title="게시판보기">
-            <el-menu-item index="1-1">
-               <span><router-link class="active" to="/board1"> 회원관리1 </router-link></span>
+            <el-menu-item index="1-1" disabled>
+               <span><router-link class="active" to="/board1" style="decorate:none"> 회원관리1 </router-link></span>
             </el-menu-item>
             <el-menu-item index="1-2" disabled>
                 <span><router-link  to="/managemember2">기업회원관리 </router-link></span>
@@ -111,7 +113,7 @@
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
         <el-menu-item-group title="소모임 리스트">
-            <el-menu-item index="1-3">
+            <el-menu-item index="1-3" disabled>
                 <span>
                   <router-link  to="/managemember3">소모임관리</router-link>
                 </span>
@@ -139,7 +141,7 @@
       </el-submenu>
 -->
 
-      <el-menu-item index="2">
+      <!-- <el-menu-item index="2">
         <i class="el-icon-menu"></i>
         <span>Navigator Two</span>
       </el-menu-item>
@@ -150,8 +152,9 @@
       <el-menu-item index="4">
         <i class="el-icon-setting"></i>
         <span>Navigator Four</span>
-      </el-menu-item>
+      </el-menu-item> -->
     </el-menu>
+    </el-scrollbar>
     </div>
   
 </template>
@@ -183,4 +186,19 @@ import 'element-ui/lib/theme-chalk/index.css';
   span a{
       color:white;
   }
+
+  .LeftNavBar{
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .el-scrollbar {
+  height: 100%;
+}
+.el-scrollbar__wrap {
+  overflow: scroll;
+  overflow-x:auto
+}
+
+
 </style>

@@ -10,7 +10,7 @@
 
             <el-table-column
               prop="memberSeq"
-              label="memberSeq"
+              label="가입번호"
               width="100">
             </el-table-column>
 
@@ -23,30 +23,27 @@
 
             <el-table-column
               prop="memberName"
-              label="memberName"
+              label="회사명"
               width="100">
             </el-table-column>
 
             <el-table-column
               prop="address"
-              label="address"
+              label="회사주소"
               width="100">
             </el-table-column>
-
-
 
             <el-table-column
               prop="email"
-              label="email"
+              label="이메일"
               width="100">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
               prop="myMoney"
               label="myMoney"
               width="100">
-            </el-table-column>
-
+            </el-table-column> -->
 
             <el-table-column
               prop="companyInfo"
@@ -56,22 +53,22 @@
 
             <el-table-column
               prop="auth"
-              label="auth"
-              width="100">
+              label="권한"
+              width="70"
+              align="center">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
               prop="del"
               label="del"
               width="100">
-            </el-table-column>
-
+            </el-table-column> -->
 
             <el-table-column
               prop=""
               label="button"
-              width="100">
-              <el-table-column align="center" label="Actions" width="120">
+              width="140">
+              <el-table-column align="center" label="Actions" width="140">
                 <template slot-scope="scope">
 
                   <router-link :to="'/managemember2/companydetail/'+scope.row.memberId">

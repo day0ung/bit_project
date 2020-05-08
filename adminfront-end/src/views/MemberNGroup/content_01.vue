@@ -1,6 +1,6 @@
 <template>
     <div class="content01_view">
-        <h1> manager member 11111111111111111111111</h1>
+        <h1> 회원 리스트 </h1>
         <el-table
         :data="showAllMember"
         stripe
@@ -8,92 +8,100 @@
                     
             <el-table-column
             prop="memberSeq"
-            label="memberSeq"
-            width="100">
+            label="회원번호"
+            width="60">
             </el-table-column>
 
             <el-table-column
             prop="memberId"
-            label="memberId"
+            label="ID"
             width="100">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
             prop="pwd"
             label="pwd"
             width="100">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
             prop="memberName"
-            label="memberName"
-            width="100">
+            label="회원명"
+            width="80"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="address"
-            label="address"
-            width="100">
+            label="주소1"
+            width="150"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="interArea"
-            label="interArea"
-            width="100">
+            label="주소2"
+            width="150"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="email"
-            label="email"
+            label="이메일"
             width="100">
             </el-table-column>
 
             <el-table-column
             prop="age"
             label="age"
-            width="100">
+            width="60"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="gender"
-            label="gender"
-            width="100">
+            label="성별"
+            width="80"
+            align="center">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
             prop="myMoney"
             label="myMoney"
             width="100">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
             prop="cv"
-            label="cv"
-            width="100">
+            label="이력서 작성여부"
+            width="77"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="auth"
             label="auth"
-            width="100">
+            width="60"
+            align="center">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
             prop="del"
             label="del"
             width="100">
-            </el-table-column>
+            </el-table-column> -->
 
-            <el-table-column
+            <!-- <el-table-column
             prop="dislike"
             label="dislike"
             width="100">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
               prop=""
               label="button"
-              width="100">
+              width="122"
+              align="center">
               <button type="button"> 상세정보 </button>
                 <template slot-scope="scope">
                     
