@@ -9,7 +9,7 @@
          -->
         <el-menu default-active="2" class="el-menu-vertical-demo" 
         @open="handleOpen" @close="handleClose" :collapse="isCollapse" 
-        background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        background-color="#383838" text-color="#fff" active-text-color="#ffd04b">
 
       <el-menu-item index="1">
         <i class="el-icon-s-home" />
