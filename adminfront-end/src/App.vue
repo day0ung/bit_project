@@ -62,7 +62,9 @@
 
 <!-- middle area -->
     <div class="middle_area">
+
       <div class="middle_left">
+        <!-- 화면 좌측 navigation Bar-->
         <LeftNavBar></LeftNavBar>
       </div>
       <!-- content start -->

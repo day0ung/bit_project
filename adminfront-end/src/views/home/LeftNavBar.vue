@@ -11,9 +11,7 @@
 
       <el-menu-item index="1">
         <i class="el-icon-s-home" />
-        <span>
-            <router-link class="active" to="/">Home</router-link>
-        </span>
+          <span><router-link class="active" to="/">Home</router-link></span>
       </el-menu-item>
 <!-- 
       <el-submenu index="1">
@@ -43,34 +41,34 @@
         </template>
         <el-menu-item-group title="회원관리">
             <el-menu-item index="1-1">
-                <router-link class="active" to="/managemember1">일반회원관리</router-link>
+                <span><router-link class="active" to="/managemember1">일반회원관리</router-link></span>
             </el-menu-item>
             <el-menu-item index="1-2">
-                <router-link  to="/managemember2">기업회원관리 </router-link>
+                <span><router-link  to="/managemember2">기업회원관리 </router-link></span>
             </el-menu-item>
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
         <el-menu-item-group title="소모임 리스트">
             <el-menu-item index="1-3">
-                <router-link  to="/managemember3">소모임관리</router-link>
+                <span><router-link  to="/managemember3">소모임관리</router-link></span>
             </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
 
     <el-submenu index="3">
         <template slot="title">
-            <i class="el-icon-user" />
+            <i class="el-icon-s-claim" />
             <span>승인/개설</span>
         </template>
         <el-menu-item-group title="기업회원 전환">
             <el-menu-item index="1-1">
-               <router-link to="/acceptlist1"> 기업회원승인 </router-link>
+               <span><router-link to="/acceptlist1"> 기업회원승인 </router-link></span>
             </el-menu-item>
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
         <el-menu-item-group title="스터디그룹 개설요청">
             <el-menu-item index="1-2">
-                <router-link  to="/acceptlist2"> 스터디그룹 리스트 </router-link>
+                <span><router-link  to="/acceptlist2"> 스터디그룹 리스트 </router-link></span>
             </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
@@ -79,42 +77,44 @@
 
     <el-submenu index="4">
         <template slot="title">
-            <i class="el-icon-user" />
+            <i class="el-icon-s-data" />
             <span>통계</span>
         </template>
         <el-menu-item-group title="대분류/소분류통계">
             <el-menu-item index="1-1">
-               <router-link  to="/statisticsNresearch8">회원 남여비율</router-link>
+               <span><router-link  to="/statisticsNresearch8">회원 남여비율</router-link></span>
             </el-menu-item>
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
         <el-menu-item-group title="그룹별 비율">
             <el-menu-item index="1-2">
-                <router-link  to="/statisticsNresearch5"> 대분류비율 </router-link>
+                <span><router-link  to="/statisticsNresearch5"> 대분류비율 </router-link></span>
             </el-menu-item>
             <el-menu-item index="1-3">
-                <router-link  to="/statisticsNresearch6"> 소분류비율 </router-link>
+                <span><router-link  to="/statisticsNresearch6"> 소분류비율 </router-link></span>
             </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
 
     <el-submenu index="5">
         <template slot="title">
-            <i class="el-icon-user" />
+            <i class="el-icon-circle-check" />
             <span>게시판관리</span>
         </template>
         <el-menu-item-group title="게시판보기">
             <el-menu-item index="1-1">
-               <router-link class="active" to="/board1"> 회원관리1 </router-link>
+               <span><router-link class="active" to="/board1"> 회원관리1 </router-link></span>
             </el-menu-item>
             <el-menu-item index="1-2" disabled>
-                <router-link  to="/managemember2">기업회원관리 </router-link>
+                <span><router-link  to="/managemember2">기업회원관리 </router-link></span>
             </el-menu-item>
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
         <el-menu-item-group title="소모임 리스트">
             <el-menu-item index="1-3">
-                <router-link  to="/managemember3">소모임관리</router-link>
+                <span>
+                  <router-link  to="/managemember3">소모임관리</router-link>
+                </span>
             </el-menu-item>
         </el-menu-item-group>
     </el-submenu>
