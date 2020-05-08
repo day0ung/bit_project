@@ -1,20 +1,7 @@
 <template>
   <div class="showMemberDetailFrom">
-    <h1> "{{ showAllMember.memberName }}" 상세정보 </h1>
+    <h1> "{{ showAllMember.memberName }}"님의 상세정보 </h1>
     <el-form ref="form" :model="showAllMember" label-width="120px">
-      
-
-      <!-- <el-form-item label="memberSeq">
-        <ul>
-          <li>
-            <div> {{showAllMember.memberSeq}} 을 </div>
-            <div style="width:100px;">
-              <el-input v-model="showAllMember.memberSeq"></el-input>
-            </div>
-            <div> 으로 변경 </div>
-          </li>
-        </ul>
-      </el-form-item> -->
       
       <el-form-item label="회원번호">
         <div class="width80per"

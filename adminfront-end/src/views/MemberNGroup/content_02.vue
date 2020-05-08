@@ -8,107 +8,80 @@
         stripe
         style="width:100%">
 
-            <el-table-column
-              prop="memberSeq"
-              label="가입번호"
-              width="100">
-            </el-table-column>
+        <el-table-column
+          prop="memberSeq"
+          label="가입번호"
+          width="100"
+          align="center">
+        </el-table-column>
 
-            <el-table-column
-              prop="memberId"
-              label="memberId"
-              width="100">
-            </el-table-column>
-
-
-            <el-table-column
-              prop="memberName"
-              label="회사명"
-              width="100">
-            </el-table-column>
-
-            <el-table-column
-              prop="address"
-              label="회사주소"
-              width="100">
-            </el-table-column>
-
-            <el-table-column
-              prop="email"
-              label="이메일"
-              width="100">
-            </el-table-column>
-
-            <!-- <el-table-column
-              prop="myMoney"
-              label="myMoney"
-              width="100">
-            </el-table-column> -->
-
-            <el-table-column
-              prop="companyInfo"
-              label="companyInfo"
-              width="100">
-            </el-table-column>
-
-            <el-table-column
-              prop="auth"
-              label="권한"
-              width="70"
-              align="center">
-            </el-table-column>
-
-            <!-- <el-table-column
-              prop="del"
-              label="del"
-              width="100">
-            </el-table-column> -->
-
-            <el-table-column
-              prop=""
-              label="button"
-              width="140">
-              <el-table-column align="center" label="Actions" width="140">
-                <template slot-scope="scope">
-
-                  <router-link :to="'/managemember2/companydetail/'+scope.row.memberId">
-                    <el-button type="primary" size="small" icon="el-icon-edit">
-                      상세정보
-                    </el-button>
-                  </router-link>
-
-                </template>
-              </el-table-column>
-
-            </el-table-column>
+        <el-table-column
+          prop="memberId"
+          label="memberId"
+          width="100">
+        </el-table-column>
 
 
+        <el-table-column
+          prop="memberName"
+          label="회사명"
+          width="130"
+          align="center">
+        </el-table-column>
 
+        <el-table-column
+          prop="address"
+          label="회사주소"
+          width="300">
+        </el-table-column>
+
+        <el-table-column
+          prop="email"
+          label="이메일"
+          width="150"
+          align="center">
+          
+        </el-table-column>
+
+        <!-- <el-table-column
+          prop="myMoney"
+          label="myMoney"
+          width="100">
+        </el-table-column> -->
+
+        <!-- <el-table-column
+          prop="companyInfo"
+          label="companyInfo"
+          width="100">
+        </el-table-column> -->
+
+        <el-table-column
+          prop="auth"
+          label="권한"
+          width="70"
+          align="center">
+        </el-table-column>
+
+        <!-- <el-table-column
+          prop="del"
+          label="del"
+          width="100">
+        </el-table-column> -->
+
+        <el-table-column
+          prop=""
+          label="button"
+          width="140"
+          align="center">
+            <template slot-scope="scope">
+              <router-link :to="'/managemember2/companydetail/'+scope.row.memberId">
+                <el-button type="primary" size="small" icon="el-icon-edit">
+                  상세정보
+                </el-button>
+              </router-link>
+            </template>
+        </el-table-column>
       </el-table>
-
-      <br> <hr>
-<!-- 
-      <pre>
--> callList
-/adminCompanyMemberShowAll
-/showCompanyInfo  (Memberdto)
-/adminGetCompanyInfoOne
-/finishApprovalCompanyList
-/adminGetCompanyLocationALl
-/adminGetCompanyNmaeAll
-      </pre> -->
-
-      <!-- <button v-on:click="showAdminCompanyMamberShowAll"> Call Company List All </button> -->
-      <!-- <ul>
-        <li v-for="item in CompanyMemberAll" :key="item.memberSeq">{{item}}</li>
-
-      </ul> -->
-
-    
-
-      
-
-
     </div>
 </template>
 
