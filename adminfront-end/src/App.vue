@@ -119,6 +119,7 @@ export default {
 .topLeft{
   width:300px;
   position: fixed;
+  margin-left: 260px;
   
 }
 
