@@ -1,6 +1,6 @@
 <template>
     <div class="content02_view">
-        <h1> {{title}} group 22222222222222222221122222222222222222222222221</h1>
+        <h1> 기업회원 허가전환 </h1>
         
             <el-select v-model="value" placeholder="Select" value-key="value">
                 <el-option
@@ -22,22 +22,30 @@
         <!-- @cell-click="inputcellclick()" -->
 
             <el-table-column
+            prop="memberSeq"
+            label="기업회원번호"
+            width="120"
+            align="center">
+            </el-table-column>
+
+            <el-table-column
             prop="memberId"
-            label="memberId"
+            label="회원아이디"
             width="100">
             </el-table-column>
 
 
             <el-table-column
             prop="memberName"
-            label="memberName"
-            width="100">
+            label="회사명"
+            width="130">
             </el-table-column>
 
              <el-table-column
             prop="companyLogo"
-            label="companyLogo"
-            width="100">
+            label="회사로고"
+            width="120"
+            align="center">
                 <div slot-scope="{row}" class="img-container">
                     <img :src="row.companyLogo" alt="NocompanyLogo"
                     style="width:100px; height:100px;"
@@ -47,33 +55,21 @@
 
             <el-table-column
             prop="address"
-            label="address"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="cv"
-            label="cv"
-            width="100">
+            label="주소"
+            width="280">
             </el-table-column>
 
             <el-table-column
             prop="email"
-            label="email"
-            width="100">
+            label="이메일"
+            width="200">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
             prop="companyInfo"
             label="companyInfo"
             width="100">
-            </el-table-column>
-            
-            <el-table-column
-            prop="myMoney"
-            label="myMoney"
-            width="100">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
             prop="del"
@@ -82,34 +78,18 @@
             </el-table-column>
 
             <el-table-column
-            prop="dislike"
-            label="dislike"
-            width="80">
-            </el-table-column>
-
-            <el-table-column
-            prop="info"
-            label="info"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="memberSeq"
-            label="memberSeq"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
             prop="auth"
-            label="auth"
-            width="60">
+            label="권한번호"
+            width="60"
+            align="center">
             </el-table-column>
 
 
             <el-table-column
               prop=""
               label="button"
-              width="170" >
+              width="170" 
+              align="center">
                 <template slot-scope="scope">
                     <div v-loading="loading">
                         <el-button

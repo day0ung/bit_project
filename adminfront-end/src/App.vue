@@ -119,9 +119,9 @@ export default {
 
 <style>
 
-.AppvueMainContnet h1, .AppvueMainContnet h2, {
+/* .AppvueMainContnet h1, .AppvueMainContnet h2, {
 
-}  
+}   */
 
 
 .topArea{
