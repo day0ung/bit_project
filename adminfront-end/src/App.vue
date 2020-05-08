@@ -42,17 +42,19 @@
     <!-- </div> -->
     <!-- end top area -->
     <div class="topArea">
-      <div class="topLeft">
-        <h2>Palette AdminPage</h2>
-        <p>관리자 페이지 입니다.</p>
-      </div>
-      <div class="topRight">
-        <div>
-          <div v-if="isLogin">
-            <router-link class="active" to="/login">로그인</router-link>
-          </div>
-          <div v-else>
-            <router-link class="" to="/logout">로그아웃 </router-link>
+      <div class="topContainer">
+        <div class="topLeft">
+          <h2>Palette AdminPage</h2>
+          <p>관리자 페이지 입니다.</p>
+        </div>
+        <div class="topRight">
+          <div>
+            <div v-if="isLogin">
+              <router-link class="active" to="/login">로그인</router-link>
+            </div>
+            <div v-else>
+              <router-link class="" to="/logout">로그아웃 </router-link>
+            </div>
           </div>
         </div>
       </div>
@@ -103,20 +105,32 @@ export default {
 .topArea{
   width:100%;
   height:80px;
+  
+}
+.topContainer{
+  background-color:#545c64;
+  width: 100%;
+  height: 80px;
+  position: fixed;
+  z-index: 10000;
 }
 .topLeft{
   width:300px;
   position: fixed;
+  
 }
+
+
 .topRight{
   width:300px;
   float:right;
-  margin: 38px 0px 0px 0px;
+  margin: 38px 0px 0px 75%;
+  position: fixed;
 }
 
 .AppvueMainContnet{
   /* float: left; */
-  margin-left: 210px;
+  margin-left: 235px;
   display: grid;
 }
 
@@ -128,18 +142,21 @@ export default {
 }
 
 .middle_left{
-  width:210px;
   float:left;
-  
-
   position: fixed;
-  width: 210px;
-  /* overflow-y: scroll; */
+  width: 235px;
+  overflow-y: auto;
+  /* overflow-x: hidden; */
   top: 0;
   bottom: 0;
-  margin-top:81px;
+  margin-top:80px;
 
+  background-color: #545c64;
+  z-index:9999;
+}
 
+.LeftNavBar ul{
+  border: 1px solid #545c64;
 }
 
 

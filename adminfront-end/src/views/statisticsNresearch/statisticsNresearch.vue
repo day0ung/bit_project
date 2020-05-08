@@ -1,6 +1,6 @@
 <template>
       <div class="statisticsNresearch">
-        <div class="leftBar">
+        <!-- <div class="leftBar">
             <ul>
                 <li> <h2> {{title}} </h2> </li>
                 <li><router-link class="active" to="/statisticsNresearch1"> 통계및조사1 </router-link></li>
@@ -15,6 +15,9 @@
         </div> 
         <div  class="margin-L_25 contentPadding" >
             <router-view ></router-view>
+        </div> -->
+        <div  class="contentPadding" >
+        <router-view ></router-view>
         </div>
     </div>
 </template>
