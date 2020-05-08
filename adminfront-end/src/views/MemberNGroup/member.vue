@@ -1,6 +1,6 @@
 <template>
     <div class="memberManage">
-        <div class="leftBar">
+        <!-- <div class="leftBar">
             <ul>
                 <li> <h4> {{title}} </h4> </li>
                 <li><router-link class="active" to="/managemember1"> 일반회원관리 </router-link></li>
@@ -8,16 +8,22 @@
                 <li><router-link  to="/managemember3">  소모임관리 </router-link></li>
                 <li><router-link  to="/managemember4">  기타2 </router-link></li>
                 <li>
-                        <el-button
-                            size="mini"
-                            @click="showNowPage()"> 콘솔로 페이지 주소 보기  </el-button>
+                    <el-button
+                        size="mini"
+                        @click="showNowPage()">
+                         콘솔로 페이지 주소 보기  
+                    </el-button>
                     
                 </li>
             </ul>
-        </div> 
+        </div>  
         <div  class="margin-L_25 contentPadding" >
             <router-view ></router-view>
         </div>
+        -->
+        
+        <router-view ></router-view>
+        
     </div>
 </template>
 
