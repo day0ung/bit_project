@@ -1,6 +1,5 @@
 package com.palette.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -63,12 +62,12 @@ public class AdminStatisticsService {
 		//1. 변환해서
 		//2. change to listmap to JSON
 
-		System.out.println("변환전 데이터 체크 시작.... ");
-		System.out.println(inputData[0]);
-		System.out.println("ListMap형태를 JSON으로 변환한다.");
-		System.out.println(convetJSON.getJsonStringFromList((List<Map<String, Object>>)inputData[0]));
-		System.out.println(convetJSON.getJsonStringFromList((List<Map<String, Object>>)inputData[1]));
-		System.out.println("변환전 데이터 체크 끝.... ");
+		// System.out.println("변환전 데이터 체크 시작.... ");
+		// System.out.println(inputData[0]);
+		// System.out.println("ListMap형태를 JSON으로 변환한다.");
+		// System.out.println(convetJSON.getJsonStringFromList((List<Map<String, Object>>)inputData[0]));
+		// System.out.println(convetJSON.getJsonStringFromList((List<Map<String, Object>>)inputData[1]));
+		// System.out.println("변환전 데이터 체크 끝.... ");
 
 		for(int i=0; i<inputData.length; i++){
 			System.out.println("\n\nreceiveinterSmall_All 시작");
@@ -78,13 +77,12 @@ public class AdminStatisticsService {
 			//JSON으로 변환하지말고 배열에 넣어서 넣은것을 변환하자.
 			jsonArray1.add((List<Map<String, Object>>)inputData[i]);
 
-			System.out.println(jsonArray1);
-
-			System.out.println("receiveinterSmall_All 끝\n\n");
+			// System.out.println(jsonArray1);
+			// System.out.println("receiveinterSmall_All 끝\n\n");
 		}
-		System.out.println("jsonarray 출력");
-		System.out.println(jsonArray1);
-		System.out.println("jsonarray 출력끝.");
+		// System.out.println("jsonarray 출력");
+		// System.out.println(jsonArray1);
+		// System.out.println("jsonarray 출력끝.");
 
 		return jsonArray1;
 	}
