@@ -49,26 +49,32 @@ export default {
       axios.post('http://localhost:9000/adminLoginCheck',params).then(
         res => {
         console.log(res.data)
+        console.log(res.data)
         //this.$router.push(this.rPath)//rPath로 redirect
           if(res.data.memberId == undefined){
             alert("id나 password가 틀렸습니다.");
             this.$store.state.isLogin = true;//로그인 미완료시 true로 처리.
             return;
           }
+          console.log("asfdhjkl;asdf;kafsdl;")
+          console.log(res.data.auth);
+          if(res.data.auth == 4){
+            sessionStorage.setItem("loginUser", JSON.stringify(res.data.memberId)); //String
+            //alert(res.data.memberId)
+            var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
+            console.log('세션가져오기' + loginData)
+            var login = JSON.parse(loginData); //JSON
+            this.$store.commit('loginSuccess', login)
+            console.log('로그인성공');
 
-          sessionStorage.setItem("loginUser", JSON.stringify(res.data.memberId)); //String
-          //alert(res.data.memberId)
-          var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
-          console.log('세션가져오기' + loginData)
-          var login = JSON.parse(loginData); //JSON
-          this.$store.commit('loginSuccess', login)
-          console.log('로그인성공');
+            console.log("출력 : " + this.$store.state.loginUser);
+            console.log("출력 : " + this.$store.state.isLogin);
 
-          console.log("출력 : " + this.$store.state.loginUser);
-          console.log("출력 : " + this.$store.state.isLogin);
-
-          this.$router.push ({path:'/'})
-          this.$emit('close')
+            this.$router.push ({path:'/'})
+            this.$emit('close')
+          }else{
+            alert(" 관리자 로그인에 실패하였습니다.\n 서버 관리자에게 문의 바랍니다 ");
+          }
 
 
       })
