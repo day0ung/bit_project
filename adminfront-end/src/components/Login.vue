@@ -56,19 +56,17 @@ export default {
             this.$store.state.isLogin = true;//로그인 미완료시 true로 처리.
             return;
           }
-          console.log("asfdhjkl;asdf;kafsdl;")
-          console.log(res.data.auth);
           if(res.data.auth == 4){
             sessionStorage.setItem("loginUser", JSON.stringify(res.data.memberId)); //String
             //alert(res.data.memberId)
             var loginData = sessionStorage.getItem("loginUser"); //세션가져오기
-            console.log('세션가져오기' + loginData)
+            // console.log('세션가져오기' + loginData)
             var login = JSON.parse(loginData); //JSON
             this.$store.commit('loginSuccess', login)
-            console.log('로그인성공');
+            // console.log('로그인성공');
 
-            console.log("출력 : " + this.$store.state.loginUser);
-            console.log("출력 : " + this.$store.state.isLogin);
+            // console.log("출력 : " + this.$store.state.loginUser);
+            // console.log("출력 : " + this.$store.state.isLogin);
 
             this.$router.push ({path:'/'})
             this.$emit('close')
