@@ -44,7 +44,7 @@ public class GroupController {
     	List<GroupDto> list = groupService.getAllGroup();
     	return list;
     }
-    
+
     // login
     @PostMapping(value="/getMyGroup")
     public ArrayList<GroupDto> getMyGroup(GroupParams groupParams){
@@ -52,6 +52,7 @@ public class GroupController {
         ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
         return list;
     }
+    
     @PostMapping(value="/getMyOtherGroup")
     public ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams){
     	System.out.println("getMyOtherGroup() 실행");
