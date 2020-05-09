@@ -16,7 +16,7 @@
             <el-table-column
             prop="memberId"
             label="ID"
-            width="100"
+            width="110"
             align="center">
             </el-table-column>
 
@@ -56,7 +56,7 @@
 
             <el-table-column
             prop="age"
-            label="age"
+            label="나이"
             width="60"
             align="center">
             </el-table-column>
@@ -83,8 +83,8 @@
 
             <el-table-column
             prop="auth"
-            label="auth"
-            width="50"
+            label="권한번호"
+            width="80"
             align="center">
             </el-table-column>
 

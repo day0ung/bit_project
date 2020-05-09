@@ -50,11 +50,11 @@
             </el-menu-item>
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
-        <el-menu-item-group title="소모임 리스트">
+        <!-- <el-menu-item-group title="소모임 리스트">
             <el-menu-item index="1-3">
                 <span><router-link  to="/managemember3">소모임관리</router-link></span>
             </el-menu-item>
-        </el-menu-item-group>
+        </el-menu-item-group> -->
     </el-submenu>
 
     <el-submenu index="3">
