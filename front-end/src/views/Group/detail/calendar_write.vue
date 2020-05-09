@@ -117,7 +117,8 @@ data(){
             }).then(res =>{
               if(res.data === ""){
                 this.$store.state.s_group.showGroupCalendar = true
-                alert("성공적으로 등록되었습니다.")
+                this.$message({ type: 'success', message:'성공적으로 등록되었습니다.' })
+                //alert("성공적으로 등록되었습니다.")
                 this.$emit('close')
                 let params = new URLSearchParams()	
                 let groupSeq = this.$store.state.s_group.groupSeq
@@ -138,7 +139,7 @@ data(){
               }
             })
 
-            alert('submit!');
+            //alert('submit!');
             
           } else {
             console.log('error submit!!');

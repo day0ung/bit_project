@@ -49,6 +49,7 @@ Vue.use(VueMomentJS, moment)
 export default {
 	 data() {
       return {
+		  dialogVisible: false,
         ruleForm: {
           title: '',
           category: '',
@@ -75,6 +76,7 @@ export default {
 			if (valid) {
 				let formData = new FormData();
 				formData.append('memberSeq', this.login1.memberSeq)
+				formData.append('memberId', this.login1.memberId)
 				formData.append('title', this.ruleForm.title)
 				formData.append('category', this.ruleForm.category)
 				this.ruleForm.fileList.forEach(function(element){
@@ -83,12 +85,13 @@ export default {
                 for (let key of formData.entries()){
                     console.log(`${key}`)
                 }
-				axios.get("http://localhost:9000/insertCV", formData, {
+				axios.post("http://localhost:9000/insertCV", formData, {
 					headers:{
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
-					alert("이력서가 성공적으로 업로드 되었습니다.")
+					this.$message({ type: 'success', message:'이력서가 성공적으로 업로드 되었습니다.'})
+					//alert("이력서가 성공적으로 업로드 되었습니다.")
 					var params = new URLSearchParams();	// post 방식으로 받아야함. 
 					params.append('memberSeq', this.login1.memberSeq);
 					axios.post("http://localhost:9000/oneMember", params).then(res => { 

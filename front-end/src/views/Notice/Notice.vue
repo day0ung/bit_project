@@ -10,7 +10,7 @@
           size="large"
           placeholder="검색">
           <el-button slot="prepend" icon="el-icon-tickets" circle style="margin-right:10px" @click="allList"></el-button>
-          <el-select v-model="s_keyWord" slot="prepend" placeholder="Select">
+          <el-select v-model="s_keyWord" slot="prepend" placeholder="제목" >
             <!-- <el-option label="작성자" value="writer"></el-option> -->
             <el-option label="제목" value="title"></el-option>
           </el-select>
@@ -21,8 +21,9 @@
           :row-class-name="clickableRows"
           :data="tableData"
           stripe
-          style="width: 100% cursor:pointer"
+          style="width: 100%; cursor:pointer"
           @row-click="gotoClick"
+          v-loading="loading"
       >
         <el-table-column
           prop="sfinalnum"
@@ -58,7 +59,7 @@
         <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
       </div>
       <div class="writeNewAnonymousBoard">
-        <el-button type="primary" round @click="writeAnonymousBoard">글 쓰기</el-button>
+        <el-button v-if="login1 != null" type="primary" round @click="writeAnonymousBoard">글 쓰기</el-button>
       </div>
     </div>
   </div>
@@ -81,12 +82,12 @@ export default {
         limit: 10,
         title: "",
         searchWord: "",
-        s_keyWord: ""
+        s_keyWord: "title"
       },
       searchWord:'',
       
       s_keyWord:'',
-      loading: true,
+      loading: false,
       login1 : "",
     }
   },
@@ -100,7 +101,7 @@ export default {
       })
     },
     allList(){
-     this.s_keyWord=''
+     
      this.searchWord=''
 
      this.loading = true
@@ -134,10 +135,11 @@ export default {
     },
     searchBoard(){
       if(this.s_keyWord==''){
-        alert('검색타입을 설정해주세요')
+        this.s_keyWord = 'title'
       }
       if(this.searchWord==""){
-        alert('검색어를 입력해주세요')
+        this.$message({ type: 'info', message:'검색어를 입력해주세요'})
+        //alert('검색어를 입력해주세요')
       }
       
       if(this.s_keyWord != '' && this.searchWord!=''){
@@ -171,16 +173,10 @@ export default {
       this.getList()
     },
     gotoClick(row, column, event){
-      this.$emit("showAnonymousBoardDetail")
-      this.$store.state.s_employment.loadingAnonymousBoardDetail = true
-      var params = new URLSearchParams();	// post 방식으로 받아야함. 
-      params.append('boardSeq', row.boardSeq);
-      axios.post("http://localhost:9000/getOneAnonymousBoard", params).then(res => { 
-        this.$store.state.s_employment.anonymousBoardDetail = res.data
-        this.$store.state.s_employment.loadingCVDetail = false
-        
-        })
-
+      //alert(row.boardSeq)
+      this.$store.state.s_notice.boardSeq = row.boardSeq
+      this.$router.push('/Notice/detail/'+row.boardSeq)
+      //this.$router.push('/group/menu/'+groupSeq)
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
@@ -188,19 +184,21 @@ export default {
     }
   },
   mounted(){
-    
+ 
     
   
   },
   created(){
-		let sMemberSeq = sessionStorage.getItem("loginUser")
+    
+    
+    let sMemberSeq = sessionStorage.getItem("loginUser")
     this.login1 = JSON.parse(sMemberSeq)
     
     //페이징
       this.getTotal()
       this.getList()
 
-      
+    
       
     
 		// this.memberSeq = this.$store.state.loginUser.memberSeq

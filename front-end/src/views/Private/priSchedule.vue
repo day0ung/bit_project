@@ -5,7 +5,8 @@
         :config="config"
         @event-selected="eventSelected" 
         @event-drop="eventDrop"
-        @event-created="scheduleCreate"></full-calendar>
+        @event-created="scheduleCreate"
+        v-loading="this.$store.state.s_private.loading"></full-calendar>
         <CalDetail 
         v-if="caldetail"
         @close="detail">
@@ -24,6 +25,7 @@ import CalWrite from '@/views/Private/Calendar/WriteCal.vue'
 import 'fullcalendar/dist/fullcalendar.css'
 import 'fullcalendar/dist/locale/ko'
 import { FullCalendar } from 'vue-full-calendar'
+import { loading } from 'element-ui'
 export default {
     components:{ CalDetail,CalWrite },
     data(){
@@ -40,17 +42,17 @@ export default {
     },
     methods:{
       getCalenarInfo(){
-        let params = new URLSearchParams()	
-        //alert("calendar"+this.$store.state.s_private.memberSeq)
-        let memberSeq = this.$store.state.s_private.memberSeq
-        params.append('memberSeq', memberSeq)
+        this.$store.state.s_private.loading = true
+        var loginData = sessionStorage.getItem("loginUser");
+        var login = JSON.parse(loginData); 
+        var memSeq = login.memberSeq
+        var params = new URLSearchParams();
+        params.append('memberSeq', memSeq)
         axios.post("http://localhost:9000/getMemberCalendar", params)
           .then(res => {
-          console.log("DB: "+JSON.stringify(res.data))
           let e = JSON.stringify(res.data)
           this.$store.state.s_private.memberCalendar = JSON.parse(e)
-          //alert(this.$store.state.s_private.memberCalendar) 
-          //alert(JSON.stringify(this.$store.state.s_private.memberCalendar)) 
+          this.$store.state.s_private.loading = false
         })  
       },
       eventSelected(event, jsEvent, view){ //detail
@@ -71,8 +73,7 @@ export default {
             cancelButtonText: '취소',
             type: 'info'
             }).then(() => {
-               let params = new URLSearchParams()	
-               let memberSeq = this.$store.state.s_private.memberSeq
+                let params = new URLSearchParams()	
                 params.append('calendarSeq', event.calendarSeq)
                 params.append('start', this.$moment(event.start).format('YYYY.MM.DD HH:mm:ss'))
                 params.append('end', this.$moment(event.end).format('YYYY.MM.DD HH:mm:ss'))
@@ -118,7 +119,16 @@ export default {
 
     },
     mounted(){
-      this.getCalenarInfo()
+         var loginData = sessionStorage.getItem("loginUser");
+         var login = JSON.parse(loginData); 
+         var memSeq = login.memberSeq
+         var params = new URLSearchParams();
+         params.append('memberSeq', memSeq)
+         axios.post("http://localhost:9000/getMemberCalendar", params)
+          .then(res => {
+          let e = JSON.stringify(res.data)
+          this.$store.state.s_private.memberCalendar = JSON.parse(e)
+        })  
     }
   
 }

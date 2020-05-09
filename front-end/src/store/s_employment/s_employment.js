@@ -16,7 +16,8 @@ export default new Vuex.Store({
         showCVUpdate : false,
         loadingCVList : false,
         loadingCVDetail : false,
-        oneMember : ""
+        oneMember : "",
+        cvDetailRef : ""
 
     },
     mutations: {

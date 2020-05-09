@@ -16,6 +16,8 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberDto;
+import com.palette.model.MemberLikeDto;
 
 @Mapper
 @Repository
@@ -26,6 +28,7 @@ public interface GroupDao {
 	ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams);
 
 	GroupDto getOneGroup(GroupDto insertDto);
+	List<MemberDto> getGroupMember(GroupDto groupDto);
 	
 	List<GroupMemberDto> getGroupMemberName(int seq);
 
@@ -60,17 +63,38 @@ public interface GroupDao {
 	
 	ArrayList<CommentDto> groupBoardDetailComments(int boardSeq);
 	void insertComment(CommentDto commentDto);
+	int getRef();
+	void answerDelete(CommentDto commentDto);
+	void answerUpdate(CommentDto commentDto);
+	void updateCommentAnswer(CommentDto commentDto);
+	CommentDto selectRefStepDepth(int boardCommentSeq);
+	void insertCommentAnswer(CommentDto commentDto);
 	
 
 	int currBoardSeq();
 	void insertBoardReference(BoardReferenceDto boardReferenceDto);
-	int getRef();
 	
 	List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq);
-	void answerDelete(CommentDto commentDto);
+
 	List<BoardReferenceDto> getMypageReferenceList(int memberSeq);
-	
 	void groupReferenceDelete(int boardSeq);
+	void joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+	
+	void likeGroupAdd(GroupMemberDto groupMemberDto);
+	int checkLikeGroup(GroupMemberDto groupMemberDto);
+	void likeGroupDelete(GroupMemberDto groupMemberDto);
+	List<MemberLikeDto> getMylikeList(int memberSeq);
+	GroupMemberDto checkGroupMember(GroupMemberDto groupMemberDto);
+	void likeJoinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+	void groupWaitingDelete(GroupMemberDto groupMemberDto);
+	void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto);
+
+	void permissionGroupMember(GroupMemberDto groupMemberDto);
+	void groupMemberDelete(GroupMemberDto groupMemberDto);
+	ArrayList<GroupDto> getMyPremissionGroup(GroupParams groupParams);
+	ArrayList<GroupDto> getMyPageCreatGroupList(GroupParams groupParams);
+	void groupCreateCancle(GroupDto groupDto);
+	
 
 
 

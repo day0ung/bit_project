@@ -1,8 +1,9 @@
 <template>
     <div class="create">
         <div class="createContainer">
+            <el-button @click="gotoMypage" round>돌아가기</el-button>
             <div class="title">그룹 스터디 생성</div>
-            <el-form :model="groupDto" label-position="top" :rules="rules" ref="groupDto" label-width="120px" class="demo-groupDto" v-loading="loading">
+            <el-form :model="groupDto" label-position="top" :rules="rules" ref="groupDto" label-width="120px" class="demo-groupDto" v-loading="this.$store.state.s_group.groupCreateSubmitLoading">
                 <!-- 그룹명 설정 -->
                 <el-form-item label="그룹 스터디명" prop="groupName">
                     <el-input placeholder="그룹 스터디명을 적어주세요" v-model="groupDto.groupName" style="width: 85%"></el-input>
@@ -42,7 +43,7 @@
                 <el-form-item label="지역선택" prop="address">
                     <el-button type="primary" round @click="execDaumPostcode">우편번호찾기</el-button>
                     <el-input placeholder="주소" v-model="groupDto.address" style="width: 85%" readonly="readonly"></el-input>
-                    <el-input placeholder="상세주소" v-model="groupDto.extraAddress" style="width: 85%" readonly="readonly"></el-input>
+                    <el-input placeholder="상세주소" v-model="groupDto.extraAddress" style="width: 85%"></el-input>
                 </el-form-item>
                 <!-- 주간일정 -->
                 <el-form-item label="주간 일정" prop="groupSchedule">
@@ -100,7 +101,6 @@ import { loading } from 'element-ui';
 export default {
     data(){
         return{
-            loading: true,
             dialogVisible: false,
             loginMemberSeq: '',
             files: [],
@@ -191,10 +191,9 @@ export default {
             }
     },
     methods:{
-        gruopCreateApply: function (event) {
-            alert("그룹신청이 완료되었습니다.\n심사 후 그룹개설이 완료됩니다.")
+        gotoMypage(){
             this.$router.push({
-                path: "/group"
+                path: "/mypage"
             })
         },
         handleChange(file, fileList){
@@ -226,6 +225,7 @@ export default {
         submitForm(formName) {
             this.$refs[formName].validate((valid) => {
             if (valid) {
+                this.$store.state.s_group.groupCreateSubmitLoading = true
                 let setGroupSchedule = new Object();
                 setGroupSchedule.groupScheduleSeq = 0;
                 setGroupSchedule.groupInfoSeq = 0;
@@ -257,7 +257,6 @@ export default {
                 formData.append('info', this.groupDto.info);
                 formData.append('smallInfo', this.groupDto.smallInfo);
                 formData.append('maxMember', this.groupDto.maxMember);
-                formData.append('image', this.groupDto.dialogImageUrl);
                 formData.append('startDate', this.groupDto.startDate);
                 formData.append('endDate', this.groupDto.endDate);
                 formData.append('maxMember', this.groupDto.maxMember);
@@ -272,13 +271,22 @@ export default {
                 // 로그인된 맴버Seq
                 formData.append('memberSeq', this.loginMemberSeq);
                 // 파일업로드
-                formData.append('file', this.files[0]);
+                console.log(this.files.length)
+                if(this.files.length === 0){
+                    console.log("if 들어왔음")
+                    formData.append('image', "https://bit-palette.s3.ap-northeast-2.amazonaws.com/groupImage/1.png")
+                }else{
+                    formData.append('file', this.files[0]);
+                    console.log("else 들어왔음")
+                }
 
                 axios.post("http://localhost:9000/creatGroupApply", formData,{
 					headers:{'Content-Type' : 'multipart/form-data'}
                 }).then(res => {
-                                this.$router.push({name: "Group"})
-                                alert(res.data + "그룹스터디 개설신청이 완료 되었습니다.\n개설여부는 마이페이지에서 확인 가능합니다.\n매주 월요일 9시에 승인여부가 업데이트 됩니다.")
+                                this.$router.push({path: "/mypage"})
+                                this.$message({ type: 'success', message:'그룹스터디 개설신청이 완료 되었습니다. 마이페이지에서 확인해주세요'})
+                                //alert(res.data + "그룹스터디 개설신청이 완료 되었습니다.\n개설여부는 마이페이지에서 확인 가능합니다.\n매주 월요일 9시에 승인여부가 업데이트 됩니다.")
+                                this.$store.state.s_group.groupCreateSubmitLoading = false
                             })
             } else {
                 console.log('error submit!!');
@@ -323,7 +331,7 @@ export default {
         axios.get("http://localhost:9000/getInterListAll")
         .then(res => {
             this.InterListAll = res.data
-            this.loading = false
+            this.$store.state.s_group.groupCreateSubmitLoading =false
         })
     }
 }

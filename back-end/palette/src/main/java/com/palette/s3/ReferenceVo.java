@@ -5,131 +5,159 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ReferenceVo {
-
+	
+	
     private int groupInfoSeq;
     private int boardSeq;
     private int memberSeq;
-    private String memberId;
     private String title;
+    private String memberId;
     private String content;
-    private List<MultipartFile> files;
 
+    private String pwd;
+    private String memberName;
+    private String email;
+    private String address;
+    private int auth;
+    private String companyInfo;
+    private List<MultipartFile> files;
 
     public ReferenceVo() {
     }
 
-    public ReferenceVo(int groupInfoSeq, int boardSeq, int memberSeq, String memberId, String title, String content, List<MultipartFile> files) {
-        this.groupInfoSeq = groupInfoSeq;
-        this.boardSeq = boardSeq;
-        this.memberSeq = memberSeq;
-        this.memberId = memberId;
-        this.title = title;
-        this.content = content;
-        this.files = files;
-    }
+	public ReferenceVo(int groupInfoSeq, int boardSeq, int memberSeq, String memberId, String title, String content,
+			List<MultipartFile> files, int auth, String pwd, String memberName, String email, String address,
+			String companyInfo) {
+		super();
+		this.groupInfoSeq = groupInfoSeq;
+		this.boardSeq = boardSeq;
+		this.memberSeq = memberSeq;
+		this.memberId = memberId;
+		this.title = title;
+		this.content = content;
+		this.files = files;
+		this.auth = auth;
+		this.pwd = pwd;
+		this.memberName = memberName;
+		this.email = email;
+		this.address = address;
+		this.companyInfo = companyInfo;
+	}
 
-    public int getGroupInfoSeq() {
-        return this.groupInfoSeq;
-    }
+	public int getGroupInfoSeq() {
+		return groupInfoSeq;
+	}
 
-    public void setGroupInfoSeq(int groupInfoSeq) {
-        this.groupInfoSeq = groupInfoSeq;
-    }
+	public void setGroupInfoSeq(int groupInfoSeq) {
+		this.groupInfoSeq = groupInfoSeq;
+	}
 
-    public int getBoardSeq() {
-        return this.boardSeq;
-    }
+	public int getBoardSeq() {
+		return boardSeq;
+	}
 
-    public void setBoardSeq(int boardSeq) {
-        this.boardSeq = boardSeq;
-    }
+	public void setBoardSeq(int boardSeq) {
+		this.boardSeq = boardSeq;
+	}
 
-    public int getMemberSeq() {
-        return this.memberSeq;
-    }
+	public int getMemberSeq() {
+		return memberSeq;
+	}
 
-    public void setMemberSeq(int memberSeq) {
-        this.memberSeq = memberSeq;
-    }
+	public void setMemberSeq(int memberSeq) {
+		this.memberSeq = memberSeq;
+	}
 
-    public String getMemberId() {
-        return this.memberId;
-    }
+	public String getMemberId() {
+		return memberId;
+	}
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
-    }
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
-    public String getTitle() {
-        return this.title;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public String getContent() {
-        return this.content;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public List<MultipartFile> getFiles() {
-        return this.files;
-    }
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
 
-    public void setFiles(List<MultipartFile> files) {
-        this.files = files;
-    }
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
+	}
 
-    public ReferenceVo groupInfoSeq(int groupInfoSeq) {
-        this.groupInfoSeq = groupInfoSeq;
-        return this;
-    }
+	public int getAuth() {
+		return auth;
+	}
 
-    public ReferenceVo boardSeq(int boardSeq) {
-        this.boardSeq = boardSeq;
-        return this;
-    }
+	public void setAuth(int auth) {
+		this.auth = auth;
+	}
 
-    public ReferenceVo memberSeq(int memberSeq) {
-        this.memberSeq = memberSeq;
-        return this;
-    }
+	public String getPwd() {
+		return pwd;
+	}
 
-    public ReferenceVo memberId(String memberId) {
-        this.memberId = memberId;
-        return this;
-    }
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
-    public ReferenceVo title(String title) {
-        this.title = title;
-        return this;
-    }
+	public String getMemberName() {
+		return memberName;
+	}
 
-    public ReferenceVo content(String content) {
-        this.content = content;
-        return this;
-    }
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 
-    public ReferenceVo files(List<MultipartFile> files) {
-        this.files = files;
-        return this;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    @Override
-    public String toString() {
-        return "{" +
-            " groupInfoSeq='" + getGroupInfoSeq() + "'" +
-            ", boardSeq='" + getBoardSeq() + "'" +
-            ", memberSeq='" + getMemberSeq() + "'" +
-            ", memberId='" + getMemberId() + "'" +
-            ", title='" + getTitle() + "'" +
-            ", content='" + getContent() + "'" +
-            ", files='" + getFiles() + "'" +
-            "}";
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCompanyInfo() {
+		return companyInfo;
+	}
+
+	public void setCompanyInfo(String companyInfo) {
+		this.companyInfo = companyInfo;
+	}
+
+	@Override
+	public String toString() {
+		return "ReferenceVo [groupInfoSeq=" + groupInfoSeq + ", boardSeq=" + boardSeq + ", memberSeq=" + memberSeq
+				+ ", memberId=" + memberId + ", title=" + title + ", content=" + content + ", files=" + files
+				+ ", auth=" + auth + ", pwd=" + pwd + ", memberName=" + memberName + ", email=" + email + ", address="
+				+ address + ", companyInfo=" + companyInfo + "]";
+	}
+    
+    
+
+ 
 
 }

@@ -4,31 +4,33 @@
     <br>
     <div class="groupDetailcCntainer" v-loading="this.$store.state.s_group.showReferenceDetail">
       <div class="groupName">
-        <h1>{{ this.$store.state.s_group.groupReferenceDetail.title }}</h1>
+        <h4>{{ this.$store.state.s_group.groupReferenceDetail.title }}</h4>
       </div>
       <div class="hr"></div>
-      <div class="groupInfoTitle">
-        <h5>자료</h5>
-      </div>
-      <div class="groupInfoContent">
-        <a v-for="file in this.$store.state.s_group.groupReferenceDetailFileList" :key="file.boardSeq" :href="file.url" download>{{file.fileName}}</a>
-      </div>
-      <div class="hr"></div>
-      <div class="groupInfoTitle">
-        <h5><span>상세 정보</span></h5>
-      </div>
-      <div class="groupInfoContent">
-        <div><span>파일정보</span>{{ this.$store.state.s_group.groupReferenceDetail.content }}</div>
+      <div class="groupdetailInfo">
         <div><span>작성자</span> {{ this.$store.state.s_group.groupReferenceDetail.memberSeq }}</div>
         <div><span>작성일</span> {{ this.$store.state.s_group.groupReferenceDetail.writeDate }}</div>
         <div><span>조회수</span> {{ this.$store.state.s_group.groupReferenceDetail.readCount }}</div>
+        <div><span>파일</span> <a class="el-icon-download" v-for="file in this.$store.state.s_group.groupReferenceDetailFileList" :key="file.boardSeq" :href="file.url" download>{{file.fileName}}</a></div>
       </div>
       <div class="hr"></div>
+      
+      <div class="groupInfoContent">
+      <div><span>파일정보</span>{{ this.$store.state.s_group.groupReferenceDetail.content }}</div>
+      </div>
+        
+      
+      <div class="hr"></div>
+
       <div class="groupName">
         <el-button type="primary" @click="showGroupReference" round>돌아가기</el-button>
         <el-button type="primary" v-show="this.$store.state.s_group.showUpdateBtn" @click="referenceUpdate" round>수정하기</el-button>
         <el-button type="primary" v-show="this.$store.state.s_group.showDeleteBtn" @click="referenceDelete" round>삭제하기</el-button>
       </div>
+      <div class="comment">
+        <Comments></Comments>
+      </div>
+
     </div>
     <br>
     <br>
@@ -36,8 +38,10 @@
 </template>
 
 <script>
+import Comments from '@/views/Group/detail/board_comment.vue';
 import { loading } from 'element-ui';
 export default {
+  components: { Comments },
   data(){
     return{
         boardOne: "",
@@ -59,19 +63,19 @@ export default {
       this.getList()
       this.$emit("showGroupReference")
     },
+    showGroupReferenceWrive(){
+      this.getList()
+      this.$emit("showGroupReference")
+    },
     referenceUpdate(){
-      // var params = new URLSearchParams()
-      // params.append('boardSeq', this.$store.state.s_group.groupReferenceDetailFileList.boardSeq);
-      // axios.post("http://localhost:9000/groupRreferenceUpdate", params)
-      //             .then(res => {
-      //           this.getList()
-      // })
+      this.$emit("showGroupReferenceUpdate")
     },
     referenceDelete(){
       var params = new URLSearchParams()
       params.append('boardSeq', this.$store.state.s_group.groupReferenceDetail.boardSeq);
       axios.post("http://localhost:9000/groupReferenceDelete", params).then(res => {
-        alert("자료가 삭제되었습니다.")
+        this.$message({ type: 'success', message:'성공적으로 삭제되었습니다' });
+        //alert("자료가 삭제되었습니다.")
         this.showGroupReference()
       })
     },
@@ -81,7 +85,6 @@ export default {
   },
 }
 </script>
-
 <style scoped>
 
 .group_detail{
@@ -94,7 +97,7 @@ export default {
     margin: auto;
     overflow: hidden;
     height: auto;
-    background: #f7f7f7;
+   
 }
 
 .groupImage img{
@@ -105,7 +108,7 @@ export default {
 
 .groupName{
     text-align: center;
-    padding: 35px;
+    padding: 10px;
 }
 .groupInfoTitle{
     float: left;
@@ -114,26 +117,42 @@ export default {
 .groupInfoTitle > h5 > span{
     color: #727272;
 }
-.groupInfoContent{
-    float: right;
-    padding: 60px 100px 60px 0px;
+.groupdetailInfo{
+    padding: 0px 10px 0px 100px;
     width: 600px;
     text-align: initial;
 }
-.groupInfoContent > div{
+.groupdetailInfo > div{
+    float: left;
     margin: 14px 0px;
+    margin-right: 50px;
     line-height: 24px;
+}
+.groupdetailInfo > div > span{
+    margin-right: 10px;
+    color: #727272;
+}
+.groupInfoContent{
+    /* float: left; */
+    padding: 10px 100px 60px 100px;
+    width: auto;
+    text-align: initial;
+}
+.groupInfoContent > div{
+    float: left;
+    margin: 14px 0px 20px 0px;
+    
 }
 
 .groupInfoContent > div > span{
-    display: list-item;
+    margin-right: 10px;
     color: #727272;
 }
 
 .hr{
     display: flex;
     margin: auto;
-    margin-top: 15px;
+    margin-top: 5px;
     margin-bottom: 5px;
     background: #c1c1c1;
     height: 1px;
@@ -162,4 +181,9 @@ export default {
     transition: all 0.4s ease-in-out;
 }
 
+a{
+  
+  margin-left: 10px;
+  margin-right: 20px;
+}
 </style>

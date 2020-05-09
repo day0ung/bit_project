@@ -89,9 +89,10 @@
 		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where g.INTER_BIG_SEQ= #{interBigSeq};
+	where g.INTER_BIG_SEQ= #{interBigSeq} AND g.DEL = 0;
 </select>
 <select id="getAllGroup" resultMap="GroupList">
 	select *
@@ -104,8 +105,10 @@
 		on g.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
-		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ;
+		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+		WHERE g.PERMISSION= 1 and g.DEL=0;
 </select>
 <select id="getMyGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
@@ -120,10 +123,42 @@
 		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
-	where gm.MEMBER_SEQ =#{memberSeq};
+	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0 and i.PERMISSION = 1 AND gm.DEL = 0;
 </select>
+<select id="getMyPremissionGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select * 
+	from GROUP_INFO i
+	join MEMBER m
+		on i.MEMBER_SEQ = m.MEMBER_SEQ
+	join GROUP_MEMBER gm
+		on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
+	join INTER_BIG ib
+		on i.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
+			from GROUP_MEMBER
+			WHERE DEL = 0
+			group by GROUP_INFO_SEQ) cur
+		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
+	where gm.MEMBER_SEQ =#{memberSeq} AND i.DEL = 0 and i.PERMISSION = 1 AND gm.DEL = 2;
+</select>
+
+<select id="getMyPageCreatGroupList" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
+	select * 
+	from GROUP_INFO i
+	join MEMBER m
+		on i.MEMBER_SEQ = m.MEMBER_SEQ
+	join INTER_BIG ib
+		on i.INTER_BIG_SEQ = ib.INTER_BIG_SEQ
+	join INTER_SMALL ism
+		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
+	where i.MEMBER_SEQ = #{memberSeq} AND i.DEL = 0 and i.PERMISSION = 0;
+</select>
+
 <select id="getMyOtherGroup" parameterType="com.palette.model.GroupParams" resultMap="GroupList">
 	select * 
 	from GROUP_INFO i
@@ -135,6 +170,7 @@
 		on i.INTER_SMALL_SEQ = ism.INTER_SMALL_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on i.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where i.GROUP_INFO_SEQ not in 
@@ -142,10 +178,11 @@
 								 from GROUP_INFO i
 								 join GROUP_MEMBER gm
 								     on i.GROUP_INFO_SEQ = gm.GROUP_INFO_SEQ
-								 where gm.MEMBER_SEQ = #{memberSeq} )
+								 where gm.MEMBER_SEQ = #{memberSeq} and gm.DEL = 0)
 	<if test="interBigSeq != 0">
-	and i.INTER_BIG_SEQ = #{interBigSeq};
+	and i.INTER_BIG_SEQ = #{interBigSeq}
 	</if>
+	AND i.DEL = 0 AND i.PERMISSION = 1;
 </select>
 
  <select id="getOneGroup" parameterType="com.palette.model.GroupDto" resultMap="GroupInfo">
@@ -161,9 +198,18 @@
 		on g.GROUP_INFO_SEQ = s.GROUP_INFO_SEQ
 	join (select GROUP_INFO_SEQ, count(*) as CURR_MEMBER
 			from GROUP_MEMBER
+			WHERE DEL = 0
 			group by GROUP_INFO_SEQ) cur
 		on g.GROUP_INFO_SEQ = cur.GROUP_INFO_SEQ
 	where g.GROUP_INFO_SEQ = #{groupInfoSeq};
+</select>
+<select id="getGroupMember" parameterType="com.palette.model.GroupDto" resultType="com.palette.model.MemberDto">
+	select m.MEMBER_SEQ, m.MEMBER_ID, g.del AS del
+	from GROUP_MEMBER g
+	join MEMBER m
+		on g.MEMBER_SEQ = m.MEMBER_SEQ
+	where g.GROUP_INFO_SEQ = #{groupInfoSeq}
+
 </select>
 
 <insert id="insertAttendGroup" parameterType="com.palette.model.GroupSchedule">
@@ -203,10 +249,85 @@
 
 
 <select id="getInterListAll" resultMap="InterBig">
-SELECT *
-FROM INTER_BIG b
-JOIN INTER_SMALL s
-on b.INTER_BIG_SEQ = s.INTER_BIG_SEQ;
+	SELECT *
+	FROM INTER_BIG b
+	JOIN INTER_SMALL s
+	on b.INTER_BIG_SEQ = s.INTER_BIG_SEQ;
 </select>
+
+<insert id="joinGroupMemberRegistrationRequest" parameterType="com.palette.model.GroupMemberDto">
+	INSERT INTO GROUP_MEMBER (GROUP_INFO_SEQ, MEMBER_SEQ, DEL)
+	VALUES (#{groupInfoSeq}, #{memberSeq}, 2);
+</insert>
+
+<update id="updateGroupMemberRegistrationRequest">
+	UPDATE GROUP_MEMBER
+	SET DEL = 2
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
+
+<insert id="likeJoinGroupMemberRegistrationRequest" parameterType="com.palette.model.GroupMemberDto">
+	INSERT INTO GROUP_MEMBER (GROUP_INFO_SEQ, MEMBER_SEQ, DEL)
+	VALUES (#{groupInfoSeq}, #{memberSeq}, 3);
+</insert>
+
+<select id="checkLikeGroup" parameterType="com.palette.model.GroupMemberDto" resultType="java.lang.Integer">
+	SELECT COUNT(*)
+	FROM GROUP_LIKE
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq} AND DEL = 0;
+</select>
+
+<insert id="likeGroupAdd" parameterType="com.palette.model.GroupMemberDto">
+	INSERT INTO GROUP_LIKE (GROUP_INFO_SEQ, MEMBER_SEQ)
+	VALUES (#{groupInfoSeq}, #{memberSeq});
+</insert>
+
+<update id="likeGroupDelete" parameterType="com.palette.model.GroupMemberDto">
+	UPDATE GROUP_LIKE
+	SET DEL = 1
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
+
+<select id="getMylikeList" parameterType="java.lang.Integer" resultType="com.palette.model.MemberLikeDto">
+	SELECT li.GROUP_INFO_SEQ, m.GROUP_MEMBER_SEQ, li.GROUP_NAME, m.DEL AS DEL
+	FROM GROUP_MEMBER m
+	JOIN (SELECT i.GROUP_INFO_SEQ, l.MEMBER_SEQ, i.DEL, i.GROUP_NAME
+	FROM GROUP_LIKE l
+	JOIN GROUP_INFO i
+	ON l.GROUP_INFO_SEQ = i.GROUP_INFO_SEQ
+	WHERE l.MEMBER_SEQ = #{memberSeq} AND l.DEL = 0 AND i.DEL = 0 AND PERMISSION = 1 ) li
+	ON m.GROUP_INFO_SEQ = li.GROUP_INFO_SEQ
+	WHERE m.MEMBER_SEQ = #{memberSeq};
+</select>
+
+<select id="checkGroupMember" parameterType="com.palette.model.GroupMemberDto" resultType="com.palette.model.GroupMemberDto">
+	SELECT *
+	FROM GROUP_MEMBER
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</select>
+
+<update id="groupWaitingDelete" parameterType="com.palette.model.GroupMemberDto">
+	UPDATE GROUP_MEMBER
+	SET DEL = 3
+	WHERE GROUP_INFO_SEQ = #{groupInfoSeq} AND MEMBER_SEQ = #{memberSeq}
+</update>
+
+<update id="permissionGroupMember" parameterType="java.lang.Integer">
+	UPDATE GROUP_MEMBER
+	SET DEL = 0
+	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
+</update>
+
+<update id="groupMemberDelete" parameterType="java.lang.Integer">
+	UPDATE GROUP_MEMBER
+	SET DEL = 1
+	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
+</update>
+
+<update id="groupCreateCancle" parameterType="com.palette.model.GroupDto">
+	UPDATE GROUP_INFO
+	SET DEL = 1
+	WHERE MEMBER_SEQ = #{memberSeq} AND GROUP_INFO_SEQ = #{groupInfoSeq}
+</update>
 
 </mapper>

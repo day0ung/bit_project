@@ -20,6 +20,8 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberDto;
+import com.palette.model.MemberLikeDto;
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
 import com.palette.service.GroupService;
@@ -42,19 +44,20 @@ public class GroupController {
     	List<GroupDto> list = groupService.getAllGroup();
     	return list;
     }
+
     // login
     @PostMapping(value="/getMyGroup")
     public ArrayList<GroupDto> getMyGroup(GroupParams groupParams){
     	System.out.println("getMyGroup() 실행");
-    	 ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
-    	 return list;
+        ArrayList<GroupDto> list = groupService.getMyGroup(groupParams);
+        return list;
     }
+    
     @PostMapping(value="/getMyOtherGroup")
     public ArrayList<GroupDto> getMyOtherGroup(GroupParams groupParams){
     	System.out.println("getMyOtherGroup() 실행");
-
-    	 ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
-    	 return list;
+        ArrayList<GroupDto> list = groupService.getMyOtherGroup(groupParams);
+        return list;
     }
     
     @PostMapping(value="/groupSearchList")
@@ -65,7 +68,6 @@ public class GroupController {
         }else{
             list = groupService.groupSearchList(groupParams);
         }
-    	
     	return list;
     }
     
@@ -75,18 +77,25 @@ public class GroupController {
         GroupDto outDto = groupService.getOneGroup(insertDto);
     	return outDto;
     }
-    
+    @PostMapping(value = "/getGroupMember")
+    public List<MemberDto> getGroupMember(GroupDto groupDto){
+    	System.out.println("getGroupMember()");
+    	List<MemberDto> list = groupService.getGroupMember(groupDto);
+    	return list;
+    }
     
     @PostMapping(value = "/creatGroupApply")
     public String creatGroupApply(GroupDto groupDto, GroupSchedule groupSchedule, MultipartFile file)
             throws IOException {
         System.out.println("creatGroupApply");
         groupDto.setInterBigSeq(groupService.searchInterBigSeq(groupDto.getInterSmallSeq()));
-        if(!file.isEmpty()){
-            String imagePath = s3Uploader.upload(file, "groupImage");
-            groupDto.setImage(imagePath);
+        if(file == null){
+            groupDto.setImage("https://bit-palette.s3.ap-northeast-2.amazonaws.com/groupImage/1.png");
         }else{
-            groupDto.setImage("");
+            if(!file.isEmpty()){
+                String imagePath = s3Uploader.upload(file, "groupImage");
+                groupDto.setImage(imagePath);
+            }
         }
         groupService.createGroup(groupDto);
         groupSchedule.setGroupInfoSeq(groupService.currGroupInfoSeq());
@@ -94,25 +103,100 @@ public class GroupController {
         return "";
     }
 
+    @PostMapping (value = "/permissionGroupMember")
+    public String permissionGroupMember(GroupMemberDto groupMemberDto){
+        System.out.println("permissionGroupMember()");
+        groupService.permissionGroupMember(groupMemberDto);
+        return "";
+    }
 
+    @PostMapping(value = "/groupMemberDelete")
+    public String groupMemberDelete(GroupMemberDto groupMemberDto){
+        System.out.println("groupMemberDelete()");
+        groupService.groupMemberDelete(groupMemberDto);
+        return "";
+    }
+
+    //TODO join like mypage
+    @PostMapping(value = "/joinGroupMemberRegistrationRequest")
+    public String joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto){
+        System.out.println("joinGroupMemberRegistrationRequest()");
+        if(groupService.checkGroupMember(groupMemberDto).equals("가입된회원")){
+            return "fail";
+        }else if(groupService.checkGroupMember(groupMemberDto).equals("가입가능한회원")){
+            groupService.joinGroupMemberRegistrationRequest(groupMemberDto);
+            return "success";
+        }else if(groupService.checkGroupMember(groupMemberDto).equals("가입대기중회원")){
+            return "waiting";
+        }else if(groupService.checkGroupMember(groupMemberDto).equals("업데이트해야하회원")){
+            groupService.updateGroupMemberRegistrationRequest(groupMemberDto);
+            return "success";
+        }else{
+            return "메소드 로직 실패";
+        }
+    }
+
+    @PostMapping(value = "/likeGroupAdd")
+    public String likeGroupAdd(GroupMemberDto groupMemberDto){
+        System.out.println("likeGroupAdd()");
+        groupService.likeGroupAdd(groupMemberDto);
+        return "";
+    }
+
+    @PostMapping(value = "/getMylikeList")
+    public List<MemberLikeDto> getMylikeList(int memberSeq){
+        System.out.println("getMylikeList()");
+        return  groupService.getMylikeList(memberSeq);
+    }
+
+    @PostMapping(value = "/likeGroupDelete")
+    public String likeGroupDelete(GroupMemberDto groupMemberDto){
+        System.out.println("likeGroupDelete()");
+        groupService.likeGroupDelete(groupMemberDto);
+        return "";
+    }
+
+    @PostMapping(value = "/groupWaitingDelete")
+    public String groupWaitingDelete(GroupMemberDto groupMemberDto){
+        System.out.println("groupWaitingDelete()");
+        groupService.groupWaitingDelete(groupMemberDto);
+        return "";
+    }
+
+    @PostMapping(value = "/getMyPremissionGroup")
+    public ArrayList<GroupDto> getMyPremissionGroup(GroupParams groupParams){
+        System.out.println("getMyPremissionGroup()");
+        ArrayList<GroupDto> list = groupService.getMyPremissionGroup(groupParams);
+        return list;
+    }
+
+    @PostMapping(value = "/getMyPageCreatGroupList")
+    public ArrayList<GroupDto> getMyPageCreatGroupList(GroupParams groupParams){
+        System.out.println("getMyPageCreatGroupList()");
+        return groupService.getMyPageCreatGroupList(groupParams);
+    }
+
+    @PostMapping(value = "/groupCreateCancle")
+    public String groupCreateCancle(GroupDto groupDto){
+        System.out.println("groupCreateCancle()");
+        groupService.groupCreateCancle(groupDto);
+        return "";
+    }
     
-    
-    // Board
+//TODO Board
     @PostMapping(value="/groupPagingList")
     public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
-    	System.out.println("getGroupPagingList() : "+boardParams.toString());
+    	System.out.println("getGroupPagingList()");
     	boardParams.setStart( (boardParams.getPage()-1)*boardParams.getLimit() );
     	ArrayList<GroupBoardDto> list =	groupService.getGroupPagingList(boardParams);
-    	System.out.println("list.size= "+list.size());
     	return list;
     }
     
     @PostMapping(value="/groupBoardTotal")
     public String getGroupBoardTotal(BoardParams boardParams) {
-    	System.out.println("getGroupBoardTotal()" + boardParams.toString());
+    	System.out.println("getGroupBoardTotal()");
         int total = groupService.getGroupBoardTotal(boardParams);
         String stotal = total +"";
-    	System.out.println("total: "+total);
     	return stotal;
     }
     
@@ -144,9 +228,7 @@ public class GroupController {
         return "";
     }
     
-
-    
-    // Pds
+//TODO Reference
     @PostMapping(value="/groupPdsList")
     public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
     	System.out.println("getgroupPdsList");
@@ -193,7 +275,14 @@ public class GroupController {
         return "";
     }
 
-    // Comment
+    @PostMapping(value = "/updateGroupReference")
+    public String updateGroupReference(ReferenceVo form) throws IOException {
+        System.out.println("updateGroupReference()");
+        groupService.updateGroupReference(form);
+        return "";
+    }
+
+//TODO Comment
     @PostMapping(value="/groupBoardDetailComments")
     public ArrayList<CommentDto> getGroupBoardDetailComments(int boardSeq) {
         System.out.println("getGroupBoardDetailComments() : " + boardSeq);
@@ -202,7 +291,7 @@ public class GroupController {
     }
     @PostMapping(value = "/insertComment")
     public String insertComment(CommentDto commentDto) {
-    	System.out.println("insertComment(): "+commentDto.toString());
+    	System.out.println("insertComment()");
     	groupService.insertComment(commentDto);
     	return "";
     }
@@ -214,27 +303,34 @@ public class GroupController {
     	return "";
     }
     
+    @PostMapping(value = "/realAnswerUpdate")
+    public String answerUpdate(CommentDto commentDto) {
+    	System.out.println("answerUpdate()");
+    	groupService.answerUpdate(commentDto);
+    	return "";
+    }
     
-    // attendance
+    @PostMapping(value = "/answerInsert")
+    public String answerInsert(CommentDto commentDto) {
+    	System.out.println("answerInsert()");
+    	groupService.answerInsert(commentDto);
+    	return "";
+    }
+    
+//TODO attendance
     @PostMapping(value="/attendGroup")
     public String getAttendGroup(String checkday, GroupSchedule groupSchedule) {
-    	System.out.println("getAttendGroup() " +checkday +"/" + groupSchedule.toString());
-    	
+    	System.out.println("getAttendGroup() ");
     	int result = groupService.getAttendGroup(checkday, groupSchedule);
-
     	String s_result= result+"";
-    	    	
     	return s_result;
     }
+
 	@PostMapping(value="/getAttendStatus")
 	public String checkAttend(GroupSchedule groupSchedule) {
 		System.out.println("getAttendStatus()");
-		
 		int result = groupService.checkAttend(groupSchedule);
-		
 		String s_result = result+"";
-		
 		return s_result;
-		
 	}
 }

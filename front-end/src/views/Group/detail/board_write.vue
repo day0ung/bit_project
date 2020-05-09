@@ -70,9 +70,12 @@ export default {
 						content: this.content
 					}
 				}).then(res =>{
-                    alert("게시글 작성이 완료되었습니다.")
+                    this.$message({ type: 'success', message:'게시글 작성이 완료되었습니다.' });
+                    
                     this.allList()
                     this.showList()
+                    this.content =''
+                    this.ruleForm.title=''
 				})
 				
 			} else {

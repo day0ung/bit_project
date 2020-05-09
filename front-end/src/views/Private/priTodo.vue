@@ -1,6 +1,5 @@
 <template>
   <div>
- 
       <el-button type="text" @click="remainSelect"> TODO LIST: {{todoList.length - countDone}} </el-button>
       <el-button type="text" @click="doneSelect">완료된 할일: {{countDone}} </el-button>
       <el-button type="text" @click="allSelect">전체 TODO LIST: {{todoList.length}} </el-button>
@@ -126,6 +125,7 @@ export default {
        },
        listDone(memSeq){
          this.getDoingList(memSeq)
+         this.getAllLIst(memSeq)
        },
        listEdit(memSeq){
          this.getDoingList(memSeq)

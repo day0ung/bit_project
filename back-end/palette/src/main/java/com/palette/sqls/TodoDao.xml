@@ -11,7 +11,7 @@
  	SELECT TODO_SEQ, TITLE, TODO_DATE, DEL
  	FROM TODOLIST 
  	WHERE MEMBER_SEQ=#{memberSeq} 
-	order by del desc, TODO_DATE asc
+	order by del desc, TODO_DATE desc
  </select>
  
   
@@ -46,14 +46,8 @@
  </update>
  
  <select id="selectDate" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
-  	SELECT distinct TODO_DATE
- 	FROM TODOLIST 
- 	WHERE MEMBER_SEQ=#{memberSeq} 
+  select TODO_DATE, COUNT(*) AS DEL_COUNT from TODOLIST where MEMBER_SEQ=#{memberSeq} AND del=1 group by TODO_DATE
  </select>
  
- <select id="DateAndCount" parameterType="com.palette.model.TodoListDto" resultType="com.palette.model.TodoListDto">
- SELECT TODO_DATE, (select count(*) from TODOLIST where MEMBER_SEQ=#{memberSeq} AND del =1 AND TODO_DATE = #{todoDate}) as delcount
- FROM TODOLIST where MEMBER_SEQ=#{memberSeq} AND TODO_DATE=#{todoDate}
- </select>
  
 </mapper>

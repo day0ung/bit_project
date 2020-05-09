@@ -15,6 +15,8 @@ public interface EmploymentDao {
 
 	EmploymentBoardDto getOneRecruit(int empBoardSeq);
 	
+	public List<EmploymentBoardDto> getOneRecruitByMemberSeq(int memberSeq);
+	
 	void readCount(int empBoardSeq);
 	
 	int insertRecruit(EmploymentBoardDto dto);

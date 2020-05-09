@@ -1,7 +1,7 @@
 <template>
     <div class="create">
         <div class="createContainer">
-            <div class="title">그룹 스터디 생성</div>
+            <div class="title">PALETTE 회원가입</div>
             <el-form :model="ruleForm" label-position="top" :rules="rules" ref="ruleForm" label-width="120px" class="demo-ruleForm">
                 <!-- 아이디 설정 -->
                 <el-form-item label="아이디" prop="memberId">
@@ -49,7 +49,7 @@
                 <div class="submitBtnDiv">
                     <el-form-item>
                         <el-button type="primary" @click="submitForm('ruleForm')">회원가입</el-button>
-                        <el-button @click="resetForm('ruleForm')">취소</el-button>
+                        <el-button @click="resetForm('ruleForm')">지우기</el-button>
                     </el-form-item>
                 </div>
             </el-form>
@@ -138,17 +138,20 @@ export default {
     methods:{
          idcheck(){
             if( this.ruleForm.memberId == ''){
-                alert('아이디를 입력해주세요')
+                this.$message({ type: 'info', message:'아이디를 입력해주세요'})
+                //alert('아이디를 입력해주세요')
             }else {
                 var params = new URLSearchParams();
                 params.append('memberId', this.ruleForm.memberId)
                 axios.post('http://localhost:9000/checkid', params)
                 .then(res => {
                     if(res.data == true){
-                        alert(' 아이디 사용이 가능합니다.')
+                        this.$message({ type: 'success', message:'아이디 사용이 가능합니다.'})
+                        //alert(' 아이디 사용이 가능합니다.')
                         this.checkIs = true
                     }else{
-                        alert('이미 아이디가 존재합니다')
+                        this.$message({ type: 'info', message:'이미 아이디가 존재합니다'})
+                        //alert('이미 아이디가 존재합니다')
                     }
                 }) 
             }
@@ -157,7 +160,8 @@ export default {
             this.$refs[formName].validate((valid) => {
             if (valid) {
                 if( this.checkIs  == false){
-                    alert('아이디 중복확인을 해주세요')
+                    this.$message({ type: 'info', message:'아이디 중복확인을 해주세요'})
+                    //alert('아이디 중복확인을 해주세요')
                 }else{
                  
                     var memberAddress = this.ruleForm.address + this.ruleForm.extraAddress
@@ -175,7 +179,8 @@ export default {
                     axios.post('http://localhost:9000/createMember', params).then(
                         res => {
                             if(res.data == true){
-                                alert('회원가입이 완료 되었습니다')
+                                this.$message({ type: 'success', message:'회원가입이 완료 되었습니다'})
+                                //alert('회원가입이 완료 되었습니다')
                                 this.$router.push ({name:'memberInter'})
                             }
                         }) 
@@ -184,6 +189,7 @@ export default {
             } else {
                 console.log('error submit!!');
                 return false;
+                
             }
             });
         },

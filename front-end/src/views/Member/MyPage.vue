@@ -7,59 +7,57 @@
 			class="el-menu-vertical-demo"
 			active-text-color="#ff674b"
 			default-active="5">
-			<el-menu-item index="1" v-model="auth" v-if="auth == '1' | auth == '0' " @click="studyClick(memSeq)" >
+			<el-menu-item index="1"  v-if="auth == '1' | auth == '0' " @click="studyClick(memSeq)" >
 				<i class="el-icon-edit"></i>
 				<span>내 스터디</span>
 			</el-menu-item>
-			<el-menu-item index="2" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="scheduleClick(memSeq)">
+			<el-menu-item index="2" v-if="auth == '1' | auth == '0' "  @click="scheduleClick(memSeq)">
 				<i class="el-icon-postcard"></i>
 				<span>내 일정</span>
 			</el-menu-item>
-			<el-menu-item index="6" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="referenceClick(memSeq)">
+			<el-menu-item index="6"  v-if="auth == '1' | auth == '0' "  @click="referenceClick(memSeq)">
 				<i class="el-icon-takeaway-box"></i>
-				<sapn>내 자료</sapn>
+				<span>내 자료</span>
 			</el-menu-item>
-			<el-menu-item index="3" v-model="auth"  @click="resumeClick(memSeq)">
+			<el-menu-item index="3" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="resumeClick(memSeq)">
 				<i class="el-icon-document"></i>
 				<span>내 이력서</span>
 			</el-menu-item>
+			<el-menu-item index="3" v-model="auth" v-else @click="recruitClick(memSeq)">
+				<i class="el-icon-document"></i>
+				<span>내 공고</span>
+			</el-menu-item>
 			<el-menu-item index="4" v-model="auth" v-if="auth == '1' | auth == '0' "  @click="interclick(memSeq)">
 				<i class="el-icon-star-off"></i>
-				<span>내 관심분야</span>
+				<span>내 찜목록</span>
 			</el-menu-item><!-- $router.push({name:'MyInfo', params: { seq: memSeq }}), show = false" -->
-			<el-menu-item index="5" v-model="auth"  @click="infoClick(memSeq)" >
+			<el-menu-item index="5"   @click="infoClick(memSeq)" >
 				<i class="el-icon-setting"></i>
 				<span>내 정보수정</span>
 			</el-menu-item>
 			</el-menu>
 	 </div>
 	 <div class="myContent" >
-		<MyStudy v-if="study">
-		</MyStudy>
-		<MySchedule v-if="schedule">
-		</MySchedule>
+		<MyStudy v-if="study"/>
+		<MySchedule v-if="schedule"/>
 		<MyReference v-if="reference"/>
-		<MyResume v-if="resume">
-		</MyResume>
+		<MyResume v-if="resume"/>
+		<MyRecruit v-if="recruit"/>
 		<MyInter v-if="inter"
 		:memSeq="memSeq"
 		:myinter="myinter"
+		:mylike="mylike"
 		:myBig="myBig"
 		:mySmall="mySmall"
-		@updateInterArea="updateInterArea">
-		</MyInter>
+		@updateInterArea="updateInterArea"/>
 		<MyInfo v-if="info"
 		:memSeq="memSeq"
 		:myinfo="myinfo"
 		@emailUpdate="emailUpdate"
 		@addrUpdate="addrUpdate"
-		@passUpdate="passUpdate">
-		</MyInfo>
+		@passUpdate="passUpdate"/>
 	 </div> 
-	 <!-- <div class="myContent" v-else>
-		 	<router-view :key="$route.fullPath">
-			</router-view> 
-	 </div> -->
+
   </div>
 </template>
 
@@ -67,13 +65,14 @@
 import MyStudy from '@/views/MyPage/myStudy.vue'
 import MySchedule from '@/views/MyPage/mySchedule.vue'
 import MyResume from '@/views/MyPage/myResume.vue'
+import MyRecruit from '@/views/MyPage/myRecruit.vue'
 import MyInter from '@/views/MyPage/myInter.vue'
 import MyInfo from '@/views/MyPage/myInfo.vue'
 import MyReference from '@/views/MyPage/reference.vue'
 
 export default {
 	components:{
-		MyStudy, MySchedule, MyResume, MyInter, MyInfo, MyReference
+		MyStudy, MySchedule, MyResume, MyInter, MyInfo, MyReference, MyRecruit
 	},
 	data(){
 		return{
@@ -81,8 +80,10 @@ export default {
 			schedule:false,
 			reference: false,
 			resume:false,
+			recruit:false,
 			inter:false,
 			info:true,
+			mylike: [],
 			myinfo: [],
 			myinter:[],
          	myBig: [],
@@ -99,9 +100,19 @@ export default {
 		 this.memSeq = login.memberSeq
 		 this.auth = login.auth
 		 this.getInfomation(this.memSeq)
+		 this.getMylikeList(this.memSeq)
 	}, 
 
 	methods:{
+		getMylikeList(memSeq){
+			let params = new URLSearchParams();
+			params.append('memberSeq', memSeq)
+			axios.post('http://localhost:9000/getMylikeList', params).then(res => {
+				this.mylike = res.data
+				this.$store.state.s_member.MyPageInterLikeList = res.data
+				console.log(res.data)
+			})
+		},
 		getInfomation(memSeq){
 			var params = new URLSearchParams();
 			params.append('memberSeq', memSeq)
@@ -114,6 +125,7 @@ export default {
 			this.study = true
 			this.schedule = false
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = false
 			this.reference = false
@@ -122,6 +134,7 @@ export default {
 			this.study = false
 			this.schedule = true
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = false
 			this.reference = false
@@ -131,6 +144,7 @@ export default {
 			this.schedule = false
 			this.reference = true
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = false
 		},
@@ -138,6 +152,7 @@ export default {
 			this.study = false
 			this.schedule = false
 			this.resume = true
+			this.recruit = false
 			this.inter = false
 			this.info = false
 			this.reference = false
@@ -146,6 +161,7 @@ export default {
 			this.study = false
 			this.schedule = false
 			this.resume = false
+			this.recruit = false
 			this.inter = true
 			this.info = false
 			this.reference = false
@@ -174,6 +190,7 @@ export default {
 			this.study = false
 			this.schedule = false
 			this.resume = false
+			this.recruit = false
 			this.inter = false
 			this.info = true	
 			this.reference = false	
@@ -184,6 +201,16 @@ export default {
 			this.myinfo = res.data
 			 }) 
 		},
+		recruitClick(){
+			this.study = false
+			this.schedule = false
+			this.reference = false
+			this.resume = false
+			this.recruit = true
+			this.inter = false
+			this.info = false
+		},
+
 		emailUpdate(memSeq){
 			this.getInfomation(memSeq)
 		},

@@ -75,7 +75,7 @@
                 <!-- 서브밋버튼 -->
                 <div class="submitBtnDiv">
                     <el-form-item>
-                        <el-button type="primary" @click="submitForm('ruleForm')">회원가입</el-button>
+                        <el-button type="primary" @click="submitForm('ruleForm')">작성완료</el-button>
                         <el-button @click="resetForm('ruleForm')">취소</el-button>
                     </el-form-item>
                 </div>
@@ -123,7 +123,8 @@ export default {
                 axios.post('http://localhost:9000/intersting', params).then(
                 res => {
                     if(res.data == 'perfect'){
-                        alert('작성이 완료 되었습니다')
+                        this.$message({ type: 'success', message:'작성이 완료 되었습니다'})
+                        //alert('작성이 완료 되었습니다')
                         this.$router.push ({path:'/'})
                     }
                 }) 

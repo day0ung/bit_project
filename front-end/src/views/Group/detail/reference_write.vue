@@ -1,7 +1,6 @@
 <template>
   <div class="reference_write">
         <br>
-        <br>
         <el-button @click="showGroupReference" round>목록으로</el-button>
         <br>
         <br>
@@ -76,6 +75,7 @@ export default {
     },
     methods:{
         showGroupReference(){
+            this.getList()
             this.$emit("showGroupReference")
         },
         textContent(value){
@@ -93,16 +93,13 @@ export default {
                 this.ruleForm.fileList.forEach(function(element){
                     formData.append('files', element)
                 })
-                // for (let key of formData.entries()){
-                //     console.log(`${key}`)
-                // }
 				axios.post("http://localhost:9000/insertGroupReference", formData ,{
 					headers:{
                         'Content-Type' : 'multipart/form-data'
 					}
 				}).then(res =>{
-                    alert("자료가 업로드 되었습니다.")
-                    this.getList()
+                    this.$message({ type: 'success', message:'성공적으로 등록되었습니다' });
+                    //alert("자료가 업로드 되었습니다.")
                     this.showGroupReference()
 				})
 				

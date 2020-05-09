@@ -47,7 +47,7 @@
             <header>
               <div class="imageCircle all">
                 <div style="height: 50px;"></div>
-                  <router-link :to="{ name: 'groupdetail', params: { contentId: groupInfo.groupInfoSeq }}">
+                  <router-link :to="{ name: 'nonloginGroupDetail', params: { contentId: groupInfo.groupInfoSeq }}">
                     <img :src="groupInfo.image">
                   </router-link>
               </div>
@@ -57,7 +57,7 @@
             </div>
             <div class="buttons detailcontainer">
               <button class="add" @click="gotoDetail(groupInfo.groupInfoSeq)">{{groupInfo.startDate}} 시작</button>
-              <button class="like" @click="likeAdd(groupInfo.groupName)"><span>♥</span></button>
+              <button class="like" @click="likeAdd(groupInfo.groupInfoSeq, groupInfo.groupName)"><span>♥</span></button>
             </div>
           </div>
         </aside>
@@ -85,13 +85,23 @@ export default {
     }
   },
   methods:{
-    likeAdd(groupName){
-      alert("like Add 미완성")
-      alert(groupName + " 그룹을 찜목록에 추가되었습니다.\n마이페이지 찜목록에서 확인해주세요.")
+    likeAdd(groupInfoSeq, groupName){
+      if(this.$store.state.isLogin === true){ //아직 로그인이 안된 유저니까 막음
+        this.$message({ type: 'info', message:"로그인이 필요한 기능입니다"})
+        //alert('로그인이 필요한 기능입니다')
+        this.$router.push('/login')
+      }else{
+        let params = new URLSearchParams();
+        params.append("groupInfoSeq", groupInfoSeq)
+        params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+        axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
+          this.$message({ type: 'success', message:"그룹이 찜목록에 추가되었습니다. 마이페이지에서 확인해주세요."})
+          //alert(groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+        })
+      }
     },
     gotoDetail(seq){
-      //alert("seq=" + seq)
-      this.$router.push('/group/main/detail/'+seq)
+      this.$router.push('/group/n_main/detail/'+seq)
     },
     searchBigSeq(seq){
       //alert(seq)

@@ -8,6 +8,7 @@ import javax.validation.constraints.PastOrPresent;
 
 import com.palette.model.MemberDto;
 import com.palette.model.TodoListDto;
+import com.palette.s3.ReferenceVo;
 import com.palette.service.MemberService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,14 @@ public class MemberController {
     	boolean check = memberService.createMember(dto);
     	System.out.println(" 추가 성공: " + check);
     	return check;
+    }
+    
+    //기업 회원가입
+    @PostMapping(value="/createCompanyMember")
+    public String createCompanyMember(ReferenceVo vo)throws Exception {
+    	System.out.println("createCompanyMember");
+    	memberService.createCompanyMember(vo);
+    	return "";
     }
     //회원가입시 아이디체크 컨트롤러
     @PostMapping(value="/checkid")

@@ -2,7 +2,7 @@
   <div class="group_detail">
     <br>
     <br>
-    <div class="groupDetailcCntainer">
+    <div class="groupDetailcCntainer" v-loading="this.$store.state.s_group.groupDetailLoading">
       <div class="groupImage">
         <img :src="groupOne.image" />
       </div>
@@ -70,23 +70,38 @@ export default {
   },
   methods:{
     likeAdd(){
-      alert("like Add 미완성")
-      alert(this.groupOne.groupName + " 그룹을 찜목록에 추가되었습니다.\n마이페이지 찜목록에서 확인해주세요.")
+      this.$store.state.s_group.groupDetailLoading = true
+      let params = new URLSearchParams();
+      params.append("groupInfoSeq", this.$route.params.contentId)
+      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+      axios.post("http://localhost:9000/likeGroupAdd", params).then(res =>{
+        this.$message({ type: 'success', message: this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다. 마이페이지에서 확인해주세요."})
+        //alert(this.groupOne.groupName + " 그룹이 찜목록에 추가되었습니다.\n마이페이지에서 확인해주세요.")
+        this.$store.state.s_group.groupDetailLoading = false
+      })
     },
     joinGroup(){
-      alert("join group 미완성")
-      alert("참여신청이 완료되었습니다.\n마이페이지 그룹에서 확인해주세요.")
+      this.$store.state.s_group.groupDetailLoading = true
+      let params = new URLSearchParams();
+      params.append("groupInfoSeq", this.$route.params.contentId)
+      params.append("memberSeq", this.$store.state.loginUser.memberSeq)
+      axios.post("http://localhost:9000/joinGroupMemberRegistrationRequest", params).then(res =>{
+        this.$message({ type: 'success', message:"참여신청이 완료. 마이페이지에서 확인해주세요."})
+        //alert("참여신청이 완료되었습니다.\n마이페이지 내 그룹에서 확인해주세요.")
+        this.$store.state.s_group.groupDetailLoading = false
+        this.$router.push({name : "Group"})
+      })
     }
   },
   mounted(){
-    this.loading = true;
+    this.$store.state.s_group.groupDetailLoading = true
     this.groupInfoSeq = this.$route.params.contentId
     var params = new URLSearchParams();	// post 방식으로 받아야함.
     params.append('groupInfoSeq', this.groupInfoSeq);
     axios.post("http://localhost:9000/getOneGroup", params)
                 .then(res => {
             this.groupOne = res.data
-            this.loading = false;
+            this.$store.state.s_group.groupDetailLoading = false
           })
   },
   create(){

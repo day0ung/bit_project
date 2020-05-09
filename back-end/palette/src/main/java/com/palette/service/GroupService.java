@@ -22,6 +22,8 @@ import com.palette.model.GroupMemberDto;
 import com.palette.model.GroupParams;
 import com.palette.model.GroupSchedule;
 import com.palette.model.InterBigDto;
+import com.palette.model.MemberDto;
+import com.palette.model.MemberLikeDto;
 import com.palette.s3.ReferenceVo;
 import com.palette.s3.S3Uploader;
 
@@ -35,7 +37,7 @@ public class GroupService {
 	@Autowired
 	GroupDao groupDao;
 
-	// TODO: GROUP LIST
+// TODO: GROUP LIST
 	public List<GroupDto> getAllGroup() {
 		return groupDao.getAllGroup();
 	}
@@ -55,6 +57,9 @@ public class GroupService {
 	public GroupDto getOneGroup(GroupDto insertDto) {
 		return groupDao.getOneGroup(insertDto);
 	}
+	public List<MemberDto> getGroupMember(GroupDto groupDto) {
+		return groupDao.getGroupMember(groupDto);
+	}
 
 	public List<GroupMemberDto> getGroupMemberName(int seq) {
 		return groupDao.getGroupMemberName(seq);
@@ -64,7 +69,7 @@ public class GroupService {
 		return groupDao.getInterListAll();
 	}
 
-	// TODO: CREATE GROUP
+// TODO: CREATE GROUP
 	public void createGroup(GroupDto groupDto) {
 		groupDao.createGroup(groupDto);
 	}
@@ -90,7 +95,7 @@ public class GroupService {
 		return groupDao.getGroupBoardTotal(boardParams);
 	}
 
-	// TODO: GROUP CALENDAR
+// TODO: GROUP CALENDAR
 	public List<CalendarDto> getGroupCalendar(GroupDto groupDto) {
 		return groupDao.getGroupCalendar(groupDto);
 	}
@@ -160,7 +165,7 @@ public class GroupService {
 		return groupDao.checkAttend(groupSchedule);
 	}
 
-	// TODO: GROUP BOARD
+// TODO: GROUP BOARD
 	public ArrayList<GroupBoardDto> getGroupPagingList(BoardParams boardParams) {
 		return groupDao.getgroupPagingList(boardParams);
 	}
@@ -182,7 +187,7 @@ public class GroupService {
 		groupDao.updateReadCount(boardSeq);
 	}
 	
-	// TODO: GROUP PDS BOARD
+// TODO: GROUP PDS BOARD
 	public ArrayList<GroupBoardDto> getgroupPdsList(int groupSeq) {
 		return groupDao.getgroupPdsList(groupSeq);
 	}
@@ -202,13 +207,32 @@ public class GroupService {
         for (MultipartFile file : form.getFiles()) {
 			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
 			boardReferenceDto.setFileName(file.getOriginalFilename());
-            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()));
+            boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId())); //접근할 수 있는  url
             boardReferenceDto.setMemberSeq(form.getMemberSeq());
             boardReferenceDto.setBoardSeq(boardSeq);
             groupDao.insertBoardReference(boardReferenceDto);
         }
 	}
-	
+	public void updateGroupReference(ReferenceVo form) throws IOException {
+		// board update 먼저실행
+		GroupBoardDto boardDto = new GroupBoardDto();
+		boardDto.setBoardSeq(form.getBoardSeq());
+		boardDto.setTitle(form.getTitle());
+		boardDto.setContent(form.getContent());
+		groupDao.updateGroupBoard(boardDto);
+		// 기존 file delete 먼저실행후
+		groupDao.groupReferenceDelete(form.getBoardSeq());
+		// 같은 boardSeq로 file upload
+		for(MultipartFile file : form.getFiles()){
+			BoardReferenceDto boardReferenceDto = new BoardReferenceDto();
+			boardReferenceDto.setFileName(file.getOriginalFilename());
+			boardReferenceDto.setUrl(s3Uploader.upload(file, form.getMemberId()));
+			boardReferenceDto.setMemberSeq(form.getMemberSeq());
+			boardReferenceDto.setBoardSeq(form.getBoardSeq());
+			groupDao.insertBoardReference(boardReferenceDto);
+		}
+	}
+//TODO Comment
 	public ArrayList<CommentDto> groupBoardDetailComments(int boardSeq) {
 		return groupDao.groupBoardDetailComments(boardSeq);
 	}
@@ -217,13 +241,27 @@ public class GroupService {
 		commentDto.setRef(ref);
 		groupDao.insertComment(commentDto);
 	}
-
-	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
-		return groupDao.getGroupReferenceDetailFileList(boardSeq);
-	}
-
 	public void answerDelete(CommentDto commentDto) {
 		groupDao.answerDelete(commentDto);
+	}
+	public void answerUpdate(CommentDto commentDto) {
+		groupDao.answerUpdate(commentDto);
+	}
+	public void answerInsert(CommentDto commentDto) {
+		groupDao.updateCommentAnswer(commentDto);
+		CommentDto dto = groupDao.selectRefStepDepth(commentDto.getBoardCommentSeq());
+		commentDto.setRef(dto.getRef());
+		commentDto.setStep(dto.getStep()+1);
+		commentDto.setDepth(dto.getDepth()+1);
+		
+		System.out.println("answerInsert Service: " + commentDto.toString());
+		groupDao.insertCommentAnswer(commentDto);
+		
+	}
+	
+	
+	public List<BoardReferenceDto> getGroupReferenceDetailFileList(int boardSeq) {
+		return groupDao.getGroupReferenceDetailFileList(boardSeq);
 	}
 	public List<BoardReferenceDto> getMypageReferenceList(int memberSeq) {
 		return groupDao.getMypageReferenceList(memberSeq);
@@ -233,4 +271,72 @@ public class GroupService {
 		groupDao.groupBoardDelete(boardSeq);
 		groupDao.groupReferenceDelete(boardSeq);
 	}
+
+	public void joinGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto) {
+		groupDao.joinGroupMemberRegistrationRequest(groupMemberDto);
+	}
+
+	public void likeGroupAdd(GroupMemberDto groupMemberDto) {
+		if(groupDao.checkLikeGroup(groupMemberDto) == 0){
+			groupDao.likeGroupAdd(groupMemberDto);
+			groupDao.likeJoinGroupMemberRegistrationRequest(groupMemberDto);
+		}
+	}
+
+	public List<MemberLikeDto> getMylikeList(int memberSeq) {
+		return groupDao.getMylikeList(memberSeq);
+	}
+
+	public String checkGroupMember(GroupMemberDto groupMemberDto) {
+		if (groupDao.checkGroupMember(groupMemberDto) == null){
+			return "가입가능한회원";
+		}else{
+			if(groupDao.checkGroupMember(groupMemberDto).getDel() == 0){
+					return "가입된회원";
+			}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 1){
+				return "가입가능한회원";
+			}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 2){
+				return "가입대기중회원";
+			}else if(groupDao.checkGroupMember(groupMemberDto).getDel() == 3){
+				return "업데이트해야하회원";
+			}else{
+				return "가입가능한회원";
+			}
+		}
+	}
+
+	public void likeGroupDelete(GroupMemberDto groupMemberDto) {
+		groupDao.likeGroupDelete(groupMemberDto);
+	}
+
+	public void groupWaitingDelete(GroupMemberDto groupMemberDto) {
+		groupDao.groupWaitingDelete(groupMemberDto);
+	}
+
+	public void updateGroupMemberRegistrationRequest(GroupMemberDto groupMemberDto) {
+		groupDao.updateGroupMemberRegistrationRequest(groupMemberDto);
+	}
+
+	public void permissionGroupMember(GroupMemberDto groupMemberDto) {
+		groupDao.permissionGroupMember(groupMemberDto);
+	}
+
+	public void groupMemberDelete(GroupMemberDto groupMemberDto) {
+		groupDao.groupMemberDelete(groupMemberDto);
+	}
+
+	public ArrayList<GroupDto> getMyPremissionGroup(GroupParams groupParams) {
+		return groupDao.getMyPremissionGroup(groupParams);
+	}
+
+	public ArrayList<GroupDto> getMyPageCreatGroupList(GroupParams groupParams) {
+		return groupDao.getMyPageCreatGroupList(groupParams);
+	}
+
+	public void groupCreateCancle(GroupDto groupDto) {
+		groupDao.groupCreateCancle(groupDto);
+	}
+
+	
+
 }

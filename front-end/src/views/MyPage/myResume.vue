@@ -6,7 +6,7 @@
           <img src='../../assets/css/images/resume.png'>
         </div>
         <div class="titup">
-          <table class="table1" style="margin-left: 55px">
+          <table class="table1" style="margin-left: 55px" v-loading="loading">
             <colgroup>
             <col style="width: 45%">
             <col style="width: 45%">
@@ -38,22 +38,26 @@
 
 <script>
 import logincss from '@/assets/css/member/myinfo.css'
+import { loading } from 'element-ui';
 
 export default {
   data(){
     return{
       login1 : "",
       title : "",
-      category : ""
+      category : "",
+      loading:false
     }
   },
   mounted(){
+    this.loading=true
     var params = new URLSearchParams();	// post 방식으로 받아야함. 
       params.append('memberSeq', this.login1.memberSeq);
       axios.post("http://localhost:9000/getOneCVByMemberSeq", params).then(res => { 
         this.$store.state.s_employment.cvDetail = res.data
         this.title = this.$store.state.s_employment.cvDetail.title
         this.category = this.$store.state.s_employment.cvDetail.category
+        this.loading=false
         })
   },
   created(){

@@ -56,7 +56,7 @@ public class EmploymentController {
 		    	long calDateDay = calDate / (24*60*60*1000);
 				list.get(i).setdDay(calDateDay);
 			}
-	    	
+	    	System.out.println("------------------"+list.size());
     	return list;
     }
     
@@ -67,6 +67,7 @@ public class EmploymentController {
         employmentService.readCount(empBoardSeq);
         
         EmploymentBoardDto dto =  employmentService.getOneRecruit(empBoardSeq);
+        System.out.println("겟원디티오" + dto.toString());
         
 //		디데이 함수      
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -95,13 +96,24 @@ public class EmploymentController {
 
     	return dto;
     }
+    
+    @PostMapping(value = "/getOneRecruitByMemberSeq")
+    public List<EmploymentBoardDto> getOneRecruitByMemberSeq(int memberSeq){
+        System.out.println("getOneRecruitByMemberSeq() 실행");
+        
+        List<EmploymentBoardDto> list =  employmentService.getOneRecruitByMemberSeq(memberSeq);
+        for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).toString());
+		}
+
+    	return list;
+    }
    
     @GetMapping(value = "/insertRecruit")
     public boolean insertRecruit(EmploymentBoardDto dto){
     	System.out.println("insertRecruit() 실행");
-    	
+    	dto.setWebUrl("https://" + dto.getWebUrl());
     	boolean isS = employmentService.insertRecruit(dto);
-    	
     	
     	return isS;
     }

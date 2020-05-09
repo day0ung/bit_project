@@ -37,7 +37,7 @@
                 <p class="signup-forgotten">
                  
                    <span></span>
-                   <button class="forgotten" @click="idSearch" style="font-weight: 5px">아이디/비밀번호 찾기</button>
+                 
                 </p>
                  </div>
              </div>
@@ -87,12 +87,13 @@ export default {
            params.append('memberId', this.id)
            params.append('pwd', this.pwd)
 
-          this.id == null ? alert('아이디를 입력해주세요'):
-          this.pwd == null ? alert('비밀번호를 입력해 주세요'):
+          this.id == null ? this.$message({ type: 'warning', message:'아이디를 입력해주세요'}):
+          this.pwd == null ? this.$message({ type: 'warning', message:'비밀번호를 입력해주세요'}):
           axios.post('http://localhost:9000/getOneMember', params).then(
     				res => {
               if(res.data.memberId == undefined){
-                alert("id나 password가 틀렸습니다.");
+                this.$message({ type: 'warning', message:'id나 password가 틀렸습니다.'})
+                //alert("id나 password가 틀렸습니다.");
                 this.$store.state.isLogin = true;
                 return;
               }
@@ -102,22 +103,25 @@ export default {
                 //alert('세션가져오기' + loginData)
                 var login = JSON.parse(loginData); //JSON
                 this.$store.commit('loginSuccess', login )
-                alert('로그인성공')
-                // this.$router.push ({path: '/'}) 
+                this.$message({ type: 'success', message:'로그인성공'})
+                //alert('로그인성공')
+                this.$router.push ({path: '/'}) 
                 this.$emit('close')   
             })
         },
         saveId(){
           if(this.idSave == false){
                 if(this.id == null){
-                  alert('아이디를 입력해주세요')
+                  this.$message({ type: 'info', message:'아이디를 입력해주세요'})
+                  //alert('아이디를 입력해주세요')
                   this.idSave = false
                 }else{
                   this.$cookie.set('userId', this.id, 365);
                 }
           }else if(this.idSave == ''){
              if(this.id == null){
-                  alert('아이디를 입력해주세요')
+                  this.$message({ type: 'info', message:'아이디를 입력해주세요'})
+                  //alert('아이디를 입력해주세요')
                   this.idSave = ''
                 }else{
                   this.$cookie.set('userId', this.id, 365);
@@ -127,9 +131,6 @@ export default {
             this.$cookie.delete('userId');
           }
         },
-        idSearch(){
-
-        }
     }
 }
 

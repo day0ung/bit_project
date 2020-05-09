@@ -87,7 +87,9 @@ export default {
     })
     },
     gotoClick(row, column, event){
+      //alert(row.boardSeq)
       this.$emit("showReferenceDetail")
+      this.$store.state.s_group.detailSeq = row.boardSeq
       this.$store.state.s_group.showReferenceDetail = true
       var params = new URLSearchParams();	// post 방식으로 받아야함.
       params.append('boardSeq', row.boardSeq);
@@ -102,6 +104,10 @@ export default {
         }
         this.getReferenceFileList(row.boardSeq)
         })
+      axios.post("http://localhost:9000/groupBoardDetailComments", params).then(res => { 
+        this.$store.state.s_group.groupBoardDetailComments = res.data
+        //this.$store.state.s_group.showBoardDetailComments = false
+      })
     },
     clickableRows :function (row, rowIndex) {
       //alert(row.rowIndex)
