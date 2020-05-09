@@ -1,6 +1,6 @@
 <template>
   <div class="showMemberDetailFrom">
-    <h1 v-loading="loading"> "{{ showAllMember.memberName }}"님의 상세정보 </h1>
+    <h1 v-loading="loading"> "{{ showAllMember.memberId }}"님의 상세정보 </h1>
     <el-form ref="form" :model="showAllMember" label-width="120px">
       
 
@@ -176,7 +176,9 @@ import { loading } from 'element-ui';
 <style>
 .width80per{
   width:80%;
-
+}
+.el-form-item__content .width80per{
+  margin-left:20px;
 }
 
 </style>

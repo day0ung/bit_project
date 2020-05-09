@@ -4,14 +4,29 @@
             <h3> 그룹별 소분류 비율(DonutChart) </h3>
           </div>
           <div class="set_one">
-            <div class="barchartArea">
-              <DonutChart1></DonutChart1>
-              <DonutChart2></DonutChart2>
-            </div>
-            <div class="dounutChartArea">
-              <DonutChart3></DonutChart3>
-              <DonutChart4></DonutChart4>
-            </div>
+              <div class="set_two_1">
+                <div class="show_small">
+                  <p>대학생/취업</p>
+                  <DonutChart1></DonutChart1>
+                </div>
+                
+                <div class="show_small">
+                  <p>공무원/임용</p>
+                  <DonutChart2></DonutChart2>
+                </div>
+
+                <div class="show_small">
+                  <p>어학/회화</p>
+                  <DonutChart3></DonutChart3>
+                </div>
+
+                <div class="show_small">
+                  <p>라이프/취미</p>
+                  <DonutChart4></DonutChart4>
+                </div>
+
+
+              </div>
           </div>
             <div class="content01_view">
                 <!-- <h1> {{title}} member333333333333333333</h1> -->
@@ -62,13 +77,25 @@ export default {
 
 <style>
 
- /* .small {
-    max-width: 600px;
-    margin:  150px auto;
-  } */
-
 .set_one{
   display:flex;
 }
+.dounutChartArea{
+  margin:auto;
+}
+
+.set_two{
+  display: flex;
+}
+
+.set_two_1 .show_small{
+  float:left;
+  margin-top:50px;
+}
+
+.show_small p{
+      text-align: center;
+}
+
 
 </style>

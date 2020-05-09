@@ -164,7 +164,7 @@ export default {
   /* float: left; */
   margin-left: 235px;
   display: grid;
-  padding: 40px 0px 0px 40px;
+  padding: 30px;
 }
 
 .ViewStart{
