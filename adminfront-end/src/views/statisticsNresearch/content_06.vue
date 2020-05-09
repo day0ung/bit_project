@@ -94,7 +94,9 @@ export default {
 }
 
 .show_small p{
-      text-align: center;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
 }
 
 
