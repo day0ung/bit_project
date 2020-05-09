@@ -16,9 +16,9 @@
         <div  class="margin-L_25 contentPadding" >
             <router-view ></router-view>
         </div> -->
-        <div  class="contentPadding" >
+        
         <router-view ></router-view>
-        </div>
+
     </div>
 </template>
 
