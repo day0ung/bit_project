@@ -128,7 +128,7 @@
                     <p style="color:#908d8d"> 비밀번호 변경</p><br>
                     <ul>
                       <li style="float: left; margin-right: 12px;">
-                    <el-input v-model="passCheck" placeholder="현재 비밀번호를 입력해주세요" style="width: 264px"></el-input>
+                    <el-input v-model="passCheck" type="password" placeholder="현재 비밀번호를 입력해주세요" style="width: 264px"></el-input>
                       </li>
                       <li>
                     <el-button type="text" @click="passedit" style="color: #ff5151; font-size: 16px">비밀번호 확인</el-button>

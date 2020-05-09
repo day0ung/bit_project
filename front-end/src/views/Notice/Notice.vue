@@ -21,7 +21,7 @@
           :row-class-name="clickableRows"
           :data="tableData"
           stripe
-          style="width: 100% cursor:pointer"
+          style="width: 100%; cursor:pointer"
           @row-click="gotoClick"
           v-loading="loading"
       >
