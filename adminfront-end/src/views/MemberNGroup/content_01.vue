@@ -9,13 +9,15 @@
             <el-table-column
             prop="memberSeq"
             label="회원번호"
-            width="60">
+            width="60"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="memberId"
             label="ID"
-            width="100">
+            width="100"
+            align="center">
             </el-table-column>
 
             <!-- <el-table-column
@@ -34,21 +36,22 @@
             <el-table-column
             prop="address"
             label="주소1"
-            width="150"
+            width="200"
             align="center">
             </el-table-column>
 
             <el-table-column
             prop="interArea"
             label="주소2"
-            width="150"
+            width="200"
             align="center">
             </el-table-column>
 
             <el-table-column
             prop="email"
             label="이메일"
-            width="100">
+            width="120"
+            align="center">
             </el-table-column>
 
             <el-table-column
@@ -61,7 +64,7 @@
             <el-table-column
             prop="gender"
             label="성별"
-            width="80"
+            width="50"
             align="center">
             </el-table-column>
 
@@ -81,7 +84,7 @@
             <el-table-column
             prop="auth"
             label="auth"
-            width="60"
+            width="50"
             align="center">
             </el-table-column>
 
@@ -99,8 +102,8 @@
 
             <el-table-column
               prop=""
-              label="button"
-              width="122"
+              label=""
+              width="125"
               align="center">
               <button type="button"> 상세정보 </button>
                 <template slot-scope="scope">

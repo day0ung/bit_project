@@ -50,10 +50,11 @@
         <div class="topRight">
           <div>
             <div v-if="isLogin">
-              <router-link class="active" to="/login">로그인</router-link>
+              <router-link class="logBtn" to="/login" v-onclick="receiveId">로그인</router-link>
             </div>
             <div v-else>
-              <router-link class="" to="/logout">로그아웃 </router-link>
+              <p class="welcomeName"> <span>{{loginId}}</span> 환영합니다.</p>
+              <router-link class="logBtn" to="/logout">로그아웃 </router-link>
             </div>
           </div>
         </div>
@@ -85,6 +86,11 @@ import LeftNavBar from "./views/home/LeftNavBar.vue"
 
 
 export default {
+  data(){
+    return{
+      loginId:''
+    }
+  },
   
   name:'dashboard',
   components:{
@@ -96,7 +102,16 @@ export default {
     ...mapState(['isLogin', 'loginUser'])
   },
   methods:{
-    ...mapMutations(['logout'])
+    ...mapMutations(['logout']),
+
+    receiveId(){
+      var resId = sessionStorage.getItem("loginUser")
+
+      this.loginId = resId;
+    }
+  },
+  watch: {
+    
   }
 }
 </script>
@@ -104,13 +119,18 @@ export default {
 
 <style>
 
+/* .AppvueMainContnet h1, .AppvueMainContnet h2, {
+
+}   */
+
+
 .topArea{
   width:100%;
   height:80px;
   
 }
 .topContainer{
-  background-color:#545c64;
+  background-color:#000;
   width: 100%;
   height: 80px;
   position: fixed;
@@ -119,8 +139,16 @@ export default {
 .topLeft{
   width:300px;
   position: fixed;
+  margin-left: 260px;
+  color:#fff;
   
 }
+
+.topLeft p{
+  color:#ccc;
+}
+
+
 
 
 .topRight{
@@ -134,6 +162,7 @@ export default {
   /* float: left; */
   margin-left: 235px;
   display: grid;
+  padding: 40px 0px 0px 40px;
 }
 
 .ViewStart{
@@ -153,13 +182,30 @@ export default {
   bottom: 0;
   margin-top:80px;
 
-  background-color: #545c64;
+  background-color: #383838;
   z-index:9999;
 }
 
-.LeftNavBar ul{
-  border: 1px solid #545c64;
+.welcomeName{
+  color: white;
+  float: left;
+  margin-right: 100px;
 }
+.welcomeName span{
+  color:aqua;
+}
+
+.logBtn{
+  padding: 5px 10px;
+  background: #ccc;
+  border-radius: 5px;
+  color: #000;
+  font-weight: bold;
+}
+.logBtn:hover{
+  background:#484848;
+}
+
 
 
 

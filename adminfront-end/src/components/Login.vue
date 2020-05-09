@@ -87,7 +87,7 @@ export default {
 <style>
 .login {
   width: 400px;
-  margin: 0 auto; 
+  margin: 120px auto;
 }
 .error {
   color: #f00;

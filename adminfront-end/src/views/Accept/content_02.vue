@@ -1,7 +1,7 @@
 <template>
     <div class="content02_view">
         
-        <h1> {{title}} group 22222222222222222221122222222222222222222222221</h1>
+        <h1> 그룹 개설요청 </h1>
         
             <el-select v-model="value" placeholder="Select" value-key="value">
                 <el-option
@@ -22,52 +22,51 @@
         <!-- @row-click="eventReceiver" -->
         <!-- @cell-click="inputcellclick()" -->
 
+        
             <el-table-column
+            prop="groupInfoSeq"
+            label="그룹번호"
+            width="60"
+            align="center">
+            </el-table-column>
+
+
+            <!-- <el-table-column
             prop="currMember"
             label="currMember"
             width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="del"
-            label="del"
-            width="50">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
             prop="startDate"
-            label="startDate"
+            label="시작기간"
             width="100">
             </el-table-column>
 
             <el-table-column
             prop="endDate"
-            label="endDate"
-            width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="groupInfoSeq"
-            label="groupInfoSeq"
+            label="종료기간"
             width="100">
             </el-table-column>
 
             <el-table-column
             prop="groupLocation"
-            label="groupLocation"
+            label="모임지역"
             width="100">
             </el-table-column>
 
             <el-table-column
             prop="groupName"
-            label="groupName"
-            width="100">
+            label="그룹명"
+            width="100"
+            align="center">
             </el-table-column>
             
             <el-table-column
             prop="image"
-            label="image"
-            width="100">
+            label="회사로고"
+            width="100"
+            align="center">
                 <div slot-scope="{row}" class="img-container">
                     <img :src="row.image" alt="Agenda"
                     style="width:100px; height:100px;"
@@ -75,52 +74,65 @@
                 </div>
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
             prop="info"
             label="info"
             width="100">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
             prop="interBigSeq"
-            label="interBigSeq"
-            width="100">
+            label="대분류번호"
+            width="100"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="interSmallSeq"
-            label="interSmallSeq"
-            width="90">
+            label="소분류번호"
+            width="90"
+            align="center">
             </el-table-column>
 
             <el-table-column
             prop="maxMember"
-            label="maxMember"
-            width="100">
+            label="그룹최대인원"
+            width="120"
+            align="center">
             </el-table-column>
 
-            <el-table-column
+            <!-- <el-table-column
             prop="memberSeq"
             label="memberSeq"
             width="100">
-            </el-table-column>
-
-            <el-table-column
-            prop="permission"
-            label="permission"
-            width="100">
-            </el-table-column>
+            </el-table-column> -->
 
             <el-table-column
             prop="smallInfo"
-            label="smallInfo"
-            width="100">
+            label="개설모집정보"
+            width="150"
+            align="center">
+            </el-table-column>
+
+
+            <el-table-column
+            prop="permission"
+            label="권한번호"
+            width="100"
+            align="center">
+            </el-table-column>
+
+            <el-table-column
+            prop="del"
+            label="삭제여부"
+            width="50">
             </el-table-column>
 
             <el-table-column
               prop=""
-              label="button"
-              width="120" >
+              label="개설허가/취소"
+              width="120"
+              align="center">
                 <template slot-scope="scope">
                     <div v-loading="loading">
                         <el-button
