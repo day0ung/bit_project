@@ -84,7 +84,7 @@
                           <td colspan="3">{{myinter.interArea}}</td>
                           <td><i class="el-icon-paperclip" style="color: #ff5151"></i> </td>
                           <td>
-                            <el-button type="text" @click="editAddr" style="color: #ff5151; font-size: 16px">수정</el-button>
+                            <el-button type="text" @click="editAddr" style="color: #ff5151; font-size: 16px">수정하기</el-button>
                           </td>
                         </tr>                   
                       </tbody>
@@ -118,22 +118,22 @@
                   <img src='../../assets/css/images/puzzle.png'>
                 </div>
                 <div class="titup">
-                  <div>
+                  <div class="inter">
+                      <p style="color: #909090">관심분야</p>
+                      <h5 v-for="big in myBig" :key="big.seq">
+                        {{big.bigName}}
+                      </h5>
+                    <br>
+                  <p style="color: #909090">상세분야</p>
+                    <h5 v-for="small in mySmall" :key="small.seq">
+                      {{small.smallName}}
+                    </h5>
 
                   </div>
-                  <div>
-
+                  <div class="interEdit">
+                  <i class="el-icon-paperclip" style="color: #ff5151"></i> 
+                    <el-button @click="showshow" type="text"  style="color: #ff5151; font-size: 16px">수정하기</el-button>
                   </div>
-                <p style="color: #909090">관심분야</p>
-                <h5 v-for="big in myBig" :key="big.seq">
-                  {{big.bigName}}
-                </h5>
-                <br>
-              <p style="color: #909090">상세분야</p>
-                <h5 v-for="small in mySmall" :key="small.seq">
-                  {{small.smallName}}
-                </h5>
-                <el-button @click="showshow">수정하기</el-button>
                 <Inter 
                 v-if="showInter"
                 :memSeq="memSeq"
@@ -306,6 +306,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.inter{
+  padding: 23px 44px 0px 54px;
+    margin-left: 88px;
+}
+.interEdit{
+   padding:12px 44px 0px 51px;
+   margin-top: 32px;
+}
 </style>

@@ -24,7 +24,7 @@
       </div>
       <div class="cvInfoContent">
         <div>
-          <a :href="file.url" download>{{file.fileName}}</a>
+          <a :href="file.url" download>{{this.$store.state.s_employment.cvDetailRef.fileName}}</a>
         </div>
       </div>
       <div class="hr"></div>

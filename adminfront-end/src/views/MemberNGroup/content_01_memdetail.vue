@@ -1,5 +1,6 @@
 <template>
   <div class="showMemberDetailFrom">
+    <h1> "{{ showAllMember.memberName }}"님의 상세정보 </h1>
     <el-form ref="form" :model="showAllMember" label-width="120px">
       
 
@@ -16,99 +17,91 @@
       </el-form-item> -->
       
       <el-form-item label="회원번호">
-        <div class="width80per">
-          <el-input 
-            v-loading="loading"
-            v-model="showAllMember.memberSeq"></el-input>
-          </div>
+        <div class="width80per"
+          v-loading="loading">
+          <p>{{ showAllMember.memberSeq }}</p>
+        </div>
       </el-form-item>
 
       <el-form-item label="회원ID">
-        <div class="width80per">
-          <el-input 
-          v-loading="loading"
-          v-model="showAllMember.memberId"></el-input>
+        <div class="width80per"
+          v-loading="loading">
+        <p>{{ showAllMember.memberId }}</p>
         </div>
       </el-form-item>
 
       <el-form-item
         v-loading="loading"
         label="회원명">
-        <div class="width80per">
-          <el-input v-model="showAllMember.memberName"></el-input>
+        <div class="width80per"
+          v-loading="loading">
+          <p>{{ showAllMember.memberName }}</p>
         </div>
       </el-form-item>
 
       <el-form-item 
         v-loading="loading"
         label="회원주소">
-        <div class="width80per">
-          <el-input v-model="showAllMember.address"></el-input>
+        <div class="width80per"
+          v-loading="loading">
+	        <p>{{ showAllMember.address }}</p>
         </div>
       </el-form-item>
 
 
       <el-form-item label="email">
-        <div class="width80per">
-          <el-input 
-            v-loading="loading"
-            v-model="showAllMember.email"></el-input>
-          </div>
+        <div class="width80per"
+          v-loading="loading">
+	        <p>{{ showAllMember.email }}</p>
+        </div>
       </el-form-item>
 
       <el-form-item label="나이">
-        <div class="width80per">
-          <el-input 
-            v-loading="loading"
-            v-model="showAllMember.age"></el-input>
-          </div>
+        <div class="width80per"
+          v-loading="loading">
+	        <p>{{ showAllMember.age }}</p>
+        </div>
       </el-form-item>
 
       <el-form-item label="성별">
         <div class="width80per">
-          <el-input 
-            v-loading="loading"
-            v-model="showAllMember.gender"></el-input>
-          </div>
+          v-loading="loading">
+	        <p>{{ showAllMember.gender }}</p>
+        </div>
       </el-form-item>
 
       <el-form-item label="적립금">
-        <div class="width80per">
-          <el-input 
-          v-loading="loading"
-          v-model="showAllMember.myMoney"></el-input>
+        <div class="width80per"
+          v-loading="loading">
+	        <p>{{ showAllMember.myMoney }}</p>
         </div>
       </el-form-item>
 
       <el-form-item label="이력서여부">
         <div class="width80per">
-          <el-input 
-          v-loading="loading"
-          v-model="showAllMember.cv"></el-input>  
+          v-loading="loading">
+	        <p>{{ showAllMember.cv }}</p>
         </div>
       </el-form-item>
 
       <el-form-item label="권한">
-        <div class="width80per">
-          <el-input 
-          v-loading="loading"
-          v-model="showAllMember.auth"></el-input>
+        <div class="width80per"
+          v-loading="loading">
+	        <p>{{ showAllMember.auth }}</p>
         </div>
       </el-form-item>
 
       <el-form-item label="탈퇴여부">
-        <div class="width80per">
-          <el-input 
-          v-loading="loading"
-          v-model="showAllMember.del"></el-input>
+        <div class="width80per"
+        v-loading="loading">
+	        <p>{{ showAllMember.del }}</p>
         </div>
       </el-form-item>
 
       <el-form-item label="dislike">
-        <div class="width80per">
-          <el-input 
-          v-loading="loading"
-          v-model="showAllMember.dislike"></el-input>
+        <div class="width80per"
+          v-loading="loading">
+	        <p>{{ showAllMember.dislike }}</p>
         </div>
       </el-form-item>
 

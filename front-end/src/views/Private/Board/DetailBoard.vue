@@ -40,7 +40,7 @@
 
       <div class="groupName">
         <el-button  plain @click="showList" round>돌아가기</el-button>
-        <el-button type="success" plain  @click="boardOneUpdate(this.$store.state.s_private.boardDetail.boardSeq)" round>수정하기</el-button>
+        <el-button type="success" plain  @click="boardOneUpdate" round>수정하기</el-button>
         <el-button type="warning" plain  @click="boardOneDelete" round>삭제하기</el-button>
       </div>
   </div>
@@ -61,7 +61,7 @@ export default {
           this.$store.state.s_private.list = true
           
       },
-      boardOneUpdate(boardSeq){
+      boardOneUpdate(){
           this.$store.state.s_private.detail = false
           this.$store.state.s_private.update =true
       },

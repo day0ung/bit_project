@@ -6,10 +6,12 @@
 
 
 	<select id="idpwcheck" parameterType="com.palette.model.MemberDto" resultType="com.palette.model.MemberDto">
-		SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME
+		SELECT MEMBER_SEQ, MEMBER_ID, MEMBER_NAME, auth
 		FROM MEMBER
 		WHERE MEMBER_ID=#{memberId} AND PWD=#{pwd}
 	</select>
+
+	
 	<!-- 
 		general Member: auth: 0
 		Group Master:  auth: 1
