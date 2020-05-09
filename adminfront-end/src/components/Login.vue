@@ -2,12 +2,12 @@
   <div class="login">
     <h2>Log in Page</h2>
     <form @submit.prevent="onSubmit">
-      <div>
-        <label for="email">Email</label>
+      <div class="form_id">
+        <label for="email">ID</label>
         <input class="form-control" type="text" name="email" 
           v-model="email" autofocus placeholder="e.g., test@test.com" />
       </div>
-      <div>
+      <div class="form_pw">
         <label for="password">Passwrod</label>
         <input class="form-control" type="password" 
           v-model="password" placeholder="123123" />
@@ -92,5 +92,14 @@ export default {
 .error {
   color: #f00;
 }
+
+  
+
+
+ 
+.form_id, .form_pw, .btn{
+  margin-top:30px;
+}
+
 
 </style>

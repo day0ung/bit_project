@@ -50,10 +50,12 @@
         <div class="topRight">
           <div>
             <div v-if="isLogin">
-              <router-link class="logBtn" to="/login" v-onclick="receiveId">로그인</router-link>
+              <router-link class="logBtn" to="/login" >로그인</router-link>
             </div>
             <div v-else>
-              <p class="welcomeName"> <span>{{loginId}}</span> 환영합니다.</p>
+              <p class="welcomeName"> 
+                <!-- <span>{{loginId}}</span>  -->
+                환영합니다.</p>
               <router-link class="logBtn" to="/logout">로그아웃 </router-link>
             </div>
           </div>
@@ -88,7 +90,7 @@ import LeftNavBar from "./views/home/LeftNavBar.vue"
 export default {
   data(){
     return{
-      loginId:''
+      // loginId:''
     }
   },
   
@@ -104,11 +106,11 @@ export default {
   methods:{
     ...mapMutations(['logout']),
 
-    receiveId(){
-      var resId = sessionStorage.getItem("loginUser")
+    // receiveId(){
+    //   var resId = sessionStorage.getItem("loginUser")
 
-      this.loginId = resId;
-    }
+    //   this.loginId = resId;
+    // }
   },
   watch: {
     
@@ -162,7 +164,7 @@ export default {
   /* float: left; */
   margin-left: 235px;
   display: grid;
-  padding: 40px 0px 0px 40px;
+  padding: 30px;
 }
 
 .ViewStart{

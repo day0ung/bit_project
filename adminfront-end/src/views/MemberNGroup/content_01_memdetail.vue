@@ -1,6 +1,6 @@
 <template>
   <div class="showMemberDetailFrom">
-    <h1> "{{ showAllMember.memberName }}"님의 상세정보 </h1>
+    <h1 v-loading="loading"> "{{ showAllMember.memberId }}"님의 상세정보 </h1>
     <el-form ref="form" :model="showAllMember" label-width="120px">
       
 
@@ -64,7 +64,7 @@
       </el-form-item>
 
       <el-form-item label="성별">
-        <div class="width80per">
+        <div class="width80per"
           v-loading="loading">
 	        <p>{{ showAllMember.gender }}</p>
         </div>
@@ -78,7 +78,7 @@
       </el-form-item>
 
       <el-form-item label="이력서여부">
-        <div class="width80per">
+        <div class="width80per"
           v-loading="loading">
 	        <p>{{ showAllMember.cv }}</p>
         </div>
@@ -142,16 +142,16 @@ import { loading } from 'element-ui';
                 this.loading=true
                 console.log("디테일 출력 부분입니다. ")
                 console.log(this.$route.params);
-              console.log(JSON.stringify(res.data))
-              console.log("디테일 출력 끝.  ")
-              console.log(res.data)
-              this.loading=false
-              this.showAllMember=res.data;
-              //attatch data source
-              // this.form = this.showAllMember;
+                console.log(JSON.stringify(res.data))
+                console.log("디테일 출력 끝.  ")
+                console.log(res.data)
+                this.loading=false
+                this.showAllMember=res.data;
+                //attatch data source
+                // this.form = this.showAllMember;
 
-              // console.log("여기부터 다시시작 ")
-              // console.log(this.form);
+                // console.log("여기부터 다시시작 ")
+                // console.log(this.form);
               
           })
       },
@@ -176,7 +176,9 @@ import { loading } from 'element-ui';
 <style>
 .width80per{
   width:80%;
-
+}
+.el-form-item__content .width80per{
+  margin-left:20px;
 }
 
 </style>
