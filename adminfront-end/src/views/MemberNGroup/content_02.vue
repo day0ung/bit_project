@@ -70,7 +70,7 @@
 
         <el-table-column
           prop=""
-          label="button"
+          label=""
           width="140"
           align="center">
             <template slot-scope="scope">
