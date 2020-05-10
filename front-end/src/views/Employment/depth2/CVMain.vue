@@ -117,7 +117,7 @@
           </el-input>
         </div>
         <el-table 
-          v-loading="this.$store.state.s_employment.loadingCVDetail"
+          v-loading="loading"
           :row-class-name="clickableRows"
           :data="tableData"
           stripe
@@ -189,7 +189,7 @@ export default {
       searchWord:'',
       file: '',
       s_keyWord:'',
-      loading: true,
+      loading: false,
       login1 : "",
     }
   },

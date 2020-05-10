@@ -37,26 +37,7 @@
                   </tr>                   
                 </tbody>
               </table>
-              <table class="table1" v-if="addr">
-                <tbody>
-                  <tr>
-                        <el-button type="info" plain style="width: 100px; padding: 11px;" @click="execDaumPostcode">우편번호 찾기</el-button>
-                  </tr>
-                  <tr>
-                    <td>
-                      <el-input  placeholder="주소" readonly="readonly" v-model="address"></el-input>
-                    </td>
-                    <td>
-                      <el-input  placeholder="상세주소" style="width: 300px" v-model="extraAddress"></el-input>
-                    </td>
-                    <td style="width: 14px"></td>
-                    <td><i class="el-icon-s-tools" style="color: #d77f4a"></i> </td>
-                    <td>
-                      <el-button type="text" @click="editArea" style="color: #d77f4a; font-size: 16px">수정하기</el-button>
-                    </td>
-                  </tr>                   
-                </tbody>
-              </table>
+           
           </div>
       </div>
     </div>

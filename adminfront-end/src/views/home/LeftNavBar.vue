@@ -9,7 +9,7 @@
          -->
         <el-menu default-active="2" class="el-menu-vertical-demo" 
         @open="handleOpen" @close="handleClose" :collapse="isCollapse" 
-        background-color="#545c64" text-color="#fff" active-text-color="#ffd04b">
+        background-color="#383838" text-color="#fff" active-text-color="#ffd04b">
 
       <el-menu-item index="1">
         <i class="el-icon-s-home" />
@@ -50,11 +50,11 @@
             </el-menu-item>
             <!-- <el-menu-item index="1-2">item one</el-menu-item> -->
         </el-menu-item-group>
-        <el-menu-item-group title="소모임 리스트">
+        <!-- <el-menu-item-group title="소모임 리스트">
             <el-menu-item index="1-3">
                 <span><router-link  to="/managemember3">소모임관리</router-link></span>
             </el-menu-item>
-        </el-menu-item-group>
+        </el-menu-item-group> -->
     </el-submenu>
 
     <el-submenu index="3">
